@@ -1,0 +1,2063 @@
+[
+  {
+    "Default": {
+      "abilitySpecials": {
+        "stage_time": 25
+      },
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "ApplyModifier",
+          "doOffStage": false,
+          "modifierName": "FirstStage",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "SetGlobalValue",
+          "doOffStage": false,
+          "value": 2,
+          "key": "EX_PASS_COUNT",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "SetGlobalValue",
+          "doOffStage": false,
+          "value": 1,
+          "key": "_ELEMENT_EXPLODE_ENABLE",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "Drake_Primo_Rock_BossEvent_ElementController",
+      "abilityMixins": [
+        {
+          "$type": "AttachModifierToSelfGlobalValueMixin",
+          "defaultGlobalValueOnCreate": 1,
+          "globalValueKey": "_DRAKE_PRIMO_STATE",
+          "modifierNameSteps": [
+            "State_Ice_1",
+            "State_IceReadyToTrans_2",
+            "State_Water_3",
+            "State_WaterReadyToTrans_4"
+          ],
+          "removeAppliedModifier": true,
+          "actorIceSubHurtDelta": -1,
+          "valueSteps": [
+            0.5,
+            1.5,
+            2.5,
+            3.5,
+            4.5
+          ]
+        }
+      ],
+      "onAbilityStart": [
+        {
+          "$type": "Predicated",
+          "doOffStage": false,
+          "failActions": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "value": 3,
+              "key": "_DRAKE_PRIMO_STATE",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "ShowReminder",
+              "doOffStage": false,
+              "id": 31030004,
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "targetPredicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "value": 2.5,
+              "target": "Target",
+              "key": "_DRAKE_PRIMO_STATE",
+              "compareType": "MoreThan"
+            }
+          ],
+          "actorIceSubHurtDelta": -1,
+          "successActions": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "value": 1,
+              "key": "_DRAKE_PRIMO_STATE",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "ShowReminder",
+              "doOffStage": false,
+              "id": 31030005,
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "SetGlobalValueV2",
+          "doOffStage": false,
+          "key": "_CAMERA_STATE",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "AddGlobalValue",
+          "doOffStage": false,
+          "value": 1,
+          "minValue": -1,
+          "key": "EX_PASS_COUNT",
+          "maxValue": 3,
+          "actorIceSubHurtDelta": -1,
+          "useLimitRange": true,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "SetGlobalValueV2",
+          "doOffStage": false,
+          "value": 1,
+          "key": "_ELEMENT_EXPLODE_ENABLE",
+          "predicates": [
+            {
+              "$type": "ByAny",
+              "target": "Target",
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "value": 2,
+                  "target": "Target",
+                  "key": "EX_PASS_COUNT"
+                },
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "value": 3,
+                  "target": "Target",
+                  "key": "EX_PASS_COUNT"
+                }
+              ]
+            }
+          ],
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "modifiers": {
+        "FirstStage": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "value": 2,
+              "key": "_DRAKE_PRIMO_STATE",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "duration": 11
+        },
+        "State_IceReadyToTrans_2": {
+          "onAdded": [
+            {
+              "$type": "SetPoseBool",
+              "doOffStage": false,
+              "value": true,
+              "boolID": "ReadyToTrans",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetPoseInt",
+              "doOffStage": false,
+              "value": 1,
+              "intID": "ElementState",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "State_Ice_1": {
+          "onAdded": [
+            {
+              "$type": "SetPoseBool",
+              "doOffStage": false,
+              "boolID": "ReadyToTrans",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetPoseInt",
+              "doOffStage": false,
+              "value": 1,
+              "intID": "ElementState",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "value": 2,
+              "key": "_DRAKE_PRIMO_STATE",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "thinkInterval": "stage_time"
+        },
+        "State_WaterReadyToTrans_4": {
+          "onAdded": [
+            {
+              "$type": "SetPoseBool",
+              "doOffStage": false,
+              "value": true,
+              "boolID": "ReadyToTrans",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetPoseInt",
+              "doOffStage": false,
+              "value": 2,
+              "intID": "ElementState",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "State_Water_3": {
+          "onAdded": [
+            {
+              "$type": "SetPoseBool",
+              "doOffStage": false,
+              "boolID": "ReadyToTrans",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetPoseInt",
+              "doOffStage": false,
+              "value": 2,
+              "intID": "ElementState",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "value": 4,
+              "key": "_DRAKE_PRIMO_STATE",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "thinkInterval": "stage_time"
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "abilitySpecials": {
+        "sub_hurt_delta": 1
+      },
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Drake_Primo_Rock_BossEvent_ElementSkillManager",
+      "abilityMixins": [
+        {
+          "$type": "AttachModifierToGlobalValueMixin",
+          "globalValueKey": "_DRAKE_PRIMO_STATE",
+          "modifierNameSteps": [
+            "Element_Ice",
+            "Element_Water"
+          ],
+          "enable": true,
+          "removeAppliedModifier": true,
+          "actorIceSubHurtDelta": -1,
+          "valueSteps": [
+            0.5,
+            2.5,
+            4.5
+          ],
+          "NEACJLMBFMN": true
+        }
+      ],
+      "modifiers": {
+        "BreatheAttack_Ice_Damage": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "TriggerAttackEvent",
+              "doOffStage": false,
+              "attackEvent": {
+                "attackInfo": {
+                  "attenuationGroup": "Monster_Primo_Attenuation_Breathe",
+                  "hitPattern": {
+                    "hitImpulseType": "LV2",
+                    "onHitEffectName": "default",
+                    "JKLONEBKFKJ": {
+                      "JJGBOHIKHFM": true,
+                      "value": 1
+                    }
+                  },
+                  "FJNMGDHFOEH": {
+                    "GCPNPCOFFBP": "Shake"
+                  },
+                  "attenuationTag": "Primo_Attenuation_Breathe",
+                  "IODAJAKBOLG": {
+                    "onHitEffectName": "default",
+                    "JKLONEBKFKJ": {
+                      "JJGBOHIKHFM": true,
+                      "value": 1
+                    }
+                  },
+                  "attackProperty": {
+                    "attackType": "Default",
+                    "enBreak": 50,
+                    "elementType": "Ice",
+                    "elementDurability": 50,
+                    "elementRank": 1,
+                    "damagePercentage": 0.4000000059604645
+                  },
+                  "cameraShake": {
+                    "extension": {
+                      "baseCycle": 0.11999999731779099,
+                      "cycleDamping": 0.11999999731779099,
+                      "baseOnCamera": true,
+                      "rangeAttenuation": 0.5
+                    },
+                    "FAKMJBNLPPB": -1,
+                    "shakeDistance": 20
+                  }
+                },
+                "attackPattern": {
+                  "$type": "ConfigAttackBox",
+                  "massiveAttackRatio": 1,
+                  "born": {
+                    "$type": "ConfigBornByAttachPoint",
+                    "direction": {
+                      "maxAngle": 180
+                    },
+                    "useRotation": true,
+                    "offset": {
+                      "z": -1,
+                      "x": -2
+                    },
+                    "ENOAPEJAJHB": true,
+                    "FDGAEDDEEDG": {
+                      "ELAJJIANFFM": 180
+                    },
+                    "attachPointName": "BreatheAttachPoint",
+                    "onGroundRaycastUpDist": 2,
+                    "value": 10
+                  },
+                  "size": {
+                    "y": 3,
+                    "z": 9,
+                    "x": 3
+                  },
+                  "PBFNLCIFCBO": {
+                    "GOAEBMPCPJL": {
+                      "JJGBOHIKHFM": true,
+                      "value": 1
+                    }
+                  },
+                  "triggerType": "TriggerNoRepeat"
+                }
+              },
+              "targetType": "Enemy",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "thinkInterval": 0.10000000149011612
+        },
+        "BreatheAttack_Ice_VFX": {
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Drake_Primo_Rock_Breathe_Ice",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "BreatheAttack_Water_Damage": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "TriggerAttackEvent",
+              "doOffStage": false,
+              "attackEvent": {
+                "attackInfo": {
+                  "attenuationGroup": "Monster_Primo_Attenuation_Breathe",
+                  "hitPattern": {
+                    "hitImpulseType": "LV2",
+                    "onHitEffectName": "default",
+                    "JKLONEBKFKJ": {
+                      "JJGBOHIKHFM": true,
+                      "value": 1
+                    }
+                  },
+                  "FJNMGDHFOEH": {
+                    "GCPNPCOFFBP": "Shake"
+                  },
+                  "attenuationTag": "Primo_Attenuation_Breathe",
+                  "IODAJAKBOLG": {
+                    "onHitEffectName": "default",
+                    "JKLONEBKFKJ": {
+                      "JJGBOHIKHFM": true,
+                      "value": 1
+                    }
+                  },
+                  "attackProperty": {
+                    "attackType": "Default",
+                    "enBreak": 50,
+                    "elementType": "Water",
+                    "elementDurability": 50,
+                    "elementRank": 1,
+                    "damagePercentage": 0.4000000059604645
+                  },
+                  "cameraShake": {
+                    "extension": {
+                      "baseCycle": 0.11999999731779099,
+                      "cycleDamping": 0.11999999731779099,
+                      "baseOnCamera": true,
+                      "rangeAttenuation": 0.5
+                    },
+                    "FAKMJBNLPPB": -1,
+                    "shakeDistance": 20
+                  }
+                },
+                "attackPattern": {
+                  "$type": "ConfigAttackBox",
+                  "massiveAttackRatio": 1,
+                  "born": {
+                    "$type": "ConfigBornByAttachPoint",
+                    "direction": {
+                      "maxAngle": 180
+                    },
+                    "useRotation": true,
+                    "offset": {
+                      "z": -1,
+                      "x": -2
+                    },
+                    "ENOAPEJAJHB": true,
+                    "FDGAEDDEEDG": {
+                      "ELAJJIANFFM": 180
+                    },
+                    "attachPointName": "BreatheAttachPoint",
+                    "onGroundRaycastUpDist": 2,
+                    "value": 10
+                  },
+                  "size": {
+                    "y": 3,
+                    "z": 9,
+                    "x": 3
+                  },
+                  "PBFNLCIFCBO": {
+                    "GOAEBMPCPJL": {
+                      "JJGBOHIKHFM": true,
+                      "value": 1
+                    }
+                  },
+                  "triggerType": "TriggerNoRepeat"
+                }
+              },
+              "targetType": "Enemy",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "thinkInterval": 0.10000000149011612
+        },
+        "BreatheAttack_Water_VFX": {
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Drake_Primo_Rock_Breathe_Water",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "ClearScale": {
+          "onAdded": [
+            {
+              "$type": "KillSelf",
+              "doOffStage": false,
+              "killSelfType": "Normal",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "Element_Ice": {
+          "onKill": [
+            {
+              "$type": "RemoveModifier",
+              "doOffStage": false,
+              "modifierName": "Element_Ice",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_MONSTER_DRAKE_PRIMO_ROCK_WATER",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "value": 1,
+              "key": "_MONSTER_DRAKE_PRIMO_ROCK_ICE",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetAnimatorFloat",
+              "doOffStage": false,
+              "value": 50,
+              "floatID": "SkinController",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Drake_Primo_BossEvent_HandParticle_Ice",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetEffectFollowPath",
+              "doOffStage": false,
+              "followPath": "HandR",
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Drake_Primo_BossEvent_HandParticle_Ice",
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Drake_Primo_BossEvent_HandParticle_Ice",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "AttachToNormalizedTimeMixin",
+              "stateID": "Breathe",
+              "modifierName": "BreatheAttack_Ice_Damage",
+              "normalizeEnd": 0.6700000166893005,
+              "value": -1,
+              "actorIceSubHurtDelta": -1,
+              "normalizeStart": 0.2199999988079071
+            },
+            {
+              "$type": "AttachToStateIDMixin",
+              "modifierName": "BreatheAttack_Ice_VFX",
+              "stateIDs": [
+                "Breathe"
+              ],
+              "value": -1,
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "ReplaceEventPatternMixin",
+              "newPatterns": [
+                "Monster_Drake_Primo_BossEvent_NormalAtk01_Ice",
+                "Monster_Drake_Primo_BossEvent_NormalAtk02_Ice",
+                "Monster_Drake_Primo_BossEvent_ComboAtk01_Ice",
+                "Monster_Drake_Primo_BossEvent_ComboAtk02_Ice",
+                "Monster_Drake_Primo_BossEvent_ComboAtk03_Ice",
+                "Monster_Drake_Primo_BossEvent_JumpAtk_Ice",
+                "Monster_Drake_Primo_BossEvent_ElementTransform_IceToWater",
+                "Monster_Drake_Primo_BossEvent_ElementExplode_Ice",
+                "Monster_Drake_Primo_BossEvent_ElementTransform_IceToWater_Attack",
+                "Audio_Monster_Drake_Primo_Rock_02_ComboAtk01_Ice",
+                "Audio_Monster_Drake_Primo_Rock_02_ComboAtk02_Ice",
+                "Audio_Monster_Drake_Primo_Rock_02_ComboAtk03_Ice",
+                "Audio_Monster_Drake_Primo_Rock_02_ElementTrans_BS_Ice",
+                "Audio_Monster_Drake_Primo_Rock_02_ElementTrans_Burst_Ice",
+                "Audio_Monster_Drake_Primo_Rock_02_JumpAtk_Ice",
+                "Audio_Monster_Drake_Primo_Rock_02_ElementTrans_Scale_Ice"
+              ],
+              "oldPatterns": [
+                "Monster_Drake_Primo_BossEvent_NormalAtk01_Dummy",
+                "Monster_Drake_Primo_BossEvent_NormalAtk02_Dummy",
+                "Monster_Drake_Primo_BossEvent_ComboAtk01_Dummy",
+                "Monster_Drake_Primo_BossEvent_ComboAtk02_Dummy",
+                "Monster_Drake_Primo_BossEvent_ComboAtk03_Dummy",
+                "Monster_Drake_Primo_BossEvent_JumpAtk_Dummy",
+                "Monster_Drake_Primo_BossEvent_ElementTransform",
+                "Monster_Drake_Primo_BossEvent_ElementExplode",
+                "Monster_Drake_Primo_BossEvent_ElementTransform_Attack",
+                "Audio_Monster_Drake_Primo_Rock_02_ComboAtk01_Water",
+                "Audio_Monster_Drake_Primo_Rock_02_ComboAtk02_Water",
+                "Audio_Monster_Drake_Primo_Rock_02_ComboAtk03_Water",
+                "Audio_Monster_Drake_Primo_Rock_02_ElementTrans_BS_Water",
+                "Audio_Monster_Drake_Primo_Rock_02_ElementTrans_Burst_Water",
+                "Audio_Monster_Drake_Primo_Rock_02_JumpAtk_Water",
+                "Audio_Monster_Drake_Primo_Rock_02_ElementTrans_Scale_Water"
+              ],
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "AttachToStateIDMixin",
+              "modifierName": "Scale_Emitter_Ice",
+              "stateIDs": [
+                "ElementTrans_Scale"
+              ],
+              "value": -1,
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "DoActionByAnimatorStateIDMixin",
+              "stateIDs": [
+                "ElementTrans_BS"
+              ],
+              "value": -1,
+              "enterActions": [
+                {
+                  "$type": "ApplyModifier",
+                  "doOffStage": false,
+                  "otherTargets": {
+                    "$type": "SelectTargetsByChildren",
+                    "configID": 42605054
+                  },
+                  "modifierName": "ClearScale",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "KillGadget",
+                  "doOffStage": false,
+                  "gadgetInfo": {
+                    "configID": 42605056
+                  },
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "minus_one": -1,
+          "properties": {
+            "Actor_IceSubHurtDelta": "sub_hurt_delta"
+          }
+        },
+        "Element_Water": {
+          "onKill": [
+            {
+              "$type": "RemoveModifier",
+              "doOffStage": false,
+              "modifierName": "Element_Water",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "value": 1,
+              "key": "_MONSTER_DRAKE_PRIMO_ROCK_WATER",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_MONSTER_DRAKE_PRIMO_ROCK_ICE",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetAnimatorFloat",
+              "doOffStage": false,
+              "value": 70,
+              "floatID": "SkinController",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Drake_Primo_BossEvent_HandParticle_Water",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetEffectFollowPath",
+              "doOffStage": false,
+              "followPath": "HandR",
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Drake_Primo_BossEvent_HandParticle_Water",
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Drake_Primo_BossEvent_HandParticle_Water",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "AttachToNormalizedTimeMixin",
+              "stateID": "Breathe",
+              "modifierName": "BreatheAttack_Water_Damage",
+              "normalizeEnd": 0.6700000166893005,
+              "value": -1,
+              "actorIceSubHurtDelta": -1,
+              "normalizeStart": 0.2199999988079071
+            },
+            {
+              "$type": "AttachToStateIDMixin",
+              "modifierName": "BreatheAttack_Water_VFX",
+              "stateIDs": [
+                "Breathe"
+              ],
+              "value": -1,
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "ReplaceEventPatternMixin",
+              "newPatterns": [
+                "Monster_Drake_Primo_BossEvent_NormalAtk01_Water",
+                "Monster_Drake_Primo_BossEvent_NormalAtk02_Water",
+                "Monster_Drake_Primo_BossEvent_ComboAtk01_Water",
+                "Monster_Drake_Primo_BossEvent_ComboAtk02_Water",
+                "Monster_Drake_Primo_BossEvent_ComboAtk03_Water",
+                "Monster_Drake_Primo_BossEvent_JumpAtk_Water",
+                "Monster_Drake_Primo_BossEvent_ElementTransform_WaterToIce",
+                "Monster_Drake_Primo_BossEvent_ElementExplode_Water",
+                "Monster_Drake_Primo_BossEvent_ElementTransform_WaterToIce_Attack"
+              ],
+              "oldPatterns": [
+                "Monster_Drake_Primo_BossEvent_NormalAtk01_Dummy",
+                "Monster_Drake_Primo_BossEvent_NormalAtk02_Dummy",
+                "Monster_Drake_Primo_BossEvent_ComboAtk01_Dummy",
+                "Monster_Drake_Primo_BossEvent_ComboAtk02_Dummy",
+                "Monster_Drake_Primo_BossEvent_ComboAtk03_Dummy",
+                "Monster_Drake_Primo_BossEvent_JumpAtk_Dummy",
+                "Monster_Drake_Primo_BossEvent_ElementTransform",
+                "Monster_Drake_Primo_BossEvent_ElementExplode",
+                "Monster_Drake_Primo_BossEvent_ElementTransform_Attack"
+              ],
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "AttachToStateIDMixin",
+              "modifierName": "Scale_Emitter_Water",
+              "stateIDs": [
+                "ElementTrans_Scale"
+              ],
+              "value": -1,
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "DoActionByAnimatorStateIDMixin",
+              "stateIDs": [
+                "ElementTrans_BS"
+              ],
+              "value": -1,
+              "enterActions": [
+                {
+                  "$type": "ApplyModifier",
+                  "doOffStage": false,
+                  "otherTargets": {
+                    "$type": "SelectTargetsByChildren",
+                    "configID": 42605055
+                  },
+                  "modifierName": "ClearScale",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "KillGadget",
+                  "doOffStage": false,
+                  "gadgetInfo": {
+                    "configID": 42605057
+                  },
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "minus_one": -1,
+          "properties": {
+            "Actor_WaterSubHurtDelta": "sub_hurt_delta"
+          }
+        },
+        "Scale_Emitter_Ice": {
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Drake_Primo_Rock_ScaleBurst_Ice",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "TriggerBullet",
+              "doOffStage": false,
+              "trackTarget": "SelfAttackActiveTarget",
+              "bulletID": 42605056,
+              "value": true,
+              "actorIceSubHurtDelta": -1,
+              "born": {
+                "$type": "ConfigBornByAttachPoint",
+                "direction": {
+                  "$type": "ConfigDirectionByAttachPoint",
+                  "maxAngle": 180,
+                  "attachPointName": "Emitter"
+                },
+                "useRotation": true,
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "attachPointName": "ScaleBurstPoint",
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "canBeHandledOnRecover": true,
+              "POOEIFNLHDB": true
+            }
+          ],
+          "thinkInterval": 0.25999999046325684
+        },
+        "Scale_Emitter_Water": {
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Drake_Primo_Rock_ScaleBurst_Water",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "TriggerBullet",
+              "doOffStage": false,
+              "trackTarget": "SelfAttackActiveTarget",
+              "bulletID": 42605057,
+              "value": true,
+              "actorIceSubHurtDelta": -1,
+              "born": {
+                "$type": "ConfigBornByAttachPoint",
+                "direction": {
+                  "$type": "ConfigDirectionByAttachPoint",
+                  "maxAngle": 180,
+                  "attachPointName": "Emitter"
+                },
+                "useRotation": true,
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "attachPointName": "ScaleBurstPoint",
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "canBeHandledOnRecover": true,
+              "POOEIFNLHDB": true
+            }
+          ],
+          "thinkInterval": 0.25999999046325684
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "SetGlobalValueV2",
+          "doOffStage": false,
+          "key": "_IN_AIR",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "Drake_Primo_Rock_BossEvent_JumpAtk",
+      "abilityMixins": [
+        {
+          "$type": "SteerAttackMixin",
+          "angularSpeed": 360,
+          "CCFNFIKKIDJ": true,
+          "value": -1,
+          "GMEPMDNDBOP": 180,
+          "actorIceSubHurtDelta": -1,
+          "steerStateIDs": [
+            "JumpAtk"
+          ],
+          "endNormalizedTime": 0.15000000596046448,
+          "PMKCEJILFAF": true
+        },
+        {
+          "$type": "AttachToNormalizedTimeMixin",
+          "stateID": "JumpAtk",
+          "modifierName": "In_Jump_State",
+          "normalizeEnd": 0.5690000057220459,
+          "value": -1,
+          "actorIceSubHurtDelta": -1,
+          "normalizeStart": 0.3070000112056732
+        },
+        {
+          "$type": "POPMKOINBCH",
+          "angleLimit": 90,
+          "animationRotate": 175,
+          "actorIceSubHurtDelta": -1,
+          "animatorStateIDs": [
+            "TailSweepL_Rotate"
+          ]
+        },
+        {
+          "$type": "POPMKOINBCH",
+          "angleLimit": 90,
+          "animationRotate": -175,
+          "actorIceSubHurtDelta": -1,
+          "animatorStateIDs": [
+            "TailSweepR_Rotate"
+          ]
+        }
+      ],
+      "onAbilityStart": [
+        {
+          "$type": "FireEffect",
+          "doOffStage": false,
+          "scale": 1,
+          "actorIceSubHurtDelta": -1,
+          "effectPattern": "Eff_Monster_Drake_Primo_BossEvent_JumpAttack_Alert",
+          "born": {
+            "$type": "LMKOOEACLIM",
+            "direction": {
+              "maxAngle": 180
+            },
+            "FDGAEDDEEDG": {
+              "ELAJJIANFFM": 180
+            },
+            "onGroundRaycastUpDist": 2,
+            "value": 10
+          },
+          "effectTempleteID": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "modifiers": {
+        "In_Jump_State": {
+          "onAdded": [
+            {
+              "$type": "EnablePushColliderName",
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1,
+              "pushColliderNames": [
+                "PushCollider",
+                "PushCollider_Center",
+                "PushCollider_Back",
+                "PushCollider_Extra"
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "EnablePushColliderName",
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1,
+              "setEnable": true,
+              "pushColliderNames": [
+                "PushCollider",
+                "PushCollider_Center",
+                "PushCollider_Back",
+                "PushCollider_Extra"
+              ],
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValueV2",
+              "doOffStage": false,
+              "value": 2,
+              "key": "_CAMERA_STATE",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValueV2",
+              "doOffStage": false,
+              "key": "_IN_AIR",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Drake_Primo_Rock_BossEvent_CameraManager",
+      "abilityMixins": [
+        {
+          "$type": "AttachModifierToSelfGlobalValueMixin",
+          "defaultGlobalValueOnCreate": -1,
+          "globalValueKey": "_CAMERA_STATE",
+          "modifierNameSteps": [
+            "Camera_Default",
+            "Camera_InAir",
+            "Camera_DefaultFast",
+            "Camera_InUlt",
+            "Camera_ElementExplodeView"
+          ],
+          "removeAppliedModifier": true,
+          "actorIceSubHurtDelta": -1,
+          "valueSteps": [
+            -0.5,
+            0.5,
+            1.5,
+            2.5,
+            3.5,
+            4.5
+          ]
+        },
+        {
+          "$type": "AttachToAIAlertnessMixin",
+          "modifierName": "Camera_Manager",
+          "alertness": [
+            2,
+            3
+          ],
+          "actorIceSubHurtDelta": -1
+        }
+      ],
+      "modifiers": {
+        "Camera_Default": {
+          "onAdded": [
+            {
+              "$type": "SetLockingV3Config",
+              "doOffStage": false,
+              "specialCameraName": "BasicView",
+              "enable": true,
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true,
+              "value": 1
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "Camera_DefaultFast": {
+          "onAdded": [
+            {
+              "$type": "SetLockingV3Config",
+              "doOffStage": false,
+              "specialCameraName": "BasicViewFast",
+              "enable": true,
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true,
+              "value": 1
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "Camera_ElementExplodeView": {
+          "onAdded": [
+            {
+              "$type": "SetLockingV3Config",
+              "doOffStage": false,
+              "specialCameraName": "ElementExplodeView",
+              "enable": true,
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true,
+              "value": 1
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "Camera_InAir": {
+          "onAdded": [
+            {
+              "$type": "SetLockingV3Config",
+              "doOffStage": false,
+              "specialCameraName": "InAir",
+              "enable": true,
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true,
+              "value": 1
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "Camera_InUlt": {
+          "onAdded": [
+            {
+              "$type": "SetLockingV3Config",
+              "doOffStage": false,
+              "specialCameraName": "InUlt",
+              "enable": true,
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true,
+              "value": 1
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "Camera_Manager": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValueV2",
+              "doOffStage": false,
+              "key": "_CAMERA_STATE",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "onReconnect": [
+            {
+              "$type": "SetLockingV3Config",
+              "doOffStage": false,
+              "specialCameraName": "BasicView",
+              "enable": true,
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true,
+              "value": 1
+            },
+            {
+              "$type": "SetGlobalValueV2",
+              "doOffStage": false,
+              "key": "_CAMERA_STATE",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "DoActionByStateIDMixin",
+              "stateIDs": [
+                "NormalIdle"
+              ],
+              "value": -1,
+              "enterActions": [
+                {
+                  "$type": "SetGlobalValueV2",
+                  "doOffStage": false,
+                  "key": "_CAMERA_STATE",
+                  "predicates": [
+                    {
+                      "$type": "ByNot",
+                      "target": "Target",
+                      "predicates": [
+                        {
+                          "$type": "ByTargetGlobalValue",
+                          "target": "Target",
+                          "key": "_CAMERA_STATE"
+                        }
+                      ]
+                    }
+                  ],
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "SetGlobalValueV2",
+                  "doOffStage": false,
+                  "key": "_IN_AIR",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "DoActionByStateIDMixin",
+              "stateIDs": [
+                "JumpAtk"
+              ],
+              "value": -1,
+              "enterActions": [
+                {
+                  "$type": "SetGlobalValueV2",
+                  "doOffStage": false,
+                  "value": 1,
+                  "key": "_IN_AIR",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "SetGlobalValueV2",
+                  "doOffStage": false,
+                  "value": 1,
+                  "key": "_CAMERA_STATE",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "DoActionByStateIDMixin",
+              "stateIDs": [
+                "ElementTrans_BS",
+                "ElementTrans_Scale"
+              ],
+              "value": -1,
+              "enterActions": [
+                {
+                  "$type": "SetGlobalValueV2",
+                  "doOffStage": false,
+                  "value": 3,
+                  "key": "_CAMERA_STATE",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "minus_one": -1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "SetGlobalValue",
+          "doOffStage": false,
+          "key": "_HIT_LEVEL",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "Drake_Primo_Rock_BossEvent_HitShield",
+      "onAbilityStart": [
+        {
+          "$type": "ApplyModifier",
+          "doOffStage": false,
+          "modifierName": "HitShieldDelay",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "modifiers": {
+        "HitShieldDelay": {
+          "elementDurability": 100,
+          "stacking": "Unique",
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "ServerLuaCall",
+              "doOffStage": false,
+              "luaCallType": "CurGalleryControlGroup",
+              "actorIceSubHurtDelta": -1,
+              "funcName": "SLC_EffigyChallenge_V5_SubChallengeAchieve",
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "TurnDirectionToPos",
+              "doOffStage": false,
+              "maxAngle": -1,
+              "value": -1,
+              "actorIceSubHurtDelta": -1,
+              "toPos": {
+                "$type": "ConfigBornByGlobalValue",
+                "direction": {
+                  "maxAngle": 180
+                },
+                "positionKey": "_MONSTER_DRAKE_PRIMO_ROCK_BROKEN_POS",
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "Predicated",
+              "doOffStage": false,
+              "failActions": [
+                {
+                  "$type": "SetAnimatorTrigger",
+                  "doOffStage": false,
+                  "triggerID": "BeHitBrokenL",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "LoseHP",
+                  "doOffStage": false,
+                  "amountByCasterMaxHPRatio": 0.029999999329447746,
+                  "enableInvincible": true,
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "targetPredicates": [
+                {
+                  "$type": "ByAny",
+                  "target": "Target",
+                  "predicates": [
+                    {
+                      "$type": "ByTargetGlobalValue",
+                      "value": 2,
+                      "target": "Target",
+                      "key": "_HIT_LEVEL"
+                    },
+                    {
+                      "$type": "ByTargetGlobalValue",
+                      "value": 1,
+                      "target": "Target",
+                      "key": "SGV_EffigyChallenge_V5_AssistOptionSelected_4"
+                    }
+                  ]
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "successActions": [
+                {
+                  "$type": "SetAnimatorTrigger",
+                  "doOffStage": false,
+                  "triggerID": "BeHitBrokenH",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "LoseHP",
+                  "doOffStage": false,
+                  "amountByCasterMaxHPRatio": 0.10000000149011612,
+                  "enableInvincible": true,
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "TriggerAbility",
+                  "doOffStage": false,
+                  "abilityName": "Drake_Primo_Rock_BossEvent_SubHurt",
+                  "actorIceSubHurtDelta": -1,
+                  "target": "Other",
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "duration": 0.05000000074505806
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "abilitySpecials": {
+        "sub_hurt_delta": -0.5,
+        "vulnerable_duration": 6
+      },
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Drake_Primo_Rock_BossEvent_SubHurt",
+      "onAbilityStart": [
+        {
+          "$type": "Predicated",
+          "doOffStage": false,
+          "failActions": [
+            {
+              "$type": "SetOverrideMapValue",
+              "doOffStage": false,
+              "value": 6,
+              "overrideMapKey": "vulnerable_duration",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "targetPredicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "value": 1,
+              "target": "Target",
+              "key": "SGV_EffigyChallenge_V5_AssistOptionSelected_4"
+            }
+          ],
+          "actorIceSubHurtDelta": -1,
+          "successActions": [
+            {
+              "$type": "SetOverrideMapValue",
+              "doOffStage": false,
+              "value": 20,
+              "overrideMapKey": "vulnerable_duration",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "ApplyModifier",
+          "doOffStage": false,
+          "modifierName": "Drake_Primo_Rock_BossEvent_BrokenHurt",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "modifiers": {
+        "Drake_Primo_Rock_BossEvent_BrokenHurt": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "properties": {
+            "Actor_ElecSubHurtDelta": "sub_hurt_delta",
+            "Actor_FireSubHurtDelta": "sub_hurt_delta",
+            "Actor_GrassSubHurtDelta": "sub_hurt_delta",
+            "Actor_IceSubHurtDelta": "sub_hurt_delta",
+            "Actor_PhysicalSubHurtDelta": "sub_hurt_delta",
+            "Actor_RockSubHurtDelta": "sub_hurt_delta",
+            "Actor_WaterSubHurtDelta": "sub_hurt_delta",
+            "Actor_WindSubHurtDelta": "sub_hurt_delta"
+          },
+          "duration": "vulnerable_duration",
+          "state": "DefenseDown"
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "abilitySpecials": {
+        "dragon_exterminator_ratio": 0,
+        "max_hp": 0
+      },
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "GetFightProperty",
+          "doOffStage": false,
+          "globalValueKey": "_MAX_HP",
+          "fightProp": "FIGHT_PROP_MAX_HP",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "SetGlobalValue",
+          "doOffStage": false,
+          "key": "GV_EffigyChallenge_V5_Boss_DisableButtonT",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "Drake_Primo_Rock_BossEvent_DragonExterminator",
+      "abilityMixins": [
+        {
+          "$type": "AttachModifierToGlobalValueMixin",
+          "enable": true,
+          "globalValueKey": "SGV_EffigyChallenge_V5_AssistSkillUsed",
+          "modifierNameSteps": [
+            "DragonExterminator_Ready",
+            "DragonExterminator_Start"
+          ],
+          "removeAppliedModifier": true,
+          "actorIceSubHurtDelta": -1,
+          "valueSteps": [
+            -0.5,
+            0.5,
+            1.5
+          ],
+          "NEACJLMBFMN": true
+        }
+      ],
+      "onAbilityStart": [
+        {
+          "$type": "RemoveModifier",
+          "doOffStage": false,
+          "modifierName": "DragonExterminator_Monitor",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "ApplyModifier",
+          "doOffStage": false,
+          "modifierName": "DragonExterminator_Monitor",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "modifiers": {
+        "ClearScale": {
+          "onAdded": [
+            {
+              "$type": "KillSelf",
+              "doOffStage": false,
+              "killSelfType": "Normal",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "DelayKiller": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "ApplyModifier",
+              "doOffStage": false,
+              "otherTargets": {
+                "$type": "SelectTargetsByChildren",
+                "configID": 42605054
+              },
+              "modifierName": "ClearScale",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "ApplyModifier",
+              "doOffStage": false,
+              "otherTargets": {
+                "$type": "SelectTargetsByChildren",
+                "configID": 42605055
+              },
+              "modifierName": "ClearScale",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "KillGadget",
+              "doOffStage": false,
+              "gadgetInfo": {
+                "configID": 42605056
+              },
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "KillGadget",
+              "doOffStage": false,
+              "gadgetInfo": {
+                "configID": 42605057
+              },
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "thinkInterval": 1,
+          "duration": 3.5
+        },
+        "DragonExterminator_Monitor": {
+          "elementDurability": 100,
+          "stacking": "Unique",
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "Predicated",
+              "doOffStage": false,
+              "targetPredicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "target": "Target",
+                  "key": "_IN_AIR",
+                  "compareType": "NoneOrEqual"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "successActions": [
+                {
+                  "$type": "ApplyModifier",
+                  "doOffStage": false,
+                  "modifierName": "Dummy_Bullet_Timer",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "RemoveModifier",
+                  "doOffStage": false,
+                  "modifierName": "DragonExterminator_Monitor",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "thinkInterval": 0.05000000074505806
+        },
+        "DragonExterminator_Ready": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "DragonExterminator_Start": {
+          "onAdded": [
+            {
+              "$type": "TriggerAbility",
+              "doOffStage": false,
+              "abilityName": "Drake_Primo_Rock_BossEvent_DragonExterminator",
+              "actorIceSubHurtDelta": -1,
+              "target": "Other",
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "Dummy_Bullet_Timer": {
+          "onAdded": [
+            {
+              "$type": "FireEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Drake_Primo_BossEvent_DragonExterminator",
+              "born": {
+                "$type": "ConfigBornBySelf",
+                "direction": {
+                  "$type": "ConfigDirectionByWorld",
+                  "eularAngles": {
+                    "y": 3,
+                    "z": -180
+                  },
+                  "maxAngle": 180,
+                  "FIDMAMPCMOI": true
+                },
+                "useRotation": true,
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "SetAnimatorTrigger",
+              "doOffStage": false,
+              "triggerID": "DragonExterminatorHit",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "TriggerAbility",
+              "doOffStage": false,
+              "abilityName": "Drake_Primo_Rock_BossEvent_SubHurt",
+              "actorIceSubHurtDelta": -1,
+              "target": "Other",
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "GetFightProperty",
+              "doOffStage": false,
+              "globalValueKey": "_MAX_HP",
+              "fightProp": "FIGHT_PROP_MAX_HP",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValueToOverrideMap",
+              "doOffStage": false,
+              "overrideMapKey": "max_hp",
+              "globalValueKey": "_MAX_HP",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "DamageByAttackValue",
+              "attackInfo": {
+                "attenuationGroup": "default",
+                "hitPattern": {
+                  "hitImpulseType": "LV1",
+                  "onHitEffectName": "default",
+                  "hitHaltTime": 0.07000000029802322,
+                  "hitHaltTimeScale": 0.10000000149011612,
+                  "JKLONEBKFKJ": {
+                    "JJGBOHIKHFM": true,
+                    "value": 1
+                  }
+                },
+                "FJNMGDHFOEH": {
+                  "GCPNPCOFFBP": "Shake"
+                },
+                "IODAJAKBOLG": {
+                  "onHitEffectName": "default",
+                  "JKLONEBKFKJ": {
+                    "JJGBOHIKHFM": true,
+                    "value": 1
+                  }
+                },
+                "attackProperty": {
+                  "attackType": "Default",
+                  "enBreak": 30,
+                  "elementDurability": 100,
+                  "strikeType": "Blunt",
+                  "elementRank": 1,
+                  "HPPLKCPAKHP": true,
+                  "damageExtra": [
+                    "dragon_exterminator_ratio",
+                    "max_hp",
+                    "MUL"
+                  ]
+                },
+                "cameraShake": {
+                  "extension": {
+                    "baseCycle": 0.11999999731779099,
+                    "cycleDamping": 0.11999999731779099,
+                    "baseOnCamera": true,
+                    "rangeAttenuation": 0.5
+                  },
+                  "FAKMJBNLPPB": -1,
+                  "shakeDistance": 20
+                }
+              },
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1,
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "ActCameraRadialBlur",
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1,
+              "cameraRadialBlur": {
+                "power": 2.5,
+                "blurTime": 0.30000001192092896,
+                "fadeTime": 0.20000000298023224
+              },
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "ActCameraShake",
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1,
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "cameraShake": {
+                "extension": {
+                  "baseCycle": 0.23999999463558197,
+                  "baseOnCamera": true,
+                  "IHGGLJIHKBE": true,
+                  "rangeAttenuation": 0.05000000074505806
+                },
+                "FAKMJBNLPPB": -1,
+                "shakeDistance": 50,
+                "shakeRange": 3.5999999046325684,
+                "shakeTime": 0.7200000286102295
+              },
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "value": 1,
+              "key": "_DRAKE_PRIMO_STATE",
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "value": 2,
+                  "target": "Target",
+                  "key": "_DRAKE_PRIMO_STATE"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "value": 3,
+              "key": "_DRAKE_PRIMO_STATE",
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "value": 4,
+                  "target": "Target",
+                  "key": "_DRAKE_PRIMO_STATE"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "ApplyModifier",
+              "doOffStage": false,
+              "otherTargets": {
+                "$type": "SelectTargetsByChildren",
+                "configID": 42605054
+              },
+              "modifierName": "ClearScale",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "ApplyModifier",
+              "doOffStage": false,
+              "otherTargets": {
+                "$type": "SelectTargetsByChildren",
+                "configID": 42605055
+              },
+              "modifierName": "ClearScale",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "KillGadget",
+              "doOffStage": false,
+              "gadgetInfo": {
+                "configID": 42605056
+              },
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "KillGadget",
+              "doOffStage": false,
+              "gadgetInfo": {
+                "configID": 42605057
+              },
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "ApplyModifier",
+              "doOffStage": false,
+              "modifierName": "DelayKiller",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "duration": 0.6000000238418579
+        }
+      }
+    }
+  }
+]

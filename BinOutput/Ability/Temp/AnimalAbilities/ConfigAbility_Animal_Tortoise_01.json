@@ -1,0 +1,5276 @@
+[
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "AddGlobalValue",
+          "doOffStage": false,
+          "value": 1,
+          "key": "_ANIMAL_ENTITY_TYPE",
+          "maxValue": 1,
+          "actorIceSubHurtDelta": -1,
+          "useLimitRange": true,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "Animal_Tortoise_Giant_01_State",
+      "abilityMixins": [
+        {
+          "$type": "RigidBodyFreezeMixin",
+          "actorIceSubHurtDelta": -1,
+          "value": true
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "AddGlobalValue",
+          "doOffStage": false,
+          "value": 1,
+          "key": "_ANIMAL_ENTITY_TYPE",
+          "maxValue": 1,
+          "actorIceSubHurtDelta": -1,
+          "useLimitRange": true,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "ApplyModifier",
+          "doOffStage": false,
+          "modifierName": "Animal_Tortoise_01_Initial",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "ApplyModifier",
+          "doOffStage": false,
+          "modifierName": "Animal_Tortoise_01_BeHitHandler",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "Animal_Tortoise_02_Initial",
+      "abilityMixins": [
+        {
+          "$type": "AttachToPoseIDMixin",
+          "modifierName": "Animal_Tortoise_01_BeforeBattle",
+          "poseIDs": [
+            0,
+            1
+          ],
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToPoseIDMixin",
+          "modifierName": "Animal_Tortoise_01_OutOfBattle",
+          "poseIDs": [
+            901
+          ],
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToStateIDMixin",
+          "modifierName": "Animal_Tortoise_01_InDefendAnim",
+          "stateIDs": [
+            "Defend_Loop",
+            "Standby_Defend_Loop"
+          ],
+          "value": -1,
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToStateIDMixin",
+          "modifierName": "Animal_Tortoise_01_CanShake",
+          "stateIDs": [
+            "Defend_BS",
+            "Defend_Loop",
+            "Defend_AS"
+          ],
+          "value": -1,
+          "actorIceSubHurtDelta": -1
+        }
+      ],
+      "modifiers": {
+        "Animal_Tortoise_01_BeHitHandler": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_BE_HIT_TIMES",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_DEFEND_BE_HIT_TIMES",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "onBeingHit": [
+            {
+              "$type": "AddGlobalValue",
+              "doOffStage": false,
+              "value": 1,
+              "key": "_BE_HIT_TIMES",
+              "maxValue": 10,
+              "actorIceSubHurtDelta": -1,
+              "useLimitRange": true,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AddGlobalValue",
+              "doOffStage": false,
+              "value": 1,
+              "key": "_DEFEND_BE_HIT_TIMES",
+              "maxValue": 10,
+              "actorIceSubHurtDelta": -1,
+              "useLimitRange": true,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "AttachModifierToSelfGlobalValueMixin",
+              "globalValueKey": "_BE_HIT_TIMES",
+              "modifierNameSteps": [
+                "Peace",
+                "Defend"
+              ],
+              "removeAppliedModifier": true,
+              "actorIceSubHurtDelta": -1,
+              "valueSteps": [
+                -0.5,
+                0.5,
+                11
+              ]
+            }
+          ],
+          "minus_one": -1
+        },
+        "Animal_Tortoise_01_BeforeBattle": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_AVATAR_NUMS_NEAR_TORTOISE",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetAnimatorBool",
+              "doOffStage": false,
+              "boolID": "InAttack",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "RemoveModifier",
+              "doOffStage": false,
+              "modifierName": "Animal_Tortoise_DefendDuration",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetAnimatorBool",
+              "doOffStage": false,
+              "boolID": "InDefend",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "FieldEntityCountChangeMixin",
+              "campTargetType": "AllExceptSelf",
+              "targetPredicates": [
+                {
+                  "$type": "ByEntityTypes",
+                  "target": "Target",
+                  "value": -1,
+                  "entityTypes": [
+                    "Avatar",
+                    "Vehicle"
+                  ]
+                }
+              ],
+              "simpleCountMaxValue": 10,
+              "simpleCountGlobaValueKey": "_AVATAR_NUMS_NEAR_TORTOISE",
+              "actorIceSubHurtDelta": -1,
+              "replaceOnAddedInTick": true,
+              "PPPOKDHPHAF": true
+            },
+            {
+              "$type": "AttachModifierToSelfGlobalValueMixin",
+              "globalValueKey": "_AVATAR_NUMS_NEAR_TORTOISE",
+              "modifierNameSteps": [
+                "No_AvatarNear",
+                "AvatarNear"
+              ],
+              "removeAppliedModifier": true,
+              "actorIceSubHurtDelta": -1,
+              "valueSteps": [
+                -0.5,
+                0.5,
+                11
+              ]
+            }
+          ],
+          "minus_one": -1
+        },
+        "Animal_Tortoise_01_CanShake": {
+          "onAdded": [
+            {
+              "$type": "SetAnimatorBool",
+              "doOffStage": false,
+              "value": true,
+              "boolID": "CanShake",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "SetAnimatorBool",
+              "doOffStage": false,
+              "boolID": "CanShake",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1
+        },
+        "Animal_Tortoise_01_InDefendAnim": {
+          "onAdded": [
+            {
+              "$type": "SetAnimatorBool",
+              "doOffStage": false,
+              "value": true,
+              "boolID": "InDefendAnim",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "SetAnimatorBool",
+              "doOffStage": false,
+              "boolID": "InDefendAnim",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1
+        },
+        "Animal_Tortoise_01_Initial": {
+          "onAdded": [
+            {
+              "$type": "HideUIBillBoard",
+              "doOffStage": false,
+              "enable": true,
+              "actorIceSubHurtDelta": -1,
+              "hide": true,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AttachAbilityStateResistance",
+              "doOffStage": false,
+              "durationRatio": 1,
+              "actorIceSubHurtDelta": -1,
+              "resistanceListID": 11001,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "state": "LockHP"
+        },
+        "Animal_Tortoise_01_OutOfBattle": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_AVATAR_NUMS_NEAR_TORTOISE",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetAnimatorBool",
+              "doOffStage": false,
+              "boolID": "InAttack",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "RemoveModifier",
+              "doOffStage": false,
+              "modifierName": "Animal_Tortoise_DefendDuration",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetAnimatorBool",
+              "doOffStage": false,
+              "boolID": "InDefend",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetAnimatorBool",
+              "doOffStage": false,
+              "boolID": "InStandbyDefend",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "Animal_Tortoise_DefendDuration": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_DEFEND_BE_HIT_TIMES",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_BE_HIT_TIMES",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_DEFEND_BE_HIT_TIMES",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "duration": 30
+        },
+        "AvatarNear": {
+          "onAdded": [
+            {
+              "$type": "SetAnimatorBool",
+              "doOffStage": false,
+              "value": true,
+              "boolID": "InStandbyDefend",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "Defend": {
+          "onAdded": [
+            {
+              "$type": "SetAnimatorTrigger",
+              "doOffStage": false,
+              "triggerID": "GoDefend",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetPoseBool",
+              "doOffStage": false,
+              "value": true,
+              "boolID": "InDefend",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetAnimatorBool",
+              "doOffStage": false,
+              "value": true,
+              "boolID": "InDefend",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "ApplyModifier",
+              "doOffStage": false,
+              "modifierName": "Animal_Tortoise_DefendDuration",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "No_AvatarNear": {
+          "onAdded": [
+            {
+              "$type": "SetAnimatorBool",
+              "doOffStage": false,
+              "boolID": "InStandbyDefend",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "Peace": {
+          "onAdded": [
+            {
+              "$type": "SetPoseBool",
+              "doOffStage": false,
+              "boolID": "InDefend",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetAnimatorBool",
+              "doOffStage": false,
+              "boolID": "InDefend",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "doOffStage": false,
+          "modifierName": "WaterEffect",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "Animal_Tortoise_Giant_01_WaterEffect",
+      "modifiers": {
+        "WaterEffect": {
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Animal_GiantTortoise_Standby_Water",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "ChangeTag",
+          "doOffStage": false,
+          "tag": "IS_GIANT_TORTOISE",
+          "enable": true,
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "ApplyModifier",
+          "doOffStage": false,
+          "modifierName": "Animal_Tortoise_01_Initial",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "ApplyModifier",
+          "doOffStage": false,
+          "modifierName": "Animal_Tortoise_01_BeHitHandler",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "Animal_Tortoise_Giant_01_Initial",
+      "abilityMixins": [
+        {
+          "$type": "AttachToStateIDMixin",
+          "modifierName": "Animal_Tortoise_01_OutOfBattle",
+          "stateIDs": [
+            "Attack_AS"
+          ],
+          "value": -1,
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToStateIDMixin",
+          "modifierName": "Animal_Tortoise_01_InDefendAnim",
+          "stateIDs": [
+            "Defend_Loop"
+          ],
+          "value": -1,
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToStateIDMixin",
+          "modifierName": "Animal_Tortoise_01_CanShake",
+          "stateIDs": [
+            "Defend_BS",
+            "Defend_Loop",
+            "Defend_AS"
+          ],
+          "value": -1,
+          "actorIceSubHurtDelta": -1
+        }
+      ],
+      "modifiers": {
+        "Animal_Tortoise_01_BeHitHandler": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_BE_HIT_TIMES",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_DEFEND_BE_HIT_TIMES",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "onBeingHit": [
+            {
+              "$type": "Predicated",
+              "doOffStage": false,
+              "targetPredicates": [
+                {
+                  "$type": "ByAny",
+                  "target": "Target",
+                  "predicates": [
+                    {
+                      "$type": "ByHitBoxName",
+                      "target": "Target",
+                      "hitBoxNames": [
+                        "HitBoxHead"
+                      ]
+                    },
+                    {
+                      "$type": "ByHitEnBreak",
+                      "CLKGIJDDGBM": 100,
+                      "target": "Target",
+                      "logic": "GreaterOrEqual"
+                    }
+                  ]
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "successActions": [
+                {
+                  "$type": "SetAnimatorTrigger",
+                  "doOffStage": false,
+                  "mpTriggerOnRemote": true,
+                  "triggerID": "RealShakeTrigger",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "AddGlobalValue",
+                  "doOffStage": false,
+                  "value": 1,
+                  "key": "_BE_HIT_TIMES",
+                  "maxValue": 10,
+                  "predicates": [
+                    {
+                      "$type": "ByNot",
+                      "target": "Target",
+                      "predicates": [
+                        {
+                          "$type": "ByHasModifier",
+                          "modifierName": "Animal_Tortoise_01_OutOfBattle",
+                          "target": "Target"
+                        }
+                      ]
+                    }
+                  ],
+                  "actorIceSubHurtDelta": -1,
+                  "useLimitRange": true,
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "AddGlobalValue",
+                  "doOffStage": false,
+                  "value": 1,
+                  "key": "_DEFEND_BE_HIT_TIMES",
+                  "maxValue": 10,
+                  "predicates": [
+                    {
+                      "$type": "ByNot",
+                      "target": "Target",
+                      "predicates": [
+                        {
+                          "$type": "ByHasModifier",
+                          "modifierName": "Animal_Tortoise_01_OutOfBattle",
+                          "target": "Target"
+                        }
+                      ]
+                    }
+                  ],
+                  "actorIceSubHurtDelta": -1,
+                  "useLimitRange": true,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "AttachModifierToSelfGlobalValueMixin",
+              "globalValueKey": "_BE_HIT_TIMES",
+              "modifierNameSteps": [
+                "Peace",
+                "Defend"
+              ],
+              "removeAppliedModifier": true,
+              "actorIceSubHurtDelta": -1,
+              "valueSteps": [
+                -0.5,
+                4.5,
+                11
+              ]
+            },
+            {
+              "$type": "AttachModifierToSelfGlobalValueMixin",
+              "globalValueKey": "_DEFEND_BE_HIT_TIMES",
+              "modifierNameSteps": [
+                "InDefend",
+                "Attack"
+              ],
+              "removeAppliedModifier": true,
+              "actorIceSubHurtDelta": -1,
+              "valueSteps": [
+                -0.5,
+                5.5,
+                11
+              ]
+            }
+          ],
+          "minus_one": -1
+        },
+        "Animal_Tortoise_01_CanShake": {
+          "onAdded": [
+            {
+              "$type": "SetAnimatorBool",
+              "doOffStage": false,
+              "value": true,
+              "boolID": "CanShake",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "SetAnimatorBool",
+              "doOffStage": false,
+              "boolID": "CanShake",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1
+        },
+        "Animal_Tortoise_01_InDefendAnim": {
+          "onAdded": [
+            {
+              "$type": "SetAnimatorBool",
+              "doOffStage": false,
+              "value": true,
+              "boolID": "InDefendAnim",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "SetAnimatorBool",
+              "doOffStage": false,
+              "boolID": "InDefendAnim",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1
+        },
+        "Animal_Tortoise_01_Initial": {
+          "onAdded": [
+            {
+              "$type": "HideUIBillBoard",
+              "doOffStage": false,
+              "enable": true,
+              "actorIceSubHurtDelta": -1,
+              "hide": true,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AttachAbilityStateResistance",
+              "doOffStage": false,
+              "durationRatio": 1,
+              "actorIceSubHurtDelta": -1,
+              "resistanceListID": 11001,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "state": "LockHP"
+        },
+        "Animal_Tortoise_01_OutOfBattle": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "SetAnimatorBool",
+              "doOffStage": false,
+              "boolID": "InAttack",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "RemoveModifier",
+              "doOffStage": false,
+              "modifierName": "Animal_Tortoise_DefendDuration",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetAnimatorBool",
+              "doOffStage": false,
+              "boolID": "InDefend",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1
+        },
+        "Animal_Tortoise_AttackDuration": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_DEFEND_BE_HIT_TIMES",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "duration": 8
+        },
+        "Animal_Tortoise_DefendDuration": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_BE_HIT_TIMES",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_DEFEND_BE_HIT_TIMES",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "duration": 8
+        },
+        "Attack": {
+          "onAdded": [
+            {
+              "$type": "SetAnimatorTrigger",
+              "doOffStage": false,
+              "triggerID": "GoAttack",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetAnimatorBool",
+              "doOffStage": false,
+              "value": true,
+              "boolID": "InAttack",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "ApplyModifier",
+              "doOffStage": false,
+              "modifierName": "Animal_Tortoise_AttackDuration",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "onBeingHit": [
+            {
+              "$type": "ApplyModifier",
+              "doOffStage": false,
+              "modifierName": "Animal_Tortoise_AttackDuration",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "Defend": {
+          "onAdded": [
+            {
+              "$type": "SetAnimatorTrigger",
+              "doOffStage": false,
+              "triggerID": "GoDefend",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetPoseBool",
+              "doOffStage": false,
+              "value": true,
+              "boolID": "InDefend",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetAnimatorBool",
+              "doOffStage": false,
+              "value": true,
+              "boolID": "InDefend",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "ApplyModifier",
+              "doOffStage": false,
+              "modifierName": "Animal_Tortoise_DefendDuration",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_DEFEND_BE_HIT_TIMES",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "onBeingHit": [
+            {
+              "$type": "ApplyModifier",
+              "doOffStage": false,
+              "modifierName": "Animal_Tortoise_DefendDuration",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "InDefend": {
+          "onAdded": [
+            {
+              "$type": "SetAnimatorBool",
+              "doOffStage": false,
+              "boolID": "InAttack",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "Peace": {
+          "onAdded": [
+            {
+              "$type": "SetPoseBool",
+              "doOffStage": false,
+              "boolID": "InDefend",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetAnimatorBool",
+              "doOffStage": false,
+              "boolID": "InDefend",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "ApplyModifier",
+          "doOffStage": false,
+          "modifierName": "Animal_Tortoise_01_Initial",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "ApplyModifier",
+          "doOffStage": false,
+          "modifierName": "Animal_Tortoise_01_BeHitHandler",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "Animal_Tortoise_01_Initial",
+      "abilityMixins": [
+        {
+          "$type": "AttachToPoseIDMixin",
+          "modifierName": "Animal_Tortoise_01_BeforeBattle",
+          "poseIDs": [
+            0,
+            1
+          ],
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToPoseIDMixin",
+          "modifierName": "Animal_Tortoise_01_OutOfBattle",
+          "poseIDs": [
+            901
+          ],
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToStateIDMixin",
+          "modifierName": "Animal_Tortoise_01_AttackEffAS",
+          "stateIDs": [
+            "Attack_AS"
+          ],
+          "value": -1,
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToStateIDMixin",
+          "modifierName": "Animal_Tortoise_01_InDefendAnim",
+          "stateIDs": [
+            "Defend_Loop",
+            "Standby_Defend_Loop"
+          ],
+          "value": -1,
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToStateIDMixin",
+          "modifierName": "Animal_Tortoise_01_CanShake",
+          "stateIDs": [
+            "Defend_BS",
+            "Defend_Loop",
+            "Defend_AS"
+          ],
+          "value": -1,
+          "actorIceSubHurtDelta": -1
+        }
+      ],
+      "modifiers": {
+        "Animal_Tortoise_01_Attack": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "TriggerAttackEvent",
+              "doOffStage": false,
+              "attackEvent": {
+                "attackInfo": {
+                  "attenuationGroup": "Tortoise_Attack",
+                  "hitPattern": {
+                    "hitImpulseType": "LV4",
+                    "onHitEffectName": "default",
+                    "hitHaltTimeScale": 0.05000000074505806,
+                    "JKLONEBKFKJ": {
+                      "JJGBOHIKHFM": true,
+                      "value": 1
+                    }
+                  },
+                  "FJNMGDHFOEH": {
+                    "GCPNPCOFFBP": "Shake"
+                  },
+                  "attenuationTag": "Tortoise_Attack",
+                  "IODAJAKBOLG": {
+                    "onHitEffectName": "default",
+                    "JKLONEBKFKJ": {
+                      "JJGBOHIKHFM": true,
+                      "value": 1
+                    }
+                  },
+                  "attackProperty": {
+                    "attackType": "Default",
+                    "enBreak": 120,
+                    "elementDurability": 100,
+                    "strikeType": "Blunt",
+                    "elementRank": 1,
+                    "damagePercentage": 1
+                  },
+                  "cameraShake": {
+                    "extension": {
+                      "baseCycle": 0.11999999731779099,
+                      "cycleDamping": 0.11999999731779099,
+                      "baseOnCamera": true,
+                      "rangeAttenuation": 0.5
+                    },
+                    "FAKMJBNLPPB": -1,
+                    "shakeDistance": 20
+                  }
+                },
+                "attackPattern": {
+                  "$type": "ConfigAttackCircle",
+                  "radius": 1.7999999523162842,
+                  "massiveAttackRatio": 1,
+                  "born": {
+                    "$type": "ConfigBornBySelf",
+                    "direction": {
+                      "maxAngle": 180
+                    },
+                    "useRotation": true,
+                    "FDGAEDDEEDG": {
+                      "ELAJJIANFFM": 180
+                    },
+                    "onGroundRaycastUpDist": 2,
+                    "value": 10
+                  },
+                  "height": 2,
+                  "fanAngle": 360,
+                  "PBFNLCIFCBO": {
+                    "GOAEBMPCPJL": {
+                      "JJGBOHIKHFM": true,
+                      "value": 1
+                    }
+                  },
+                  "triggerType": "TriggerNoRepeat"
+                }
+              },
+              "targetType": "Enemy",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "thinkInterval": 0.20000000298023224
+        },
+        "Animal_Tortoise_01_AttackEffAS": {
+          "onAdded": [
+            {
+              "$type": "FireEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Animal_Tortoise_Attack_AS",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "Animal_Tortoise_01_BeHitHandler": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_BE_HIT_TIMES",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_DEFEND_BE_HIT_TIMES",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "onBeingHit": [
+            {
+              "$type": "AddGlobalValue",
+              "doOffStage": false,
+              "value": 1,
+              "key": "_BE_HIT_TIMES",
+              "maxValue": 10,
+              "actorIceSubHurtDelta": -1,
+              "useLimitRange": true,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AddGlobalValue",
+              "doOffStage": false,
+              "value": 1,
+              "key": "_DEFEND_BE_HIT_TIMES",
+              "maxValue": 10,
+              "actorIceSubHurtDelta": -1,
+              "useLimitRange": true,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "AttachModifierToSelfGlobalValueMixin",
+              "globalValueKey": "_BE_HIT_TIMES",
+              "modifierNameSteps": [
+                "Peace",
+                "Defend"
+              ],
+              "removeAppliedModifier": true,
+              "actorIceSubHurtDelta": -1,
+              "valueSteps": [
+                -0.5,
+                0.5,
+                11
+              ]
+            },
+            {
+              "$type": "AttachModifierToSelfGlobalValueMixin",
+              "globalValueKey": "_DEFEND_BE_HIT_TIMES",
+              "modifierNameSteps": [
+                "InDefend",
+                "Attack"
+              ],
+              "removeAppliedModifier": true,
+              "actorIceSubHurtDelta": -1,
+              "valueSteps": [
+                -0.5,
+                5,
+                11
+              ]
+            }
+          ],
+          "minus_one": -1
+        },
+        "Animal_Tortoise_01_BeforeBattle": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_AVATAR_NUMS_NEAR_TORTOISE",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetAnimatorBool",
+              "doOffStage": false,
+              "boolID": "InAttack",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "RemoveModifier",
+              "doOffStage": false,
+              "modifierName": "Animal_Tortoise_DefendDuration",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetAnimatorBool",
+              "doOffStage": false,
+              "boolID": "InDefend",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "FieldEntityCountChangeMixin",
+              "campTargetType": "AllExceptSelf",
+              "targetPredicates": [
+                {
+                  "$type": "ByEntityTypes",
+                  "target": "Target",
+                  "value": -1,
+                  "entityTypes": [
+                    "Avatar",
+                    "Vehicle"
+                  ]
+                }
+              ],
+              "simpleCountMaxValue": 10,
+              "simpleCountGlobaValueKey": "_AVATAR_NUMS_NEAR_TORTOISE",
+              "actorIceSubHurtDelta": -1,
+              "replaceOnAddedInTick": true,
+              "PPPOKDHPHAF": true
+            },
+            {
+              "$type": "AttachModifierToSelfGlobalValueMixin",
+              "globalValueKey": "_AVATAR_NUMS_NEAR_TORTOISE",
+              "modifierNameSteps": [
+                "No_AvatarNear",
+                "AvatarNear"
+              ],
+              "removeAppliedModifier": true,
+              "actorIceSubHurtDelta": -1,
+              "valueSteps": [
+                -0.5,
+                0.5,
+                11
+              ]
+            }
+          ],
+          "minus_one": -1
+        },
+        "Animal_Tortoise_01_CanShake": {
+          "onAdded": [
+            {
+              "$type": "SetAnimatorBool",
+              "doOffStage": false,
+              "value": true,
+              "boolID": "CanShake",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "SetAnimatorBool",
+              "doOffStage": false,
+              "boolID": "CanShake",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1
+        },
+        "Animal_Tortoise_01_InDefendAnim": {
+          "onAdded": [
+            {
+              "$type": "SetAnimatorBool",
+              "doOffStage": false,
+              "value": true,
+              "boolID": "InDefendAnim",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "SetAnimatorBool",
+              "doOffStage": false,
+              "boolID": "InDefendAnim",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1
+        },
+        "Animal_Tortoise_01_Initial": {
+          "onAdded": [
+            {
+              "$type": "HideUIBillBoard",
+              "doOffStage": false,
+              "enable": true,
+              "actorIceSubHurtDelta": -1,
+              "hide": true,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AttachAbilityStateResistance",
+              "doOffStage": false,
+              "durationRatio": 1,
+              "actorIceSubHurtDelta": -1,
+              "resistanceListID": 11001,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "state": "LockHP"
+        },
+        "Animal_Tortoise_01_OutOfBattle": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_AVATAR_NUMS_NEAR_TORTOISE",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetAnimatorBool",
+              "doOffStage": false,
+              "boolID": "InAttack",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "RemoveModifier",
+              "doOffStage": false,
+              "modifierName": "Animal_Tortoise_DefendDuration",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetAnimatorBool",
+              "doOffStage": false,
+              "boolID": "InDefend",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetAnimatorBool",
+              "doOffStage": false,
+              "boolID": "InStandbyDefend",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "Animal_Tortoise_AttackDuration": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_DEFEND_BE_HIT_TIMES",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "duration": 4
+        },
+        "Animal_Tortoise_DefendDuration": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_DEFEND_BE_HIT_TIMES",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_BE_HIT_TIMES",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_DEFEND_BE_HIT_TIMES",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "duration": 20
+        },
+        "Attack": {
+          "onAdded": [
+            {
+              "$type": "SetAnimatorTrigger",
+              "doOffStage": false,
+              "triggerID": "GoAttack",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetAnimatorBool",
+              "doOffStage": false,
+              "value": true,
+              "boolID": "InAttack",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "ApplyModifier",
+              "doOffStage": false,
+              "modifierName": "Animal_Tortoise_AttackDuration",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "onBeingHit": [
+            {
+              "$type": "ApplyModifier",
+              "doOffStage": false,
+              "modifierName": "Animal_Tortoise_AttackDuration",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "AvatarNear": {
+          "onAdded": [
+            {
+              "$type": "SetAnimatorBool",
+              "doOffStage": false,
+              "value": true,
+              "boolID": "InStandbyDefend",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "Defend": {
+          "onAdded": [
+            {
+              "$type": "SetAnimatorTrigger",
+              "doOffStage": false,
+              "triggerID": "GoDefend",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetPoseBool",
+              "doOffStage": false,
+              "value": true,
+              "boolID": "InDefend",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetAnimatorBool",
+              "doOffStage": false,
+              "value": true,
+              "boolID": "InDefend",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "ApplyModifier",
+              "doOffStage": false,
+              "modifierName": "Animal_Tortoise_DefendDuration",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "InDefend": {
+          "onAdded": [
+            {
+              "$type": "SetAnimatorBool",
+              "doOffStage": false,
+              "boolID": "InAttack",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "No_AvatarNear": {
+          "onAdded": [
+            {
+              "$type": "SetAnimatorBool",
+              "doOffStage": false,
+              "boolID": "InStandbyDefend",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "Peace": {
+          "onAdded": [
+            {
+              "$type": "SetPoseBool",
+              "doOffStage": false,
+              "boolID": "InDefend",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetAnimatorBool",
+              "doOffStage": false,
+              "boolID": "InDefend",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "abilitySpecials": {
+        "ChargeBarMaxValue": 100
+      },
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "SetGlobalPos",
+          "doOffStage": false,
+          "key": "_ANIMAL_TORTOISE_ELECTRIC_BORNPOS_",
+          "actorIceSubHurtDelta": -1,
+          "born": {
+            "$type": "ConfigBornBySelf",
+            "direction": {
+              "$type": "ConfigDirectionByDefault",
+              "maxAngle": 180
+            },
+            "useRotation": true,
+            "FDGAEDDEEDG": {
+              "ELAJJIANFFM": 180
+            },
+            "alongGround": true,
+            "onGroundRaycastUpDist": 2,
+            "value": 10
+          },
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "SetGlobalValue",
+          "doOffStage": false,
+          "key": "_CHARGEBAR_VALUE",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "SetGlobalValue",
+          "doOffStage": false,
+          "key": "_AI_INCOMBAT_",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "ApplyModifier",
+          "doOffStage": false,
+          "modifierName": "Animal_Tortoise_Electric_SetValue",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "Animal_Tortoise_Electric_CombatStage",
+      "abilityMixins": [
+        {
+          "$type": "AttachToPoseIDMixin",
+          "modifierName": "Animal_Tortoise_Electric_AIInCombat",
+          "poseIDs": [
+            101,
+            201,
+            301
+          ],
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToStateIDMixin",
+          "modifierName": "Animal_Tortoise_Electric_WeakState",
+          "stateIDs": [
+            "Weak_BS",
+            "Weak_Loop",
+            "Weak_AS"
+          ],
+          "value": -1,
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToStateIDMixin",
+          "modifierName": "Animal_Tortoise_Electric_ForceSetCombatStage",
+          "stateIDs": [
+            "Weak_BS",
+            "Weak_Loop"
+          ],
+          "value": -1,
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "ServerFinishWatcherMixin",
+          "predicatesForeach": [
+            {
+              "$type": "HCGHHKEFGOK",
+              "target": "Target",
+              "PAHFKCFMIDO": 82224
+            }
+          ],
+          "predicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "value": 1,
+              "key": "_WATCHER_82225_FLAG_02_"
+            },
+            {
+              "$type": "ByTargetGlobalValue",
+              "key": "_WATCHER_82225_FLAG_01_",
+              "compareType": "NoneOrEqual"
+            },
+            {
+              "$type": "ByTargetGlobalValue",
+              "value": 1,
+              "key": "_LocalLegendTag_"
+            }
+          ],
+          "watcherId": 82225,
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "ServerFinishWatcherMixin",
+          "predicatesForeach": [
+            {
+              "$type": "HCGHHKEFGOK",
+              "target": "Target",
+              "PAHFKCFMIDO": 82223
+            }
+          ],
+          "predicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "key": "_WATCHER_82224_FLAG_01_",
+              "compareType": "NoneOrEqual"
+            },
+            {
+              "$type": "ByTargetGlobalValue",
+              "value": 1,
+              "key": "_LocalLegendTag_"
+            }
+          ],
+          "watcherId": 82224,
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "ServerFinishWatcherMixin",
+          "predicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "value": 1,
+              "key": "_LocalLegendTag_"
+            }
+          ],
+          "watcherId": 82223,
+          "actorIceSubHurtDelta": -1
+        }
+      ],
+      "modifiers": {
+        "Animal_Tortoise_Electric_AIInCombat": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "value": 1,
+              "key": "_AI_INCOMBAT_",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "Predicated",
+              "doOffStage": false,
+              "failActions": [
+                {
+                  "$type": "AttachAbilityStateResistance",
+                  "doOffStage": false,
+                  "durationRatio": 0.6000000238418579,
+                  "actorIceSubHurtDelta": -1,
+                  "resistanceListID": 14002,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "targetPredicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "target": "Team",
+                  "key": "LeyLineChallenge_MonsterLevelHigh",
+                  "compareType": "NoneOrEqual"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "successActions": [
+                {
+                  "$type": "AttachAbilityStateResistance",
+                  "doOffStage": false,
+                  "durationRatio": 0.8999999761581421,
+                  "actorIceSubHurtDelta": -1,
+                  "resistanceListID": 14002,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_AI_INCOMBAT_",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_ANIMAL_TORTOISE_ELECTRIC_COMBATSTAGE_",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetPoseBool",
+              "doOffStage": false,
+              "boolID": "FuryState",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValueV2",
+              "doOffStage": true,
+              "key": "_WATCHER_82224_FLAG_01_",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValueV2",
+              "doOffStage": true,
+              "key": "_WATCHER_82225_FLAG_01_",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValueV2",
+              "doOffStage": true,
+              "key": "_WATCHER_82225_FLAG_02_",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "modifierMixins": [
+            {
+              "$type": "AttachModifierToSelfGlobalValueMixin",
+              "globalValueKey": "_ANIMAL_TORTOISE_ELECTRIC_COMBATSTAGE_",
+              "modifierNameSteps": [
+                "UNIQUE_Animal_Tortoise_Electric_Stage1",
+                "UNIQUE_Animal_Tortoise_Electric_Stage2",
+                "UNIQUE_Animal_Tortoise_Electric_Weak"
+              ],
+              "removeAppliedModifier": true,
+              "actorIceSubHurtDelta": -1,
+              "valueSteps": [
+                -0.5,
+                0.5,
+                1.5,
+                2.5
+              ]
+            }
+          ],
+          "minus_one": -1
+        },
+        "Animal_Tortoise_Electric_ForceSetCombatStage": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_ANIMAL_TORTOISE_ELECTRIC_COMBATSTAGE_",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1
+        },
+        "Animal_Tortoise_Electric_SetValue": {
+          "onAdded": [
+            {
+              "$type": "TriggerThinkInterval",
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "SetOverrideMapValue",
+              "doOffStage": false,
+              "value": 30,
+              "overrideMapKey": "ChargeBarMaxValue",
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "value": 1,
+                  "target": "Team",
+                  "key": "LeyLineChallenge_MonsterLevelHigh"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "thinkInterval": 0.30000001192092896,
+          "duration": 3
+        },
+        "Animal_Tortoise_Electric_WeakState": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "VelocityForceMixin",
+              "actorIceSubHurtDelta": -1,
+              "MJDFLCCJPIH": true
+            },
+            {
+              "$type": "ExcludeGravityMixin",
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "minus_one": -1
+        },
+        "UNIQUE_Animal_Tortoise_Electric_ChargeBar": {
+          "elementDurability": 100,
+          "onBeingHit": [
+            {
+              "$type": "AddChargeBarValue",
+              "doOffStage": false,
+              "value": 3,
+              "useMutiPlayerFixData": true,
+              "predicates": [
+                {
+                  "$type": "ByHitDamage",
+                  "target": "Target",
+                  "KPKGMCBNADD": true
+                },
+                {
+                  "$type": "ByNot",
+                  "target": "Target",
+                  "predicates": [
+                    {
+                      "$type": "ByAttackTags",
+                      "attackTags": [
+                        "BurningDamage"
+                      ],
+                      "target": "Target"
+                    }
+                  ]
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "ChargeBarMixin",
+              "maxValue": "ChargeBarMaxValue",
+              "actorIceSubHurtDelta": -1,
+              "chargeBarElementType": "Electric",
+              "chargeBarIconID": 2
+            },
+            {
+              "$type": "AttachModifierToSelfGlobalValueMixin",
+              "globalValueKey": "_CHARGEBAR_VALUE",
+              "modifierNameSteps": [
+                "UNIQUE_Animal_Tortoise_Electric_ChargeBarFull"
+              ],
+              "removeAppliedModifier": true,
+              "actorIceSubHurtDelta": -1,
+              "valueSteps": [
+                [
+                  "ChargeBarMaxValue",
+                  0.5,
+                  "SUB"
+                ],
+                [
+                  "ChargeBarMaxValue",
+                  0.5,
+                  "ADD"
+                ]
+              ]
+            }
+          ],
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "Predicated",
+              "doOffStage": false,
+              "targetPredicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "value": 1,
+                  "target": "Team",
+                  "key": "LeyLineChallenge_MonsterLevelHigh"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "successActions": [
+                {
+                  "$type": "AddChargeBarValue",
+                  "doOffStage": false,
+                  "value": -2,
+                  "useMutiPlayerFixData": true,
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "isUnique": true,
+          "thinkInterval": 0.5
+        },
+        "UNIQUE_Animal_Tortoise_Electric_ChargeBarFull": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "value": 1,
+              "key": "_ANIMAL_TORTOISE_ELECTRIC_COMBATSTAGE_",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "isUnique": true
+        },
+        "UNIQUE_Animal_Tortoise_Electric_ChargeBar_LeyLineChallenge": {
+          "elementDurability": 100,
+          "onBeingHit": [
+            {
+              "$type": "AddChargeBarValue",
+              "doOffStage": false,
+              "value": 3,
+              "useMutiPlayerFixData": true,
+              "predicates": [
+                {
+                  "$type": "ByHitDamage",
+                  "target": "Target",
+                  "KPKGMCBNADD": true
+                },
+                {
+                  "$type": "ByNot",
+                  "target": "Target",
+                  "predicates": [
+                    {
+                      "$type": "ByAttackTags",
+                      "attackTags": [
+                        "BurningDamage"
+                      ],
+                      "target": "Target"
+                    }
+                  ]
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "ChargeBarMixin",
+              "useMutiPlayerFixData": true,
+              "maxValue": "ChargeBarMaxValue",
+              "actorIceSubHurtDelta": -1,
+              "chargeBarElementType": "Electric",
+              "chargeBarIconID": 2
+            },
+            {
+              "$type": "AttachModifierToSelfGlobalValueMixin",
+              "globalValueKey": "_CHARGEBAR_VALUE",
+              "modifierNameSteps": [
+                "UNIQUE_Animal_Tortoise_Electric_ChargeBarFull"
+              ],
+              "removeAppliedModifier": true,
+              "actorIceSubHurtDelta": -1,
+              "valueSteps": [
+                [
+                  "ChargeBarMaxValue",
+                  0.5,
+                  "SUB"
+                ],
+                [
+                  "ChargeBarMaxValue",
+                  0.5,
+                  "ADD"
+                ]
+              ]
+            }
+          ],
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "Predicated",
+              "doOffStage": false,
+              "targetPredicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "value": 1,
+                  "target": "Team",
+                  "key": "LeyLineChallenge_MonsterLevelHigh"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "successActions": [
+                {
+                  "$type": "AddChargeBarValue",
+                  "doOffStage": false,
+                  "value": -2,
+                  "useMutiPlayerFixData": true,
+                  "predicates": [
+                    {
+                      "$type": "FHLLBHFPBGN",
+                      "target": "Target",
+                      "logic": "Equal"
+                    }
+                  ],
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "AddChargeBarValue",
+                  "doOffStage": false,
+                  "value": -3,
+                  "useMutiPlayerFixData": true,
+                  "predicates": [
+                    {
+                      "$type": "FHLLBHFPBGN",
+                      "target": "Target"
+                    }
+                  ],
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "isUnique": true,
+          "thinkInterval": 0.5
+        },
+        "UNIQUE_Animal_Tortoise_Electric_Stage1": {
+          "onAdded": [
+            {
+              "$type": "SetPoseBool",
+              "doOffStage": false,
+              "boolID": "FuryState",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetAISkillGCD",
+              "doOffStage": false,
+              "value": 2,
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_ANIMAL_TORTOISE_ELECTRIC_FURYSTATE_",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "Predicated",
+              "doOffStage": false,
+              "failActions": [
+                {
+                  "$type": "ApplyModifier",
+                  "doOffStage": false,
+                  "modifierName": "UNIQUE_Animal_Tortoise_Electric_ChargeBar_LeyLineChallenge",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "targetPredicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "target": "Team",
+                  "key": "LeyLineChallenge_MonsterLevelHigh",
+                  "compareType": "NoneOrEqual"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "successActions": [
+                {
+                  "$type": "ApplyModifier",
+                  "doOffStage": false,
+                  "modifierName": "UNIQUE_Animal_Tortoise_Electric_ChargeBar",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "Predicated",
+              "doOffStage": false,
+              "failActions": [
+                {
+                  "$type": "RemoveUniqueModifier",
+                  "doOffStage": false,
+                  "modifierName": "UNIQUE_Animal_Tortoise_Electric_ChargeBar_LeyLineChallenge",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "targetPredicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "target": "Team",
+                  "key": "LeyLineChallenge_MonsterLevelHigh",
+                  "compareType": "NoneOrEqual"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "successActions": [
+                {
+                  "$type": "RemoveUniqueModifier",
+                  "doOffStage": false,
+                  "modifierName": "UNIQUE_Animal_Tortoise_Electric_ChargeBar",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "isUnique": true
+        },
+        "UNIQUE_Animal_Tortoise_Electric_Stage2": {
+          "onAdded": [
+            {
+              "$type": "SetPoseBool",
+              "doOffStage": false,
+              "value": true,
+              "boolID": "FuryState",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetAISkillGCD",
+              "doOffStage": false,
+              "value": 1.5,
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetAISkillCDAvailableNow",
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1,
+              "skillIDs": [
+                401
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "RemoveUniqueModifier",
+              "doOffStage": false,
+              "modifierName": "UNIQUE_Animal_Tortoise_Electric_ElementShield",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_ANIMAL_TORTOISE_ELECTRIC_FURYSTATE_",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "isUnique": true
+        },
+        "UNIQUE_Animal_Tortoise_Electric_Weak": {
+          "onAdded": [
+            {
+              "$type": "SetAnimatorTrigger",
+              "doOffStage": false,
+              "mpTriggerOnRemote": true,
+              "triggerID": "WeakStart",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_CHARGEBAR_VALUE",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "isUnique": true
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Animal_Tortoise_Electric_JumpAtk",
+      "onAbilityStart": [
+        {
+          "$type": "ApplyModifier",
+          "doOffStage": false,
+          "modifierName": "Animal_Tortoise_Electric_JumpAtkDamage",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "modifiers": {
+        "Animal_Tortoise_Electric_JumpAtkDamage": {
+          "onAdded": [
+            {
+              "$type": "FireEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_ANIMAL_TORTOISE_ELECTRIC_FURYSTATE_"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Ani_Animal_Tortoise_Electric_JumpAtk_Normal",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "FireEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "value": 1,
+                  "key": "_ANIMAL_TORTOISE_ELECTRIC_FURYSTATE_"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Ani_Animal_Tortoise_Electric_JumpAtk_Strong",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "TriggerAttackEvent",
+              "doOffStage": false,
+              "attackEvent": {
+                "attackInfo": {
+                  "attenuationGroup": "default",
+                  "hitPattern": {
+                    "hitImpulseType": "LV3",
+                    "onHitEffectName": "default",
+                    "hitHaltTimeScale": 0.05000000074505806,
+                    "JKLONEBKFKJ": {
+                      "JJGBOHIKHFM": true,
+                      "value": 1
+                    }
+                  },
+                  "forceCameraShake": true,
+                  "FJNMGDHFOEH": {
+                    "GCPNPCOFFBP": "Shake"
+                  },
+                  "IODAJAKBOLG": {
+                    "onHitEffectName": "default",
+                    "JKLONEBKFKJ": {
+                      "JJGBOHIKHFM": true,
+                      "value": 1
+                    }
+                  },
+                  "attackProperty": {
+                    "attackType": "Default",
+                    "enBreak": 200,
+                    "elementType": "Electric",
+                    "elementDurability": 25,
+                    "strikeType": "Blunt",
+                    "elementRank": 1,
+                    "damagePercentage": 0.5
+                  },
+                  "cameraShake": {
+                    "extension": {
+                      "baseCycle": 0.11999999731779099,
+                      "cycleDamping": 0.11999999731779099,
+                      "baseOnCamera": true,
+                      "rangeAttenuation": 0.5
+                    },
+                    "FAKMJBNLPPB": -1,
+                    "shakeDistance": 30,
+                    "shakeDir": {
+                      "y": -1
+                    },
+                    "shakeRange": 0.5,
+                    "shakeType": "CustomVector",
+                    "shakeTime": 0.20000000298023224
+                  }
+                },
+                "attackPattern": {
+                  "$type": "ConfigAttackCircle",
+                  "radius": 5,
+                  "massiveAttackRatio": 1,
+                  "born": {
+                    "$type": "ConfigBornBySelf",
+                    "direction": {
+                      "maxAngle": 180
+                    },
+                    "useRotation": true,
+                    "offset": {
+                      "x": -1
+                    },
+                    "FDGAEDDEEDG": {
+                      "ELAJJIANFFM": 180
+                    },
+                    "onGroundRaycastUpDist": 2,
+                    "value": 10
+                  },
+                  "height": 3,
+                  "fanAngle": 360,
+                  "PBFNLCIFCBO": {
+                    "GOAEBMPCPJL": {
+                      "JJGBOHIKHFM": true,
+                      "value": 1
+                    }
+                  },
+                  "triggerType": "TriggerNoRepeat"
+                }
+              },
+              "targetType": "Enemy",
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_ANIMAL_TORTOISE_ELECTRIC_FURYSTATE_"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "TriggerAttackEvent",
+              "doOffStage": false,
+              "attackEvent": {
+                "attackInfo": {
+                  "attenuationGroup": "default",
+                  "hitPattern": {
+                    "hitImpulseType": "LV3",
+                    "onHitEffectName": "default",
+                    "hitHaltTimeScale": 0.05000000074505806,
+                    "JKLONEBKFKJ": {
+                      "JJGBOHIKHFM": true,
+                      "value": 1
+                    }
+                  },
+                  "forceCameraShake": true,
+                  "FJNMGDHFOEH": {
+                    "GCPNPCOFFBP": "Shake"
+                  },
+                  "IODAJAKBOLG": {
+                    "onHitEffectName": "default",
+                    "JKLONEBKFKJ": {
+                      "JJGBOHIKHFM": true,
+                      "value": 1
+                    }
+                  },
+                  "attackProperty": {
+                    "attackType": "Default",
+                    "enBreak": 200,
+                    "elementType": "Electric",
+                    "elementDurability": 25,
+                    "strikeType": "Blunt",
+                    "elementRank": 1,
+                    "damagePercentage": 0.699999988079071
+                  },
+                  "cameraShake": {
+                    "extension": {
+                      "baseCycle": 0.11999999731779099,
+                      "cycleDamping": 0.11999999731779099,
+                      "baseOnCamera": true,
+                      "rangeAttenuation": 0.5
+                    },
+                    "FAKMJBNLPPB": -1,
+                    "shakeDistance": 30,
+                    "shakeDir": {
+                      "y": -1
+                    },
+                    "shakeRange": 0.5,
+                    "shakeType": "CustomVector",
+                    "shakeTime": 0.20000000298023224
+                  }
+                },
+                "attackPattern": {
+                  "$type": "ConfigAttackCircle",
+                  "radius": 7.5,
+                  "massiveAttackRatio": 1,
+                  "born": {
+                    "$type": "ConfigBornBySelf",
+                    "direction": {
+                      "maxAngle": 180
+                    },
+                    "useRotation": true,
+                    "offset": {
+                      "x": -1
+                    },
+                    "FDGAEDDEEDG": {
+                      "ELAJJIANFFM": 180
+                    },
+                    "onGroundRaycastUpDist": 2,
+                    "value": 10
+                  },
+                  "height": 3,
+                  "fanAngle": 360,
+                  "PBFNLCIFCBO": {
+                    "GOAEBMPCPJL": {
+                      "JJGBOHIKHFM": true,
+                      "value": 1
+                    }
+                  },
+                  "triggerType": "TriggerNoRepeat"
+                }
+              },
+              "targetType": "Enemy",
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "value": 1,
+                  "key": "_ANIMAL_TORTOISE_ELECTRIC_FURYSTATE_"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "duration": 0.699999988079071
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Animal_Tortoise_Electric_FireBullet",
+      "abilityMixins": [
+        {
+          "$type": "AttachToStateIDMixin",
+          "modifierName": "Animal_Tortoise_Electric_FireBulletState",
+          "stateIDs": [
+            "FireBullet"
+          ],
+          "value": -1,
+          "actorIceSubHurtDelta": -1
+        }
+      ],
+      "onAbilityStart": [
+        {
+          "$type": "TriggerBullet",
+          "doOffStage": false,
+          "trackTarget": "SelfAttackTarget",
+          "value": true,
+          "bulletID": 42802131,
+          "actorIceSubHurtDelta": -1,
+          "born": {
+            "$type": "ConfigBornByAttachPoint",
+            "direction": {
+              "$type": "ConfigDirectionByAttackTarget",
+              "maxAngle": 20
+            },
+            "useRotation": true,
+            "FDGAEDDEEDG": {
+              "ELAJJIANFFM": 180
+            },
+            "attachPointName": "FireBulletPos",
+            "onGroundRaycastUpDist": 2,
+            "value": 10
+          },
+          "canBeHandledOnRecover": true,
+          "POOEIFNLHDB": true
+        }
+      ],
+      "modifiers": {
+        "Animal_Tortoise_Electric_FireBulletState": {
+          "onAdded": [
+            {
+              "$type": "FireEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Ani_Animal_Tortoise_Electric_FireBulletBS",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "ApplyModifier",
+          "doOffStage": false,
+          "modifierName": "Tortoise_Electric_ElectricBall_Effect",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "Tortoise_Electric_ElectricBall_Hit",
+      "onAbilityStart": [
+        {
+          "$type": "TriggerAttackEvent",
+          "doOffStage": false,
+          "attackEvent": {
+            "attackInfo": {
+              "attenuationGroup": "default",
+              "hitPattern": {
+                "hitImpulseType": "LV2",
+                "onHitEffectName": "default",
+                "hitHaltTimeScale": 0.05000000074505806,
+                "JKLONEBKFKJ": {
+                  "JJGBOHIKHFM": true,
+                  "value": 1
+                }
+              },
+              "FJNMGDHFOEH": {
+                "GCPNPCOFFBP": "Shake"
+              },
+              "IODAJAKBOLG": {
+                "onHitEffectName": "default",
+                "JKLONEBKFKJ": {
+                  "JJGBOHIKHFM": true,
+                  "value": 1
+                }
+              },
+              "attackProperty": {
+                "attackType": "Default",
+                "enBreak": 100,
+                "elementType": "Electric",
+                "elementDurability": 25,
+                "strikeType": "Blunt",
+                "elementRank": 1,
+                "damagePercentage": 1
+              },
+              "cameraShake": {
+                "extension": {
+                  "baseCycle": 0.11999999731779099,
+                  "cycleDamping": 0.11999999731779099,
+                  "baseOnCamera": true,
+                  "rangeAttenuation": 0.5
+                },
+                "FAKMJBNLPPB": -1,
+                "shakeDistance": 20
+              }
+            },
+            "attackPattern": {
+              "$type": "ConfigAttackSphere",
+              "radius": 1.25,
+              "massiveAttackRatio": 1,
+              "born": {
+                "$type": "ConfigBornByCollisionPoint",
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "PBFNLCIFCBO": {
+                "GOAEBMPCPJL": {
+                  "JJGBOHIKHFM": true,
+                  "value": 1
+                }
+              },
+              "triggerType": "TriggerNoRepeat"
+            }
+          },
+          "targetType": "Enemy",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "modifiers": {
+        "Tortoise_Electric_ElectricBall_Effect": {
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Ani_Animal_Tortoise_Electric_FireBullet_ElectricBallLoop",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "FireEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Ani_Animal_Tortoise_Electric_FireBullet_ElectricBallAS",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "KillSelf",
+              "doOffStage": false,
+              "configIdArray": [
+                42802131
+              ],
+              "killSelfType": "Normal",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "duration": 5
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "abilitySpecials": {
+        "ElementShieldDurability": 400
+      },
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "SetOverrideMapValue",
+          "doOffStage": false,
+          "value": 800,
+          "overrideMapKey": "ElementShieldDurability",
+          "predicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "value": 1,
+              "target": "Team",
+              "key": "LeyLineChallenge_MonsterLevelHigh"
+            }
+          ],
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "Animal_Tortoise_Electric_Fury",
+      "abilityMixins": [
+        {
+          "$type": "AttachToStateIDMixin",
+          "modifierName": "Animal_Tortoise_Electric_FuryState",
+          "stateIDs": [
+            "Fury"
+          ],
+          "value": -1,
+          "actorIceSubHurtDelta": -1
+        }
+      ],
+      "onAbilityStart": [
+        {
+          "$type": "ApplyModifier",
+          "doOffStage": false,
+          "modifierName": "UNIQUE_Animal_Tortoise_Electric_ElementShield",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "modifiers": {
+        "Animal_Tortoise_Electric_ElementShield_ElectricWave": {
+          "onAdded": [
+            {
+              "$type": "DamageByAttackValue",
+              "attackInfo": {
+                "attenuationGroup": "Animal_Tortoise_Electric_Lightning",
+                "hitPattern": {
+                  "hitImpulseType": "LV1",
+                  "onHitEffectName": "default",
+                  "hitHaltTimeScale": 0.009999999776482582,
+                  "JKLONEBKFKJ": {
+                    "JJGBOHIKHFM": true,
+                    "value": 1
+                  }
+                },
+                "FJNMGDHFOEH": {
+                  "GCPNPCOFFBP": "Shake"
+                },
+                "attenuationTag": "Animal_Tortoise_Electric_Lightning",
+                "IODAJAKBOLG": {
+                  "onHitEffectName": "default",
+                  "JKLONEBKFKJ": {
+                    "JJGBOHIKHFM": true,
+                    "value": 1
+                  }
+                },
+                "attackProperty": {
+                  "attackType": "Default",
+                  "enBreak": 1,
+                  "elementType": "Electric",
+                  "elementDurability": 25,
+                  "strikeType": "Blunt",
+                  "elementRank": 1,
+                  "damagePercentage": 0.25
+                },
+                "cameraShake": {
+                  "extension": {
+                    "baseCycle": 0.11999999731779099,
+                    "cycleDamping": 0.11999999731779099,
+                    "baseOnCamera": true,
+                    "rangeAttenuation": 0.5
+                  },
+                  "FAKMJBNLPPB": -1,
+                  "shakeDistance": 20
+                },
+                "attackTag": "Animal_Tortoise_Electric_Lightning"
+              },
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1,
+              "born": {
+                "$type": "ConfigBornByAttachPoint",
+                "direction": {
+                  "maxAngle": 180
+                },
+                "useRotation": true,
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "attachPointTargetType": "Self",
+                "attachPointName": "RootNode",
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "stacking": "Multiple",
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "duration": 0.10000000149011612
+        },
+        "Animal_Tortoise_Electric_ElementShield_Lightning": {
+          "onAdded": [
+            {
+              "$type": "DamageByAttackValue",
+              "attackInfo": {
+                "attenuationGroup": "Animal_Tortoise_Electric_Lightning",
+                "hitPattern": {
+                  "hitImpulseType": "LV1",
+                  "onHitEffectName": "default",
+                  "hitHaltTimeScale": 0.009999999776482582,
+                  "JKLONEBKFKJ": {
+                    "JJGBOHIKHFM": true,
+                    "value": 1
+                  }
+                },
+                "FJNMGDHFOEH": {
+                  "GCPNPCOFFBP": "Shake"
+                },
+                "attenuationTag": "Animal_Tortoise_Electric_Lightning",
+                "IODAJAKBOLG": {
+                  "onHitEffectName": "default",
+                  "JKLONEBKFKJ": {
+                    "JJGBOHIKHFM": true,
+                    "value": 1
+                  }
+                },
+                "attackProperty": {
+                  "attackType": "Default",
+                  "enBreak": 1,
+                  "elementType": "Electric",
+                  "elementDurability": 25,
+                  "strikeType": "Blunt",
+                  "elementRank": 1,
+                  "damagePercentage": 0.25
+                },
+                "cameraShake": {
+                  "extension": {
+                    "baseCycle": 0.11999999731779099,
+                    "cycleDamping": 0.11999999731779099,
+                    "baseOnCamera": true,
+                    "rangeAttenuation": 0.5
+                  },
+                  "FAKMJBNLPPB": -1,
+                  "shakeDistance": 20
+                },
+                "attackTag": "Animal_Tortoise_Electric_Lightning"
+              },
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1,
+              "born": {
+                "$type": "ConfigBornByAttachPoint",
+                "direction": {
+                  "maxAngle": 180
+                },
+                "useRotation": true,
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "attachPointTargetType": "Self",
+                "attachPointName": "RootNode",
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "FireEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Ani_Animal_Tortoise_Electric_Fury_ElectricShield_Lightning",
+              "born": {
+                "$type": "ConfigBornByAttachPoint",
+                "direction": {
+                  "maxAngle": 180
+                },
+                "useRotation": true,
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "attachPointTargetType": "Caster",
+                "attachPointName": "LightningAttachPos",
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true,
+              "OMPCBPHLEAN": true
+            }
+          ],
+          "elementDurability": 100,
+          "stacking": "Multiple",
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "duration": 0.10000000149011612
+        },
+        "Animal_Tortoise_Electric_FuryState": {
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Ani_Animal_Tortoise_Electric_FuryBS",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "value": 1,
+              "key": "_ANIMAL_TORTOISE_ELECTRIC_FURYSTATE_",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_CHARGEBAR_VALUE",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "Animal_Tortoise_Electric_SetWatcherFlag": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValueV2",
+              "doOffStage": true,
+              "value": 1,
+              "key": "_WATCHER_82225_FLAG_01_",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "duration": 0.10000000149011612
+        },
+        "UNIQUE_Animal_Tortoise_Electric_ElementShield": {
+          "elementType": "Electric",
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Ani_Animal_Tortoise_Electric_Fury_ElectricShield",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValueV2",
+              "doOffStage": true,
+              "value": 1,
+              "key": "_WATCHER_82224_FLAG_01_",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValueV2",
+              "doOffStage": true,
+              "value": 1,
+              "key": "_WATCHER_82225_FLAG_02_",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": "ElementShieldDurability",
+          "onBeingHit": [
+            {
+              "$type": "Predicated",
+              "doOffStage": false,
+              "failActions": [
+                {
+                  "$type": "Predicated",
+                  "doOffStage": false,
+                  "target": "TargetOriginOwner",
+                  "targetPredicates": [
+                    {
+                      "$type": "ByEntityTypes",
+                      "target": "Target",
+                      "value": -1,
+                      "entityTypes": [
+                        "Avatar",
+                        "Vehicle",
+                        "Partner"
+                      ]
+                    },
+                    {
+                      "$type": "ByTargetPositionToSelfPosition",
+                      "value": 4.5,
+                      "target": "Target",
+                      "logic": "LesserOrEqual",
+                      "compareType": "XYZ"
+                    },
+                    {
+                      "$type": "ByHitDamage",
+                      "target": "Target",
+                      "KPKGMCBNADD": true
+                    }
+                  ],
+                  "actorIceSubHurtDelta": -1,
+                  "successActions": [
+                    {
+                      "$type": "FireEffect",
+                      "doOffStage": false,
+                      "scale": 1,
+                      "actorIceSubHurtDelta": -1,
+                      "effectPattern": "Eff_Ani_Animal_Tortoise_Fury_ElectricShield_ElectricWave",
+                      "born": {
+                        "direction": {
+                          "maxAngle": 180
+                        },
+                        "FDGAEDDEEDG": {
+                          "ELAJJIANFFM": 180
+                        },
+                        "onGroundRaycastUpDist": 2,
+                        "value": 10
+                      },
+                      "effectTempleteID": -1,
+                      "canBeHandledOnRecover": true
+                    },
+                    {
+                      "$type": "ApplyModifier",
+                      "doOffStage": false,
+                      "modifierName": "Animal_Tortoise_Electric_ElementShield_ElectricWave",
+                      "target": "Target",
+                      "actorIceSubHurtDelta": -1,
+                      "canBeHandledOnRecover": true
+                    }
+                  ],
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "target": "Target",
+              "targetPredicates": [
+                {
+                  "$type": "ByTargetPositionToSelfPosition",
+                  "value": 4.5,
+                  "target": "Target",
+                  "logic": "LesserOrEqual",
+                  "compareType": "XYZ"
+                },
+                {
+                  "$type": "ByHitDamage",
+                  "target": "Target",
+                  "KPKGMCBNADD": true
+                },
+                {
+                  "$type": "ByEntityTypes",
+                  "target": "Target",
+                  "value": -1,
+                  "entityTypes": [
+                    "Avatar",
+                    "Vehicle",
+                    "Partner"
+                  ]
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "successActions": [
+                {
+                  "$type": "FireEffect",
+                  "doOffStage": false,
+                  "scale": 1,
+                  "actorIceSubHurtDelta": -1,
+                  "effectPattern": "Eff_Ani_Animal_Tortoise_Fury_ElectricShield_ElectricWave",
+                  "born": {
+                    "direction": {
+                      "maxAngle": 180
+                    },
+                    "FDGAEDDEEDG": {
+                      "ELAJJIANFFM": 180
+                    },
+                    "onGroundRaycastUpDist": 2,
+                    "value": 10
+                  },
+                  "effectTempleteID": -1,
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "ApplyModifier",
+                  "doOffStage": false,
+                  "modifierName": "Animal_Tortoise_Electric_ElementShield_ElectricWave",
+                  "target": "Target",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "Predicated",
+              "doOffStage": false,
+              "failActions": [
+                {
+                  "$type": "Predicated",
+                  "doOffStage": false,
+                  "target": "TargetOriginOwner",
+                  "targetPredicates": [
+                    {
+                      "$type": "ByEntityTypes",
+                      "target": "Target",
+                      "value": -1,
+                      "entityTypes": [
+                        "Avatar",
+                        "Vehicle",
+                        "Partner"
+                      ]
+                    },
+                    {
+                      "$type": "ByTargetPositionToSelfPosition",
+                      "value": 12.5,
+                      "target": "Target",
+                      "logic": "LesserOrEqual",
+                      "compareType": "XYZ"
+                    },
+                    {
+                      "$type": "ByTargetPositionToSelfPosition",
+                      "value": 4.5,
+                      "target": "Target",
+                      "compareType": "XYZ"
+                    },
+                    {
+                      "$type": "ByHitDamage",
+                      "target": "Target",
+                      "KPKGMCBNADD": true
+                    }
+                  ],
+                  "actorIceSubHurtDelta": -1,
+                  "successActions": [
+                    {
+                      "$type": "ApplyModifier",
+                      "doOffStage": false,
+                      "modifierName": "Animal_Tortoise_Electric_ElementShield_Lightning",
+                      "target": "Target",
+                      "actorIceSubHurtDelta": -1,
+                      "canBeHandledOnRecover": true
+                    }
+                  ],
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "target": "Target",
+              "targetPredicates": [
+                {
+                  "$type": "ByTargetPositionToSelfPosition",
+                  "value": 12.5,
+                  "target": "Target",
+                  "logic": "LesserOrEqual",
+                  "compareType": "XYZ"
+                },
+                {
+                  "$type": "ByTargetPositionToSelfPosition",
+                  "value": 4.5,
+                  "target": "Target",
+                  "compareType": "XYZ"
+                },
+                {
+                  "$type": "ByHitDamage",
+                  "target": "Target",
+                  "KPKGMCBNADD": true
+                },
+                {
+                  "$type": "ByEntityTypes",
+                  "target": "Target",
+                  "value": -1,
+                  "entityTypes": [
+                    "Avatar",
+                    "Vehicle",
+                    "Partner"
+                  ]
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "successActions": [
+                {
+                  "$type": "ApplyModifier",
+                  "doOffStage": false,
+                  "modifierName": "Animal_Tortoise_Electric_ElementShield_Lightning",
+                  "target": "Target",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "stacking": "Unique",
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "FireEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Ani_Animal_Tortoise_Electric_Fury_ElectricShield_AS",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "value": 2,
+              "key": "_ANIMAL_TORTOISE_ELECTRIC_COMBATSTAGE_",
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "value": 1,
+                  "key": "_AI_INCOMBAT_"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "onAttackLanded": [
+            {
+              "$type": "Predicated",
+              "doOffStage": false,
+              "target": "Other",
+              "targetPredicates": [
+                {
+                  "$type": "ByEntityTypes",
+                  "target": "Target",
+                  "value": -1,
+                  "entityTypes": [
+                    "Avatar"
+                  ]
+                },
+                {
+                  "$type": "ByAttackTags",
+                  "attackTags": [
+                    "Animal_Tortoise_Electric_Lightning"
+                  ],
+                  "target": "Target"
+                },
+                {
+                  "$type": "ByNot",
+                  "target": "Target",
+                  "predicates": [
+                    {
+                      "$type": "DAHNAPHKMJO",
+                      "target": "Target",
+                      "NHKJFMPLEFL": true
+                    }
+                  ]
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "successActions": [
+                {
+                  "$type": "ApplyModifier",
+                  "doOffStage": false,
+                  "modifierName": "Animal_Tortoise_Electric_SetWatcherFlag",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "modifierMixins": [
+            {
+              "$type": "ElementShieldMixin",
+              "maxShieldByHPRatio": 1,
+              "elementType": "Electric",
+              "useMutiPlayerFixData": true,
+              "actorIceSubHurtDelta": -1,
+              "NADBHIKGCJA": 360
+            },
+            {
+              "$type": "VelocityForceMixin",
+              "excludeForces": [
+                "WindZoneType"
+              ],
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "minus_one": -1,
+          "isUnique": true
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "onKill": [
+        {
+          "$type": "KillMultiBullet",
+          "doOffStage": true,
+          "gadgetInfo": {
+            "configID": 42802134
+          },
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Animal_Tortoise_Electric_RushAtk",
+      "abilityMixins": [
+        {
+          "$type": "AttachToStateIDMixin",
+          "modifierName": "Animal_Tortoise_Electric_RushAtkLoopState",
+          "stateIDs": [
+            "RushAtk_Loop"
+          ],
+          "value": -1,
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToStateIDMixin",
+          "modifierName": "Animal_Tortoise_Electric_ForceKillBullet",
+          "stateIDs": [
+            "RushAtk_Loop",
+            "RushAtk_AS"
+          ],
+          "value": -1,
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "SteerAttackMixin",
+          "startNormalizedTime": 0.33000001311302185,
+          "angularSpeed": 90,
+          "CCFNFIKKIDJ": true,
+          "value": -1,
+          "GMEPMDNDBOP": 180,
+          "actorIceSubHurtDelta": -1,
+          "steerStateIDs": [
+            "RushAtk_BS",
+            "RushAtk_Loop"
+          ],
+          "endNormalizedTime": 7,
+          "attackDistance": 2,
+          "PMKCEJILFAF": true
+        }
+      ],
+      "modifiers": {
+        "Animal_Tortoise_Electric_ForceKillBullet": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "KillMultiBullet",
+              "doOffStage": true,
+              "gadgetInfo": {
+                "configID": 42802134
+              },
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1
+        },
+        "Animal_Tortoise_Electric_RushAtkLoopState": {
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Ani_Animal_Tortoise_Electric_RushAtkLoop",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "TriggerBullet",
+              "doOffStage": false,
+              "trackTarget": "SelfAttackTarget",
+              "value": true,
+              "bulletID": 42802134,
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "value": 1,
+                  "key": "_ANIMAL_TORTOISE_ELECTRIC_FURYSTATE_"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "born": {
+                "$type": "ConfigBornBySelf",
+                "direction": {
+                  "maxAngle": 180
+                },
+                "useRotation": true,
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "canBeHandledOnRecover": true,
+              "POOEIFNLHDB": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "Predicated",
+              "doOffStage": false,
+              "failActions": [
+                {
+                  "$type": "Predicated",
+                  "doOffStage": false,
+                  "failActions": [
+                    {
+                      "$type": "TriggerAttackEvent",
+                      "doOffStage": false,
+                      "attackEvent": {
+                        "attackInfo": {
+                          "attenuationGroup": "Animal_Tortoise_Electric_RushAtk",
+                          "hitPattern": {
+                            "hitImpulseType": "LV1",
+                            "onHitEffectName": "default",
+                            "hitHaltTimeScale": 0.05000000074505806,
+                            "JKLONEBKFKJ": {
+                              "JJGBOHIKHFM": true,
+                              "value": 1
+                            }
+                          },
+                          "FJNMGDHFOEH": {
+                            "GCPNPCOFFBP": "Shake"
+                          },
+                          "attenuationTag": "Animal_Tortoise_Electric_RushAtk",
+                          "IODAJAKBOLG": {
+                            "onHitEffectName": "default",
+                            "JKLONEBKFKJ": {
+                              "JJGBOHIKHFM": true,
+                              "value": 1
+                            }
+                          },
+                          "attackProperty": {
+                            "attackType": "Default",
+                            "enBreak": 200,
+                            "elementType": "Electric",
+                            "elementDurability": 25,
+                            "strikeType": "Blunt",
+                            "elementRank": 1,
+                            "damagePercentage": 0.4000000059604645
+                          },
+                          "cameraShake": {
+                            "extension": {
+                              "baseCycle": 0.11999999731779099,
+                              "cycleDamping": 0.11999999731779099,
+                              "baseOnCamera": true,
+                              "rangeAttenuation": 0.5
+                            },
+                            "FAKMJBNLPPB": -1,
+                            "shakeDistance": 20
+                          }
+                        },
+                        "attackPattern": {
+                          "$type": "ConfigAttackCircle",
+                          "radius": 4,
+                          "massiveAttackRatio": 1,
+                          "born": {
+                            "$type": "ConfigBornBySelf",
+                            "direction": {
+                              "maxAngle": 180
+                            },
+                            "useRotation": true,
+                            "offset": {
+                              "x": -1
+                            },
+                            "FDGAEDDEEDG": {
+                              "ELAJJIANFFM": 180
+                            },
+                            "onGroundRaycastUpDist": 2,
+                            "value": 10
+                          },
+                          "height": 4,
+                          "fanAngle": 360,
+                          "PBFNLCIFCBO": {
+                            "GOAEBMPCPJL": {
+                              "JJGBOHIKHFM": true,
+                              "value": 1
+                            }
+                          },
+                          "triggerType": "TriggerNoRepeat"
+                        }
+                      },
+                      "targetType": "Enemy",
+                      "actorIceSubHurtDelta": -1,
+                      "canBeHandledOnRecover": true
+                    }
+                  ],
+                  "targetPredicates": [
+                    {
+                      "$type": "ByHasAbilityState",
+                      "target": "Target",
+                      "abilityState": "ElementFreeze"
+                    }
+                  ],
+                  "actorIceSubHurtDelta": -1,
+                  "successActions": [
+                    {
+                      "$type": "SetAnimatorTrigger",
+                      "doOffStage": false,
+                      "triggerID": "StopRush",
+                      "actorIceSubHurtDelta": -1,
+                      "canBeHandledOnRecover": true
+                    }
+                  ],
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "targetPredicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "target": "Team",
+                  "key": "LeyLineChallenge_MonsterLevelHigh",
+                  "compareType": "NoneOrEqual"
+                },
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_Monster_LeyLineChallenge_LevelLow",
+                  "compareType": "NoneOrEqual"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "successActions": [
+                {
+                  "$type": "TriggerAttackEvent",
+                  "doOffStage": false,
+                  "attackEvent": {
+                    "attackInfo": {
+                      "attenuationGroup": "Animal_Tortoise_Electric_RushAtk",
+                      "hitPattern": {
+                        "hitImpulseType": "LV1",
+                        "onHitEffectName": "default",
+                        "hitHaltTimeScale": 0.05000000074505806,
+                        "JKLONEBKFKJ": {
+                          "JJGBOHIKHFM": true,
+                          "value": 1
+                        }
+                      },
+                      "FJNMGDHFOEH": {
+                        "GCPNPCOFFBP": "Shake"
+                      },
+                      "attenuationTag": "Animal_Tortoise_Electric_RushAtk",
+                      "IODAJAKBOLG": {
+                        "onHitEffectName": "default",
+                        "JKLONEBKFKJ": {
+                          "JJGBOHIKHFM": true,
+                          "value": 1
+                        }
+                      },
+                      "attackProperty": {
+                        "attackType": "Default",
+                        "enBreak": 200,
+                        "elementType": "Electric",
+                        "elementDurability": 25,
+                        "strikeType": "Blunt",
+                        "elementRank": 1,
+                        "damagePercentage": 0.699999988079071
+                      },
+                      "cameraShake": {
+                        "extension": {
+                          "baseCycle": 0.11999999731779099,
+                          "cycleDamping": 0.11999999731779099,
+                          "baseOnCamera": true,
+                          "rangeAttenuation": 0.5
+                        },
+                        "FAKMJBNLPPB": -1,
+                        "shakeDistance": 20
+                      }
+                    },
+                    "attackPattern": {
+                      "$type": "ConfigAttackCircle",
+                      "radius": 4,
+                      "massiveAttackRatio": 1,
+                      "born": {
+                        "$type": "ConfigBornBySelf",
+                        "direction": {
+                          "maxAngle": 180
+                        },
+                        "useRotation": true,
+                        "offset": {
+                          "x": -1
+                        },
+                        "FDGAEDDEEDG": {
+                          "ELAJJIANFFM": 180
+                        },
+                        "onGroundRaycastUpDist": 2,
+                        "value": 10
+                      },
+                      "height": 4,
+                      "fanAngle": 360,
+                      "PBFNLCIFCBO": {
+                        "GOAEBMPCPJL": {
+                          "JJGBOHIKHFM": true,
+                          "value": 1
+                        }
+                      },
+                      "triggerType": "TriggerNoRepeat"
+                    }
+                  },
+                  "targetType": "Enemy",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "thinkInterval": 0.33000001311302185
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Tortoise_Electric_RushAtk_ElectricBall_Hit",
+      "onAbilityStart": [
+        {
+          "$type": "Predicated",
+          "doOffStage": false,
+          "failActions": [
+            {
+              "$type": "TriggerAttackEvent",
+              "doOffStage": false,
+              "attackEvent": {
+                "attackInfo": {
+                  "attenuationGroup": "default",
+                  "hitPattern": {
+                    "hitImpulseType": "LV1",
+                    "onHitEffectName": "default",
+                    "hitHaltTimeScale": 0.05000000074505806,
+                    "JKLONEBKFKJ": {
+                      "JJGBOHIKHFM": true,
+                      "value": 1
+                    }
+                  },
+                  "FJNMGDHFOEH": {
+                    "GCPNPCOFFBP": "Shake"
+                  },
+                  "IODAJAKBOLG": {
+                    "onHitEffectName": "default",
+                    "JKLONEBKFKJ": {
+                      "JJGBOHIKHFM": true,
+                      "value": 1
+                    }
+                  },
+                  "attackProperty": {
+                    "attackType": "Default",
+                    "enBreak": 1,
+                    "elementType": "Electric",
+                    "elementDurability": 25,
+                    "strikeType": "Blunt",
+                    "elementRank": 1,
+                    "damagePercentage": 0.20000000298023224
+                  },
+                  "cameraShake": {
+                    "extension": {
+                      "baseCycle": 0.11999999731779099,
+                      "cycleDamping": 0.11999999731779099,
+                      "baseOnCamera": true,
+                      "rangeAttenuation": 0.5
+                    },
+                    "FAKMJBNLPPB": -1,
+                    "shakeDistance": 20
+                  }
+                },
+                "attackPattern": {
+                  "$type": "ConfigAttackSphere",
+                  "radius": 0.25,
+                  "massiveAttackRatio": 1,
+                  "born": {
+                    "$type": "ConfigBornByCollisionPoint",
+                    "direction": {
+                      "maxAngle": 180
+                    },
+                    "FDGAEDDEEDG": {
+                      "ELAJJIANFFM": 180
+                    },
+                    "onGroundRaycastUpDist": 2,
+                    "value": 10
+                  },
+                  "PBFNLCIFCBO": {
+                    "GOAEBMPCPJL": {
+                      "JJGBOHIKHFM": true,
+                      "value": 1
+                    }
+                  },
+                  "triggerType": "TriggerNoRepeat"
+                }
+              },
+              "targetType": "Enemy",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "targetPredicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "target": "Team",
+              "key": "LeyLineChallenge_MonsterLevelHigh",
+              "compareType": "NoneOrEqual"
+            },
+            {
+              "$type": "ByTargetGlobalValue",
+              "target": "Owner",
+              "key": "_Monster_LeyLineChallenge_LevelLow",
+              "compareType": "NoneOrEqual"
+            }
+          ],
+          "actorIceSubHurtDelta": -1,
+          "successActions": [
+            {
+              "$type": "TriggerAttackEvent",
+              "doOffStage": false,
+              "attackEvent": {
+                "attackInfo": {
+                  "attenuationGroup": "default",
+                  "hitPattern": {
+                    "hitImpulseType": "LV1",
+                    "onHitEffectName": "default",
+                    "hitHaltTimeScale": 0.05000000074505806,
+                    "JKLONEBKFKJ": {
+                      "JJGBOHIKHFM": true,
+                      "value": 1
+                    }
+                  },
+                  "FJNMGDHFOEH": {
+                    "GCPNPCOFFBP": "Shake"
+                  },
+                  "IODAJAKBOLG": {
+                    "onHitEffectName": "default",
+                    "JKLONEBKFKJ": {
+                      "JJGBOHIKHFM": true,
+                      "value": 1
+                    }
+                  },
+                  "attackProperty": {
+                    "attackType": "Default",
+                    "enBreak": 1,
+                    "elementType": "Electric",
+                    "elementDurability": 25,
+                    "strikeType": "Blunt",
+                    "elementRank": 1,
+                    "damagePercentage": 0.5
+                  },
+                  "cameraShake": {
+                    "extension": {
+                      "baseCycle": 0.11999999731779099,
+                      "cycleDamping": 0.11999999731779099,
+                      "baseOnCamera": true,
+                      "rangeAttenuation": 0.5
+                    },
+                    "FAKMJBNLPPB": -1,
+                    "shakeDistance": 20
+                  }
+                },
+                "attackPattern": {
+                  "$type": "ConfigAttackSphere",
+                  "radius": 0.25,
+                  "massiveAttackRatio": 1,
+                  "born": {
+                    "$type": "ConfigBornByCollisionPoint",
+                    "direction": {
+                      "maxAngle": 180
+                    },
+                    "FDGAEDDEEDG": {
+                      "ELAJJIANFFM": 180
+                    },
+                    "onGroundRaycastUpDist": 2,
+                    "value": 10
+                  },
+                  "PBFNLCIFCBO": {
+                    "GOAEBMPCPJL": {
+                      "JJGBOHIKHFM": true,
+                      "value": 1
+                    }
+                  },
+                  "triggerType": "TriggerNoRepeat"
+                }
+              },
+              "targetType": "Enemy",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "FireSubEmitterEffect",
+          "doOffStage": false,
+          "actorIceSubHurtDelta": -1,
+          "effectPattern": "Eff_Ani_Animal_Tortoise_Electric_RushAtk_ElectricBallAS",
+          "born": {
+            "$type": "ConfigBornByCollisionPoint",
+            "direction": {
+              "maxAngle": 180
+            },
+            "FDGAEDDEEDG": {
+              "ELAJJIANFFM": 180
+            },
+            "onGroundRaycastUpDist": 2,
+            "value": 10
+          },
+          "value": 1,
+          "canBeHandledOnRecover": true
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "onKill": [
+        {
+          "$type": "KillMultiBullet",
+          "doOffStage": true,
+          "gadgetInfo": {
+            "configID": 42802132
+          },
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Animal_Tortoise_Electric_ElectricAreaAtk",
+      "abilityMixins": [
+        {
+          "$type": "AttachToStateIDMixin",
+          "modifierName": "Animal_Tortoise_Electric_ElectricAreaLoopState",
+          "stateIDs": [
+            "ElectricArea_Loop"
+          ],
+          "value": -1,
+          "actorIceSubHurtDelta": -1
+        }
+      ],
+      "modifiers": {
+        "Animal_Tortoise_Electric_ElectricAreaLoopState": {
+          "onAdded": [
+            {
+              "$type": "TriggerBullet",
+              "doOffStage": false,
+              "trackTarget": "SelfAttackTarget",
+              "value": true,
+              "bulletID": 42802132,
+              "actorIceSubHurtDelta": -1,
+              "born": {
+                "$type": "ConfigBornBySelf",
+                "direction": {
+                  "maxAngle": 180
+                },
+                "useRotation": true,
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "canBeHandledOnRecover": true,
+              "POOEIFNLHDB": true
+            },
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Ani_Animal_Tortoise_Electric_ElectricAreaAtkLoop",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "KillMultiBullet",
+              "doOffStage": true,
+              "gadgetInfo": {
+                "configID": 42802132
+              },
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "Predicated",
+              "doOffStage": false,
+              "target": "SelfAttackTarget",
+              "targetPredicates": [
+                {
+                  "$type": "ByTargetPositionToSelfPosition",
+                  "value": 30,
+                  "target": "Target",
+                  "logic": "Lesser"
+                },
+                {
+                  "$type": "ByTargetPositionToSelfPosition",
+                  "value": 5,
+                  "target": "Target",
+                  "logic": "Lesser",
+                  "compareType": "Y"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "successActions": [
+                {
+                  "$type": "CreateGadget",
+                  "doOffStage": false,
+                  "campID": 4001,
+                  "target": "SelfAttackTarget",
+                  "HGPMDCCAHMK": {
+                    "IFAGHADONMB": true,
+                    "KCLDKFCKPEE": 0.5,
+                    "MJDMDBDMPAM": true,
+                    "PHCINBJNAOK": 0.5
+                  },
+                  "value": true,
+                  "actorIceSubHurtDelta": -1,
+                  "born": {
+                    "$type": "IHCIMIPIJCO",
+                    "direction": {
+                      "maxAngle": 180
+                    },
+                    "FDGAEDDEEDG": {
+                      "ELAJJIANFFM": 180
+                    },
+                    "alongGround": true,
+                    "MMLPKNDIOPO": 0.8999999761581421,
+                    "onGroundRaycastUpDist": 2,
+                    "value": 10
+                  },
+                  "gadgetID": 42802133,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "thinkInterval": 0.5
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "abilitySpecials": {
+        "damageRatio": 0.5
+      },
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "Predicated",
+          "doOffStage": false,
+          "failActions": [
+            {
+              "$type": "SetOverrideMapValue",
+              "doOffStage": false,
+              "value": 0.30000001192092896,
+              "overrideMapKey": "damageRatio",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "targetPredicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "target": "Team",
+              "key": "LeyLineChallenge_MonsterLevelHigh",
+              "compareType": "NoneOrEqual"
+            }
+          ],
+          "actorIceSubHurtDelta": -1,
+          "successActions": [
+            {
+              "$type": "SetOverrideMapValue",
+              "doOffStage": false,
+              "value": 0.5,
+              "overrideMapKey": "damageRatio",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "Tortoise_Electric_ElectricArea_Random_Hit",
+      "onAbilityStart": [
+        {
+          "$type": "TriggerAttackEvent",
+          "doOffStage": false,
+          "attackEvent": {
+            "attackInfo": {
+              "attenuationGroup": "default",
+              "hitPattern": {
+                "hitImpulseType": "LV1",
+                "onHitEffectName": "default",
+                "hitHaltTimeScale": 0.05000000074505806,
+                "JKLONEBKFKJ": {
+                  "JJGBOHIKHFM": true,
+                  "value": 1
+                }
+              },
+              "FJNMGDHFOEH": {
+                "GCPNPCOFFBP": "Shake"
+              },
+              "IODAJAKBOLG": {
+                "onHitEffectName": "default",
+                "JKLONEBKFKJ": {
+                  "JJGBOHIKHFM": true,
+                  "value": 1
+                }
+              },
+              "attackProperty": {
+                "attackType": "Default",
+                "enBreak": 1,
+                "elementType": "Electric",
+                "elementDurability": 25,
+                "strikeType": "Blunt",
+                "elementRank": 1,
+                "damagePercentage": "damageRatio"
+              },
+              "cameraShake": {
+                "extension": {
+                  "baseCycle": 0.11999999731779099,
+                  "cycleDamping": 0.11999999731779099,
+                  "baseOnCamera": true,
+                  "rangeAttenuation": 0.5
+                },
+                "FAKMJBNLPPB": -1,
+                "shakeDistance": 20
+              }
+            },
+            "attackPattern": {
+              "$type": "ConfigAttackSphere",
+              "radius": 2,
+              "massiveAttackRatio": 1,
+              "born": {
+                "$type": "ConfigBornByCollisionPoint",
+                "direction": {
+                  "maxAngle": 180
+                },
+                "useRotation": true,
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "PBFNLCIFCBO": {
+                "GOAEBMPCPJL": {
+                  "JJGBOHIKHFM": true,
+                  "value": 1
+                }
+              },
+              "triggerType": "TriggerNoRepeat"
+            }
+          },
+          "targetType": "Enemy",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "abilitySpecials": {
+        "damageRatio": 0.5
+      },
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "Predicated",
+          "doOffStage": false,
+          "failActions": [
+            {
+              "$type": "SetOverrideMapValue",
+              "doOffStage": false,
+              "value": 0.30000001192092896,
+              "overrideMapKey": "damageRatio",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "targetPredicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "target": "Team",
+              "key": "LeyLineChallenge_MonsterLevelHigh",
+              "compareType": "NoneOrEqual"
+            }
+          ],
+          "actorIceSubHurtDelta": -1,
+          "successActions": [
+            {
+              "$type": "SetOverrideMapValue",
+              "doOffStage": false,
+              "value": 0.5,
+              "overrideMapKey": "damageRatio",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "ApplyModifier",
+          "doOffStage": false,
+          "modifierName": "Tortoise_Electric_ElectricArea_Track_HitAlert",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "Tortoise_Electric_ElectricArea_Track_Hit",
+      "modifiers": {
+        "Tortoise_Electric_ElectricArea_Track_HitAlert": {
+          "onAdded": [
+            {
+              "$type": "FireEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Ani_Animal_Tortoise_Electric_ElectricAreaAtk_Single",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "TriggerAttackEvent",
+              "doOffStage": false,
+              "attackEvent": {
+                "attackInfo": {
+                  "attenuationGroup": "default",
+                  "hitPattern": {
+                    "hitImpulseType": "LV1",
+                    "onHitEffectName": "default",
+                    "hitHaltTimeScale": 0.05000000074505806,
+                    "JKLONEBKFKJ": {
+                      "JJGBOHIKHFM": true,
+                      "value": 1
+                    }
+                  },
+                  "FJNMGDHFOEH": {
+                    "GCPNPCOFFBP": "Shake"
+                  },
+                  "IODAJAKBOLG": {
+                    "onHitEffectName": "default",
+                    "JKLONEBKFKJ": {
+                      "JJGBOHIKHFM": true,
+                      "value": 1
+                    }
+                  },
+                  "attackProperty": {
+                    "attackType": "Default",
+                    "enBreak": 1,
+                    "elementType": "Electric",
+                    "elementDurability": 25,
+                    "strikeType": "Blunt",
+                    "elementRank": 1,
+                    "damagePercentage": "damageRatio"
+                  },
+                  "cameraShake": {
+                    "extension": {
+                      "baseCycle": 0.11999999731779099,
+                      "cycleDamping": 0.11999999731779099,
+                      "baseOnCamera": true,
+                      "rangeAttenuation": 0.5
+                    },
+                    "FAKMJBNLPPB": -1,
+                    "shakeDistance": 20
+                  }
+                },
+                "attackPattern": {
+                  "$type": "ConfigAttackSphere",
+                  "radius": 2,
+                  "massiveAttackRatio": 1,
+                  "born": {
+                    "$type": "ConfigBornBySelf",
+                    "direction": {
+                      "maxAngle": 180
+                    },
+                    "useRotation": true,
+                    "FDGAEDDEEDG": {
+                      "ELAJJIANFFM": 180
+                    },
+                    "onGroundRaycastUpDist": 2,
+                    "value": 10
+                  },
+                  "PBFNLCIFCBO": {
+                    "GOAEBMPCPJL": {
+                      "JJGBOHIKHFM": true,
+                      "value": 1
+                    }
+                  },
+                  "triggerType": "TriggerNoRepeat"
+                }
+              },
+              "targetType": "Enemy",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "duration": 1.100000023841858
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Animal_Tortoise_Electric_ShaderNormal",
+      "abilityMixins": [
+        {
+          "$type": "AttachToAnimatorStateIDMixin",
+          "modifierName": "Animal_Tortoise_Electric_ResetShader",
+          "stateIDs": [
+            "NormalIdle"
+          ],
+          "value": -1,
+          "actorIceSubHurtDelta": -1
+        }
+      ],
+      "onAbilityStart": [
+        {
+          "$type": "SetAnimatorTrigger",
+          "doOffStage": false,
+          "mpTriggerOnRemote": true,
+          "triggerID": "ShaderNormal",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "modifiers": {
+        "Animal_Tortoise_Electric_ResetShader": {
+          "onAdded": [
+            {
+              "$type": "SetAnimatorTrigger",
+              "doOffStage": false,
+              "mpTriggerOnRemote": true,
+              "triggerID": "ShaderNormal",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Animal_Tortoise_Electric_ShaderSkill",
+      "onAbilityStart": [
+        {
+          "$type": "SetAnimatorTrigger",
+          "doOffStage": false,
+          "mpTriggerOnRemote": true,
+          "triggerID": "ShaderSkill",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Animal_Tortoise_Electric_Steer",
+      "abilityMixins": [
+        {
+          "$type": "SteerAttackMixin",
+          "angularSpeed": 90,
+          "CCFNFIKKIDJ": true,
+          "value": -1,
+          "GMEPMDNDBOP": 180,
+          "actorIceSubHurtDelta": -1,
+          "steerStateIDs": [
+            "FireBullet"
+          ],
+          "endNormalizedTime": 0.20000000298023224,
+          "attackDistance": 12,
+          "PMKCEJILFAF": true
+        },
+        {
+          "$type": "SteerAttackMixin",
+          "startNormalizedTime": 0.25,
+          "angularSpeed": 90,
+          "CCFNFIKKIDJ": true,
+          "value": -1,
+          "GMEPMDNDBOP": 180,
+          "actorIceSubHurtDelta": -1,
+          "steerStateIDs": [
+            "JumpAtk_BS"
+          ],
+          "endNormalizedTime": 0.75,
+          "attackDistance": 12,
+          "PMKCEJILFAF": true
+        },
+        {
+          "$type": "SteerAttackMixin",
+          "angularSpeed": 90,
+          "CCFNFIKKIDJ": true,
+          "value": -1,
+          "GMEPMDNDBOP": 180,
+          "actorIceSubHurtDelta": -1,
+          "steerStateIDs": [
+            "RushAtk_BS"
+          ],
+          "endNormalizedTime": 0.30000001192092896,
+          "attackDistance": 12,
+          "PMKCEJILFAF": true
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "ApplyModifier",
+          "doOffStage": false,
+          "modifierName": "Animal_Tortoise_01_Initial",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "ApplyModifier",
+          "doOffStage": false,
+          "modifierName": "Animal_Tortoise_01_BeHitHandler",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "Animal_Tortoise_03_Initial",
+      "abilityMixins": [
+        {
+          "$type": "AttachToPoseIDMixin",
+          "modifierName": "Animal_Tortoise_01_BeforeBattle",
+          "poseIDs": [
+            0,
+            1
+          ],
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToPoseIDMixin",
+          "modifierName": "Animal_Tortoise_01_OutOfBattle",
+          "poseIDs": [
+            901
+          ],
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToStateIDMixin",
+          "modifierName": "Animal_Tortoise_01_AttackEffAS",
+          "stateIDs": [
+            "Attack_AS"
+          ],
+          "value": -1,
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToStateIDMixin",
+          "modifierName": "Animal_Tortoise_03_PhlogistonRevive",
+          "stateIDs": [
+            "Attack_Loop"
+          ],
+          "value": -1,
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToStateIDMixin",
+          "modifierName": "Animal_Tortoise_01_InDefendAnim",
+          "stateIDs": [
+            "Defend_Loop",
+            "Standby_Defend_Loop"
+          ],
+          "value": -1,
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToStateIDMixin",
+          "modifierName": "Animal_Tortoise_01_CanShake",
+          "stateIDs": [
+            "Defend_BS",
+            "Defend_Loop",
+            "Defend_AS"
+          ],
+          "value": -1,
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToStateIDMixin",
+          "modifierName": "Animal_Tortoise_03_GenerateElemBall",
+          "stateIDs": [
+            "Defend_BS"
+          ],
+          "value": -1,
+          "actorIceSubHurtDelta": -1
+        }
+      ],
+      "modifiers": {
+        "AddHp": {
+          "onAdded": [
+            {
+              "$type": "HealHP",
+              "doOffStage": false,
+              "amountByTargetMaxHPRatio": 0.10000000149011612,
+              "value": 1,
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "stacking": "Multiple",
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "duration": 0.20000000298023224
+        },
+        "AddPhlogistion": {
+          "onAdded": [
+            {
+              "$type": "ChangePhlogiston",
+              "doOffStage": false,
+              "value": 16,
+              "costType": "Add",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "stacking": "Multiple",
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "duration": 0.20000000298023224
+        },
+        "Animal_Tortoise_01_AttackEffAS": {
+          "onAdded": [
+            {
+              "$type": "FireEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Animal_Tortoise_Attack_Fire",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "Animal_Tortoise_01_BeHitHandler": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_BE_HIT_TIMES",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_DEFEND_BE_HIT_TIMES",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "onBeingHit": [
+            {
+              "$type": "Predicated",
+              "doOffStage": false,
+              "failActions": [
+                {
+                  "$type": "AddGlobalValue",
+                  "doOffStage": false,
+                  "value": 1,
+                  "key": "_BE_HIT_TIMES",
+                  "maxValue": 10,
+                  "actorIceSubHurtDelta": -1,
+                  "useLimitRange": true,
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "AddGlobalValue",
+                  "doOffStage": false,
+                  "value": 1,
+                  "key": "_DEFEND_BE_HIT_TIMES",
+                  "maxValue": 10,
+                  "actorIceSubHurtDelta": -1,
+                  "useLimitRange": true,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "targetPredicates": [
+                {
+                  "$type": "ByAttackTags",
+                  "attackTags": [
+                    "BisonsaurusAttack",
+                    "BisonsaurusAttack_Destroy",
+                    "BisonsaurusAttack_Dash"
+                  ],
+                  "target": "Target"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "successActions": [
+                {
+                  "$type": "AddGlobalValue",
+                  "doOffStage": false,
+                  "value": 10,
+                  "key": "_DEFEND_BE_HIT_TIMES",
+                  "maxValue": 10,
+                  "actorIceSubHurtDelta": -1,
+                  "useLimitRange": true,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "AttachModifierToSelfGlobalValueMixin",
+              "globalValueKey": "_BE_HIT_TIMES",
+              "modifierNameSteps": [
+                "Peace",
+                "Defend"
+              ],
+              "removeAppliedModifier": true,
+              "actorIceSubHurtDelta": -1,
+              "valueSteps": [
+                -0.5,
+                0.5,
+                11
+              ]
+            },
+            {
+              "$type": "AttachModifierToSelfGlobalValueMixin",
+              "globalValueKey": "_DEFEND_BE_HIT_TIMES",
+              "modifierNameSteps": [
+                "InDefend",
+                "Attack"
+              ],
+              "removeAppliedModifier": true,
+              "actorIceSubHurtDelta": -1,
+              "valueSteps": [
+                -0.5,
+                5,
+                11
+              ]
+            }
+          ],
+          "minus_one": -1
+        },
+        "Animal_Tortoise_01_BeforeBattle": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_AVATAR_NUMS_NEAR_TORTOISE",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetAnimatorBool",
+              "doOffStage": false,
+              "boolID": "InAttack",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "RemoveModifier",
+              "doOffStage": false,
+              "modifierName": "Animal_Tortoise_DefendDuration",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetAnimatorBool",
+              "doOffStage": false,
+              "boolID": "InDefend",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "FieldEntityCountChangeMixin",
+              "campTargetType": "AllExceptSelf",
+              "targetPredicates": [
+                {
+                  "$type": "ByEntityTypes",
+                  "target": "Target",
+                  "value": -1,
+                  "entityTypes": [
+                    "Avatar",
+                    "Vehicle"
+                  ]
+                }
+              ],
+              "simpleCountMaxValue": 10,
+              "simpleCountGlobaValueKey": "_AVATAR_NUMS_NEAR_TORTOISE",
+              "actorIceSubHurtDelta": -1,
+              "replaceOnAddedInTick": true,
+              "PPPOKDHPHAF": true
+            },
+            {
+              "$type": "AttachModifierToSelfGlobalValueMixin",
+              "globalValueKey": "_AVATAR_NUMS_NEAR_TORTOISE",
+              "modifierNameSteps": [
+                "No_AvatarNear",
+                "AvatarNear"
+              ],
+              "removeAppliedModifier": true,
+              "actorIceSubHurtDelta": -1,
+              "valueSteps": [
+                -0.5,
+                0.5,
+                11
+              ]
+            }
+          ],
+          "minus_one": -1
+        },
+        "Animal_Tortoise_01_CanShake": {
+          "onAdded": [
+            {
+              "$type": "SetAnimatorBool",
+              "doOffStage": false,
+              "value": true,
+              "boolID": "CanShake",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "SetAnimatorBool",
+              "doOffStage": false,
+              "boolID": "CanShake",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1
+        },
+        "Animal_Tortoise_01_InDefendAnim": {
+          "onAdded": [
+            {
+              "$type": "SetAnimatorBool",
+              "doOffStage": false,
+              "value": true,
+              "boolID": "InDefendAnim",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "SetAnimatorBool",
+              "doOffStage": false,
+              "boolID": "InDefendAnim",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1
+        },
+        "Animal_Tortoise_01_Initial": {
+          "onAdded": [
+            {
+              "$type": "HideUIBillBoard",
+              "doOffStage": false,
+              "enable": true,
+              "actorIceSubHurtDelta": -1,
+              "hide": true,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AttachAbilityStateResistance",
+              "doOffStage": false,
+              "durationRatio": 1,
+              "actorIceSubHurtDelta": -1,
+              "resistanceListID": 11001,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "state": "LockHP"
+        },
+        "Animal_Tortoise_01_OutOfBattle": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_AVATAR_NUMS_NEAR_TORTOISE",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetAnimatorBool",
+              "doOffStage": false,
+              "boolID": "InAttack",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "RemoveModifier",
+              "doOffStage": false,
+              "modifierName": "Animal_Tortoise_DefendDuration",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetAnimatorBool",
+              "doOffStage": false,
+              "boolID": "InDefend",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetAnimatorBool",
+              "doOffStage": false,
+              "boolID": "InStandbyDefend",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "Animal_Tortoise_03_GenerateElemBall": {
+          "onAdded": [
+            {
+              "$type": "GenerateElemBall",
+              "doOffStage": true,
+              "ratio": 1,
+              "actorIceSubHurtDelta": -1,
+              "born": {
+                "$type": "ConfigBornBySelf",
+                "direction": {
+                  "maxAngle": 180
+                },
+                "useRotation": true,
+                "offset": {
+                  "x": 1.5
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "baseEnergy": 40,
+              "canBeHandledOnRecover": true,
+              "configID": 2030
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "Animal_Tortoise_03_PhlogistonRevive": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "GenerateElemBall",
+              "doOffStage": true,
+              "ratio": 1,
+              "actorIceSubHurtDelta": -1,
+              "born": {
+                "$type": "ConfigBornBySelf",
+                "direction": {
+                  "maxAngle": 180
+                },
+                "useRotation": true,
+                "offset": {
+                  "x": 1.5
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "baseEnergy": 20,
+              "canBeHandledOnRecover": true,
+              "configID": 2030
+            }
+          ],
+          "thinkInterval": 0.5
+        },
+        "Animal_Tortoise_AttackDuration": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_DEFEND_BE_HIT_TIMES",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "duration": 4
+        },
+        "Animal_Tortoise_DefendDuration": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_DEFEND_BE_HIT_TIMES",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_BE_HIT_TIMES",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_DEFEND_BE_HIT_TIMES",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "duration": 20
+        },
+        "Attack": {
+          "onAdded": [
+            {
+              "$type": "SetAnimatorTrigger",
+              "doOffStage": false,
+              "triggerID": "GoAttack",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetAnimatorBool",
+              "doOffStage": false,
+              "value": true,
+              "boolID": "InAttack",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "ApplyModifier",
+              "doOffStage": false,
+              "modifierName": "Animal_Tortoise_AttackDuration",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "onBeingHit": [
+            {
+              "$type": "ApplyModifier",
+              "doOffStage": false,
+              "modifierName": "Animal_Tortoise_AttackDuration",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "AvatarNear": {
+          "onAdded": [
+            {
+              "$type": "SetAnimatorBool",
+              "doOffStage": false,
+              "value": true,
+              "boolID": "InStandbyDefend",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "Defend": {
+          "onAdded": [
+            {
+              "$type": "SetAnimatorTrigger",
+              "doOffStage": false,
+              "triggerID": "GoDefend",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetPoseBool",
+              "doOffStage": false,
+              "value": true,
+              "boolID": "InDefend",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetAnimatorBool",
+              "doOffStage": false,
+              "value": true,
+              "boolID": "InDefend",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "ApplyModifier",
+              "doOffStage": false,
+              "modifierName": "Animal_Tortoise_DefendDuration",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "InDefend": {
+          "onAdded": [
+            {
+              "$type": "SetAnimatorBool",
+              "doOffStage": false,
+              "boolID": "InAttack",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "No_AvatarNear": {
+          "onAdded": [
+            {
+              "$type": "SetAnimatorBool",
+              "doOffStage": false,
+              "boolID": "InStandbyDefend",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "Peace": {
+          "onAdded": [
+            {
+              "$type": "SetPoseBool",
+              "doOffStage": false,
+              "boolID": "InDefend",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetAnimatorBool",
+              "doOffStage": false,
+              "boolID": "InDefend",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        }
+      }
+    }
+  }
+]

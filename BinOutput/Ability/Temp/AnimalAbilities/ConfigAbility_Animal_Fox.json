@@ -1,0 +1,321 @@
+[
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Animal_Fox_AIStateInitial",
+      "abilityMixins": [
+        {
+          "$type": "DoActionByPoseIDMixin",
+          "enterActions": [
+            {
+              "$type": "ReTriggerAISkillInitialCD",
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1,
+              "skillIDs": [
+                103,
+                202
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "poseIDs": [
+            1
+          ],
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "DoActionByPoseIDMixin",
+          "enterActions": [
+            {
+              "$type": "ReTriggerAISkillInitialCD",
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1,
+              "skillIDs": [
+                101,
+                102,
+                201
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "poseIDs": [
+            2
+          ],
+          "actorIceSubHurtDelta": -1
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "abilitySpecials": {
+        "RandomSpeed": 0
+      },
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "SetRandomOverrideMapValue",
+          "doOffStage": false,
+          "overrideMapKey": "RandomSpeed",
+          "valueRangeMax": 0.25,
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "Animal_Fox_Random",
+      "abilityMixins": [
+        {
+          "$type": "AttachToAnimatorStateIDMixin",
+          "modifierName": "Random_MoveSpeedRatio",
+          "stateIDs": [
+            "Run",
+            "Disappear"
+          ],
+          "value": -1,
+          "actorIceSubHurtDelta": -1
+        }
+      ],
+      "modifiers": {
+        "Random_MoveSpeedRatio": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "properties": {
+            "Animator_MoveSpeedRatio": "RandomSpeed"
+          }
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Animal_Fox_GetUp",
+      "onAbilityStart": [
+        {
+          "$type": "SetPoseBool",
+          "doOffStage": false,
+          "value": true,
+          "boolID": "WanderState",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Animal_Fox_GetDown",
+      "onAbilityStart": [
+        {
+          "$type": "SetPoseBool",
+          "doOffStage": false,
+          "boolID": "WanderState",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Animal_Fox_Disappear",
+      "abilityMixins": [
+        {
+          "$type": "AttachToAnimatorStateIDMixin",
+          "modifierName": "DisappearTimer",
+          "stateIDs": [
+            "Disappear",
+            "Disappear2"
+          ],
+          "value": -1,
+          "actorIceSubHurtDelta": -1
+        }
+      ],
+      "modifiers": {
+        "DisappearTimer": {
+          "onAdded": [
+            {
+              "$type": "StartDither",
+              "ADBJDJLIIMK": -1,
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1,
+              "duHPRation": 3,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetAnimatorBool",
+              "doOffStage": false,
+              "value": true,
+              "boolID": "Disappear",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "KillSelf",
+              "doOffStage": false,
+              "killSelfType": "Disappear",
+              "HMOKBGGKIAF": true,
+              "actorIceSubHurtDelta": -1,
+              "duHPRation": 2.5,
+              "OLIICKEKPGF": true,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Animal_Fox_AwareTigger",
+      "abilityMixins": [
+        {
+          "$type": "DoActionByPoseIDMixin",
+          "enterActions": [
+            {
+              "$type": "SetAnimatorTrigger",
+              "doOffStage": false,
+              "triggerID": "AwareTrigger",
+              "predicates": [
+                {
+                  "$type": "ByTargetPositionToSelfPosition",
+                  "value": 5,
+                  "target": "Target",
+                  "logic": "GreaterOrEqual"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "poseIDs": [
+            101
+          ],
+          "actorIceSubHurtDelta": -1
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "doOffStage": false,
+          "modifierName": "Animal_Fox_02_CheckPlayerArround",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "Animal_Fox_02_GoToMHPoint",
+      "modifiers": {
+        "Animal_Fox_02_CheckPlayerArround": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "Predicated",
+              "doOffStage": false,
+              "otherTargets": {
+                "$type": "SelectTargetsByShape",
+                "shapeName": "CircleR5",
+                "campTargetType": "Enemy",
+                "sizeRatio": 1,
+                "ILLOOADJMLF": {
+                  "direction": {
+                    "maxAngle": 180
+                  },
+                  "FDGAEDDEEDG": {
+                    "ELAJJIANFFM": 180
+                  },
+                  "onGroundRaycastUpDist": 2,
+                  "value": 10
+                }
+              },
+              "targetPredicates": [
+                {
+                  "$type": "ByEntityTypes",
+                  "target": "Target",
+                  "value": -1,
+                  "entityTypes": [
+                    "Avatar"
+                  ]
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "successActions": [
+                {
+                  "$type": "SetNeuronEnable",
+                  "doOffStage": false,
+                  "GLCPENJECKO": "SURROUND",
+                  "enable": true,
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "thinkInterval": 1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Animal_Fox_02_Alert",
+      "onAbilityStart": [
+        {
+          "$type": "SetNeuronEnable",
+          "doOffStage": false,
+          "GLCPENJECKO": "SURROUND",
+          "enable": true,
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ]
+    }
+  }
+]

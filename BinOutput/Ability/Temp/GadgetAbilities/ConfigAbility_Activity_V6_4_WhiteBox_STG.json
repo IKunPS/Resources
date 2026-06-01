@@ -1,0 +1,3556 @@
+[
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "ChangeTag",
+          "doOffStage": false,
+          "tag": "_CurrentLocalAvatarPredicate",
+          "enable": true,
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "SceneObj_Area_Common_Property_6_4_PlayerShootManager_Advance"
+    }
+  },
+  {
+    "Default": {
+      "__unk_Q2982101340": [
+        "_CurrentRandomFlyTime",
+        "_CurrentWingTime"
+      ],
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "SetGlobalValueV2",
+          "doOffStage": false,
+          "target": "Team",
+          "key": "GV_TriggerFalconSpecial",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "AttachModifier",
+          "doOffStage": false,
+          "modifierName": "ContinueTryWing",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "SceneObj_Area_Common_Property_6_4_PlayerShootManager_Animator",
+      "abilityMixins": [
+        {
+          "$type": "AttachModifierToGlobalValueMixin",
+          "enable": true,
+          "globalValueKey": "GV_LevelOffsetControlMode",
+          "modifierNameSteps": [
+            "OceanModeSync",
+            "LightingModeSync",
+            "FlappyBirdSync"
+          ],
+          "globalValueTarget": "Team",
+          "removeAppliedModifier": true,
+          "actorIceSubHurtDelta": -1,
+          "valueSteps": [
+            -0.5,
+            0.5,
+            1.5,
+            2.5
+          ],
+          "NEACJLMBFMN": true
+        },
+        {
+          "$type": "AttachModifierToGlobalValueMixin",
+          "enable": true,
+          "globalValueKey": "GV_TriggerFalconSpecial",
+          "modifierNameSteps": [
+            "TriggerFalconSpecial"
+          ],
+          "globalValueTarget": "Team",
+          "removeAppliedModifier": true,
+          "actorIceSubHurtDelta": -1,
+          "valueSteps": [
+            0.5,
+            1.5
+          ],
+          "NEACJLMBFMN": true
+        },
+        {
+          "$type": "AttachModifierToGlobalValueMixin",
+          "enable": true,
+          "globalValueKey": "_WindCannonEnd",
+          "modifierNameSteps": [
+            "EndWindCannonAnimation"
+          ],
+          "globalValueTarget": "Team",
+          "removeAppliedModifier": true,
+          "actorIceSubHurtDelta": -1,
+          "valueSteps": [
+            0.5,
+            1.5
+          ],
+          "NEACJLMBFMN": true
+        }
+      ],
+      "modifiers": {
+        "ContinueTryWing": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "Predicated",
+              "doOffStage": false,
+              "failActions": [
+                {
+                  "$type": "SetGlobalValueV2",
+                  "doOffStage": false,
+                  "minValue": 3,
+                  "key": "_CurrentRandomFlyTime",
+                  "maxValue": 8,
+                  "value": true,
+                  "actorIceSubHurtDelta": -1,
+                  "useLimitRange": true,
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "SetGlobalValueV2",
+                  "doOffStage": false,
+                  "minValue": 2,
+                  "key": "_CurrentWingTime",
+                  "maxValue": 4,
+                  "value": true,
+                  "actorIceSubHurtDelta": -1,
+                  "useLimitRange": true,
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "AttachModifier",
+                  "doOffStage": false,
+                  "modifierName": "DelayAddWing",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "targetPredicates": [
+                {
+                  "$type": "ByAny",
+                  "target": "Target",
+                  "predicates": [
+                    {
+                      "$type": "ByHasModifier",
+                      "modifierName": "DelayAddWing"
+                    },
+                    {
+                      "$type": "ByHasModifier",
+                      "modifierName": "Wing"
+                    }
+                  ]
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "thinkInterval": 1
+        },
+        "DelayAddWing": {
+          "onAdded": [
+            {
+              "$type": "SetAnimatorBool",
+              "doOffStage": false,
+              "boolID": "KeepWing",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "stacking": "Unique",
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "ApplyModifier",
+              "doOffStage": false,
+              "modifierName": "Wing",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "duration": "_CurrentRandomFlyTime"
+        },
+        "EndWindCannonAnimation": {
+          "onAdded": [
+            {
+              "$type": "SetAnimatorTrigger",
+              "doOffStage": false,
+              "triggerID": "EndSkill",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "SetGlobalValueV2",
+              "doOffStage": false,
+              "target": "Team",
+              "key": "_WindCannonEnd",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "duration": 0.5
+        },
+        "FlappyBirdSync": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "JCKBJBAEFOH",
+              "CMDDLDFHLCK": 1,
+              "CNOIBNFBNOG": "Pitch",
+              "JEMDBIHEPND": 3,
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "minus_one": -1
+        },
+        "LightingModeSync": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "JCKBJBAEFOH",
+              "DNCBCFCIINE": 1,
+              "JEMDBIHEPND": 3,
+              "actorIceSubHurtDelta": -1,
+              "PHOJPPEBJBP": "Yaw"
+            }
+          ],
+          "minus_one": -1
+        },
+        "OceanModeSync": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "SetAnimatorFloat",
+              "doOffStage": false,
+              "floatID": "Yaw",
+              "value": 2,
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetAnimatorFloat",
+              "doOffStage": false,
+              "floatID": "Pitch",
+              "value": 2,
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "modifierMixins": [
+            {
+              "$type": "AttachModifierToGlobalValueMixin",
+              "enable": true,
+              "globalValueKey": "GV_ReverseControlMode_Interrupt",
+              "modifierNameSteps": [
+                "OceanModeSyncNormal",
+                "OceanModeSyncReverse"
+              ],
+              "globalValueTarget": "Team",
+              "removeAppliedModifier": true,
+              "actorIceSubHurtDelta": -1,
+              "valueSteps": [
+                -0.5,
+                0.5,
+                1.5
+              ],
+              "NEACJLMBFMN": true
+            }
+          ],
+          "minus_one": -1
+        },
+        "OceanModeSyncNormal": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "JCKBJBAEFOH",
+              "CMDDLDFHLCK": 1,
+              "CNOIBNFBNOG": "Pitch",
+              "DNCBCFCIINE": 1,
+              "JEMDBIHEPND": 3,
+              "actorIceSubHurtDelta": -1,
+              "PHOJPPEBJBP": "Yaw"
+            }
+          ],
+          "minus_one": -1
+        },
+        "OceanModeSyncReverse": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "JCKBJBAEFOH",
+              "CMDDLDFHLCK": -1,
+              "CNOIBNFBNOG": "Pitch",
+              "DNCBCFCIINE": -1,
+              "JEMDBIHEPND": 3,
+              "actorIceSubHurtDelta": -1,
+              "PHOJPPEBJBP": "Yaw"
+            }
+          ],
+          "minus_one": -1
+        },
+        "TriggerFalconSpecial": {
+          "onAdded": [
+            {
+              "$type": "SetAnimatorTrigger",
+              "doOffStage": false,
+              "triggerID": "Dash",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "SetGlobalValueV2",
+              "doOffStage": false,
+              "target": "Team",
+              "key": "GV_TriggerFalconSpecial",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "duration": 0.5
+        },
+        "Wing": {
+          "onAdded": [
+            {
+              "$type": "SetAnimatorBool",
+              "doOffStage": false,
+              "value": true,
+              "boolID": "KeepWing",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "stacking": "Unique",
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "duration": "_CurrentWingTime"
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "__unk_Q2982101340": [
+        "_CurrentShootCD"
+      ],
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "doOffStage": false,
+          "modifierName": "CD_Contoller",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "SceneObj_Area_Common_Property_6_4_PlayerShootManager_CD",
+      "modifiers": {
+        "CD_Contoller": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValueV2",
+              "doOffStage": false,
+              "target": "Team",
+              "key": "_CurrentShootCD",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "Predicated",
+              "doOffStage": false,
+              "targetPredicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "target": "Team",
+                  "key": "_CurrentShootCD",
+                  "compareType": "MoreThan"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "successActions": [
+                {
+                  "$type": "AddGlobalValueV2",
+                  "doOffStage": false,
+                  "value": -1,
+                  "target": "Team",
+                  "key": "_CurrentShootCD",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "thinkInterval": 0.10000000149011612
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "SetGlobalValueV2",
+          "doOffStage": false,
+          "key": "GV_UIControlMode",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "AttachModifier",
+          "doOffStage": false,
+          "modifierName": "UIStateSync",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "SceneObj_Area_Common_Property_6_4_PlayerShootManager_UIController",
+      "modifiers": {
+        "LightingShootState": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValueV2",
+              "doOffStage": false,
+              "value": 1,
+              "target": "Team",
+              "key": "GV_UIControlMode",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "MuteUI": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValueV2",
+              "doOffStage": false,
+              "value": 3,
+              "target": "Team",
+              "key": "GV_UIControlMode",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "OceanShootState": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValueV2",
+              "doOffStage": false,
+              "target": "Team",
+              "key": "GV_UIControlMode",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "UIStateSync": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "AttachModifierToGlobalValueMixin",
+              "enable": true,
+              "globalValueKey": "GV_LevelOffsetControlMode",
+              "modifierNameSteps": [
+                "OceanShootState",
+                "LightingShootState",
+                "LightingShootState",
+                "MuteUI"
+              ],
+              "globalValueTarget": "Team",
+              "removeAppliedModifier": true,
+              "actorIceSubHurtDelta": -1,
+              "valueSteps": [
+                -0.5,
+                0.5,
+                1.5,
+                2.5,
+                3.5
+              ],
+              "NEACJLMBFMN": true
+            }
+          ],
+          "minus_one": -1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "__unk_Q2982101340": [
+        "GV_SkillEnable",
+        "GV_ShootUpgradeItem",
+        "GV_Heal",
+        "GV_RotateBallItem",
+        "GV_STG_6_4_ShootDirection",
+        "GV_STG_6_4_ShootDirection_0",
+        "GV_STG_6_4_ShootDirection_1",
+        "GV_STG_6_4_ShootDirection_2",
+        "GV_STG_6_4_AimPosition",
+        "GV_STG_6_4_AimPosition_0",
+        "GV_STG_6_4_AimPosition_1",
+        "GV_STG_6_4_AimPosition_2",
+        "_ShootAttachPointPos",
+        "_ShootAttachPointPos_0",
+        "_ShootAttachPointPos_1",
+        "_ShootAttachPointPos_2",
+        "GV_InvincibleFrame"
+      ],
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "SetGlobalValueV2",
+          "doOffStage": false,
+          "value": 1,
+          "target": "Team",
+          "key": "GV_CreateShootManagerReady",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "SetGlobalValueV2",
+          "doOffStage": false,
+          "target": "Team",
+          "key": "GV_ShootUpgradeItem",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "SetGlobalValueV2",
+          "doOffStage": false,
+          "target": "Team",
+          "key": "GV_Heal",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "SetGlobalValueV2",
+          "doOffStage": false,
+          "target": "Team",
+          "key": "GV_RotateBallItem",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "SetGlobalValueV2",
+          "doOffStage": false,
+          "target": "Team",
+          "key": "GV_SkillEnable",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "SetGlobalValueV2",
+          "doOffStage": false,
+          "target": "Team",
+          "key": "GV_CurrentAudioListenerAttachToPlayer",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "AttachModifier",
+          "doOffStage": false,
+          "modifierName": "ShootModeManagerBranch",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "AttachModifier",
+          "doOffStage": false,
+          "modifierName": "AudioListener",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "CreateGadget",
+          "doOffStage": true,
+          "HGPMDCCAHMK": {
+            "IFAGHADONMB": true,
+            "KCLDKFCKPEE": 0.5,
+            "MJDMDBDMPAM": true,
+            "PHCINBJNAOK": 0.5
+          },
+          "value": true,
+          "actorIceSubHurtDelta": -1,
+          "born": {
+            "$type": "ConfigBornBySelf",
+            "direction": {
+              "maxAngle": 180
+            },
+            "useRotation": true,
+            "FDGAEDDEEDG": {
+              "ELAJJIANFFM": 180
+            },
+            "onGroundRaycastUpDist": 2,
+            "value": 10
+          },
+          "gadgetID": 73120028,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "SceneObj_Area_Common_Property_6_4_PlayerShootManager",
+      "onFieldEnter": [
+        {
+          "$type": "Predicated",
+          "doOffStage": false,
+          "failActions": [
+            {
+              "$type": "DebugLog",
+              "doOffStage": false,
+              "content": "Failed to apply damage - ",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "target": "Other",
+          "targetPredicates": [
+            {
+              "$type": "NCPHFNAHGED",
+              "configIdArray": [
+                73120002,
+                73120001,
+                73120003,
+                73120027,
+                73120006,
+                73120046,
+                73120012,
+                73120008,
+                73120009,
+                73120010,
+                73120011
+              ],
+              "target": "Target"
+            },
+            {
+              "$type": "ByTargetGlobalValue",
+              "key": "GV_InvincibleFrame",
+              "compareType": "NoneOrEqual"
+            },
+            {
+              "$type": "ByTargetGlobalValue",
+              "target": "Team",
+              "key": "GV_WindCannonShooting",
+              "compareType": "NoneOrEqual"
+            },
+            {
+              "$type": "ByTargetGlobalValue",
+              "target": "Team",
+              "key": "_HasRotateControllerInstance",
+              "compareType": "NoneOrEqual"
+            }
+          ],
+          "actorIceSubHurtDelta": -1,
+          "successActions": [
+            {
+              "$type": "Predicated",
+              "doOffStage": false,
+              "failActions": [
+                {
+                  "$type": "ServerLuaCall",
+                  "doOffStage": true,
+                  "luaCallType": "SpecificGroup",
+                  "actorIceSubHurtDelta": -1,
+                  "funcName": "SLC_PlayerBeingHitEvent",
+                  "CallParamList": [
+                    251187013,
+                    251212001,
+                    251193002,
+                    251199001
+                  ],
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "target": "Target",
+              "targetPredicates": [
+                {
+                  "$type": "NCPHFNAHGED",
+                  "configIdArray": [
+                    73120012
+                  ],
+                  "target": "Target"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "successActions": [
+                {
+                  "$type": "ServerLuaCall",
+                  "doOffStage": true,
+                  "luaCallType": "SpecificGroup",
+                  "actorIceSubHurtDelta": -1,
+                  "funcName": "SLC_PlayerBeingDoubleHitEvent",
+                  "CallParamList": [
+                    251187013,
+                    251212001,
+                    251193002,
+                    251199001
+                  ],
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValueV2",
+              "doOffStage": false,
+              "value": 1,
+              "target": "Other",
+              "key": "GV_SkillHitByPlayer",
+              "predicates": [
+                {
+                  "$type": "NCPHFNAHGED",
+                  "configIdArray": [
+                    73120002,
+                    73120001,
+                    73120012
+                  ],
+                  "target": "Target"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AttachModifier",
+              "doOffStage": false,
+              "modifierName": "InvincibleModifier",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "onAbilityStart": [
+        {
+          "$type": "Predicated",
+          "doOffStage": false,
+          "targetPredicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "target": "Team",
+              "key": "_CurrentShootCD",
+              "compareType": "LessAndEqual"
+            },
+            {
+              "$type": "ByTargetGlobalValue",
+              "target": "Team",
+              "key": "_onAbilityStartCD",
+              "compareType": "NoneOrEqual"
+            }
+          ],
+          "actorIceSubHurtDelta": -1,
+          "successActions": [
+            {
+              "$type": "SetGlobalValueV2",
+              "doOffStage": false,
+              "value": 1,
+              "target": "Team",
+              "key": "_onAbilityStartCD",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AttachModifier",
+              "doOffStage": false,
+              "modifierName": "abilityStartCDModifier",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AttachModifier",
+              "doOffStage": false,
+              "modifierName": "SingleNormalShootLogic",
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "target": "Team",
+                  "key": "GV_ShootUpgradeItem"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AttachModifier",
+              "doOffStage": false,
+              "modifierName": "SingleUpgradeShootLogic",
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "value": 1,
+                  "target": "Team",
+                  "key": "GV_ShootUpgradeItem"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "modifiers": {
+        "AttachToCamera": {
+          "onAdded": [
+            {
+              "$type": "DebugLog",
+              "doOffStage": false,
+              "content": "Attach AudioListener to Camera",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "TailListenerToMainCameraMixin",
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "minus_one": -1
+        },
+        "AttachToPlayer": {
+          "onAdded": [
+            {
+              "$type": "DebugLog",
+              "doOffStage": false,
+              "content": "Attach AudioListener to Player",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "AudioListener": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "AttachModifierToGlobalValueMixin",
+              "enable": true,
+              "globalValueKey": "GV_CurrentAudioListenerAttachToPlayer",
+              "modifierNameSteps": [
+                "AttachToCamera",
+                "AttachToPlayer"
+              ],
+              "globalValueTarget": "Team",
+              "removeAppliedModifier": true,
+              "actorIceSubHurtDelta": -1,
+              "valueSteps": [
+                -0.5,
+                0.5,
+                1.5
+              ],
+              "NEACJLMBFMN": true
+            }
+          ],
+          "minus_one": -1
+        },
+        "FireNodeEffectNormal": {
+          "elementDurability": 100,
+          "stacking": "MultipleRefresh",
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "AttachSubEmitterEffectMixin",
+              "DOLJIIMFLHK": "FireNodeEffect",
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_SceneObj_CharacterBullet_Brust_01",
+              "KIAMNNHLGNG": true,
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "value": 1,
+              "OGPJACKPAPN": true
+            }
+          ],
+          "minus_one": -1,
+          "duration": 1
+        },
+        "FireNodeEffectUpgrade": {
+          "elementDurability": 100,
+          "stacking": "MultipleRefresh",
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "AttachSubEmitterEffectMixin",
+              "DOLJIIMFLHK": "FireNodeEffect",
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_SceneObj_CharacterBullet_Brust_03",
+              "KIAMNNHLGNG": true,
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "value": 1,
+              "OGPJACKPAPN": true
+            }
+          ],
+          "minus_one": -1,
+          "duration": 1
+        },
+        "InvincibleModifier": {
+          "onAdded": [
+            {
+              "$type": "SetAnimatorTrigger",
+              "doOffStage": false,
+              "triggerID": "Hit",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValueV2",
+              "doOffStage": false,
+              "value": 1,
+              "key": "GV_InvincibleFrame",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "EnableSceneTransformByName",
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1,
+              "transformNames": [
+                "FieldTrigger"
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "stacking": "Unique",
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "SetGlobalValueV2",
+              "doOffStage": false,
+              "key": "GV_InvincibleFrame",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "EnableSceneTransformByName",
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1,
+              "setEnable": true,
+              "transformNames": [
+                "FieldTrigger"
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "duration": 1
+        },
+        "ShootBulletNormalCheckHoldingState": {
+          "onAdded": [
+            {
+              "$type": "TriggerThinkInterval",
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "AttachModifier",
+              "doOffStage": false,
+              "modifierName": "SingleNormalShootLogic",
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "value": 1,
+                  "target": "Team",
+                  "key": "GV_STG_6_4_Shooting"
+                },
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "target": "Team",
+                  "key": "_CurrentShootCD",
+                  "compareType": "LessAndEqual"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "thinkInterval": 0.10000000149011612
+        },
+        "ShootBulletUpgradeCheckHoldingState": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValueV2",
+              "doOffStage": false,
+              "value": 1,
+              "target": "Team",
+              "key": "GV_BulletLockMode",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "TriggerThinkInterval",
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "SetGlobalValueV2",
+              "doOffStage": false,
+              "target": "Team",
+              "key": "GV_BulletLockMode",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "AttachModifier",
+              "doOffStage": false,
+              "modifierName": "SingleUpgradeShootLogic",
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "value": 1,
+                  "target": "Team",
+                  "key": "GV_STG_6_4_Shooting"
+                },
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "target": "Team",
+                  "key": "_CurrentShootCD",
+                  "compareType": "LessAndEqual"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "thinkInterval": 0.10000000149011612
+        },
+        "ShootModeManagerBranch": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "AttachModifierToGlobalValueMixin",
+              "enable": true,
+              "globalValueKey": "GV_ShootUpgradeItem",
+              "modifierNameSteps": [
+                "ShootBulletNormalCheckHoldingState",
+                "ShootBulletUpgradeCheckHoldingState"
+              ],
+              "globalValueTarget": "Team",
+              "removeAppliedModifier": true,
+              "actorIceSubHurtDelta": -1,
+              "valueSteps": [
+                -0.5,
+                0.5,
+                1.5
+              ],
+              "NEACJLMBFMN": true
+            }
+          ],
+          "minus_one": -1
+        },
+        "SingleNormalShootLogic": {
+          "onAdded": [
+            {
+              "$type": "CopyGlobalValue",
+              "doOffStage": true,
+              "dstKey": "GV_STG_6_4_AimPosition_0",
+              "srcTarget": "Team",
+              "actorIceSubHurtDelta": -1,
+              "srcKey": "GV_STG_6_4_AimPosition_0",
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "CopyGlobalValue",
+              "doOffStage": true,
+              "dstKey": "GV_STG_6_4_AimPosition_1",
+              "srcTarget": "Team",
+              "actorIceSubHurtDelta": -1,
+              "srcKey": "GV_STG_6_4_AimPosition_1",
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "CopyGlobalValue",
+              "doOffStage": true,
+              "dstKey": "GV_STG_6_4_AimPosition_2",
+              "srcTarget": "Team",
+              "actorIceSubHurtDelta": -1,
+              "srcKey": "GV_STG_6_4_AimPosition_2",
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalPos",
+              "doOffStage": false,
+              "key": "_ShootAttachPointPos",
+              "actorIceSubHurtDelta": -1,
+              "born": {
+                "$type": "ConfigBornByAttachPoint",
+                "direction": {
+                  "$type": "ConfigDirectionByEntity",
+                  "maxAngle": 180,
+                  "FIDMAMPCMOI": true
+                },
+                "useRotation": true,
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "attachPointTargetType": "Self",
+                "attachPointName": "FireNode",
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "Predicated",
+              "doOffStage": false,
+              "targetPredicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "target": "Team",
+                  "key": "GV_LevelOffsetControlMode"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "successActions": [
+                {
+                  "$type": "AttachModifier",
+                  "doOffStage": false,
+                  "modifierName": "FireNodeEffectNormal",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "TriggerBullet",
+                  "doOffStage": false,
+                  "trackTarget": "SelfAttackTarget",
+                  "bulletID": 73120004,
+                  "value": true,
+                  "actorIceSubHurtDelta": -1,
+                  "born": {
+                    "$type": "ConfigBornByAttachPoint",
+                    "direction": {
+                      "$type": "KIIGGBKHPDO",
+                      "ANMALEIDHEC": "GV_STG_6_4_AimPosition",
+                      "BPKMIPIEMHD": "_ShootAttachPointPos",
+                      "maxAngle": 180
+                    },
+                    "useRotation": true,
+                    "FDGAEDDEEDG": {
+                      "ELAJJIANFFM": 180
+                    },
+                    "attachPointName": "FireNode",
+                    "onGroundRaycastUpDist": 2,
+                    "value": 10
+                  },
+                  "canBeHandledOnRecover": true,
+                  "POOEIFNLHDB": true
+                },
+                {
+                  "$type": "SetGlobalValueV2",
+                  "doOffStage": false,
+                  "value": 2,
+                  "target": "Team",
+                  "key": "_CurrentShootCD",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "Predicated",
+              "doOffStage": false,
+              "targetPredicates": [
+                {
+                  "$type": "ByAny",
+                  "target": "Target",
+                  "predicates": [
+                    {
+                      "$type": "ByTargetGlobalValue",
+                      "value": 1,
+                      "target": "Team",
+                      "key": "GV_LevelOffsetControlMode"
+                    },
+                    {
+                      "$type": "ByTargetGlobalValue",
+                      "value": 2,
+                      "target": "Team",
+                      "key": "GV_LevelOffsetControlMode"
+                    }
+                  ]
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "successActions": [
+                {
+                  "$type": "AttachModifier",
+                  "doOffStage": false,
+                  "modifierName": "FireNodeEffectNormal",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "TriggerBullet",
+                  "doOffStage": false,
+                  "trackTarget": "SelfAttackTarget",
+                  "bulletID": 73120004,
+                  "value": true,
+                  "actorIceSubHurtDelta": -1,
+                  "born": {
+                    "$type": "ConfigBornByAttachPoint",
+                    "direction": {
+                      "$type": "ConfigDirectionByAttachPoint",
+                      "maxAngle": 180,
+                      "attachPointTargetType": "Self",
+                      "attachPointName": "FireNode"
+                    },
+                    "useRotation": true,
+                    "FDGAEDDEEDG": {
+                      "ELAJJIANFFM": 180
+                    },
+                    "attachPointName": "FireNode",
+                    "onGroundRaycastUpDist": 2,
+                    "value": 10
+                  },
+                  "canBeHandledOnRecover": true,
+                  "POOEIFNLHDB": true
+                },
+                {
+                  "$type": "SetGlobalValueV2",
+                  "doOffStage": false,
+                  "value": 2,
+                  "target": "Team",
+                  "key": "_CurrentShootCD",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "stacking": "Unique",
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "duration": 0.05000000074505806
+        },
+        "SingleUpgradeShootLogic": {
+          "onAdded": [
+            {
+              "$type": "TriggerAudioV2",
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1,
+              "pattern": "v6_4_AirFight_LotsBulletShoot",
+              "canBeHandledOnRecover": true,
+              "PBHJPBFJGME": true
+            },
+            {
+              "$type": "AttachModifier",
+              "doOffStage": false,
+              "modifierName": "FireNodeEffectUpgrade",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "NOPGFHJHJNE",
+              "doOffStage": true,
+              "shapeName": "CircleR200",
+              "topLimit": 30,
+              "sizeRatio": 1,
+              "ILLOOADJMLF": {
+                "$type": "ConfigBornBySelf",
+                "direction": {
+                  "maxAngle": 180
+                },
+                "useRotation": true,
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "actorIceSubHurtDelta": -1,
+              "LAOHJBEJENO": [
+                {
+                  "$type": "TriggerBullet",
+                  "doOffStage": false,
+                  "trackTarget": "Target",
+                  "target": "Target",
+                  "bulletID": 73120041,
+                  "value": true,
+                  "predicates": [
+                    {
+                      "$type": "NGHAKIJDBDH",
+                      "target": "Target",
+                      "HFKNDGJJFMG": true
+                    }
+                  ],
+                  "actorIceSubHurtDelta": -1,
+                  "born": {
+                    "$type": "ConfigBornByAttachPoint",
+                    "direction": {
+                      "$type": "ConfigDirectionByAttachPoint",
+                      "randomAngleHor": 35,
+                      "CDBMJDKEEGD": 35,
+                      "maxAngle": 180,
+                      "attachPointTargetType": "Self",
+                      "attachPointName": "FireNodeEffect"
+                    },
+                    "useRotation": true,
+                    "FDGAEDDEEDG": {
+                      "ELAJJIANFFM": 180
+                    },
+                    "attachPointTargetType": "Caster",
+                    "attachPointName": "FireNodeEffect",
+                    "onGroundRaycastUpDist": 2,
+                    "value": 10
+                  },
+                  "canBeHandledOnRecover": true,
+                  "POOEIFNLHDB": true
+                }
+              ],
+              "MILOKGHGAEI": [
+                {
+                  "$type": "TriggerBullet",
+                  "doOffStage": false,
+                  "trackTarget": "SelfAttackTarget",
+                  "bulletID": 73120004,
+                  "value": true,
+                  "actorIceSubHurtDelta": -1,
+                  "born": {
+                    "$type": "ConfigBornByAttachPoint",
+                    "direction": {
+                      "$type": "ConfigDirectionByAttachPoint",
+                      "maxAngle": 180,
+                      "attachPointTargetType": "Self",
+                      "attachPointName": "FireNode"
+                    },
+                    "useRotation": true,
+                    "FDGAEDDEEDG": {
+                      "ELAJJIANFFM": 180
+                    },
+                    "attachPointName": "FireNode",
+                    "onGroundRaycastUpDist": 2,
+                    "value": 10
+                  },
+                  "canBeHandledOnRecover": true,
+                  "POOEIFNLHDB": true
+                }
+              ],
+              "canBeHandledOnRecover": true,
+              "configID": 73120019
+            },
+            {
+              "$type": "SetGlobalValueV2",
+              "doOffStage": false,
+              "value": 4,
+              "target": "Team",
+              "key": "_CurrentShootCD",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "stacking": "Unique",
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "duration": 0.05000000074505806
+        },
+        "abilityStartCDModifier": {
+          "elementDurability": 100,
+          "stacking": "Unique",
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "SetGlobalValueV2",
+              "doOffStage": false,
+              "target": "Team",
+              "key": "_onAbilityStartCD",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "duration": 0.10000000149011612
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "doOffStage": false,
+          "modifierName": "ListenCurveMoveSpeedUp_Level",
+          "target": "CurLocalAvatar",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "SceneObj_Area_Common_Property_6_4_PlayerShootManager_ItemsEffect",
+      "abilityMixins": [
+        {
+          "$type": "AttachModifierToGlobalValueMixin",
+          "enable": true,
+          "globalValueKey": "GV_Heal",
+          "modifierNameSteps": [
+            "HealEffect"
+          ],
+          "globalValueTarget": "Team",
+          "removeAppliedModifier": true,
+          "actorIceSubHurtDelta": -1,
+          "valueSteps": [
+            0.5,
+            1.5
+          ],
+          "NEACJLMBFMN": true
+        },
+        {
+          "$type": "AttachModifierToGlobalValueMixin",
+          "enable": true,
+          "globalValueKey": "GV_UsingWindCannon",
+          "modifierNameSteps": [
+            "SkillAnimation"
+          ],
+          "globalValueTarget": "Team",
+          "removeAppliedModifier": true,
+          "actorIceSubHurtDelta": -1,
+          "valueSteps": [
+            0.5,
+            1.5
+          ],
+          "NEACJLMBFMN": true
+        },
+        {
+          "$type": "AttachModifierToGlobalValueMixin",
+          "enable": true,
+          "globalValueKey": "SGV_ReverseFly",
+          "modifierNameSteps": [
+            "ReverseFlyEffect"
+          ],
+          "globalValueTarget": "Team",
+          "removeAppliedModifier": true,
+          "actorIceSubHurtDelta": -1,
+          "valueSteps": [
+            0.5,
+            1.5
+          ],
+          "NEACJLMBFMN": true
+        },
+        {
+          "$type": "AttachModifierToGlobalValueMixin",
+          "enable": true,
+          "globalValueKey": "GV_TriggerExplosionEffect",
+          "modifierNameSteps": [
+            "TriggerExplosionEffect"
+          ],
+          "globalValueTarget": "Team",
+          "removeAppliedModifier": true,
+          "actorIceSubHurtDelta": -1,
+          "valueSteps": [
+            0.5,
+            1.5
+          ],
+          "NEACJLMBFMN": true
+        }
+      ],
+      "modifiers": {
+        "HealEffect": {
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 2,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_SceneObj_FalconJet_Heal",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "stacking": "Unique",
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "SetGlobalValueV2",
+              "doOffStage": false,
+              "target": "Team",
+              "key": "GV_Heal",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "duration": 3
+        },
+        "ListenCurveMoveSpeedUp_Level": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "DoActionOnGlobalValueChangeMixin",
+              "globalValueKey": "GV_CurveMoveSpeedUp_Level",
+              "actions": [
+                {
+                  "$type": "AttachModifier",
+                  "doOffStage": false,
+                  "modifierName": "SpeedUpEffect",
+                  "target": "Caster",
+                  "predicates": [
+                    {
+                      "$type": "ByTargetGlobalValue",
+                      "target": "CurLocalAvatar",
+                      "key": "GV_CurveMoveSpeedUp_Level",
+                      "compareType": "MoreThan"
+                    }
+                  ],
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "gvInTalk": true
+            }
+          ],
+          "minus_one": -1
+        },
+        "ReverseFlyEffect": {
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_SceneObj_FalconJet_Destroy",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "stacking": "Unique",
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "SkillAnimation": {
+          "onAdded": [
+            {
+              "$type": "SetAnimatorTrigger",
+              "doOffStage": false,
+              "triggerID": "WindSkill",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "ServerLuaCall",
+              "doOffStage": true,
+              "luaCallType": "SpecificGroup",
+              "actorIceSubHurtDelta": -1,
+              "funcName": "SLC_TriggerEventUseSkill",
+              "CallParamList": [
+                251187013,
+                251212001,
+                251193002,
+                251199001
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "stacking": "Unique",
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "duration": 0.5
+        },
+        "SpeedUpEffect": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValueV2",
+              "doOffStage": false,
+              "key": "_SpeedUpEffectTriggerd",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_SceneObj_FalconJet_Trail_L",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_SceneObj_FalconJet_Trail_R",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "SetAnimatorTrigger",
+              "doOffStage": false,
+              "triggerID": "Dashend",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "SetAnimatorTrigger",
+              "doOffStage": false,
+              "triggerID": "Dash",
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "target": "Target",
+                  "key": "_SpeedUpEffectTriggerd"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValueV2",
+              "doOffStage": false,
+              "value": 1,
+              "key": "_SpeedUpEffectTriggerd",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "thinkInterval": 0.25,
+          "duration": 2
+        },
+        "TriggerExplosionEffect": {
+          "onAdded": [
+            {
+              "$type": "FireEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_SceneObj_BalloonEnemy_Exp_Small",
+              "born": {
+                "$type": "ConfigBornByAttachPoint",
+                "direction": {
+                  "maxAngle": 180
+                },
+                "useRotation": true,
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "attachPointName": "FireNode",
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "SetGlobalValueV2",
+              "doOffStage": false,
+              "target": "Team",
+              "key": "GV_TriggerExplosionEffect",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "duration": 1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "__unk_Q2982101340": [
+        "SGV_EnterLevelCurveMove",
+        "GV_EnterLevelCurveMove",
+        "GV_LeaveLevelCurveMove",
+        "SGV_ReverseFly",
+        "SGV_ChangeFire",
+        "GV_STG_6_4_Shooting",
+        "GV_UsingWindCannon",
+        "GV_WindCannonShooting",
+        "GV_STG_6_4_ShootDirection",
+        "GV_CreateShootManagerReady",
+        "GV_GainUpgradeItem",
+        "GV_STG_ShootTargetKey_0",
+        "GV_STG_ShootTargetKey_1",
+        "GV_STG_6_4_ShootDirection_0",
+        "GV_STG_6_4_ShootDirection_1",
+        "GV_STG_6_4_ShootDirection_2",
+        "GV_STG_6_4_ShootDirection",
+        "GV_STG_6_4_AimPosition_0",
+        "GV_STG_6_4_AimPosition_1",
+        "GV_STG_6_4_AimPosition_2",
+        "GV_STG_6_4_AimPosition"
+      ],
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "SetGlobalValueV2",
+          "doOffStage": false,
+          "key": "GV_STG_ShootTargetKey_0",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "SetGlobalValueV2",
+          "doOffStage": false,
+          "key": "GV_STG_ShootTargetKey_1",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "SetGlobalValueV2",
+          "doOffStage": false,
+          "key": "GV_STG_6_4_ShootDirection_0",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "SetGlobalValueV2",
+          "doOffStage": false,
+          "key": "GV_STG_6_4_ShootDirection_1",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "SetGlobalValueV2",
+          "doOffStage": false,
+          "key": "GV_STG_6_4_ShootDirection_2",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "SetGlobalValueV2",
+          "doOffStage": false,
+          "key": "GV_STG_6_4_AimPosition_0",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "SetGlobalValueV2",
+          "doOffStage": false,
+          "key": "GV_STG_6_4_AimPosition_1",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "SetGlobalValueV2",
+          "doOffStage": false,
+          "key": "GV_STG_6_4_AimPosition_2",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "SetGlobalValueV2",
+          "doOffStage": false,
+          "key": "GV_STG_ShootTargetKey_1",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "SetGlobalValueV2",
+          "doOffStage": false,
+          "key": "GV_STG_ShootTargetKey_1",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "SetGlobalValueV2",
+          "doOffStage": false,
+          "key": "GV_CreateShootManagerReady",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "SetGlobalValueV2",
+          "doOffStage": false,
+          "key": "GV_STG_6_4_Shooting",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "SetGlobalValueV2",
+          "doOffStage": false,
+          "key": "GV_STG_6_4_ShootDirection",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "SetGlobalValueV2",
+          "doOffStage": false,
+          "key": "GV_EnterLevelCurveMove",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "SetGlobalValueV2",
+          "doOffStage": false,
+          "key": "GV_LeaveLevelCurveMove",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "SetGlobalValueV2",
+          "doOffStage": false,
+          "key": "GV_ReverseControlMode_Interrupt",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "AttachModifier",
+          "doOffStage": false,
+          "modifierName": "StateMachineHandler",
+          "target": "Team",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "AttachModifier",
+          "doOffStage": false,
+          "modifierName": "FeverScreenEffectModifier",
+          "target": "Team",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "DynamicAbility_WhiteBox_CurveMoveAbility",
+      "isDynamicAbility": true,
+      "abilityMixins": [
+        {
+          "$type": "CameraCollisionMixin",
+          "actorIceSubHurtDelta": -1
+        }
+      ],
+      "modifiers": {
+        "AfterEnterCurveModifier": {
+          "onAdded": [
+            {
+              "$type": "CreateGadget",
+              "doOffStage": false,
+              "campID": 5001,
+              "campTargetType": "Self",
+              "target": "CurLocalAvatar",
+              "HGPMDCCAHMK": {
+                "IFAGHADONMB": true,
+                "KCLDKFCKPEE": 0.5,
+                "MJDMDBDMPAM": true,
+                "PHCINBJNAOK": 0.5
+              },
+              "value": true,
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "target": "Team",
+                  "key": "GV_CreateShootManagerReady"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "gadgetID": 73120005,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AttachModifier",
+              "doOffStage": false,
+              "modifierName": "CurveRegionEventListener",
+              "target": "CurLocalAvatar",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AttachModifier",
+              "doOffStage": false,
+              "modifierName": "CheckCurveMoveCameraState",
+              "target": "CurLocalAvatar",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "CameraModifier": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "SpawnCameraStateMixin",
+              "target": "CurLocalAvatar",
+              "GLLDODDPPBH": {
+                "FNJLKMHCPCD": 2,
+                "duHPRation": 5,
+                "blendType": 2,
+                "OOIOBBGPEEJ": 4
+              },
+              "sceneID": -1,
+              "IPILBALMAHO": {
+                "duHPRation": 1
+              },
+              "actorIceSubHurtDelta": -1,
+              "LOJHNNIHIOF": {
+                "$type": "PBPIAGELBKM",
+                "AGLJAMJOKKJ": true,
+                "fov": 70,
+                "JDDMEMBNPBO": 5,
+                "KAOILFOHPBF": true,
+                "KHOJBBAOMPK": true,
+                "LGNCPAFPKAK": 100,
+                "MFALNDBDGLJ": true,
+                "NONDILLBFJO": true
+              }
+            },
+            {
+              "$type": "OverrideCameraModuleParamMixin",
+              "actorIceSubHurtDelta": -1,
+              "stateName": "CurveMove",
+              "LCMEJBONCFM": [
+                {
+                  "$type": "GBFALACEKJE"
+                }
+              ]
+            }
+          ],
+          "minus_one": -1
+        },
+        "CheckCurveMoveCameraState": {
+          "elementDurability": 100,
+          "stacking": "Unique",
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "AttachModifierToGlobalValueMixin",
+              "enable": true,
+              "globalValueKey": "GV_IsInCurve",
+              "modifierNameSteps": [
+                "CameraModifier"
+              ],
+              "globalValueTarget": "Team",
+              "removeAppliedModifier": true,
+              "actorIceSubHurtDelta": -1,
+              "valueSteps": [
+                0.5,
+                1.5
+              ],
+              "NEACJLMBFMN": true
+            }
+          ],
+          "minus_one": -1
+        },
+        "CurveRegionEventListener": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValueV2",
+              "doOffStage": false,
+              "target": "Team",
+              "key": "GV_LevelOffsetControlMode",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValueV2",
+              "doOffStage": false,
+              "target": "Team",
+              "key": "GV_ReverseControlMode_Interrupt",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "stacking": "Unique",
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "LevelCurveMixin",
+              "CILIPKOJIIG": [
+                [
+                  {
+                    "$type": "SetGlobalValueV2",
+                    "doOffStage": false,
+                    "target": "Team",
+                    "key": "GV_LevelOffsetControlMode",
+                    "actorIceSubHurtDelta": -1,
+                    "canBeHandledOnRecover": true
+                  }
+                ]
+              ],
+              "tag": "Maglev",
+              "actorIceSubHurtDelta": -1,
+              "MKKFJDDCKFD": [
+                "OceanMode"
+              ]
+            },
+            {
+              "$type": "LevelCurveMixin",
+              "CILIPKOJIIG": [
+                [
+                  {
+                    "$type": "SetGlobalValueV2",
+                    "doOffStage": false,
+                    "value": 1,
+                    "target": "Team",
+                    "key": "GV_LevelOffsetControlMode",
+                    "actorIceSubHurtDelta": -1,
+                    "canBeHandledOnRecover": true
+                  }
+                ]
+              ],
+              "tag": "Maglev",
+              "actorIceSubHurtDelta": -1,
+              "MKKFJDDCKFD": [
+                "LightingMode"
+              ]
+            },
+            {
+              "$type": "LevelCurveMixin",
+              "CILIPKOJIIG": [
+                [
+                  {
+                    "$type": "SetGlobalValueV2",
+                    "doOffStage": false,
+                    "value": -1,
+                    "target": "Team",
+                    "key": "GV_LevelOffsetControlMode",
+                    "actorIceSubHurtDelta": -1,
+                    "canBeHandledOnRecover": true
+                  }
+                ]
+              ],
+              "tag": "Maglev",
+              "actorIceSubHurtDelta": -1,
+              "MKKFJDDCKFD": [
+                "DisableOffsetMode"
+              ]
+            }
+          ],
+          "minus_one": -1
+        },
+        "EnterCurve": {
+          "onAdded": [
+            {
+              "$type": "EnterLevelCurveMove",
+              "doOffStage": false,
+              "DHOMNAFNNHJ": 6401,
+              "target": "CurLocalAvatar",
+              "FAKMJBNLPPB": 10002,
+              "actorIceSubHurtDelta": -1,
+              "OEOJLJIFADF": 8,
+              "canBeHandledOnRecover": true,
+              "PMEENGGJHMJ": "TeamTempTarget"
+            },
+            {
+              "$type": "AttachModifier",
+              "doOffStage": false,
+              "modifierName": "AfterEnterCurveModifier",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "EnterCurveDebug": {
+          "onAdded": [
+            {
+              "$type": "EnterLevelCurveMove",
+              "doOffStage": false,
+              "DHOMNAFNNHJ": 6401,
+              "target": "CurLocalAvatar",
+              "FAKMJBNLPPB": 10006,
+              "actorIceSubHurtDelta": -1,
+              "OEOJLJIFADF": 16,
+              "canBeHandledOnRecover": true,
+              "PMEENGGJHMJ": "TeamTempTarget"
+            },
+            {
+              "$type": "CreateGadget",
+              "doOffStage": false,
+              "campID": 5001,
+              "campTargetType": "Self",
+              "target": "CurLocalAvatar",
+              "HGPMDCCAHMK": {
+                "IFAGHADONMB": true,
+                "KCLDKFCKPEE": 0.5,
+                "MJDMDBDMPAM": true,
+                "PHCINBJNAOK": 0.5
+              },
+              "value": true,
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "target": "Team",
+                  "key": "GV_CreateShootManagerReady"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "gadgetID": 73120005,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AttachModifier",
+              "doOffStage": false,
+              "modifierName": "CurveRegionEventListener",
+              "target": "CurLocalAvatar",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AttachModifier",
+              "doOffStage": false,
+              "modifierName": "CheckCurveMoveCameraState",
+              "target": "CurLocalAvatar",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "EnterCurveDebugGroupCall": {
+          "onAdded": [
+            {
+              "$type": "EnterLevelCurveMove",
+              "doOffStage": false,
+              "DHOMNAFNNHJ": 6401,
+              "target": "CurLocalAvatar",
+              "FAKMJBNLPPB": 10002,
+              "actorIceSubHurtDelta": -1,
+              "OEOJLJIFADF": 8,
+              "canBeHandledOnRecover": true,
+              "PMEENGGJHMJ": "TeamTempTarget"
+            },
+            {
+              "$type": "EnterLevelCurveMove",
+              "doOffStage": false,
+              "DHOMNAFNNHJ": 6401,
+              "target": "CurLocalAvatar",
+              "FAKMJBNLPPB": 10001,
+              "actorIceSubHurtDelta": -1,
+              "OEOJLJIFADF": 8,
+              "canBeHandledOnRecover": true,
+              "PMEENGGJHMJ": "TeamTempTarget"
+            },
+            {
+              "$type": "AttachModifier",
+              "doOffStage": false,
+              "modifierName": "AfterEnterCurveModifier",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "Predicated",
+              "doOffStage": false,
+              "failActions": [
+                {
+                  "$type": "ServerLuaCall",
+                  "doOffStage": false,
+                  "luaCallType": "SpecificGroup",
+                  "actorIceSubHurtDelta": -1,
+                  "funcName": "SLC_ResetEnterCurveMoveFlag",
+                  "CallParamList": [
+                    251187011
+                  ],
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "targetPredicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "value": 1,
+                  "target": "Team",
+                  "key": "GV_IsInCurve"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "thinkInterval": 1
+        },
+        "ExitCurve": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "FeverModifier": {
+          "onAdded": [
+            {
+              "$type": "CameraScreenEffect",
+              "doOffStage": true,
+              "effectName": "Eff_UI_BubbleDrama_AirFight_ScreenEffect",
+              "enable": true,
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true,
+              "PBHJPBFJGME": true
+            }
+          ],
+          "elementDurability": 100,
+          "stacking": "Unique",
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "CameraScreenEffect",
+              "doOffStage": true,
+              "effectName": "Eff_UI_BubbleDrama_AirFight_ScreenEffect",
+              "enable": true,
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true,
+              "PBHJPBFJGME": true
+            }
+          ],
+          "minus_one": -1
+        },
+        "FeverScreenEffectModifier": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "DoActionOnGlobalValueChangeMixin",
+              "globalValueKey": "GV_ShootUpgradeItem",
+              "actions": [
+                {
+                  "$type": "SetGlobalValueV2",
+                  "doOffStage": false,
+                  "value": 1,
+                  "target": "Team",
+                  "key": "GV_FeverStateEffect",
+                  "predicates": [
+                    {
+                      "$type": "ByAny",
+                      "target": "Target",
+                      "predicates": [
+                        {
+                          "$type": "ByTargetGlobalValue",
+                          "value": 1,
+                          "target": "Target",
+                          "key": "GV_ShootUpgradeItem"
+                        },
+                        {
+                          "$type": "ByTargetGlobalValue",
+                          "value": 1,
+                          "target": "Target",
+                          "key": "_HasRotateControllerInstance"
+                        },
+                        {
+                          "$type": "ByTargetGlobalValue",
+                          "value": 1,
+                          "target": "Target",
+                          "key": "GV_WindCannonShooting"
+                        }
+                      ]
+                    }
+                  ],
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "SetGlobalValueV2",
+                  "doOffStage": false,
+                  "target": "Team",
+                  "key": "GV_FeverStateEffect",
+                  "predicates": [
+                    {
+                      "$type": "ByAnd",
+                      "target": "Target",
+                      "predicates": [
+                        {
+                          "$type": "ByTargetGlobalValue",
+                          "target": "Target",
+                          "key": "GV_ShootUpgradeItem",
+                          "compareType": "NoneOrEqual"
+                        },
+                        {
+                          "$type": "ByTargetGlobalValue",
+                          "target": "Target",
+                          "key": "_HasRotateControllerInstance",
+                          "compareType": "NoneOrEqual"
+                        },
+                        {
+                          "$type": "ByTargetGlobalValue",
+                          "target": "Target",
+                          "key": "GV_WindCannonShooting",
+                          "compareType": "NoneOrEqual"
+                        }
+                      ]
+                    }
+                  ],
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "gvInTalk": true
+            },
+            {
+              "$type": "DoActionOnGlobalValueChangeMixin",
+              "globalValueKey": "_HasRotateControllerInstance",
+              "actions": [
+                {
+                  "$type": "SetGlobalValueV2",
+                  "doOffStage": false,
+                  "value": 1,
+                  "target": "Team",
+                  "key": "GV_FeverStateEffect",
+                  "predicates": [
+                    {
+                      "$type": "ByAny",
+                      "target": "Target",
+                      "predicates": [
+                        {
+                          "$type": "ByTargetGlobalValue",
+                          "value": 1,
+                          "target": "Target",
+                          "key": "GV_ShootUpgradeItem"
+                        },
+                        {
+                          "$type": "ByTargetGlobalValue",
+                          "value": 1,
+                          "target": "Target",
+                          "key": "_HasRotateControllerInstance"
+                        },
+                        {
+                          "$type": "ByTargetGlobalValue",
+                          "value": 1,
+                          "target": "Target",
+                          "key": "GV_WindCannonShooting"
+                        }
+                      ]
+                    }
+                  ],
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "SetGlobalValueV2",
+                  "doOffStage": false,
+                  "target": "Team",
+                  "key": "GV_FeverStateEffect",
+                  "predicates": [
+                    {
+                      "$type": "ByAnd",
+                      "target": "Target",
+                      "predicates": [
+                        {
+                          "$type": "ByTargetGlobalValue",
+                          "target": "Target",
+                          "key": "GV_ShootUpgradeItem",
+                          "compareType": "NoneOrEqual"
+                        },
+                        {
+                          "$type": "ByTargetGlobalValue",
+                          "target": "Target",
+                          "key": "_HasRotateControllerInstance",
+                          "compareType": "NoneOrEqual"
+                        },
+                        {
+                          "$type": "ByTargetGlobalValue",
+                          "target": "Target",
+                          "key": "GV_WindCannonShooting",
+                          "compareType": "NoneOrEqual"
+                        }
+                      ]
+                    }
+                  ],
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "gvInTalk": true
+            },
+            {
+              "$type": "DoActionOnGlobalValueChangeMixin",
+              "globalValueKey": "GV_WindCannonShooting",
+              "actions": [
+                {
+                  "$type": "SetGlobalValueV2",
+                  "doOffStage": false,
+                  "value": 1,
+                  "target": "Team",
+                  "key": "GV_FeverStateEffect",
+                  "predicates": [
+                    {
+                      "$type": "ByAny",
+                      "target": "Target",
+                      "predicates": [
+                        {
+                          "$type": "ByTargetGlobalValue",
+                          "value": 1,
+                          "target": "Target",
+                          "key": "GV_ShootUpgradeItem"
+                        },
+                        {
+                          "$type": "ByTargetGlobalValue",
+                          "value": 1,
+                          "target": "Target",
+                          "key": "_HasRotateControllerInstance"
+                        },
+                        {
+                          "$type": "ByTargetGlobalValue",
+                          "value": 1,
+                          "target": "Target",
+                          "key": "GV_WindCannonShooting"
+                        }
+                      ]
+                    }
+                  ],
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "SetGlobalValueV2",
+                  "doOffStage": false,
+                  "target": "Team",
+                  "key": "GV_FeverStateEffect",
+                  "predicates": [
+                    {
+                      "$type": "ByAnd",
+                      "target": "Target",
+                      "predicates": [
+                        {
+                          "$type": "ByTargetGlobalValue",
+                          "target": "Target",
+                          "key": "GV_ShootUpgradeItem",
+                          "compareType": "NoneOrEqual"
+                        },
+                        {
+                          "$type": "ByTargetGlobalValue",
+                          "target": "Target",
+                          "key": "_HasRotateControllerInstance",
+                          "compareType": "NoneOrEqual"
+                        },
+                        {
+                          "$type": "ByTargetGlobalValue",
+                          "target": "Target",
+                          "key": "GV_WindCannonShooting",
+                          "compareType": "NoneOrEqual"
+                        }
+                      ]
+                    }
+                  ],
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "gvInTalk": true
+            }
+          ],
+          "minus_one": -1
+        },
+        "LeaveCurveDebug": {
+          "onAdded": [
+            {
+              "$type": "AvatarExitCurveMove",
+              "doOffStage": false,
+              "target": "CurLocalAvatar",
+              "JJMAELJJIHM": true,
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "StateMachineHandler": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "AttachModifierToGlobalValueMixin",
+              "enable": true,
+              "globalValueKey": "SGV_EnterLevelCurveMove",
+              "modifierNameSteps": [
+                "EnterCurveDebugGroupCall"
+              ],
+              "removeAppliedModifier": true,
+              "actorIceSubHurtDelta": -1,
+              "valueSteps": [
+                0.5,
+                1.5
+              ],
+              "NEACJLMBFMN": true
+            },
+            {
+              "$type": "AttachModifierToGlobalValueMixin",
+              "enable": true,
+              "globalValueKey": "GV_EnterLevelCurveMove",
+              "modifierNameSteps": [
+                "EnterCurveDebug"
+              ],
+              "removeAppliedModifier": true,
+              "actorIceSubHurtDelta": -1,
+              "valueSteps": [
+                0.5,
+                1.5
+              ],
+              "NEACJLMBFMN": true
+            },
+            {
+              "$type": "AttachModifierToGlobalValueMixin",
+              "enable": true,
+              "globalValueKey": "GV_LeaveLevelCurveMove",
+              "modifierNameSteps": [
+                "LeaveCurveDebug"
+              ],
+              "removeAppliedModifier": true,
+              "actorIceSubHurtDelta": -1,
+              "valueSteps": [
+                0.5,
+                1.5
+              ],
+              "NEACJLMBFMN": true
+            },
+            {
+              "$type": "LevelCurveMoveGVMixin",
+              "ANEOCCDBMDO": "GV_IsInCurve",
+              "isTeam": true,
+              "actorIceSubHurtDelta": -1,
+              "KCEHMMPKOKM": "GV_IsInTempCurve",
+              "speed": "GV_CurveSpeed"
+            },
+            {
+              "$type": "AttachModifierToSelfGlobalValueMixin",
+              "enable": true,
+              "globalValueKey": "GV_IsInCurve",
+              "modifierNameSteps": [
+                "ExitCurve"
+              ],
+              "removeAppliedModifier": true,
+              "actorIceSubHurtDelta": -1,
+              "valueSteps": [
+                -0.5,
+                0.5
+              ]
+            },
+            {
+              "$type": "AttachModifierToSelfGlobalValueMixin",
+              "enable": true,
+              "globalValueKey": "GV_FeverStateEffect",
+              "modifierNameSteps": [
+                "FeverModifier"
+              ],
+              "removeAppliedModifier": true,
+              "actorIceSubHurtDelta": -1,
+              "valueSteps": [
+                0.5,
+                1.5
+              ]
+            },
+            {
+              "$type": "StageReadyMixin",
+              "onStageReady": [
+                {
+                  "$type": "ServerLuaCall",
+                  "doOffStage": true,
+                  "luaCallType": "SpecificGroup",
+                  "actorIceSubHurtDelta": -1,
+                  "funcName": "SLC_DungeonInitComplete",
+                  "CallParamList": [
+                    251187013,
+                    251212001,
+                    251193002,
+                    251199001
+                  ],
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "DoActionOnGlobalValueChangeMixin",
+              "globalValueKey": "GV_GainUpgradeItem",
+              "actions": [
+                {
+                  "$type": "ApplyModifier",
+                  "doOffStage": false,
+                  "modifierName": "UNIQUE_KeepUpgradeFireMode",
+                  "predicates": [
+                    {
+                      "$type": "ByTargetGlobalValue",
+                      "target": "Team",
+                      "key": "GV_GainUpgradeItem",
+                      "compareType": "MoreThan"
+                    }
+                  ],
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "gvInTalk": true
+            },
+            {
+              "$type": "DoActionOnGlobalValueChangeMixin",
+              "globalValueKey": "SGV_ReverseFly",
+              "actions": [
+                {
+                  "$type": "SetGlobalValueV2",
+                  "doOffStage": false,
+                  "value": "SGV_ReverseFly",
+                  "target": "Team",
+                  "key": "GV_ReverseControlMode_Interrupt",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "ServerUpdateGlobalValueMixin",
+              "key": "GV_LevelOffsetControlMode",
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "ServerUpdateGlobalValueMixin",
+              "key": "GV_ForceCancelRotateBalls",
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "ServerUpdateGlobalValueMixin",
+              "key": "GV_TriggerFalconSpecial",
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "ServerUpdateGlobalValueMixin",
+              "key": "GV_ShootUpgradeItem",
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "ServerUpdateGlobalValueMixin",
+              "key": "GV_TriggerExplosionEffect",
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "ServerUpdateGlobalValueMixin",
+              "key": "GV_SkillEnable",
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "ServerUpdateGlobalValueMixin",
+              "key": "_ForceEndWindCannon",
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "minus_one": -1
+        },
+        "UNIQUE_KeepUpgradeFireMode": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValueV2",
+              "doOffStage": false,
+              "value": 1,
+              "target": "Team",
+              "key": "GV_ShootUpgradeItem",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "ServerLuaCall",
+              "doOffStage": true,
+              "luaCallType": "SpecificGroup",
+              "actorIceSubHurtDelta": -1,
+              "funcName": "SLC_Banner_UpgradeShootItem",
+              "CallParamList": [
+                251187013,
+                251212001,
+                251193002,
+                251199001
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "stacking": "Prolong",
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "SetGlobalValueV2",
+              "doOffStage": false,
+              "target": "Team",
+              "key": "GV_ShootUpgradeItem",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "isUnique": true,
+          "duration": 10
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "__unk_Q2982101340": [
+        "GV_LevelOffsetControlMode",
+        "GV_ReverseControlMode_Interrupt",
+        "GV_OffsetRadiusLimit",
+        "SGV_OffsetMoveRadiusLimit"
+      ],
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "SetGlobalValueV2",
+          "doOffStage": false,
+          "value": 4,
+          "key": "GV_OffsetRadiusLimit",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "AttachModifier",
+          "doOffStage": false,
+          "modifierName": "SyncSGV",
+          "target": "Team",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "AttachModifier",
+          "doOffStage": false,
+          "modifierName": "InvincibleModifier",
+          "target": "CurTeamAvatars",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "DynamicAbility_WhiteBox_CurveMoveAbility_Avatar",
+      "isDynamicAbility": true,
+      "abilityMixins": [
+        {
+          "$type": "AttachModifierToGlobalValueMixin",
+          "enable": true,
+          "globalValueKey": "GV_LevelOffsetControlMode",
+          "modifierNameSteps": [
+            "OceanModeModifier",
+            "LightingModeModifier",
+            "FlappyBirdModifier"
+          ],
+          "globalValueTarget": "Team",
+          "removeAppliedModifier": true,
+          "actorIceSubHurtDelta": -1,
+          "valueSteps": [
+            -0.5,
+            0.5,
+            1.5,
+            2.5
+          ],
+          "NEACJLMBFMN": true
+        },
+        {
+          "$type": "DoActionOnGlobalValueChangeMixin",
+          "globalValueKey": "GV_CurveMoveSpeedUp_Level",
+          "actions": [
+            {
+              "$type": "AttachModifier",
+              "doOffStage": false,
+              "modifierName": "SpeedUpModifier",
+              "target": "CurLocalAvatar",
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "target": "CurLocalAvatar",
+                  "key": "GV_CurveMoveSpeedUp_Level",
+                  "compareType": "MoreThan"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "actorIceSubHurtDelta": -1,
+          "gvInTalk": true
+        }
+      ],
+      "modifiers": {
+        "FlappyBirdModifier": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValueV2",
+              "doOffStage": false,
+              "target": "Team",
+              "key": "GV_SkillEnable",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AttachModifier",
+              "doOffStage": false,
+              "modifierName": "OnceSetForceCancelRotateBalls",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "TriggerAudioV2",
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1,
+              "pattern": "v6_4_AirFight_CameraMove_End",
+              "canBeHandledOnRecover": true,
+              "PBHJPBFJGME": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "AJEHMMJDLIE",
+              "APEAMFPJJAN": -13,
+              "BEAICCPNBGE": 5.5,
+              "DDMALKOLMFK": true,
+              "DFJDNFLFFKC": "Back",
+              "FILEDDBIJKB": 5,
+              "GCEOFICIMMD": 9999,
+              "GPEJAFBFKEP": 15,
+              "ILLIJKCHCML": 10,
+              "INHAEHFDCMD": "Rectangle",
+              "actorIceSubHurtDelta": -1,
+              "LCPFLPCNHHB": 9999,
+              "LKGDIHFAMPJ": 13,
+              "NCDFIPECHHA": -24
+            }
+          ],
+          "minus_one": -1
+        },
+        "InvincibleModifier": {
+          "elementDurability": 100,
+          "onReconnect": [
+            {
+              "$type": "ServerLuaCall",
+              "doOffStage": true,
+              "luaCallType": "SpecificGroup",
+              "actorIceSubHurtDelta": -1,
+              "funcName": "SLC_ReconnectEvent",
+              "CallParamList": [
+                251187013,
+                251212001,
+                251193002,
+                251199001
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "EntityInVisibleMixin",
+              "disableAudio": true,
+              "HOMDDINNFFG": {
+                "KNKPKKDPEDJ": true
+              },
+              "reason": "Gallary",
+              "KBGFNPHLGLA": true,
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "minus_one": -1,
+          "state": "Invincible"
+        },
+        "LightingModeModifier": {
+          "onAdded": [
+            {
+              "$type": "TriggerAudioV2",
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1,
+              "pattern": "v6_4_AirFight_CameraMove_End",
+              "canBeHandledOnRecover": true,
+              "PBHJPBFJGME": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "AttachModifierToGlobalValueMixin",
+              "enable": true,
+              "globalValueKey": "GV_ReverseControlMode_Interrupt",
+              "modifierNameSteps": [
+                "LightingModeNormal",
+                "LightingModeReverse"
+              ],
+              "globalValueTarget": "Team",
+              "removeAppliedModifier": true,
+              "actorIceSubHurtDelta": -1,
+              "valueSteps": [
+                -0.5,
+                0.5,
+                1.5
+              ],
+              "NEACJLMBFMN": true
+            }
+          ],
+          "minus_one": -1
+        },
+        "LightingModeNormal": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "AJEHMMJDLIE",
+              "APEAMFPJJAN": -6,
+              "BEAICCPNBGE": 5,
+              "DDMALKOLMFK": true,
+              "DFJDNFLFFKC": "Right",
+              "FILEDDBIJKB": 11,
+              "GCEOFICIMMD": 9999,
+              "GPEJAFBFKEP": 999,
+              "ILLIJKCHCML": 8,
+              "INHAEHFDCMD": "Rectangle",
+              "actorIceSubHurtDelta": -1,
+              "LCPFLPCNHHB": 9999,
+              "LGALOLIKLCH": "Front",
+              "LKGDIHFAMPJ": 7,
+              "NCDFIPECHHA": -11
+            }
+          ],
+          "minus_one": -1
+        },
+        "LightingModeReverse": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "AJEHMMJDLIE",
+              "APEAMFPJJAN": -6,
+              "BEAICCPNBGE": 5,
+              "DDMALKOLMFK": true,
+              "DFJDNFLFFKC": "Left",
+              "FILEDDBIJKB": 11,
+              "GCEOFICIMMD": 9999,
+              "GPEJAFBFKEP": 999,
+              "ILLIJKCHCML": 8,
+              "INHAEHFDCMD": "Rectangle",
+              "actorIceSubHurtDelta": -1,
+              "LCPFLPCNHHB": 9999,
+              "LGALOLIKLCH": "Back",
+              "LKGDIHFAMPJ": 7,
+              "NCDFIPECHHA": -11
+            }
+          ],
+          "minus_one": -1
+        },
+        "OceanModeModifier": {
+          "onAdded": [
+            {
+              "$type": "TriggerAudioV2",
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1,
+              "pattern": "v6_4_AirFight_CameraMove_End",
+              "canBeHandledOnRecover": true,
+              "PBHJPBFJGME": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "TriggerAudioV2",
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1,
+              "pattern": "v6_4_AirFight_CameraMove_Start",
+              "canBeHandledOnRecover": true,
+              "PBHJPBFJGME": true
+            }
+          ],
+          "modifierMixins": [
+            {
+              "$type": "AttachModifierToGlobalValueMixin",
+              "enable": true,
+              "globalValueKey": "GV_ReverseControlMode_Interrupt",
+              "modifierNameSteps": [
+                "OceanModeNormal",
+                "OceanModeReverse"
+              ],
+              "globalValueTarget": "Team",
+              "removeAppliedModifier": true,
+              "actorIceSubHurtDelta": -1,
+              "valueSteps": [
+                -0.5,
+                0.5,
+                1.5
+              ],
+              "NEACJLMBFMN": true
+            }
+          ],
+          "minus_one": -1
+        },
+        "OceanModeNormal": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValueV2",
+              "doOffStage": false,
+              "target": "Team",
+              "key": "GV_SkillEnable",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AttachModifier",
+              "doOffStage": false,
+              "modifierName": "OnceSetForceCancelRotateBalls",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "AJEHMMJDLIE",
+              "BEAICCPNBGE": 8,
+              "radius": "GV_OffsetRadiusLimit",
+              "DDMALKOLMFK": true,
+              "DFJDNFLFFKC": "Right",
+              "GCEOFICIMMD": 9999,
+              "GPEJAFBFKEP": 4,
+              "ILLIJKCHCML": 3,
+              "actorIceSubHurtDelta": -1,
+              "LCPFLPCNHHB": 9999
+            }
+          ],
+          "minus_one": -1
+        },
+        "OceanModeReverse": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "AJEHMMJDLIE",
+              "BEAICCPNBGE": 8,
+              "radius": "GV_OffsetRadiusLimit",
+              "DDMALKOLMFK": true,
+              "DFJDNFLFFKC": "Left",
+              "GCEOFICIMMD": 9999,
+              "GPEJAFBFKEP": 4,
+              "ILLIJKCHCML": 3,
+              "actorIceSubHurtDelta": -1,
+              "LCPFLPCNHHB": 9999,
+              "LGALOLIKLCH": "Down"
+            }
+          ],
+          "minus_one": -1
+        },
+        "OnceSetForceCancelRotateBalls": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValueV2",
+              "doOffStage": false,
+              "value": 1,
+              "target": "Team",
+              "key": "GV_ForceCancelRotateBalls",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "SetGlobalValueV2",
+              "doOffStage": false,
+              "target": "Team",
+              "key": "GV_ForceCancelRotateBalls",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "duration": 0.5
+        },
+        "SpeedUpModifier": {
+          "elementDurability": 100,
+          "stacking": "MultipleRefresh",
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "AddGlobalValueV2",
+              "doOffStage": false,
+              "value": -1,
+              "target": "CurLocalAvatar",
+              "key": "GV_CurveMoveSpeedUp_Level",
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "target": "CurLocalAvatar",
+                  "key": "GV_CurveMoveSpeedUp_Level",
+                  "compareType": "MoreThan"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "modifierMixins": [
+            {
+              "$type": "OverrideCurveSpeedMixin",
+              "AOMHPNAKKAO": true,
+              "HNIOFPEODIG": 0.5,
+              "actorIceSubHurtDelta": -1,
+              "KOLIGEEDJCN": 0.5,
+              "LDOIDDLOHOJ": 5
+            }
+          ],
+          "minus_one": -1,
+          "duration": 2.5
+        },
+        "SyncSGV": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "DoActionOnGlobalValueChangeMixin",
+              "globalValueKey": "SGV_OffsetMoveRadiusLimit",
+              "actions": [
+                {
+                  "$type": "CopyGlobalValue",
+                  "doOffStage": false,
+                  "dstKey": "GV_OffsetRadiusLimit",
+                  "srcTarget": "Team",
+                  "actorIceSubHurtDelta": -1,
+                  "srcKey": "SGV_OffsetMoveRadiusLimit",
+                  "canBeHandledOnRecover": true,
+                  "dstTarget": "CurLocalAvatar"
+                }
+              ],
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "minus_one": -1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "__unk_Q2982101340": [
+        "GV_UseSkill",
+        "GV_RotateBallItem",
+        "GV_BulletLockMode"
+      ],
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "doOffStage": false,
+          "modifierName": "InvincibleModifier",
+          "target": "CurTeamAvatars",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "SetGlobalValueV2",
+          "doOffStage": false,
+          "target": "Team",
+          "key": "GV_UseSkill",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "SetGlobalValueV2",
+          "doOffStage": false,
+          "target": "Team",
+          "key": "GV_RotateBallItem",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "SetGlobalValueV2",
+          "doOffStage": false,
+          "target": "Team",
+          "key": "GV_BulletLockMode",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "DynamicAbility_WhiteBox_STG_SkillManager_Team",
+      "isDynamicAbility": true,
+      "abilityMixins": [
+        {
+          "$type": "DoActionOnGlobalValueChangeMixin",
+          "globalValueKey": "GV_UseSkill",
+          "actions": [
+            {
+              "$type": "Predicated",
+              "doOffStage": false,
+              "target": "Team",
+              "targetPredicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "value": 1,
+                  "target": "Team",
+                  "key": "GV_UseSkill"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "successActions": [
+                {
+                  "$type": "SetGlobalValueV2",
+                  "doOffStage": false,
+                  "target": "Team",
+                  "key": "GV_UseSkill",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "SetGlobalValueV2",
+                  "doOffStage": false,
+                  "target": "Team",
+                  "key": "GV_SkillEnable",
+                  "predicates": [
+                    {
+                      "$type": "ByTargetGlobalValue",
+                      "target": "Team",
+                      "key": "GV_UsingWindCannon",
+                      "compareType": "NoneOrEqual"
+                    }
+                  ],
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "CreateGadget",
+                  "doOffStage": false,
+                  "campID": 5001,
+                  "campTargetType": "SelfCamp",
+                  "HGPMDCCAHMK": {
+                    "IFAGHADONMB": true,
+                    "KCLDKFCKPEE": 0.5,
+                    "MJDMDBDMPAM": true,
+                    "PHCINBJNAOK": 0.5
+                  },
+                  "value": true,
+                  "predicates": [
+                    {
+                      "$type": "ByTargetGlobalValue",
+                      "target": "Team",
+                      "key": "GV_UsingWindCannon",
+                      "compareType": "NoneOrEqual"
+                    }
+                  ],
+                  "actorIceSubHurtDelta": -1,
+                  "born": {
+                    "direction": {
+                      "maxAngle": 180
+                    },
+                    "FDGAEDDEEDG": {
+                      "ELAJJIANFFM": 180
+                    },
+                    "onGroundRaycastUpDist": 2,
+                    "value": 10
+                  },
+                  "gadgetID": 73120014,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "actorIceSubHurtDelta": -1,
+          "gvInTalk": true
+        },
+        {
+          "$type": "DoActionOnGlobalValueChangeMixin",
+          "globalValueKey": "GV_RotateBallItem",
+          "actions": [
+            {
+              "$type": "Predicated",
+              "doOffStage": false,
+              "target": "Team",
+              "targetPredicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "value": 1,
+                  "target": "Team",
+                  "key": "GV_RotateBallItem"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "successActions": [
+                {
+                  "$type": "SetGlobalValueV2",
+                  "doOffStage": false,
+                  "target": "Team",
+                  "key": "GV_RotateBallItem",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "Predicated",
+                  "doOffStage": false,
+                  "failActions": [
+                    {
+                      "$type": "CreateGadget",
+                      "doOffStage": false,
+                      "campID": 5001,
+                      "campTargetType": "SelfCamp",
+                      "HGPMDCCAHMK": {
+                        "IFAGHADONMB": true,
+                        "KCLDKFCKPEE": 0.5,
+                        "MJDMDBDMPAM": true,
+                        "PHCINBJNAOK": 0.5
+                      },
+                      "value": true,
+                      "actorIceSubHurtDelta": -1,
+                      "born": {
+                        "direction": {
+                          "maxAngle": 180
+                        },
+                        "FDGAEDDEEDG": {
+                          "ELAJJIANFFM": 180
+                        },
+                        "onGroundRaycastUpDist": 2,
+                        "value": 10
+                      },
+                      "gadgetID": 73120016,
+                      "canBeHandledOnRecover": true
+                    },
+                    {
+                      "$type": "ServerLuaCall",
+                      "doOffStage": true,
+                      "luaCallType": "SpecificGroup",
+                      "actorIceSubHurtDelta": -1,
+                      "funcName": "SLC_Banner_RotatingBall",
+                      "CallParamList": [
+                        251187013,
+                        251212001,
+                        251193002,
+                        251199001
+                      ],
+                      "canBeHandledOnRecover": true
+                    }
+                  ],
+                  "targetPredicates": [
+                    {
+                      "$type": "ByTargetGlobalValue",
+                      "value": 1,
+                      "target": "Team",
+                      "key": "_HasRotateControllerInstance"
+                    }
+                  ],
+                  "actorIceSubHurtDelta": -1,
+                  "successActions": [
+                    {
+                      "$type": "AddGlobalValueV2",
+                      "doOffStage": false,
+                      "otherTargets": {
+                        "$type": "EKDIJCOKJDO",
+                        "tag": "_RotateController",
+                        "topLimit": 1,
+                        "sortType": "Nearest"
+                      },
+                      "value": 1,
+                      "key": "_ProlongItemTime",
+                      "actorIceSubHurtDelta": -1,
+                      "canBeHandledOnRecover": true
+                    }
+                  ],
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "actorIceSubHurtDelta": -1,
+          "gvInTalk": true
+        }
+      ],
+      "modifiers": {
+        "InvincibleModifier": {
+          "elementDurability": 100,
+          "stacking": "Unique",
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "state": "Invincible"
+        }
+      }
+    }
+  }
+]

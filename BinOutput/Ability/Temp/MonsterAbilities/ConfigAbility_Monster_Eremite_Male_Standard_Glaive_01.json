@@ -1,0 +1,3459 @@
+[
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "SetGlobalValue",
+          "doOffStage": false,
+          "key": "_MONSTER_EREMITE_IMPROVED_",
+          "maxValue": 1,
+          "actorIceSubHurtDelta": -1,
+          "useLimitRange": true,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "SetGlobalValue",
+          "doOffStage": false,
+          "key": "_MONSTER_EREMITE_OUTIMPROVED",
+          "maxValue": 1,
+          "actorIceSubHurtDelta": -1,
+          "useLimitRange": true,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "SetGlobalValue",
+          "doOffStage": false,
+          "key": "_MONSTER_EREMITE_IMPROVED_COUNT_",
+          "maxValue": 99,
+          "actorIceSubHurtDelta": -1,
+          "useLimitRange": true,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "SetGlobalValue",
+          "doOffStage": false,
+          "key": "_MONSTER_EREMITE_ISINFIGHT_",
+          "maxValue": 1,
+          "actorIceSubHurtDelta": -1,
+          "useLimitRange": true,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "SetGlobalValue",
+          "doOffStage": false,
+          "key": "_MONSTER_EREMITE_WEAK_",
+          "maxValue": 1,
+          "actorIceSubHurtDelta": -1,
+          "useLimitRange": true,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "SetGlobalValue",
+          "doOffStage": false,
+          "key": "_MONSTER_EREMITE_RETURNTOBORN_",
+          "maxValue": 1,
+          "actorIceSubHurtDelta": -1,
+          "useLimitRange": true,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "Monster_Eremite_Male_Standard_Glaive_Ice_FightControl",
+      "abilityMixins": [
+        {
+          "$type": "AttachToPoseIDMixin",
+          "modifierName": "Eremite_OutFightState",
+          "poseIDs": [
+            1,
+            2,
+            901,
+            902,
+            903
+          ],
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToPoseIDMixin",
+          "modifierName": "Eremite_InFightState",
+          "poseIDs": [
+            101,
+            102,
+            111,
+            201,
+            301
+          ],
+          "actorIceSubHurtDelta": -1
+        }
+      ],
+      "modifiers": {
+        "Eremite_InFightState": {
+          "onAdded": [
+            {
+              "$type": "AddGlobalValue",
+              "doOffStage": false,
+              "value": 10,
+              "key": "_MONSTER_EREMITE_ISINFIGHT_",
+              "maxValue": 1,
+              "actorIceSubHurtDelta": -1,
+              "useLimitRange": true,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "RemoveModifier",
+              "doOffStage": false,
+              "modifierName": "Eremite_OutFightState",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "Eremite_OutFightState": {
+          "onAdded": [
+            {
+              "$type": "AddGlobalValue",
+              "doOffStage": false,
+              "value": -10,
+              "key": "_MONSTER_EREMITE_ISINFIGHT_",
+              "maxValue": 1,
+              "actorIceSubHurtDelta": -1,
+              "useLimitRange": true,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "RemoveModifier",
+              "doOffStage": false,
+              "modifierName": "Eremite_InFightState",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Monster_Eremite_Male_Standard_Glaive_Ice_Alert",
+      "onAbilityStart": [
+        {
+          "$type": "SetPoseInt",
+          "doOffStage": false,
+          "intID": "FreePoseMark",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "abilitySpecials": {
+        "Eremite_Max_HP": 0
+      },
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Monster_Eremite_Male_Standard_Glaive_Ice_Improve",
+      "abilityMixins": [
+        {
+          "$type": "AttachModifierToSelfGlobalValueMixin",
+          "globalValueKey": "_MONSTER_EREMITE_IMPROVED_",
+          "modifierNameSteps": [
+            "Eremite_NormalState",
+            "Eremite_ImproveState"
+          ],
+          "removeAppliedModifier": true,
+          "actorIceSubHurtDelta": -1,
+          "valueSteps": [
+            -0.5,
+            0.5,
+            1.5
+          ]
+        },
+        {
+          "$type": "AttachModifierToSelfGlobalValueMixin",
+          "globalValueKey": "_MONSTER_EREMITE_WEAK_",
+          "modifierNameSteps": [
+            "Eremite_IsNotWeak",
+            "Eremite_IsWeak"
+          ],
+          "removeAppliedModifier": true,
+          "actorIceSubHurtDelta": -1,
+          "valueSteps": [
+            -0.5,
+            0.5,
+            1.5
+          ]
+        },
+        {
+          "$type": "AttachModifierToHPPercentMixin",
+          "modifierNameSteps": [
+            "Empty",
+            "UNIQUE_Eremite_Force_ImproveState"
+          ],
+          "actorIceSubHurtDelta": -1,
+          "valueSteps": [
+            0.699999988079071
+          ]
+        },
+        {
+          "$type": "AttachToPoseIDMixin",
+          "modifierName": "ResetMonsterSkill",
+          "poseIDs": [
+            1,
+            2
+          ],
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachModifierToSelfGlobalValueMixin",
+          "globalValueKey": "_MONSTER_EREMITE_OUTIMPROVED",
+          "modifierNameSteps": [
+            "Eremite_ISNotOutImproved",
+            "Eremite_IsOutImproved"
+          ],
+          "removeAppliedModifier": true,
+          "actorIceSubHurtDelta": -1,
+          "valueSteps": [
+            -0.5,
+            0.5,
+            1.5
+          ]
+        },
+        {
+          "$type": "DoActionByStateIDMixin",
+          "stateIDs": [
+            "Die",
+            "Die_RagDoll"
+          ],
+          "value": -1,
+          "enterActions": [
+            {
+              "$type": "RemoveModifier",
+              "doOffStage": false,
+              "modifierName": "Eremite_Improve_Effect",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "RemoveUniqueModifier",
+              "doOffStage": false,
+              "modifierName": "UNIQUE_Eremite_Effect",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToStateIDMixin",
+          "modifierName": "Improve_AddEndure",
+          "stateIDs": [
+            "Improve"
+          ],
+          "value": -1,
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToPoseIDMixin",
+          "modifierName": "Improve_AddEndure",
+          "poseIDs": [
+            201
+          ],
+          "actorIceSubHurtDelta": -1
+        }
+      ],
+      "onAbilityStart": [
+        {
+          "$type": "AttachModifier",
+          "doOffStage": false,
+          "modifierName": "UNIQUE_Eremite_ImproveState_Properties",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "modifiers": {
+        "Empty": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "Eremite_ASHintEffect01": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Eremite_Male_Standard_Glaive_Ice_Improve_ASHint",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "thinkInterval": 18.200000762939453
+        },
+        "Eremite_ASHintEffect02": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Eremite_Male_Standard_Glaive_Ice_Improve_ASHint02",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "thinkInterval": 15
+        },
+        "Eremite_ISNotOutImproved": {
+          "onAdded": [
+            {
+              "$type": "SetPoseBool",
+              "doOffStage": false,
+              "enable": true,
+              "boolID": "OutImproved",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "RemoveModifier",
+              "doOffStage": false,
+              "modifierName": "Eremite_IsOutImproved",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "Eremite_ImproveState": {
+          "onAdded": [
+            {
+              "$type": "SetPoseBool",
+              "doOffStage": false,
+              "value": true,
+              "enable": true,
+              "boolID": "ImproveState",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "RemoveModifier",
+              "doOffStage": false,
+              "modifierName": "Eremite_NormalState",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "Eremite_Improve_Effect": {
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Eremite_Male_Standard_Glaive_Ice_Improve_Loop01",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Eremite_Male_Standard_Glaive_Ice_Improve_Loop02",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "Eremite_IsNotWeak": {
+          "onAdded": [
+            {
+              "$type": "SetPoseBool",
+              "doOffStage": false,
+              "enable": true,
+              "boolID": "WeakState",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "RemoveModifier",
+              "doOffStage": false,
+              "modifierName": "Eremite_IsWeak",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "Eremite_IsOutImproved": {
+          "onAdded": [
+            {
+              "$type": "SetPoseBool",
+              "doOffStage": false,
+              "value": true,
+              "enable": true,
+              "boolID": "OutImproved",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "RemoveModifier",
+              "doOffStage": false,
+              "modifierName": "Eremite_ISNotOutImproved",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "Eremite_IsWeak": {
+          "onAdded": [
+            {
+              "$type": "SetPoseBool",
+              "doOffStage": false,
+              "value": true,
+              "enable": true,
+              "boolID": "WeakState",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "RemoveModifier",
+              "doOffStage": false,
+              "modifierName": "Eremite_IsNotWeak",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "Eremite_NormalState": {
+          "onAdded": [
+            {
+              "$type": "SetPoseBool",
+              "doOffStage": false,
+              "enable": true,
+              "boolID": "ImproveState",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "RemoveModifier",
+              "doOffStage": false,
+              "modifierName": "Eremite_ImproveState",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "Improve_AddEndure": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "properties": {
+            "Actor_EndureDelta": 0,
+            "Entity_WeightRatio": 5
+          }
+        },
+        "RemoveImproveState": {
+          "onAdded": [
+            {
+              "$type": "AddGlobalValue",
+              "doOffStage": false,
+              "value": 10,
+              "key": "_MOSNTER_EREMITE_RETURNTOBORN_",
+              "maxValue": 1,
+              "actorIceSubHurtDelta": -1,
+              "useLimitRange": true,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "RemoveUniqueModifier",
+              "doOffStage": false,
+              "modifierName": "UNIQUE_Eremite_ImproveState_Properties",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "AddGlobalValue",
+              "doOffStage": false,
+              "value": -10,
+              "key": "_MOSNTER_EREMITE_RETURNTOBORN_",
+              "maxValue": 1,
+              "actorIceSubHurtDelta": -1,
+              "useLimitRange": true,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1
+        },
+        "ResetMonsterSkill": {
+          "onAdded": [
+            {
+              "$type": "AddGlobalValue",
+              "doOffStage": false,
+              "value": -99,
+              "key": "_MONSTER_EREMITE_IMPROVED_COUNT_",
+              "maxValue": 99,
+              "actorIceSubHurtDelta": -1,
+              "useLimitRange": true,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetAISkillCDAvailableNow",
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1,
+              "skillIDs": [
+                402
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "UNIQUE_Eremite_Force_ImproveState": {
+          "onAdded": [
+            {
+              "$type": "SetPoseBool",
+              "doOffStage": false,
+              "value": true,
+              "enable": true,
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_MONSTER_EREMITE_IMPROVED_COUNT_",
+                  "compareType": "NoneOrEqual"
+                }
+              ],
+              "boolID": "ForceImprove",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetAISkillCDAvailableNow",
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1,
+              "skillIDs": [
+                401
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "stacking": "Unique",
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "SetPoseBool",
+              "doOffStage": false,
+              "boolID": "ForceImprove",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "isUnique": true
+        },
+        "UNIQUE_Eremite_ImproveState_Properties": {
+          "onAdded": [
+            {
+              "$type": "AddGlobalValue",
+              "doOffStage": false,
+              "value": 10,
+              "enable": true,
+              "key": "_MONSTER_EREMITE_IMPROVED_",
+              "maxValue": 1,
+              "actorIceSubHurtDelta": -1,
+              "useLimitRange": true,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AddGlobalValue",
+              "doOffStage": false,
+              "value": -10,
+              "enable": true,
+              "key": "_MONSTER_EREMITE_RECOVER_",
+              "maxValue": 1,
+              "actorIceSubHurtDelta": -1,
+              "useLimitRange": true,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AddGlobalValue",
+              "doOffStage": false,
+              "value": 1,
+              "key": "_MONSTER_EREMITE_IMPROVED_COUNT_",
+              "maxValue": 99,
+              "actorIceSubHurtDelta": -1,
+              "useLimitRange": true,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetAISkillGCD",
+              "doOffStage": false,
+              "enable": true,
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AttachModifier",
+              "doOffStage": false,
+              "modifierName": "Eremite_Improve_Effect",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AttachModifier",
+              "doOffStage": false,
+              "modifierName": "Eremite_ASHintEffect01",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AttachModifier",
+              "doOffStage": false,
+              "modifierName": "Eremite_ASHintEffect02",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "stacking": "Unique",
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "SetAnimatorTrigger",
+              "doOffStage": true,
+              "triggerID": "Weak",
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_MONSTER_EREMITE_RETURNTOBORN_"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "RemoveModifier",
+              "doOffStage": false,
+              "modifierName": "Eremite_Improve_Effect",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "RemoveUniqueModifier",
+              "doOffStage": false,
+              "modifierName": "UNIQUE_Eremite_Effect",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AddGlobalValue",
+              "doOffStage": false,
+              "value": -10,
+              "enable": true,
+              "key": "_MONSTER_EREMITE_IMPROVED_",
+              "maxValue": 1,
+              "actorIceSubHurtDelta": -1,
+              "useLimitRange": true,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AddGlobalValue",
+              "doOffStage": false,
+              "value": 10,
+              "enable": true,
+              "key": "_MONSTER_EREMITE_WEAK_",
+              "maxValue": 1,
+              "actorIceSubHurtDelta": -1,
+              "useLimitRange": true,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "RemoveUniqueModifier",
+              "doOffStage": false,
+              "modifierName": "UNIQUE_Eremite_Force_ImproveState",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetAISkillGCD",
+              "doOffStage": false,
+              "value": 2,
+              "enable": true,
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "properties": {
+            "Actor_EndureDelta": 0,
+            "Entity_WeightRatio": 5
+          },
+          "isUnique": true,
+          "duration": 20
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Monster_Eremite_Male_Standard_Glaive_Ice_Improve_Effect",
+      "onAbilityStart": [
+        {
+          "$type": "ApplyModifier",
+          "doOffStage": false,
+          "modifierName": "UNIQUE_Eremite_Effect",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "modifiers": {
+        "UNIQUE_Eremite_Effect": {
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Eremite_Male_Standard_Glaive_Ice_Improve_BS01",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "stacking": "Unique",
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "isUnique": true
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Monster_Eremite_Male_Standard_Glaive_Ice_Improve_Die",
+      "onAbilityStart": [
+        {
+          "$type": "RemoveUniqueModifier",
+          "doOffStage": false,
+          "modifierName": "UNIQUE_Eremite_ImproveState_Properties",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Monster_Eremite_Male_Standard_Glaive_Ice_Weak",
+      "abilityMixins": [
+        {
+          "$type": "AttachToPoseIDMixin",
+          "modifierName": "WeakState",
+          "poseIDs": [
+            301
+          ],
+          "actorIceSubHurtDelta": -1
+        }
+      ],
+      "modifiers": {
+        "Empty": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "Recover": {
+          "onAdded": [
+            {
+              "$type": "SetAnimatorTrigger",
+              "doOffStage": false,
+              "triggerID": "Recover",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "WeakState": {
+          "onAdded": [
+            {
+              "$type": "FireEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Eremite_Male_Standard_Glaive_Ice_Improve_AS01",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Avatar_Properties_Defense_Down",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AddGlobalValue",
+              "doOffStage": false,
+              "value": 10,
+              "enable": true,
+              "key": "_MONSTER_EREMITE_WEAK_",
+              "maxValue": 1,
+              "actorIceSubHurtDelta": -1,
+              "useLimitRange": true,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AddGlobalValue",
+              "doOffStage": false,
+              "value": -10,
+              "enable": true,
+              "key": "_MONSTER_EREMITE_RECOVER_",
+              "maxValue": 1,
+              "actorIceSubHurtDelta": -1,
+              "useLimitRange": true,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "TriggerAbility",
+              "doOffStage": false,
+              "abilityName": "Monster_Eremite_Male_Standard_Glaive_Ice_BuffEffect_Open",
+              "actorIceSubHurtDelta": -1,
+              "target": "Other",
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "AddGlobalValue",
+              "doOffStage": false,
+              "value": 10,
+              "enable": true,
+              "key": "_MONSTER_EREMITE_RECOVER_",
+              "maxValue": 1,
+              "actorIceSubHurtDelta": -1,
+              "useLimitRange": true,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AddGlobalValue",
+              "doOffStage": false,
+              "value": -10,
+              "enable": true,
+              "key": "_MONSTER_EREMITE_WEAK_",
+              "maxValue": 1,
+              "actorIceSubHurtDelta": -1,
+              "useLimitRange": true,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "value": 1,
+              "enable": true,
+              "key": "_MONSTER_EREMITE_OUTIMPROVED",
+              "maxValue": 1,
+              "actorIceSubHurtDelta": -1,
+              "useLimitRange": true,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "ReTriggerAISkillInitialCD",
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1,
+              "skillIDs": [
+                402
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "modifierMixins": [
+            {
+              "$type": "AttachModifierToSelfGlobalValueMixin",
+              "globalValueKey": "_MONSTER_EREMITE_RECOVER_",
+              "modifierNameSteps": [
+                "Empty",
+                "Recover"
+              ],
+              "removeAppliedModifier": true,
+              "actorIceSubHurtDelta": -1,
+              "valueSteps": [
+                -0.5,
+                0.5,
+                1.5
+              ]
+            }
+          ],
+          "minus_one": -1,
+          "properties": {
+            "Actor_EndureDelta": 0,
+            "Actor_IceSubHurtDelta": -0.6000000238418579
+          },
+          "onChangeAuthority": [
+            {
+              "$type": "AddGlobalValue",
+              "doOffStage": false,
+              "value": 10,
+              "enable": true,
+              "key": "_MONSTER_EREMITE_WEAK_",
+              "maxValue": 1,
+              "actorIceSubHurtDelta": -1,
+              "useLimitRange": true,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AddGlobalValue",
+              "doOffStage": false,
+              "value": -10,
+              "enable": true,
+              "key": "_MONSTER_EREMITE_RECOVER_",
+              "maxValue": 1,
+              "actorIceSubHurtDelta": -1,
+              "useLimitRange": true,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "TriggerAbility",
+              "doOffStage": false,
+              "abilityName": "Monster_Eremite_Male_Standard_Glaive_Ice_BuffEffect_Open",
+              "actorIceSubHurtDelta": -1,
+              "target": "Other",
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "duration": 8
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Monster_Eremite_Male_Standard_Glaive_Ice_WeaponOnback",
+      "abilityMixins": [
+        {
+          "$type": "AttachToPoseIDMixin",
+          "modifierName": "UNIQUE_WeaponOnBack_Equip",
+          "poseIDs": [
+            1,
+            2,
+            901,
+            902,
+            903
+          ],
+          "actorIceSubHurtDelta": -1
+        }
+      ],
+      "onAbilityStart": [
+        {
+          "$type": "ApplyModifier",
+          "doOffStage": false,
+          "modifierName": "UNIQUE_WeaponOnBack_Equip",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "modifiers": {
+        "UNIQUE_WeaponOnBack_Equip": {
+          "onAdded": [
+            {
+              "$type": "SetWeaponAttachPointRealName",
+              "doOffStage": false,
+              "GPBOIHMLHEG": "equip01",
+              "actorIceSubHurtDelta": -1,
+              "OFEJNMBBIMO": "WeaponOnBack01",
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetWeaponAttachPointRealName",
+              "doOffStage": false,
+              "GPBOIHMLHEG": "equip02",
+              "actorIceSubHurtDelta": -1,
+              "OFEJNMBBIMO": "WeaponOnBack02",
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "isUnique": true
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "SetGlobalValue",
+          "doOffStage": false,
+          "key": "_MONSTER_EREMITE_SHEATH_WEAPON",
+          "maxValue": 1,
+          "actorIceSubHurtDelta": -1,
+          "useLimitRange": true,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "Monster_Eremite_Male_Standard_Glaive_Ice_DrawWeapon",
+      "abilityMixins": [
+        {
+          "$type": "AttachToStateIDMixin",
+          "modifierName": "Reconnect_DrawWeapon",
+          "stateIDs": [
+            "Alert"
+          ],
+          "value": -1,
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToStateIDMixin",
+          "modifierName": "DrawWeapon",
+          "stateIDs": [
+            "Struggle",
+            "Dance",
+            "Weak"
+          ],
+          "value": -1,
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "DoActionByAnimatorStateIDMixin",
+          "stateIDs": [
+            "Hit_H",
+            "Hit_L",
+            "HitThrow"
+          ],
+          "value": -1,
+          "enterActions": [
+            {
+              "$type": "TriggerAbility",
+              "doOffStage": false,
+              "abilityName": "Monster_Eremite_Male_Standard_Glaive_Ice_Alert",
+              "actorIceSubHurtDelta": -1,
+              "target": "Other",
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AddGlobalValue",
+              "doOffStage": false,
+              "value": 10,
+              "key": "_MONSTER_EREMITE_SHEATH_WEAPON",
+              "maxValue": 1,
+              "actorIceSubHurtDelta": -1,
+              "useLimitRange": true,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachModifierToSelfGlobalValueMixin",
+          "globalValueKey": "_MONSTER_EREMITE_SHEATH_WEAPON",
+          "modifierNameSteps": [
+            "UNIQUE_SheathWeapon",
+            "UNIQUE_DrawWeapon"
+          ],
+          "removeAppliedModifier": true,
+          "actorIceSubHurtDelta": -1,
+          "valueSteps": [
+            -0.5,
+            0.5,
+            1.5
+          ]
+        },
+        {
+          "$type": "AttachToPoseIDMixin",
+          "modifierName": "Reconnect_DrawWeapon",
+          "poseIDs": [
+            101
+          ],
+          "actorIceSubHurtDelta": -1
+        }
+      ],
+      "onAbilityStart": [
+        {
+          "$type": "AddGlobalValue",
+          "doOffStage": false,
+          "value": 10,
+          "key": "_MONSTER_EREMITE_SHEATH_WEAPON",
+          "maxValue": 1,
+          "actorIceSubHurtDelta": -1,
+          "useLimitRange": true,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "modifiers": {
+        "DrawWeapon": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "value": 1,
+              "enable": true,
+              "key": "_MONSTER_EREMITE_SHEATH_WEAPON",
+              "maxValue": 1,
+              "actorIceSubHurtDelta": -1,
+              "useLimitRange": true,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "Reconnect_DrawWeapon": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "AddGlobalValue",
+              "doOffStage": false,
+              "value": 10,
+              "key": "_MONSTER_EREMITE_SHEATH_WEAPON",
+              "maxValue": 1,
+              "actorIceSubHurtDelta": -1,
+              "useLimitRange": true,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "duration": 2
+        },
+        "UNIQUE_DrawWeapon": {
+          "onAdded": [
+            {
+              "$type": "RemoveUniqueModifier",
+              "doOffStage": false,
+              "modifierName": "UNIQUE_SheathWeapon",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetWeaponAttachPointRealName",
+              "doOffStage": false,
+              "enable": true,
+              "GPBOIHMLHEG": "equip01",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetWeaponAttachPointRealName",
+              "doOffStage": false,
+              "enable": true,
+              "GPBOIHMLHEG": "equip02",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "stacking": "Unique",
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "isUnique": true
+        },
+        "UNIQUE_SheathWeapon": {
+          "onAdded": [
+            {
+              "$type": "RemoveUniqueModifier",
+              "doOffStage": false,
+              "modifierName": "UNIQUE_DrawWeapon",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetWeaponAttachPointRealName",
+              "doOffStage": false,
+              "enable": true,
+              "GPBOIHMLHEG": "equip01",
+              "actorIceSubHurtDelta": -1,
+              "OFEJNMBBIMO": "WeaponOnBackR",
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetWeaponAttachPointRealName",
+              "doOffStage": false,
+              "enable": true,
+              "GPBOIHMLHEG": "equip02",
+              "actorIceSubHurtDelta": -1,
+              "OFEJNMBBIMO": "WeaponOnBackL",
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "stacking": "Unique",
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "isUnique": true
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Monster_Eremite_Male_Standard_Glaive_Ice_SheathWeapon",
+      "abilityMixins": [
+        {
+          "$type": "AttachToStateIDMixin",
+          "modifierName": "Reconnect_SheathWeapon",
+          "stateIDs": [
+            "SheathWeapon"
+          ],
+          "value": -1,
+          "actorIceSubHurtDelta": -1
+        }
+      ],
+      "onAbilityStart": [
+        {
+          "$type": "AddGlobalValue",
+          "doOffStage": false,
+          "value": -10,
+          "key": "_MONSTER_EREMITE_SHEATH_WEAPON",
+          "maxValue": 1,
+          "actorIceSubHurtDelta": -1,
+          "useLimitRange": true,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "modifiers": {
+        "Reconnect_SheathWeapon": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "AddGlobalValue",
+              "doOffStage": false,
+              "value": -10,
+              "key": "_MONSTER_EREMITE_SHEATH_WEAPON",
+              "maxValue": 1,
+              "actorIceSubHurtDelta": -1,
+              "useLimitRange": true,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "SetGlobalValue",
+          "doOffStage": false,
+          "key": "_MONSTER_EREMITE_HIDE_WEAPON",
+          "maxValue": 1,
+          "actorIceSubHurtDelta": -1,
+          "useLimitRange": true,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "Monster_Eremite_Male_Standard_Glaive_Ice_HideWeapon",
+      "abilityMixins": [
+        {
+          "$type": "AttachToStateIDMixin",
+          "modifierName": "HideWeapon",
+          "stateIDs": [
+            "Lie",
+            "Sit_Loop"
+          ],
+          "value": -1,
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToPoseIDMixin",
+          "modifierName": "ThroeWeapon_HideWeapon_Handle",
+          "poseIDs": [
+            201,
+            301
+          ],
+          "actorIceSubHurtDelta": -1
+        }
+      ],
+      "onAbilityStart": [
+        {
+          "$type": "SetGlobalValue",
+          "doOffStage": false,
+          "value": 1,
+          "key": "_MONSTER_EREMITE_HIDE_WEAPON",
+          "maxValue": 1,
+          "actorIceSubHurtDelta": -1,
+          "useLimitRange": true,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "modifiers": {
+        "HideWeapon": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "value": 1,
+              "key": "_MONSTER_EREMITE_HIDE_WEAPON",
+              "maxValue": 1,
+              "actorIceSubHurtDelta": -1,
+              "useLimitRange": true,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_MONSTER_EREMITE_HIDE_WEAPON",
+              "maxValue": 1,
+              "actorIceSubHurtDelta": -1,
+              "useLimitRange": true,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1
+        },
+        "ThroeWeapon_HideWeapon_Handle": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_MONSTER_EREMITE_HIDE_WEAPON",
+              "maxValue": 1,
+              "actorIceSubHurtDelta": -1,
+              "useLimitRange": true,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "onReconnect": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_MONSTER_EREMITE_HIDE_WEAPON",
+              "maxValue": 1,
+              "actorIceSubHurtDelta": -1,
+              "useLimitRange": true,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "onChangeAuthority": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_MONSTER_EREMITE_HIDE_WEAPON",
+              "maxValue": 1,
+              "actorIceSubHurtDelta": -1,
+              "useLimitRange": true,
+              "canBeHandledOnRecover": true
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Monster_Eremite_Male_Standard_Glaive_Ice_UnhideWeapon",
+      "abilityMixins": [
+        {
+          "$type": "AttachToStateIDMixin",
+          "modifierName": "UnhideWeapon",
+          "stateIDs": [
+            "Weak"
+          ],
+          "value": -1,
+          "actorIceSubHurtDelta": -1
+        }
+      ],
+      "onAbilityStart": [
+        {
+          "$type": "AddGlobalValue",
+          "doOffStage": false,
+          "value": -10,
+          "key": "_MONSTER_EREMITE_HIDE_WEAPON",
+          "maxValue": 1,
+          "actorIceSubHurtDelta": -1,
+          "useLimitRange": true,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "modifiers": {
+        "UnhideWeapon": {
+          "onAdded": [
+            {
+              "$type": "AddGlobalValue",
+              "doOffStage": false,
+              "value": -10,
+              "enable": true,
+              "key": "_MONSTER_EREMITE_HIDE_WEAPON",
+              "maxValue": 1,
+              "actorIceSubHurtDelta": -1,
+              "useLimitRange": true,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Monster_Eremite_Male_Standard_Glaive_Ice_SteerControl",
+      "abilityMixins": [
+        {
+          "$type": "SteerAttackMixin",
+          "angularSpeed": 90,
+          "CCFNFIKKIDJ": true,
+          "value": -1,
+          "GMEPMDNDBOP": 180,
+          "actorIceSubHurtDelta": -1,
+          "steerStateIDs": [
+            "Turn"
+          ],
+          "endNormalizedTime": 99,
+          "PMKCEJILFAF": true
+        },
+        {
+          "$type": "SteerAttackMixin",
+          "angularSpeed": 150,
+          "CCFNFIKKIDJ": true,
+          "value": -1,
+          "GMEPMDNDBOP": 180,
+          "actorIceSubHurtDelta": -1,
+          "steerStateIDs": [
+            "Alert"
+          ],
+          "endNormalizedTime": 1,
+          "attackDistance": 2,
+          "PMKCEJILFAF": true
+        },
+        {
+          "$type": "SteerAttackMixin",
+          "angularSpeed": 150,
+          "CCFNFIKKIDJ": true,
+          "value": -1,
+          "GMEPMDNDBOP": 180,
+          "actorIceSubHurtDelta": -1,
+          "steerStateIDs": [
+            "SitAlert"
+          ],
+          "endNormalizedTime": 1,
+          "attackDistance": 2,
+          "PMKCEJILFAF": true
+        },
+        {
+          "$type": "SteerAttackMixin",
+          "angularSpeed": 150,
+          "CCFNFIKKIDJ": true,
+          "value": -1,
+          "GMEPMDNDBOP": 180,
+          "actorIceSubHurtDelta": -1,
+          "steerStateIDs": [
+            "Improve"
+          ],
+          "endNormalizedTime": 1,
+          "attackDistance": 2,
+          "PMKCEJILFAF": true
+        },
+        {
+          "$type": "SteerAttackMixin",
+          "angularSpeed": 150,
+          "CCFNFIKKIDJ": true,
+          "value": -1,
+          "GMEPMDNDBOP": 180,
+          "actorIceSubHurtDelta": -1,
+          "steerStateIDs": [
+            "NormalAtk01"
+          ],
+          "endNormalizedTime": 1,
+          "attackDistance": 2,
+          "PMKCEJILFAF": true
+        },
+        {
+          "$type": "SteerAttackMixin",
+          "angularSpeed": 150,
+          "CCFNFIKKIDJ": true,
+          "value": -1,
+          "GMEPMDNDBOP": 180,
+          "actorIceSubHurtDelta": -1,
+          "steerStateIDs": [
+            "NormalAtk01_AS"
+          ],
+          "endNormalizedTime": 1,
+          "attackDistance": 2,
+          "PMKCEJILFAF": true
+        },
+        {
+          "$type": "SteerAttackMixin",
+          "angularSpeed": 150,
+          "CCFNFIKKIDJ": true,
+          "value": -1,
+          "GMEPMDNDBOP": 180,
+          "actorIceSubHurtDelta": -1,
+          "steerStateIDs": [
+            "NormalAtk02_BS"
+          ],
+          "endNormalizedTime": 1,
+          "attackDistance": 2,
+          "PMKCEJILFAF": true
+        },
+        {
+          "$type": "SteerAttackMixin",
+          "angularSpeed": 100,
+          "CCFNFIKKIDJ": true,
+          "value": -1,
+          "GMEPMDNDBOP": 180,
+          "actorIceSubHurtDelta": -1,
+          "steerStateIDs": [
+            "NormalAtk02"
+          ],
+          "endNormalizedTime": 1,
+          "attackDistance": 2,
+          "PMKCEJILFAF": true
+        },
+        {
+          "$type": "SteerAttackMixin",
+          "startNormalizedTime": 0.3499999940395355,
+          "angularSpeed": 150,
+          "CCFNFIKKIDJ": true,
+          "value": -1,
+          "GMEPMDNDBOP": 180,
+          "actorIceSubHurtDelta": -1,
+          "steerStateIDs": [
+            "NormalAtk02_AS"
+          ],
+          "endNormalizedTime": 1,
+          "attackDistance": 2,
+          "PMKCEJILFAF": true
+        },
+        {
+          "$type": "SteerAttackMixin",
+          "angularSpeed": 150,
+          "CCFNFIKKIDJ": true,
+          "value": -1,
+          "GMEPMDNDBOP": 180,
+          "actorIceSubHurtDelta": -1,
+          "steerStateIDs": [
+            "NormalAtk03_BS"
+          ],
+          "endNormalizedTime": 0.8999999761581421,
+          "attackDistance": 2,
+          "PMKCEJILFAF": true
+        },
+        {
+          "$type": "SteerAttackMixin",
+          "angularSpeed": 150,
+          "CCFNFIKKIDJ": true,
+          "value": -1,
+          "GMEPMDNDBOP": 180,
+          "actorIceSubHurtDelta": -1,
+          "steerStateIDs": [
+            "NormalAtk03"
+          ],
+          "endNormalizedTime": 0.30000001192092896,
+          "attackDistance": 2,
+          "PMKCEJILFAF": true
+        },
+        {
+          "$type": "SteerAttackMixin",
+          "startNormalizedTime": 0.6000000238418579,
+          "angularSpeed": 150,
+          "CCFNFIKKIDJ": true,
+          "value": -1,
+          "GMEPMDNDBOP": 180,
+          "actorIceSubHurtDelta": -1,
+          "steerStateIDs": [
+            "NormalAtk03"
+          ],
+          "endNormalizedTime": 1,
+          "attackDistance": 2,
+          "PMKCEJILFAF": true
+        },
+        {
+          "$type": "SteerAttackMixin",
+          "angularSpeed": 150,
+          "CCFNFIKKIDJ": true,
+          "value": -1,
+          "GMEPMDNDBOP": 180,
+          "actorIceSubHurtDelta": -1,
+          "steerStateIDs": [
+            "SlamAtk02"
+          ],
+          "endNormalizedTime": 0.3499999940395355,
+          "attackDistance": 2,
+          "PMKCEJILFAF": true
+        },
+        {
+          "$type": "SteerAttackMixin",
+          "startNormalizedTime": 0.6800000071525574,
+          "angularSpeed": 150,
+          "CCFNFIKKIDJ": true,
+          "value": -1,
+          "GMEPMDNDBOP": 180,
+          "actorIceSubHurtDelta": -1,
+          "steerStateIDs": [
+            "SlamAtk02"
+          ],
+          "endNormalizedTime": 1,
+          "attackDistance": 2,
+          "PMKCEJILFAF": true
+        },
+        {
+          "$type": "SteerAttackMixin",
+          "angularSpeed": 150,
+          "CCFNFIKKIDJ": true,
+          "value": -1,
+          "GMEPMDNDBOP": 180,
+          "actorIceSubHurtDelta": -1,
+          "steerStateIDs": [
+            "ImproveNormalAtk01"
+          ],
+          "endNormalizedTime": 1,
+          "attackDistance": 2,
+          "PMKCEJILFAF": true
+        },
+        {
+          "$type": "SteerAttackMixin",
+          "angularSpeed": 150,
+          "CCFNFIKKIDJ": true,
+          "value": -1,
+          "GMEPMDNDBOP": 180,
+          "actorIceSubHurtDelta": -1,
+          "steerStateIDs": [
+            "ImproveNormalAtk01_AS"
+          ],
+          "endNormalizedTime": 1,
+          "attackDistance": 2,
+          "PMKCEJILFAF": true
+        },
+        {
+          "$type": "SteerAttackMixin",
+          "angularSpeed": 150,
+          "CCFNFIKKIDJ": true,
+          "value": -1,
+          "GMEPMDNDBOP": 180,
+          "actorIceSubHurtDelta": -1,
+          "steerStateIDs": [
+            "ImproveNormalAtk02"
+          ],
+          "endNormalizedTime": 1,
+          "attackDistance": 2,
+          "PMKCEJILFAF": true
+        },
+        {
+          "$type": "SteerAttackMixin",
+          "angularSpeed": 150,
+          "CCFNFIKKIDJ": true,
+          "value": -1,
+          "GMEPMDNDBOP": 180,
+          "actorIceSubHurtDelta": -1,
+          "steerStateIDs": [
+            "ImproveNormalAtk02_AS"
+          ],
+          "endNormalizedTime": 1,
+          "attackDistance": 2,
+          "PMKCEJILFAF": true
+        },
+        {
+          "$type": "SteerAttackMixin",
+          "angularSpeed": 150,
+          "CCFNFIKKIDJ": true,
+          "value": -1,
+          "GMEPMDNDBOP": 180,
+          "actorIceSubHurtDelta": -1,
+          "steerStateIDs": [
+            "ImproveNormalAtk03"
+          ],
+          "endNormalizedTime": 0.30000001192092896,
+          "attackDistance": 2,
+          "PMKCEJILFAF": true
+        },
+        {
+          "$type": "SteerAttackMixin",
+          "startNormalizedTime": 0.6000000238418579,
+          "angularSpeed": 150,
+          "CCFNFIKKIDJ": true,
+          "value": -1,
+          "GMEPMDNDBOP": 180,
+          "actorIceSubHurtDelta": -1,
+          "steerStateIDs": [
+            "ImproveNormalAtk03"
+          ],
+          "endNormalizedTime": 1,
+          "attackDistance": 2,
+          "PMKCEJILFAF": true
+        },
+        {
+          "$type": "SteerAttackMixin",
+          "angularSpeed": 150,
+          "CCFNFIKKIDJ": true,
+          "value": -1,
+          "GMEPMDNDBOP": 180,
+          "actorIceSubHurtDelta": -1,
+          "steerStateIDs": [
+            "UpRightThrow_Atk"
+          ],
+          "endNormalizedTime": 0.6299999952316284,
+          "attackDistance": 2,
+          "PMKCEJILFAF": true
+        },
+        {
+          "$type": "SteerAttackMixin",
+          "angularSpeed": 150,
+          "CCFNFIKKIDJ": true,
+          "value": -1,
+          "GMEPMDNDBOP": 180,
+          "actorIceSubHurtDelta": -1,
+          "steerStateIDs": [
+            "UpRightThrow_AtkEnd"
+          ],
+          "endNormalizedTime": 0.2199999988079071,
+          "attackDistance": 2,
+          "PMKCEJILFAF": true
+        },
+        {
+          "$type": "SteerAttackMixin",
+          "startNormalizedTime": 0.5,
+          "angularSpeed": 150,
+          "CCFNFIKKIDJ": true,
+          "value": -1,
+          "GMEPMDNDBOP": 180,
+          "actorIceSubHurtDelta": -1,
+          "steerStateIDs": [
+            "UpRightThrow_AtkEnd"
+          ],
+          "endNormalizedTime": 1,
+          "attackDistance": 2,
+          "PMKCEJILFAF": true
+        },
+        {
+          "$type": "SteerAttackMixin",
+          "angularSpeed": 150,
+          "CCFNFIKKIDJ": true,
+          "value": -1,
+          "GMEPMDNDBOP": 180,
+          "actorIceSubHurtDelta": -1,
+          "steerStateIDs": [
+            "ImproveSlamAtk02"
+          ],
+          "endNormalizedTime": 0.3499999940395355,
+          "attackDistance": 2,
+          "PMKCEJILFAF": true
+        },
+        {
+          "$type": "SteerAttackMixin",
+          "startNormalizedTime": 0.6800000071525574,
+          "angularSpeed": 150,
+          "CCFNFIKKIDJ": true,
+          "value": -1,
+          "GMEPMDNDBOP": 180,
+          "actorIceSubHurtDelta": -1,
+          "steerStateIDs": [
+            "ImproveSlamAtk02"
+          ],
+          "endNormalizedTime": 1,
+          "attackDistance": 2,
+          "PMKCEJILFAF": true
+        },
+        {
+          "$type": "SteerAttackMixin",
+          "angularSpeed": 150,
+          "CCFNFIKKIDJ": true,
+          "value": -1,
+          "GMEPMDNDBOP": 180,
+          "actorIceSubHurtDelta": -1,
+          "steerStateIDs": [
+            "CrossThrow_Atk"
+          ],
+          "endNormalizedTime": 0.5799999833106995,
+          "attackDistance": 2,
+          "PMKCEJILFAF": true
+        },
+        {
+          "$type": "SteerAttackMixin",
+          "angularSpeed": 150,
+          "CCFNFIKKIDJ": true,
+          "value": -1,
+          "GMEPMDNDBOP": 180,
+          "actorIceSubHurtDelta": -1,
+          "steerStateIDs": [
+            "CrossThrow_Away"
+          ],
+          "endNormalizedTime": 0.33000001311302185,
+          "attackDistance": 2,
+          "PMKCEJILFAF": true
+        },
+        {
+          "$type": "SteerAttackMixin",
+          "startNormalizedTime": 0.46000000834465027,
+          "angularSpeed": 200,
+          "CCFNFIKKIDJ": true,
+          "value": -1,
+          "GMEPMDNDBOP": 180,
+          "actorIceSubHurtDelta": -1,
+          "steerStateIDs": [
+            "CrossThrow_Away"
+          ],
+          "endNormalizedTime": 1,
+          "attackDistance": 2,
+          "PMKCEJILFAF": true
+        },
+        {
+          "$type": "SteerAttackMixin",
+          "startNormalizedTime": 0.4000000059604645,
+          "angularSpeed": 150,
+          "CCFNFIKKIDJ": true,
+          "value": -1,
+          "GMEPMDNDBOP": 180,
+          "actorIceSubHurtDelta": -1,
+          "steerStateIDs": [
+            "ImproveSlamAtk03_HitSence"
+          ],
+          "endNormalizedTime": 1,
+          "attackDistance": 2,
+          "PMKCEJILFAF": true
+        },
+        {
+          "$type": "SteerAttackMixin",
+          "angularSpeed": 150,
+          "CCFNFIKKIDJ": true,
+          "value": -1,
+          "GMEPMDNDBOP": 180,
+          "actorIceSubHurtDelta": -1,
+          "steerStateIDs": [
+            "Taunt01"
+          ],
+          "endNormalizedTime": 1,
+          "attackDistance": 2,
+          "PMKCEJILFAF": true
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Monster_Eremite_Male_Standard_Glaive_Ice_ThrowGlavie",
+      "onAbilityStart": [
+        {
+          "$type": "TriggerBullet",
+          "doOffStage": false,
+          "value": true,
+          "bulletID": 42530001,
+          "actorIceSubHurtDelta": -1,
+          "born": {
+            "$type": "ConfigBornBySelf",
+            "direction": {
+              "$type": "ConfigDirectionByDefault",
+              "maxAngle": 180,
+              "angleOffset": {
+                "x": 45
+              }
+            },
+            "offset": {
+              "y": 0.6000000238418579,
+              "z": 0.6000000238418579,
+              "x": 1.2999999523162842
+            },
+            "FDGAEDDEEDG": {
+              "ELAJJIANFFM": 180
+            },
+            "onGroundRaycastUpDist": 2,
+            "value": 10
+          },
+          "canBeHandledOnRecover": true,
+          "POOEIFNLHDB": true
+        },
+        {
+          "$type": "TriggerAbility",
+          "doOffStage": false,
+          "abilityName": "Monster_Eremite_Male_Standard_Glaive_Ice_BuffEffect_Closed",
+          "actorIceSubHurtDelta": -1,
+          "target": "Other",
+          "canBeHandledOnRecover": true
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Monster_Eremite_Male_Standard_Glaive_Ice_ThrowGlavie_Remove",
+      "onAbilityStart": [
+        {
+          "$type": "KillGadget",
+          "doOffStage": false,
+          "gadgetInfo": {
+            "configID": 42530001
+          },
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "TriggerAbility",
+          "doOffStage": false,
+          "abilityName": "Monster_Eremite_Male_Standard_Glaive_Ice_BuffEffect_Open",
+          "actorIceSubHurtDelta": -1,
+          "target": "Other",
+          "canBeHandledOnRecover": true
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "onKill": [
+        {
+          "$type": "RemoveUniqueModifier",
+          "doOffStage": false,
+          "modifierName": "UNIQUE_Eremite_ThrowGlavie_Effect01",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "doOffStage": false,
+          "modifierName": "UNIQUE_Eremite_ThrowGlavie_Effect01",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "ApplyModifier",
+          "doOffStage": false,
+          "modifierName": "Bullet_Move_Handler",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "Monster_Eremite_Male_Standard_Glaive_Ice_ThrowGlavieBullet",
+      "onAbilityStart": [
+        {
+          "$type": "TriggerAttackEvent",
+          "doOffStage": false,
+          "attackEvent": {
+            "attackInfo": {
+              "attenuationGroup": "default",
+              "canBeModifiedBy": "OriginOwner",
+              "hitPattern": {
+                "hitImpulseType": "LV2",
+                "onHitEffectName": "default",
+                "hitHaltTimeScale": 0.05000000074505806,
+                "JKLONEBKFKJ": {
+                  "JJGBOHIKHFM": true,
+                  "value": 1
+                }
+              },
+              "FJNMGDHFOEH": {
+                "GCPNPCOFFBP": "Shake"
+              },
+              "IODAJAKBOLG": {
+                "onHitEffectName": "default",
+                "JKLONEBKFKJ": {
+                  "JJGBOHIKHFM": true,
+                  "value": 1
+                }
+              },
+              "attackProperty": {
+                "attackType": "Default",
+                "enBreak": 100,
+                "elementType": "Ice",
+                "elementDurability": 25,
+                "strikeType": "Slash",
+                "elementRank": 1,
+                "damagePercentage": 0.3499999940395355
+              },
+              "cameraShake": {
+                "extension": {
+                  "baseCycle": 0.11999999731779099,
+                  "cycleDamping": 0.11999999731779099,
+                  "baseOnCamera": true,
+                  "rangeAttenuation": 0.5
+                },
+                "FAKMJBNLPPB": -1,
+                "shakeDistance": 20
+              }
+            },
+            "attackPattern": {
+              "$type": "ConfigAttackBox",
+              "massiveAttackRatio": 1,
+              "born": {
+                "$type": "ConfigBornBySelf",
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "size": {
+                "y": 3.5,
+                "z": 3.5,
+                "x": 1
+              },
+              "PBFNLCIFCBO": {
+                "GOAEBMPCPJL": {
+                  "JJGBOHIKHFM": true,
+                  "value": 1
+                }
+              },
+              "triggerType": "TriggerAlways"
+            }
+          },
+          "targetType": "Enemy",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "Predicated",
+          "doOffStage": false,
+          "target": "Target",
+          "targetPredicates": [
+            {
+              "$type": "ByEntityTypes",
+              "target": "Target",
+              "value": -1,
+              "entityTypes": [
+                "Monster"
+              ]
+            },
+            {
+              "$type": "ByTargetGlobalValue",
+              "value": 1,
+              "target": "Owner",
+              "key": "Glavie_Can_Back"
+            }
+          ],
+          "actorIceSubHurtDelta": -1,
+          "successActions": [
+            {
+              "$type": "AddGlobalValue",
+              "doOffStage": false,
+              "value": -10,
+              "target": "Owner",
+              "key": "_GLAVIE_CAN_BACK_",
+              "maxValue": 1,
+              "actorIceSubHurtDelta": -1,
+              "useLimitRange": true,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "KillSelf",
+              "doOffStage": false,
+              "killSelfType": "Normal",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "modifiers": {
+        "Bullet_Move_AngleUp_Pt1": {
+          "elementDurability": 100,
+          "stacking": "Multiple",
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "properties": {
+            "Actor_BulletMoveAngularVelocityRatio": 2
+          }
+        },
+        "Bullet_Move_AngleUp_Pt2": {
+          "elementDurability": 100,
+          "stacking": "Unique",
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "ApplyModifier",
+              "doOffStage": false,
+              "modifierName": "Bullet_Move_Angle_Delay_Pt3",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "properties": {
+            "Actor_BulletMoveAngularVelocityRatio": 4
+          },
+          "duration": 0.30000001192092896
+        },
+        "Bullet_Move_AngleUp_Pt3": {
+          "elementDurability": 100,
+          "stacking": "Multiple",
+          "isLimitedProperties": true,
+          "stackingOption": {
+            "maxModifierNumForMultipleType": 20
+          },
+          "minus_one": -1,
+          "properties": {
+            "Actor_BulletMoveAngularVelocityRatio": 7
+          }
+        },
+        "Bullet_Move_Angle_Delay_Pt3": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "ApplyModifier",
+              "doOffStage": false,
+              "modifierName": "Bullet_Move_Angle_Handler_Pt3",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "duration": 0.5
+        },
+        "Bullet_Move_Angle_Handler_Pt1": {
+          "onAdded": [
+            {
+              "$type": "ApplyModifier",
+              "doOffStage": false,
+              "modifierName": "Bullet_Move_AngleUp_Pt1",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "ApplyModifier",
+              "doOffStage": false,
+              "modifierName": "Bullet_Move_AngleUp_Pt1",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "thinkInterval": 0.20000000298023224
+        },
+        "Bullet_Move_Angle_Handler_Pt2": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "ApplyModifier",
+              "doOffStage": false,
+              "modifierName": "Bullet_Move_AngleUp_Pt2",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "duration": 1.2000000476837158
+        },
+        "Bullet_Move_Angle_Handler_Pt3": {
+          "onAdded": [
+            {
+              "$type": "ApplyModifier",
+              "doOffStage": false,
+              "modifierName": "Bullet_Move_AngleUp_Pt3",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "ApplyModifier",
+              "doOffStage": false,
+              "modifierName": "Bullet_Move_AngleUp_Pt3",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "thinkInterval": 0.30000001192092896
+        },
+        "Bullet_Move_Handler": {
+          "onAdded": [
+            {
+              "$type": "ApplyModifier",
+              "doOffStage": false,
+              "modifierName": "Bullet_Move_Angle_Handler_Pt1",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "ApplyModifier",
+              "doOffStage": false,
+              "modifierName": "Bullet_Move_Angle_Handler_Pt2",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "stacking": "Unique",
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "Glavie_Can_Back": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "AddGlobalValue",
+              "doOffStage": false,
+              "value": 1,
+              "target": "Owner",
+              "key": "_GLAVIE_CAN_BACK_",
+              "maxValue": 1,
+              "actorIceSubHurtDelta": -1,
+              "useLimitRange": true,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "duration": 0.699999988079071
+        },
+        "UNIQUE_Eremite_ThrowGlavie_Effect01": {
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Eremite_Male_Standard_Glaive_Ice_ImproveSlamAtk03_Damage",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "stacking": "Unique",
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "isUnique": true
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Monster_Eremite_Male_Standard_Glaive_Ice_ThrowGlavieAway",
+      "onAbilityStart": [
+        {
+          "$type": "TriggerBullet",
+          "doOffStage": false,
+          "value": true,
+          "bulletID": 42530002,
+          "actorIceSubHurtDelta": -1,
+          "born": {
+            "$type": "ConfigBornBySelf",
+            "direction": {
+              "$type": "ConfigDirectionByDefault",
+              "maxAngle": 180,
+              "angleOffset": {
+                "x": 45
+              }
+            },
+            "offset": {
+              "y": 0.6000000238418579,
+              "z": 0.6000000238418579,
+              "x": 1.2999999523162842
+            },
+            "FDGAEDDEEDG": {
+              "ELAJJIANFFM": 180
+            },
+            "onGroundRaycastUpDist": 2,
+            "value": 10
+          },
+          "canBeHandledOnRecover": true,
+          "POOEIFNLHDB": true
+        },
+        {
+          "$type": "TriggerAbility",
+          "doOffStage": false,
+          "abilityName": "Monster_Eremite_Male_Standard_Glaive_Ice_BuffEffect_Closed",
+          "actorIceSubHurtDelta": -1,
+          "target": "Other",
+          "canBeHandledOnRecover": true
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Monster_Eremite_Male_Standard_Glaive_Ice_ThrowGlavieAway_Remove",
+      "onAbilityStart": [
+        {
+          "$type": "KillGadget",
+          "doOffStage": false,
+          "gadgetInfo": {
+            "configID": 42530002
+          },
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "TriggerAbility",
+          "doOffStage": false,
+          "abilityName": "Monster_Eremite_Male_Standard_Glaive_Ice_BuffEffect_Open",
+          "actorIceSubHurtDelta": -1,
+          "target": "Other",
+          "canBeHandledOnRecover": true
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "onKill": [
+        {
+          "$type": "RemoveUniqueModifier",
+          "doOffStage": false,
+          "modifierName": "UNIQUE_Eremite_ThrowGlavie_Effect01",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "doOffStage": false,
+          "modifierName": "UNIQUE_Eremite_ThrowGlavie_Effect01",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "ApplyModifier",
+          "doOffStage": false,
+          "modifierName": "Bullet_Move_Handler",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "Monster_Eremite_Male_Standard_Glaive_Ice_ThrowGlavieAway_Bullet",
+      "onAbilityStart": [
+        {
+          "$type": "TriggerAttackEvent",
+          "doOffStage": false,
+          "attackEvent": {
+            "attackInfo": {
+              "attenuationGroup": "default",
+              "canBeModifiedBy": "OriginOwner",
+              "hitPattern": {
+                "hitImpulseType": "LV2",
+                "onHitEffectName": "default",
+                "hitHaltTimeScale": 0.05000000074505806,
+                "JKLONEBKFKJ": {
+                  "JJGBOHIKHFM": true,
+                  "value": 1
+                }
+              },
+              "FJNMGDHFOEH": {
+                "GCPNPCOFFBP": "Shake"
+              },
+              "IODAJAKBOLG": {
+                "onHitEffectName": "default",
+                "JKLONEBKFKJ": {
+                  "JJGBOHIKHFM": true,
+                  "value": 1
+                }
+              },
+              "attackProperty": {
+                "attackType": "Default",
+                "enBreak": 100,
+                "elementType": "Ice",
+                "elementDurability": 50,
+                "strikeType": "Slash",
+                "elementRank": 1,
+                "damagePercentage": 0.3499999940395355
+              },
+              "cameraShake": {
+                "extension": {
+                  "baseCycle": 0.11999999731779099,
+                  "cycleDamping": 0.11999999731779099,
+                  "baseOnCamera": true,
+                  "rangeAttenuation": 0.5
+                },
+                "FAKMJBNLPPB": -1,
+                "shakeDistance": 20
+              }
+            },
+            "attackPattern": {
+              "$type": "ConfigAttackBox",
+              "massiveAttackRatio": 1,
+              "born": {
+                "$type": "ConfigBornBySelf",
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "size": {
+                "y": 3.5,
+                "z": 3.5,
+                "x": 1.5
+              },
+              "PBFNLCIFCBO": {
+                "GOAEBMPCPJL": {
+                  "JJGBOHIKHFM": true,
+                  "value": 1
+                }
+              },
+              "triggerType": "TriggerAlways"
+            }
+          },
+          "targetType": "Enemy",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "modifiers": {
+        "Bullet_Move_AngleUp_Pt1": {
+          "elementDurability": 100,
+          "stacking": "Multiple",
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "properties": {
+            "Actor_BulletMoveAngularVelocityRatio": 2
+          }
+        },
+        "Bullet_Move_AngleUp_Pt2": {
+          "elementDurability": 100,
+          "stacking": "Unique",
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "ApplyModifier",
+              "doOffStage": false,
+              "modifierName": "Bullet_Move_Angle_Delay_Pt3",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "properties": {
+            "Actor_BulletMoveAngularVelocityRatio": 4
+          },
+          "duration": 0.30000001192092896
+        },
+        "Bullet_Move_AngleUp_Pt3": {
+          "elementDurability": 100,
+          "stacking": "Multiple",
+          "isLimitedProperties": true,
+          "stackingOption": {
+            "maxModifierNumForMultipleType": 20
+          },
+          "minus_one": -1,
+          "properties": {
+            "Actor_BulletMoveAngularVelocityRatio": 7
+          }
+        },
+        "Bullet_Move_Angle_Delay_Pt3": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "ApplyModifier",
+              "doOffStage": false,
+              "modifierName": "Bullet_Move_Angle_Handler_Pt3",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "duration": 0.5
+        },
+        "Bullet_Move_Angle_Handler_Pt1": {
+          "onAdded": [
+            {
+              "$type": "ApplyModifier",
+              "doOffStage": false,
+              "modifierName": "Bullet_Move_AngleUp_Pt1",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "ApplyModifier",
+              "doOffStage": false,
+              "modifierName": "Bullet_Move_AngleUp_Pt1",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "thinkInterval": 0.20000000298023224
+        },
+        "Bullet_Move_Angle_Handler_Pt2": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "ApplyModifier",
+              "doOffStage": false,
+              "modifierName": "Bullet_Move_AngleUp_Pt2",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "duration": 1.2000000476837158
+        },
+        "Bullet_Move_Angle_Handler_Pt3": {
+          "onAdded": [
+            {
+              "$type": "ApplyModifier",
+              "doOffStage": false,
+              "modifierName": "Bullet_Move_AngleUp_Pt3",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "ApplyModifier",
+              "doOffStage": false,
+              "modifierName": "Bullet_Move_AngleUp_Pt3",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "thinkInterval": 0.30000001192092896
+        },
+        "Bullet_Move_Handler": {
+          "onAdded": [
+            {
+              "$type": "ApplyModifier",
+              "doOffStage": false,
+              "modifierName": "Bullet_Move_Angle_Handler_Pt1",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "ApplyModifier",
+              "doOffStage": false,
+              "modifierName": "Bullet_Move_Angle_Handler_Pt2",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "stacking": "Unique",
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "Glavie_Can_Back": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "AddGlobalValue",
+              "doOffStage": false,
+              "value": 1,
+              "target": "Owner",
+              "key": "_GLAVIE_CAN_BACK_",
+              "maxValue": 1,
+              "actorIceSubHurtDelta": -1,
+              "useLimitRange": true,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "duration": 0.699999988079071
+        },
+        "UNIQUE_Eremite_ThrowGlavie_Effect01": {
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Eremite_Male_Standard_Glaive_Ice_ImproveSlamAtk03_Damage",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "stacking": "Unique",
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "isUnique": true
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Monster_Eremite_Male_Standard_Glaive_Ice_ThrowGlavieForword",
+      "onAbilityStart": [
+        {
+          "$type": "TriggerBullet",
+          "doOffStage": false,
+          "value": true,
+          "bulletID": 42530003,
+          "actorIceSubHurtDelta": -1,
+          "born": {
+            "$type": "ConfigBornBySelf",
+            "direction": {
+              "$type": "ConfigDirectionByDefault",
+              "maxAngle": 180
+            },
+            "offset": {
+              "y": -0.20000000298023224,
+              "z": 1.399999976158142,
+              "x": 1
+            },
+            "FDGAEDDEEDG": {
+              "ELAJJIANFFM": 180
+            },
+            "onGroundRaycastUpDist": 2,
+            "value": 10
+          },
+          "canBeHandledOnRecover": true,
+          "POOEIFNLHDB": true
+        },
+        {
+          "$type": "TriggerAbility",
+          "doOffStage": false,
+          "abilityName": "Monster_Eremite_Male_Standard_Glaive_Ice_BuffEffect_Closed",
+          "actorIceSubHurtDelta": -1,
+          "target": "Other",
+          "canBeHandledOnRecover": true
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "onKill": [
+        {
+          "$type": "RemoveUniqueModifier",
+          "doOffStage": false,
+          "modifierName": "UNIQUE_ThrowGlavie_Forword_Bullet_Effect",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "doOffStage": false,
+          "modifierName": "UNIQUE_ThrowGlavie_Forword_Bullet_Effect",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "ApplyModifier",
+          "doOffStage": false,
+          "modifierName": "Bullet_Move_Handler",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "Monster_Eremite_Male_Standard_Glaive_Ice_ThrowGlavieForwordBullet",
+      "onAbilityStart": [
+        {
+          "$type": "TriggerAttackEvent",
+          "doOffStage": false,
+          "attackEvent": {
+            "attackInfo": {
+              "attenuationGroup": "default",
+              "canBeModifiedBy": "OriginOwner",
+              "hitPattern": {
+                "hitImpulseType": "LV2",
+                "onHitEffectName": "default",
+                "hitHaltTimeScale": 0.05000000074505806,
+                "JKLONEBKFKJ": {
+                  "JJGBOHIKHFM": true,
+                  "value": 1
+                }
+              },
+              "FJNMGDHFOEH": {
+                "GCPNPCOFFBP": "Shake"
+              },
+              "IODAJAKBOLG": {
+                "onHitEffectName": "default",
+                "JKLONEBKFKJ": {
+                  "JJGBOHIKHFM": true,
+                  "value": 1
+                }
+              },
+              "attackProperty": {
+                "attackType": "Default",
+                "enBreak": 100,
+                "elementType": "Ice",
+                "elementDurability": 25,
+                "strikeType": "Pierce",
+                "elementRank": 1,
+                "damagePercentage": 0.25
+              },
+              "cameraShake": {
+                "extension": {
+                  "baseCycle": 0.11999999731779099,
+                  "cycleDamping": 0.11999999731779099,
+                  "baseOnCamera": true,
+                  "rangeAttenuation": 0.5
+                },
+                "FAKMJBNLPPB": -1,
+                "shakeDistance": 20
+              }
+            },
+            "attackPattern": {
+              "$type": "ConfigAttackBox",
+              "massiveAttackRatio": 1,
+              "born": {
+                "$type": "ConfigBornBySelf",
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "size": {
+                "y": 1.5,
+                "z": 3.5,
+                "x": 3.5
+              },
+              "PBFNLCIFCBO": {
+                "GOAEBMPCPJL": {
+                  "JJGBOHIKHFM": true,
+                  "value": 1
+                }
+              },
+              "triggerType": "TriggerAlways"
+            }
+          },
+          "targetType": "Enemy",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "modifiers": {
+        "Bullet_Move_Angle_Handler_Pt1": {
+          "elementDurability": 100,
+          "stacking": "Unique",
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "properties": {
+            "Actor_BulletMoveAngularVelocityRatio": 1800
+          },
+          "duration": 0.44999998807907104
+        },
+        "Bullet_Move_Handler": {
+          "elementDurability": 100,
+          "stacking": "Unique",
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "ApplyModifier",
+              "doOffStage": false,
+              "modifierName": "Bullet_Move_Angle_Handler_Pt1",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "duration": 0.44999998807907104
+        },
+        "Fire_Back_Bullet": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "TriggerBullet",
+              "doOffStage": false,
+              "trackTarget": "SelfAttackTarget",
+              "target": "OriginOwner",
+              "bulletID": 42530004,
+              "value": true,
+              "actorIceSubHurtDelta": -1,
+              "born": {
+                "$type": "ConfigBornBySelf",
+                "direction": {
+                  "$type": "ConfigDirectionByAttackTarget",
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "canBeHandledOnRecover": true,
+              "POOEIFNLHDB": true
+            }
+          ],
+          "minus_one": -1
+        },
+        "UNIQUE_ThrowGlavie_Forword_Bullet_Effect": {
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Eremite_Male_Standard_Glaive_Ice_SlamAtk01_ForwordDamage",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "stacking": "Unique",
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "isUnique": true
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Monster_Eremite_Male_Standard_Glaive_Ice_ThrowGlavie_02_Remove",
+      "onAbilityStart": [
+        {
+          "$type": "KillGadget",
+          "doOffStage": false,
+          "gadgetInfo": {
+            "configID": 42530003
+          },
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "TriggerAbility",
+          "doOffStage": false,
+          "abilityName": "Monster_Eremite_Male_Standard_Glaive_Ice_BuffEffect_Open",
+          "actorIceSubHurtDelta": -1,
+          "target": "Other",
+          "canBeHandledOnRecover": true
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Monster_Eremite_Male_Standard_Glaive_Ice_BuffEffect_Closed",
+      "onAbilityStart": [
+        {
+          "$type": "ApplyModifier",
+          "doOffStage": false,
+          "modifierName": "UNIQUE_Closed_ImproveEffect",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "modifiers": {
+        "UNIQUE_Closed_ImproveEffect": {
+          "onAdded": [
+            {
+              "$type": "RemoveUniqueModifier",
+              "doOffStage": false,
+              "modifierName": "UNIQUE_Open_ImproveEffect",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SendEffectTrigger",
+              "doOffStage": false,
+              "value": 1,
+              "parameter": "Closed",
+              "enable": true,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Eremite_Male_Standard_Glaive_Ice_Improve_Loop01",
+              "type": "Bool",
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SendEffectTrigger",
+              "doOffStage": false,
+              "value": 1,
+              "parameter": "Closed",
+              "enable": true,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Eremite_Male_Standard_Glaive_Ice_Improve_Loop02",
+              "type": "Bool",
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "onReconnect": [
+            {
+              "$type": "SendEffectTrigger",
+              "doOffStage": false,
+              "parameter": "Closed",
+              "enable": true,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Eremite_Male_Standard_Glaive_Ice_Improve_Loop01",
+              "type": "Bool",
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SendEffectTrigger",
+              "doOffStage": false,
+              "parameter": "Closed",
+              "enable": true,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Eremite_Male_Standard_Glaive_Ice_Improve_Loop02",
+              "type": "Bool",
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "isUnique": true,
+          "onChangeAuthority": [
+            {
+              "$type": "SendEffectTrigger",
+              "doOffStage": false,
+              "parameter": "Closed",
+              "enable": true,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Eremite_Male_Standard_Glaive_Ice_Improve_Loop01",
+              "type": "Bool",
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SendEffectTrigger",
+              "doOffStage": false,
+              "parameter": "Closed",
+              "enable": true,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Eremite_Male_Standard_Glaive_Ice_Improve_Loop02",
+              "type": "Bool",
+              "canBeHandledOnRecover": true
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Monster_Eremite_Male_Standard_Glaive_Ice_BuffEffect_Open",
+      "onAbilityStart": [
+        {
+          "$type": "ApplyModifier",
+          "doOffStage": false,
+          "modifierName": "UNIQUE_Open_ImproveEffect",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "modifiers": {
+        "UNIQUE_Open_ImproveEffect": {
+          "onAdded": [
+            {
+              "$type": "RemoveUniqueModifier",
+              "doOffStage": false,
+              "modifierName": "UNIQUE_Closed_ImproveEffect",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SendEffectTrigger",
+              "doOffStage": false,
+              "parameter": "Closed",
+              "enable": true,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Eremite_Male_Standard_Glaive_Ice_Improve_Loop01",
+              "type": "Bool",
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SendEffectTrigger",
+              "doOffStage": false,
+              "parameter": "Closed",
+              "enable": true,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Eremite_Male_Standard_Glaive_Ice_Improve_Loop02",
+              "type": "Bool",
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "onReconnect": [
+            {
+              "$type": "SendEffectTrigger",
+              "doOffStage": false,
+              "parameter": "Closed",
+              "enable": true,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Eremite_Male_Standard_Glaive_Ice_Improve_Loop01",
+              "type": "Bool",
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SendEffectTrigger",
+              "doOffStage": false,
+              "parameter": "Closed",
+              "enable": true,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Eremite_Male_Standard_Glaive_Ice_Improve_Loop02",
+              "type": "Bool",
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "isUnique": true,
+          "onChangeAuthority": [
+            {
+              "$type": "RemoveUniqueModifier",
+              "doOffStage": false,
+              "modifierName": "UNIQUE_Closed_ImproveEffect",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SendEffectTrigger",
+              "doOffStage": false,
+              "parameter": "Closed",
+              "enable": true,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Eremite_Male_Standard_Glaive_Ice_Improve_Loop01",
+              "type": "Bool",
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SendEffectTrigger",
+              "doOffStage": false,
+              "parameter": "Closed",
+              "enable": true,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Eremite_Male_Standard_Glaive_Ice_Improve_Loop02",
+              "type": "Bool",
+              "canBeHandledOnRecover": true
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Monster_Eremite_Male_Standard_Glaive_Ice_ReturnToBorn",
+      "abilityMixins": [
+        {
+          "$type": "AttachToPoseIDMixin",
+          "modifierName": "ReturnToBorn_Start",
+          "poseIDs": [
+            901
+          ],
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToAnimatorStateIDMixin",
+          "modifierName": "ReturnToBornHandler",
+          "stateIDs": [
+            "SheathWeapon"
+          ],
+          "value": -1,
+          "actorIceSubHurtDelta": -1
+        }
+      ],
+      "modifiers": {
+        "ReturnToBornHandler": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_MONSTER_EREMITE_IMPROVED_",
+              "maxValue": 1,
+              "actorIceSubHurtDelta": -1,
+              "useLimitRange": true,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "value": 1,
+              "key": "_MONSTER_EREMITE_RETURNTOBORN_",
+              "maxValue": 1,
+              "actorIceSubHurtDelta": -1,
+              "useLimitRange": true,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_MONSTER_EREMITE_WEAK_",
+              "maxValue": 1,
+              "actorIceSubHurtDelta": -1,
+              "useLimitRange": true,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_MONSTER_EREMITE_IMPROVED_COUNT_",
+              "maxValue": 99,
+              "actorIceSubHurtDelta": -1,
+              "useLimitRange": true,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "RemoveUniqueModifier",
+              "doOffStage": false,
+              "modifierName": "UNIQUE_Eremite_ImproveState_Properties",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "RemoveUniqueModifier",
+              "doOffStage": false,
+              "modifierName": "UNIQUE_Eremite_Force_ImproveState",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_MONSTER_EREMITE_IMPROVED_",
+              "maxValue": 1,
+              "actorIceSubHurtDelta": -1,
+              "useLimitRange": true,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_MONSTER_EREMITE_IMPROVED_COUNT_",
+              "maxValue": 99,
+              "actorIceSubHurtDelta": -1,
+              "useLimitRange": true,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_MONSTER_EREMITE_ISINFIGHT_",
+              "maxValue": 1,
+              "actorIceSubHurtDelta": -1,
+              "useLimitRange": true,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_MONSTER_EREMITE_WEAK_",
+              "maxValue": 1,
+              "actorIceSubHurtDelta": -1,
+              "useLimitRange": true,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_MONSTER_EREMITE_RETURNTOBORN_",
+              "maxValue": 1,
+              "actorIceSubHurtDelta": -1,
+              "useLimitRange": true,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_MONSTER_EREMITE_OUTIMPROVED",
+              "maxValue": 1,
+              "actorIceSubHurtDelta": -1,
+              "useLimitRange": true,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1
+        },
+        "ReturnToBorn_Start": {
+          "onAdded": [
+            {
+              "$type": "SetAnimatorTrigger",
+              "doOffStage": false,
+              "triggerID": "SheathWeaponTrigger",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        }
+      }
+    }
+  }
+]

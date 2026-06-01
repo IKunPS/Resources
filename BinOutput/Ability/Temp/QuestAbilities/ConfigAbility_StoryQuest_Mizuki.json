@@ -1,0 +1,1170 @@
+[
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "doOffStage": false,
+          "modifierName": "UNIQUE_Mizuki_ReviveEnergy_OnTeam",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "Avatar_Mizuki_ReviveEnergy",
+      "isDynamicAbility": true,
+      "modifiers": {
+        "UNIQUE_Mizuki_ReviveEnergy_OnAvatar": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "AttachModifierToPredicateMixin",
+              "modifierName": "UNIQUE_Mizuki_ReviveEnergy_OnMizuki",
+              "predicates": [
+                {
+                  "$type": "ByHasFeatureTag",
+                  "featureTagIDs": [
+                    10109
+                  ]
+                }
+              ],
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "minus_one": -1,
+          "isUnique": true
+        },
+        "UNIQUE_Mizuki_ReviveEnergy_OnMizuki": {
+          "onAdded": [
+            {
+              "$type": "ReviveElemEnergy",
+              "doOffStage": true,
+              "value": 100,
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "isUnique": true
+        },
+        "UNIQUE_Mizuki_ReviveEnergy_OnTeam": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "LocalAvatarsMixin",
+              "modifierName": "UNIQUE_Mizuki_ReviveEnergy_OnAvatar",
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "minus_one": -1,
+          "isUnique": true
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "abilitySpecials": {
+        "BurstDamageRatio": 0,
+        "ConvertRatio": 0,
+        "ElementLevelCo": 0
+      },
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Avatar_Player_Mizuki_ElementalBurst",
+      "isDynamicAbility": true,
+      "abilityMixins": [
+        {
+          "$type": "LocalAvatarsMixin",
+          "modifierName": "Burst_Handler",
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "LocalAvatarsMixin",
+          "modifierName": "UNIQUE_SwirDamage_Add",
+          "actorIceSubHurtDelta": -1
+        }
+      ],
+      "modifiers": {
+        "Burst_Handler": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "AttachToMultiNormalizedTimeMixin",
+              "modifierName": "Mizuki_Burst_Handler",
+              "value": -1,
+              "actorIceSubHurtDelta": -1,
+              "normalizedStateIDList": [
+                {
+                  "stateID": "Player_Electric_ElementalBurst",
+                  "normalizeEnd": 1
+                }
+              ]
+            }
+          ],
+          "minus_one": -1
+        },
+        "Mizuki_Burst_Handler": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "RemoveModifier",
+              "doOffStage": true,
+              "modifierName": "UNIQUE_Mizuki_DreamGadget_Generater",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "ApplyModifier",
+              "doOffStage": true,
+              "modifierName": "UNIQUE_Mizuki_DreamGadget_Generater",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "ApplyModifier",
+              "doOffStage": true,
+              "modifierName": "UNIQUE_Add_ElementBurst_Dura",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "ApplyModifier",
+              "doOffStage": true,
+              "modifierName": "UNIQUE_Mizuki_Burst_First_Attack",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "thinkInterval": 0.800000011920929
+        },
+        "UNIQUE_Add_ElementBurst_Dura": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "AddElementDurability",
+              "doOffStage": true,
+              "otherTargets": {
+                "$type": "SelectTargetsByChildren",
+                "configID": 41044002
+              },
+              "modifierName": "UNIQUE_Player_Electric_ElementalBurst_Handler",
+              "value": 5000,
+              "maxValue": 5000,
+              "actorIceSubHurtDelta": -1,
+              "useLimitRange": true,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "isUnique": true,
+          "duration": 3
+        },
+        "UNIQUE_Mizuki_Burst_First_Attack": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalPos",
+              "doOffStage": true,
+              "target": "CurLocalAvatar",
+              "setTarget": true,
+              "key": "_ABILITY_Player_Burst_AttackPos",
+              "actorIceSubHurtDelta": -1,
+              "born": {
+                "$type": "ConfigBornBySelf",
+                "direction": {
+                  "maxAngle": 180
+                },
+                "useRotation": true,
+                "offset": {
+                  "z": 9
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "FireEffect",
+              "doOffStage": true,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Avatar_Girl_Catalyst_Mizuki_ElementalBurst_Thirdparty",
+              "born": {
+                "$type": "ConfigBornByTarget",
+                "direction": {
+                  "maxAngle": 180
+                },
+                "offset": {
+                  "y": 1.7000000476837158,
+                  "x": 0.25
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "alongGround": true,
+                "onGroundRaycastUpDist": 3,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "FireEffect",
+              "doOffStage": true,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Avatar_Girl_Catalyst_Mizuki_ElementalBurst_Quest",
+              "born": {
+                "$type": "ConfigBornByTarget",
+                "direction": {
+                  "maxAngle": 180
+                },
+                "offset": {
+                  "y": 1.7000000476837158,
+                  "x": 0.25
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "alongGround": true,
+                "onGroundRaycastUpDist": 3,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "SetSystemValueToOverrideMap",
+              "doOffStage": false,
+              "key": "ElementLevelCo",
+              "actorIceSubHurtDelta": -1,
+              "value": -1,
+              "type": "ElementLevelCo",
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "Predicated",
+              "doOffStage": true,
+              "otherTargets": {
+                "$type": "SelectTargetsByShape",
+                "shapeName": "CircleR6H10",
+                "campTargetType": "Enemy",
+                "topLimit": 1,
+                "sizeRatio": 1,
+                "sortType": "Nearest",
+                "ILLOOADJMLF": {
+                  "direction": {
+                    "maxAngle": 180
+                  },
+                  "FDGAEDDEEDG": {
+                    "ELAJJIANFFM": 180
+                  },
+                  "onGroundRaycastUpDist": 2,
+                  "value": 10
+                },
+                "entityTypePriority": [
+                  "Monster",
+                  "Gadget"
+                ]
+              },
+              "targetPredicates": [
+                {
+                  "$type": "ByEntityTypes",
+                  "target": "Target",
+                  "value": -1,
+                  "entityTypes": [
+                    "Monster",
+                    "Gadget"
+                  ]
+                }
+              ],
+              "predicates": [
+                {
+                  "$type": "ByEntityTypes",
+                  "target": "Target",
+                  "value": -1,
+                  "entityTypes": [
+                    "Monster",
+                    "Gadget"
+                  ]
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "successActions": [
+                {
+                  "$type": "SetGlobalPos",
+                  "doOffStage": true,
+                  "target": "Other",
+                  "key": "_ABILITY_Player_Burst_AttackPos_Team",
+                  "actorIceSubHurtDelta": -1,
+                  "born": {
+                    "$type": "ConfigBornByTarget",
+                    "direction": {
+                      "maxAngle": 180
+                    },
+                    "FDGAEDDEEDG": {
+                      "ELAJJIANFFM": 180
+                    },
+                    "alongGround": true,
+                    "onGroundRaycastUpDist": 2,
+                    "value": 10
+                  },
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "CopyGlobalPos",
+                  "doOffStage": true,
+                  "dstKey": "_ABILITY_Player_Burst_AttackPos",
+                  "srcTarget": "Team",
+                  "actorIceSubHurtDelta": -1,
+                  "srcKey": "_ABILITY_Player_Burst_AttackPos_Team",
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "TriggerAttackEvent",
+              "doOffStage": true,
+              "attackEvent": {
+                "attackInfo": {
+                  "attenuationGroup": "default",
+                  "canBeModifiedBy": "OriginOwner",
+                  "hitPattern": {
+                    "hitImpulseType": "LV5",
+                    "onHitEffectName": "Default",
+                    "hitHaltTimeScale": 0.05000000074505806,
+                    "JKLONEBKFKJ": {
+                      "JJGBOHIKHFM": true,
+                      "value": 1
+                    }
+                  },
+                  "FJNMGDHFOEH": {
+                    "GCPNPCOFFBP": "Shake"
+                  },
+                  "IODAJAKBOLG": {
+                    "onHitEffectName": "default",
+                    "JKLONEBKFKJ": {
+                      "JJGBOHIKHFM": true,
+                      "value": 1
+                    }
+                  },
+                  "attackProperty": {
+                    "attackType": "Default",
+                    "enBreak": 100,
+                    "CGDGMKEJOKH": true,
+                    "elementType": "Wind",
+                    "elementDurability": 50,
+                    "elementRank": 1,
+                    "HPPLKCPAKHP": true,
+                    "damageExtra": [
+                      "ElementLevelCo",
+                      "BurstDamageRatio",
+                      "MUL"
+                    ]
+                  },
+                  "cameraShake": {
+                    "extension": {
+                      "baseCycle": 0.11999999731779099,
+                      "cycleDamping": 0.11999999731779099,
+                      "baseOnCamera": true,
+                      "rangeAttenuation": 0.5
+                    },
+                    "FAKMJBNLPPB": -1,
+                    "shakeDistance": 20
+                  },
+                  "attackTag": "Elemental_Burst"
+                },
+                "attackPattern": {
+                  "$type": "ConfigAttackSphere",
+                  "radius": 8,
+                  "massiveAttackRatio": 1,
+                  "born": {
+                    "$type": "ConfigBornByGlobalValue",
+                    "direction": {
+                      "maxAngle": 180
+                    },
+                    "useRotation": true,
+                    "positionKey": "_ABILITY_Player_Burst_AttackPos",
+                    "FDGAEDDEEDG": {
+                      "ELAJJIANFFM": 180
+                    },
+                    "onGroundRaycastUpDist": 2,
+                    "value": 10
+                  },
+                  "PBFNLCIFCBO": {
+                    "GOAEBMPCPJL": {
+                      "JJGBOHIKHFM": true,
+                      "value": 1
+                    }
+                  },
+                  "triggerType": "TriggerNoRepeat"
+                }
+              },
+              "targetType": "Enemy",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "FireEffect",
+              "doOffStage": true,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Avatar_Girl_Catalyst_Mizuki_ElementalBurst_FirstAttack",
+              "born": {
+                "$type": "ConfigBornByGlobalValue",
+                "direction": {
+                  "maxAngle": 180
+                },
+                "useRotation": true,
+                "positionKey": "_ABILITY_Player_Burst_AttackPos",
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "isUnique": true,
+          "thinkInterval": 1.2999999523162842,
+          "duration": 2
+        },
+        "UNIQUE_Mizuki_DreamGadget_Generater": {
+          "onAdded": [
+            {
+              "$type": "AttachModifier",
+              "doOffStage": true,
+              "modifierName": "UNIQUE_Player_Baku_Eff",
+              "target": "Team",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "SetGlobalPos",
+              "doOffStage": true,
+              "target": "CurLocalAvatar",
+              "setTarget": true,
+              "key": "_ABILITY_Mizuki_DreamGadget_Generate_Position",
+              "actorIceSubHurtDelta": -1,
+              "born": {
+                "$type": "ConfigBornByTarget",
+                "direction": {
+                  "$type": "OOOOLHKNIPO",
+                  "maxAngle": 180
+                },
+                "offset": {
+                  "z": 1.7000000476837158,
+                  "x": 0.699999988079071
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "alongGround": true,
+                "bornRandom": {
+                  "$type": "BornRandomFromCenter",
+                  "maxRandomRange": 0.699999988079071,
+                  "minRandomRange": 0.30000001192092896
+                },
+                "onGroundRaycastUpDist": 3,
+                "value": 10
+              },
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "Predicated",
+              "doOffStage": true,
+              "otherTargets": {
+                "$type": "SelectTargetsByShape",
+                "shapeName": "CircleR6H10",
+                "campTargetType": "Enemy",
+                "topLimit": 1,
+                "sizeRatio": 1,
+                "sortType": "Nearest",
+                "ILLOOADJMLF": {
+                  "direction": {
+                    "maxAngle": 180
+                  },
+                  "FDGAEDDEEDG": {
+                    "ELAJJIANFFM": 180
+                  },
+                  "onGroundRaycastUpDist": 2,
+                  "value": 10
+                },
+                "entityTypePriority": [
+                  "Monster",
+                  "Gadget"
+                ]
+              },
+              "targetPredicates": [
+                {
+                  "$type": "ByEntityTypes",
+                  "target": "Target",
+                  "value": -1,
+                  "entityTypes": [
+                    "Monster",
+                    "Gadget"
+                  ]
+                }
+              ],
+              "predicates": [
+                {
+                  "$type": "ByEntityTypes",
+                  "target": "Target",
+                  "value": -1,
+                  "entityTypes": [
+                    "Monster",
+                    "Gadget"
+                  ]
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "successActions": [
+                {
+                  "$type": "SetGlobalPos",
+                  "doOffStage": true,
+                  "target": "Other",
+                  "key": "_ABILITY_Mizuki_DreamGadget_Generate_Position_Team",
+                  "actorIceSubHurtDelta": -1,
+                  "born": {
+                    "$type": "ConfigBornByTarget",
+                    "direction": {
+                      "maxAngle": 180
+                    },
+                    "offset": {
+                      "x": 0.699999988079071
+                    },
+                    "FDGAEDDEEDG": {
+                      "ELAJJIANFFM": 180
+                    },
+                    "alongGround": true,
+                    "bornRandom": {
+                      "$type": "BornRandomFromCenter",
+                      "maxRandomRange": 1,
+                      "minRandomRange": 0.20000000298023224
+                    },
+                    "onGroundRaycastUpDist": 3,
+                    "value": 10
+                  },
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "CopyGlobalPos",
+                  "doOffStage": true,
+                  "dstKey": "_ABILITY_Mizuki_DreamGadget_Generate_Position",
+                  "srcTarget": "Team",
+                  "actorIceSubHurtDelta": -1,
+                  "srcKey": "_ABILITY_Mizuki_DreamGadget_Generate_Position_Team",
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "DebugLog",
+                  "doOffStage": false,
+                  "content": "MizukiSetMonsterPos",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "CreateGadget",
+              "doOffStage": true,
+              "campID": 5003,
+              "campTargetType": "All",
+              "HGPMDCCAHMK": {
+                "IFAGHADONMB": true,
+                "KCLDKFCKPEE": 0.5,
+                "MJDMDBDMPAM": true,
+                "PHCINBJNAOK": 0.5
+              },
+              "value": true,
+              "actorIceSubHurtDelta": -1,
+              "born": {
+                "$type": "ConfigBornByGlobalValue",
+                "direction": {
+                  "maxAngle": 180
+                },
+                "useRotation": true,
+                "positionKey": "_ABILITY_Mizuki_DreamGadget_Generate_Position",
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "gadgetID": 41109020,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SendEffectTrigger",
+              "doOffStage": true,
+              "value": 1,
+              "target": "Team",
+              "parameter": "CreateGadget",
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Avatar_Girl_Catalyst_Mizuki_ElementalBurst_Baku_Pink_After",
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SendEffectTrigger",
+              "doOffStage": true,
+              "value": 1,
+              "target": "Team",
+              "parameter": "CreateGadget",
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Avatar_Girl_Catalyst_Mizuki_ElementalBurst_Baku_Blue_After",
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "isUnique": true,
+          "thinkInterval": 1.7000000476837158,
+          "duration": 600
+        },
+        "UNIQUE_Player_Baku_Eff": {
+          "onAdded": [
+            {
+              "$type": "Randomed",
+              "doOffStage": true,
+              "failActions": [
+                {
+                  "$type": "AttachEffect",
+                  "doOffStage": true,
+                  "scale": 1,
+                  "actorIceSubHurtDelta": -1,
+                  "effectPattern": "Eff_Avatar_Girl_Catalyst_Mizuki_ElementalBurst_Baku_Blue_After",
+                  "born": {
+                    "direction": {
+                      "maxAngle": 180
+                    },
+                    "FDGAEDDEEDG": {
+                      "ELAJJIANFFM": 180
+                    },
+                    "onGroundRaycastUpDist": 2,
+                    "value": 10
+                  },
+                  "effectTempleteID": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "chance": 0.5,
+              "actorIceSubHurtDelta": -1,
+              "successActions": [
+                {
+                  "$type": "AttachEffect",
+                  "doOffStage": true,
+                  "scale": 1,
+                  "actorIceSubHurtDelta": -1,
+                  "effectPattern": "Eff_Avatar_Girl_Catalyst_Mizuki_ElementalBurst_Baku_Pink_After",
+                  "born": {
+                    "direction": {
+                      "maxAngle": 180
+                    },
+                    "FDGAEDDEEDG": {
+                      "ELAJJIANFFM": 180
+                    },
+                    "onGroundRaycastUpDist": 2,
+                    "value": 10
+                  },
+                  "effectTempleteID": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "FireEffect",
+              "doOffStage": true,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Avatar_Girl_Catalyst_Mizuki_ElementalBurst_Baku_Disappear",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "isUnique": true
+        },
+        "UNIQUE_SwirDamage_Add": {
+          "elementDurability": 100,
+          "stacking": "Unique",
+          "isLimitedProperties": true,
+          "KKBDDALAMKP": true,
+          "minus_one": -1,
+          "properties": {
+            "Actor_ElemReactSwirlElectricDelta": "ConvertRatio",
+            "Actor_ElemReactSwirlFireDelta": "ConvertRatio",
+            "Actor_ElemReactSwirlIceDelta": "ConvertRatio",
+            "Actor_ElemReactSwirlWaterDelta": "ConvertRatio"
+          },
+          "isUnique": true
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "onKill": [
+        {
+          "$type": "SetSystemValueToOverrideMap",
+          "doOffStage": false,
+          "key": "ElementLevelCo",
+          "actorIceSubHurtDelta": -1,
+          "value": -1,
+          "type": "ElementLevelCo",
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "ApplyModifier",
+          "doOffStage": false,
+          "modifierName": "DreamGadget_Heal",
+          "target": "TempTarget",
+          "actorIceSubHurtDelta": -1,
+          "isOnStageFalseSwitchValue": {
+            "__unk_Q16140806": "_ABILITY_Mizuki_Heal_TargetGV"
+          },
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "SetGlobalPos",
+          "doOffStage": false,
+          "setTarget": true,
+          "key": "_ABILITY_DreamGadget_AttackPos",
+          "actorIceSubHurtDelta": -1,
+          "born": {
+            "$type": "ConfigBornBySelf",
+            "direction": {
+              "maxAngle": 180
+            },
+            "useRotation": true,
+            "FDGAEDDEEDG": {
+              "ELAJJIANFFM": 180
+            },
+            "onGroundRaycastUpDist": 2,
+            "value": 10
+          },
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "TriggerAttackEvent",
+          "doOffStage": false,
+          "attackEvent": {
+            "attackInfo": {
+              "attenuationGroup": "default",
+              "canBeModifiedBy": "OriginOwner",
+              "hitPattern": {
+                "hitImpulseType": "LV2",
+                "onHitEffectName": "Default",
+                "hitHaltTimeScale": 0.05000000074505806,
+                "JKLONEBKFKJ": {
+                  "JJGBOHIKHFM": true,
+                  "value": 1
+                }
+              },
+              "FJNMGDHFOEH": {
+                "GCPNPCOFFBP": "Shake"
+              },
+              "attenuationTag": "Elemental_Burst",
+              "IODAJAKBOLG": {
+                "onHitEffectName": "default",
+                "JKLONEBKFKJ": {
+                  "JJGBOHIKHFM": true,
+                  "value": 1
+                }
+              },
+              "attackProperty": {
+                "attackType": "Default",
+                "enBreak": 13.916399955749512,
+                "CGDGMKEJOKH": true,
+                "elementType": "Wind",
+                "elementDurability": 25,
+                "elementRank": 1,
+                "HPPLKCPAKHP": true,
+                "damageExtra": [
+                  "ElementLevelCo",
+                  "GadgetDamageRatio",
+                  "MUL"
+                ]
+              },
+              "cameraShake": {
+                "extension": {
+                  "baseCycle": 0.11999999731779099,
+                  "cycleDamping": 0.11999999731779099,
+                  "baseOnCamera": true,
+                  "rangeAttenuation": 0.5
+                },
+                "FAKMJBNLPPB": -1,
+                "shakeDistance": 20
+              },
+              "attackTag": "Elemental_Burst"
+            },
+            "attackPattern": {
+              "$type": "ConfigAttackSphere",
+              "radius": 4,
+              "massiveAttackRatio": 1,
+              "born": {
+                "$type": "ConfigBornByGlobalValue",
+                "direction": {
+                  "maxAngle": 180
+                },
+                "useRotation": true,
+                "positionKey": "_ABILITY_DreamGadget_AttackPos",
+                "DKAMKMPMLFA": "Caster",
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "PBFNLCIFCBO": {
+                "GOAEBMPCPJL": {
+                  "JJGBOHIKHFM": true,
+                  "value": 1
+                }
+              },
+              "triggerType": "TriggerNoRepeat"
+            }
+          },
+          "targetType": "Enemy",
+          "target": "OriginOwner",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "FireEffect",
+          "doOffStage": false,
+          "scale": 1,
+          "actorIceSubHurtDelta": -1,
+          "effectPattern": "Eff_Avatar_Girl_Catalyst_Mizuki_ElementalBurst_TickAttack",
+          "born": {
+            "direction": {
+              "maxAngle": 180
+            },
+            "FDGAEDDEEDG": {
+              "ELAJJIANFFM": 180
+            },
+            "onGroundRaycastUpDist": 2,
+            "value": 10
+          },
+          "effectTempleteID": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "RemoveModifier",
+          "doOffStage": false,
+          "modifierName": "DreamGadget_Effect_Generate",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilitySpecials": {
+        "ElementLevelCo": 0,
+        "GadgetDamageRatio": 0,
+        "HealRatio": 0
+      },
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "SetGlobalValue",
+          "doOffStage": false,
+          "key": "_ABILITY_DreamGadget_isTriggered",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "AttachModifier",
+          "doOffStage": false,
+          "modifierName": "DreamGadget_KillSelf_Countdown",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "AttachModifier",
+          "doOffStage": false,
+          "modifierName": "DreamGadget_Effect_Generate",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "AttachModifier",
+          "doOffStage": false,
+          "modifierName": "DreamGadget_Generate_Protection",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "Avatar_Mizuki_ElementalBurst_DreamGadget_StoryQuest",
+      "onFieldEnter": [
+        {
+          "$type": "Predicated",
+          "doOffStage": false,
+          "target": "Target",
+          "targetPredicates": [
+            {
+              "$type": "ByEntityTypes",
+              "target": "Target",
+              "value": 1,
+              "entityTypes": [
+                "Avatar"
+              ]
+            }
+          ],
+          "actorIceSubHurtDelta": -1,
+          "successActions": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "value": 1,
+              "key": "_ABILITY_DreamGadget_isTriggered",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "DebugLog",
+              "doOffStage": false,
+              "content": "!!!!!!!!",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetTargetToTargetKey",
+              "doOffStage": true,
+              "targetKey": "_ABILITY_Mizuki_Heal_TargetGV",
+              "target": "Caster",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "ApplyModifier",
+              "doOffStage": false,
+              "modifierName": "DreamGadget_KillSelf",
+              "predicates": [
+                {
+                  "$type": "ByNot",
+                  "target": "Target",
+                  "predicates": [
+                    {
+                      "$type": "ByHasModifier",
+                      "modifierName": "DreamGadget_Generate_Protection",
+                      "target": "Caster"
+                    }
+                  ]
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "modifiers": {
+        "DreamGadget_Effect_Generate": {
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Avatar_Girl_Catalyst_Mizuki_ElementalBurst_Bullet",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true,
+              "PBHJPBFJGME": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "duration": 6
+        },
+        "DreamGadget_Generate_Protection": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "ApplyModifier",
+              "doOffStage": false,
+              "modifierName": "DreamGadget_KillSelf",
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "value": 1,
+                  "target": "Caster",
+                  "key": "_ABILITY_DreamGadget_isTriggered"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "duration": 0.30000001192092896
+        },
+        "DreamGadget_Heal": {
+          "onAdded": [
+            {
+              "$type": "HealHP",
+              "doOffStage": false,
+              "amountByTargetMaxHPRatio": "HealRatio",
+              "value": 1,
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "stacking": "Multiple",
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "duration": 0.5
+        },
+        "DreamGadget_KillSelf": {
+          "onAdded": [
+            {
+              "$type": "KillSelf",
+              "doOffStage": false,
+              "configIdArray": [
+                41109020
+              ],
+              "killSelfType": "Normal",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "stacking": "Unique",
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "duration": 1
+        },
+        "DreamGadget_KillSelf_Countdown": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "KillSelf",
+              "doOffStage": false,
+              "configIdArray": [
+                41109020
+              ],
+              "killSelfType": "Normal",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "duration": 4
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "doOffStage": false,
+          "modifierName": "AllAvatarRevive",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "DynamicAbility_MizukiQuest_AllAvatarRevive",
+      "isDynamicAbility": true,
+      "modifiers": {
+        "AllAvatarRevive": {
+          "onAdded": [
+            {
+              "$type": "ReviveDeadAvatar",
+              "doOffStage": true,
+              "cdRatio": 1,
+              "target": "CurTeamAvatars",
+              "amountByTargetMaxHPRatio": 1,
+              "range": 50,
+              "value": 1,
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "HealHP",
+              "doOffStage": true,
+              "target": "AllPlayerAvatars",
+              "amountByTargetMaxHPRatio": 1,
+              "value": 1,
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "duration": 1
+        }
+      }
+    }
+  }
+]

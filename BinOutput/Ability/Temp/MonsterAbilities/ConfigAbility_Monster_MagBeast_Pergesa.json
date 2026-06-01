@@ -1,0 +1,4132 @@
+[
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "SetGlobalValue",
+          "doOffStage": false,
+          "value": 1,
+          "key": "_MagDebuff_PergesaTag",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "Monster_Magbeast_Pergesa_Alert",
+      "abilityMixins": [
+        {
+          "$type": "AttachToPoseIDMixin",
+          "modifierName": "BornInvisible",
+          "poseIDs": [
+            100
+          ],
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToAIAlertnessMixin",
+          "modifierName": "Reset",
+          "alertness": [
+            0,
+            1
+          ],
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToAnimatorStateIDMixin",
+          "modifierName": "AlertState",
+          "stateIDs": [
+            "Alert"
+          ],
+          "value": -1,
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToAnimatorStateIDMixin",
+          "modifierName": "GlowTrigger",
+          "stateIDs": [
+            "Alert_BS"
+          ],
+          "value": -1,
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "OverrideMassCapMixin",
+          "actorIceSubHurtDelta": -1,
+          "mass": 100000000
+        }
+      ],
+      "onAbilityStart": [
+        {
+          "$type": "RemoveModifier",
+          "doOffStage": false,
+          "modifierName": "SetInvisible",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "modifiers": {
+        "AlertState": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "SetSpecialCamera",
+              "doOffStage": false,
+              "specialCameraName": "NormalState",
+              "enable": true,
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1
+        },
+        "BornInvisible": {
+          "onAdded": [
+            {
+              "$type": "Predicated",
+              "doOffStage": false,
+              "failActions": [
+                {
+                  "$type": "ApplyModifier",
+                  "doOffStage": false,
+                  "modifierName": "SetInvisible",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "targetPredicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "value": 1,
+                  "target": "Target",
+                  "key": "_MONSTER_Magbeast_Pergesa_Abyss"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "Born_Invincible": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "state": "Invincible"
+        },
+        "Born_IsGhostToAllied": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "state": "IsGhostToAllied"
+        },
+        "Born_IsGhostToEnemy": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "state": "IsGhostToEnemy"
+        },
+        "GlowTrigger": {
+          "onAdded": [
+            {
+              "$type": "SendEffectTrigger",
+              "doOffStage": false,
+              "parameter": "GlowTrigger",
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Magbeast_Pergesa_Cocoon",
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "GlowTrigger_Cacoon": {
+          "onAdded": [
+            {
+              "$type": "SetAnimatorTrigger",
+              "doOffStage": false,
+              "mpTriggerOnRemote": true,
+              "triggerID": "GlowTrigger",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "Reset": {
+          "onAdded": [
+            {
+              "$type": "SetPoseBool",
+              "doOffStage": false,
+              "boolID": "MagState",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetPoseBool",
+              "doOffStage": false,
+              "boolID": "Weak",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "SetInvisible": {
+          "onAdded": [
+            {
+              "$type": "TriggerSetRenderersEnableV2",
+              "doOffStage": false,
+              "renderNames": [
+                "Body"
+              ],
+              "enable": true,
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AttachModifier",
+              "doOffStage": false,
+              "modifierName": "Born_Invincible",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AttachModifier",
+              "doOffStage": false,
+              "modifierName": "Born_IsGhostToAllied",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AttachModifier",
+              "doOffStage": false,
+              "modifierName": "Born_IsGhostToEnemy",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Magbeast_Pergesa_Cocoon",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Magbeast_Pergesa_Cocoon_Standby",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "onReconnect": [
+            {
+              "$type": "RemoveModifier",
+              "doOffStage": false,
+              "modifierName": "SetInvisible",
+              "predicates": [
+                {
+                  "$type": "BDLJGADLCIO",
+                  "target": "Caster"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "TriggerSetRenderersEnableV2",
+              "doOffStage": false,
+              "renderNames": [
+                "Body"
+              ],
+              "actorIceSubHurtDelta": -1,
+              "setEnable": true,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "modifierMixins": [
+            {
+              "$type": "AttachActionToModifierMixin",
+              "onAdded": [
+                {
+                  "$type": "EnableHitBoxByName",
+                  "doOffStage": false,
+                  "enable": true,
+                  "actorIceSubHurtDelta": -1,
+                  "hitBoxNames": [
+                    "HitBox"
+                  ],
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "onRemoved": [
+                {
+                  "$type": "EnableHitBoxByName",
+                  "doOffStage": false,
+                  "enable": true,
+                  "actorIceSubHurtDelta": -1,
+                  "setEnable": true,
+                  "hitBoxNames": [
+                    "HitBox"
+                  ],
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "minus_one": -1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "doOffStage": false,
+          "modifierName": "Cocoon_Eff",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "Magbeast_Pergesa_Cocoon",
+      "modifiers": {
+        "Cocoon_Eff": {
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Magbeast_Pergesa_Cocoon_Standby",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Monster_Magbeast_Pergesa_ExitBattle",
+      "abilityMixins": [
+        {
+          "$type": "AttachToAIAlertnessMixin",
+          "modifierName": "Pergesa_ExitBattle",
+          "alertness": [
+            2,
+            3
+          ],
+          "actorIceSubHurtDelta": -1
+        }
+      ],
+      "modifiers": {
+        "Pergesa_ExitBattle": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "ApplyModifier",
+              "doOffStage": false,
+              "modifierName": "Pergesa_ExitBattle_DitherHandler",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1
+        },
+        "Pergesa_ExitBattle_DitherHandler": {
+          "onAdded": [
+            {
+              "$type": "StartDither",
+              "ADBJDJLIIMK": -1,
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1,
+              "duHPRation": 2.299999952316284,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "ServerLuaCall",
+              "doOffStage": false,
+              "luaCallType": "FromGroup",
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "target": "Target",
+                  "key": "_MONSTER_Magbeast_Pergesa_Abyss",
+                  "compareType": "NoneOrEqual"
+                },
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "target": "Target",
+                  "key": "_MONSTER_Magbeast_Pergesa_WQ",
+                  "compareType": "NoneOrEqual"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "funcName": "SLC_Pergesa_BossBattleReset",
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "duration": 1.5
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Monster_Magbeast_Pergesa_SteerAttack",
+      "abilityMixins": [
+        {
+          "$type": "SteerAttackMixin",
+          "angularSpeed": 180,
+          "CCFNFIKKIDJ": true,
+          "value": true,
+          "GMEPMDNDBOP": 180,
+          "actorIceSubHurtDelta": -1,
+          "steerStateIDs": [
+            "Alert"
+          ],
+          "endNormalizedTime": 1,
+          "PMKCEJILFAF": true
+        },
+        {
+          "$type": "SteerAttackMixin",
+          "startNormalizedTime": 0.23999999463558197,
+          "angularSpeed": 1080,
+          "CCFNFIKKIDJ": true,
+          "value": true,
+          "GMEPMDNDBOP": 180,
+          "actorIceSubHurtDelta": -1,
+          "steerStateIDs": [
+            "Turn"
+          ],
+          "endNormalizedTime": 0.5600000023841858,
+          "PMKCEJILFAF": true
+        },
+        {
+          "$type": "SteerAttackMixin",
+          "startNormalizedTime": 0.49000000953674316,
+          "angularSpeed": 720,
+          "CCFNFIKKIDJ": true,
+          "value": true,
+          "GMEPMDNDBOP": 180,
+          "actorIceSubHurtDelta": -1,
+          "steerStateIDs": [
+            "RushForward"
+          ],
+          "endNormalizedTime": 0.6700000166893005,
+          "PMKCEJILFAF": true
+        },
+        {
+          "$type": "SteerAttackMixin",
+          "startNormalizedTime": 0.49000000953674316,
+          "angularSpeed": 720,
+          "CCFNFIKKIDJ": true,
+          "value": true,
+          "GMEPMDNDBOP": 180,
+          "actorIceSubHurtDelta": -1,
+          "steerStateIDs": [
+            "RushLeft"
+          ],
+          "endNormalizedTime": 0.6700000166893005,
+          "PMKCEJILFAF": true
+        },
+        {
+          "$type": "SteerAttackMixin",
+          "startNormalizedTime": 0.49000000953674316,
+          "angularSpeed": 720,
+          "CCFNFIKKIDJ": true,
+          "value": true,
+          "GMEPMDNDBOP": 180,
+          "actorIceSubHurtDelta": -1,
+          "steerStateIDs": [
+            "RushRight"
+          ],
+          "endNormalizedTime": 0.6700000166893005,
+          "PMKCEJILFAF": true
+        },
+        {
+          "$type": "SteerAttackMixin",
+          "angularSpeed": 180,
+          "CCFNFIKKIDJ": true,
+          "value": true,
+          "GMEPMDNDBOP": 180,
+          "actorIceSubHurtDelta": -1,
+          "steerStateIDs": [
+            "DoubleKick"
+          ],
+          "endNormalizedTime": 0.40299999713897705
+        },
+        {
+          "$type": "SteerAttackMixin",
+          "startNormalizedTime": 0.5230000019073486,
+          "angularSpeed": 180,
+          "CAOIBLNGAMN": 15,
+          "CCFNFIKKIDJ": true,
+          "value": true,
+          "GMEPMDNDBOP": 180,
+          "actorIceSubHurtDelta": -1,
+          "steerStateIDs": [
+            "DoubleKick"
+          ],
+          "endNormalizedTime": 0.6389999985694885
+        },
+        {
+          "$type": "SteerAttackMixin",
+          "startNormalizedTime": 0.7580000162124634,
+          "angularSpeed": 270,
+          "CCFNFIKKIDJ": true,
+          "value": true,
+          "GMEPMDNDBOP": 180,
+          "actorIceSubHurtDelta": -1,
+          "steerStateIDs": [
+            "DoubleKick"
+          ],
+          "endNormalizedTime": 0.8479999899864197
+        },
+        {
+          "$type": "SteerAttackMixin",
+          "angularSpeed": 180,
+          "CCFNFIKKIDJ": true,
+          "value": true,
+          "GMEPMDNDBOP": 180,
+          "actorIceSubHurtDelta": -1,
+          "steerStateIDs": [
+            "StraightKick"
+          ],
+          "endNormalizedTime": 0.23499999940395355
+        },
+        {
+          "$type": "SteerAttackMixin",
+          "angularSpeed": 120,
+          "CAOIBLNGAMN": 4.199999809265137,
+          "CCFNFIKKIDJ": true,
+          "value": true,
+          "GMEPMDNDBOP": 180,
+          "actorIceSubHurtDelta": -1,
+          "steerStateIDs": [
+            "RoundHouseKick"
+          ],
+          "endNormalizedTime": 1,
+          "PMKCEJILFAF": true
+        },
+        {
+          "$type": "SteerAttackMixin",
+          "angularSpeed": 120,
+          "CAOIBLNGAMN": 4.199999809265137,
+          "CCFNFIKKIDJ": true,
+          "value": true,
+          "GMEPMDNDBOP": 180,
+          "actorIceSubHurtDelta": -1,
+          "steerStateIDs": [
+            "RoundHouseKick_MagAS"
+          ],
+          "endNormalizedTime": 1,
+          "PMKCEJILFAF": true
+        },
+        {
+          "$type": "SteerAttackMixin",
+          "angularSpeed": 120,
+          "CCFNFIKKIDJ": true,
+          "value": true,
+          "GMEPMDNDBOP": 180,
+          "actorIceSubHurtDelta": -1,
+          "steerStateIDs": [
+            "Shuriken"
+          ],
+          "endNormalizedTime": 1,
+          "PMKCEJILFAF": true
+        },
+        {
+          "$type": "SteerAttackMixin",
+          "angularSpeed": 180,
+          "CCFNFIKKIDJ": true,
+          "value": true,
+          "GMEPMDNDBOP": 180,
+          "actorIceSubHurtDelta": -1,
+          "steerStateIDs": [
+            "Shuriken_MagAS"
+          ],
+          "endNormalizedTime": 1,
+          "PMKCEJILFAF": true
+        },
+        {
+          "$type": "SteerAttackMixin",
+          "angularSpeed": 180,
+          "CCFNFIKKIDJ": true,
+          "value": true,
+          "GMEPMDNDBOP": 180,
+          "actorIceSubHurtDelta": -1,
+          "steerStateIDs": [
+            "MagAtk1_BS"
+          ],
+          "endNormalizedTime": 1,
+          "PMKCEJILFAF": true
+        },
+        {
+          "$type": "SteerAttackMixin",
+          "angularSpeed": 180,
+          "CCFNFIKKIDJ": true,
+          "value": true,
+          "GMEPMDNDBOP": 180,
+          "actorIceSubHurtDelta": -1,
+          "steerStateIDs": [
+            "MagAtk1_Loop"
+          ],
+          "endNormalizedTime": 99,
+          "PMKCEJILFAF": true
+        },
+        {
+          "$type": "SteerAttackMixin",
+          "angularSpeed": 180,
+          "CCFNFIKKIDJ": true,
+          "value": true,
+          "GMEPMDNDBOP": 180,
+          "actorIceSubHurtDelta": -1,
+          "steerStateIDs": [
+            "MagAtk1_AS"
+          ],
+          "endNormalizedTime": 1,
+          "PMKCEJILFAF": true
+        },
+        {
+          "$type": "SteerAttackMixin",
+          "angularSpeed": 180,
+          "CCFNFIKKIDJ": true,
+          "value": true,
+          "GMEPMDNDBOP": 180,
+          "actorIceSubHurtDelta": -1,
+          "steerStateIDs": [
+            "MagAtk2_BS"
+          ],
+          "endNormalizedTime": 1,
+          "PMKCEJILFAF": true
+        },
+        {
+          "$type": "SteerAttackMixin",
+          "angularSpeed": 180,
+          "CCFNFIKKIDJ": true,
+          "value": true,
+          "GMEPMDNDBOP": 180,
+          "actorIceSubHurtDelta": -1,
+          "steerStateIDs": [
+            "MagAtk2_Loop"
+          ],
+          "endNormalizedTime": 99,
+          "PMKCEJILFAF": true
+        },
+        {
+          "$type": "SteerAttackMixin",
+          "angularSpeed": 180,
+          "CCFNFIKKIDJ": true,
+          "value": true,
+          "GMEPMDNDBOP": 180,
+          "actorIceSubHurtDelta": -1,
+          "steerStateIDs": [
+            "MagAtk2_AS"
+          ],
+          "endNormalizedTime": 1,
+          "PMKCEJILFAF": true
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Monster_Magbeast_Pergesa_RushFix",
+      "abilityMixins": [
+        {
+          "$type": "AttachToPoseIDMixin",
+          "modifierName": "RushFix_Monitor",
+          "poseIDs": [
+            201
+          ],
+          "actorIceSubHurtDelta": -1
+        }
+      ],
+      "modifiers": {
+        "CheckTrigger": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "SetAnimatorInt",
+              "doOffStage": false,
+              "intID": "RushState",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "Predicated",
+              "doOffStage": false,
+              "target": "SelfAttackActiveTarget",
+              "targetPredicates": [
+                {
+                  "$type": "ByTargetPositionToSelfPosition",
+                  "value": 7,
+                  "target": "SelfAttackTarget"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "successActions": [
+                {
+                  "$type": "Predicated",
+                  "doOffStage": false,
+                  "failActions": [
+                    {
+                      "$type": "SetAnimatorInt",
+                      "doOffStage": false,
+                      "value": 1,
+                      "intID": "RushState",
+                      "actorIceSubHurtDelta": -1,
+                      "canBeHandledOnRecover": true
+                    }
+                  ],
+                  "target": "SelfAttackActiveTarget",
+                  "targetPredicates": [
+                    {
+                      "$type": "ByTargetPositionToSelfPosition",
+                      "value": 12,
+                      "target": "SelfAttackTarget"
+                    }
+                  ],
+                  "actorIceSubHurtDelta": -1,
+                  "successActions": [
+                    {
+                      "$type": "SetAnimatorInt",
+                      "doOffStage": false,
+                      "value": 2,
+                      "intID": "RushState",
+                      "actorIceSubHurtDelta": -1,
+                      "canBeHandledOnRecover": true
+                    }
+                  ],
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "SetAnimatorTrigger",
+                  "doOffStage": false,
+                  "triggerID": "RushTrigger",
+                  "predicates": [
+                    {
+                      "$type": "ByTargetGlobalValue",
+                      "key": "_RushFix_Mask",
+                      "compareType": "NoneOrEqual"
+                    }
+                  ],
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "ApplyModifier",
+                  "doOffStage": false,
+                  "modifierName": "RushFixMask",
+                  "predicates": [
+                    {
+                      "$type": "ByTargetGlobalValue",
+                      "key": "_RushFix_Mask",
+                      "compareType": "NoneOrEqual"
+                    }
+                  ],
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "thinkInterval": 0.6000000238418579
+        },
+        "RushFixMask": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "value": 1,
+              "key": "_RushFix_Mask",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_RushFix_Mask",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "duration": 5
+        },
+        "RushFix_Monitor": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "ResetAnimatorTrigger",
+              "doOffStage": false,
+              "triggerID": "RushTrigger",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "modifierMixins": [
+            {
+              "$type": "AttachToStateIDMixin",
+              "modifierName": "CheckTrigger",
+              "stateIDs": [
+                "NormalIdle"
+              ],
+              "value": -1,
+              "isCheckOnAttach": true,
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "AttachToAnimatorStateIDMixin",
+              "modifierName": "TurnTrigger",
+              "stateIDs": [
+                "Turn"
+              ],
+              "value": -1,
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "minus_one": -1
+        },
+        "TurnMask": {
+          "onAdded": [
+            {
+              "$type": "SetAnimatorBool",
+              "doOffStage": false,
+              "value": true,
+              "boolID": "TurnMask",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "SetAnimatorBool",
+              "doOffStage": false,
+              "boolID": "TurnMask",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "duration": 0.800000011920929
+        },
+        "TurnTrigger": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "ApplyModifier",
+              "doOffStage": false,
+              "modifierName": "TurnMask",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Monster_Magbeast_Pergesa_BreakRock",
+      "abilityMixins": [
+        {
+          "$type": "AttachToMultiNormalizedTimeMixin",
+          "modifierName": "Monster_Magbeast_Pergesa_BreakRock",
+          "value": -1,
+          "actorIceSubHurtDelta": -1,
+          "normalizedStateIDList": [
+            {
+              "stateID": "StraightKick",
+              "normalizeEnd": 0.44999998807907104,
+              "normalizeStart": 0.23000000417232513
+            },
+            {
+              "stateID": "MagAtk1_BS",
+              "normalizeEnd": 0.5,
+              "normalizeStart": 0.10000000149011612
+            },
+            {
+              "stateID": "MagAtk2_BS",
+              "normalizeEnd": 0.5,
+              "normalizeStart": 0.10000000149011612
+            }
+          ]
+        }
+      ],
+      "modifiers": {
+        "Kill_Summon_Gadget": {
+          "onAdded": [
+            {
+              "$type": "KillSelf",
+              "doOffStage": false,
+              "configIdArray": [
+                70000000
+              ],
+              "killSelfType": "Normal",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "Monster_Magbeast_Pergesa_BreakRock": {
+          "onAdded": [
+            {
+              "$type": "ApplyModifier",
+              "doOffStage": false,
+              "otherTargets": {
+                "$type": "SelectTargetsByShape",
+                "shapeName": "CircleR5H10",
+                "campTargetType": "All",
+                "sizeRatio": 1,
+                "ILLOOADJMLF": {
+                  "direction": {
+                    "maxAngle": 180
+                  },
+                  "FDGAEDDEEDG": {
+                    "ELAJJIANFFM": 180
+                  },
+                  "onGroundRaycastUpDist": 2,
+                  "value": 10
+                }
+              },
+              "modifierName": "Kill_Summon_Gadget",
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "target": "Target",
+                  "key": "_COMMON_GADGET_ISSUMMON",
+                  "compareType": "MoreThan"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "ApplyModifier",
+              "doOffStage": false,
+              "otherTargets": {
+                "$type": "SelectTargetsByShape",
+                "shapeName": "CircleR5H10",
+                "campTargetType": "All",
+                "sizeRatio": 1,
+                "ILLOOADJMLF": {
+                  "direction": {
+                    "maxAngle": 180
+                  },
+                  "FDGAEDDEEDG": {
+                    "ELAJJIANFFM": 180
+                  },
+                  "onGroundRaycastUpDist": 2,
+                  "value": 10
+                }
+              },
+              "modifierName": "Kill_Summon_Gadget",
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "target": "Target",
+                  "key": "_COMMON_GADGET_ISSUMMON",
+                  "compareType": "MoreThan"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "thinkInterval": 0.5
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "onKill": [
+        {
+          "$type": "SetAnimatorBool",
+          "doOffStage": false,
+          "boolID": "Weak",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Monster_Magbeast_Pergesa_StateChange",
+      "abilityMixins": [
+        {
+          "$type": "AttachToAnimatorStateIDMixin",
+          "modifierName": "MagState_Exit",
+          "stateIDs": [
+            "MagWeak_Loop"
+          ],
+          "value": -1,
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToPoseIDMixin",
+          "modifierName": "Monster_Pergesa_WeakEnter",
+          "poseIDs": [
+            221
+          ],
+          "actorIceSubHurtDelta": -1
+        }
+      ],
+      "onAbilityStart": [
+        {
+          "$type": "SetPoseBool",
+          "doOffStage": false,
+          "value": true,
+          "boolID": "MagState",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "SetSpecialCamera",
+          "doOffStage": false,
+          "specialCameraName": "MagState",
+          "enable": true,
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "modifiers": {
+        "MagState_Enter": {
+          "onAdded": [
+            {
+              "$type": "SetPoseBool",
+              "doOffStage": false,
+              "value": true,
+              "boolID": "MagState",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "MagState_Exit": {
+          "onAdded": [
+            {
+              "$type": "SetPoseBool",
+              "doOffStage": false,
+              "value": true,
+              "boolID": "Weak",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetPoseBool",
+              "doOffStage": false,
+              "boolID": "MagState",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetAnimatorBool",
+              "doOffStage": false,
+              "boolID": "Dissolve",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetAnimatorBool",
+              "doOffStage": false,
+              "boolID": "MagStateFire",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "ApplyModifier",
+              "doOffStage": false,
+              "modifierName": "Monster_Pergesa_WeakState",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "Monster_Pergesa_WeakEnter": {
+          "onAdded": [
+            {
+              "$type": "ApplyModifier",
+              "doOffStage": false,
+              "modifierName": "Monster_Pergesa_WeakState",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "Monster_Pergesa_WeakState": {
+          "onAdded": [
+            {
+              "$type": "SetAnimatorBool",
+              "doOffStage": false,
+              "value": true,
+              "boolID": "Weak",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "stacking": "Unique",
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "SetAnimatorBool",
+              "doOffStage": false,
+              "boolID": "Weak",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetPoseBool",
+              "doOffStage": false,
+              "boolID": "Weak",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "duration": 12
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Monster_Magbeast_Pergesa_WingDissolve",
+      "onAbilityStart": [
+        {
+          "$type": "SetAnimatorBool",
+          "doOffStage": false,
+          "value": true,
+          "boolID": "Dissolve",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "Predicated",
+          "doOffStage": false,
+          "failActions": [
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Magbeast_Pergesa_WingsOff_Fire",
+              "born": {
+                "$type": "ConfigBornByAttachPoint",
+                "direction": {
+                  "maxAngle": 180
+                },
+                "useRotation": true,
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "attachPointName": "WingL",
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetEffectFollowPath",
+              "doOffStage": false,
+              "followPath": "WingL",
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Magbeast_Pergesa_WingsOff_Fire",
+              "attachPoint": "WingL",
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Magbeast_Pergesa_WingsOff_Fire",
+              "born": {
+                "$type": "ConfigBornByAttachPoint",
+                "direction": {
+                  "maxAngle": 180
+                },
+                "useRotation": true,
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "attachPointName": "WingR",
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetEffectFollowPath",
+              "doOffStage": false,
+              "followPath": "WingR",
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Magbeast_Pergesa_WingsOff_Fire",
+              "attachPoint": "WingR",
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "targetPredicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "target": "Target",
+              "key": "_MONSTER_Magbeast_Pergesa_MagState"
+            }
+          ],
+          "actorIceSubHurtDelta": -1,
+          "successActions": [
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Magbeast_Pergesa_WingsOff_Grass",
+              "born": {
+                "$type": "ConfigBornByAttachPoint",
+                "direction": {
+                  "maxAngle": 180
+                },
+                "useRotation": true,
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "attachPointName": "WingL",
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetEffectFollowPath",
+              "doOffStage": false,
+              "followPath": "WingL",
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Magbeast_Pergesa_WingsOff_Grass",
+              "attachPoint": "WingL",
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Magbeast_Pergesa_WingsOff_Grass",
+              "born": {
+                "$type": "ConfigBornByAttachPoint",
+                "direction": {
+                  "maxAngle": 180
+                },
+                "useRotation": true,
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "attachPointName": "WingR",
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetEffectFollowPath",
+              "doOffStage": false,
+              "followPath": "WingR",
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Magbeast_Pergesa_WingsOff_Grass",
+              "attachPoint": "WingR",
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "SetGlobalValue",
+          "doOffStage": false,
+          "value": 2,
+          "key": "_MONSTER_Magbeast_Pergesa_MagState",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "SetSpecialCamera",
+          "doOffStage": false,
+          "specialCameraName": "NormalState",
+          "enable": true,
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Monster_Magbeast_Pergesa_RoundHouseKick",
+      "onAbilityStart": [
+        {
+          "$type": "TriggerBullet",
+          "doOffStage": false,
+          "trackTarget": "SelfAttackActiveTarget",
+          "bulletID": 42630011,
+          "value": true,
+          "actorIceSubHurtDelta": -1,
+          "born": {
+            "$type": "ConfigBornBySelf",
+            "direction": {
+              "maxAngle": 180
+            },
+            "useRotation": true,
+            "offset": {
+              "y": -1,
+              "x": 1
+            },
+            "FDGAEDDEEDG": {
+              "ELAJJIANFFM": 180
+            },
+            "onGroundRaycastUpDist": 2,
+            "value": 10
+          },
+          "canBeHandledOnRecover": true,
+          "onGround": true,
+          "POOEIFNLHDB": true
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "doOffStage": false,
+          "modifierName": "Magbeast_Pergesa_RoundHouseKick_Eff",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "Magbeast_Pergesa_RoundHouseKick",
+      "onAbilityStart": [
+        {
+          "$type": "TriggerAttackEvent",
+          "doOffStage": false,
+          "attackEvent": {
+            "attackInfo": {
+              "attenuationGroup": "Monster_ComboSkip",
+              "canBeModifiedBy": "OriginOwner",
+              "hitPattern": {
+                "hitImpulseType": "LV3",
+                "onHitEffectName": "default",
+                "JKLONEBKFKJ": {
+                  "JJGBOHIKHFM": true,
+                  "value": 1
+                }
+              },
+              "FJNMGDHFOEH": {
+                "GCPNPCOFFBP": "Shake"
+              },
+              "attenuationTag": "Monster_ComboSkip",
+              "IODAJAKBOLG": {
+                "onHitEffectName": "default",
+                "JKLONEBKFKJ": {
+                  "JJGBOHIKHFM": true,
+                  "value": 1
+                }
+              },
+              "attackProperty": {
+                "attackType": "Default",
+                "enBreak": 50,
+                "elementType": "Grass",
+                "elementDurability": 25,
+                "strikeType": "Pierce",
+                "elementRank": 1,
+                "damagePercentage": 0.8999999761581421
+              },
+              "cameraShake": {
+                "extension": {
+                  "baseCycle": 0.11999999731779099,
+                  "cycleDamping": 0.11999999731779099,
+                  "baseOnCamera": true,
+                  "rangeAttenuation": 0.5
+                },
+                "FAKMJBNLPPB": -1,
+                "shakeDistance": 20
+              }
+            },
+            "attackPattern": {
+              "$type": "ConfigAttackSphere",
+              "radius": 0.5,
+              "massiveAttackRatio": 1,
+              "born": {
+                "$type": "ConfigBornByCollisionPoint",
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "PBFNLCIFCBO": {
+                "GOAEBMPCPJL": {
+                  "JJGBOHIKHFM": true,
+                  "value": 1
+                }
+              },
+              "triggerType": "TriggerNoRepeat"
+            }
+          },
+          "targetType": "Enemy",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "modifiers": {
+        "Magbeast_Pergesa_RoundHouseKick_Eff": {
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Magbeast_Pergesa_RoundHouseKick_Bullet",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Monster_Magbeast_Pergesa_Shuriken",
+      "onAbilityStart": [
+        {
+          "$type": "TriggerBullet",
+          "doOffStage": false,
+          "trackTarget": "SelfAttackActiveTarget",
+          "bulletID": 42630012,
+          "value": true,
+          "actorIceSubHurtDelta": -1,
+          "born": {
+            "$type": "ConfigBornBySelf",
+            "direction": {
+              "$type": "ConfigDirectionByAttackTarget",
+              "maxAngle": 180
+            },
+            "useRotation": true,
+            "offset": {
+              "y": -1.5,
+              "x": 4
+            },
+            "FDGAEDDEEDG": {
+              "ELAJJIANFFM": 180
+            },
+            "onGroundRaycastUpDist": 2,
+            "value": 10
+          },
+          "canBeHandledOnRecover": true,
+          "onGround": true,
+          "POOEIFNLHDB": true
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "doOffStage": false,
+          "modifierName": "Magbeast_Pergesa_Shuriken_Eff",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "Magbeast_Pergesa_Shuriken",
+      "onAbilityStart": [
+        {
+          "$type": "TriggerAttackEvent",
+          "doOffStage": false,
+          "attackEvent": {
+            "attackInfo": {
+              "attenuationGroup": "default",
+              "canBeModifiedBy": "OriginOwner",
+              "hitPattern": {
+                "hitImpulseType": "LV3",
+                "onHitEffectName": "default",
+                "JKLONEBKFKJ": {
+                  "JJGBOHIKHFM": true,
+                  "value": 1
+                }
+              },
+              "FJNMGDHFOEH": {
+                "GCPNPCOFFBP": "Shake"
+              },
+              "IODAJAKBOLG": {
+                "onHitEffectName": "default",
+                "JKLONEBKFKJ": {
+                  "JJGBOHIKHFM": true,
+                  "value": 1
+                }
+              },
+              "attackProperty": {
+                "attackType": "Default",
+                "enBreak": 50,
+                "elementType": "Grass",
+                "elementDurability": 25,
+                "strikeType": "Pierce",
+                "elementRank": 1,
+                "damagePercentage": 0.699999988079071
+              },
+              "cameraShake": {
+                "extension": {
+                  "baseCycle": 0.11999999731779099,
+                  "cycleDamping": 0.11999999731779099,
+                  "baseOnCamera": true,
+                  "rangeAttenuation": 0.5
+                },
+                "FAKMJBNLPPB": -1,
+                "shakeDistance": 20
+              }
+            },
+            "attackPattern": {
+              "$type": "ConfigAttackSphere",
+              "radius": 0.5,
+              "massiveAttackRatio": 1,
+              "born": {
+                "$type": "ConfigBornByCollisionPoint",
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "PBFNLCIFCBO": {
+                "GOAEBMPCPJL": {
+                  "JJGBOHIKHFM": true,
+                  "value": 1
+                }
+              },
+              "triggerType": "TriggerNoRepeat"
+            }
+          },
+          "targetType": "Enemy",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "modifiers": {
+        "Magbeast_Pergesa_Shuriken_Eff": {
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Magbeast_Pergesa_Shuriken_Bullet",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "abilitySpecials": {
+        "FinalTrigger_Times": 2,
+        "Total_CurHP": 0,
+        "Total_CurHP_Temp": 0,
+        "Total_MaxHP": 0,
+        "Total_MaxHP_Temp": 0
+      },
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "AttachAbilityStateResistance",
+          "doOffStage": false,
+          "durationRatio": 1,
+          "actorIceSubHurtDelta": -1,
+          "resistanceListID": 13002,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "Monster_Magbeast_Pergesa_MagState",
+      "abilityMixins": [
+        {
+          "$type": "AttachToPoseIDMixin",
+          "modifierName": "NormalState_Manager",
+          "poseIDs": [
+            201
+          ],
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToPoseIDMixin",
+          "modifierName": "MagState_Manager",
+          "poseIDs": [
+            211
+          ],
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToAnimatorStateIDMixin",
+          "modifierName": "ChangeFire",
+          "stateIDs": [
+            "MagAtk1_BS"
+          ],
+          "value": -1,
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToAnimatorStateIDMixin",
+          "modifierName": "ChangeGrass",
+          "stateIDs": [
+            "MagAtk2_BS"
+          ],
+          "value": -1,
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToAnimatorStateIDMixin",
+          "modifierName": "ExtraLoop_Monitor",
+          "stateIDs": [
+            "MagAtk1_Loop",
+            "MagAtk2_Loop"
+          ],
+          "value": -1,
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachModifierToGlobalValueMixin",
+          "globalValueKey": "_MONSTER_Magbeast_Pergesa_ExtraLoop",
+          "modifierNameSteps": [
+            "ExtraLoop_Trigger"
+          ],
+          "enable": true,
+          "removeAppliedModifier": true,
+          "actorIceSubHurtDelta": -1,
+          "valueSteps": [
+            0.5,
+            1.5
+          ],
+          "NEACJLMBFMN": true
+        },
+        {
+          "$type": "AttachModifierToSelfGlobalValueMixin",
+          "globalValueKey": "_MONSTER_Magbeast_Pergesa_WQ",
+          "modifierNameSteps": [
+            "WQ_Manager"
+          ],
+          "removeAppliedModifier": true,
+          "actorIceSubHurtDelta": -1,
+          "valueSteps": [
+            0.5,
+            1.5
+          ]
+        },
+        {
+          "$type": "AttachToAnimatorStateIDMixin",
+          "modifierName": "MagAttk1_CheckWindow",
+          "stateIDs": [
+            "MagAtk1_Loop"
+          ],
+          "value": -1,
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToAnimatorStateIDMixin",
+          "modifierName": "MagAttk2_CheckWindow",
+          "stateIDs": [
+            "MagAtk2_Loop"
+          ],
+          "value": -1,
+          "actorIceSubHurtDelta": -1
+        }
+      ],
+      "modifiers": {
+        "ChangeFire": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "value": 1,
+              "key": "_MONSTER_Magbeast_Pergesa_MagState",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_MONSTER_Magbeast_Pergesa_MagState",
+              "predicates": [
+                {
+                  "$type": "ByEntityIsAlive"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1
+        },
+        "ChangeGrass": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_MONSTER_Magbeast_Pergesa_MagState",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "value": 1,
+              "key": "_MONSTER_Magbeast_Pergesa_MagState",
+              "predicates": [
+                {
+                  "$type": "ByEntityIsAlive"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1
+        },
+        "Empty": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "ExtraLoop_Monitor": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_MONSTER_Magbeast_Pergesa_ExtraLoop",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_Total_MaxHP",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_Total_CurHP",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "Predicated",
+              "doOffStage": false,
+              "target": "AllPlayerAvatars",
+              "targetPredicates": [
+                {
+                  "$type": "ByTargetPositionToSelfPosition",
+                  "value": 30,
+                  "target": "Target",
+                  "logic": "LesserOrEqual"
+                },
+                {
+                  "$type": "ByTargetPositionToSelfPosition",
+                  "value": 20,
+                  "target": "Target",
+                  "logic": "LesserOrEqual",
+                  "compareType": "Y"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "successActions": [
+                {
+                  "$type": "GetFightProperty",
+                  "doOffStage": false,
+                  "globalValueKey": "_Total_MaxHP_Temp",
+                  "target": "Target",
+                  "fightProp": "FIGHT_PROP_MAX_HP",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "SetGlobalValueToOverrideMap",
+                  "doOffStage": false,
+                  "overrideMapKey": "Total_MaxHP_Temp",
+                  "globalValueKey": "_Total_MaxHP_Temp",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "AddGlobalValue",
+                  "doOffStage": false,
+                  "value": "Total_MaxHP_Temp",
+                  "target": "Caster",
+                  "key": "_Total_MaxHP",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "GetFightProperty",
+                  "doOffStage": false,
+                  "globalValueKey": "_Total_CurHP_Temp",
+                  "target": "Target",
+                  "fightProp": "FIGHT_PROP_CUR_HP",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "SetGlobalValueToOverrideMap",
+                  "doOffStage": false,
+                  "overrideMapKey": "Total_CurHP_Temp",
+                  "globalValueKey": "_Total_CurHP_Temp",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "AddGlobalValue",
+                  "doOffStage": false,
+                  "value": "Total_CurHP_Temp",
+                  "target": "Caster",
+                  "key": "_Total_CurHP",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValueToOverrideMap",
+              "doOffStage": false,
+              "overrideMapKey": "Total_MaxHP",
+              "globalValueKey": "_Total_MaxHP",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValueToOverrideMap",
+              "doOffStage": false,
+              "overrideMapKey": "Total_CurHP",
+              "globalValueKey": "_Total_CurHP",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "value": [
+                "Total_CurHP",
+                "Total_MaxHP",
+                "DIV"
+              ],
+              "key": "_Total_CurHP_Percent",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AddGlobalValue",
+              "doOffStage": false,
+              "value": 1,
+              "key": "_MONSTER_Magbeast_Pergesa_ExtraLoop",
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "value": 0.6499999761581421,
+                  "target": "Target",
+                  "key": "_Total_CurHP_Percent",
+                  "compareType": "LessAndEqual"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "thinkInterval": 2
+        },
+        "ExtraLoop_Trigger": {
+          "onAdded": [
+            {
+              "$type": "SetAnimatorTrigger",
+              "doOffStage": false,
+              "triggerID": "ExtraLoop_Trigger",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "FireState": {
+          "onAdded": [
+            {
+              "$type": "SetAnimatorBool",
+              "doOffStage": false,
+              "value": true,
+              "boolID": "MagStateFire",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Magbeast_Pergesa_Common_Fire_L",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Magbeast_Pergesa_Common_Fire_R",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "GrassState": {
+          "onAdded": [
+            {
+              "$type": "SetAnimatorBool",
+              "doOffStage": false,
+              "boolID": "MagStateFire",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Magbeast_Pergesa_Common_Grass_L",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Magbeast_Pergesa_Common_Grass_R",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "LowHP": {
+          "onAdded": [
+            {
+              "$type": "ShowReminder",
+              "doOffStage": false,
+              "id": 1003010027,
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "MagAttk1_CheckWindow": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_HasChangeState",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "onBeingHit": [
+            {
+              "$type": "Predicated",
+              "doOffStage": false,
+              "targetPredicates": [
+                {
+                  "$type": "ByHitElement",
+                  "target": "Target",
+                  "element": "Fire"
+                },
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "target": "Caster",
+                  "key": "_HasChangeState",
+                  "compareType": "NoneOrEqual"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "successActions": [
+                {
+                  "$type": "SetGlobalValue",
+                  "doOffStage": false,
+                  "value": 1,
+                  "target": "Caster",
+                  "key": "_HasChangeState",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "SetGlobalValue",
+                  "doOffStage": false,
+                  "value": 1,
+                  "target": "Caster",
+                  "key": "_MONSTER_Magbeast_Pergesa_MagState",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "SetGlobalValue",
+                  "doOffStage": false,
+                  "value": 1,
+                  "key": "_Pergesa_MagAtk1",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "SetGlobalValue",
+                  "doOffStage": false,
+                  "key": "_Pergesa_MagAtk2",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_Pergesa_MagAtk1",
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "target": "Caster",
+                  "key": "_HasChangeState",
+                  "compareType": "NoneOrEqual"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "value": 1,
+              "key": "_Pergesa_MagAtk2",
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "target": "Caster",
+                  "key": "_HasChangeState",
+                  "compareType": "NoneOrEqual"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1
+        },
+        "MagAttk2_CheckWindow": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_HasChangeState",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "onBeingHit": [
+            {
+              "$type": "Predicated",
+              "doOffStage": false,
+              "targetPredicates": [
+                {
+                  "$type": "ByAny",
+                  "target": "Target",
+                  "predicates": [
+                    {
+                      "$type": "ByHitElement",
+                      "target": "Target",
+                      "element": "Ice"
+                    },
+                    {
+                      "$type": "ByHitElement",
+                      "target": "Target",
+                      "element": "Water"
+                    }
+                  ]
+                },
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "target": "Caster",
+                  "key": "_HasChangeState",
+                  "compareType": "NoneOrEqual"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "successActions": [
+                {
+                  "$type": "SetGlobalValue",
+                  "doOffStage": false,
+                  "value": 1,
+                  "target": "Caster",
+                  "key": "_HasChangeState",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "SetGlobalValue",
+                  "doOffStage": false,
+                  "target": "Caster",
+                  "key": "_MONSTER_Magbeast_Pergesa_MagState",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "SetGlobalValue",
+                  "doOffStage": false,
+                  "key": "_Pergesa_MagAtk1",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "SetGlobalValue",
+                  "doOffStage": false,
+                  "value": 1,
+                  "key": "_Pergesa_MagAtk2",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "value": 1,
+              "key": "_Pergesa_MagAtk1",
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "target": "Caster",
+                  "key": "_HasChangeState",
+                  "compareType": "NoneOrEqual"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_Pergesa_MagAtk2",
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "target": "Caster",
+                  "key": "_HasChangeState",
+                  "compareType": "NoneOrEqual"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1
+        },
+        "MagFinal_Trigger": {
+          "onAdded": [
+            {
+              "$type": "SetAnimatorTrigger",
+              "doOffStage": false,
+              "triggerID": "FinalTrigger",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "onReconnect": [
+            {
+              "$type": "SetAnimatorTrigger",
+              "doOffStage": false,
+              "triggerID": "FinalTrigger",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "MagSkill_Counter": {
+          "onAdded": [
+            {
+              "$type": "AddGlobalValue",
+              "doOffStage": false,
+              "value": 1,
+              "key": "_MagSkill_Counter",
+              "maxValue": "FinalTrigger_Times",
+              "actorIceSubHurtDelta": -1,
+              "useLimitRange": true,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "MagState_Manager": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_MagSkill_Counter",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_HasChangeState",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetAnimatorBool",
+              "doOffStage": false,
+              "value": true,
+              "boolID": "TurnMask",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_Pergesa_MagSkill_Random",
+              "maxValue": 2,
+              "value": true,
+              "actorIceSubHurtDelta": -1,
+              "useLimitRange": true,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "Predicated",
+              "doOffStage": false,
+              "failActions": [
+                {
+                  "$type": "SetGlobalValue",
+                  "doOffStage": false,
+                  "key": "_Pergesa_MagAtk1",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "SetGlobalValue",
+                  "doOffStage": false,
+                  "value": 1,
+                  "key": "_Pergesa_MagAtk2",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "targetPredicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "value": 1,
+                  "target": "Caster",
+                  "key": "_Pergesa_MagSkill_Random",
+                  "compareType": "LessAndEqual"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "successActions": [
+                {
+                  "$type": "SetGlobalValue",
+                  "doOffStage": false,
+                  "value": 1,
+                  "key": "_Pergesa_MagAtk1",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "SetGlobalValue",
+                  "doOffStage": false,
+                  "key": "_Pergesa_MagAtk2",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "onBeingHit": [
+            {
+              "$type": "SetAnimatorTrigger",
+              "doOffStage": false,
+              "triggerID": "BreakHit",
+              "predicates": [
+                {
+                  "$type": "ByAttackTags",
+                  "attackTags": [
+                    "6_0_Player_Combination_Attack"
+                  ],
+                  "target": "Target"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_MagSkill_Counter",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetAnimatorBool",
+              "doOffStage": false,
+              "boolID": "TurnMask",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "modifierMixins": [
+            {
+              "$type": "AttachModifierToSelfGlobalValueMixin",
+              "globalValueKey": "_MONSTER_Magbeast_Pergesa_MagState",
+              "modifierNameSteps": [
+                "GrassState",
+                "FireState",
+                "Empty"
+              ],
+              "removeAppliedModifier": true,
+              "actorIceSubHurtDelta": -1,
+              "valueSteps": [
+                -0.5,
+                0.5,
+                1.5,
+                2.5
+              ]
+            },
+            {
+              "$type": "AttachToAnimatorStateIDMixin",
+              "modifierName": "MagSkill_Counter",
+              "stateIDs": [
+                "MagAtk1_AS",
+                "MagAtk2_AS"
+              ],
+              "value": -1,
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "AttachModifierToSelfGlobalValueMixin",
+              "globalValueKey": "_MagSkill_Counter",
+              "modifierNameSteps": [
+                "MagFinal_Trigger"
+              ],
+              "removeAppliedModifier": true,
+              "actorIceSubHurtDelta": -1,
+              "valueSteps": [
+                [
+                  "FinalTrigger_Times",
+                  0.5,
+                  "SUB"
+                ],
+                [
+                  "FinalTrigger_Times",
+                  0.5,
+                  "ADD"
+                ]
+              ]
+            },
+            {
+              "$type": "DiePatternSwitchMixin",
+              "hasAnimatorDie": true,
+              "dieDenyLockOn": true,
+              "dieIsGhostToEnemy": true,
+              "dieIgnoreTriggerBullet": true,
+              "muteBillboard": true,
+              "dieShaderEnableDurationTime": -1,
+              "dieForceDisappearTime": 1.2000000476837158,
+              "HNJCCGAFABL": true,
+              "mutePushCollider": true,
+              "dieDisappearEffect": "Eff_Death_Common",
+              "actorIceSubHurtDelta": -1,
+              "dieShaderData": "MonsterDie",
+              "NLJDDODJGGH": true,
+              "dieShaderDisableDurationTime": -1,
+              "OPHINBIFIME": true,
+              "dieEndTime": 0.5
+            },
+            {
+              "$type": "AttachActionToModifierMixin",
+              "onAdded": [
+                {
+                  "$type": "EnableHitBoxByName",
+                  "doOffStage": false,
+                  "actorIceSubHurtDelta": -1,
+                  "setEnable": true,
+                  "hitBoxNames": [
+                    "HitBox_MagState"
+                  ],
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "onRemoved": [
+                {
+                  "$type": "EnableHitBoxByName",
+                  "doOffStage": false,
+                  "actorIceSubHurtDelta": -1,
+                  "hitBoxNames": [
+                    "HitBox_MagState"
+                  ],
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "minus_one": -1
+        },
+        "NormalState_Manager": {
+          "onAdded": [
+            {
+              "$type": "EnableHeadControl",
+              "doOffStage": false,
+              "enable": true,
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetAnimatorBool",
+              "doOffStage": false,
+              "boolID": "TurnMask",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetSpecialCamera",
+              "doOffStage": false,
+              "specialCameraName": "NormalState",
+              "enable": true,
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "value": 1,
+                  "target": "Target",
+                  "key": "_MONSTER_Magbeast_Pergesa_Abyss"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "EnableHeadControl",
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1,
+              "enable": true,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1
+        },
+        "SkillAnnounce": {
+          "onAdded": [
+            {
+              "$type": "AddGlobalValue",
+              "doOffStage": false,
+              "value": 1,
+              "key": "_Reminder_TimeCount",
+              "predicates": [
+                {
+                  "$type": "ByNot",
+                  "target": "Target",
+                  "predicates": [
+                    {
+                      "$type": "ByHasModifier",
+                      "modifierName": "SkillAnnounce_Mask",
+                      "target": "Target"
+                    }
+                  ]
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "value": 1,
+              "key": "_Reminder_TimeCount",
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "value": 3,
+                  "target": "Target",
+                  "key": "_Reminder_TimeCount"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "ShowReminder",
+              "doOffStage": false,
+              "id": 1003010024,
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "value": 1,
+                  "target": "Target",
+                  "key": "_Reminder_TimeCount"
+                },
+                {
+                  "$type": "ByNot",
+                  "target": "Target",
+                  "predicates": [
+                    {
+                      "$type": "ByHasModifier",
+                      "modifierName": "SkillAnnounce_Mask",
+                      "target": "Target"
+                    }
+                  ]
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "ShowReminder",
+              "doOffStage": false,
+              "id": 1003010025,
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "value": 2,
+                  "target": "Target",
+                  "key": "_Reminder_TimeCount"
+                },
+                {
+                  "$type": "ByNot",
+                  "target": "Target",
+                  "predicates": [
+                    {
+                      "$type": "ByHasModifier",
+                      "modifierName": "SkillAnnounce_Mask",
+                      "target": "Target"
+                    }
+                  ]
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "ApplyModifier",
+              "doOffStage": false,
+              "modifierName": "SkillAnnounce_Mask",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "SkillAnnounce_Mask": {
+          "elementDurability": 100,
+          "stacking": "Unique",
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "duration": 15
+        },
+        "WQ_Manager": {
+          "onAdded": [
+            {
+              "$type": "SetOverrideMapValue",
+              "doOffStage": false,
+              "value": 8,
+              "overrideMapKey": "FinalTrigger_Times",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "AttachToAnimatorStateIDMixin",
+              "modifierName": "SkillAnnounce",
+              "stateIDs": [
+                "DoubleKick",
+                "RoundHouseKick",
+                "RoundHouseKick_MagAS",
+                "Shuriken",
+                "Shuriken_MagAS",
+                "MagAtk1_BS",
+                "MagAtk2_BS",
+                "MagFinal_Grass",
+                "MagFinal_Fire"
+              ],
+              "value": -1,
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "AttachModifierToHPPercentMixin",
+              "modifierNameSteps": [
+                "Empty",
+                "LowHP"
+              ],
+              "actorIceSubHurtDelta": -1,
+              "valueSteps": [
+                0.30000001192092896
+              ]
+            }
+          ],
+          "minus_one": -1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Monster_Magbeast_Pergesa_MagDebuff_Eff",
+      "onAbilityStart": [
+        {
+          "$type": "FireEffect",
+          "doOffStage": false,
+          "scale": 1,
+          "predicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "value": 1,
+              "target": "Target",
+              "key": "_MONSTER_Magbeast_Pergesa_MagState"
+            }
+          ],
+          "actorIceSubHurtDelta": -1,
+          "effectPattern": "Eff_Monster_Magbeast_Pergesa_MagAtk1_1",
+          "born": {
+            "direction": {
+              "maxAngle": 180
+            },
+            "FDGAEDDEEDG": {
+              "ELAJJIANFFM": 180
+            },
+            "onGroundRaycastUpDist": 2,
+            "value": 10
+          },
+          "effectTempleteID": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "FireEffect",
+          "doOffStage": false,
+          "scale": 1,
+          "predicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "target": "Target",
+              "key": "_MONSTER_Magbeast_Pergesa_MagState"
+            }
+          ],
+          "actorIceSubHurtDelta": -1,
+          "effectPattern": "Eff_Monster_Magbeast_Pergesa_MagAtk2_1",
+          "born": {
+            "direction": {
+              "maxAngle": 180
+            },
+            "FDGAEDDEEDG": {
+              "ELAJJIANFFM": 180
+            },
+            "onGroundRaycastUpDist": 2,
+            "value": 10
+          },
+          "effectTempleteID": -1,
+          "canBeHandledOnRecover": true
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Monster_Magbeast_Pergesa_MagAtk1",
+      "abilityMixins": [
+        {
+          "$type": "AttachToNormalizedTimeMixin",
+          "stateID": "MagAtk1_BS",
+          "modifierName": "Monster_Magbeast_Pergesa_MagAtk1",
+          "normalizeEnd": 0.5,
+          "value": -1,
+          "actorIceSubHurtDelta": -1,
+          "normalizeStart": 0.3580000102519989
+        }
+      ],
+      "onAbilityStart": [
+        {
+          "$type": "TriggerAttackEvent",
+          "doOffStage": false,
+          "attackEvent": {
+            "attackInfo": {
+              "attenuationGroup": "default",
+              "canBeModifiedBy": "OriginOwner",
+              "hitPattern": {
+                "hitImpulseType": "LV3",
+                "onHitEffectName": "default",
+                "JKLONEBKFKJ": {
+                  "JJGBOHIKHFM": true,
+                  "value": 1
+                }
+              },
+              "FJNMGDHFOEH": {
+                "GCPNPCOFFBP": "Shake"
+              },
+              "IODAJAKBOLG": {
+                "onHitEffectName": "default",
+                "JKLONEBKFKJ": {
+                  "JJGBOHIKHFM": true,
+                  "value": 1
+                }
+              },
+              "attackProperty": {
+                "attackType": "Default",
+                "enBreak": 25,
+                "elementType": "Fire",
+                "elementDurability": 100,
+                "strikeType": "Pierce",
+                "elementRank": 1,
+                "damagePercentage": 0.5
+              },
+              "cameraShake": {
+                "extension": {
+                  "baseCycle": 0.11999999731779099,
+                  "cycleDamping": 0.11999999731779099,
+                  "baseOnCamera": true,
+                  "rangeAttenuation": 0.5
+                },
+                "FAKMJBNLPPB": -1,
+                "shakeDistance": 20
+              }
+            },
+            "attackPattern": {
+              "$type": "ConfigAttackCircle",
+              "radius": 15,
+              "massiveAttackRatio": 1,
+              "born": {
+                "$type": "ConfigBornBySelf",
+                "direction": {
+                  "maxAngle": 180
+                },
+                "useRotation": true,
+                "offset": {
+                  "z": 4
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "height": 5,
+              "fanAngle": 360,
+              "PBFNLCIFCBO": {
+                "GOAEBMPCPJL": {
+                  "JJGBOHIKHFM": true,
+                  "value": 1
+                }
+              },
+              "triggerType": "TriggerNoRepeat"
+            }
+          },
+          "targetType": "Enemy",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "modifiers": {
+        "Monster_Magbeast_Pergesa_MagAtk1": {
+          "onAdded": [
+            {
+              "$type": "FixedMonsterRushMove",
+              "doOffStage": false,
+              "target": "SelfAttackActiveTarget",
+              "FMLEGJIKPGH": -1,
+              "FPCBFHKNDED": -1,
+              "timeRange": 0.5,
+              "actorIceSubHurtDelta": -1,
+              "toPos": {
+                "$type": "ConfigBornByTargetLinearPoint",
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "FPHMANNFLHE": true,
+                "alongGround": true,
+                "MEFDEJIBIHI": true,
+                "value": 10,
+                "onGroundRaycastUpDist": 2,
+                "linearOffset": -3
+              },
+              "maxRange": 15,
+              "animatorStateIDs": [
+                "MagAtk1_BS"
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Monster_Magbeast_Pergesa_MagAtk1_BulletBS",
+      "onAbilityStart": [
+        {
+          "$type": "FireEffect",
+          "doOffStage": false,
+          "scale": 1,
+          "predicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "target": "Target",
+              "key": "_MONSTER_Magbeast_Pergesa_MagState"
+            }
+          ],
+          "actorIceSubHurtDelta": -1,
+          "effectPattern": "Eff_Monster_Magbeast_Pergesa_MagAtk1_2_BS_Grass",
+          "born": {
+            "direction": {
+              "maxAngle": 180
+            },
+            "FDGAEDDEEDG": {
+              "ELAJJIANFFM": 180
+            },
+            "onGroundRaycastUpDist": 2,
+            "value": 10
+          },
+          "effectTempleteID": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "FireEffect",
+          "doOffStage": false,
+          "scale": 1,
+          "predicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "value": 1,
+              "target": "Target",
+              "key": "_MONSTER_Magbeast_Pergesa_MagState"
+            }
+          ],
+          "actorIceSubHurtDelta": -1,
+          "effectPattern": "Eff_Monster_Magbeast_Pergesa_MagAtk1_2_BS_Fire",
+          "born": {
+            "direction": {
+              "maxAngle": 180
+            },
+            "FDGAEDDEEDG": {
+              "ELAJJIANFFM": 180
+            },
+            "onGroundRaycastUpDist": 2,
+            "value": 10
+          },
+          "effectTempleteID": -1,
+          "canBeHandledOnRecover": true
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Monster_Magbeast_Pergesa_MagAtk1_BulletFire",
+      "onAbilityStart": [
+        {
+          "$type": "FireEffect",
+          "doOffStage": false,
+          "scale": 1,
+          "predicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "target": "Target",
+              "key": "_MONSTER_Magbeast_Pergesa_MagState"
+            }
+          ],
+          "actorIceSubHurtDelta": -1,
+          "effectPattern": "Eff_Monster_Magbeast_Pergesa_MagAtk1_2_Fire_Grass",
+          "born": {
+            "direction": {
+              "maxAngle": 180
+            },
+            "FDGAEDDEEDG": {
+              "ELAJJIANFFM": 180
+            },
+            "onGroundRaycastUpDist": 2,
+            "value": 10
+          },
+          "effectTempleteID": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "FireEffect",
+          "doOffStage": false,
+          "scale": 1,
+          "predicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "value": 1,
+              "target": "Target",
+              "key": "_MONSTER_Magbeast_Pergesa_MagState"
+            }
+          ],
+          "actorIceSubHurtDelta": -1,
+          "effectPattern": "Eff_Monster_Magbeast_Pergesa_MagAtk1_2_Fire_Fire",
+          "born": {
+            "direction": {
+              "maxAngle": 180
+            },
+            "FDGAEDDEEDG": {
+              "ELAJJIANFFM": 180
+            },
+            "onGroundRaycastUpDist": 2,
+            "value": 10
+          },
+          "effectTempleteID": -1,
+          "canBeHandledOnRecover": true
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Monster_Magbeast_Pergesa_MagAtk1_BulletTrigger",
+      "onAbilityStart": [
+        {
+          "$type": "TriggerBullet",
+          "doOffStage": false,
+          "trackTarget": "SelfAttackActiveTarget",
+          "bulletID": 42630013,
+          "value": true,
+          "predicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "target": "Target",
+              "key": "_MONSTER_Magbeast_Pergesa_MagState"
+            }
+          ],
+          "actorIceSubHurtDelta": -1,
+          "born": {
+            "$type": "ConfigBornBySelf",
+            "direction": {
+              "$type": "ConfigDirectionByAttackTarget",
+              "maxAngle": 180
+            },
+            "useRotation": true,
+            "offset": {
+              "z": 2.4100000858306885,
+              "x": 2.6600000858306885
+            },
+            "FDGAEDDEEDG": {
+              "ELAJJIANFFM": 180
+            },
+            "onGroundRaycastUpDist": 2,
+            "value": 10
+          },
+          "canBeHandledOnRecover": true,
+          "onGround": true,
+          "POOEIFNLHDB": true
+        },
+        {
+          "$type": "TriggerBullet",
+          "doOffStage": false,
+          "trackTarget": "SelfAttackActiveTarget",
+          "bulletID": 42630014,
+          "value": true,
+          "predicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "value": 1,
+              "target": "Target",
+              "key": "_MONSTER_Magbeast_Pergesa_MagState"
+            }
+          ],
+          "actorIceSubHurtDelta": -1,
+          "born": {
+            "$type": "ConfigBornBySelf",
+            "direction": {
+              "$type": "ConfigDirectionByAttackTarget",
+              "maxAngle": 180
+            },
+            "useRotation": true,
+            "offset": {
+              "z": 2.4100000858306885,
+              "x": 2.6600000858306885
+            },
+            "FDGAEDDEEDG": {
+              "ELAJJIANFFM": 180
+            },
+            "onGroundRaycastUpDist": 2,
+            "value": 10
+          },
+          "canBeHandledOnRecover": true,
+          "onGround": true,
+          "POOEIFNLHDB": true
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "doOffStage": false,
+          "modifierName": "Magbeast_Pergesa_MagAtk1_Bullet_GrassEff",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "Magbeast_Pergesa_MagBullet1_Grass",
+      "onAbilityStart": [
+        {
+          "$type": "FireEffect",
+          "doOffStage": false,
+          "scale": 1,
+          "actorIceSubHurtDelta": -1,
+          "effectPattern": "Eff_Monster_Magbeast_Pergesa_MagAtk1_2_Bullet_Grass_Burst",
+          "born": {
+            "$type": "ConfigBornByCollisionPoint",
+            "direction": {
+              "maxAngle": 180
+            },
+            "ENOAPEJAJHB": true,
+            "FDGAEDDEEDG": {
+              "ELAJJIANFFM": 180
+            },
+            "onGroundRaycastUpDist": 2,
+            "value": 10
+          },
+          "effectTempleteID": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "TriggerAttackEvent",
+          "doOffStage": false,
+          "attackEvent": {
+            "attackInfo": {
+              "attenuationGroup": "default",
+              "canBeModifiedBy": "OriginOwner",
+              "hitPattern": {
+                "hitImpulseType": "LV3",
+                "onHitEffectName": "default",
+                "JKLONEBKFKJ": {
+                  "JJGBOHIKHFM": true,
+                  "value": 1
+                }
+              },
+              "FJNMGDHFOEH": {
+                "GCPNPCOFFBP": "Shake"
+              },
+              "IODAJAKBOLG": {
+                "onHitEffectName": "default",
+                "JKLONEBKFKJ": {
+                  "JJGBOHIKHFM": true,
+                  "value": 1
+                }
+              },
+              "attackProperty": {
+                "attackType": "Default",
+                "enBreak": 25,
+                "elementType": "Grass",
+                "elementDurability": 25,
+                "strikeType": "Pierce",
+                "elementRank": 1,
+                "damagePercentage": 0.5
+              },
+              "cameraShake": {
+                "extension": {
+                  "baseCycle": 0.11999999731779099,
+                  "cycleDamping": 0.11999999731779099,
+                  "baseOnCamera": true,
+                  "rangeAttenuation": 0.5
+                },
+                "FAKMJBNLPPB": -1,
+                "shakeDistance": 20
+              }
+            },
+            "attackPattern": {
+              "$type": "ConfigAttackSphere",
+              "radius": 0.5,
+              "massiveAttackRatio": 1,
+              "born": {
+                "$type": "ConfigBornByCollisionPoint",
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "PBFNLCIFCBO": {
+                "GOAEBMPCPJL": {
+                  "JJGBOHIKHFM": true,
+                  "value": 1
+                }
+              },
+              "triggerType": "TriggerNoRepeat"
+            }
+          },
+          "targetType": "Enemy",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "modifiers": {
+        "Magbeast_Pergesa_MagAtk1_Bullet_GrassEff": {
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Magbeast_Pergesa_MagAtk1_2_Bullet_Grass",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Magbeast_Pergesa_MagAtk1_2_Bullet_Grass_Trail",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "doOffStage": false,
+          "modifierName": "Magbeast_Pergesa_MagAtk1_Bullet_FireEff",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "Magbeast_Pergesa_MagBullet1_Fire",
+      "onAbilityStart": [
+        {
+          "$type": "FireEffect",
+          "doOffStage": false,
+          "scale": 1,
+          "actorIceSubHurtDelta": -1,
+          "effectPattern": "Eff_Monster_Magbeast_Pergesa_MagAtk1_2_Bullet_Fire_Burst",
+          "born": {
+            "$type": "ConfigBornByCollisionPoint",
+            "direction": {
+              "maxAngle": 180
+            },
+            "ENOAPEJAJHB": true,
+            "FDGAEDDEEDG": {
+              "ELAJJIANFFM": 180
+            },
+            "onGroundRaycastUpDist": 2,
+            "value": 10
+          },
+          "effectTempleteID": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "TriggerAttackEvent",
+          "doOffStage": false,
+          "attackEvent": {
+            "attackInfo": {
+              "attenuationGroup": "default",
+              "canBeModifiedBy": "OriginOwner",
+              "hitPattern": {
+                "hitImpulseType": "LV3",
+                "onHitEffectName": "default",
+                "JKLONEBKFKJ": {
+                  "JJGBOHIKHFM": true,
+                  "value": 1
+                }
+              },
+              "FJNMGDHFOEH": {
+                "GCPNPCOFFBP": "Shake"
+              },
+              "IODAJAKBOLG": {
+                "onHitEffectName": "default",
+                "JKLONEBKFKJ": {
+                  "JJGBOHIKHFM": true,
+                  "value": 1
+                }
+              },
+              "attackProperty": {
+                "attackType": "Default",
+                "enBreak": 25,
+                "elementType": "Fire",
+                "elementDurability": 25,
+                "strikeType": "Pierce",
+                "elementRank": 1,
+                "damagePercentage": 0.5
+              },
+              "cameraShake": {
+                "extension": {
+                  "baseCycle": 0.11999999731779099,
+                  "cycleDamping": 0.11999999731779099,
+                  "baseOnCamera": true,
+                  "rangeAttenuation": 0.5
+                },
+                "FAKMJBNLPPB": -1,
+                "shakeDistance": 20
+              }
+            },
+            "attackPattern": {
+              "$type": "ConfigAttackSphere",
+              "radius": 0.5,
+              "massiveAttackRatio": 1,
+              "born": {
+                "$type": "ConfigBornByCollisionPoint",
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "PBFNLCIFCBO": {
+                "GOAEBMPCPJL": {
+                  "JJGBOHIKHFM": true,
+                  "value": 1
+                }
+              },
+              "triggerType": "TriggerNoRepeat"
+            }
+          },
+          "targetType": "Enemy",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "modifiers": {
+        "Magbeast_Pergesa_MagAtk1_Bullet_FireEff": {
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Magbeast_Pergesa_MagAtk1_2_Bullet_Fire",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Magbeast_Pergesa_MagAtk1_2_Bullet_Fire_Trail",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Monster_Magbeast_Pergesa_MagAtk2",
+      "abilityMixins": [
+        {
+          "$type": "AttachToNormalizedTimeMixin",
+          "stateID": "MagAtk2_BS",
+          "modifierName": "Monster_Magbeast_Pergesa_MagAtk2",
+          "normalizeEnd": 0.42500001192092896,
+          "value": -1,
+          "actorIceSubHurtDelta": -1,
+          "normalizeStart": 0.2750000059604645
+        }
+      ],
+      "onAbilityStart": [
+        {
+          "$type": "TriggerAttackEvent",
+          "doOffStage": false,
+          "attackEvent": {
+            "attackInfo": {
+              "attenuationGroup": "default",
+              "canBeModifiedBy": "OriginOwner",
+              "hitPattern": {
+                "hitImpulseType": "LV3",
+                "onHitEffectName": "default",
+                "JKLONEBKFKJ": {
+                  "JJGBOHIKHFM": true,
+                  "value": 1
+                }
+              },
+              "FJNMGDHFOEH": {
+                "GCPNPCOFFBP": "Shake"
+              },
+              "IODAJAKBOLG": {
+                "onHitEffectName": "default",
+                "JKLONEBKFKJ": {
+                  "JJGBOHIKHFM": true,
+                  "value": 1
+                }
+              },
+              "attackProperty": {
+                "attackType": "Default",
+                "enBreak": 25,
+                "elementType": "Grass",
+                "elementDurability": 100,
+                "strikeType": "Pierce",
+                "elementRank": 1,
+                "damagePercentage": 0.5
+              },
+              "cameraShake": {
+                "extension": {
+                  "baseCycle": 0.11999999731779099,
+                  "cycleDamping": 0.11999999731779099,
+                  "baseOnCamera": true,
+                  "rangeAttenuation": 0.5
+                },
+                "FAKMJBNLPPB": -1,
+                "shakeDistance": 20
+              }
+            },
+            "attackPattern": {
+              "$type": "ConfigAttackCircle",
+              "radius": 15,
+              "massiveAttackRatio": 1,
+              "born": {
+                "$type": "ConfigBornBySelf",
+                "direction": {
+                  "maxAngle": 180
+                },
+                "useRotation": true,
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "height": 5,
+              "fanAngle": 360,
+              "PBFNLCIFCBO": {
+                "GOAEBMPCPJL": {
+                  "JJGBOHIKHFM": true,
+                  "value": 1
+                }
+              },
+              "triggerType": "TriggerNoRepeat"
+            }
+          },
+          "targetType": "Enemy",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "modifiers": {
+        "Monster_Magbeast_Pergesa_MagAtk2": {
+          "onAdded": [
+            {
+              "$type": "FixedMonsterRushMove",
+              "doOffStage": false,
+              "target": "SelfAttackActiveTarget",
+              "FMLEGJIKPGH": -1,
+              "FPCBFHKNDED": -1,
+              "timeRange": 0.5,
+              "actorIceSubHurtDelta": -1,
+              "toPos": {
+                "$type": "ConfigBornByTargetLinearPoint",
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "FPHMANNFLHE": true,
+                "alongGround": true,
+                "MEFDEJIBIHI": true,
+                "value": 10,
+                "onGroundRaycastUpDist": 2,
+                "linearOffset": -3
+              },
+              "maxRange": 15,
+              "animatorStateIDs": [
+                "MagAtk2_BS"
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Monster_Magbeast_Pergesa_MagAtk2_BS",
+      "onAbilityStart": [
+        {
+          "$type": "FireEffect",
+          "doOffStage": false,
+          "scale": 1,
+          "predicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "target": "Target",
+              "key": "_MONSTER_Magbeast_Pergesa_MagState"
+            }
+          ],
+          "actorIceSubHurtDelta": -1,
+          "effectPattern": "Eff_Monster_Magbeast_Pergesa_MagAtk2_BS",
+          "born": {
+            "direction": {
+              "maxAngle": 180
+            },
+            "FDGAEDDEEDG": {
+              "ELAJJIANFFM": 180
+            },
+            "onGroundRaycastUpDist": 2,
+            "value": 10
+          },
+          "effectTempleteID": -1,
+          "canBeHandledOnRecover": true
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Monster_Magbeast_Pergesa_MagAtk2_BulletTriggerL",
+      "onAbilityStart": [
+        {
+          "$type": "TriggerBullet",
+          "doOffStage": false,
+          "trackTarget": "SelfAttackActiveTarget",
+          "bulletID": 42630015,
+          "value": true,
+          "predicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "target": "Target",
+              "key": "_MONSTER_Magbeast_Pergesa_MagState"
+            }
+          ],
+          "actorIceSubHurtDelta": -1,
+          "born": {
+            "$type": "ConfigBornBySelf",
+            "direction": {
+              "maxAngle": 180
+            },
+            "useRotation": true,
+            "offset": {
+              "y": -1.5,
+              "x": 4
+            },
+            "FDGAEDDEEDG": {
+              "ELAJJIANFFM": 180
+            },
+            "onGroundRaycastUpDist": 2,
+            "value": 10
+          },
+          "canBeHandledOnRecover": true,
+          "POOEIFNLHDB": true
+        },
+        {
+          "$type": "TriggerBullet",
+          "doOffStage": false,
+          "trackTarget": "SelfAttackActiveTarget",
+          "bulletID": 42630017,
+          "value": true,
+          "predicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "value": 1,
+              "target": "Target",
+              "key": "_MONSTER_Magbeast_Pergesa_MagState"
+            }
+          ],
+          "actorIceSubHurtDelta": -1,
+          "born": {
+            "$type": "ConfigBornBySelf",
+            "direction": {
+              "maxAngle": 180
+            },
+            "useRotation": true,
+            "offset": {
+              "y": -1.5,
+              "x": 4
+            },
+            "FDGAEDDEEDG": {
+              "ELAJJIANFFM": 180
+            },
+            "onGroundRaycastUpDist": 2,
+            "value": 10
+          },
+          "canBeHandledOnRecover": true,
+          "POOEIFNLHDB": true
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Monster_Magbeast_Pergesa_MagAtk2_BulletTriggerR",
+      "onAbilityStart": [
+        {
+          "$type": "TriggerBullet",
+          "doOffStage": false,
+          "trackTarget": "SelfAttackActiveTarget",
+          "bulletID": 42630016,
+          "value": true,
+          "predicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "target": "Target",
+              "key": "_MONSTER_Magbeast_Pergesa_MagState"
+            }
+          ],
+          "actorIceSubHurtDelta": -1,
+          "born": {
+            "$type": "ConfigBornBySelf",
+            "direction": {
+              "maxAngle": 180
+            },
+            "useRotation": true,
+            "offset": {
+              "y": -1.5,
+              "x": 4
+            },
+            "FDGAEDDEEDG": {
+              "ELAJJIANFFM": 180
+            },
+            "onGroundRaycastUpDist": 2,
+            "value": 10
+          },
+          "canBeHandledOnRecover": true,
+          "POOEIFNLHDB": true
+        },
+        {
+          "$type": "TriggerBullet",
+          "doOffStage": false,
+          "trackTarget": "SelfAttackActiveTarget",
+          "bulletID": 42630018,
+          "value": true,
+          "predicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "value": 1,
+              "target": "Target",
+              "key": "_MONSTER_Magbeast_Pergesa_MagState"
+            }
+          ],
+          "actorIceSubHurtDelta": -1,
+          "born": {
+            "$type": "ConfigBornBySelf",
+            "direction": {
+              "maxAngle": 180
+            },
+            "useRotation": true,
+            "offset": {
+              "y": -1.5,
+              "x": 4
+            },
+            "FDGAEDDEEDG": {
+              "ELAJJIANFFM": 180
+            },
+            "onGroundRaycastUpDist": 2,
+            "value": 10
+          },
+          "canBeHandledOnRecover": true,
+          "POOEIFNLHDB": true
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Magbeast_Pergesa_MagBullet2_Grass",
+      "onAbilityStart": [
+        {
+          "$type": "FireHitEffect",
+          "doOffStage": false,
+          "hitEntity": "Eff_Monster_Magbeast_Pergesa_MagAtk2_Bullet_Grass_Hit",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true,
+          "PBFNLCIFCBO": {
+            "GOAEBMPCPJL": {
+              "JJGBOHIKHFM": true,
+              "value": 1
+            },
+            "defaultEffect": "Eff_Monster_Magbeast_Pergesa_MagAtk2_Bullet_Grass_Hit"
+          }
+        },
+        {
+          "$type": "TriggerAttackEvent",
+          "doOffStage": false,
+          "attackEvent": {
+            "attackInfo": {
+              "attenuationGroup": "default",
+              "canBeModifiedBy": "OriginOwner",
+              "hitPattern": {
+                "hitImpulseType": "LV3",
+                "onHitEffectName": "default",
+                "JKLONEBKFKJ": {
+                  "JJGBOHIKHFM": true,
+                  "value": 1
+                }
+              },
+              "FJNMGDHFOEH": {
+                "GCPNPCOFFBP": "Shake"
+              },
+              "IODAJAKBOLG": {
+                "onHitEffectName": "default",
+                "JKLONEBKFKJ": {
+                  "JJGBOHIKHFM": true,
+                  "value": 1
+                }
+              },
+              "attackProperty": {
+                "attackType": "Default",
+                "enBreak": 25,
+                "elementType": "Grass",
+                "elementDurability": 25,
+                "strikeType": "Pierce",
+                "elementRank": 1,
+                "damagePercentage": 0.25
+              },
+              "cameraShake": {
+                "extension": {
+                  "baseCycle": 0.11999999731779099,
+                  "cycleDamping": 0.11999999731779099,
+                  "baseOnCamera": true,
+                  "rangeAttenuation": 0.5
+                },
+                "FAKMJBNLPPB": -1,
+                "shakeDistance": 20
+              }
+            },
+            "attackPattern": {
+              "$type": "ConfigAttackSphere",
+              "radius": 0.5,
+              "massiveAttackRatio": 1,
+              "born": {
+                "$type": "ConfigBornByCollisionPoint",
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "PBFNLCIFCBO": {
+                "GOAEBMPCPJL": {
+                  "JJGBOHIKHFM": true,
+                  "value": 1
+                }
+              },
+              "triggerType": "TriggerNoRepeat"
+            }
+          },
+          "targetType": "Enemy",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Magbeast_Pergesa_MagBullet2_Fire",
+      "onAbilityStart": [
+        {
+          "$type": "FireHitEffect",
+          "doOffStage": false,
+          "hitEntity": "Eff_Monster_Magbeast_Pergesa_MagAtk2_Bullet_Fire_Hit",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true,
+          "PBFNLCIFCBO": {
+            "GOAEBMPCPJL": {
+              "JJGBOHIKHFM": true,
+              "value": 1
+            },
+            "defaultEffect": "Eff_Monster_Magbeast_Pergesa_MagAtk2_Bullet_Fire_Hit"
+          }
+        },
+        {
+          "$type": "TriggerAttackEvent",
+          "doOffStage": false,
+          "attackEvent": {
+            "attackInfo": {
+              "attenuationGroup": "default",
+              "canBeModifiedBy": "OriginOwner",
+              "hitPattern": {
+                "hitImpulseType": "LV3",
+                "onHitEffectName": "default",
+                "JKLONEBKFKJ": {
+                  "JJGBOHIKHFM": true,
+                  "value": 1
+                }
+              },
+              "FJNMGDHFOEH": {
+                "GCPNPCOFFBP": "Shake"
+              },
+              "IODAJAKBOLG": {
+                "onHitEffectName": "default",
+                "JKLONEBKFKJ": {
+                  "JJGBOHIKHFM": true,
+                  "value": 1
+                }
+              },
+              "attackProperty": {
+                "attackType": "Default",
+                "enBreak": 25,
+                "elementType": "Fire",
+                "elementDurability": 25,
+                "strikeType": "Pierce",
+                "elementRank": 1,
+                "damagePercentage": 0.25
+              },
+              "cameraShake": {
+                "extension": {
+                  "baseCycle": 0.11999999731779099,
+                  "cycleDamping": 0.11999999731779099,
+                  "baseOnCamera": true,
+                  "rangeAttenuation": 0.5
+                },
+                "FAKMJBNLPPB": -1,
+                "shakeDistance": 20
+              }
+            },
+            "attackPattern": {
+              "$type": "ConfigAttackSphere",
+              "radius": 0.5,
+              "massiveAttackRatio": 1,
+              "born": {
+                "$type": "ConfigBornByCollisionPoint",
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "PBFNLCIFCBO": {
+                "GOAEBMPCPJL": {
+                  "JJGBOHIKHFM": true,
+                  "value": 1
+                }
+              },
+              "triggerType": "TriggerNoRepeat"
+            }
+          },
+          "targetType": "Enemy",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ]
+    }
+  }
+]

@@ -1,0 +1,1518 @@
+[
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "SetGlobalValue",
+          "doOffStage": false,
+          "key": "_MONSTER_OVACUA_OUTERRING_AVAILABLITY",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "Monster_Ovacua_Common_OuterRingManager",
+      "abilityMixins": [
+        {
+          "$type": "AttachModifierToSelfGlobalValueMixin",
+          "globalValueKey": "_MONSTER_OVACUA_OUTERRING_AVAILABLITY",
+          "modifierNameSteps": [
+            "Ovacua_OuterRing_Unavailable",
+            "Ovacua_OuterRing_Available"
+          ],
+          "removeAppliedModifier": true,
+          "actorIceSubHurtDelta": -1,
+          "valueSteps": [
+            -0.5,
+            0.5,
+            1.5
+          ]
+        },
+        {
+          "$type": "DoActionOnEquipOwnerAndEquipsReadyMixin",
+          "actorIceSubHurtDelta": -1,
+          "actionQueue": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "value": 1,
+              "key": "_MONSTER_OVACUA_OUTERRING_AVAILABLITY",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ]
+        },
+        {
+          "$type": "AttachToAbilityStateMixin",
+          "modifierName": "Ovacua_OuterRing_FreezeState",
+          "abilityStates": [
+            "ElementFrozen",
+            "ElementPetrifaction"
+          ],
+          "actorIceSubHurtDelta": -1
+        }
+      ],
+      "modifiers": {
+        "Ovacua_OuterRing_Available": {
+          "onKill": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "otherTargets": {
+                "$type": "SelectTargetsByEquipParts",
+                "partNames": [
+                  "equip01"
+                ]
+              },
+              "key": "_MONSTER_OVACUA_OUTERRING_GADGETSTATE",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "otherTargets": {
+                "$type": "SelectTargetsByEquipParts",
+                "partNames": [
+                  "equip01"
+                ]
+              },
+              "key": "_MONSTER_OVACUA_OUTERRING_FX_VISIBLE",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "AttachModifierToSelfGlobalValueMixin",
+              "globalValueKey": "_MONSTER_OVACUA_OUTERRING_STATE",
+              "modifierNameSteps": [
+                "Ovacua_OuterRing_Hidden",
+                "Ovacua_OuterRing_Standby",
+                "Ovacua_OuterRing_Idle"
+              ],
+              "removeAppliedModifier": true,
+              "actorIceSubHurtDelta": -1,
+              "valueSteps": [
+                -0.5,
+                0.5,
+                1.5,
+                2.5
+              ]
+            }
+          ],
+          "minus_one": -1
+        },
+        "Ovacua_OuterRing_FreezeState": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_MONSTER_OVACUA_OUTERRING_STATE",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "value": 1,
+              "key": "_MONSTER_OVACUA_OUTERRING_STATE",
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "target": "Target",
+                  "key": "_MONSTER_OVACUA_OUTERRING_HIDDENFLAG",
+                  "compareType": "NoneOrEqual"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1
+        },
+        "Ovacua_OuterRing_Hidden": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "otherTargets": {
+                "$type": "SelectTargetsByEquipParts",
+                "partNames": [
+                  "equip01"
+                ]
+              },
+              "key": "_MONSTER_OVACUA_OUTERRING_GADGETSTATE",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "otherTargets": {
+                "$type": "SelectTargetsByEquipParts",
+                "partNames": [
+                  "equip01"
+                ]
+              },
+              "key": "_MONSTER_OVACUA_OUTERRING_FX_VISIBLE",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "Ovacua_OuterRing_Idle": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "otherTargets": {
+                "$type": "SelectTargetsByEquipParts",
+                "partNames": [
+                  "equip01"
+                ]
+              },
+              "value": 1,
+              "key": "_MONSTER_OVACUA_OUTERRING_GADGETSTATE",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "otherTargets": {
+                "$type": "SelectTargetsByEquipParts",
+                "partNames": [
+                  "equip01"
+                ]
+              },
+              "key": "_MONSTER_OVACUA_OUTERRING_FX_VISIBLE",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "onBeingHit": [
+            {
+              "$type": "SetAnimatorTrigger",
+              "doOffStage": false,
+              "otherTargets": {
+                "$type": "SelectTargetsByEquipParts",
+                "partNames": [
+                  "equip01"
+                ]
+              },
+              "mpTriggerOnRemote": true,
+              "triggerID": "HitShake",
+              "predicates": [
+                {
+                  "$type": "EPPIILDCNBB",
+                  "target": "Target",
+                  "logic": "Equal",
+                  "hitLevel": "Shake"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetAnimatorTrigger",
+              "doOffStage": false,
+              "otherTargets": {
+                "$type": "SelectTargetsByEquipParts",
+                "partNames": [
+                  "equip01"
+                ]
+              },
+              "mpTriggerOnRemote": true,
+              "triggerID": "HitH",
+              "predicates": [
+                {
+                  "$type": "EPPIILDCNBB",
+                  "target": "Target",
+                  "hitLevel": "Shake"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "Ovacua_OuterRing_Standby": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "otherTargets": {
+                "$type": "SelectTargetsByEquipParts",
+                "partNames": [
+                  "equip01"
+                ]
+              },
+              "value": 1,
+              "key": "_MONSTER_OVACUA_OUTERRING_GADGETSTATE",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "otherTargets": {
+                "$type": "SelectTargetsByEquipParts",
+                "partNames": [
+                  "equip01"
+                ]
+              },
+              "value": 1,
+              "key": "_MONSTER_OVACUA_OUTERRING_FX_VISIBLE",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "onBeingHit": [
+            {
+              "$type": "SetAnimatorTrigger",
+              "doOffStage": false,
+              "otherTargets": {
+                "$type": "SelectTargetsByEquipParts",
+                "partNames": [
+                  "equip01"
+                ]
+              },
+              "mpTriggerOnRemote": true,
+              "triggerID": "HitShake",
+              "predicates": [
+                {
+                  "$type": "EPPIILDCNBB",
+                  "target": "Target",
+                  "logic": "Equal",
+                  "hitLevel": "Shake"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetAnimatorTrigger",
+              "doOffStage": false,
+              "otherTargets": {
+                "$type": "SelectTargetsByEquipParts",
+                "partNames": [
+                  "equip01"
+                ]
+              },
+              "mpTriggerOnRemote": true,
+              "triggerID": "HitH",
+              "predicates": [
+                {
+                  "$type": "EPPIILDCNBB",
+                  "target": "Target",
+                  "hitLevel": "Shake"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "Ovacua_OuterRing_Unavailable": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Monster_Ovacua_Common_OuterRing_Alert",
+      "onAbilityStart": [
+        {
+          "$type": "SetAnimatorInt",
+          "doOffStage": false,
+          "otherTargets": {
+            "$type": "SelectTargetsByEquipParts",
+            "partNames": [
+              "equip01"
+            ]
+          },
+          "value": 100,
+          "intID": "SkillID",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "SetAnimatorTrigger",
+          "doOffStage": false,
+          "otherTargets": {
+            "$type": "SelectTargetsByEquipParts",
+            "partNames": [
+              "equip01"
+            ]
+          },
+          "mpTriggerOnRemote": true,
+          "triggerID": "DoSkill",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Monster_Ovacua_Common_ReturnToBorn",
+      "abilityMixins": [
+        {
+          "$type": "AttachToPoseIDMixin",
+          "modifierName": "ReturnToBornState",
+          "poseIDs": [
+            401,
+            402
+          ],
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToAnimatorStateIDMixin",
+          "modifierName": "ReturnToBornHandler",
+          "stateIDs": [
+            "ReturnToBorn_Loop"
+          ],
+          "value": -1,
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToAnimatorStateIDMixin",
+          "modifierName": "ReturnToBorn_End",
+          "stateIDs": [
+            "Standby"
+          ],
+          "value": -1,
+          "actorIceSubHurtDelta": -1
+        }
+      ],
+      "modifiers": {
+        "ReturnToBornHandler": {
+          "onAdded": [
+            {
+              "$type": "HideUIBillBoard",
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1,
+              "hide": true,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "TriggerSetCastShadow",
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true,
+              "PBCEIGJPENK": true
+            },
+            {
+              "$type": "EnablePushColliderName",
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1,
+              "pushColliderNames": [
+                "PushCollider"
+              ],
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_MONSTER_OVACUA_BILLBOARD_POSSTATE",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "HideUIBillBoard",
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "TriggerSetCastShadow",
+              "doOffStage": false,
+              "enable": true,
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true,
+              "PBCEIGJPENK": true
+            },
+            {
+              "$type": "EnablePushColliderName",
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1,
+              "setEnable": true,
+              "pushColliderNames": [
+                "PushCollider"
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1
+        },
+        "ReturnToBornState": {
+          "onAdded": [
+            {
+              "$type": "SetAnimatorTrigger",
+              "doOffStage": false,
+              "triggerID": "ReturnToBornTrigger",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "ReturnToBorn_End": {
+          "onAdded": [
+            {
+              "$type": "HideUIBillBoard",
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "TriggerSetCastShadow",
+              "doOffStage": false,
+              "enable": true,
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true,
+              "PBCEIGJPENK": true
+            },
+            {
+              "$type": "EnablePushColliderName",
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1,
+              "setEnable": true,
+              "pushColliderNames": [
+                "PushCollider"
+              ],
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_MONSTER_OVACUA_BILLBOARD_POSSTATE",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Monster_Ovacua_Common_OuterRing_Show",
+      "onAbilityStart": [
+        {
+          "$type": "SetGlobalValue",
+          "doOffStage": false,
+          "value": 1,
+          "key": "_MONSTER_OVACUA_OUTERRING_STATE",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "SetGlobalValue",
+          "doOffStage": false,
+          "key": "_MONSTER_OVACUA_OUTERRING_HIDDENFLAG",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Monster_Ovacua_Common_OuterRing_Hide",
+      "onAbilityStart": [
+        {
+          "$type": "SetGlobalValue",
+          "doOffStage": false,
+          "key": "_MONSTER_OVACUA_OUTERRING_STATE",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "SetGlobalValue",
+          "doOffStage": false,
+          "value": 1,
+          "key": "_MONSTER_OVACUA_OUTERRING_HIDDENFLAG",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Monster_Ovacua_Common_OuterRing_Idle",
+      "onAbilityStart": [
+        {
+          "$type": "SetGlobalValue",
+          "doOffStage": false,
+          "value": 2,
+          "key": "_MONSTER_OVACUA_OUTERRING_STATE",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "SetGlobalValue",
+          "doOffStage": false,
+          "key": "_MONSTER_OVACUA_OUTERRING_HIDDENFLAG",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "SetAnimatorFloat",
+          "doOffStage": false,
+          "value": 0.5,
+          "floatID": "HiddenBlend",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "Monster_Ovacua_Common_OuterRing",
+      "abilityMixins": [
+        {
+          "$type": "AttachModifierToSelfGlobalValueMixin",
+          "globalValueKey": "_MONSTER_OVACUA_OUTERRING_GADGETSTATE",
+          "modifierNameSteps": [
+            "Hidden",
+            "Standby"
+          ],
+          "removeAppliedModifier": true,
+          "actorIceSubHurtDelta": -1,
+          "valueSteps": [
+            -0.5,
+            0.5,
+            1.5
+          ]
+        },
+        {
+          "$type": "AttachModifierToSelfGlobalValueMixin",
+          "globalValueKey": "_MONSTER_OVACUA_OUTERRING_FX_VISIBLE",
+          "modifierNameSteps": [
+            "Fx_Invisible",
+            "Fx_Visible"
+          ],
+          "removeAppliedModifier": true,
+          "actorIceSubHurtDelta": -1,
+          "valueSteps": [
+            -0.5,
+            0.5,
+            1.5
+          ]
+        }
+      ],
+      "modifiers": {
+        "Fx_Invisible": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "Fx_Visible": {
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Ovacua_01_OuterRing_01",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "Hidden": {
+          "onAdded": [
+            {
+              "$type": "SetAnimatorFloat",
+              "doOffStage": false,
+              "floatID": "HiddenBlend",
+              "value": 0.5,
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "Standby": {
+          "onAdded": [
+            {
+              "$type": "SetAnimatorFloat",
+              "doOffStage": false,
+              "value": 0.5,
+              "floatID": "HiddenBlend",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "SetGlobalValue",
+          "doOffStage": false,
+          "key": "_MONSTER_OVACUA_BILLBOARD_POSSTATE",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "Monster_Ovacua_Common_UIBillboardManager",
+      "abilityMixins": [
+        {
+          "$type": "AttachModifierToSelfGlobalValueMixin",
+          "globalValueKey": "_MONSTER_OVACUA_BILLBOARD_POSSTATE",
+          "modifierNameSteps": [
+            "Ovacua_Billboard_HighPos",
+            "Ovacua_Billboard_LowPos"
+          ],
+          "removeAppliedModifier": true,
+          "actorIceSubHurtDelta": -1,
+          "valueSteps": [
+            -0.5,
+            0.5,
+            1.5
+          ]
+        }
+      ],
+      "onAbilityStart": [
+        {
+          "$type": "SetGlobalValue",
+          "doOffStage": false,
+          "key": "_MONSTER_OVACUA_BILLBOARD_POSSTATE",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "modifiers": {
+        "Ovacua_Billboard_HighPos": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "Ovacua_Billboard_LowPos": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "OverrideBillboardAttachPointMixin",
+              "actorIceSubHurtDelta": -1,
+              "attachPointName": "BillBoardAttach_Low"
+            }
+          ],
+          "minus_one": -1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Monster_Ovacua_Common_UIBillboard_MoveToLowPosition",
+      "onAbilityStart": [
+        {
+          "$type": "SetGlobalValue",
+          "doOffStage": false,
+          "value": 1,
+          "key": "_MONSTER_OVACUA_BILLBOARD_POSSTATE",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Monster_Ovacua_Common_Steer",
+      "abilityMixins": [
+        {
+          "$type": "SteerAttackMixin",
+          "angularSpeed": 30,
+          "CCFNFIKKIDJ": true,
+          "value": -1,
+          "GMEPMDNDBOP": 180,
+          "actorIceSubHurtDelta": -1,
+          "steerStateIDs": [
+            "NormalMove"
+          ],
+          "endNormalizedTime": 99,
+          "attackDistance": 12,
+          "PMKCEJILFAF": true
+        },
+        {
+          "$type": "SteerAttackMixin",
+          "angularSpeed": 30,
+          "CCFNFIKKIDJ": true,
+          "value": -1,
+          "GMEPMDNDBOP": 180,
+          "actorIceSubHurtDelta": -1,
+          "steerStateIDs": [
+            "NormalIdle"
+          ],
+          "endNormalizedTime": 99,
+          "attackDistance": 12,
+          "PMKCEJILFAF": true
+        },
+        {
+          "$type": "SteerAttackMixin",
+          "angularSpeed": 120,
+          "CCFNFIKKIDJ": true,
+          "value": -1,
+          "GMEPMDNDBOP": 180,
+          "actorIceSubHurtDelta": -1,
+          "steerStateIDs": [
+            "Shoot01"
+          ],
+          "endNormalizedTime": 0.5,
+          "attackDistance": 12,
+          "PMKCEJILFAF": true
+        },
+        {
+          "$type": "SteerAttackMixin",
+          "angularSpeed": 240,
+          "CCFNFIKKIDJ": true,
+          "value": -1,
+          "GMEPMDNDBOP": 180,
+          "actorIceSubHurtDelta": -1,
+          "steerStateIDs": [
+            "MeleeAttack01_BS"
+          ],
+          "endNormalizedTime": 0.30000001192092896,
+          "attackDistance": 12,
+          "PMKCEJILFAF": true
+        },
+        {
+          "$type": "SteerAttackMixin",
+          "angularSpeed": 240,
+          "CCFNFIKKIDJ": true,
+          "value": -1,
+          "GMEPMDNDBOP": 180,
+          "actorIceSubHurtDelta": -1,
+          "steerStateIDs": [
+            "MeleeAttack02_BS"
+          ],
+          "endNormalizedTime": 0.30000001192092896,
+          "attackDistance": 12,
+          "PMKCEJILFAF": true
+        },
+        {
+          "$type": "SteerAttackMixin",
+          "angularSpeed": 240,
+          "CCFNFIKKIDJ": true,
+          "value": -1,
+          "GMEPMDNDBOP": 180,
+          "actorIceSubHurtDelta": -1,
+          "steerStateIDs": [
+            "MeleeAttack03_BS"
+          ],
+          "endNormalizedTime": 0.30000001192092896,
+          "attackDistance": 12,
+          "PMKCEJILFAF": true
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Monster_Ovacua_Common_Shoot01_Big",
+      "onAbilityStart": [
+        {
+          "$type": "TriggerBullet",
+          "doOffStage": false,
+          "trackTarget": "SelfAttackTarget",
+          "bulletID": 42211005,
+          "value": true,
+          "actorIceSubHurtDelta": -1,
+          "born": {
+            "$type": "ConfigBornByAttachPoint",
+            "direction": {
+              "$type": "ConfigDirectionByAttackTarget",
+              "maxAngle": 30
+            },
+            "useRotation": true,
+            "FDGAEDDEEDG": {
+              "ELAJJIANFFM": 180
+            },
+            "attachPointName": "Shoot01BulletSource01",
+            "onGroundRaycastUpDist": 2,
+            "value": 10
+          },
+          "canBeHandledOnRecover": true,
+          "POOEIFNLHDB": true
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Monster_Ovacua_Common_Shoot01_Small",
+      "onAbilityStart": [
+        {
+          "$type": "TriggerBullet",
+          "doOffStage": false,
+          "trackTarget": "SelfAttackTarget",
+          "bulletID": 42211009,
+          "value": true,
+          "actorIceSubHurtDelta": -1,
+          "born": {
+            "$type": "ConfigBornByAttachPoint",
+            "direction": {
+              "$type": "ConfigDirectionByAttackTarget",
+              "maxAngle": 30
+            },
+            "useRotation": true,
+            "FDGAEDDEEDG": {
+              "ELAJJIANFFM": 180
+            },
+            "attachPointName": "Shoot01BulletSource01",
+            "onGroundRaycastUpDist": 2,
+            "value": 10
+          },
+          "canBeHandledOnRecover": true,
+          "POOEIFNLHDB": true
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Monster_Ovacua_Common_Shader_Growth_On",
+      "abilityMixins": [
+        {
+          "$type": "AttachModifierToSelfGlobalValueMixin",
+          "globalValueKey": "_MONSTER_OVACUA_SHADER_GROWTH_ON",
+          "modifierNameSteps": [
+            "Ovacua_Common_Shader_Charge_Off",
+            "Ovacua_Common_Shader_Charge_On"
+          ],
+          "removeAppliedModifier": true,
+          "actorIceSubHurtDelta": -1,
+          "valueSteps": [
+            -0.5,
+            0.5,
+            1.5
+          ]
+        }
+      ],
+      "onAbilityStart": [
+        {
+          "$type": "SetGlobalValue",
+          "doOffStage": false,
+          "value": 1,
+          "key": "_MONSTER_OVACUA_SHADER_GROWTH_ON",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "modifiers": {
+        "Ovacua_Common_Shader_Charge_Off": {
+          "onAdded": [
+            {
+              "$type": "SetAnimatorBool",
+              "doOffStage": false,
+              "boolID": "ShaderGrowthState",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "Ovacua_Common_Shader_Charge_On": {
+          "onAdded": [
+            {
+              "$type": "SetAnimatorBool",
+              "doOffStage": false,
+              "value": true,
+              "boolID": "ShaderGrowthState",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Monster_Ovacua_Common_Shader_Growth_Off",
+      "onAbilityStart": [
+        {
+          "$type": "SetGlobalValue",
+          "doOffStage": false,
+          "key": "_MONSTER_OVACUA_SHADER_GROWTH_ON",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "SetGlobalValue",
+          "doOffStage": false,
+          "value": 150,
+          "key": "_MONSTER_OVACUA_GROWTH_ELEMENTDURABILITY",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "Monster_Ovacua_01_GrowthState_ElementDurability"
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "SetGlobalValue",
+          "doOffStage": false,
+          "value": 50,
+          "key": "_MONSTER_OVACUA_GROWTH_ELEMENTDURABILITY",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "Monster_Ovacua_02_GrowthState_ElementDurability"
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "doOffStage": false,
+          "modifierName": "Bullet_Loop",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "Monster_Ovacua_Common_Shoot01_Bullet",
+      "onAbilityStart": [
+        {
+          "$type": "RemoveModifier",
+          "doOffStage": false,
+          "modifierName": "Bullet_Loop",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "FireEffect",
+          "doOffStage": false,
+          "scale": 1,
+          "actorIceSubHurtDelta": -1,
+          "effectPattern": "Eff_Monster_Ovacua_01_Shoot01_Bullet_Hit",
+          "born": {
+            "$type": "ConfigBornByAttachPoint",
+            "direction": {
+              "maxAngle": 180
+            },
+            "useRotation": true,
+            "FDGAEDDEEDG": {
+              "ELAJJIANFFM": 180
+            },
+            "attachPointName": "RootNode",
+            "onGroundRaycastUpDist": 2,
+            "value": 10
+          },
+          "effectTempleteID": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "TriggerAttackEvent",
+          "doOffStage": false,
+          "attackEvent": {
+            "attackInfo": {
+              "attenuationGroup": "default",
+              "hitPattern": {
+                "hitImpulseType": "LV3",
+                "onHitEffectName": "default",
+                "hitHaltTimeScale": 0.05000000074505806,
+                "JKLONEBKFKJ": {
+                  "JJGBOHIKHFM": true,
+                  "value": 1
+                }
+              },
+              "FJNMGDHFOEH": {
+                "GCPNPCOFFBP": "Shake"
+              },
+              "IODAJAKBOLG": {
+                "onHitEffectName": "default",
+                "JKLONEBKFKJ": {
+                  "JJGBOHIKHFM": true,
+                  "value": 1
+                }
+              },
+              "attackProperty": {
+                "attackType": "Range",
+                "enBreak": 100,
+                "elementDurability": 100,
+                "strikeType": "Blunt",
+                "elementRank": 1,
+                "damagePercentage": 0.6000000238418579
+              },
+              "cameraShake": {
+                "extension": {
+                  "baseCycle": 0.11999999731779099,
+                  "cycleDamping": 0.11999999731779099,
+                  "baseOnCamera": true,
+                  "rangeAttenuation": 0.5
+                },
+                "FAKMJBNLPPB": -1,
+                "shakeDistance": 20
+              }
+            },
+            "attackPattern": {
+              "$type": "ConfigAttackSphere",
+              "radius": 1.5,
+              "massiveAttackRatio": 1,
+              "born": {
+                "$type": "ConfigBornBySelf",
+                "direction": {
+                  "maxAngle": 180
+                },
+                "useRotation": true,
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "PBFNLCIFCBO": {
+                "GOAEBMPCPJL": {
+                  "JJGBOHIKHFM": true,
+                  "value": 1
+                }
+              },
+              "triggerType": "TriggerNoRepeat"
+            }
+          },
+          "targetType": "Enemy",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "modifiers": {
+        "Bullet_Loop": {
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Ovacua_01_Shoot01_Bullet",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Ovacua_01_Shoot01_Bullet_Trail",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "KillSelf",
+              "doOffStage": false,
+              "killSelfType": "Normal",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "doOffStage": false,
+          "modifierName": "Bullet_Loop",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "Monster_Ovacua_Common_Shoot01_Bullet_Small",
+      "onAbilityStart": [
+        {
+          "$type": "RemoveModifier",
+          "doOffStage": false,
+          "modifierName": "Bullet_Loop",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "FireEffect",
+          "doOffStage": false,
+          "scale": 1,
+          "actorIceSubHurtDelta": -1,
+          "effectPattern": "Eff_Monster_Ovacua_01_Shoot01_Bullet_Hit",
+          "born": {
+            "$type": "ConfigBornByAttachPoint",
+            "direction": {
+              "maxAngle": 180
+            },
+            "useRotation": true,
+            "FDGAEDDEEDG": {
+              "ELAJJIANFFM": 180
+            },
+            "attachPointName": "RootNode",
+            "onGroundRaycastUpDist": 2,
+            "value": 10
+          },
+          "effectTempleteID": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "TriggerAttackEvent",
+          "doOffStage": false,
+          "attackEvent": {
+            "attackInfo": {
+              "attenuationGroup": "default",
+              "hitPattern": {
+                "hitImpulseType": "LV3",
+                "onHitEffectName": "default",
+                "hitHaltTimeScale": 0.05000000074505806,
+                "JKLONEBKFKJ": {
+                  "JJGBOHIKHFM": true,
+                  "value": 1
+                }
+              },
+              "FJNMGDHFOEH": {
+                "GCPNPCOFFBP": "Shake"
+              },
+              "IODAJAKBOLG": {
+                "onHitEffectName": "default",
+                "JKLONEBKFKJ": {
+                  "JJGBOHIKHFM": true,
+                  "value": 1
+                }
+              },
+              "attackProperty": {
+                "attackType": "Range",
+                "enBreak": 100,
+                "elementDurability": 100,
+                "strikeType": "Blunt",
+                "elementRank": 1,
+                "damagePercentage": 0.6000000238418579
+              },
+              "cameraShake": {
+                "extension": {
+                  "baseCycle": 0.11999999731779099,
+                  "cycleDamping": 0.11999999731779099,
+                  "baseOnCamera": true,
+                  "rangeAttenuation": 0.5
+                },
+                "FAKMJBNLPPB": -1,
+                "shakeDistance": 20
+              }
+            },
+            "attackPattern": {
+              "$type": "ConfigAttackSphere",
+              "radius": 0.5,
+              "massiveAttackRatio": 1,
+              "born": {
+                "$type": "ConfigBornBySelf",
+                "direction": {
+                  "maxAngle": 180
+                },
+                "useRotation": true,
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "PBFNLCIFCBO": {
+                "GOAEBMPCPJL": {
+                  "JJGBOHIKHFM": true,
+                  "value": 1
+                }
+              },
+              "triggerType": "TriggerNoRepeat"
+            }
+          },
+          "targetType": "Enemy",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "modifiers": {
+        "Bullet_Loop": {
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Ovacua_02_Shoot01_Bullet",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Ovacua_02_Shoot01_Bullet_Trail",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "KillSelf",
+              "doOffStage": false,
+              "killSelfType": "Normal",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "Predicated",
+          "doOffStage": false,
+          "failActions": [
+            {
+              "$type": "UseSkillEliteSet",
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true,
+              "skillEliteSetID": 1
+            }
+          ],
+          "enable": true,
+          "targetPredicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "value": 1,
+              "target": "Target",
+              "key": "_MONSTER_OVACUA_ISINDUNGEON_"
+            }
+          ],
+          "actorIceSubHurtDelta": -1,
+          "successActions": [
+            {
+              "$type": "UseSkillEliteSet",
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true,
+              "skillEliteSetID": 2
+            }
+          ],
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "Monster_Ovacua_SkillSetManager"
+    }
+  }
+]

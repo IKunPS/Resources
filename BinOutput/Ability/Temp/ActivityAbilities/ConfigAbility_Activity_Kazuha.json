@@ -1,0 +1,57 @@
+[
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "ActivityAbility_Kazuha_Decision_HealthValue",
+      "isDynamicAbility": true,
+      "abilityMixins": [
+        {
+          "$type": "LocalAvatarsMixin",
+          "modifierName": "UNIQUE_Ability_Kazuha_Decision_HealthValue",
+          "actorIceSubHurtDelta": -1
+        }
+      ],
+      "modifiers": {
+        "UNIQUE_Ability_Kazuha_Decision_HealthValue": {
+          "elementDurability": 100,
+          "stacking": "Unique",
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "DoActionByEventMixin",
+              "onEvent": "HP",
+              "actions": [
+                {
+                  "$type": "ServerLuaTriggerEvent",
+                  "doOffStage": true,
+                  "luaCallType": "SpecificGroup",
+                  "actorIceSubHurtDelta": -1,
+                  "sourceName": "Kazuha_Room3",
+                  "CallParamList": [
+                    201071002
+                  ],
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "predicates": [
+                {
+                  "$type": "ByTargetHPRatio",
+                  "logic": "LesserOrEqual",
+                  "HPRatio": 0.30000001192092896
+                }
+              ],
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "minus_one": -1,
+          "isUnique": true,
+          "state": "Limbo"
+        }
+      }
+    }
+  }
+]

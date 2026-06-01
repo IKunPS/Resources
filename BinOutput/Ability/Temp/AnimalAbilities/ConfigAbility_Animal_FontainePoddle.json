@@ -1,0 +1,397 @@
+[
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "doOffStage": false,
+          "modifierName": "UNIQUE_Invincible",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "AttachModifier",
+          "doOffStage": false,
+          "modifierName": "DenyLockOn",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "AttachAbilityStateResistance",
+          "doOffStage": false,
+          "durationRatio": 1,
+          "actorIceSubHurtDelta": -1,
+          "resistanceListID": 11001,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "Animal_FontainePoddle_AIStateInitial",
+      "abilityMixins": [
+        {
+          "$type": "SteerAttackMixin",
+          "angularSpeed": 60,
+          "CCFNFIKKIDJ": true,
+          "value": -1,
+          "GMEPMDNDBOP": 180,
+          "actorIceSubHurtDelta": -1,
+          "steerStateIDs": [
+            "Turn"
+          ],
+          "endNormalizedTime": 999,
+          "PMKCEJILFAF": true
+        },
+        {
+          "$type": "SteerAttackMixin",
+          "angularSpeed": 3600,
+          "CCFNFIKKIDJ": true,
+          "value": -1,
+          "GMEPMDNDBOP": 180,
+          "actorIceSubHurtDelta": -1,
+          "steerStateIDs": [
+            "Dodge"
+          ],
+          "endNormalizedTime": 0.18000000715255737,
+          "PMKCEJILFAF": true
+        }
+      ],
+      "modifiers": {
+        "DenyLockOn": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "state": "DenyLockOn"
+        },
+        "UNIQUE_Invincible": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "isUnique": true,
+          "state": "Invincible"
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Animal_FontainePoddle_Prone",
+      "onAbilityStart": [
+        {
+          "$type": "SetPoseInt",
+          "doOffStage": false,
+          "value": 2,
+          "intID": "RandomPose",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Animal_FontainePoddle_Stand",
+      "onAbilityStart": [
+        {
+          "$type": "SetPoseInt",
+          "doOffStage": false,
+          "value": 1,
+          "intID": "RandomPose",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Animal_FontainePoddle_BeHit",
+      "abilityMixins": [
+        {
+          "$type": "AttachToPoseIDMixin",
+          "modifierName": "BeHitDetect",
+          "poseIDs": [
+            1,
+            2,
+            4,
+            5,
+            101,
+            201,
+            401,
+            501
+          ],
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "DoActionByPoseIDMixin",
+          "enterActions": [
+            {
+              "$type": "ApplyModifier",
+              "doOffStage": false,
+              "modifierName": "FleeCountDown",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "poseIDs": [
+            901,
+            902
+          ],
+          "actorIceSubHurtDelta": -1
+        }
+      ],
+      "modifiers": {
+        "BeHitDetect": {
+          "elementDurability": 100,
+          "onBeingHit": [
+            {
+              "$type": "Predicated",
+              "doOffStage": false,
+              "failActions": [
+                {
+                  "$type": "SetPoseBool",
+                  "doOffStage": false,
+                  "value": true,
+                  "boolID": "FleeNoTarget",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "target": "Target",
+              "targetPredicates": [
+                {
+                  "$type": "ByEntityTypes",
+                  "target": "Target",
+                  "value": -1,
+                  "entityTypes": [
+                    "Avatar",
+                    "Monster",
+                    "Gadget",
+                    "Bullet",
+                    "Partner",
+                    "Vehicle"
+                  ]
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "successActions": [
+                {
+                  "$type": "SetPoseBool",
+                  "doOffStage": false,
+                  "value": true,
+                  "boolID": "FleeHasTarget",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "SetAnimatorTrigger",
+                  "doOffStage": false,
+                  "triggerID": "BeHitTrigger",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "FleeCountDown": {
+          "elementDurability": 100,
+          "stacking": "Unique",
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "StartDither",
+              "ADBJDJLIIMK": -1,
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1,
+              "duHPRation": 3,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "KillSelf",
+              "doOffStage": false,
+              "killSelfType": "Disappear",
+              "HMOKBGGKIAF": true,
+              "actorIceSubHurtDelta": -1,
+              "duHPRation": 2.5,
+              "OLIICKEKPGF": true,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "duration": 10
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Animal_FontainePoddle_Guard_TurnToProne",
+      "onAbilityStart": [
+        {
+          "$type": "SetAISkillCDAvailableNow",
+          "doOffStage": false,
+          "actorIceSubHurtDelta": -1,
+          "skillIDs": [
+            101,
+            102
+          ],
+          "canBeHandledOnRecover": true
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Animal_FontainePoddle_Guard_BeHit",
+      "abilityMixins": [
+        {
+          "$type": "AttachToPoseIDMixin",
+          "modifierName": "BeHitDetect",
+          "poseIDs": [
+            1,
+            2,
+            3,
+            101,
+            201,
+            301
+          ],
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "DoActionByPoseIDMixin",
+          "enterActions": [
+            {
+              "$type": "ApplyModifier",
+              "doOffStage": false,
+              "modifierName": "FleeCountDown",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "poseIDs": [
+            901,
+            902
+          ],
+          "actorIceSubHurtDelta": -1
+        }
+      ],
+      "modifiers": {
+        "BeHitDetect": {
+          "elementDurability": 100,
+          "onBeingHit": [
+            {
+              "$type": "Predicated",
+              "doOffStage": false,
+              "failActions": [
+                {
+                  "$type": "SetPoseBool",
+                  "doOffStage": false,
+                  "value": true,
+                  "boolID": "FleeNoTarget",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "target": "Target",
+              "targetPredicates": [
+                {
+                  "$type": "ByEntityTypes",
+                  "target": "Target",
+                  "value": -1,
+                  "entityTypes": [
+                    "Avatar",
+                    "Monster",
+                    "Gadget",
+                    "Bullet",
+                    "Partner",
+                    "Vehicle"
+                  ]
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "successActions": [
+                {
+                  "$type": "SetPoseBool",
+                  "doOffStage": false,
+                  "value": true,
+                  "boolID": "FleeHasTarget",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "SetAnimatorTrigger",
+                  "doOffStage": false,
+                  "triggerID": "BeHitTrigger",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "FleeCountDown": {
+          "elementDurability": 100,
+          "stacking": "Unique",
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "StartDither",
+              "ADBJDJLIIMK": -1,
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1,
+              "duHPRation": 3,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "KillSelf",
+              "doOffStage": false,
+              "killSelfType": "Disappear",
+              "HMOKBGGKIAF": true,
+              "actorIceSubHurtDelta": -1,
+              "duHPRation": 2.5,
+              "OLIICKEKPGF": true,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "duration": 10
+        }
+      }
+    }
+  }
+]

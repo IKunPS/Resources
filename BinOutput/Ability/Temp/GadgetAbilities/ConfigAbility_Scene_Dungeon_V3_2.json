@@ -1,0 +1,1895 @@
+[
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "SetGlobalValue",
+          "doOffStage": false,
+          "key": "MachineCarrier_PlayerState",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "SceneObj_Level_Common_Property_Ani_Prop_MachineCarrier_01",
+      "abilityMixins": [
+        {
+          "$type": "AttachModifierToSelfGlobalValueMixin",
+          "globalValueKey": "SGV_MachineCarrier_State",
+          "modifierNameSteps": [
+            "MachineCarrier_Default",
+            "MachineCarrier_State_1",
+            "MachineCarrier_State_2"
+          ],
+          "removeAppliedModifier": true,
+          "actorIceSubHurtDelta": -1,
+          "valueSteps": [
+            -0.5,
+            0.5,
+            1.5,
+            2.5
+          ]
+        },
+        {
+          "$type": "AttachModifierToSelfGlobalValueMixin",
+          "globalValueKey": "MachineCarrier_PlayerState",
+          "modifierNameSteps": [
+            "MachineCarrier_DetectPlayer",
+            "MachineCarrier_PlayerIn"
+          ],
+          "removeAppliedModifier": true,
+          "actorIceSubHurtDelta": -1,
+          "valueSteps": [
+            -0.5,
+            0.5,
+            1.5
+          ]
+        },
+        {
+          "$type": "PlatformMoveMixin",
+          "actorIceSubHurtDelta": -1,
+          "moveModifiers": [
+            "MachineCarrier_Sound"
+          ]
+        },
+        {
+          "$type": "AttachToGadgetStateMixin",
+          "modifierName": "MachineCarrier_StartDetectPlayer",
+          "actorIceSubHurtDelta": -1
+        }
+      ],
+      "modifiers": {
+        "MachineCarrier_Default": {
+          "onAdded": [
+            {
+              "$type": "SetAnimatorInt",
+              "doOffStage": false,
+              "intID": "GadgetState",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "MachineCarrier_DetectPlayer": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "Predicated",
+              "doOffStage": false,
+              "otherTargets": {
+                "$type": "SelectTargetsByShape",
+                "shapeName": "CircleR1",
+                "campTargetType": "Enemy",
+                "sizeRatio": 1,
+                "ILLOOADJMLF": {
+                  "direction": {
+                    "maxAngle": 180
+                  },
+                  "FDGAEDDEEDG": {
+                    "ELAJJIANFFM": 180
+                  },
+                  "onGroundRaycastUpDist": 2,
+                  "value": 10
+                }
+              },
+              "targetPredicates": [
+                {
+                  "$type": "ByEntityTypes",
+                  "target": "Target",
+                  "value": -1,
+                  "entityTypes": [
+                    "Avatar"
+                  ]
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "successActions": [
+                {
+                  "$type": "ExecuteGadgetLua",
+                  "doOffStage": false,
+                  "param1": 201,
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "ServerLuaCall",
+                  "doOffStage": false,
+                  "luaCallType": "FromGroup",
+                  "actorIceSubHurtDelta": -1,
+                  "funcName": "SLC_MachineCarrier_Player_In",
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "SetGlobalValue",
+                  "doOffStage": false,
+                  "value": 1,
+                  "key": "MachineCarrier_PlayerState",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "thinkInterval": 0.20000000298023224
+        },
+        "MachineCarrier_PlayerIn": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "MachineCarrier_Sound": {
+          "onAdded": [
+            {
+              "$type": "TriggerAudio",
+              "doOffStage": false,
+              "operation": {
+                "$type": "ConfigAudioEventOp",
+                "operation": {
+                  "text": "Play_amb_sceneObj_gear_MachineCarrier_01_move"
+                }
+              },
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "TriggerAudio",
+              "doOffStage": false,
+              "operation": {
+                "$type": "ConfigAudioEventOp",
+                "operation": {
+                  "text": "Stop_amb_sceneObj_gear_MachineCarrier_01_move"
+                }
+              },
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1
+        },
+        "MachineCarrier_StartDetectPlayer": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "MachineCarrier_PlayerState",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "MachineCarrier_State_1": {
+          "onAdded": [
+            {
+              "$type": "SetAnimatorInt",
+              "doOffStage": false,
+              "value": 201,
+              "intID": "GadgetState",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "MachineCarrier_State_2": {
+          "onAdded": [
+            {
+              "$type": "SetAnimatorInt",
+              "doOffStage": false,
+              "value": 101,
+              "intID": "GadgetState",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        }
+      },
+      "onFieldExit": [
+        {
+          "$type": "ExecuteGadgetLua",
+          "doOffStage": false,
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "abilitySpecials": {
+        "AmberMuteTime": 5.5
+      },
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "AttachEffect",
+          "doOffStage": false,
+          "scale": 1,
+          "actorIceSubHurtDelta": -1,
+          "effectPattern": "Eff_SceneObj_DreamPortal_01",
+          "born": {
+            "$type": "ConfigBornBySelf",
+            "direction": {
+              "maxAngle": 180
+            },
+            "offset": {
+              "x": 1.350000023841858
+            },
+            "FDGAEDDEEDG": {
+              "ELAJJIANFFM": 180
+            },
+            "onGroundRaycastUpDist": 2,
+            "value": 10
+          },
+          "effectTempleteID": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "SendEffectTrigger",
+          "doOffStage": true,
+          "parameter": "GadgetState",
+          "enable": true,
+          "predicates": [
+            {
+              "$type": "ByTargetGadgetState"
+            }
+          ],
+          "actorIceSubHurtDelta": -1,
+          "effectPattern": "Eff_SceneObj_DreamPortal_01",
+          "type": "Int",
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "SendEffectTrigger",
+          "doOffStage": true,
+          "value": 201,
+          "parameter": "GadgetState",
+          "enable": true,
+          "predicates": [
+            {
+              "$type": "ByTargetGadgetState",
+              "gadgetState": 201
+            }
+          ],
+          "actorIceSubHurtDelta": -1,
+          "effectPattern": "Eff_SceneObj_DreamPortal_01",
+          "type": "Int",
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "SceneObj_Level_Common_Property_Prop_DreamPortal_01",
+      "abilityMixins": [
+        {
+          "$type": "AttachToGadgetStateMixin",
+          "modifierName": "DreamPortal_DefaultState",
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToGadgetStateMixin",
+          "modifierName": "DreamPortal_OpenState",
+          "actorIceSubHurtDelta": -1,
+          "gadgetState": 201
+        }
+      ],
+      "onFieldEnter": [
+        {
+          "$type": "ClearLocalGadgets",
+          "doOffStage": false,
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "ApplyModifier",
+          "doOffStage": false,
+          "modifierName": "DreamPortal_MuteAmberEff_1",
+          "target": "Target",
+          "predicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "value": 1,
+              "target": "TargetTeam",
+              "key": "_HAS_AMBER"
+            },
+            {
+              "$type": "ByTargetGlobalValue",
+              "key": "SGV_DreamPortal_KillAmberBuff",
+              "compareType": "NoneOrEqual"
+            }
+          ],
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "ApplyModifier",
+          "doOffStage": false,
+          "modifierName": "DreamPortal_MuteAmberEff_2",
+          "target": "Target",
+          "predicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "value": 2,
+              "target": "TargetTeam",
+              "key": "_HAS_AMBER"
+            },
+            {
+              "$type": "ByTargetGlobalValue",
+              "key": "SGV_DreamPortal_KillAmberBuff",
+              "compareType": "NoneOrEqual"
+            }
+          ],
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "ApplyModifier",
+          "doOffStage": false,
+          "modifierName": "DreamPortal_MuteAmberEff_3",
+          "target": "Target",
+          "predicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "value": 3,
+              "target": "TargetTeam",
+              "key": "_HAS_AMBER"
+            },
+            {
+              "$type": "ByTargetGlobalValue",
+              "key": "SGV_DreamPortal_KillAmberBuff",
+              "compareType": "NoneOrEqual"
+            }
+          ],
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "ApplyModifier",
+          "doOffStage": false,
+          "modifierName": "DreamPortal_ClearAmberEff",
+          "target": "Target",
+          "predicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "target": "TargetTeam",
+              "key": "_HAS_AMBER",
+              "compareType": "MoreThan"
+            },
+            {
+              "$type": "ByTargetGlobalValue",
+              "key": "SGV_DreamPortal_KillAmberBuff",
+              "compareType": "MoreThan"
+            }
+          ],
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "ChangeGadgetState",
+          "doOffStage": false,
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "ServerLuaCall",
+          "doOffStage": false,
+          "luaCallType": "FromGroup",
+          "actorIceSubHurtDelta": -1,
+          "funcName": "SLC_TeleportHotSpot_NeedRemove",
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "ApplyModifier",
+          "doOffStage": false,
+          "modifierName": "DreamPortal_StateRecover",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "ServerLuaTriggerEvent",
+          "doOffStage": false,
+          "luaCallType": "FromGroup",
+          "actorIceSubHurtDelta": -1,
+          "sourceName": "DreamPortalEnter",
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "modifiers": {
+        "DreamPortal_ClearAmberEff": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "target": "TargetTeam",
+              "key": "_HAS_AMBER",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "DreamPortal_DefaultState": {
+          "onAdded": [
+            {
+              "$type": "SendEffectTrigger",
+              "doOffStage": true,
+              "parameter": "GadgetState",
+              "enable": true,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_SceneObj_DreamPortal_01",
+              "type": "Int",
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "DreamPortal_MuteAmberEff_1": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "target": "TargetTeam",
+              "key": "_HAS_AMBER",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": true,
+              "value": 1,
+              "target": "TargetTeam",
+              "key": "_HAS_AMBER",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "duration": "AmberMuteTime"
+        },
+        "DreamPortal_MuteAmberEff_2": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "target": "TargetTeam",
+              "key": "_HAS_AMBER",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": true,
+              "value": 2,
+              "target": "TargetTeam",
+              "key": "_HAS_AMBER",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "duration": "AmberMuteTime"
+        },
+        "DreamPortal_MuteAmberEff_3": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "target": "TargetTeam",
+              "key": "_HAS_AMBER",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": true,
+              "value": 3,
+              "target": "TargetTeam",
+              "key": "_HAS_AMBER",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "duration": "AmberMuteTime"
+        },
+        "DreamPortal_OpenState": {
+          "onAdded": [
+            {
+              "$type": "SendEffectTrigger",
+              "doOffStage": true,
+              "value": 201,
+              "parameter": "GadgetState",
+              "enable": true,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_SceneObj_DreamPortal_01",
+              "type": "Int",
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "DreamPortal_StateRecover": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "ChangeGadgetState",
+              "doOffStage": false,
+              "value": 201,
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "duration": 5
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "AttachEffect",
+          "doOffStage": false,
+          "scale": 1,
+          "actorIceSubHurtDelta": -1,
+          "effectPattern": "Eff_SceneObj_Common_WaterFlow_01_Vo_02",
+          "born": {
+            "direction": {
+              "maxAngle": 180
+            },
+            "FDGAEDDEEDG": {
+              "ELAJJIANFFM": 180
+            },
+            "onGroundRaycastUpDist": 2,
+            "value": 10
+          },
+          "effectTempleteID": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "SceneObj_Level_Common_Property_Water_Waterfall_01",
+      "abilityMixins": [
+        {
+          "$type": "AttachToGadgetStateMixin",
+          "modifierName": "Waterfall_DefaultState",
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToGadgetStateMixin",
+          "modifierName": "Waterfall_OpenState",
+          "actorIceSubHurtDelta": -1,
+          "gadgetState": 201
+        }
+      ],
+      "modifiers": {
+        "Waterfall_DefaultState": {
+          "onAdded": [
+            {
+              "$type": "SendEffectTrigger",
+              "doOffStage": false,
+              "parameter": "GadgetState",
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_SceneObj_Common_WaterFlow_01_Vo_02",
+              "type": "Int",
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "Waterfall_OpenState": {
+          "onAdded": [
+            {
+              "$type": "SendEffectTrigger",
+              "doOffStage": false,
+              "value": 201,
+              "parameter": "GadgetState",
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_SceneObj_Common_WaterFlow_01_Vo_02",
+              "type": "Int",
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "AttachEffect",
+          "doOffStage": false,
+          "scale": 1,
+          "actorIceSubHurtDelta": -1,
+          "effectPattern": "Eff_SceneObj_Common_WaterFlow_01_Vo_01",
+          "born": {
+            "direction": {
+              "maxAngle": 180
+            },
+            "FDGAEDDEEDG": {
+              "ELAJJIANFFM": 180
+            },
+            "onGroundRaycastUpDist": 2,
+            "value": 10
+          },
+          "effectTempleteID": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "SceneObj_Level_Common_Property_Water_Waterfall_02",
+      "abilityMixins": [
+        {
+          "$type": "AttachToGadgetStateMixin",
+          "modifierName": "Waterfall_DefaultState",
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToGadgetStateMixin",
+          "modifierName": "Waterfall_OpenState",
+          "actorIceSubHurtDelta": -1,
+          "gadgetState": 201
+        }
+      ],
+      "modifiers": {
+        "Waterfall_DefaultState": {
+          "onAdded": [
+            {
+              "$type": "SendEffectTrigger",
+              "doOffStage": false,
+              "parameter": "GadgetState",
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_SceneObj_Common_WaterFlow_01_Vo_01",
+              "type": "Int",
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "Waterfall_OpenState": {
+          "onAdded": [
+            {
+              "$type": "SendEffectTrigger",
+              "doOffStage": false,
+              "value": 201,
+              "parameter": "GadgetState",
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_SceneObj_Common_WaterFlow_01_Vo_01",
+              "type": "Int",
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "AttachEffect",
+          "doOffStage": false,
+          "scale": 1,
+          "actorIceSubHurtDelta": -1,
+          "effectPattern": "Eff_SceneObj_Common_WaterFlow_01_Vo",
+          "born": {
+            "direction": {
+              "maxAngle": 180
+            },
+            "FDGAEDDEEDG": {
+              "ELAJJIANFFM": 180
+            },
+            "onGroundRaycastUpDist": 2,
+            "value": 10
+          },
+          "effectTempleteID": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "SceneObj_Level_Common_Property_Water_Waterfall_03",
+      "abilityMixins": [
+        {
+          "$type": "AttachToGadgetStateMixin",
+          "modifierName": "Waterfall_DefaultState",
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToGadgetStateMixin",
+          "modifierName": "Waterfall_OpenState",
+          "actorIceSubHurtDelta": -1,
+          "gadgetState": 201
+        }
+      ],
+      "modifiers": {
+        "Waterfall_DefaultState": {
+          "onAdded": [
+            {
+              "$type": "SendEffectTrigger",
+              "doOffStage": false,
+              "parameter": "GadgetState",
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_SceneObj_Common_WaterFlow_01_Vo",
+              "type": "Int",
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "Waterfall_OpenState": {
+          "onAdded": [
+            {
+              "$type": "SendEffectTrigger",
+              "doOffStage": false,
+              "value": 201,
+              "parameter": "GadgetState",
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_SceneObj_Common_WaterFlow_01_Vo",
+              "type": "Int",
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "SceneObj_Level_Common_Property_Ani_Build_Elevator_Disc_03",
+      "abilityMixins": [
+        {
+          "$type": "AttachToGadgetStateMixin",
+          "modifierName": "Elevator_Disc_Effect_On",
+          "actorIceSubHurtDelta": -1,
+          "gadgetState": 201
+        }
+      ],
+      "modifiers": {
+        "Elevator_Disc_Effect_On": {
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_SceneObj_Build_Elevator_Disc_01_Cover_Loop",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "FireEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_SceneObj_Build_Elevator_Disc_01_Cover_Diss",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "SceneObj_Level_Common_Property_Ani_Build_Elevator_Disc_02",
+      "abilityMixins": [
+        {
+          "$type": "AttachToGadgetStateMixin",
+          "modifierName": "Elevator_Disc_On1",
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToGadgetStateMixin",
+          "modifierName": "Elevator_Disc_On2",
+          "actorIceSubHurtDelta": -1,
+          "gadgetState": 108
+        },
+        {
+          "$type": "AttachToGadgetStateMixin",
+          "modifierName": "Elevator_Disc_On3",
+          "actorIceSubHurtDelta": -1,
+          "gadgetState": 116
+        }
+      ],
+      "modifiers": {
+        "Elevator_Disc_Emission": {
+          "onAdded": [
+            {
+              "$type": "SetMaterialParamFloatByTransform",
+              "doOffStage": false,
+              "patternName": "_EmissionStrength",
+              "value": 6,
+              "lerpTime": 0.5,
+              "enable": true,
+              "matName": "Disc",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "SetMaterialParamFloatByTransform",
+              "doOffStage": false,
+              "patternName": "_EmissionStrength",
+              "lerpTime": 0.5,
+              "enable": true,
+              "matName": "Disc",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1
+        },
+        "Elevator_Disc_EmissionTimer": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "ApplyModifier",
+              "doOffStage": false,
+              "modifierName": "Elevator_Disc_Emission",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "duration": 1
+        },
+        "Elevator_Disc_On1": {
+          "onAdded": [
+            {
+              "$type": "AttachModifier",
+              "doOffStage": false,
+              "modifierName": "Elevator_Disc_EmissionTimer",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "RemoveModifier",
+              "doOffStage": false,
+              "modifierName": "Elevator_Disc_Emission",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1
+        },
+        "Elevator_Disc_On2": {
+          "onAdded": [
+            {
+              "$type": "AttachModifier",
+              "doOffStage": false,
+              "modifierName": "Elevator_Disc_EmissionTimer",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "RemoveModifier",
+              "doOffStage": false,
+              "modifierName": "Elevator_Disc_Emission",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1
+        },
+        "Elevator_Disc_On3": {
+          "onAdded": [
+            {
+              "$type": "AttachModifier",
+              "doOffStage": false,
+              "modifierName": "Elevator_Disc_EmissionTimer",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "RemoveModifier",
+              "doOffStage": false,
+              "modifierName": "Elevator_Disc_Emission",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "SceneObj_Level_Common_Property_Ani_Build_Elevator_Disc_01",
+      "abilityMixins": [
+        {
+          "$type": "PlatformMoveMixin",
+          "actorIceSubHurtDelta": -1,
+          "moveModifiers": [
+            "Elevator_Disc_Effect"
+          ],
+          "isLogicMove": true
+        }
+      ],
+      "modifiers": {
+        "Delay_MovingEffect": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "ApplyModifier",
+              "doOffStage": false,
+              "modifierName": "MovingEffect",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "duration": 1
+        },
+        "Elevator_Disc_Effect": {
+          "onAdded": [
+            {
+              "$type": "FireEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_SceneObj_Build_Elevator_Disc_01_08_Door_Active",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AttachModifier",
+              "doOffStage": false,
+              "modifierName": "Delay_MovingEffect",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "EnableSceneTransformByName",
+              "doOffStage": false,
+              "enable": true,
+              "actorIceSubHurtDelta": -1,
+              "setEnable": true,
+              "transformNames": [
+                "Collider_Moving"
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "FireEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_SceneObj_Build_Elevator_Disc_01_08_Door_Diss",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "RemoveModifier",
+              "doOffStage": false,
+              "modifierName": "MovingEffect",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "EnableSceneTransformByName",
+              "doOffStage": false,
+              "enable": true,
+              "actorIceSubHurtDelta": -1,
+              "transformNames": [
+                "Collider_Moving"
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1
+        },
+        "MovingEffect": {
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_SceneObj_Build_Elevator_Disc_01_08_Door_Loop",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "SceneObj_Level_Xm_Property_Prop_AmberKeyGear_01",
+      "abilityMixins": [
+        {
+          "$type": "AttachToGadgetStateMixin",
+          "modifierName": "DefaultState",
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToGadgetStateMixin",
+          "modifierName": "OpenState",
+          "actorIceSubHurtDelta": -1,
+          "gadgetState": 201
+        }
+      ],
+      "modifiers": {
+        "DefaultState": {
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_SceneObj_AmberKeyGear_Idle",
+              "born": {
+                "$type": "ConfigBornByAttachPoint",
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "attachPointName": "EffectNode1",
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "Predicated",
+              "doOffStage": false,
+              "otherTargets": {
+                "$type": "SelectTargetsByShape",
+                "shapeName": "CircleR3H3",
+                "campTargetType": "All",
+                "sizeRatio": 1,
+                "ILLOOADJMLF": {
+                  "direction": {
+                    "maxAngle": 180
+                  },
+                  "FDGAEDDEEDG": {
+                    "ELAJJIANFFM": 180
+                  },
+                  "onGroundRaycastUpDist": 2,
+                  "value": 10
+                }
+              },
+              "predicates": [
+                {
+                  "$type": "ByEntityTypes",
+                  "target": "Target",
+                  "value": -1,
+                  "entityTypes": [
+                    "Avatar"
+                  ]
+                },
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "target": "TargetTeam",
+                  "key": "_HAS_AMBER",
+                  "compareType": "MoreThan"
+                },
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "target": "Target",
+                  "key": "IN_TRIGGRE",
+                  "compareType": "NoneOrEqual"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "successActions": [
+                {
+                  "$type": "ApplyModifier",
+                  "doOffStage": false,
+                  "modifierName": "UNIQUE_AmberKeyGear_Add_2_Avatar1",
+                  "target": "Other",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "ExecuteGadgetLua",
+                  "doOffStage": false,
+                  "param1": 201,
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "thinkInterval": 0.5
+        },
+        "OpenState": {
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_SceneObj_AmberKeyGear_Active",
+              "born": {
+                "$type": "ConfigBornByAttachPoint",
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "attachPointName": "EffectNode2",
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "UNIQUE_AmberKeyGear_Add_2_Avatar1": {
+          "onAdded": [
+            {
+              "$type": "AddGlobalValue",
+              "doOffStage": false,
+              "value": 1,
+              "minValue": 1,
+              "key": "IN_TRIGGRE",
+              "maxValue": 1,
+              "actorIceSubHurtDelta": -1,
+              "useLimitRange": true,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "Predicated",
+              "doOffStage": false,
+              "target": "Team",
+              "targetPredicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "target": "Target",
+                  "key": "_HAS_AMBER",
+                  "compareType": "MoreThan"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "successActions": [
+                {
+                  "$type": "AddGlobalValue",
+                  "doOffStage": false,
+                  "value": -1,
+                  "target": "Team",
+                  "key": "_HAS_AMBER",
+                  "maxValue": 3,
+                  "actorIceSubHurtDelta": -1,
+                  "useLimitRange": true,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "stacking": "Unique",
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "AddGlobalValue",
+              "doOffStage": true,
+              "key": "IN_TRIGGRE",
+              "actorIceSubHurtDelta": -1,
+              "useLimitRange": true,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "isUnique": true,
+          "duration": 1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "SceneObj_Area_Common_Property_Prop_LoopFarView_01",
+      "abilityMixins": [
+        {
+          "$type": "AttachToGadgetStateMixin",
+          "modifierName": "MoveType_1",
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToGadgetStateMixin",
+          "modifierName": "MoveType_2",
+          "actorIceSubHurtDelta": -1,
+          "gadgetState": 201
+        }
+      ],
+      "modifiers": {
+        "MoveType_1": {
+          "onAdded": [
+            {
+              "$type": "SetAnimatorInt",
+              "doOffStage": false,
+              "intID": "GadgetState",
+              "enable": true,
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SectorCityManeuver",
+              "doOffStage": false,
+              "start": true,
+              "enable": true,
+              "actorIceSubHurtDelta": -1,
+              "attachPointName": "FollowNode",
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "MoveType_2": {
+          "onAdded": [
+            {
+              "$type": "SetAnimatorInt",
+              "doOffStage": false,
+              "value": 201,
+              "intID": "GadgetState",
+              "enable": true,
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SectorCityManeuver",
+              "doOffStage": false,
+              "start": true,
+              "enable": true,
+              "actorIceSubHurtDelta": -1,
+              "attachPointName": "FollowNode",
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "SceneObj_Level_Xm_Property_Ani_Prop_RainFlower_01",
+      "abilityMixins": [
+        {
+          "$type": "AttachToGadgetStateMixin",
+          "modifierName": "RainFlower_On",
+          "actorIceSubHurtDelta": -1,
+          "gadgetState": 201
+        },
+        {
+          "$type": "AttachToGadgetStateMixin",
+          "modifierName": "RainFlower_Off",
+          "actorIceSubHurtDelta": -1
+        }
+      ],
+      "modifiers": {
+        "RainFlower_Off": {
+          "onAdded": [
+            {
+              "$type": "SetMaterialParamFloatByTransform",
+              "doOffStage": false,
+              "patternName": "_DitherAlpha",
+              "value": 1,
+              "lerpTime": 4,
+              "useCurve": true,
+              "matName": "Dissolve",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "EnableSceneTransformByName",
+              "doOffStage": false,
+              "enable": true,
+              "actorIceSubHurtDelta": -1,
+              "setEnable": true,
+              "transformNames": [
+                "Collider"
+              ],
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "TriggerAudio",
+              "doOffStage": false,
+              "operation": {
+                "$type": "ConfigAudioEventOp",
+                "operation": {
+                  "text": "Play_amb_sceneObj_gear_rainFlower_01"
+                }
+              },
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "RainFlower_On": {
+          "onAdded": [
+            {
+              "$type": "SetMaterialParamFloatByTransform",
+              "doOffStage": false,
+              "patternName": "_DitherAlpha",
+              "value": 1,
+              "enable": true,
+              "matName": "Dissolve",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetMaterialParamFloatByTransform",
+              "doOffStage": false,
+              "patternName": "_DitherAlpha",
+              "lerpTime": 4,
+              "useCurve": true,
+              "matName": "Dissolve",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "EnableSceneTransformByName",
+              "doOffStage": false,
+              "enable": true,
+              "actorIceSubHurtDelta": -1,
+              "transformNames": [
+                "Collider"
+              ],
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "TriggerAudio",
+              "doOffStage": false,
+              "operation": {
+                "$type": "ConfigAudioEventOp",
+                "operation": {
+                  "text": "Play_amb_sceneObj_gear_rainFlower_01"
+                }
+              },
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "EnableGadgetIntee",
+          "doOffStage": false,
+          "enable": true,
+          "predicates": [
+            {
+              "$type": "ByTargetGadgetState"
+            }
+          ],
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "SetMaterialParamFloatByTransform",
+          "doOffStage": false,
+          "patternName": "_EmissionStrength",
+          "value": 0.5,
+          "enable": true,
+          "matName": "Emission",
+          "predicates": [
+            {
+              "$type": "ByTargetGadgetState",
+              "gadgetState": 202
+            }
+          ],
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "SetMaterialParamFloatByTransform",
+          "doOffStage": false,
+          "patternName": "_EmissionStrength",
+          "value": 4,
+          "enable": true,
+          "matName": "Emission",
+          "predicates": [
+            {
+              "$type": "ByTargetGadgetState"
+            }
+          ],
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "SceneObj_Gear_Operator_Invisible_LuaTriggerOperator_01",
+      "abilityMixins": [
+        {
+          "$type": "WidgetMpSupportMixin",
+          "actorIceSubHurtDelta": -1,
+          "succActions": [
+            {
+              "$type": "ApplyModifier",
+              "doOffStage": false,
+              "modifierName": "LuaTriggerOperator_Intee",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ]
+        },
+        {
+          "$type": "AttachToGadgetStateMixin",
+          "modifierName": "Operator_On",
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToGadgetStateMixin",
+          "modifierName": "Operator_Off",
+          "actorIceSubHurtDelta": -1,
+          "gadgetState": 202
+        }
+      ],
+      "modifiers": {
+        "LuaTriggerOperator_Intee": {
+          "onAdded": [
+            {
+              "$type": "EnableGadgetIntee",
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetAnimatorTrigger",
+              "doOffStage": false,
+              "triggerID": "Active",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "ServerLuaTriggerEvent",
+              "doOffStage": false,
+              "luaCallType": "FromGroup",
+              "actorIceSubHurtDelta": -1,
+              "sourceName": "FactoryOperator",
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "EnableGadgetIntee",
+              "doOffStage": false,
+              "enable": true,
+              "predicates": [
+                {
+                  "$type": "ByTargetGadgetState"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "duration": 1.5
+        },
+        "Operator_Off": {
+          "onAdded": [
+            {
+              "$type": "ApplyModifier",
+              "doOffStage": false,
+              "modifierName": "Operator_OffDelay",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "Operator_OffDelay": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "SetMaterialParamFloatByTransform",
+              "doOffStage": false,
+              "patternName": "_EmissionStrength",
+              "value": 0.5,
+              "lerpTime": 0.5,
+              "useCurve": true,
+              "matName": "Emission",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "duration": 1
+        },
+        "Operator_On": {
+          "onAdded": [
+            {
+              "$type": "SetMaterialParamFloatByTransform",
+              "doOffStage": false,
+              "patternName": "_EmissionStrength",
+              "value": 4,
+              "lerpTime": 0.5,
+              "useCurve": true,
+              "matName": "Emission",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "doOffStage": false,
+          "modifierName": "BigTreeDungeonEff",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "SceneObj_Other_Property_Prop_BigTreeDungeonEff_01",
+      "abilityMixins": [
+        {
+          "$type": "AttachToGadgetStateMixin",
+          "modifierName": "BigTreeDungeonEff_On",
+          "actorIceSubHurtDelta": -1,
+          "gadgetState": 201
+        },
+        {
+          "$type": "AttachToGadgetStateMixin",
+          "modifierName": "BigTreeDungeonEff_Off",
+          "actorIceSubHurtDelta": -1
+        }
+      ],
+      "modifiers": {
+        "BigTreeDungeonEff": {
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "GIGGLHAJGLN": true,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Level_FCdungeon_BigTree_Light_01",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "BigTreeDungeonEff_Off": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "GV_GadgetState",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "BigTreeDungeonEff_On": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "value": 201,
+              "key": "GV_GadgetState",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "SceneObj_Level_Xm_Property_Ani_Prop_Rudder_01",
+      "abilityMixins": [
+        {
+          "$type": "AttachToAnimatorStateIDMixin",
+          "modifierName": "Rudder_On",
+          "stateIDs": [
+            "Active"
+          ],
+          "value": -1,
+          "actorIceSubHurtDelta": -1
+        }
+      ],
+      "modifiers": {
+        "Rudder_On": {
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_SceneObj_Rubber_Active",
+              "born": {
+                "$type": "ConfigBornByAttachPoint",
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "attachPointName": "EffectNode",
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        }
+      }
+    }
+  }
+]

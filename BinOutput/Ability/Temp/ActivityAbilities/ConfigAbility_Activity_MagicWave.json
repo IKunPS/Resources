@@ -1,0 +1,1211 @@
+[
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Activity_MagicWave_SkillButton",
+      "isDynamicAbility": true,
+      "onAbilityStart": [
+        {
+          "$type": "SetGlobalValue",
+          "doOffStage": true,
+          "target": "Team",
+          "key": "_ABILITY_MagicWave_State",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "SetGlobalValue",
+          "doOffStage": true,
+          "target": "Team",
+          "key": "_ABILITY_MagicWave_State",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "AttachModifier",
+          "doOffStage": true,
+          "modifierName": "Activity_MagicWave_Team_Switch",
+          "target": "Team",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "Avatar_Activity_MagicWave",
+      "isDynamicAbility": true,
+      "abilityMixins": [
+        {
+          "$type": "ButtonHoldChargeMixin",
+          "chargeTime": 0.20000000298023224,
+          "OnBeginUncharged": [
+            {
+              "$type": "ResetAnimatorTrigger",
+              "doOffStage": false,
+              "triggerID": "StartChannelTrigger",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "RemoveModifier",
+              "doOffStage": false,
+              "modifierName": "SetTrigger",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "OnReleaseUncharged": [
+            {
+              "$type": "SetAnimatorTrigger",
+              "doOffStage": false,
+              "triggerID": "StartChannelTrigger",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "secondChargeTime": 999999,
+          "actorIceSubHurtDelta": -1,
+          "skillID": 20067,
+          "NFEKMFEMMGK": [
+            {
+              "$type": "SetAnimatorTrigger",
+              "doOffStage": false,
+              "triggerID": "EndChannelTrigger",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "chargeStateIDs": [
+            "Channel_Loop"
+          ],
+          "OnReleaseCharged": [
+            {
+              "$type": "SetAnimatorTrigger",
+              "doOffStage": false,
+              "triggerID": "EndChannelTrigger",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "ApplyModifier",
+              "doOffStage": false,
+              "modifierName": "SetTrigger",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ]
+        },
+        {
+          "$type": "AttachToStateIDMixin",
+          "modifierName": "Focus",
+          "stateIDs": [
+            "Channel_BS",
+            "Channel_Loop"
+          ],
+          "value": -1,
+          "actorIceSubHurtDelta": -1
+        }
+      ],
+      "modifiers": {
+        "Activity_MagicWave_Avatar": {
+          "onAdded": [
+            {
+              "$type": "ShowExtraAbility",
+              "doOffStage": true,
+              "actorIceSubHurtDelta": -1,
+              "skillID": 20062,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "RemoveAvatarSkillInfo",
+              "doOffStage": true,
+              "actorIceSubHurtDelta": -1,
+              "skillID": 20067,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AttachModifier",
+              "doOffStage": true,
+              "modifierName": "MagicWave_SwitchSkill_Handler",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "ShowExtraAbility",
+              "doOffStage": true,
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AddAvatarSkillInfo",
+              "doOffStage": true,
+              "EHOMHLDILII": true,
+              "actorIceSubHurtDelta": -1,
+              "skillID": 20067,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "onAvatarIn": [
+            {
+              "$type": "ShowExtraAbility",
+              "doOffStage": true,
+              "actorIceSubHurtDelta": -1,
+              "skillID": 20062,
+              "canBeHandledOnRecover": true
+            }
+          ]
+        },
+        "Activity_MagicWave_Team": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "CurLocalAvatarMixinV2",
+              "modifierName": "Activity_MagicWave_Avatar",
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "minus_one": -1
+        },
+        "Activity_MagicWave_Team_Switch": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "ServerUpdateGlobalValueMixin",
+              "key": "_ABILITY_MagicWave_State",
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "AttachModifierToSelfGlobalValueMixin",
+              "globalValueKey": "_ABILITY_MagicWave_State",
+              "modifierNameSteps": [
+                "Empty",
+                "Activity_MagicWave_Team"
+              ],
+              "removeAppliedModifier": true,
+              "actorIceSubHurtDelta": -1,
+              "valueSteps": [
+                -0.5,
+                0.5,
+                1.5
+              ]
+            }
+          ],
+          "minus_one": -1
+        },
+        "Bullet": {
+          "onAdded": [
+            {
+              "$type": "SetTargetToTargetKey",
+              "doOffStage": false,
+              "targetKey": "_TempTarget",
+              "target": "SelfAttackTarget",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "ApplyModifier",
+              "doOffStage": false,
+              "modifierName": "CaptureBeam",
+              "target": "TempTarget",
+              "actorIceSubHurtDelta": -1,
+              "isOnStageFalseSwitchValue": {
+                "__unk_Q16140806": "_TempTarget"
+              },
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "DamageByAttackValue",
+              "attackInfo": {
+                "attenuationGroup": "default",
+                "hitPattern": {
+                  "hitImpulseType": "LV1",
+                  "onHitEffectName": "default",
+                  "hitHaltTimeScale": 0.05000000074505806,
+                  "JKLONEBKFKJ": {
+                    "JJGBOHIKHFM": true,
+                    "value": 1
+                  }
+                },
+                "FJNMGDHFOEH": {
+                  "GCPNPCOFFBP": "Shake"
+                },
+                "IODAJAKBOLG": {
+                  "onHitEffectName": "default",
+                  "JKLONEBKFKJ": {
+                    "JJGBOHIKHFM": true,
+                    "value": 1
+                  }
+                },
+                "attackProperty": {
+                  "attackType": "Default",
+                  "enBreak": 30,
+                  "elementRank": 1,
+                  "HPPLKCPAKHP": true,
+                  "damagePercentage": 0.20000000298023224
+                },
+                "cameraShake": {
+                  "extension": {
+                    "baseCycle": 0.11999999731779099,
+                    "cycleDamping": 0.11999999731779099,
+                    "baseOnCamera": true,
+                    "rangeAttenuation": 0.5
+                  },
+                  "FAKMJBNLPPB": -1,
+                  "shakeDistance": 20
+                },
+                "attackTag": "WaterGun"
+              },
+              "doOffStage": false,
+              "target": "TempTarget",
+              "actorIceSubHurtDelta": -1,
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "isOnStageFalseSwitchValue": {
+                "__unk_Q16140806": "_TempTarget"
+              },
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "KillMultiBullet",
+              "doOffStage": false,
+              "gadgetInfo": {
+                "configID": 40034201
+              },
+              "BIFGGIIKHBL": 1.5,
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "KillSelf",
+              "doOffStage": false,
+              "otherTargets": {
+                "$type": "SelectTargetsByChildren",
+                "configID": 40034201
+              },
+              "killSelfType": "Normal",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "SetTargetToTargetKey",
+              "doOffStage": false,
+              "targetKey": "_TempTarget",
+              "target": "SelfAttackTarget",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "ApplyModifier",
+              "doOffStage": false,
+              "modifierName": "CaptureBeam",
+              "target": "TempTarget",
+              "actorIceSubHurtDelta": -1,
+              "isOnStageFalseSwitchValue": {
+                "__unk_Q16140806": "_TempTarget"
+              },
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "DamageByAttackValue",
+              "attackInfo": {
+                "attenuationGroup": "default",
+                "hitPattern": {
+                  "hitImpulseType": "LV1",
+                  "onHitEffectName": "default",
+                  "hitHaltTimeScale": 0.05000000074505806,
+                  "JKLONEBKFKJ": {
+                    "JJGBOHIKHFM": true,
+                    "value": 1
+                  }
+                },
+                "FJNMGDHFOEH": {
+                  "GCPNPCOFFBP": "Shake"
+                },
+                "IODAJAKBOLG": {
+                  "onHitEffectName": "default",
+                  "JKLONEBKFKJ": {
+                    "JJGBOHIKHFM": true,
+                    "value": 1
+                  }
+                },
+                "attackProperty": {
+                  "attackType": "Default",
+                  "enBreak": 30,
+                  "elementRank": 1,
+                  "HPPLKCPAKHP": true,
+                  "damagePercentage": 0.20000000298023224
+                },
+                "cameraShake": {
+                  "extension": {
+                    "baseCycle": 0.11999999731779099,
+                    "cycleDamping": 0.11999999731779099,
+                    "baseOnCamera": true,
+                    "rangeAttenuation": 0.5
+                  },
+                  "FAKMJBNLPPB": -1,
+                  "shakeDistance": 20
+                },
+                "attackTag": "WaterGun"
+              },
+              "doOffStage": false,
+              "target": "TempTarget",
+              "actorIceSubHurtDelta": -1,
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "isOnStageFalseSwitchValue": {
+                "__unk_Q16140806": "_TempTarget"
+              },
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "thinkInterval": 0.20000000298023224
+        },
+        "CaptureBeam": {
+          "onAdded": [
+            {
+              "$type": "SetTargetToTargetKey",
+              "doOffStage": false,
+              "targetKey": "_TempAvatarTarget",
+              "target": "Caster",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "gv_ConnectType",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "modifierMixins": [
+            {
+              "$type": "AttachModifierToGlobalValueMixin",
+              "globalValueKey": "gv_ConnectType",
+              "modifierNameSteps": [
+                "NoEffect",
+                "ConnectEffect1",
+                "ConnectEffect2"
+              ],
+              "enable": true,
+              "removeAppliedModifier": true,
+              "actorIceSubHurtDelta": -1,
+              "valueSteps": [
+                -0.5,
+                0.5,
+                3.5,
+                4.5
+              ],
+              "NEACJLMBFMN": true
+            }
+          ],
+          "minus_one": -1,
+          "duration": 0.5
+        },
+        "ConnectEffect1": {
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "target": "Caster",
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Avatar_Diving_SprayGun_Bullet",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true,
+              "OMPCBPHLEAN": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "ConnectEffect2": {
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "target": "Caster",
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Avatar_Diving_SprayGun_Bullet_1",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true,
+              "OMPCBPHLEAN": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "Empty": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "Focus": {
+          "onAdded": [
+            {
+              "$type": "Predicated",
+              "doOffStage": false,
+              "failActions": [
+                {
+                  "$type": "AvatarEnterFocus",
+                  "doOffStage": false,
+                  "assistance": {
+                    "other": {
+                      "useGyro": true
+                    }
+                  },
+                  "CFDCDFPIJBG": {
+                    "DNOELBIPPMN": -1,
+                    "MHMHLLECBJK": -1,
+                    "OCNFHBDCIBD": -1
+                  },
+                  "CFEKFGOIEGN": -60,
+                  "EEKKAPDHCIH": -1,
+                  "EGJMKJHBDOL": -1,
+                  "cameraFastFocusMode": true,
+                  "GHCEKBDLPPP": -1,
+                  "vcamFov": 45,
+                  "actorIceSubHurtDelta": -1,
+                  "cameraFollowLower": {
+                    "x": 0.3499999940395355,
+                    "y": 0.9599999785423279,
+                    "z": -4.599999904632568
+                  },
+                  "KNIJOGOLFIP": {
+                    "doOffStage": false,
+                    "EIEKCICHMEB": -1,
+                    "actorIceSubHurtDelta": -1,
+                    "canBeHandledOnRecover": true
+                  },
+                  "cameraFollowUpper": {
+                    "AHOCDOLMOJN": -1,
+                    "GLPEOPIELGF": 1,
+                    "HMNBDIEBENP": -1,
+                    "MNEGKIDABAG": 1
+                  },
+                  "cameraFollowMinDegree": -60,
+                  "cameraFollowMaxDegree": 60,
+                  "MEGGJCJCILB": true,
+                  "OIKFGEELCJO": {
+                    "x": 0.3499999940395355,
+                    "y": 0.9599999785423279,
+                    "z": -5
+                  },
+                  "canBeHandledOnRecover": true,
+                  "dragButtonName": "Skill2",
+                  "PBNFMJBNCCD": true
+                }
+              ],
+              "targetPredicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "target": "Target",
+                  "key": "_ABILITY_Diving_InDive_Mark",
+                  "compareType": "NoneOrEqual"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "successActions": [
+                {
+                  "$type": "Predicated",
+                  "doOffStage": false,
+                  "targetPredicates": [
+                    {
+                      "$type": "ByHasFeatureTag",
+                      "target": "Target",
+                      "featureTagIDs": [
+                        1044
+                      ]
+                    }
+                  ],
+                  "actorIceSubHurtDelta": -1,
+                  "successActions": [
+                    {
+                      "$type": "AvatarEnterFocus",
+                      "doOffStage": false,
+                      "assistance": {
+                        "other": {
+                          "useGyro": true
+                        }
+                      },
+                      "CFDCDFPIJBG": {
+                        "DNOELBIPPMN": -1,
+                        "MHMHLLECBJK": -1,
+                        "OCNFHBDCIBD": -1
+                      },
+                      "CFEKFGOIEGN": -60,
+                      "EEKKAPDHCIH": -1,
+                      "EGJMKJHBDOL": -1,
+                      "cameraFastFocusMode": true,
+                      "GHCEKBDLPPP": -1,
+                      "vcamFov": 45,
+                      "actorIceSubHurtDelta": -1,
+                      "cameraFollowLower": {
+                        "x": 0.3499999940395355,
+                        "y": 0.9599999785423279,
+                        "z": -4.599999904632568
+                      },
+                      "KNIJOGOLFIP": {
+                        "doOffStage": false,
+                        "EIEKCICHMEB": -1,
+                        "actorIceSubHurtDelta": -1,
+                        "canBeHandledOnRecover": true
+                      },
+                      "cameraFollowUpper": {
+                        "AHOCDOLMOJN": -1,
+                        "GLPEOPIELGF": 1,
+                        "HMNBDIEBENP": -1,
+                        "MNEGKIDABAG": 1
+                      },
+                      "cameraFollowMinDegree": -60,
+                      "cameraFollowMaxDegree": 60,
+                      "MEGGJCJCILB": true,
+                      "OIKFGEELCJO": {
+                        "x": 0.3499999940395355,
+                        "y": 0.9599999785423279,
+                        "z": -5
+                      },
+                      "canBeHandledOnRecover": true,
+                      "dragButtonName": "Skill2",
+                      "PBNFMJBNCCD": true
+                    }
+                  ],
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "Predicated",
+                  "doOffStage": false,
+                  "targetPredicates": [
+                    {
+                      "$type": "ByHasFeatureTag",
+                      "target": "Target",
+                      "featureTagIDs": [
+                        1043
+                      ]
+                    }
+                  ],
+                  "actorIceSubHurtDelta": -1,
+                  "successActions": [
+                    {
+                      "$type": "AvatarEnterFocus",
+                      "doOffStage": false,
+                      "assistance": {
+                        "other": {
+                          "useGyro": true
+                        }
+                      },
+                      "CFDCDFPIJBG": {
+                        "DNOELBIPPMN": -1,
+                        "MHMHLLECBJK": -1,
+                        "OCNFHBDCIBD": -1
+                      },
+                      "CFEKFGOIEGN": -60,
+                      "EEKKAPDHCIH": -1,
+                      "EGJMKJHBDOL": -1,
+                      "cameraFastFocusMode": true,
+                      "GHCEKBDLPPP": -1,
+                      "vcamFov": 45,
+                      "actorIceSubHurtDelta": -1,
+                      "cameraFollowLower": {
+                        "x": 0.3499999940395355,
+                        "y": 0.9599999785423279,
+                        "z": -4.599999904632568
+                      },
+                      "KNIJOGOLFIP": {
+                        "doOffStage": false,
+                        "EIEKCICHMEB": -1,
+                        "actorIceSubHurtDelta": -1,
+                        "canBeHandledOnRecover": true
+                      },
+                      "cameraFollowUpper": {
+                        "AHOCDOLMOJN": -1,
+                        "GLPEOPIELGF": 1,
+                        "HMNBDIEBENP": -1,
+                        "MNEGKIDABAG": 1
+                      },
+                      "cameraFollowMinDegree": -60,
+                      "cameraFollowMaxDegree": 60,
+                      "MEGGJCJCILB": true,
+                      "OIKFGEELCJO": {
+                        "x": 0.3499999940395355,
+                        "y": 0.9599999785423279,
+                        "z": -5
+                      },
+                      "canBeHandledOnRecover": true,
+                      "dragButtonName": "Skill2",
+                      "PBNFMJBNCCD": true
+                    }
+                  ],
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "Predicated",
+                  "doOffStage": false,
+                  "targetPredicates": [
+                    {
+                      "$type": "ByHasFeatureTag",
+                      "target": "Target",
+                      "featureTagIDs": [
+                        1042
+                      ]
+                    }
+                  ],
+                  "actorIceSubHurtDelta": -1,
+                  "successActions": [
+                    {
+                      "$type": "AvatarEnterFocus",
+                      "doOffStage": false,
+                      "assistance": {
+                        "other": {
+                          "useGyro": true
+                        }
+                      },
+                      "CFDCDFPIJBG": {
+                        "DNOELBIPPMN": -1,
+                        "MHMHLLECBJK": -1,
+                        "OCNFHBDCIBD": -1
+                      },
+                      "CFEKFGOIEGN": -60,
+                      "EEKKAPDHCIH": -1,
+                      "EGJMKJHBDOL": -1,
+                      "cameraFastFocusMode": true,
+                      "GHCEKBDLPPP": -1,
+                      "vcamFov": 45,
+                      "actorIceSubHurtDelta": -1,
+                      "cameraFollowLower": {
+                        "x": 0.3499999940395355,
+                        "y": 1.059999942779541,
+                        "z": -4.599999904632568
+                      },
+                      "KNIJOGOLFIP": {
+                        "doOffStage": false,
+                        "EIEKCICHMEB": -1,
+                        "actorIceSubHurtDelta": -1,
+                        "canBeHandledOnRecover": true
+                      },
+                      "cameraFollowUpper": {
+                        "AHOCDOLMOJN": -1,
+                        "GLPEOPIELGF": 1,
+                        "HMNBDIEBENP": -1,
+                        "MNEGKIDABAG": 1
+                      },
+                      "cameraFollowMinDegree": -60,
+                      "cameraFollowMaxDegree": 60,
+                      "MEGGJCJCILB": true,
+                      "OIKFGEELCJO": {
+                        "x": 0.3499999940395355,
+                        "y": 1.059999942779541,
+                        "z": -5
+                      },
+                      "canBeHandledOnRecover": true,
+                      "dragButtonName": "Skill2",
+                      "PBNFMJBNCCD": true
+                    }
+                  ],
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "Predicated",
+                  "doOffStage": false,
+                  "targetPredicates": [
+                    {
+                      "$type": "ByHasFeatureTag",
+                      "target": "Target",
+                      "featureTagIDs": [
+                        1041
+                      ]
+                    }
+                  ],
+                  "actorIceSubHurtDelta": -1,
+                  "successActions": [
+                    {
+                      "$type": "AvatarEnterFocus",
+                      "doOffStage": false,
+                      "assistance": {
+                        "other": {
+                          "useGyro": true
+                        }
+                      },
+                      "CFDCDFPIJBG": {
+                        "DNOELBIPPMN": -1,
+                        "MHMHLLECBJK": -1,
+                        "OCNFHBDCIBD": -1
+                      },
+                      "CFEKFGOIEGN": -60,
+                      "EEKKAPDHCIH": -1,
+                      "EGJMKJHBDOL": -1,
+                      "cameraFastFocusMode": true,
+                      "GHCEKBDLPPP": -1,
+                      "vcamFov": 45,
+                      "actorIceSubHurtDelta": -1,
+                      "cameraFollowLower": {
+                        "x": 0.3499999940395355,
+                        "y": 1.159999966621399,
+                        "z": -4.599999904632568
+                      },
+                      "KNIJOGOLFIP": {
+                        "doOffStage": false,
+                        "EIEKCICHMEB": -1,
+                        "actorIceSubHurtDelta": -1,
+                        "canBeHandledOnRecover": true
+                      },
+                      "cameraFollowUpper": {
+                        "AHOCDOLMOJN": -1,
+                        "GLPEOPIELGF": 1,
+                        "HMNBDIEBENP": -1,
+                        "MNEGKIDABAG": 1
+                      },
+                      "cameraFollowMinDegree": -60,
+                      "cameraFollowMaxDegree": 60,
+                      "MEGGJCJCILB": true,
+                      "OIKFGEELCJO": {
+                        "x": 0.3499999940395355,
+                        "y": 1.159999966621399,
+                        "z": -5
+                      },
+                      "canBeHandledOnRecover": true,
+                      "dragButtonName": "Skill2",
+                      "PBNFMJBNCCD": true
+                    }
+                  ],
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "Predicated",
+                  "doOffStage": false,
+                  "targetPredicates": [
+                    {
+                      "$type": "ByHasFeatureTag",
+                      "target": "Target",
+                      "featureTagIDs": [
+                        1045
+                      ]
+                    }
+                  ],
+                  "actorIceSubHurtDelta": -1,
+                  "successActions": [
+                    {
+                      "$type": "AvatarEnterFocus",
+                      "doOffStage": false,
+                      "assistance": {
+                        "other": {
+                          "useGyro": true
+                        }
+                      },
+                      "CFDCDFPIJBG": {
+                        "DNOELBIPPMN": -1,
+                        "MHMHLLECBJK": -1,
+                        "OCNFHBDCIBD": -1
+                      },
+                      "CFEKFGOIEGN": -60,
+                      "EEKKAPDHCIH": -1,
+                      "EGJMKJHBDOL": -1,
+                      "cameraFastFocusMode": true,
+                      "GHCEKBDLPPP": -1,
+                      "vcamFov": 45,
+                      "actorIceSubHurtDelta": -1,
+                      "cameraFollowLower": {
+                        "x": 0.3499999940395355,
+                        "y": 0.6600000262260437,
+                        "z": -4.599999904632568
+                      },
+                      "KNIJOGOLFIP": {
+                        "doOffStage": false,
+                        "EIEKCICHMEB": -1,
+                        "actorIceSubHurtDelta": -1,
+                        "canBeHandledOnRecover": true
+                      },
+                      "cameraFollowUpper": {
+                        "AHOCDOLMOJN": -1,
+                        "GLPEOPIELGF": 1,
+                        "HMNBDIEBENP": -1,
+                        "MNEGKIDABAG": 1
+                      },
+                      "cameraFollowMinDegree": -60,
+                      "cameraFollowMaxDegree": 60,
+                      "MEGGJCJCILB": true,
+                      "OIKFGEELCJO": {
+                        "x": 0.3499999940395355,
+                        "y": 0.6600000262260437,
+                        "z": -5
+                      },
+                      "canBeHandledOnRecover": true,
+                      "dragButtonName": "Skill2",
+                      "PBNFMJBNCCD": true
+                    }
+                  ],
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "AvatarExitFocus",
+              "doOffStage": false,
+              "EIEKCICHMEB": -1,
+              "keepRotation": true,
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "modifierMixins": [
+            {
+              "$type": "CEJDFKGMPCO",
+              "AJMFCPOCNAI": [
+                {
+                  "$type": "SetGlobalValue",
+                  "doOffStage": true,
+                  "target": "TempTarget",
+                  "key": "gv_ConnectType",
+                  "actorIceSubHurtDelta": -1,
+                  "isOnStageFalseSwitchValue": {
+                    "__unk_Q16140806": "_TempTarget"
+                  },
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "ClearLockTarget",
+                  "doOffStage": false,
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "CIKEPPEOOKL": -1,
+              "DAEKEIJHKGI": [
+                {
+                  "$type": "SetGlobalValue",
+                  "doOffStage": true,
+                  "target": "TempTarget",
+                  "key": "gv_ConnectType",
+                  "actorIceSubHurtDelta": -1,
+                  "isOnStageFalseSwitchValue": {
+                    "__unk_Q16140806": "_TempTarget"
+                  },
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "ClearLockTarget",
+                  "doOffStage": false,
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "aimType": "OneInScope",
+              "actorIceSubHurtDelta": -1,
+              "colliderNodeName": "PRIVATE_RayCast",
+              "KKGOEAIKOCH": [
+                "ConnectPoint1",
+                "ConnectPoint2"
+              ],
+              "actionQueue": [
+                {
+                  "$type": "SetSelfAttackTarget",
+                  "doOffStage": false,
+                  "target": "Target",
+                  "predicates": [
+                    {
+                      "$type": "ByEntityTypes",
+                      "target": "Target",
+                      "value": -1,
+                      "entityTypes": [
+                        "Monster",
+                        "Gadget"
+                      ]
+                    },
+                    {
+                      "$type": "ByHasTag",
+                      "tag": "WaterGunTarget",
+                      "target": "Target"
+                    },
+                    {
+                      "$type": "ByTargetGlobalValue",
+                      "target": "Target",
+                      "key": "_ANIMAL_ENTITY_TYPE",
+                      "compareType": "NoneOrEqual"
+                    },
+                    {
+                      "$type": "ByNot",
+                      "target": "Target",
+                      "predicates": [
+                        {
+                          "$type": "ByTargetIsGhostToEnemy",
+                          "target": "Target"
+                        }
+                      ]
+                    }
+                  ],
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "SetTargetToTargetKey",
+                  "doOffStage": false,
+                  "targetKey": "_TempTarget",
+                  "target": "SelfAttackTarget",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "SetGlobalValue",
+                  "doOffStage": true,
+                  "value": 3,
+                  "target": "Target",
+                  "key": "gv_ConnectType",
+                  "predicates": [
+                    {
+                      "$type": "NODABBGMECK",
+                      "target": "Target",
+                      "namedTransform": "ConnectPoint1"
+                    },
+                    {
+                      "$type": "ByHasTag",
+                      "tag": "WaterGunTarget",
+                      "target": "Target"
+                    }
+                  ],
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "SetGlobalValue",
+                  "doOffStage": true,
+                  "value": 4,
+                  "target": "Target",
+                  "key": "gv_ConnectType",
+                  "predicates": [
+                    {
+                      "$type": "NODABBGMECK",
+                      "target": "Target",
+                      "namedTransform": "ConnectPoint2"
+                    },
+                    {
+                      "$type": "ByHasTag",
+                      "tag": "WaterGunTarget",
+                      "target": "Target"
+                    }
+                  ],
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "entityTypes": [
+                "Monster",
+                "Gadget"
+              ]
+            }
+          ],
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "ApplyModifier",
+              "doOffStage": false,
+              "modifierName": "CaptureBeam",
+              "target": "TempTarget",
+              "actorIceSubHurtDelta": -1,
+              "isOnStageFalseSwitchValue": {
+                "__unk_Q16140806": "_TempTarget"
+              },
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "DamageByAttackValue",
+              "attackInfo": {
+                "attenuationGroup": "default",
+                "hitPattern": {
+                  "hitImpulseType": "LV1",
+                  "onHitEffectName": "default",
+                  "hitHaltTimeScale": 0.05000000074505806,
+                  "JKLONEBKFKJ": {
+                    "JJGBOHIKHFM": true,
+                    "value": 1
+                  }
+                },
+                "FJNMGDHFOEH": {
+                  "GCPNPCOFFBP": "Shake"
+                },
+                "IODAJAKBOLG": {
+                  "onHitEffectName": "default",
+                  "JKLONEBKFKJ": {
+                    "JJGBOHIKHFM": true,
+                    "value": 1
+                  }
+                },
+                "attackProperty": {
+                  "attackType": "Default",
+                  "enBreak": 30,
+                  "elementRank": 1,
+                  "HPPLKCPAKHP": true,
+                  "damagePercentage": 0.20000000298023224
+                },
+                "cameraShake": {
+                  "extension": {
+                    "baseCycle": 0.11999999731779099,
+                    "cycleDamping": 0.11999999731779099,
+                    "baseOnCamera": true,
+                    "rangeAttenuation": 0.5
+                  },
+                  "FAKMJBNLPPB": -1,
+                  "shakeDistance": 20
+                },
+                "attackTag": "WaterGun"
+              },
+              "doOffStage": false,
+              "target": "TempTarget",
+              "actorIceSubHurtDelta": -1,
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "isOnStageFalseSwitchValue": {
+                "__unk_Q16140806": "_TempTarget"
+              },
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "thinkInterval": 0.20000000298023224
+        },
+        "Lock_Eff": {
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Avatar_Diving_Absorb_Lock",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "duration": 10
+        },
+        "MagicWave_SwitchSkill_Handler": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "SwitchSkillIDMixin",
+              "skillIndex": 1,
+              "priority": "AvatarSpecial",
+              "actorIceSubHurtDelta": -1,
+              "skillID": 20067
+            }
+          ],
+          "minus_one": -1
+        },
+        "NoEffect": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "SetTrigger": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "SetAnimatorTrigger",
+              "doOffStage": false,
+              "triggerID": "EndChannelTrigger",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "duration": 0.15000000596046448
+        }
+      }
+    }
+  }
+]

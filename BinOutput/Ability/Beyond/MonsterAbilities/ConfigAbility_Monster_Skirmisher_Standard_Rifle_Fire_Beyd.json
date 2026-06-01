@@ -1,0 +1,81 @@
+[
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "AddGlobalValue",
+          "doOffStage": false,
+          "key": "_MONSTER_SKIRMISHER_RIFLE_FIRE_IMPROVENUM",
+          "maxValue": 10,
+          "actorIceSubHurtDelta": -1,
+          "useLimitRange": true,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "Monster_Skirmisher_Rifle_Fire_Beyd_ForceImprove_Pose",
+      "abilityMixins": [
+        {
+          "$type": "AttachToPoseIDMixin",
+          "modifierName": "Beyd_Monster_Skirmisher_Rifle_Fire_TickHP",
+          "poseIDs": [
+            101
+          ],
+          "actorIceSubHurtDelta": -1
+        }
+      ],
+      "modifiers": {
+        "Beyd_Monster_Skirmisher_Rifle_Fire_TickHP": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "Predicated",
+              "doOffStage": false,
+              "failActions": [
+                {
+                  "$type": "SetPoseBool",
+                  "doOffStage": false,
+                  "boolID": "ForceImprove",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "targetPredicates": [
+                {
+                  "$type": "ByTargetHPRatio",
+                  "target": "Target",
+                  "logic": "LesserOrEqual",
+                  "HPRatio": 0.5
+                },
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "target": "Target",
+                  "key": "_MONSTER_SKIRMISHER_RIFLE_FIRE_IMPROVENUM"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "successActions": [
+                {
+                  "$type": "SetPoseBool",
+                  "doOffStage": false,
+                  "value": true,
+                  "boolID": "ForceImprove",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "thinkInterval": 1
+        }
+      }
+    }
+  }
+]

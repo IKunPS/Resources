@@ -1,0 +1,1931 @@
+[
+  {
+    "Default": {
+      "__unk_Q2982101340": [
+        "SGV_BallGame_Player",
+        "GV_GateForbidArea_GateMark",
+        "GV_GateForbidArea_PrevGateMark"
+      ],
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "doOffStage": false,
+          "modifierName": "UNIQUE_FilmfestBallGame_CameraFix",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "AttachModifier",
+          "doOffStage": false,
+          "modifierName": "UNIQUE_FilmfestBallGame_Forbid",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "AttachModifier",
+          "doOffStage": false,
+          "modifierName": "UNIQUE_FilmfestBallGame_Billboard",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "AttachModifier",
+          "doOffStage": false,
+          "modifierName": "UNIQUE_FilmfestBallGame_Immune",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "AttachModifier",
+          "doOffStage": false,
+          "modifierName": "FilmfestBallGame_PunishScore",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "SetGlobalValueV2",
+          "doOffStage": false,
+          "key": "_FilmfestBallGame_AreaWarning",
+          "maxValue": 11,
+          "actorIceSubHurtDelta": -1,
+          "useLimitRange": true,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "SetGlobalValueV2",
+          "doOffStage": false,
+          "key": "_FilmfestBallGame_PunishmentCount",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "Activity_FilmfestBallGame_TeamAbility",
+      "isDynamicAbility": true,
+      "abilityMixins": [
+        {
+          "$type": "AttachModifierToSelfGlobalValueMixin",
+          "globalValueKey": "GV_JumpUpBuff",
+          "modifierNameSteps": [
+            "UNIQUE_FilmfestBallGame_RocketJump"
+          ],
+          "removeAppliedModifier": true,
+          "actorIceSubHurtDelta": -1,
+          "valueSteps": [
+            0.5,
+            1.5
+          ]
+        },
+        {
+          "$type": "AttachModifierToSelfGlobalValueNoInitMixin",
+          "enable": true,
+          "globalValueKey": "SGV_BallGame_Player",
+          "modifierNameSteps": [
+            "FilmfestBallGame_ClearIndicator",
+            "FilmfestBallGame_CreateIndicator"
+          ],
+          "removeAppliedModifier": true,
+          "actorIceSubHurtDelta": -1,
+          "valueSteps": [
+            -0.5,
+            0.5,
+            999
+          ]
+        },
+        {
+          "$type": "CurLocalAvatarMixinV2",
+          "modifierName": "FilmfestBallGame_Sprint_ReduceCost",
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "CurLocalAvatarMixinV2",
+          "modifierName": "FilmfestBallGame_Fly_ForbidFly",
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachModifierToPredicateMixin",
+          "modifierName": "FilmfestBallGame_PlayerInOthersArea",
+          "predicates": [
+            {
+              "$type": "ByAnd",
+              "target": "Target",
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "GV_GateForbidArea_GateMark",
+                  "compareType": "MoreThan"
+                },
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "SGV_BallGame_Player",
+                  "compareType": "MoreThan"
+                },
+                {
+                  "$type": "ByNot",
+                  "target": "Target",
+                  "predicates": [
+                    {
+                      "$type": "ByTargetGlobalValue",
+                      "value": "SGV_BallGame_Player",
+                      "key": "GV_GateForbidArea_GateMark"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "CurLocalAvatarMixinV2",
+          "modifierName": "FilmfestBallGame_TeleportState",
+          "actorIceSubHurtDelta": -1
+        }
+      ],
+      "modifiers": {
+        "FilmfestBallGame_Billboard_Avator": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "ChangeBillboardMixin",
+              "billboard": {
+                "$type": "EMJLLOCGAJJ",
+                "forceShowDistance": 15,
+                "offset": {
+                  "y": 2
+                },
+                "radiusOffset": 0.5,
+                "HKFOBGBMJNB": 35,
+                "IDEIAEFFKDN": 1,
+                "attachPoint": "BillboardAttach",
+                "type": "FilmfestBallgame",
+                "MMGEKDLPOIJ": "FilmfestBallGame",
+                "showDistance": 80
+              },
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "minus_one": -1
+        },
+        "FilmfestBallGame_ClearIndicator": {
+          "onAdded": [
+            {
+              "$type": "KillGadget",
+              "doOffStage": false,
+              "gadgetInfo": {
+                "configID": 70331050
+              },
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "FilmfestBallGame_CreateIndicator": {
+          "onAdded": [
+            {
+              "$type": "CreateGadget",
+              "doOffStage": false,
+              "campID": 5001,
+              "HGPMDCCAHMK": {
+                "IFAGHADONMB": true,
+                "KCLDKFCKPEE": 0.5,
+                "MJDMDBDMPAM": true,
+                "PHCINBJNAOK": 0.5
+              },
+              "value": true,
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "value": 1,
+                  "target": "Target",
+                  "key": "SGV_BallGame_Player"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "born": {
+                "$type": "ADOJNHPCMOB",
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "IBMCFCCFPJG": {
+                  "x": 200,
+                  "y": 16.799999237060547,
+                  "z": 216.5
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "gadgetID": 70331050,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "CreateGadget",
+              "doOffStage": false,
+              "campID": 5001,
+              "HGPMDCCAHMK": {
+                "IFAGHADONMB": true,
+                "KCLDKFCKPEE": 0.5,
+                "MJDMDBDMPAM": true,
+                "PHCINBJNAOK": 0.5
+              },
+              "value": true,
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "value": 2,
+                  "target": "Target",
+                  "key": "SGV_BallGame_Player"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "born": {
+                "$type": "ADOJNHPCMOB",
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "IBMCFCCFPJG": {
+                  "x": 216.5,
+                  "y": 16.799999237060547,
+                  "z": 200
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "gadgetID": 70331050,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "CreateGadget",
+              "doOffStage": false,
+              "campID": 5001,
+              "HGPMDCCAHMK": {
+                "IFAGHADONMB": true,
+                "KCLDKFCKPEE": 0.5,
+                "MJDMDBDMPAM": true,
+                "PHCINBJNAOK": 0.5
+              },
+              "value": true,
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "value": 3,
+                  "target": "Target",
+                  "key": "SGV_BallGame_Player"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "born": {
+                "$type": "ADOJNHPCMOB",
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "IBMCFCCFPJG": {
+                  "x": 200,
+                  "y": 16.799999237060547,
+                  "z": 183.5
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "gadgetID": 70331050,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "CreateGadget",
+              "doOffStage": false,
+              "campID": 5001,
+              "HGPMDCCAHMK": {
+                "IFAGHADONMB": true,
+                "KCLDKFCKPEE": 0.5,
+                "MJDMDBDMPAM": true,
+                "PHCINBJNAOK": 0.5
+              },
+              "value": true,
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "value": 4,
+                  "target": "Target",
+                  "key": "SGV_BallGame_Player"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "born": {
+                "$type": "ADOJNHPCMOB",
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "IBMCFCCFPJG": {
+                  "x": 183.5,
+                  "y": 16.799999237060547,
+                  "z": 200
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "gadgetID": 70331050,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "onReconnect": [
+            {
+              "$type": "CreateGadget",
+              "doOffStage": false,
+              "campID": 5001,
+              "HGPMDCCAHMK": {
+                "IFAGHADONMB": true,
+                "KCLDKFCKPEE": 0.5,
+                "MJDMDBDMPAM": true,
+                "PHCINBJNAOK": 0.5
+              },
+              "value": true,
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "value": 1,
+                  "target": "Target",
+                  "key": "SGV_BallGame_Player"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "born": {
+                "$type": "ADOJNHPCMOB",
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "IBMCFCCFPJG": {
+                  "x": 200,
+                  "y": 16.799999237060547,
+                  "z": 216.5
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "gadgetID": 70331050,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "CreateGadget",
+              "doOffStage": false,
+              "campID": 5001,
+              "HGPMDCCAHMK": {
+                "IFAGHADONMB": true,
+                "KCLDKFCKPEE": 0.5,
+                "MJDMDBDMPAM": true,
+                "PHCINBJNAOK": 0.5
+              },
+              "value": true,
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "value": 2,
+                  "target": "Target",
+                  "key": "SGV_BallGame_Player"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "born": {
+                "$type": "ADOJNHPCMOB",
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "IBMCFCCFPJG": {
+                  "x": 216.5,
+                  "y": 16.799999237060547,
+                  "z": 200
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "gadgetID": 70331050,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "CreateGadget",
+              "doOffStage": false,
+              "campID": 5001,
+              "HGPMDCCAHMK": {
+                "IFAGHADONMB": true,
+                "KCLDKFCKPEE": 0.5,
+                "MJDMDBDMPAM": true,
+                "PHCINBJNAOK": 0.5
+              },
+              "value": true,
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "value": 3,
+                  "target": "Target",
+                  "key": "SGV_BallGame_Player"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "born": {
+                "$type": "ADOJNHPCMOB",
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "IBMCFCCFPJG": {
+                  "x": 200,
+                  "y": 16.799999237060547,
+                  "z": 183.5
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "gadgetID": 70331050,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "CreateGadget",
+              "doOffStage": false,
+              "campID": 5001,
+              "HGPMDCCAHMK": {
+                "IFAGHADONMB": true,
+                "KCLDKFCKPEE": 0.5,
+                "MJDMDBDMPAM": true,
+                "PHCINBJNAOK": 0.5
+              },
+              "value": true,
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "value": 4,
+                  "target": "Target",
+                  "key": "SGV_BallGame_Player"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "born": {
+                "$type": "ADOJNHPCMOB",
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "IBMCFCCFPJG": {
+                  "x": 183.5,
+                  "y": 16.799999237060547,
+                  "z": 200
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "gadgetID": 70331050,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "FilmfestBallGame_Fly_ForbidFly": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "ForbidAvatarFlyMixin",
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "minus_one": -1
+        },
+        "FilmfestBallGame_PlayerInOthersArea": {
+          "onAdded": [
+            {
+              "$type": "Predicated",
+              "doOffStage": false,
+              "targetPredicates": [
+                {
+                  "$type": "ByNot",
+                  "target": "Target",
+                  "predicates": [
+                    {
+                      "$type": "ByTargetGlobalValue",
+                      "value": "GV_GateForbidArea_PrevGateMark",
+                      "key": "GV_GateForbidArea_GateMark"
+                    }
+                  ]
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "successActions": [
+                {
+                  "$type": "SetGlobalValueV2",
+                  "doOffStage": false,
+                  "key": "_FilmfestBallGame_AreaWarning",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "CopyGlobalValue",
+                  "doOffStage": false,
+                  "dstKey": "GV_GateForbidArea_PrevGateMark",
+                  "actorIceSubHurtDelta": -1,
+                  "srcKey": "GV_GateForbidArea_GateMark",
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "AttachModifierToSelfGlobalValueNoInitMixin",
+              "enable": true,
+              "globalValueKey": "_FilmfestBallGame_PunishmentCount",
+              "modifierNameSteps": [
+                "FilmfestBallGame_PlayerInOthersArea_Normal",
+                "FilmfestBallGame_PlayerInOthersArea_Fatal"
+              ],
+              "removeAppliedModifier": true,
+              "actorIceSubHurtDelta": -1,
+              "valueSteps": [
+                -0.5,
+                2.5,
+                9999
+              ]
+            }
+          ],
+          "minus_one": -1
+        },
+        "FilmfestBallGame_PlayerInOthersArea_Fatal": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "AttachModifierToSelfGlobalValueNoInitMixin",
+              "enable": true,
+              "globalValueKey": "_FilmfestBallGame_AreaWarning",
+              "modifierNameSteps": [
+                "FilmfestBallGame_PlayerInOthersArea_Warning",
+                "FilmfestBallGame_PlayerInOthersArea_Punish"
+              ],
+              "removeAppliedModifier": true,
+              "actorIceSubHurtDelta": -1,
+              "valueSteps": [
+                2.5,
+                4.5,
+                9999
+              ]
+            }
+          ],
+          "minus_one": -1
+        },
+        "FilmfestBallGame_PlayerInOthersArea_Normal": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "AttachModifierToSelfGlobalValueNoInitMixin",
+              "enable": true,
+              "globalValueKey": "_FilmfestBallGame_AreaWarning",
+              "modifierNameSteps": [
+                "FilmfestBallGame_PlayerInOthersArea_Warning",
+                "FilmfestBallGame_PlayerInOthersArea_Punish"
+              ],
+              "removeAppliedModifier": true,
+              "actorIceSubHurtDelta": -1,
+              "valueSteps": [
+                4.5,
+                6.5,
+                9999
+              ]
+            }
+          ],
+          "minus_one": -1
+        },
+        "FilmfestBallGame_PlayerInOthersArea_Punish": {
+          "onAdded": [
+            {
+              "$type": "ServerLuaCall",
+              "doOffStage": false,
+              "luaCallType": "CurGalleryControlGroup",
+              "paramNum": 1,
+              "actorIceSubHurtDelta": -1,
+              "param1": "GV_GateForbidArea_GateMark",
+              "funcName": "SLC_Filmfest_BallGame_Punish",
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValueV2",
+              "doOffStage": false,
+              "key": "GV_GateForbidArea_GateMark",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "FilmfestBallGame_PlayerInOthersArea_Warning": {
+          "onAdded": [
+            {
+              "$type": "ShowReminder",
+              "doOffStage": false,
+              "id": 477110102,
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true,
+              "PBHJPBFJGME": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "FilmfestBallGame_PlayerTeleporting": {
+          "onAdded": [
+            {
+              "$type": "AddGlobalValueV2",
+              "doOffStage": false,
+              "value": 1,
+              "target": "Team",
+              "key": "_FilmfestBallGame_PunishmentCount",
+              "maxValue": 10,
+              "actorIceSubHurtDelta": -1,
+              "useLimitRange": true,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValueV2",
+              "doOffStage": false,
+              "target": "Team",
+              "key": "GV_GateForbidArea_GateMark",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "SetGlobalValueV2",
+              "doOffStage": false,
+              "target": "Team",
+              "key": "GV_GateForbidArea_GateMark",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "state": "IsGhostToEnemy"
+        },
+        "FilmfestBallGame_PunishScore": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "Predicated",
+              "doOffStage": false,
+              "failActions": [
+                {
+                  "$type": "AddGlobalValueV2",
+                  "doOffStage": false,
+                  "value": -1,
+                  "key": "_FilmfestBallGame_AreaWarning",
+                  "maxValue": 11,
+                  "actorIceSubHurtDelta": -1,
+                  "useLimitRange": true,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "target": "Team",
+              "targetPredicates": [
+                {
+                  "$type": "ByHasModifier",
+                  "modifierName": "FilmfestBallGame_PlayerInOthersArea",
+                  "target": "Target"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "successActions": [
+                {
+                  "$type": "AddGlobalValueV2",
+                  "doOffStage": false,
+                  "value": 1,
+                  "key": "_FilmfestBallGame_AreaWarning",
+                  "maxValue": 11,
+                  "actorIceSubHurtDelta": -1,
+                  "useLimitRange": true,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "thinkInterval": 1
+        },
+        "FilmfestBallGame_RocketJumpEffect": {
+          "onAdded": [
+            {
+              "$type": "ServerLuaCall",
+              "doOffStage": false,
+              "luaCallType": "CurGalleryControlGroup",
+              "actorIceSubHurtDelta": -1,
+              "funcName": "SLC_Filmfest_BallGame_DoJump",
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "FireEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Stages_Level_Common_Jumpplatform_01_Active",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "duration": 0.5
+        },
+        "FilmfestBallGame_RocketJump_Avator": {
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_SceneObj_JumpUp_01_Buff",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "EnableRocketJump",
+              "doOffStage": false,
+              "enable": true,
+              "actorIceSubHurtDelta": -1,
+              "extention": {
+                "CHNNOCOHOMA": 2.5,
+                "NJBEHIKHAJJ": 3
+              },
+              "type": "DungeonJump",
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "EnableRocketJump",
+              "doOffStage": true,
+              "target": "CurTeamAvatars",
+              "actorIceSubHurtDelta": -1,
+              "type": "DungeonJump",
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "modifierMixins": [
+            {
+              "$type": "AttachToStateIDMixin",
+              "modifierName": "FilmfestBallGame_RocketJumpEffect",
+              "stateIDs": [
+                "Jump"
+              ],
+              "value": -1,
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "minus_one": -1
+        },
+        "FilmfestBallGame_Sprint_ReduceCost": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "ReviveStamina",
+              "doOffStage": true,
+              "value": 100,
+              "target": "CurLocalAvatar",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "properties": {
+            "Actor_CostStaminaRatio": -1
+          },
+          "thinkInterval": 1
+        },
+        "FilmfestBallGame_TeleportState": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "AttachToStateIDMixin",
+              "modifierName": "FilmfestBallGame_PlayerTeleporting",
+              "stateIDs": [
+                "ActivitySkill_CommonMove"
+              ],
+              "value": -1,
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "minus_one": -1
+        },
+        "UNIQUE_FilmfestBallGame_Billboard": {
+          "elementDurability": 100,
+          "stacking": "Unique",
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "CurLocalAvatarMixinV2",
+              "modifierName": "FilmfestBallGame_Billboard_Avator",
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "minus_one": -1,
+          "isUnique": true
+        },
+        "UNIQUE_FilmfestBallGame_CameraFix": {
+          "elementDurability": 100,
+          "stacking": "Unique",
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "ModifyCameraMaxDistanceMixin",
+              "lerpInDuration": 0.5,
+              "elevAngleOnStart": 6.5,
+              "lerpOutDuration": 2,
+              "resetToMaxOnStart": true,
+              "maxDistance": 10,
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "minus_one": -1,
+          "isUnique": true
+        },
+        "UNIQUE_FilmfestBallGame_Forbid": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "HideAvatarSkillMixin",
+              "actorIceSubHurtDelta": -1,
+              "skillIDs": [
+                10413,
+                10013
+              ]
+            },
+            {
+              "$type": "HideActionSlotMixin",
+              "slotType": "SlotQuickUse",
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "HideActionSlotMixin",
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "HideActionSlotMixin",
+              "slotType": "Slot1",
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "HideActionSlotMixin",
+              "slotType": "Slot2",
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "HideActionSlotMixin",
+              "slotType": "Slot5",
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "ForbidAvatarFlyMixin",
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "minus_one": -1,
+          "isUnique": true
+        },
+        "UNIQUE_FilmfestBallGame_Immune": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "CurLocalAvatarMixinV2",
+              "modifierName": "UNIQUE_FilmfestBallGame_Immune_Avatar",
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "minus_one": -1,
+          "isUnique": true
+        },
+        "UNIQUE_FilmfestBallGame_Immune_Avatar": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "properties": {
+            "Actor_FallingDamageRatio": -1
+          },
+          "isUnique": true
+        },
+        "UNIQUE_FilmfestBallGame_RocketJump": {
+          "elementDurability": 100,
+          "stacking": "Unique",
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "CurLocalAvatarMixinV2",
+              "modifierName": "FilmfestBallGame_RocketJump_Avator",
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "minus_one": -1,
+          "isUnique": true
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "ServerLuaCall",
+          "doOffStage": false,
+          "luaCallType": "SpecificGroup",
+          "actorIceSubHurtDelta": -1,
+          "funcName": "SLC_Filmfest_BallGame_GetPlayerIndex",
+          "CallParamList": [
+            247711001
+          ],
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "Activity_FilmfestBallGame_TeamAbility_PlayerMark_01",
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "ServerLuaCall",
+          "doOffStage": false,
+          "luaCallType": "SpecificGroup",
+          "actorIceSubHurtDelta": -1,
+          "funcName": "SLC_Filmfest_BallGame_GetPlayerIndex",
+          "CallParamList": [
+            247712001
+          ],
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "Activity_FilmfestBallGame_TeamAbility_PlayerMark_02",
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "ServerLuaCall",
+          "doOffStage": false,
+          "luaCallType": "SpecificGroup",
+          "actorIceSubHurtDelta": -1,
+          "funcName": "SLC_Filmfest_BallGame_GetPlayerIndex",
+          "CallParamList": [
+            247713001
+          ],
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "Activity_FilmfestBallGame_TeamAbility_PlayerMark_03",
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "ServerLuaCall",
+          "doOffStage": false,
+          "luaCallType": "SpecificGroup",
+          "actorIceSubHurtDelta": -1,
+          "funcName": "SLC_Filmfest_BallGame_GetPlayerIndex",
+          "CallParamList": [
+            247714001
+          ],
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "Activity_FilmfestBallGame_TeamAbility_PlayerMark_04",
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "ServerLuaCall",
+          "doOffStage": false,
+          "luaCallType": "SpecificGroup",
+          "actorIceSubHurtDelta": -1,
+          "funcName": "SLC_Filmfest_BallGame_GetPlayerIndex",
+          "CallParamList": [
+            247715001
+          ],
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "Activity_FilmfestBallGame_TeamAbility_PlayerMark_05",
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "doOffStage": false,
+          "modifierName": "UNIQUE_FilmfestSniper_AvatarState",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "Activity_FilmfestSniper_AvatarAbility",
+      "isDynamicAbility": true,
+      "modifiers": {
+        "UNIQUE_FilmfestSniper_AvatarState": {
+          "onAdded": [
+            {
+              "$type": "AttachModifier",
+              "doOffStage": false,
+              "modifierName": "UNIQUE_FilmfestSniper_Immobilize",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AttachModifier",
+              "doOffStage": false,
+              "modifierName": "UNIQUE_FilmfestSniper_Invincible",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AttachModifier",
+              "doOffStage": false,
+              "modifierName": "UNIQUE_FilmfestSniper_IsGhost",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AttachModifier",
+              "doOffStage": false,
+              "modifierName": "UNIQUE_FilmfestSniper_IsGhostToAllied",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "EnablePushColliderName",
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1,
+              "pushColliderNames": [
+                "MoveCollider"
+              ],
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "TriggerSetPassThrough",
+              "doOffStage": true,
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "EnableHDMesh",
+              "doOffStage": false,
+              "hdMeshKey": "Default",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "EnableHitBoxByName",
+              "doOffStage": true,
+              "actorIceSubHurtDelta": -1,
+              "hitBoxNames": [
+                "HitBox",
+                "HitBox_Skill"
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "stacking": "Unique",
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "EnablePushColliderName",
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1,
+              "setEnable": true,
+              "pushColliderNames": [
+                "MoveCollider"
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "modifierMixins": [
+            {
+              "$type": "EntityInVisibleMixin",
+              "CFAIPEFHONO": {
+                "KNKPKKDPEDJ": true
+              },
+              "disableAudio": true,
+              "HOMDDINNFFG": {
+                "KNKPKKDPEDJ": true
+              },
+              "reason": "Gallary",
+              "KBGFNPHLGLA": true,
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "minus_one": -1,
+          "isUnique": true,
+          "state": "DenyLockOn"
+        },
+        "UNIQUE_FilmfestSniper_Immobilize": {
+          "elementDurability": 100,
+          "stacking": "Unique",
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "properties": {
+            "Animator_MoveSpeedRatio": -1,
+            "Animator_OverallSpeedRatioMultiplied": 0
+          },
+          "isUnique": true,
+          "state": "ElementDeadTime"
+        },
+        "UNIQUE_FilmfestSniper_Invincible": {
+          "elementDurability": 100,
+          "stacking": "Unique",
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "isUnique": true,
+          "state": "LockHP"
+        },
+        "UNIQUE_FilmfestSniper_IsGhost": {
+          "elementDurability": 100,
+          "stacking": "Unique",
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "isUnique": true,
+          "state": "IsGhostToEnemy"
+        },
+        "UNIQUE_FilmfestSniper_IsGhostToAllied": {
+          "elementDurability": 100,
+          "stacking": "Unique",
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "isUnique": true,
+          "state": "IsGhostToAllied"
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "ShowExtraAbility",
+          "doOffStage": false,
+          "actorIceSubHurtDelta": -1,
+          "skillID": 20080,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "SetGlobalValueV2",
+          "doOffStage": false,
+          "key": "GV_FilmfestBattle_Charge",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "SetExtraAbilityEnable",
+          "doOffStage": false,
+          "enable": true,
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "Activity_FilmfestBattle_TeamAbility_01",
+      "onRemoved": [
+        {
+          "$type": "ShowExtraAbility",
+          "doOffStage": false,
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "isDynamicAbility": true,
+      "abilityMixins": [
+        {
+          "$type": "ServerUpdateGlobalValueMixin",
+          "key": "GV_FilmfestBattle_Charge",
+          "maxValue": 60,
+          "actorIceSubHurtDelta": -1,
+          "useLimitRange": true
+        },
+        {
+          "$type": "AttachModifierToSelfGlobalValueMixin",
+          "globalValueKey": "GV_FilmfestBattle_Charge",
+          "modifierNameSteps": [
+            "FilmfestBattle_IsCharge"
+          ],
+          "removeAppliedModifier": true,
+          "actorIceSubHurtDelta": -1,
+          "valueSteps": [
+            59.5,
+            60.5
+          ]
+        }
+      ],
+      "onAbilityStart": [
+        {
+          "$type": "AttachModifier",
+          "doOffStage": false,
+          "modifierName": "FilmfestBattle_Timer",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "SetExtraAbilityState",
+          "doOffStage": false,
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "ServerLuaCall",
+          "doOffStage": false,
+          "luaCallType": "CurGalleryControlGroup",
+          "actorIceSubHurtDelta": -1,
+          "funcName": "SLC_FilmfestBattle_ChargeSkill",
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "TriggerAbility",
+          "doOffStage": false,
+          "target": "Other",
+          "abilityName": "ActivityAbility_FilmfestBattle_Level_1",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "SetGlobalValueV2",
+          "doOffStage": false,
+          "key": "GV_FilmfestBattle_Charge",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "modifiers": {
+        "FilmfestBattle_IsCharge": {
+          "onAdded": [
+            {
+              "$type": "Predicated",
+              "doOffStage": false,
+              "failActions": [
+                {
+                  "$type": "ShowReminder",
+                  "doOffStage": false,
+                  "id": 477110103,
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "targetPredicates": [
+                {
+                  "$type": "ByHasModifier",
+                  "modifierName": "FilmfestBattle_Timer",
+                  "target": "Target"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "FilmfestBattle_Timer": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "Predicated",
+              "doOffStage": false,
+              "targetPredicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "value": 60,
+                  "target": "Target",
+                  "key": "GV_FilmfestBattle_Charge",
+                  "compareType": "MoreThanAndEqual"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "successActions": [
+                {
+                  "$type": "ShowReminder",
+                  "doOffStage": false,
+                  "id": 477110103,
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "duration": 20
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "ShowExtraAbility",
+          "doOffStage": false,
+          "actorIceSubHurtDelta": -1,
+          "skillID": 20081,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "SetGlobalValueV2",
+          "doOffStage": false,
+          "key": "GV_FilmfestBattle_Charge",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "SetExtraAbilityEnable",
+          "doOffStage": false,
+          "enable": true,
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "Activity_FilmfestBattle_TeamAbility_02",
+      "onRemoved": [
+        {
+          "$type": "ShowExtraAbility",
+          "doOffStage": false,
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "isDynamicAbility": true,
+      "abilityMixins": [
+        {
+          "$type": "ServerUpdateGlobalValueMixin",
+          "key": "GV_FilmfestBattle_Charge",
+          "maxValue": 60,
+          "actorIceSubHurtDelta": -1,
+          "useLimitRange": true
+        },
+        {
+          "$type": "AttachModifierToSelfGlobalValueMixin",
+          "globalValueKey": "GV_FilmfestBattle_Charge",
+          "modifierNameSteps": [
+            "FilmfestBattle_IsCharge"
+          ],
+          "removeAppliedModifier": true,
+          "actorIceSubHurtDelta": -1,
+          "valueSteps": [
+            59.5,
+            60.5
+          ]
+        }
+      ],
+      "onAbilityStart": [
+        {
+          "$type": "AttachModifier",
+          "doOffStage": false,
+          "modifierName": "FilmfestBattle_Timer",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "SetExtraAbilityState",
+          "doOffStage": false,
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "ServerLuaCall",
+          "doOffStage": false,
+          "luaCallType": "CurGalleryControlGroup",
+          "actorIceSubHurtDelta": -1,
+          "funcName": "SLC_FilmfestBattle_ChargeSkill",
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "TriggerAbility",
+          "doOffStage": false,
+          "target": "Other",
+          "abilityName": "ActivityAbility_FilmfestBattle_Level_2",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "SetGlobalValueV2",
+          "doOffStage": false,
+          "key": "GV_FilmfestBattle_Charge",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "modifiers": {
+        "FilmfestBattle_IsCharge": {
+          "onAdded": [
+            {
+              "$type": "Predicated",
+              "doOffStage": false,
+              "failActions": [
+                {
+                  "$type": "ShowReminder",
+                  "doOffStage": false,
+                  "id": 477110103,
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "targetPredicates": [
+                {
+                  "$type": "ByHasModifier",
+                  "modifierName": "FilmfestBattle_Timer",
+                  "target": "Target"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "FilmfestBattle_Timer": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "Predicated",
+              "doOffStage": false,
+              "targetPredicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "value": 60,
+                  "target": "Target",
+                  "key": "GV_FilmfestBattle_Charge",
+                  "compareType": "MoreThanAndEqual"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "successActions": [
+                {
+                  "$type": "ShowReminder",
+                  "doOffStage": false,
+                  "id": 477110103,
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "duration": 20
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "ShowExtraAbility",
+          "doOffStage": false,
+          "actorIceSubHurtDelta": -1,
+          "skillID": 20082,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "SetGlobalValueV2",
+          "doOffStage": false,
+          "key": "GV_FilmfestBattle_Charge",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "SetExtraAbilityEnable",
+          "doOffStage": false,
+          "enable": true,
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "Activity_FilmfestBattle_TeamAbility_03",
+      "onRemoved": [
+        {
+          "$type": "ShowExtraAbility",
+          "doOffStage": false,
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "isDynamicAbility": true,
+      "abilityMixins": [
+        {
+          "$type": "ServerUpdateGlobalValueMixin",
+          "key": "GV_FilmfestBattle_Charge",
+          "maxValue": 60,
+          "actorIceSubHurtDelta": -1,
+          "useLimitRange": true
+        },
+        {
+          "$type": "AttachModifierToSelfGlobalValueMixin",
+          "globalValueKey": "GV_FilmfestBattle_Charge",
+          "modifierNameSteps": [
+            "FilmfestBattle_IsCharge"
+          ],
+          "removeAppliedModifier": true,
+          "actorIceSubHurtDelta": -1,
+          "valueSteps": [
+            59.5,
+            60.5
+          ]
+        }
+      ],
+      "onAbilityStart": [
+        {
+          "$type": "AttachModifier",
+          "doOffStage": false,
+          "modifierName": "FilmfestBattle_Timer",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "SetExtraAbilityState",
+          "doOffStage": false,
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "ServerLuaCall",
+          "doOffStage": false,
+          "luaCallType": "CurGalleryControlGroup",
+          "actorIceSubHurtDelta": -1,
+          "funcName": "SLC_FilmfestBattle_ChargeSkill",
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "TriggerAbility",
+          "doOffStage": false,
+          "target": "Other",
+          "abilityName": "ActivityAbility_FilmfestBattle_Level_3",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "SetGlobalValueV2",
+          "doOffStage": false,
+          "key": "GV_FilmfestBattle_Charge",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "modifiers": {
+        "FilmfestBattle_IsCharge": {
+          "onAdded": [
+            {
+              "$type": "Predicated",
+              "doOffStage": false,
+              "failActions": [
+                {
+                  "$type": "ShowReminder",
+                  "doOffStage": false,
+                  "id": 477110103,
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "targetPredicates": [
+                {
+                  "$type": "ByHasModifier",
+                  "modifierName": "FilmfestBattle_Timer",
+                  "target": "Target"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "FilmfestBattle_Timer": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "Predicated",
+              "doOffStage": false,
+              "targetPredicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "value": 60,
+                  "target": "Target",
+                  "key": "GV_FilmfestBattle_Charge",
+                  "compareType": "MoreThanAndEqual"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "successActions": [
+                {
+                  "$type": "ShowReminder",
+                  "doOffStage": false,
+                  "id": 477110103,
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "duration": 20
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "ShowExtraAbility",
+          "doOffStage": false,
+          "actorIceSubHurtDelta": -1,
+          "skillID": 20083,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "SetGlobalValueV2",
+          "doOffStage": false,
+          "key": "GV_FilmfestBattle_Charge",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "SetExtraAbilityEnable",
+          "doOffStage": false,
+          "enable": true,
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "Activity_FilmfestBattle_TeamAbility_04",
+      "onRemoved": [
+        {
+          "$type": "ShowExtraAbility",
+          "doOffStage": false,
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "isDynamicAbility": true,
+      "abilityMixins": [
+        {
+          "$type": "ServerUpdateGlobalValueMixin",
+          "key": "GV_FilmfestBattle_Charge",
+          "maxValue": 60,
+          "actorIceSubHurtDelta": -1,
+          "useLimitRange": true
+        },
+        {
+          "$type": "AttachModifierToSelfGlobalValueMixin",
+          "globalValueKey": "GV_FilmfestBattle_Charge",
+          "modifierNameSteps": [
+            "FilmfestBattle_IsCharge"
+          ],
+          "removeAppliedModifier": true,
+          "actorIceSubHurtDelta": -1,
+          "valueSteps": [
+            59.5,
+            60.5
+          ]
+        }
+      ],
+      "onAbilityStart": [
+        {
+          "$type": "AttachModifier",
+          "doOffStage": false,
+          "modifierName": "FilmfestBattle_Timer",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "SetExtraAbilityState",
+          "doOffStage": false,
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "ServerLuaCall",
+          "doOffStage": false,
+          "luaCallType": "CurGalleryControlGroup",
+          "actorIceSubHurtDelta": -1,
+          "funcName": "SLC_FilmfestBattle_ChargeSkill",
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "TriggerAbility",
+          "doOffStage": false,
+          "target": "Other",
+          "abilityName": "ActivityAbility_FilmfestBattle_Level_4",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "SetGlobalValueV2",
+          "doOffStage": false,
+          "key": "GV_FilmfestBattle_Charge",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "modifiers": {
+        "FilmfestBattle_IsCharge": {
+          "onAdded": [
+            {
+              "$type": "Predicated",
+              "doOffStage": false,
+              "failActions": [
+                {
+                  "$type": "ShowReminder",
+                  "doOffStage": false,
+                  "id": 477110103,
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "targetPredicates": [
+                {
+                  "$type": "ByHasModifier",
+                  "modifierName": "FilmfestBattle_Timer",
+                  "target": "Target"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "FilmfestBattle_Timer": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "Predicated",
+              "doOffStage": false,
+              "targetPredicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "value": 60,
+                  "target": "Target",
+                  "key": "GV_FilmfestBattle_Charge",
+                  "compareType": "MoreThanAndEqual"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "successActions": [
+                {
+                  "$type": "ShowReminder",
+                  "doOffStage": false,
+                  "id": 477110103,
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "duration": 20
+        }
+      }
+    }
+  }
+]

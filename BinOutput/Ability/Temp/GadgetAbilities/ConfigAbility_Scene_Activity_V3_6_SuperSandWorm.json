@@ -1,0 +1,4433 @@
+[
+  {
+    "Default": {
+      "abilitySpecials": {
+        "Attack_Times": 0,
+        "Damage_Coefficient_Monster": 1.5,
+        "Damage_Coefficient_Player": 1.5,
+        "LevelEntity_AvatarDot_SystemValue": 1,
+        "max_attack_times": 5
+      },
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "SetGlobalValueToOverrideMap",
+          "doOffStage": false,
+          "overrideMapKey": "Attack_Times",
+          "globalValueKey": "SGV_Attack_Times",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "SetGlobalValue",
+          "doOffStage": false,
+          "value": [
+            "max_attack_times",
+            2,
+            "MUL",
+            "Attack_Times",
+            2,
+            "MUL",
+            "SUB"
+          ],
+          "key": "_attack_times",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "AttachModifier",
+          "doOffStage": false,
+          "modifierName": "SandwormAttackController",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "SceneObj_Area_Xm_Property_Ani_Prop_DirectAttackSandWorm_Sand_01",
+      "modifiers": {
+        "SandwormAttackController": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "AttachModifierToGlobalValueMixin",
+              "globalValueKey": "_attack_times",
+              "modifierNameSteps": [
+                "attack_phase",
+                "attack_wait_phase",
+                "attack_phase",
+                "attack_wait_phase",
+                "attack_phase",
+                "attack_wait_phase",
+                "attack_phase",
+                "attack_wait_phase",
+                "attack_phase",
+                "attack_wait_phase",
+                "attack_end"
+              ],
+              "enable": true,
+              "removeAppliedModifier": true,
+              "actorIceSubHurtDelta": -1,
+              "valueSteps": [
+                -0.5,
+                0.5,
+                1.5,
+                2.5,
+                3.5,
+                4.5,
+                5.5,
+                6.5,
+                7.5,
+                8.5,
+                9.5,
+                10.5
+              ],
+              "NEACJLMBFMN": true
+            }
+          ],
+          "onHittingOther": [
+            {
+              "$type": "Predicated",
+              "doOffStage": false,
+              "target": "Other",
+              "targetPredicates": [
+                {
+                  "$type": "ByEntityTypes",
+                  "target": "Target",
+                  "value": -1,
+                  "entityTypes": [
+                    "Avatar"
+                  ]
+                },
+                {
+                  "$type": "ByAvatarIsHost",
+                  "target": "Target",
+                  "isHost": true
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1
+        },
+        "attack_delayed": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "FireEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Property_Prop_SandwormAttack_Attack",
+              "born": {
+                "$type": "ConfigBornByGlobalValue",
+                "direction": {
+                  "maxAngle": 180
+                },
+                "positionKey": "_target_pos",
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "directionKey": "_target_dir",
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "duration": 2
+        },
+        "attack_end": {
+          "onAdded": [
+            {
+              "$type": "KillSelf",
+              "doOffStage": false,
+              "killSelfType": "Normal",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "attack_phase": {
+          "onAdded": [
+            {
+              "$type": "Predicated",
+              "doOffStage": false,
+              "failActions": [
+                {
+                  "$type": "SetSelfAttackTarget",
+                  "doOffStage": false,
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "targetPredicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "value": 1,
+                  "target": "Target",
+                  "key": "SGV_Target_Stragety"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "successActions": [
+                {
+                  "$type": "SetSelfAttackTarget",
+                  "doOffStage": false,
+                  "otherTargets": {
+                    "$type": "SelectTargetsByShape",
+                    "shapeName": "CircleR140",
+                    "campTargetType": "All",
+                    "topLimit": 1,
+                    "sizeRatio": 1,
+                    "ILLOOADJMLF": {
+                      "direction": {
+                        "maxAngle": 180
+                      },
+                      "FDGAEDDEEDG": {
+                        "ELAJJIANFFM": 180
+                      },
+                      "onGroundRaycastUpDist": 2,
+                      "value": 10
+                    },
+                    "entityTypePriority": [
+                      "Avatar"
+                    ]
+                  },
+                  "predicates": [
+                    {
+                      "$type": "ByEntityTypes",
+                      "target": "Target",
+                      "value": -1,
+                      "entityTypes": [
+                        "Avatar"
+                      ]
+                    },
+                    {
+                      "$type": "ByAvatarIsHost",
+                      "target": "Target",
+                      "isHost": true
+                    }
+                  ],
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalPos",
+              "doOffStage": false,
+              "target": "SelfAttackTarget",
+              "key": "_target_pos",
+              "actorIceSubHurtDelta": -1,
+              "born": {
+                "$type": "ConfigBornByTarget",
+                "direction": {
+                  "maxAngle": 180
+                },
+                "ENOAPEJAJHB": true,
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundIgnoreWater": true,
+                "alongGround": true,
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalDir",
+              "doOffStage": false,
+              "target": "Target",
+              "key": "_target_dir",
+              "actorIceSubHurtDelta": -1,
+              "born": {
+                "$type": "ConfigBornByTarget",
+                "direction": {
+                  "$type": "DMACPNKGOBL",
+                  "maxAngle": 180,
+                  "FIDMAMPCMOI": true,
+                  "range": 4
+                },
+                "useRotation": true,
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundIgnoreWater": true,
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "Predicated",
+              "doOffStage": false,
+              "targetPredicates": [
+                {
+                  "$type": "JDKMHOHDEEE",
+                  "logic": "Lesser",
+                  "MGDBLFDOIHF": "_target_pos",
+                  "NOGFMLCCPLM": 11
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "successActions": [
+                {
+                  "$type": "FireEffect",
+                  "doOffStage": false,
+                  "scale": 1,
+                  "actorIceSubHurtDelta": -1,
+                  "effectPattern": "Eff_Property_Prop_SandwormAttack_PreAttack_Activity",
+                  "born": {
+                    "$type": "ConfigBornByGlobalValue",
+                    "direction": {
+                      "maxAngle": 180
+                    },
+                    "positionKey": "_target_pos",
+                    "FDGAEDDEEDG": {
+                      "ELAJJIANFFM": 180
+                    },
+                    "directionKey": "_target_dir",
+                    "onGroundRaycastUpDist": 2,
+                    "value": 10
+                  },
+                  "effectTempleteID": -1,
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "ApplyModifier",
+                  "doOffStage": false,
+                  "modifierName": "attack_delayed",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "Predicated",
+              "doOffStage": false,
+              "targetPredicates": [
+                {
+                  "$type": "JDKMHOHDEEE",
+                  "logic": "Lesser",
+                  "MGDBLFDOIHF": "_target_pos",
+                  "NOGFMLCCPLM": 11
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "successActions": [
+                {
+                  "$type": "SetSystemValueToOverrideMap",
+                  "doOffStage": false,
+                  "key": "LevelEntity_AvatarDot_SystemValue",
+                  "actorIceSubHurtDelta": -1,
+                  "value": -1,
+                  "type": "ElementLevelCo",
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "TriggerAttackEvent",
+                  "doOffStage": false,
+                  "attackEvent": {
+                    "attackInfo": {
+                      "attenuationGroup": "default",
+                      "hitPattern": {
+                        "hitImpulseType": "LV6",
+                        "JKLONEBKFKJ": {
+                          "JJGBOHIKHFM": true,
+                          "value": 1
+                        }
+                      },
+                      "FJNMGDHFOEH": {
+                        "GCPNPCOFFBP": "Shake"
+                      },
+                      "IODAJAKBOLG": {
+                        "onHitEffectName": "default",
+                        "JKLONEBKFKJ": {
+                          "JJGBOHIKHFM": true,
+                          "value": 1
+                        }
+                      },
+                      "attackProperty": {
+                        "attackType": "Default",
+                        "enBreak": 350,
+                        "strikeType": "Blunt",
+                        "elementRank": 1,
+                        "HPPLKCPAKHP": true,
+                        "damageExtra": [
+                          "LevelEntity_AvatarDot_SystemValue",
+                          "Damage_Coefficient_Monster",
+                          "MUL"
+                        ],
+                        "OBHHLNNKOCN": true
+                      },
+                      "cameraShake": {
+                        "extension": {
+                          "baseCycle": 0.11999999731779099,
+                          "cycleDamping": 0.11999999731779099,
+                          "baseOnCamera": true,
+                          "rangeAttenuation": 0.5
+                        },
+                        "FAKMJBNLPPB": -1,
+                        "shakeDistance": 20
+                      },
+                      "attackTag": "SandwormAttack"
+                    },
+                    "attackPattern": {
+                      "$type": "ConfigAttackCircle",
+                      "radius": 3,
+                      "massiveAttackRatio": 1,
+                      "ignoreMassive": true,
+                      "born": {
+                        "$type": "ConfigBornByGlobalValue",
+                        "direction": {
+                          "maxAngle": 180
+                        },
+                        "positionKey": "_target_pos",
+                        "offset": {
+                          "x": -5
+                        },
+                        "FDGAEDDEEDG": {
+                          "ELAJJIANFFM": 180
+                        },
+                        "directionKey": "_target_dir",
+                        "onGroundRaycastUpDist": 2,
+                        "value": 10
+                      },
+                      "height": 9,
+                      "fanAngle": 360,
+                      "PBFNLCIFCBO": {
+                        "GOAEBMPCPJL": {
+                          "JJGBOHIKHFM": true,
+                          "value": 1
+                        }
+                      },
+                      "triggerType": "TriggerNoRepeat"
+                    }
+                  },
+                  "targetType": "Enemy",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "TriggerAttackEvent",
+                  "doOffStage": false,
+                  "attackEvent": {
+                    "attackInfo": {
+                      "attenuationGroup": "default",
+                      "hitPattern": {
+                        "hitImpulseType": "LV6",
+                        "JKLONEBKFKJ": {
+                          "JJGBOHIKHFM": true,
+                          "value": 1
+                        }
+                      },
+                      "FJNMGDHFOEH": {
+                        "GCPNPCOFFBP": "Shake"
+                      },
+                      "IODAJAKBOLG": {
+                        "onHitEffectName": "default",
+                        "JKLONEBKFKJ": {
+                          "JJGBOHIKHFM": true,
+                          "value": 1
+                        }
+                      },
+                      "attackProperty": {
+                        "attackType": "Default",
+                        "enBreak": 350,
+                        "strikeType": "Blunt",
+                        "elementRank": 1,
+                        "HPPLKCPAKHP": true,
+                        "damageExtra": [
+                          "LevelEntity_AvatarDot_SystemValue",
+                          "Damage_Coefficient_Monster",
+                          "MUL"
+                        ],
+                        "OBHHLNNKOCN": true
+                      },
+                      "cameraShake": {
+                        "extension": {
+                          "baseCycle": 0.11999999731779099,
+                          "cycleDamping": 0.11999999731779099,
+                          "baseOnCamera": true,
+                          "rangeAttenuation": 0.5
+                        },
+                        "FAKMJBNLPPB": -1,
+                        "shakeDistance": 20
+                      },
+                      "attackTag": "SandwormAttack"
+                    },
+                    "attackPattern": {
+                      "$type": "ConfigAttackCircle",
+                      "radius": 3,
+                      "massiveAttackRatio": 1,
+                      "ignoreMassive": true,
+                      "born": {
+                        "$type": "ConfigBornByGlobalValue",
+                        "direction": {
+                          "maxAngle": 180
+                        },
+                        "positionKey": "_target_pos",
+                        "offset": {
+                          "x": -5
+                        },
+                        "FDGAEDDEEDG": {
+                          "ELAJJIANFFM": 180
+                        },
+                        "directionKey": "_target_dir",
+                        "onGroundRaycastUpDist": 2,
+                        "value": 10
+                      },
+                      "height": 9,
+                      "fanAngle": 360,
+                      "PBFNLCIFCBO": {
+                        "GOAEBMPCPJL": {
+                          "JJGBOHIKHFM": true,
+                          "value": 1
+                        }
+                      },
+                      "triggerType": "TriggerNoRepeat"
+                    }
+                  },
+                  "targetType": "SelfCamp",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AddGlobalValue",
+              "doOffStage": false,
+              "value": 1,
+              "key": "_attack_times",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "duration": 3.0999999046325684
+        },
+        "attack_wait_phase": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "AddGlobalValue",
+              "doOffStage": false,
+              "value": 1,
+              "key": "_attack_times",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "duration": 3
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "SceneObj_Area_Xm_Property_Ani_Prop_ChargingStation_Sand_01",
+      "abilityMixins": [
+        {
+          "$type": "AttachToGadgetStateMixin",
+          "modifierName": "None",
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToGadgetStateMixin",
+          "modifierName": "Build",
+          "actorIceSubHurtDelta": -1,
+          "gadgetState": 201
+        },
+        {
+          "$type": "AttachToGadgetStateMixin",
+          "modifierName": "Ready",
+          "actorIceSubHurtDelta": -1,
+          "gadgetState": 202
+        }
+      ],
+      "modifiers": {
+        "Build": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "FireEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_SceneObj_ChargingStation_01_Building",
+              "born": {
+                "$type": "ConfigBornByAttachPoint",
+                "direction": {
+                  "maxAngle": 180
+                },
+                "useRotation": true,
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "attachPointName": "RootNode",
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1
+        },
+        "None": {
+          "onAdded": [
+            {
+              "$type": "EnableSceneTransformByName",
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1,
+              "transformNames": [
+                "Vo1"
+              ],
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "EnableSceneTransformByName",
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1,
+              "setEnable": true,
+              "transformNames": [
+                "Vo2"
+              ],
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Item_SpecialTreasureBox_LockIdle",
+              "born": {
+                "$type": "ConfigBornByAttachPoint",
+                "direction": {
+                  "maxAngle": 180
+                },
+                "useRotation": true,
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "attachPointName": "AttachPoint",
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "FireEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Item_SpecialTreasureBox_Unlock",
+              "born": {
+                "$type": "ConfigBornByAttachPoint",
+                "direction": {
+                  "maxAngle": 180
+                },
+                "useRotation": true,
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "attachPointName": "AttachPoint",
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1
+        },
+        "Ready": {
+          "onAdded": [
+            {
+              "$type": "EnableSceneTransformByName",
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1,
+              "setEnable": true,
+              "transformNames": [
+                "Vo1"
+              ],
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "EnableSceneTransformByName",
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1,
+              "transformNames": [
+                "Vo2"
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "SceneObj_Area_Xm_Property_Ani_Prop_ChargingStation_Sand_02",
+      "abilityMixins": [
+        {
+          "$type": "AttachToGadgetStateMixin",
+          "modifierName": "Charging",
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToGadgetStateMixin",
+          "modifierName": "Ready",
+          "actorIceSubHurtDelta": -1,
+          "gadgetState": 201
+        },
+        {
+          "$type": "AttachToGadgetStateMixin",
+          "modifierName": "Destory",
+          "actorIceSubHurtDelta": -1,
+          "gadgetState": 901
+        }
+      ],
+      "modifiers": {
+        "Charging": {
+          "onAdded": [
+            {
+              "$type": "SetAnimatorInt",
+              "doOffStage": false,
+              "value": 201,
+              "intID": "State",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_SceneObj_ChargingStation_01_Charge",
+              "born": {
+                "$type": "ConfigBornByAttachPoint",
+                "direction": {
+                  "maxAngle": 180
+                },
+                "useRotation": true,
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "attachPointName": "AttachPoint",
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "Destory": {
+          "onAdded": [
+            {
+              "$type": "SetAnimatorInt",
+              "doOffStage": false,
+              "value": 901,
+              "intID": "State",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_SceneObj_ChargingStation_01_Die",
+              "born": {
+                "$type": "ConfigBornByAttachPoint",
+                "direction": {
+                  "maxAngle": 180
+                },
+                "useRotation": true,
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "attachPointName": "AttachPoint",
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "Ready": {
+          "onAdded": [
+            {
+              "$type": "SetAnimatorInt",
+              "doOffStage": false,
+              "value": 202,
+              "intID": "State",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_SceneObj_ChargingStation_01_Finish",
+              "born": {
+                "$type": "ConfigBornByAttachPoint",
+                "direction": {
+                  "maxAngle": 180
+                },
+                "useRotation": true,
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "attachPointName": "AttachPoint",
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "ApplyModifier",
+          "doOffStage": false,
+          "modifierName": "SneerMonster",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "AttachAbilityStateResistance",
+          "doOffStage": false,
+          "durationRatio": 1,
+          "actorIceSubHurtDelta": -1,
+          "resistanceListID": 11002,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "SetGlobalValue",
+          "doOffStage": false,
+          "value": 1,
+          "key": "_SCENEOBJ_PROTECTTARGET",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "SceneObj_Area_Xm_Property_Ani_Prop_ChargingStationHpBar_01",
+      "abilityMixins": [
+        {
+          "$type": "AttachToGadgetStateMixin",
+          "modifierName": "Base",
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToGadgetStateMixin",
+          "modifierName": "Invincible",
+          "actorIceSubHurtDelta": -1,
+          "gadgetState": 201
+        }
+      ],
+      "modifiers": {
+        "Base": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "Invincible": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "state": "LockHP"
+        },
+        "SneerMonster": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "TriggerTaunt",
+              "doOffStage": false,
+              "otherTargets": {
+                "$type": "SelectTargetsByShape",
+                "shapeName": "CircleR25",
+                "campTargetType": "Enemy",
+                "sizeRatio": 1,
+                "ILLOOADJMLF": {
+                  "direction": {
+                    "maxAngle": 180
+                  },
+                  "FDGAEDDEEDG": {
+                    "ELAJJIANFFM": 180
+                  },
+                  "onGroundRaycastUpDist": 2,
+                  "value": 10
+                }
+              },
+              "careValue": 30,
+              "predicates": [
+                {
+                  "$type": "ByEntityTypes",
+                  "target": "Target",
+                  "value": -1,
+                  "entityTypes": [
+                    "Monster"
+                  ]
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "tauntLevel": "Ability_TauntLevel_3",
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "thinkInterval": 2
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "SceneObj_Area_Xm_Property_Ani_Prop_WormCannon_Sand_01",
+      "abilityMixins": [
+        {
+          "$type": "AttachToGadgetStateMixin",
+          "modifierName": "None",
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToGadgetStateMixin",
+          "modifierName": "Build",
+          "actorIceSubHurtDelta": -1,
+          "gadgetState": 201
+        },
+        {
+          "$type": "AttachToGadgetStateMixin",
+          "modifierName": "Ready",
+          "actorIceSubHurtDelta": -1,
+          "gadgetState": 202
+        }
+      ],
+      "modifiers": {
+        "Build": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "FireEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_SceneObj_WormCannon_01_Building",
+              "born": {
+                "$type": "ConfigBornByAttachPoint",
+                "direction": {
+                  "maxAngle": 180
+                },
+                "useRotation": true,
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "attachPointName": "RootNode",
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1
+        },
+        "None": {
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Item_SpecialTreasureBox_LockIdle",
+              "born": {
+                "$type": "ConfigBornByAttachPoint",
+                "direction": {
+                  "maxAngle": 180
+                },
+                "useRotation": true,
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "attachPointName": "AttachPoint",
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "EnableSceneTransformByName",
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1,
+              "transformNames": [
+                "Vo1"
+              ],
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "EnableSceneTransformByName",
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1,
+              "setEnable": true,
+              "transformNames": [
+                "Vo2"
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "FireEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Item_SpecialTreasureBox_Unlock",
+              "born": {
+                "$type": "ConfigBornByAttachPoint",
+                "direction": {
+                  "maxAngle": 180
+                },
+                "useRotation": true,
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "attachPointName": "AttachPoint",
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1
+        },
+        "Ready": {
+          "onAdded": [
+            {
+              "$type": "EnableSceneTransformByName",
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1,
+              "setEnable": true,
+              "transformNames": [
+                "Vo1"
+              ],
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "EnableSceneTransformByName",
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1,
+              "transformNames": [
+                "Vo2"
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "SceneObj_Area_Xm_Property_Ani_Prop_WormCannon_Sand_02",
+      "abilityMixins": [
+        {
+          "$type": "AttachToGadgetStateMixin",
+          "modifierName": "Cannon_Charging",
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToGadgetStateMixin",
+          "modifierName": "Cannon_Ready",
+          "actorIceSubHurtDelta": -1,
+          "gadgetState": 201
+        },
+        {
+          "$type": "AttachToGadgetStateMixin",
+          "modifierName": "Cannon_Accumulation",
+          "actorIceSubHurtDelta": -1,
+          "gadgetState": 202
+        },
+        {
+          "$type": "AttachToGadgetStateMixin",
+          "modifierName": "Cannon_Fire",
+          "actorIceSubHurtDelta": -1,
+          "gadgetState": 203
+        }
+      ],
+      "modifiers": {
+        "Cannon_Accumulation": {
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_SceneObj_WormCannon_Cast",
+              "born": {
+                "$type": "ConfigBornByAttachPoint",
+                "direction": {
+                  "maxAngle": 180
+                },
+                "useRotation": true,
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "attachPointName": "PaokouEffPoint",
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "otherTargets": {
+                "$type": "EKDIJCOKJDO",
+                "tag": "IS_DieSandworm"
+              },
+              "value": 1,
+              "key": "DieSandworm_IsInCutscene",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "ChangeGadgetState",
+              "doOffStage": false,
+              "value": 203,
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "duration": 2.5
+        },
+        "Cannon_Charging": {
+          "onAdded": [
+            {
+              "$type": "SetMaterialParamFloatByTransform",
+              "doOffStage": false,
+              "patternName": "_EmissionStrength",
+              "value": 1.5,
+              "enable": true,
+              "matName": "Mat1",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetMaterialParamFloatByTransform",
+              "doOffStage": false,
+              "patternName": "_EmissionStrength",
+              "value": 1.5,
+              "enable": true,
+              "matName": "Mat2",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_SceneObj_WormCannon_01_Charge",
+              "born": {
+                "$type": "ConfigBornByAttachPoint",
+                "direction": {
+                  "maxAngle": 180
+                },
+                "useRotation": true,
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "attachPointName": "AttachPoint",
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "Cannon_Fire": {
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "otherTargets": {
+                "$type": "EKDIJCOKJDO",
+                "tag": "IS_DieSandworm_PartcontrolTarget"
+              },
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_SceneObj_WormCannon_Laser",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true,
+              "OMPCBPHLEAN": true
+            },
+            {
+              "$type": "AttachModifier",
+              "doOffStage": false,
+              "modifierName": "SandWrom_Hit",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AttachModifier",
+              "doOffStage": false,
+              "modifierName": "PaokouFire",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "ApplyModifier",
+              "doOffStage": false,
+              "otherTargets": {
+                "$type": "EKDIJCOKJDO",
+                "tag": "IS_DieSandworm"
+              },
+              "modifierName": "Lose_HP",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "AttachModifier",
+              "doOffStage": false,
+              "modifierName": "Notify_SandWorm",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "duration": 2
+        },
+        "Cannon_Ready": {
+          "onAdded": [
+            {
+              "$type": "SetMaterialParamFloatByTransform",
+              "doOffStage": false,
+              "patternName": "_EmissionStrength",
+              "value": 5,
+              "enable": true,
+              "matName": "Mat1",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetMaterialParamFloatByTransform",
+              "doOffStage": false,
+              "patternName": "_EmissionStrength",
+              "value": 5,
+              "enable": true,
+              "matName": "Mat2",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_SceneObj_WormCannon_Finished",
+              "born": {
+                "$type": "ConfigBornByAttachPoint",
+                "direction": {
+                  "maxAngle": 180
+                },
+                "useRotation": true,
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "attachPointName": "AttachPoint",
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "Lose_HP": {
+          "onThinkIntervalIsFixedUpdate": true,
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "LoseHP",
+              "doOffStage": false,
+              "amountByTargetMaxHPRatio": 0.20000000298023224,
+              "enableInvincible": true,
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "thinkInterval": 0.30000001192092896,
+          "duration": 2.299999952316284
+        },
+        "Notify_SandWorm": {
+          "onAdded": [
+            {
+              "$type": "Predicated",
+              "doOffStage": false,
+              "otherTargets": {
+                "$type": "EKDIJCOKJDO",
+                "tag": "IS_DieSandworm"
+              },
+              "actorIceSubHurtDelta": -1,
+              "successActions": [
+                {
+                  "$type": "SetGlobalValue",
+                  "doOffStage": false,
+                  "value": 1,
+                  "target": "Other",
+                  "key": "DIESANDWORM_PLAYDIE",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "Predicated",
+              "doOffStage": false,
+              "otherTargets": {
+                "$type": "EKDIJCOKJDO",
+                "tag": "IS_DieSandworm"
+              },
+              "actorIceSubHurtDelta": -1,
+              "successActions": [
+                {
+                  "$type": "SetGlobalValue",
+                  "doOffStage": false,
+                  "value": 1,
+                  "target": "Other",
+                  "key": "DIESANDWORM_PLAYDIE",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "duration": 2
+        },
+        "PaokouFire": {
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_SceneObj_WormCannon_Fire",
+              "born": {
+                "$type": "ConfigBornByAttachPoint",
+                "direction": {
+                  "maxAngle": 180
+                },
+                "useRotation": true,
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "attachPointName": "PaokouEffPoint",
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "duration": 1.5
+        },
+        "SandWrom_Hit": {
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "otherTargets": {
+                "$type": "EKDIJCOKJDO",
+                "tag": "IS_DieSandworm_PartcontrolTarget"
+              },
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_SceneObj_WormCannon_Hit",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "duration": 2
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "SceneObj_Area_Xm_Property_Ani_Prop_WormBattleBuff_01",
+      "abilityMixins": [
+        {
+          "$type": "AttachToGadgetStateMixin",
+          "modifierName": "Buff_Ball_Stay",
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToGadgetStateMixin",
+          "modifierName": "Buff_Ball_Disappear",
+          "actorIceSubHurtDelta": -1,
+          "gadgetState": 201
+        }
+      ],
+      "onFieldEnter": [
+        {
+          "$type": "ChangeGadgetState",
+          "doOffStage": false,
+          "value": 201,
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "modifiers": {
+        "Buff_Ball_Disappear": {
+          "onAdded": [
+            {
+              "$type": "FireEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Tower_Ball_Active_01",
+              "born": {
+                "$type": "ConfigBornByAttachPoint",
+                "direction": {
+                  "maxAngle": 180
+                },
+                "useRotation": true,
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "attachPointName": "AttachPoint",
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "ApplyModifier",
+              "doOffStage": false,
+              "modifierName": "UNIQUE_SuperSandWorm_BuffBall_Controller",
+              "target": "Team",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "Buff_Ball_Stay": {
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Tower_Ball_AttackUp_01",
+              "born": {
+                "$type": "ConfigBornByAttachPoint",
+                "direction": {
+                  "maxAngle": 180
+                },
+                "useRotation": true,
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "attachPointName": "AttachPoint",
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "UNIQUE_SuperSandWorm_BuffBall_Controller": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "value": 1,
+              "target": "Team",
+              "key": "_HAS_FallingAttack",
+              "maxValue": 2,
+              "actorIceSubHurtDelta": -1,
+              "useLimitRange": true,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "stacking": "RefreshUniqueDurability",
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "target": "Team",
+              "key": "_HAS_FallingAttack",
+              "maxValue": 2,
+              "actorIceSubHurtDelta": -1,
+              "useLimitRange": true,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "isUnique": true,
+          "duration": 5
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "SceneObj_Area_Xm_Property_Ani_Prop_ChargingBuff_01",
+      "abilityMixins": [
+        {
+          "$type": "AttachToGadgetStateMixin",
+          "modifierName": "Buff_Ball_Stay",
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToGadgetStateMixin",
+          "modifierName": "Buff_Ball_Disappear",
+          "actorIceSubHurtDelta": -1,
+          "gadgetState": 201
+        }
+      ],
+      "onFieldEnter": [
+        {
+          "$type": "ChangeGadgetState",
+          "doOffStage": false,
+          "value": 201,
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "modifiers": {
+        "Buff_Ball_Disappear": {
+          "onAdded": [
+            {
+              "$type": "KillSelf",
+              "doOffStage": false,
+              "killSelfType": "Normal",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "Buff_Ball_Stay": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "ServerLuaTriggerEvent",
+              "doOffStage": false,
+              "luaCallType": "FromGroup",
+              "actorIceSubHurtDelta": -1,
+              "sourceName": "ChargingBall_Charging",
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "SceneObj_Area_Xm_Property_Ani_Prop_ChargingBuff_03",
+      "abilityMixins": [
+        {
+          "$type": "AttachToGadgetStateMixin",
+          "modifierName": "Buff_Ball_Stay",
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToGadgetStateMixin",
+          "modifierName": "Buff_Ball_Disappear",
+          "actorIceSubHurtDelta": -1,
+          "gadgetState": 201
+        }
+      ],
+      "onFieldEnter": [
+        {
+          "$type": "ChangeGadgetState",
+          "doOffStage": false,
+          "value": 201,
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "ReviveStamina",
+          "doOffStage": true,
+          "value": 1000,
+          "target": "CurLocalAvatar",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "modifiers": {
+        "Buff_Ball_Disappear": {
+          "onAdded": [
+            {
+              "$type": "KillSelf",
+              "doOffStage": false,
+              "killSelfType": "Normal",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "Buff_Ball_Stay": {
+          "onAdded": [
+            {
+              "$type": "FireEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_SceneObj_ChargingBuff_02_Create",
+              "born": {
+                "$type": "ConfigBornByAttachPoint",
+                "direction": {
+                  "maxAngle": 180
+                },
+                "useRotation": true,
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "attachPointName": "AttachPoint",
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_SceneObj_ChargingBuff_02_Self",
+              "born": {
+                "$type": "ConfigBornByAttachPoint",
+                "direction": {
+                  "maxAngle": 180
+                },
+                "useRotation": true,
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "attachPointName": "AttachPoint",
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "ServerLuaTriggerEvent",
+              "doOffStage": false,
+              "luaCallType": "FromGroup",
+              "actorIceSubHurtDelta": -1,
+              "sourceName": "ChargingBall_Charging_Big",
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "FireEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_SceneObj_ChargingBuff_02_Die",
+              "born": {
+                "$type": "ConfigBornByAttachPoint",
+                "direction": {
+                  "maxAngle": 180
+                },
+                "useRotation": true,
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "attachPointName": "AttachPoint",
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "doOffStage": false,
+          "modifierName": "SandwormStoneHit",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "SceneObj_Area_Xm_Property_Ani_Prop_WormSandPile_Sand_01",
+      "modifiers": {
+        "SandwormStoneHit": {
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Item_Hint",
+              "born": {
+                "$type": "ConfigBornByAttachPoint",
+                "direction": {
+                  "maxAngle": 180
+                },
+                "useRotation": true,
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "attachPointName": "Point1",
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Item_Hint",
+              "born": {
+                "$type": "ConfigBornByAttachPoint",
+                "direction": {
+                  "maxAngle": 180
+                },
+                "useRotation": true,
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "attachPointName": "Point2",
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Item_Hint",
+              "born": {
+                "$type": "ConfigBornByAttachPoint",
+                "direction": {
+                  "maxAngle": 180
+                },
+                "useRotation": true,
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "attachPointName": "Point3",
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Item_Hint",
+              "born": {
+                "$type": "ConfigBornByAttachPoint",
+                "direction": {
+                  "maxAngle": 180
+                },
+                "useRotation": true,
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "attachPointName": "Point4",
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "onBeingHit": [
+            {
+              "$type": "Predicated",
+              "doOffStage": false,
+              "targetPredicates": [
+                {
+                  "$type": "ByAttackTags",
+                  "attackTags": [
+                    "SandwormAttack"
+                  ],
+                  "target": "Target"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "successActions": [
+                {
+                  "$type": "KillSelf",
+                  "doOffStage": false,
+                  "killSelfType": "Normal",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "isLimitedProperties": true,
+          "minus_one": -1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "doOffStage": false,
+          "modifierName": "AttachAirWall",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "SceneObj_Area_Xm_Property_Ani_Prop_SandWormAirWall_Sand_01",
+      "modifiers": {
+        "AttachAirWall": {
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_SceneObj_SandstormWall_01",
+              "born": {
+                "$type": "ConfigBornByAttachPoint",
+                "direction": {
+                  "maxAngle": 180
+                },
+                "useRotation": true,
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "attachPointName": "RootNode",
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "SceneObj_Area_Xm_Property_Ani_Prop_SandWorm_SetEndState",
+      "onAbilityStart": [
+        {
+          "$type": "ChangeGadgetState",
+          "doOffStage": false,
+          "value": 201,
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "SceneObj_Area_Xm_Property_Ani_Prop_SmashSandWorm_SetKilledEndState",
+      "onAbilityStart": [
+        {
+          "$type": "ChangeGadgetState",
+          "doOffStage": false,
+          "value": 202,
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "SceneObj_Area_Xm_Property_Ani_Prop_AbilitySandWorm_Sand_01_Steer",
+      "abilityMixins": [
+        {
+          "$type": "SteerAttackMixin",
+          "startNormalizedTime": 0.5,
+          "angularSpeed": 720,
+          "CCFNFIKKIDJ": true,
+          "value": -1,
+          "GMEPMDNDBOP": 180,
+          "actorIceSubHurtDelta": -1,
+          "steerStateIDs": [
+            "Skill01"
+          ],
+          "endNormalizedTime": 1,
+          "PMKCEJILFAF": true
+        },
+        {
+          "$type": "SteerAttackMixin",
+          "angularSpeed": 120,
+          "CCFNFIKKIDJ": true,
+          "value": -1,
+          "GMEPMDNDBOP": 180,
+          "actorIceSubHurtDelta": -1,
+          "steerStateIDs": [
+            "Skill02"
+          ],
+          "endNormalizedTime": 0.44999998807907104,
+          "PMKCEJILFAF": true
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "SceneObj_Area_Xm_Property_Ani_Prop_AbilitySandWorm_Sand_01",
+      "abilityMixins": [
+        {
+          "$type": "AttachToGadgetStateMixin",
+          "modifierName": "Skill",
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToGadgetStateMixin",
+          "modifierName": "End",
+          "actorIceSubHurtDelta": -1,
+          "gadgetState": 201
+        }
+      ],
+      "modifiers": {
+        "AbilitySandworm_01_EndTimer": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "ChangeGadgetState",
+              "doOffStage": false,
+              "value": 201,
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "thinkInterval": 32
+        },
+        "End": {
+          "onAdded": [
+            {
+              "$type": "RemoveUniqueModifier",
+              "doOffStage": false,
+              "modifierName": "UNIQUE_AbilitySandWormScreenEffect",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "ServerLuaTriggerEvent",
+              "doOffStage": false,
+              "luaCallType": "FromGroup",
+              "actorIceSubHurtDelta": -1,
+              "sourceName": "AbilitySandWorm_Sand_End",
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "RemoveUniqueModifier",
+              "doOffStage": false,
+              "modifierName": "UNIQUE_AbilitySandWormScreenEffect",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "ServerLuaTriggerEvent",
+              "doOffStage": false,
+              "luaCallType": "FromGroup",
+              "actorIceSubHurtDelta": -1,
+              "sourceName": "AbilitySandWorm_Sand_End",
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "thinkInterval": 1
+        },
+        "Skill": {
+          "onAdded": [
+            {
+              "$type": "ApplyModifier",
+              "doOffStage": false,
+              "modifierName": "AbilitySandworm_01_EndTimer",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "SceneObj_Area_Xm_Property_Ani_Prop_AbilitySandWorm_Sand_02",
+      "abilityMixins": [
+        {
+          "$type": "AttachToGadgetStateMixin",
+          "modifierName": "Skill",
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToGadgetStateMixin",
+          "modifierName": "End",
+          "actorIceSubHurtDelta": -1,
+          "gadgetState": 201
+        }
+      ],
+      "modifiers": {
+        "AbilitySandworm_02_EndTimer": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "ChangeGadgetState",
+              "doOffStage": false,
+              "value": 201,
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "thinkInterval": 32
+        },
+        "End": {
+          "onAdded": [
+            {
+              "$type": "RemoveUniqueModifier",
+              "doOffStage": false,
+              "modifierName": "UNIQUE_AbilitySandWormScreenEffect",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "ServerLuaTriggerEvent",
+              "doOffStage": false,
+              "luaCallType": "FromGroup",
+              "actorIceSubHurtDelta": -1,
+              "sourceName": "AbilitySandWorm_Sand_End",
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "RemoveUniqueModifier",
+              "doOffStage": false,
+              "modifierName": "UNIQUE_AbilitySandWormScreenEffect",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "ServerLuaTriggerEvent",
+              "doOffStage": false,
+              "luaCallType": "FromGroup",
+              "actorIceSubHurtDelta": -1,
+              "sourceName": "AbilitySandWorm_Sand_End",
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "thinkInterval": 1
+        },
+        "Skill": {
+          "onAdded": [
+            {
+              "$type": "ApplyModifier",
+              "doOffStage": false,
+              "modifierName": "AbilitySandworm_02_EndTimer",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "SceneObj_Area_Xm_Property_Ani_Prop_AbilitySandWorm_Sand_03",
+      "abilityMixins": [
+        {
+          "$type": "AttachToGadgetStateMixin",
+          "modifierName": "Skill",
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToGadgetStateMixin",
+          "modifierName": "End",
+          "actorIceSubHurtDelta": -1,
+          "gadgetState": 201
+        }
+      ],
+      "modifiers": {
+        "AbilitySandworm_03_EndTimer": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "ChangeGadgetState",
+              "doOffStage": false,
+              "value": 201,
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "thinkInterval": 32
+        },
+        "End": {
+          "onAdded": [
+            {
+              "$type": "RemoveUniqueModifier",
+              "doOffStage": false,
+              "modifierName": "UNIQUE_AbilitySandWormScreenEffect",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "ServerLuaTriggerEvent",
+              "doOffStage": false,
+              "luaCallType": "FromGroup",
+              "actorIceSubHurtDelta": -1,
+              "sourceName": "AbilitySandWorm_Sand_End",
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "RemoveUniqueModifier",
+              "doOffStage": false,
+              "modifierName": "UNIQUE_AbilitySandWormScreenEffect",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "ServerLuaTriggerEvent",
+              "doOffStage": false,
+              "luaCallType": "FromGroup",
+              "actorIceSubHurtDelta": -1,
+              "sourceName": "AbilitySandWorm_Sand_End",
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "thinkInterval": 1
+        },
+        "Skill": {
+          "onAdded": [
+            {
+              "$type": "ApplyModifier",
+              "doOffStage": false,
+              "modifierName": "AbilitySandworm_03_EndTimer",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "SceneObj_Area_Xm_Property_Ani_Prop_AbilitySandWorm_Sand_01_ShootAttack",
+      "onAbilityStart": [
+        {
+          "$type": "CreateGadget",
+          "doOffStage": false,
+          "value": true,
+          "campID": 5001,
+          "target": "CurLocalAvatar",
+          "HGPMDCCAHMK": {
+            "IFAGHADONMB": true,
+            "KCLDKFCKPEE": 0.5,
+            "MJDMDBDMPAM": true,
+            "PHCINBJNAOK": 0.5
+          },
+          "predicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "key": "DieSandworm_IsInCutscene",
+              "compareType": "NoneOrEqual"
+            }
+          ],
+          "actorIceSubHurtDelta": -1,
+          "born": {
+            "$type": "IHCIMIPIJCO",
+            "direction": {
+              "maxAngle": 180
+            },
+            "FDGAEDDEEDG": {
+              "ELAJJIANFFM": 180
+            },
+            "alongGround": true,
+            "onGroundRaycastUpDist": 2,
+            "value": 10
+          },
+          "gadgetID": 70290943,
+          "canBeHandledOnRecover": true
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "SceneObj_Area_Xm_Property_Ani_Prop_AbilitySandWorm_Sand_01_ShootAttack_Attack",
+      "onAbilityStart": [
+        {
+          "$type": "FireSubEmitterEffect",
+          "doOffStage": false,
+          "actorIceSubHurtDelta": -1,
+          "effectPattern": "Eff_Monster_Sandworm_01_Stage02_FlyingAttack_MultiBullet_Hit_Dungeon",
+          "born": {
+            "$type": "ConfigBornByCollisionPoint",
+            "direction": {
+              "maxAngle": 180
+            },
+            "FDGAEDDEEDG": {
+              "ELAJJIANFFM": 180
+            },
+            "onGroundRaycastUpDist": 2,
+            "value": 10
+          },
+          "value": 1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "TriggerAttackEvent",
+          "doOffStage": false,
+          "attackEvent": {
+            "attackInfo": {
+              "attenuationGroup": "Sandworm_Stage02_FlyingAttackBullet",
+              "hitPattern": {
+                "hitImpulseType": "LV3",
+                "onHitEffectName": "default",
+                "hitHaltTimeScale": 0.05000000074505806,
+                "JKLONEBKFKJ": {
+                  "JJGBOHIKHFM": true,
+                  "value": 1
+                }
+              },
+              "FJNMGDHFOEH": {
+                "GCPNPCOFFBP": "Shake"
+              },
+              "attenuationTag": "Sandworm_Stage02_FlyingAttackBullet",
+              "IODAJAKBOLG": {
+                "onHitEffectName": "default",
+                "JKLONEBKFKJ": {
+                  "JJGBOHIKHFM": true,
+                  "value": 1
+                }
+              },
+              "attackProperty": {
+                "attackType": "Range",
+                "enBreak": 50,
+                "elementType": "Wind",
+                "elementDurability": 100,
+                "strikeType": "Blunt",
+                "elementRank": 1,
+                "damagePercentage": 1
+              },
+              "cameraShake": {
+                "extension": {
+                  "baseCycle": 0.11999999731779099,
+                  "cycleDamping": 0.11999999731779099,
+                  "baseOnCamera": true,
+                  "rangeAttenuation": 0.5
+                },
+                "FAKMJBNLPPB": -1,
+                "shakeDistance": 20
+              },
+              "attackTag": "SandwormAttack"
+            },
+            "attackPattern": {
+              "$type": "ConfigAttackSphere",
+              "radius": 3,
+              "massiveAttackRatio": 1,
+              "born": {
+                "$type": "ConfigBornByCollisionPoint",
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "PBFNLCIFCBO": {
+                "GOAEBMPCPJL": {
+                  "JJGBOHIKHFM": true,
+                  "value": 1
+                }
+              },
+              "triggerType": "TriggerNoRepeat"
+            }
+          },
+          "targetType": "Enemy",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "SceneObj_Area_Xm_Property_Ani_Prop_AbilitySandWorm_Sand_02_ShootAttack",
+      "onAbilityStart": [
+        {
+          "$type": "ApplyModifier",
+          "doOffStage": false,
+          "modifierName": "Bullet_Launcher",
+          "predicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "target": "Target",
+              "key": "DieSandworm_IsInCutscene",
+              "compareType": "NoneOrEqual"
+            }
+          ],
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "modifiers": {
+        "Bullet_Launcher": {
+          "onAdded": [
+            {
+              "$type": "CreateGadget",
+              "doOffStage": false,
+              "value": true,
+              "campID": 5001,
+              "target": "CurLocalAvatar",
+              "HGPMDCCAHMK": {
+                "IFAGHADONMB": true,
+                "KCLDKFCKPEE": 0.5,
+                "MJDMDBDMPAM": true,
+                "PHCINBJNAOK": 0.5
+              },
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "DieSandworm_IsInCutscene",
+                  "compareType": "NoneOrEqual"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "born": {
+                "$type": "IHCIMIPIJCO",
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "alongGround": true,
+                "bornRandom": {
+                  "$type": "BornRandomFromCenter"
+                },
+                "onGroundRaycastUpDist": 0.20000000298023224,
+                "value": 10
+              },
+              "gadgetID": 70290941,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "CreateGadget",
+              "doOffStage": false,
+              "value": true,
+              "campID": 5001,
+              "target": "CurLocalAvatar",
+              "HGPMDCCAHMK": {
+                "IFAGHADONMB": true,
+                "KCLDKFCKPEE": 0.5,
+                "MJDMDBDMPAM": true,
+                "PHCINBJNAOK": 0.5
+              },
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "DieSandworm_IsInCutscene",
+                  "compareType": "NoneOrEqual"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "born": {
+                "$type": "IHCIMIPIJCO",
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "alongGround": true,
+                "bornRandom": {
+                  "$type": "BornRandomFromCenter"
+                },
+                "onGroundRaycastUpDist": 0.20000000298023224,
+                "value": 10
+              },
+              "gadgetID": 70290941,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "thinkInterval": 1,
+          "duration": 5
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "SceneObj_Area_Xm_Property_Ani_Prop_AbilitySandWorm_Sand_03_ShootAttack",
+      "abilityMixins": [
+        {
+          "$type": "AttachToNormalizedTimeMixin",
+          "stateID": "Skill02",
+          "modifierName": "Alert",
+          "normalizeEnd": 0.5299999713897705,
+          "value": -1,
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToNormalizedTimeMixin",
+          "stateID": "Skill03",
+          "modifierName": "Alert",
+          "normalizeEnd": 0.5299999713897705,
+          "value": -1,
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToNormalizedTimeMixin",
+          "stateID": "Skill04",
+          "modifierName": "Alert",
+          "normalizeEnd": 0.5299999713897705,
+          "value": -1,
+          "actorIceSubHurtDelta": -1
+        }
+      ],
+      "onAbilityStart": [
+        {
+          "$type": "TriggerBullet",
+          "doOffStage": false,
+          "trackTarget": "CurLocalAvatar",
+          "bulletID": 70290942,
+          "value": true,
+          "predicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "target": "Target",
+              "key": "DieSandworm_IsInCutscene",
+              "compareType": "NoneOrEqual"
+            }
+          ],
+          "actorIceSubHurtDelta": -1,
+          "born": {
+            "$type": "ConfigBornByAttachPoint",
+            "direction": {
+              "maxAngle": 180
+            },
+            "useRotation": true,
+            "FDGAEDDEEDG": {
+              "ELAJJIANFFM": 180
+            },
+            "attachPointName": "TailBulletSource_Fixed",
+            "onGroundRaycastUpDist": 2,
+            "value": 10
+          },
+          "canBeHandledOnRecover": true,
+          "POOEIFNLHDB": true
+        }
+      ],
+      "modifiers": {
+        "Alert": {
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "target": "Target",
+                  "key": "DieSandworm_IsInCutscene",
+                  "compareType": "NoneOrEqual"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Sandworm_01_ActivityGadget_ShootAttack_02_Alert",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "SceneObj_Area_Xm_Property_Ani_Prop_DieSandworm_03_ShootAttack",
+      "abilityMixins": [
+        {
+          "$type": "AttachToNormalizedTimeMixin",
+          "stateID": "Skill03_02",
+          "modifierName": "Alert",
+          "normalizeEnd": 0.5299999713897705,
+          "value": -1,
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToNormalizedTimeMixin",
+          "stateID": "Skill03_03",
+          "modifierName": "Alert",
+          "normalizeEnd": 0.5299999713897705,
+          "value": -1,
+          "actorIceSubHurtDelta": -1
+        }
+      ],
+      "onAbilityStart": [
+        {
+          "$type": "TriggerBullet",
+          "doOffStage": false,
+          "trackTarget": "CurLocalAvatar",
+          "bulletID": 70290942,
+          "value": true,
+          "predicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "target": "Target",
+              "key": "DieSandworm_IsInCutscene",
+              "compareType": "NoneOrEqual"
+            }
+          ],
+          "actorIceSubHurtDelta": -1,
+          "born": {
+            "$type": "ConfigBornByAttachPoint",
+            "direction": {
+              "maxAngle": 180
+            },
+            "useRotation": true,
+            "FDGAEDDEEDG": {
+              "ELAJJIANFFM": 180
+            },
+            "attachPointName": "TailBulletSource_Fixed",
+            "onGroundRaycastUpDist": 2,
+            "value": 10
+          },
+          "canBeHandledOnRecover": true,
+          "POOEIFNLHDB": true
+        }
+      ],
+      "modifiers": {
+        "Alert": {
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "target": "Target",
+                  "key": "DieSandworm_IsInCutscene",
+                  "compareType": "NoneOrEqual"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Sandworm_01_ActivityGadget_ShootAttack_02_Alert",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "doOffStage": false,
+          "modifierName": "UNIQUE_Bullet_Loop",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "SceneObj_Area_Xm_Property_Ani_Prop_AbilitySandWorm_Sand_02_ShootAttack_Bullet_Loop",
+      "modifiers": {
+        "UNIQUE_Bullet_Loop": {
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Sandworm_01_Stage02_DrillRushAttack_Bullet_Activity",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "isUnique": true
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "SceneObj_Area_Xm_Property_Ani_Prop_AbilitySandWorm_Sand_02_ShootAttack_Bullet_Explode",
+      "onAbilityStart": [
+        {
+          "$type": "FireEffect",
+          "doOffStage": false,
+          "scale": 1,
+          "actorIceSubHurtDelta": -1,
+          "effectPattern": "Eff_Monster_Sandworm_01_Stage02_DrillRushAttack_Bullet_Hit_Activity",
+          "born": {
+            "$type": "ConfigBornBySelf",
+            "direction": {
+              "maxAngle": 180
+            },
+            "useRotation": true,
+            "ENOAPEJAJHB": true,
+            "FDGAEDDEEDG": {
+              "ELAJJIANFFM": 180
+            },
+            "alongGround": true,
+            "onGroundRaycastUpDist": 2,
+            "value": 10
+          },
+          "effectTempleteID": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "TriggerAttackEvent",
+          "doOffStage": false,
+          "attackEvent": {
+            "attackInfo": {
+              "attenuationGroup": "default",
+              "canBeModifiedBy": "OriginOwner",
+              "hitPattern": {
+                "hitImpulseType": "LV3",
+                "onHitEffectName": "none",
+                "hitHaltTimeScale": 0.05000000074505806,
+                "JKLONEBKFKJ": {
+                  "JJGBOHIKHFM": true,
+                  "value": 1
+                }
+              },
+              "FJNMGDHFOEH": {
+                "GCPNPCOFFBP": "Shake"
+              },
+              "IODAJAKBOLG": {
+                "onHitEffectName": "default",
+                "JKLONEBKFKJ": {
+                  "JJGBOHIKHFM": true,
+                  "value": 1
+                }
+              },
+              "attackProperty": {
+                "attackType": "Default",
+                "enBreak": 25,
+                "elementType": "Wind",
+                "elementDurability": 50,
+                "strikeType": "Blunt",
+                "elementRank": 1,
+                "damagePercentage": 2.5
+              },
+              "cameraShake": {
+                "extension": {
+                  "baseCycle": 0.11999999731779099,
+                  "cycleDamping": 0.11999999731779099,
+                  "baseOnCamera": true,
+                  "rangeAttenuation": 0.5
+                },
+                "FAKMJBNLPPB": -1,
+                "shakeDistance": 20,
+                "shakeRange": 0.05999999865889549,
+                "shakeTime": 0.09000000357627869
+              },
+              "attackTag": "SandwormAttack"
+            },
+            "attackPattern": {
+              "$type": "ConfigAttackSphere",
+              "radius": 3,
+              "massiveAttackRatio": 1,
+              "born": {
+                "$type": "ConfigBornBySelf",
+                "direction": {
+                  "maxAngle": 180
+                },
+                "useRotation": true,
+                "ENOAPEJAJHB": true,
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "alongGround": true,
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "PBFNLCIFCBO": {
+                "GOAEBMPCPJL": {
+                  "JJGBOHIKHFM": true,
+                  "value": 1
+                }
+              },
+              "triggerType": "TriggerNoRepeat"
+            }
+          },
+          "targetType": "Enemy",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "ApplyModifier",
+          "doOffStage": false,
+          "modifierName": "Damage_Timer",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "SceneObj_Area_Xm_Property_Ani_Prop_AbilitySandWorm_Sand_03_ShootAttack_Attack",
+      "onAbilityStart": [
+        {
+          "$type": "KillSelf",
+          "doOffStage": false,
+          "killSelfType": "Normal",
+          "predicates": [
+            {
+              "$type": "ByHasModifier",
+              "modifierName": "Damage_Timer",
+              "target": "Target"
+            }
+          ],
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "modifiers": {
+        "Damage_Timer": {
+          "onAdded": [
+            {
+              "$type": "FireSubEmitterEffect",
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Sandworm_01_Stage02_Bullet_Alert_Activity",
+              "born": {
+                "$type": "ConfigBornByTarget",
+                "direction": {
+                  "maxAngle": 180
+                },
+                "ENOAPEJAJHB": true,
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "alongGround": true,
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "value": 1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "TriggerAudio",
+              "doOffStage": false,
+              "operation": {
+                "$type": "ConfigAudioEventOp",
+                "operation": {
+                  "text": "Play_sfx_monster_effigy_ice_vfx_spikeStrike_attack"
+                }
+              },
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "ApplyModifier",
+              "doOffStage": false,
+              "modifierName": "SingleDamage",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "duration": 2.5
+        },
+        "SingleDamage": {
+          "onAdded": [
+            {
+              "$type": "FireEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Sandworm_01_Stage02_Bullet_Hit_Activity",
+              "born": {
+                "$type": "ConfigBornByTarget",
+                "direction": {
+                  "maxAngle": 180
+                },
+                "ENOAPEJAJHB": true,
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "alongGround": true,
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "TriggerAttackEvent",
+              "doOffStage": false,
+              "attackEvent": {
+                "attackInfo": {
+                  "attenuationGroup": "default",
+                  "hitPattern": {
+                    "onHitEffectName": "default",
+                    "JKLONEBKFKJ": {
+                      "JJGBOHIKHFM": true,
+                      "value": 1
+                    }
+                  },
+                  "FJNMGDHFOEH": {
+                    "GCPNPCOFFBP": "Shake"
+                  },
+                  "IODAJAKBOLG": {
+                    "onHitEffectName": "default",
+                    "JKLONEBKFKJ": {
+                      "JJGBOHIKHFM": true,
+                      "value": 1
+                    }
+                  },
+                  "attackProperty": {
+                    "attackType": "Default",
+                    "elementType": "Wind",
+                    "elementDurability": 100,
+                    "strikeType": "Blunt",
+                    "elementRank": 1,
+                    "damagePercentage": 1
+                  },
+                  "cameraShake": {
+                    "extension": {
+                      "baseCycle": 0.11999999731779099,
+                      "cycleDamping": 0.11999999731779099,
+                      "baseOnCamera": true,
+                      "rangeAttenuation": 0.5
+                    },
+                    "FAKMJBNLPPB": -1,
+                    "shakeDistance": 20
+                  },
+                  "attackTag": "SandwormAttack"
+                },
+                "attackPattern": {
+                  "$type": "ConfigAttackCircle",
+                  "radius": 3,
+                  "massiveAttackRatio": 1,
+                  "born": {
+                    "$type": "ConfigBornBySelf",
+                    "direction": {
+                      "maxAngle": 180
+                    },
+                    "useRotation": true,
+                    "offset": {
+                      "x": -0.125
+                    },
+                    "FDGAEDDEEDG": {
+                      "ELAJJIANFFM": 180
+                    },
+                    "alongGround": true,
+                    "onGroundRaycastUpDist": 2,
+                    "value": 10
+                  },
+                  "height": 2,
+                  "fanAngle": 360,
+                  "PBFNLCIFCBO": {
+                    "GOAEBMPCPJL": {
+                      "JJGBOHIKHFM": true,
+                      "value": 1
+                    }
+                  },
+                  "triggerType": "TriggerNoRepeat"
+                }
+              },
+              "targetType": "Enemy",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "duration": 0.5
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "EnablePartControl",
+          "doOffStage": false,
+          "actorIceSubHurtDelta": -1,
+          "partRootNames": [
+            "PartControl"
+          ],
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "SetPartControlTarget",
+          "doOffStage": false,
+          "targetType": "ActionSetTarget",
+          "target": "CurLocalAvatar",
+          "actorIceSubHurtDelta": -1,
+          "partRootNames": [
+            "PartControl"
+          ],
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "SceneObj_Area_Xm_Property_Ani_Prop_AbilitySandWorm_PartControl_Start",
+      "onAbilityStart": [
+        {
+          "$type": "SetPartControlTarget",
+          "doOffStage": false,
+          "targetType": "ActionSetTarget",
+          "target": "CurLocalAvatar",
+          "actorIceSubHurtDelta": -1,
+          "partRootNames": [
+            "PartControl"
+          ],
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "EnablePartControl",
+          "doOffStage": false,
+          "enable": true,
+          "actorIceSubHurtDelta": -1,
+          "partRootNames": [
+            "PartControl"
+          ],
+          "canBeHandledOnRecover": true
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "SceneObj_Area_Xm_Property_Ani_Prop_AbilitySandWorm_PartControl_End",
+      "onAbilityStart": [
+        {
+          "$type": "EnablePartControl",
+          "doOffStage": false,
+          "actorIceSubHurtDelta": -1,
+          "partRootNames": [
+            "PartControl"
+          ],
+          "canBeHandledOnRecover": true
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "HideUIBillBoard",
+          "doOffStage": false,
+          "actorIceSubHurtDelta": -1,
+          "hide": true,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "SetUICombatBarAsh",
+          "doOffStage": false,
+          "enable": true,
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "SceneObj_Area_Xm_Property_Ani_Prop_AbilitySandWorm_DoEarthQuake",
+      "onAbilityStart": [
+        {
+          "$type": "TriggerAttackEvent",
+          "doOffStage": false,
+          "attackEvent": {
+            "attackInfo": {
+              "attenuationGroup": "default",
+              "hitPattern": {
+                "hitImpulseType": "LV0",
+                "onHitEffectName": "none",
+                "hitHaltTimeScale": 0.05000000074505806,
+                "JKLONEBKFKJ": {
+                  "JJGBOHIKHFM": true,
+                  "value": 1
+                }
+              },
+              "forceCameraShake": true,
+              "FJNMGDHFOEH": {
+                "GCPNPCOFFBP": "Shake"
+              },
+              "IODAJAKBOLG": {
+                "onHitEffectName": "default",
+                "JKLONEBKFKJ": {
+                  "JJGBOHIKHFM": true,
+                  "value": 1
+                }
+              },
+              "attackProperty": {
+                "attackType": "Default",
+                "enBreak": 30,
+                "elementDurability": 100,
+                "strikeType": "None",
+                "elementRank": 1
+              },
+              "cameraShake": {
+                "extension": {
+                  "baseCycle": 0.20000000298023224,
+                  "baseOnCamera": true,
+                  "IHGGLJIHKBE": true,
+                  "rangeAttenuation": 1
+                },
+                "FAKMJBNLPPB": -1,
+                "shakeDistance": 35,
+                "shakeDir": {
+                  "y": -1
+                },
+                "shakeRange": 0.125,
+                "shakeType": "CustomVector",
+                "shakeTime": 3
+              }
+            },
+            "attackPattern": {
+              "$type": "ConfigAttackBox",
+              "massiveAttackRatio": 1,
+              "ignoreMassive": true,
+              "born": {
+                "$type": "ConfigBornBySelf",
+                "direction": {
+                  "maxAngle": 180
+                },
+                "useRotation": true,
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "size": {
+                "y": 0.10000000149011612,
+                "z": 0.10000000149011612,
+                "x": 0.10000000149011612
+              },
+              "PBFNLCIFCBO": {
+                "GOAEBMPCPJL": {
+                  "JJGBOHIKHFM": true,
+                  "value": 1
+                }
+              },
+              "triggerType": "TriggerNoRepeat"
+            }
+          },
+          "targetType": "Enemy",
+          "predicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "target": "Target",
+              "key": "SGV_Sandworm_LevelFive",
+              "compareType": "NoneOrEqual"
+            }
+          ],
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "ServerLuaTriggerEvent",
+          "doOffStage": false,
+          "luaCallType": "FromGroup",
+          "actorIceSubHurtDelta": -1,
+          "sourceName": "AbilitySandWorm_Monster_Die",
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "ApplyModifier",
+          "doOffStage": false,
+          "modifierName": "UNIQUE_AbilitySandWormBillboardAsh",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "ApplyModifier",
+          "doOffStage": false,
+          "modifierName": "UNIQUE_AbilitySandWormScreenEffect",
+          "predicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "target": "Target",
+              "key": "SGV_Sandworm_LevelFive",
+              "compareType": "NoneOrEqual"
+            }
+          ],
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "ApplyModifier",
+          "doOffStage": false,
+          "modifierName": "UNIQUE_AbilitySandWormCameraRadialBlur",
+          "predicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "target": "Target",
+              "key": "SGV_Sandworm_LevelFive",
+              "compareType": "NoneOrEqual"
+            }
+          ],
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "modifiers": {
+        "UNIQUE_AbilitySandWormBillboardAsh": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "HideUIBillBoard",
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "isUnique": true,
+          "duration": 1
+        },
+        "UNIQUE_AbilitySandWormCameraRadialBlur": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "CameraBlurMixin",
+              "actorIceSubHurtDelta": -1,
+              "cameraRadialBlur": {
+                "power": 0.6000000238418579,
+                "fadeTime": 0.15000000596046448
+              }
+            }
+          ],
+          "minus_one": -1,
+          "isUnique": true,
+          "duration": 4
+        },
+        "UNIQUE_AbilitySandWormScreenEffect": {
+          "onKill": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "target": "Team",
+              "key": "_HAS_SandWorm_ScreenEffect",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "value": 1,
+              "target": "Team",
+              "key": "_HAS_SandWorm_ScreenEffect",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "target": "Team",
+              "key": "_HAS_SandWorm_ScreenEffect",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "isUnique": true
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "SceneObj_Area_Xm_Property_Ani_Prop_DieSandWorm_DoEarthQuake",
+      "onAbilityStart": [
+        {
+          "$type": "TriggerAttackEvent",
+          "doOffStage": false,
+          "attackEvent": {
+            "attackInfo": {
+              "attenuationGroup": "default",
+              "hitPattern": {
+                "hitImpulseType": "LV0",
+                "onHitEffectName": "none",
+                "hitHaltTimeScale": 0.05000000074505806,
+                "JKLONEBKFKJ": {
+                  "JJGBOHIKHFM": true,
+                  "value": 1
+                }
+              },
+              "forceCameraShake": true,
+              "FJNMGDHFOEH": {
+                "GCPNPCOFFBP": "Shake"
+              },
+              "IODAJAKBOLG": {
+                "onHitEffectName": "default",
+                "JKLONEBKFKJ": {
+                  "JJGBOHIKHFM": true,
+                  "value": 1
+                }
+              },
+              "attackProperty": {
+                "attackType": "Default",
+                "enBreak": 30,
+                "elementDurability": 100,
+                "strikeType": "None",
+                "elementRank": 1
+              },
+              "cameraShake": {
+                "extension": {
+                  "baseCycle": 0.20000000298023224,
+                  "baseOnCamera": true,
+                  "IHGGLJIHKBE": true,
+                  "rangeAttenuation": 1
+                },
+                "FAKMJBNLPPB": -1,
+                "shakeDistance": 35,
+                "shakeDir": {
+                  "y": -1
+                },
+                "shakeRange": 0.125,
+                "shakeType": "CustomVector",
+                "shakeTime": 3
+              }
+            },
+            "attackPattern": {
+              "$type": "ConfigAttackBox",
+              "massiveAttackRatio": 1,
+              "ignoreMassive": true,
+              "born": {
+                "$type": "ConfigBornBySelf",
+                "direction": {
+                  "maxAngle": 180
+                },
+                "useRotation": true,
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "size": {
+                "y": 0.10000000149011612,
+                "z": 0.10000000149011612,
+                "x": 0.10000000149011612
+              },
+              "PBFNLCIFCBO": {
+                "GOAEBMPCPJL": {
+                  "JJGBOHIKHFM": true,
+                  "value": 1
+                }
+              },
+              "triggerType": "TriggerNoRepeat"
+            }
+          },
+          "targetType": "Enemy",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "modifiers": {
+        "UNIQUE_DieSandWormCameraRadialBlur": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "CameraBlurMixin",
+              "actorIceSubHurtDelta": -1,
+              "cameraRadialBlur": {
+                "power": 0.6000000238418579,
+                "fadeTime": 0.15000000596046448
+              }
+            }
+          ],
+          "minus_one": -1,
+          "isUnique": true,
+          "duration": 4
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "SceneObj_Area_Xm_Property_Ani_Prop_MoveSandWorm_Sand_01",
+      "abilityMixins": [
+        {
+          "$type": "AttachToGadgetStateMixin",
+          "modifierName": "Skill",
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToGadgetStateMixin",
+          "modifierName": "End",
+          "actorIceSubHurtDelta": -1,
+          "gadgetState": 201
+        }
+      ],
+      "modifiers": {
+        "End": {
+          "onAdded": [
+            {
+              "$type": "ServerLuaTriggerEvent",
+              "doOffStage": false,
+              "luaCallType": "FromGroup",
+              "actorIceSubHurtDelta": -1,
+              "sourceName": "MoveSandWorm_Sand_End",
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "Skill": {
+          "elementDurability": 100,
+          "onBeingHit": [
+            {
+              "$type": "SetAnimatorBool",
+              "doOffStage": false,
+              "value": true,
+              "boolID": "End",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "isLimitedProperties": true,
+          "minus_one": -1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "SetGlobalValue",
+          "doOffStage": false,
+          "key": "DIESANDWORM_PLAYDIE",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "CreateGadget",
+          "doOffStage": false,
+          "value": true,
+          "campID": 5001,
+          "campTargetType": "Enemy",
+          "HGPMDCCAHMK": {
+            "IFAGHADONMB": true,
+            "KCLDKFCKPEE": 0.5,
+            "MJDMDBDMPAM": true,
+            "PHCINBJNAOK": 0.5
+          },
+          "actorIceSubHurtDelta": -1,
+          "born": {
+            "direction": {
+              "maxAngle": 180
+            },
+            "FDGAEDDEEDG": {
+              "ELAJJIANFFM": 180
+            },
+            "onGroundRaycastUpDist": 2,
+            "value": 10
+          },
+          "gadgetID": 70290938,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "ChangeTag",
+          "doOffStage": false,
+          "tag": "IS_DieSandworm",
+          "enable": true,
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "SceneObj_Area_Xm_Property_Ani_Prop_DieSandWorm_Sand_01",
+      "abilityMixins": [
+        {
+          "$type": "AttachToGadgetStateMixin",
+          "modifierName": "Wait",
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToGadgetStateMixin",
+          "modifierName": "Skill01",
+          "actorIceSubHurtDelta": -1,
+          "gadgetState": 101
+        },
+        {
+          "$type": "AttachToGadgetStateMixin",
+          "modifierName": "Skill02",
+          "actorIceSubHurtDelta": -1,
+          "gadgetState": 102
+        },
+        {
+          "$type": "AttachToGadgetStateMixin",
+          "modifierName": "Skill03",
+          "actorIceSubHurtDelta": -1,
+          "gadgetState": 103
+        },
+        {
+          "$type": "AttachToGadgetStateMixin",
+          "modifierName": "End",
+          "actorIceSubHurtDelta": -1,
+          "gadgetState": 201
+        },
+        {
+          "$type": "AttachModifierToSelfGlobalValueMixin",
+          "globalValueKey": "DIESANDWORM_PLAYDIE",
+          "modifierNameSteps": [
+            "Empty",
+            "DieSandworm_PlayDie"
+          ],
+          "removeAppliedModifier": true,
+          "actorIceSubHurtDelta": -1,
+          "valueSteps": [
+            -0.5,
+            0.5,
+            1.5
+          ]
+        }
+      ],
+      "modifiers": {
+        "Delayed_ReturnToWait": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "ChangeGadgetState",
+              "doOffStage": false,
+              "predicates": [
+                {
+                  "$type": "ByTargetGadgetState",
+                  "gadgetState": 201
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetAnimatorInt",
+              "doOffStage": false,
+              "intID": "SkillState",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "duration": 10
+        },
+        "DieSandworm_PlayDie": {
+          "onAdded": [
+            {
+              "$type": "SetAnimatorTrigger",
+              "doOffStage": false,
+              "triggerID": "ToDie",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetAnimatorTrigger",
+              "doOffStage": false,
+              "triggerID": "Die",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetAnimatorInt",
+              "doOffStage": false,
+              "intID": "SkillState",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "Empty": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "End": {
+          "onAdded": [
+            {
+              "$type": "ServerLuaTriggerEvent",
+              "doOffStage": false,
+              "luaCallType": "FromGroup",
+              "actorIceSubHurtDelta": -1,
+              "sourceName": "DieSandWorm_Sand_End",
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "ApplyModifier",
+              "doOffStage": false,
+              "modifierName": "Delayed_ReturnToWait",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "Skill01": {
+          "onAdded": [
+            {
+              "$type": "HideUIBillBoard",
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1,
+              "hide": true,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "ShowUICombatBar",
+              "doOffStage": false,
+              "FJAOPGGMGHA": true,
+              "show": true,
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetAnimatorInt",
+              "doOffStage": false,
+              "value": 1,
+              "intID": "SkillState",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetFollowMove",
+              "doOffStage": false,
+              "otherTargets": {
+                "$type": "EKDIJCOKJDO",
+                "tag": "IS_DieSandworm_PartcontrolTarget"
+              },
+              "enable": true,
+              "actorIceSubHurtDelta": -1,
+              "attachPoint": "Body08",
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "SetAnimatorInt",
+              "doOffStage": false,
+              "intID": "SkillState",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "state": "Limbo"
+        },
+        "Skill02": {
+          "onAdded": [
+            {
+              "$type": "HideUIBillBoard",
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1,
+              "hide": true,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "ShowUICombatBar",
+              "doOffStage": false,
+              "FJAOPGGMGHA": true,
+              "show": true,
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetAnimatorInt",
+              "doOffStage": false,
+              "value": 2,
+              "intID": "SkillState",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetFollowMove",
+              "doOffStage": false,
+              "otherTargets": {
+                "$type": "EKDIJCOKJDO",
+                "tag": "IS_DieSandworm_PartcontrolTarget"
+              },
+              "enable": true,
+              "actorIceSubHurtDelta": -1,
+              "attachPoint": "Body08",
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "SetAnimatorInt",
+              "doOffStage": false,
+              "intID": "SkillState",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "state": "Limbo"
+        },
+        "Skill03": {
+          "onAdded": [
+            {
+              "$type": "HideUIBillBoard",
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1,
+              "hide": true,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "ShowUICombatBar",
+              "doOffStage": false,
+              "FJAOPGGMGHA": true,
+              "show": true,
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetAnimatorInt",
+              "doOffStage": false,
+              "value": 3,
+              "intID": "SkillState",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetFollowMove",
+              "doOffStage": false,
+              "otherTargets": {
+                "$type": "EKDIJCOKJDO",
+                "tag": "IS_DieSandworm_PartcontrolTarget"
+              },
+              "enable": true,
+              "actorIceSubHurtDelta": -1,
+              "attachPoint": "Body08",
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "SetAnimatorInt",
+              "doOffStage": false,
+              "intID": "SkillState",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "state": "Limbo"
+        },
+        "Wait": {
+          "onAdded": [
+            {
+              "$type": "HealHP",
+              "doOffStage": true,
+              "DPGMIOLEPCO": true,
+              "amountByTargetMaxHPRatio": 1,
+              "value": 1,
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "HideUIBillBoard",
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1,
+              "hide": true,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "ShowUICombatBar",
+              "doOffStage": false,
+              "FJAOPGGMGHA": true,
+              "actorIceSubHurtDelta": -1,
+              "KKHAFOIOEPF": true,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "DIESANDWORM_PLAYDIE",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetAnimatorTrigger",
+              "doOffStage": false,
+              "triggerID": "ToWait",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetAnimatorTrigger",
+              "doOffStage": false,
+              "triggerID": "ShaderWait",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetAnimatorInt",
+              "doOffStage": false,
+              "intID": "SkillState",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "DieSandworm_IsInCutscene",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "SceneObj_Area_Xm_Property_Ani_Prop_SmashSandWorm_Sand_01",
+      "abilityMixins": [
+        {
+          "$type": "AttachToGadgetStateMixin",
+          "modifierName": "Skill",
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToGadgetStateMixin",
+          "modifierName": "End",
+          "actorIceSubHurtDelta": -1,
+          "gadgetState": 201
+        },
+        {
+          "$type": "AttachToGadgetStateMixin",
+          "modifierName": "End",
+          "actorIceSubHurtDelta": -1,
+          "gadgetState": 202
+        },
+        {
+          "$type": "AttachToStateIDMixin",
+          "modifierName": "SmashSandworm_BeHitDetector",
+          "stateIDs": [
+            "Skill"
+          ],
+          "value": -1,
+          "actorIceSubHurtDelta": -1
+        }
+      ],
+      "modifiers": {
+        "DelayedRemove": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "KillSelf",
+              "doOffStage": false,
+              "killSelfType": "Normal",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "duration": 10
+        },
+        "Empty": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "End": {
+          "onAdded": [
+            {
+              "$type": "ServerLuaTriggerEvent",
+              "doOffStage": false,
+              "luaCallType": "FromGroup",
+              "actorIceSubHurtDelta": -1,
+              "sourceName": "SmashSandWorm_Sand_End",
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "ApplyModifier",
+              "doOffStage": false,
+              "modifierName": "DelayedRemove",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "Skill": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "SmashSandworm_BeHitDetector": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "SmashSandworm_BeHit_Count",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "onBeingHit": [
+            {
+              "$type": "AddGlobalValue",
+              "doOffStage": false,
+              "value": 1,
+              "key": "SmashSandworm_BeHit_Count",
+              "maxValue": 1,
+              "actorIceSubHurtDelta": -1,
+              "useLimitRange": true,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "AttachModifierToSelfGlobalValueMixin",
+              "globalValueKey": "SmashSandworm_BeHit_Count",
+              "modifierNameSteps": [
+                "Empty",
+                "SmashSandworm_ToEnd"
+              ],
+              "removeAppliedModifier": true,
+              "actorIceSubHurtDelta": -1,
+              "valueSteps": [
+                -0.5,
+                0.5,
+                1.5
+              ]
+            }
+          ],
+          "minus_one": -1
+        },
+        "SmashSandworm_ToEnd": {
+          "onAdded": [
+            {
+              "$type": "SetAnimatorBool",
+              "doOffStage": false,
+              "value": true,
+              "boolID": "End_Killed",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "SetGlobalValue",
+          "doOffStage": false,
+          "value": 1,
+          "key": "DIESANDWORM_ISPARTCONTROLTARGET",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "ChangeTag",
+          "doOffStage": false,
+          "tag": "IS_DieSandworm_PartcontrolTarget",
+          "enable": true,
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "SceneObj_Area_Xm_Property_Ani_Prop_DieSandWorm_Sand_01_PartcontrolTarget"
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "SetGlobalValue",
+          "doOffStage": false,
+          "key": "_MONSTER_SANDWORM_TAILGROUNDCOVER_EFFECT_ON",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "SceneObj_Area_Xm_Property_Ani_Prop_AbilitySandWorm_Sand_01_TailGroundCover_Start",
+      "abilityMixins": [
+        {
+          "$type": "AttachModifierToSelfGlobalValueMixin",
+          "globalValueKey": "_MONSTER_SANDWORM_TAILGROUNDCOVER_EFFECT_ON",
+          "modifierNameSteps": [
+            "Sandworm_TrailGroundCover_Off",
+            "Sandworm_TrailGroundCover_On"
+          ],
+          "removeAppliedModifier": true,
+          "actorIceSubHurtDelta": -1,
+          "valueSteps": [
+            -0.5,
+            0.5,
+            1.5
+          ]
+        }
+      ],
+      "onAbilityStart": [
+        {
+          "$type": "SetGlobalValue",
+          "doOffStage": false,
+          "value": 1,
+          "key": "_MONSTER_SANDWORM_TAILGROUNDCOVER_EFFECT_ON",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "modifiers": {
+        "Sandworm_TrailGroundCover_Off": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "Sandworm_TrailGroundCover_On": {
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Sandworm_01_Stage01_GroundCover",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "stacking": "Unique",
+          "isLimitedProperties": true,
+          "minus_one": -1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "SceneObj_Area_Xm_Property_Ani_Prop_AbilitySandWorm_Sand_01_TailGroundCover_End",
+      "onAbilityStart": [
+        {
+          "$type": "SetGlobalValue",
+          "doOffStage": false,
+          "key": "_MONSTER_SANDWORM_TAILGROUNDCOVER_EFFECT_ON",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "SceneObj_Area_Xm_Property_Ani_Prop_AbilitySandWorm_Sand_ClearBullet",
+      "abilityMixins": [
+        {
+          "$type": "AttachModifierToSelfGlobalValueMixin",
+          "globalValueKey": "DieSandworm_IsInCutscene",
+          "modifierNameSteps": [
+            "Empty",
+            "ClearBullet"
+          ],
+          "removeAppliedModifier": true,
+          "actorIceSubHurtDelta": -1,
+          "valueSteps": [
+            -0.5,
+            0.5,
+            1.5
+          ]
+        }
+      ],
+      "modifiers": {
+        "ClearBullet": {
+          "onAdded": [
+            {
+              "$type": "KillGadget",
+              "doOffStage": true,
+              "gadgetInfo": {
+                "configID": 70290941
+              },
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "KillGadget",
+              "doOffStage": true,
+              "gadgetInfo": {
+                "configID": 70290942
+              },
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "KillMultiBullet",
+              "doOffStage": true,
+              "gadgetInfo": {
+                "configID": 70290943
+              },
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "Empty": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        }
+      }
+    }
+  }
+]

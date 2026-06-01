@@ -1,0 +1,415 @@
+[
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Monster_Meleagris_None_Steer",
+      "abilityMixins": [
+        {
+          "$type": "SteerAttackMixin",
+          "startNormalizedTime": 0.12999999523162842,
+          "angularSpeed": 120,
+          "CCFNFIKKIDJ": true,
+          "value": -1,
+          "GMEPMDNDBOP": 180,
+          "actorIceSubHurtDelta": -1,
+          "steerStateIDs": [
+            "Alert"
+          ],
+          "endNormalizedTime": 0.5,
+          "PMKCEJILFAF": true
+        },
+        {
+          "$type": "SteerAttackMixin",
+          "angularSpeed": 10,
+          "CAOIBLNGAMN": 180,
+          "CCFNFIKKIDJ": true,
+          "value": -1,
+          "GMEPMDNDBOP": 180,
+          "actorIceSubHurtDelta": -1,
+          "steerStateIDs": [
+            "Alert_Move"
+          ],
+          "endNormalizedTime": 999,
+          "PMKCEJILFAF": true
+        },
+        {
+          "$type": "SteerAttackMixin",
+          "startNormalizedTime": 0.2199999988079071,
+          "angularSpeed": 90,
+          "CAOIBLNGAMN": 180,
+          "CCFNFIKKIDJ": true,
+          "value": -1,
+          "GMEPMDNDBOP": 180,
+          "actorIceSubHurtDelta": -1,
+          "steerStateIDs": [
+            "Alert_Run"
+          ],
+          "endNormalizedTime": 0.3499999940395355,
+          "PMKCEJILFAF": true
+        },
+        {
+          "$type": "SteerAttackMixin",
+          "startNormalizedTime": 0.12999999523162842,
+          "angularSpeed": 150,
+          "CAOIBLNGAMN": 180,
+          "CCFNFIKKIDJ": true,
+          "value": -1,
+          "GMEPMDNDBOP": 180,
+          "actorIceSubHurtDelta": -1,
+          "steerStateIDs": [
+            "Alert2"
+          ],
+          "endNormalizedTime": 0.5,
+          "PMKCEJILFAF": true
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Monster_Meleagris_None_Alert",
+      "abilityMixins": [
+        {
+          "$type": "AttachToAnimatorStateIDMixin",
+          "modifierName": "DistanceChecker",
+          "stateIDs": [
+            "Alert_Loop",
+            "Alert_Loop2",
+            "Alert_Move"
+          ],
+          "value": -1,
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToNormalizedTimeMixin",
+          "stateID": "Born",
+          "modifierName": "GadgetShowEnd",
+          "normalizeEnd": 0.5799999833106995,
+          "value": -1,
+          "actorIceSubHurtDelta": -1,
+          "normalizeStart": 0.2800000011920929
+        },
+        {
+          "$type": "AttachToAnimatorStateIDMixin",
+          "modifierName": "AlertMoveEffect",
+          "stateIDs": [
+            "Alert_Move"
+          ],
+          "value": -1,
+          "actorIceSubHurtDelta": -1
+        }
+      ],
+      "modifiers": {
+        "AlertMoveEffect": {
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Animal_Meleagris_Turn",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "DistanceChecker": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "Predicated",
+              "doOffStage": false,
+              "failActions": [
+                {
+                  "$type": "SetAnimatorBool",
+                  "doOffStage": false,
+                  "boolID": "TargetNear",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "target": "SelfAttackTarget",
+              "targetPredicates": [
+                {
+                  "$type": "ByTargetPositionToSelfPosition",
+                  "value": 2,
+                  "target": "Target",
+                  "logic": "LesserOrEqual"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "successActions": [
+                {
+                  "$type": "SetAnimatorBool",
+                  "doOffStage": false,
+                  "value": true,
+                  "boolID": "TargetNear",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "thinkInterval": 0.014999999664723873
+        },
+        "GadgetShowEnd": {
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "predicates": [
+                {
+                  "$type": "ByAnimatorFloat",
+                  "value": 5,
+                  "target": "Target",
+                  "parameter": "PoseID",
+                  "logic": "Equal"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Animal_Meleagris_Dizzy",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "SetAnimatorBool",
+              "doOffStage": false,
+              "value": true,
+              "predicates": [
+                {
+                  "$type": "ByAnimatorFloat",
+                  "value": 5,
+                  "target": "Target",
+                  "parameter": "PoseID",
+                  "logic": "Equal"
+                }
+              ],
+              "boolID": "FleeNow",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetPoseInt",
+              "doOffStage": false,
+              "value": 1,
+              "intID": "FleeNow",
+              "predicates": [
+                {
+                  "$type": "ByAnimatorFloat",
+                  "value": 5,
+                  "target": "Target",
+                  "parameter": "PoseID",
+                  "logic": "Equal"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetPoseBool",
+              "doOffStage": false,
+              "predicates": [
+                {
+                  "$type": "ByAnimatorFloat",
+                  "value": 5,
+                  "target": "Target",
+                  "parameter": "PoseID",
+                  "logic": "Equal"
+                }
+              ],
+              "boolID": "GadgetShow",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Monster_Meleagris_None_Flee",
+      "abilityMixins": [
+        {
+          "$type": "AttachToAnimatorStateIDMixin",
+          "modifierName": "OnBeingHit_Reset",
+          "stateIDs": [
+            "Alert"
+          ],
+          "value": -1,
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToAnimatorStateIDMixin",
+          "modifierName": "OnBeingHit_Monitor",
+          "stateIDs": [
+            "Alert_Loop",
+            "Alert_Loop2",
+            "Alert_Move"
+          ],
+          "value": -1,
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToAnimatorStateIDMixin",
+          "modifierName": "FleeMode_Monitor",
+          "stateIDs": [
+            "Alert_Run",
+            "Alert2"
+          ],
+          "value": -1,
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToAnimatorStateIDMixin",
+          "modifierName": "DisappearTimer",
+          "stateIDs": [
+            "Disappear"
+          ],
+          "value": -1,
+          "actorIceSubHurtDelta": -1
+        }
+      ],
+      "modifiers": {
+        "DisappearTimer": {
+          "onAdded": [
+            {
+              "$type": "SetAnimatorBool",
+              "doOffStage": false,
+              "value": true,
+              "boolID": "Disappear",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetCanDieImmediately",
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1,
+              "NMKBMGKOOJK": true,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "StartDither",
+              "ADBJDJLIIMK": -1,
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1,
+              "duHPRation": 3,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "HideUIBillBoard",
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1,
+              "hide": true,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "KillSelf",
+              "doOffStage": false,
+              "killSelfType": "Disappear",
+              "HMOKBGGKIAF": true,
+              "actorIceSubHurtDelta": -1,
+              "duHPRation": 1.5,
+              "OLIICKEKPGF": true,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "FleeMode_Monitor": {
+          "onAdded": [
+            {
+              "$type": "SetPoseInt",
+              "doOffStage": false,
+              "value": 1,
+              "intID": "FleeNow",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "OnBeingHit_Monitor": {
+          "elementDurability": 100,
+          "onBeingHit": [
+            {
+              "$type": "SetAnimatorTrigger",
+              "doOffStage": false,
+              "mpTriggerOnRemote": true,
+              "triggerID": "OnBeingHit",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "OnBeingHit_Reset": {
+          "onAdded": [
+            {
+              "$type": "ResetAnimatorTrigger",
+              "doOffStage": false,
+              "triggerID": "OnBeingHit",
+              "enable": true,
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        }
+      }
+    }
+  }
+]

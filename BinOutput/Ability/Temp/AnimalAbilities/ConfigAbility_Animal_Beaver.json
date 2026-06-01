@@ -1,0 +1,407 @@
+[
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Animal_Beaver_SwitchToDive",
+      "abilityMixins": [
+        {
+          "$type": "AttachToAnimatorStateIDMixin",
+          "modifierName": "OnWater_VFX",
+          "stateIDs": [
+            "OnWaterBackstroke",
+            "OnWaterRelax",
+            "OnWaterPlay",
+            "OnWaterBackstrokeAS"
+          ],
+          "value": -1,
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "SpacialSteerAttackMixin",
+          "angularSpeed": 160,
+          "GMEPMDNDBOP": 180,
+          "GMKMCGPDICP": -10,
+          "actorIceSubHurtDelta": -1,
+          "LNFGMIAAAHP": [
+            "Happy02"
+          ],
+          "NMKAPGBAPIO": 10,
+          "endNormalizedTime": 1,
+          "PMKCEJILFAF": true
+        },
+        {
+          "$type": "SpacialSteerAttackMixin",
+          "startNormalizedTime": 0.8270000219345093,
+          "angularSpeed": 120,
+          "GMEPMDNDBOP": 180,
+          "GMKMCGPDICP": -10,
+          "actorIceSubHurtDelta": -1,
+          "LNFGMIAAAHP": [
+            "Happy01"
+          ],
+          "NMKAPGBAPIO": 10,
+          "endNormalizedTime": 1,
+          "PMKCEJILFAF": true
+        },
+        {
+          "$type": "SpacialSteerAttackMixin",
+          "angularSpeed": 120,
+          "GMEPMDNDBOP": 180,
+          "GMKMCGPDICP": -10,
+          "actorIceSubHurtDelta": -1,
+          "LNFGMIAAAHP": [
+            "TurnPose"
+          ],
+          "NMKAPGBAPIO": 10,
+          "endNormalizedTime": 1,
+          "PMKCEJILFAF": true
+        },
+        {
+          "$type": "AttachToPoseIDMixin",
+          "modifierName": "Avatar_Monitor",
+          "poseIDs": [
+            9001
+          ],
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToPoseIDMixin",
+          "modifierName": "UnderWater_BeHit_Monitor",
+          "poseIDs": [
+            2,
+            4,
+            5,
+            9003,
+            201,
+            202,
+            210,
+            99
+          ],
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToPoseIDMixin",
+          "modifierName": "CanNotBeHit",
+          "poseIDs": [
+            9003
+          ],
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToAnimatorStateIDMixin",
+          "modifierName": "Wave_VFX",
+          "stateIDs": [
+            "Swim_Loop",
+            "FastSwim",
+            "TurnPose",
+            "BeHit",
+            "Happy01"
+          ],
+          "value": -1,
+          "actorIceSubHurtDelta": -1
+        }
+      ],
+      "onAbilityStart": [
+        {
+          "$type": "SetPoseBool",
+          "doOffStage": false,
+          "boolID": "OnWater",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "modifiers": {
+        "Avatar_Monitor": {
+          "elementDurability": 100,
+          "onBeingHit": [
+            {
+              "$type": "SetPoseBool",
+              "doOffStage": false,
+              "value": true,
+              "boolID": "AvatarClose",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "ApplyCollisionMixin",
+              "actorIceSubHurtDelta": -1,
+              "MNBGAOBMBOD": [
+                "MoveCollider"
+              ]
+            }
+          ],
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "Predicated",
+              "doOffStage": false,
+              "otherTargets": {
+                "$type": "SelectTargetsByShape",
+                "shapeName": "CircleR5H5HC",
+                "campTargetType": "AllExceptSelf",
+                "topLimit": 1,
+                "sizeRatio": 1,
+                "ILLOOADJMLF": {
+                  "direction": {
+                    "maxAngle": 180
+                  },
+                  "FDGAEDDEEDG": {
+                    "ELAJJIANFFM": 180
+                  },
+                  "onGroundRaycastUpDist": 2,
+                  "value": 10
+                }
+              },
+              "predicates": [
+                {
+                  "$type": "ByEntityTypes",
+                  "target": "Target",
+                  "value": -1,
+                  "entityTypes": [
+                    "Avatar",
+                    "Vehicle",
+                    "CurveMoveGadget"
+                  ]
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "successActions": [
+                {
+                  "$type": "SetPoseBool",
+                  "doOffStage": false,
+                  "value": true,
+                  "boolID": "AvatarClose",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "thinkInterval": 3
+        },
+        "CanNotBeHit": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "AttachActionToModifierMixin",
+              "onAdded": [
+                {
+                  "$type": "EnableHitBoxByName",
+                  "doOffStage": false,
+                  "actorIceSubHurtDelta": -1,
+                  "hitBoxNames": [
+                    "HitBox"
+                  ],
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "onRemoved": [
+                {
+                  "$type": "EnableHitBoxByName",
+                  "doOffStage": false,
+                  "actorIceSubHurtDelta": -1,
+                  "setEnable": true,
+                  "hitBoxNames": [
+                    "HitBox"
+                  ],
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "minus_one": -1
+        },
+        "OnWater_VFX": {
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Animal_Beaver_OnWater",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "StartDither_Delay": {
+          "elementDurability": 100,
+          "stacking": "Unique",
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "TriggerSetRenderersEnable",
+              "doOffStage": false,
+              "renderNames": [
+                "Body"
+              ],
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "KillSelf",
+              "doOffStage": false,
+              "killSelfType": "Disappear",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "StartDither",
+              "ADBJDJLIIMK": -1,
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1,
+              "duHPRation": 2.5,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "thinkInterval": 2.5,
+          "duration": 4.5
+        },
+        "UnderWater_BeHit_Monitor": {
+          "elementDurability": 100,
+          "onBeingHit": [
+            {
+              "$type": "Predicated",
+              "doOffStage": false,
+              "target": "Target",
+              "targetPredicates": [
+                {
+                  "$type": "ByHitEnBreak",
+                  "target": "Target"
+                },
+                {
+                  "$type": "ByNot",
+                  "target": "Target",
+                  "predicates": [
+                    {
+                      "$type": "ByHasModifier",
+                      "modifierName": "CanNotBeHit"
+                    }
+                  ]
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "successActions": [
+                {
+                  "$type": "SetAnimatorTrigger",
+                  "doOffStage": false,
+                  "mpTriggerOnRemote": true,
+                  "triggerID": "EscapeTrigger",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "TurnDirectionToPos",
+                  "doOffStage": false,
+                  "maxAngle": -1,
+                  "value": -1,
+                  "actorIceSubHurtDelta": -1,
+                  "toPos": {
+                    "$type": "ConfigBornByTarget",
+                    "direction": {
+                      "$type": "MNIKDEEPHDH",
+                      "maxAngle": 180
+                    },
+                    "useRotation": true,
+                    "FDGAEDDEEDG": {
+                      "ELAJJIANFFM": 180
+                    },
+                    "onGroundRaycastUpDist": 2,
+                    "value": 10
+                  },
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "SetPoseBool",
+                  "doOffStage": false,
+                  "value": true,
+                  "boolID": "Escape",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "ApplyModifier",
+                  "doOffStage": false,
+                  "modifierName": "StartDither_Delay",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "RemoveModifier",
+                  "doOffStage": false,
+                  "modifierName": "UnderWater_BeHit_Monitor",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "ApplyCollisionMixin",
+              "actorIceSubHurtDelta": -1,
+              "MNBGAOBMBOD": [
+                "MoveCollider"
+              ]
+            }
+          ],
+          "minus_one": -1
+        },
+        "Wave_VFX": {
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_FauneAbyssale_Seal_Larva_Bubble",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        }
+      }
+    }
+  }
+]

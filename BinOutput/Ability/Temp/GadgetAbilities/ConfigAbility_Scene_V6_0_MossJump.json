@@ -1,0 +1,2498 @@
+[
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "DynamicAbility_MossJump_TeamAbility",
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "DynamicAbility_MossJump_Avatar",
+      "isDynamicAbility": true,
+      "onAbilityStart": [
+        {
+          "$type": "DebugLog",
+          "doOffStage": false,
+          "content": "##### Triggered DynamicAbility_MossJump_Avatar",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "Predicated",
+          "doOffStage": false,
+          "targetPredicates": [
+            {
+              "$type": "PCFJFPGIOFJ",
+              "BOHLGEEBJEK": true,
+              "CLPCJGPMKKK": [
+                "ActivitySkill_CommonMove",
+                "ActivitySkill_MagnetRush_SkillState",
+                "ActivitySkill_MagnetRush_Jump",
+                "ActivitySkill_MagnetRush_Fly_Move",
+                "ActivitySkill_MagnetRush_Fly_Idle",
+                "ActivitySkill_MagnetRush_Ground_Move",
+                "ActivitySkill_MagnetRush_Ground_Idle",
+                "ActivitySkill_MagnetRush_DropDown"
+              ]
+            }
+          ],
+          "actorIceSubHurtDelta": -1,
+          "successActions": [
+            {
+              "$type": "RemoveVelocityForce",
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true,
+              "forces": [
+                "RushMoveType",
+                "InertiaType",
+                "FixedRushMoveType",
+                "RiseType",
+                "AirflowAccType",
+                "AirflowType",
+                "GrapplingHookMoveType"
+              ]
+            },
+            {
+              "$type": "SetGlobalValueV2",
+              "doOffStage": false,
+              "value": 3,
+              "target": "Team",
+              "key": "_Ability_MagnetRush_SkillState",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "Predicated",
+              "doOffStage": false,
+              "failActions": [
+                {
+                  "$type": "Predicated",
+                  "doOffStage": false,
+                  "targetPredicates": [
+                    {
+                      "$type": "ByTargetGlobalValue",
+                      "value": 1,
+                      "target": "Team",
+                      "key": "GV_MossJump_IsInCurve",
+                      "compareType": "MoreThanAndEqual"
+                    }
+                  ],
+                  "actorIceSubHurtDelta": -1,
+                  "successActions": [
+                    {
+                      "$type": "AttachModifier",
+                      "doOffStage": false,
+                      "modifierName": "Avatar_MossJump_Camera_OnTrans",
+                      "actorIceSubHurtDelta": -1,
+                      "canBeHandledOnRecover": true
+                    },
+                    {
+                      "$type": "AvatarExitCurveMove",
+                      "doOffStage": false,
+                      "actorIceSubHurtDelta": -1,
+                      "canBeHandledOnRecover": true
+                    },
+                    {
+                      "$type": "SetAnimatorTrigger",
+                      "doOffStage": false,
+                      "triggerID": "DoSkill",
+                      "actorIceSubHurtDelta": -1,
+                      "canBeHandledOnRecover": true
+                    },
+                    {
+                      "$type": "SetAnimatorInt",
+                      "doOffStage": false,
+                      "value": 202,
+                      "intID": "SkillID",
+                      "actorIceSubHurtDelta": -1,
+                      "canBeHandledOnRecover": true
+                    }
+                  ],
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "targetPredicates": [
+                {
+                  "$type": "ByAnimatorInt",
+                  "value": 5,
+                  "target": "Target",
+                  "parameter": "MagnetRush_SkillState",
+                  "logic": "Equal"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "successActions": [
+                {
+                  "$type": "DebugLog",
+                  "doOffStage": false,
+                  "content": "##### DynamicAbility_MossJump_Avatar Try Interrupt Rush move",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "SetAnimatorInt",
+                  "doOffStage": false,
+                  "value": 3,
+                  "intID": "MagnetRush_SkillState",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AttachModifier",
+              "doOffStage": false,
+              "modifierName": "Avatar_MossJump_DelayHookMove",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "modifiers": {
+        "Avatar_MossJump_Camera_OnTrans": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "CameraModifierMixin",
+              "DJJMACHBJBP": [
+                "Normal"
+              ],
+              "actorIceSubHurtDelta": -1,
+              "ONGBGIPFMNH": {
+                "$type": "HGKGGKHGKKK",
+                "CLOEFPFFOGG": true,
+                "DHEPHDGCFFA": 6,
+                "DIHEMBGNMBH": 7,
+                "priority": "PlayModeExtra",
+                "FEEHGKCIHCL": 0.5,
+                "KMKPPLJDONI": "EaseOutCubic",
+                "LDHDJNBKGNJ": 1,
+                "MGIFGAABNKH": "EaseOutCubic",
+                "POCOPPOIMEB": 7
+              }
+            },
+            {
+              "$type": "CameraModifierMixin",
+              "DJJMACHBJBP": [
+                "Normal"
+              ],
+              "actorIceSubHurtDelta": -1,
+              "ONGBGIPFMNH": {
+                "$type": "IAAGJOKPGBC",
+                "priority": "PlayModeExtra",
+                "fov": 55,
+                "FEEHGKCIHCL": 0.5,
+                "KMKPPLJDONI": "EaseOutCubic",
+                "LDHDJNBKGNJ": 1,
+                "MGIFGAABNKH": "EaseOutCubic"
+              }
+            }
+          ],
+          "minus_one": -1,
+          "duration": 1.5
+        },
+        "Avatar_MossJump_DelayHookMove": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValueV2",
+              "doOffStage": false,
+              "value": 1,
+              "key": "_Ability_MagnetRush_DelayHookMove",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "SetGlobalValueV2",
+              "doOffStage": false,
+              "key": "_Ability_MagnetRush_DelayHookMove",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "modifierMixins": [
+            {
+              "$type": "GrapplingHookMoveStayInPlaceMixin",
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "Predicated",
+              "doOffStage": false,
+              "targetPredicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "target": "Team",
+                  "key": "_Ability_MagnetRush_SkillState",
+                  "compareType": "MoreThan"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "successActions": [
+                {
+                  "$type": "SetGlobalPos",
+                  "doOffStage": false,
+                  "target": "TeamTempTarget",
+                  "key": "_MossJump_Hook_TargetPos",
+                  "actorIceSubHurtDelta": -1,
+                  "born": {
+                    "$type": "ConfigBornByTarget",
+                    "direction": {
+                      "maxAngle": 180
+                    },
+                    "useRotation": true,
+                    "offset": {
+                      "x": -0.5
+                    },
+                    "FDGAEDDEEDG": {
+                      "ELAJJIANFFM": 180
+                    },
+                    "onGroundRaycastUpDist": 2,
+                    "value": 10
+                  },
+                  "isOnStageFalseSwitchValue": {
+                    "__unk_Q16140806": "_MossJump_CurEnterTarget"
+                  },
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "Predicated",
+                  "doOffStage": false,
+                  "failActions": [
+                    {
+                      "$type": "ODJNNJFMDLI",
+                      "doOffStage": false,
+                      "IOIIINCBCEH": 10003,
+                      "JJMHIEHPOJL": [
+                        2
+                      ],
+                      "actorIceSubHurtDelta": -1,
+                      "canBeHandledOnRecover": true
+                    },
+                    {
+                      "$type": "GGBPBDACHDJ",
+                      "doOffStage": false,
+                      "CEJKJCHAJAM": 20,
+                      "EPAMNKIBOPC": -1,
+                      "HHOAGAKMODA": true,
+                      "actorIceSubHurtDelta": -1,
+                      "toPos": {
+                        "$type": "ConfigBornByGlobalValue",
+                        "direction": {
+                          "maxAngle": 180
+                        },
+                        "positionKey": "_MossJump_Hook_TargetPos",
+                        "offset": {
+                          "x": -0.5
+                        },
+                        "FDGAEDDEEDG": {
+                          "ELAJJIANFFM": 180
+                        },
+                        "onGroundRaycastUpDist": 2,
+                        "value": 10
+                      },
+                      "KPBALDCCKDA": 10,
+                      "speed": 15,
+                      "animatorStateIDs": [
+                        "ActivitySkill_CustomSkill02",
+                        "ActivitySkill_MagnetRush_SkillState",
+                        "ActivitySkill_CommonMove"
+                      ],
+                      "canBeHandledOnRecover": true
+                    }
+                  ],
+                  "target": "TeamTempTarget",
+                  "targetPredicates": [
+                    {
+                      "$type": "ByAny",
+                      "target": "Target",
+                      "predicates": [
+                        {
+                          "$type": "ByTargetGlobalValue",
+                          "value": 1,
+                          "target": "Target",
+                          "key": "_JumpAir_Type"
+                        },
+                        {
+                          "$type": "ByTargetGlobalValue",
+                          "value": 1,
+                          "target": "Target",
+                          "key": "_MossJump_Starter"
+                        }
+                      ]
+                    }
+                  ],
+                  "actorIceSubHurtDelta": -1,
+                  "successActions": [
+                    {
+                      "$type": "AvatarExitCurveMove",
+                      "doOffStage": false,
+                      "actorIceSubHurtDelta": -1,
+                      "canBeHandledOnRecover": true
+                    },
+                    {
+                      "$type": "SetGlobalPos",
+                      "doOffStage": false,
+                      "target": "TeamTempTarget",
+                      "key": "MossJump_ShootPoint_LookPos",
+                      "actorIceSubHurtDelta": -1,
+                      "born": {
+                        "$type": "ConfigBornByAttachPoint",
+                        "direction": {
+                          "maxAngle": 180
+                        },
+                        "useRotation": true,
+                        "FDGAEDDEEDG": {
+                          "ELAJJIANFFM": 180
+                        },
+                        "attachPointName": "LookAt",
+                        "onGroundRaycastUpDist": 2,
+                        "value": 10
+                      },
+                      "isOnStageFalseSwitchValue": {
+                        "__unk_Q16140806": "_MossJump_CurEnterTarget"
+                      },
+                      "canBeHandledOnRecover": true
+                    },
+                    {
+                      "$type": "GGBPBDACHDJ",
+                      "doOffStage": false,
+                      "CEJKJCHAJAM": 20,
+                      "EPAMNKIBOPC": -1,
+                      "HHOAGAKMODA": true,
+                      "actorIceSubHurtDelta": -1,
+                      "toPos": {
+                        "$type": "ConfigBornByGlobalValue",
+                        "direction": {
+                          "maxAngle": 180
+                        },
+                        "positionKey": "_MossJump_Hook_TargetPos",
+                        "offset": {
+                          "x": -0.5
+                        },
+                        "FDGAEDDEEDG": {
+                          "ELAJJIANFFM": 180
+                        },
+                        "onGroundRaycastUpDist": 2,
+                        "value": 10
+                      },
+                      "KPBALDCCKDA": 10,
+                      "speed": 15,
+                      "animatorStateIDs": [
+                        "ActivitySkill_CustomSkill02",
+                        "ActivitySkill_MagnetRush_SkillState",
+                        "ActivitySkill_CommonMove"
+                      ],
+                      "canBeHandledOnRecover": true
+                    }
+                  ],
+                  "isOnStageFalseSwitchValue": {
+                    "__unk_Q16140806": "_MossJump_CurEnterTarget"
+                  },
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "RemoveModifier",
+              "doOffStage": false,
+              "modifierName": "Avatar_MossJump_DelayHookMove",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "thinkInterval": 0.10000000149011612
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "__unk_Q2982101340": [
+        "GV_Magnetization"
+      ],
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "DynamicAbility_MossJump_Avatar_SwitchMagnet",
+      "isDynamicAbility": true,
+      "onAbilityStart": [
+        {
+          "$type": "SetAnimatorBool",
+          "doOffStage": false,
+          "boolID": "MagnetRush_End",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "AvatarSkillStart",
+          "doOffStage": true,
+          "cdRatio": 1,
+          "costStaminaRatio": 1,
+          "actorIceSubHurtDelta": -1,
+          "skillID": 20614,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "Predicated",
+          "doOffStage": false,
+          "failActions": [
+            {
+              "$type": "DebugLog",
+              "doOffStage": false,
+              "content": "#### _MossJump_BanSwitchMagnet Protecting ####",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "target": "Team",
+          "targetPredicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "target": "Target",
+              "key": "_MossJump_BanSwitchMagnet",
+              "compareType": "NoneOrEqual"
+            }
+          ],
+          "actorIceSubHurtDelta": -1,
+          "successActions": [
+            {
+              "$type": "FireEffect",
+              "doOffStage": false,
+              "otherTargets": {
+                "$type": "GJLDGPLCAAG",
+                "AOLDLCMCHBM": "Team",
+                "targetKey": "Henshin_MoonSpirit_RuntimeId"
+              },
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_SceneObj_WhiteMoonSpirit_01_Switch",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "TriggerAudioV2",
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1,
+              "pattern": "v6_0_motion_SceneObj_WhiteMoonSpirit_Switch",
+              "canBeHandledOnRecover": true,
+              "PBHJPBFJGME": true
+            },
+            {
+              "$type": "Predicated",
+              "doOffStage": false,
+              "failActions": [
+                {
+                  "$type": "SetGlobalValueV2",
+                  "doOffStage": false,
+                  "value": 1,
+                  "target": "Team",
+                  "key": "GV_Magnetization_Skill",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "target": "Team",
+              "targetPredicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "value": 1,
+                  "target": "Target",
+                  "key": "GV_Magnetization"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "successActions": [
+                {
+                  "$type": "SetGlobalValueV2",
+                  "doOffStage": false,
+                  "value": 2,
+                  "target": "Team",
+                  "key": "GV_Magnetization_Skill",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "Predicated",
+          "doOffStage": false,
+          "target": "Team",
+          "targetPredicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "target": "Target",
+              "key": "GV_Magnetization",
+              "compareType": "NoneOrEqual"
+            }
+          ],
+          "actorIceSubHurtDelta": -1,
+          "successActions": [
+            {
+              "$type": "CopyGlobalValue",
+              "doOffStage": false,
+              "dstKey": "GV_Magnetization_Skill",
+              "srcTarget": "TeamTempTarget",
+              "actorIceSubHurtDelta": -1,
+              "srcKey": "SGV_NK_SingleMagSet_Pole_1",
+              "isOnStageFalseSwitchValue": {
+                "__unk_Q16140806": "_MossJump_CurEnterTarget"
+              },
+              "canBeHandledOnRecover": true,
+              "dstTarget": "Team"
+            },
+            {
+              "$type": "DebugLog",
+              "doOffStage": false,
+              "content": "#### CopyGlobalValue SGV_NK_SingleMagSet_Pole_1 ####",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "Predicated",
+          "doOffStage": false,
+          "target": "Team",
+          "targetPredicates": [
+            {
+              "$type": "ByAny",
+              "target": "Target",
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "value": 4,
+                  "target": "Team",
+                  "key": "_Ability_MagnetRush_SkillState"
+                },
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "target": "Team",
+                  "key": "_Ability_MagnetRush_SkillState"
+                }
+              ]
+            }
+          ],
+          "actorIceSubHurtDelta": -1,
+          "successActions": [
+            {
+              "$type": "AttachModifier",
+              "doOffStage": false,
+              "modifierName": "Team_MossJump_JumpAirCD",
+              "target": "Team",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "Predicated",
+              "doOffStage": false,
+              "failActions": [
+                {
+                  "$type": "Predicated",
+                  "doOffStage": false,
+                  "target": "TeamTempTarget",
+                  "targetPredicates": [
+                    {
+                      "$type": "ByTargetGlobalValue",
+                      "value": 2,
+                      "target": "Target",
+                      "key": "_JumpAir_Type"
+                    }
+                  ],
+                  "actorIceSubHurtDelta": -1,
+                  "successActions": [
+                    {
+                      "$type": "SetGlobalValue",
+                      "doOffStage": false,
+                      "value": 5,
+                      "target": "Team",
+                      "key": "_Ability_MagnetRush_SkillState",
+                      "actorIceSubHurtDelta": -1,
+                      "canBeHandledOnRecover": true
+                    }
+                  ],
+                  "isOnStageFalseSwitchValue": {
+                    "__unk_Q16140806": "_MossJump_CurEnterTarget"
+                  },
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "target": "TeamTempTarget",
+              "targetPredicates": [
+                {
+                  "$type": "ByAny",
+                  "target": "Target",
+                  "predicates": [
+                    {
+                      "$type": "ByTargetGlobalValue",
+                      "value": 1,
+                      "target": "Target",
+                      "key": "_JumpAir_Type"
+                    },
+                    {
+                      "$type": "ByTargetGlobalValue",
+                      "value": 1,
+                      "target": "Target",
+                      "key": "_MossJump_Starter"
+                    }
+                  ]
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "successActions": [
+                {
+                  "$type": "Predicated",
+                  "doOffStage": false,
+                  "target": "TeamTempTarget",
+                  "targetPredicates": [
+                    {
+                      "$type": "ByTargetGlobalValue",
+                      "value": 1,
+                      "target": "Target",
+                      "key": "SGV_NK_SingleMagSet_Pole_1",
+                      "compareType": "MoreThanAndEqual"
+                    }
+                  ],
+                  "actorIceSubHurtDelta": -1,
+                  "successActions": [
+                    {
+                      "$type": "Predicated",
+                      "doOffStage": false,
+                      "target": "TeamTempTarget",
+                      "actorIceSubHurtDelta": -1,
+                      "successActions": [
+                        {
+                          "$type": "AttachModifier",
+                          "doOffStage": false,
+                          "modifierName": "MossJump_JumpAir_TriggerCD",
+                          "target": "Target",
+                          "actorIceSubHurtDelta": -1,
+                          "canBeHandledOnRecover": true
+                        },
+                        {
+                          "$type": "AttachModifier",
+                          "doOffStage": false,
+                          "modifierName": "MossJump_Avatar_SwitchMagnet_Shoot",
+                          "target": "CurLocalAvatar",
+                          "actorIceSubHurtDelta": -1,
+                          "canBeHandledOnRecover": true
+                        },
+                        {
+                          "$type": "EnterLevelCurveMove",
+                          "doOffStage": false,
+                          "DHOMNAFNNHJ": 6002,
+                          "target": "CurLocalAvatar",
+                          "FHOGKINOBHP": true,
+                          "actorIceSubHurtDelta": -1,
+                          "isOnStageFalseSwitchValue": {
+                            "__unk_Q16140806": "_MossJump_CurEnterTarget"
+                          },
+                          "OEOJLJIFADF": 8,
+                          "canBeHandledOnRecover": true,
+                          "PMEENGGJHMJ": "TeamTempTarget"
+                        }
+                      ],
+                      "isOnStageFalseSwitchValue": {
+                        "__unk_Q16140806": "_MossJump_CurEnterTarget"
+                      },
+                      "canBeHandledOnRecover": true
+                    }
+                  ],
+                  "isOnStageFalseSwitchValue": {
+                    "__unk_Q16140806": "_MossJump_CurEnterTarget"
+                  },
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "isOnStageFalseSwitchValue": {
+                "__unk_Q16140806": "_MossJump_CurEnterTarget"
+              },
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "modifiers": {
+        "MossJump_Avatar_SwitchMagnet_Shoot": {
+          "onAdded": [
+            {
+              "$type": "ActCameraRadialBlur",
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1,
+              "cameraRadialBlur": {
+                "power": 0.5,
+                "blurTime": 0.5,
+                "fadeTime": 1
+              },
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "CameraModifierMixin",
+              "DJJMACHBJBP": [
+                "CurveMove"
+              ],
+              "actorIceSubHurtDelta": -1,
+              "ONGBGIPFMNH": {
+                "$type": "HGKGGKHGKKK",
+                "CLOEFPFFOGG": true,
+                "DHEPHDGCFFA": 6,
+                "DIHEMBGNMBH": 15,
+                "priority": "PlayModeExtra",
+                "FEEHGKCIHCL": 0.5,
+                "KMKPPLJDONI": "EaseOutCubic",
+                "LDHDJNBKGNJ": 3,
+                "MGIFGAABNKH": "EaseOutCubic",
+                "POCOPPOIMEB": 15
+              }
+            },
+            {
+              "$type": "CameraModifierMixin",
+              "DJJMACHBJBP": [
+                "CurveMove"
+              ],
+              "actorIceSubHurtDelta": -1,
+              "ONGBGIPFMNH": {
+                "$type": "IAAGJOKPGBC",
+                "priority": "PlayModeExtra",
+                "fov": 65,
+                "FEEHGKCIHCL": 0.5,
+                "KMKPPLJDONI": "EaseOutCubic",
+                "LDHDJNBKGNJ": 3,
+                "MGIFGAABNKH": "EaseOutCubic"
+              }
+            }
+          ],
+          "minus_one": -1,
+          "duration": 1
+        },
+        "MossJump_JumpAir_TriggerCD": {
+          "onAdded": [
+            {
+              "$type": "EnableColliderByName",
+              "doOffStage": false,
+              "enable": true,
+              "actorIceSubHurtDelta": -1,
+              "transformNames": [
+                "Trigger"
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "EnableColliderByName",
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1,
+              "setEnable": true,
+              "transformNames": [
+                "Trigger"
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "duration": 2
+        },
+        "Team_MossJump_JumpAirCD": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValueV2",
+              "doOffStage": false,
+              "value": 1,
+              "key": "_Ability_MagnetRush_JumpAirCD",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "SetGlobalValueV2",
+              "doOffStage": false,
+              "key": "_Ability_MagnetRush_JumpAirCD",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "duration": 0.5
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "DynamicAbility_MossJump_Avatar_Exit",
+      "isDynamicAbility": true,
+      "abilityMixins": [
+        {
+          "$type": "ButtonHoldChargeMixin",
+          "chargeTime": 0.5,
+          "OnBeginUncharged": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "value": 0.5,
+              "key": "GV_AvatarAbility_HoldOnUI_Index03",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "OnReleaseUncharged": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "GV_AvatarAbility_HoldOnUI_Index03",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AttachModifier",
+              "doOffStage": false,
+              "modifierName": "Avatar_MossJump_DoExit",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "OnBeginCharged": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "GV_AvatarAbility_HoldOnUI_Index03",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "secondChargeTime": 999999,
+          "actorIceSubHurtDelta": -1,
+          "skillID": 20615,
+          "OnReleaseCharged": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "GV_AvatarAbility_HoldOnUI_Index03",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ]
+        }
+      ],
+      "modifiers": {
+        "Avatar_MossJump_DoExit": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "target": "Team",
+              "key": "_Ability_MagnetRush_SkillState",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValueV2",
+              "doOffStage": false,
+              "target": "TeamTempTarget",
+              "key": "GV_PlayerTeam_MagnetPowerCopy",
+              "actorIceSubHurtDelta": -1,
+              "isOnStageFalseSwitchValue": {
+                "__unk_Q16140806": "_ABILITY_MagnetAbsorbThrowSkill_ChildTarget"
+              },
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "duration": 0.20000000298023224
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "onKill": [
+        {
+          "$type": "SetAnimatorBool",
+          "doOffStage": true,
+          "boolID": "Born",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "FireEffect",
+          "doOffStage": false,
+          "scale": 1,
+          "predicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "value": 1,
+              "target": "Team",
+              "key": "GV_Magnetization_Skill"
+            }
+          ],
+          "actorIceSubHurtDelta": -1,
+          "effectPattern": "Eff_SceneObj_MoonSpirit_TransformAvatar_Disappear_Red",
+          "born": {
+            "direction": {
+              "maxAngle": 180
+            },
+            "FDGAEDDEEDG": {
+              "ELAJJIANFFM": 180
+            },
+            "onGroundRaycastUpDist": 2,
+            "value": 10
+          },
+          "effectTempleteID": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "FireEffect",
+          "doOffStage": false,
+          "scale": 1,
+          "predicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "value": 2,
+              "target": "Team",
+              "key": "GV_Magnetization_Skill"
+            }
+          ],
+          "actorIceSubHurtDelta": -1,
+          "effectPattern": "Eff_SceneObj_MoonSpirit_TransformAvatar_Disappear_Blue",
+          "born": {
+            "direction": {
+              "maxAngle": 180
+            },
+            "FDGAEDDEEDG": {
+              "ELAJJIANFFM": 180
+            },
+            "onGroundRaycastUpDist": 2,
+            "value": 10
+          },
+          "effectTempleteID": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "SetAnimatorBool",
+          "doOffStage": true,
+          "value": true,
+          "boolID": "Born",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "SetGlobalValueV2",
+          "doOffStage": false,
+          "value": 1,
+          "key": "_MossJump_Starter",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "SceneObj_Property_Ani_Prop_MossJump_01",
+      "abilityMixins": [
+        {
+          "$type": "WidgetMpSupportMixin",
+          "actorIceSubHurtDelta": -1,
+          "succActions": [
+            {
+              "$type": "Predicated",
+              "doOffStage": false,
+              "target": "Other",
+              "targetPredicates": [
+                {
+                  "$type": "ByTargetPositionToSelfPosition",
+                  "value": 5,
+                  "target": "TargetCurLocalAvatar",
+                  "logic": "LesserOrEqual",
+                  "compareType": "XYZ"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "successActions": [
+                {
+                  "$type": "AttachModifier",
+                  "doOffStage": false,
+                  "modifierName": "Avatar_MossJump_PreShootStateCheck",
+                  "target": "TargetCurLocalAvatar",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ]
+        },
+        {
+          "$type": "AttachModifierToSelfGlobalValueNoInitMixin",
+          "enable": true,
+          "globalValueKey": "_MossJump_FollowTarget_1",
+          "modifierNameSteps": [
+            "MossJump_MoonSpirit_TryFollow"
+          ],
+          "removeAppliedModifier": true,
+          "actorIceSubHurtDelta": -1,
+          "valueSteps": [
+            0.5,
+            999999
+          ]
+        },
+        {
+          "$type": "AttachModifierToSelfGlobalValueNoInitMixin",
+          "enable": true,
+          "globalValueKey": "SGV_NK_SingleMagSet_Pole_1",
+          "modifierNameSteps": [
+            "MoonSpirit_Pole_White",
+            "MoonSpirit_Pole_Red",
+            "MoonSpirit_Pole_Blue"
+          ],
+          "removeAppliedModifier": true,
+          "actorIceSubHurtDelta": -1,
+          "valueSteps": [
+            -0.5,
+            0.5,
+            1.5,
+            2.5
+          ]
+        }
+      ],
+      "modifiers": {
+        "Avatar_MossJump_AllowShoot": {
+          "onAdded": [
+            {
+              "$type": "Predicated",
+              "doOffStage": false,
+              "targetPredicates": [
+                {
+                  "$type": "ByHostOrGuest",
+                  "isHost": true
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "successActions": [
+                {
+                  "$type": "PlayerTransmitProtectAction",
+                  "doOffStage": false,
+                  "actorIceSubHurtDelta": -1,
+                  "duHPRation": 2,
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "AvatarExitCameraShot",
+                  "doOffStage": true,
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "SetTargetToTargetKey",
+                  "doOffStage": false,
+                  "targetKey": "Aim_Target",
+                  "target": "Caster",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "SetTargetToTargetKey",
+                  "doOffStage": false,
+                  "targetKey": "_MossJump_FollowTarget",
+                  "target": "Caster",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "SetTargetToTargetKey",
+                  "doOffStage": false,
+                  "targetKey": "_MossJump_CurEnterTarget",
+                  "target": "Team",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "AttachModifier",
+                  "doOffStage": false,
+                  "modifierName": "MossJump_BanSwitchMagnet",
+                  "target": "Team",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "TriggerAbility",
+                  "doOffStage": false,
+                  "abilityName": "DynamicAbility_MossJump_Avatar_SwitchMagnet",
+                  "actorIceSubHurtDelta": -1,
+                  "target": "Other",
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "Avatar_MossJump_PreShootStateCheck": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "AttachToStateIDMixin",
+              "modifierName": "Avatar_MossJump_AllowShoot",
+              "stateIDs": [
+                "Standby",
+                "NormalStandby",
+                "NormalMove",
+                "Sprint",
+                "SprintBS",
+                "NormalStandbyWeapon",
+                "NormalMoveWeapon",
+                "NormalMoveWeaponPutaway",
+                "NormalMoveWeaponStandByPutaway",
+                "NormalMoveWeaponOver",
+                "Swim",
+                "Dive",
+                "Fly",
+                "Fall"
+              ],
+              "value": -1,
+              "isCheckOnAttach": true,
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "minus_one": -1,
+          "duration": 0.10000000149011612
+        },
+        "MoonSpirit_Pole_Blue": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "ShaderStateMachineSwitchMixin",
+              "value": 1,
+              "actorIceSubHurtDelta": -1,
+              "MMJHBMEAJDN": -1
+            }
+          ],
+          "minus_one": -1
+        },
+        "MoonSpirit_Pole_Red": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "ShaderStateMachineSwitchMixin",
+              "value": 1,
+              "actorIceSubHurtDelta": -1,
+              "MMJHBMEAJDN": -1
+            }
+          ],
+          "minus_one": -1
+        },
+        "MoonSpirit_Pole_White": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "ShaderStateMachineSwitchMixin",
+              "value": 1,
+              "actorIceSubHurtDelta": -1,
+              "MMJHBMEAJDN": -1
+            }
+          ],
+          "minus_one": -1
+        },
+        "MossJump_BanSwitchMagnet": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValueV2",
+              "doOffStage": false,
+              "value": 1,
+              "key": "_Ability_MagnetRush_HasEnteredJumpAir",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValueV2",
+              "doOffStage": false,
+              "value": 1,
+              "key": "_MossJump_BanSwitchMagnet",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "SetGlobalValueV2",
+              "doOffStage": false,
+              "key": "_MossJump_BanSwitchMagnet",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "duration": 0.5
+        },
+        "MossJump_MoonSpirit_Following": {
+          "onAdded": [
+            {
+              "$type": "DebugLog",
+              "doOffStage": false,
+              "content": "### MossJump_MoonSpirit_Following ###",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "EnableGadgetInteeMp",
+              "doOffStage": true,
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "EntityInVisibleMixin",
+              "CFAIPEFHONO": {
+                "KNKPKKDPEDJ": true
+              },
+              "disableAudio": true,
+              "HOMDDINNFFG": {
+                "KNKPKKDPEDJ": true
+              },
+              "reason": "Gallary",
+              "KBGFNPHLGLA": true,
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "minus_one": -1
+        },
+        "MossJump_MoonSpirit_InteeOn": {
+          "onAdded": [
+            {
+              "$type": "EnableGadgetInteeMp",
+              "doOffStage": true,
+              "enable": true,
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "MossJump_MoonSpirit_TryFollow": {
+          "onAdded": [
+            {
+              "$type": "DebugLog",
+              "doOffStage": false,
+              "content": "### MossJump_MoonSpirit_TryFollow ###",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "AttachModifierToGlobalValueMixin",
+              "enable": true,
+              "globalValueKey": "GV_MossJump_IsInCurve",
+              "modifierNameSteps": [
+                "MossJump_MoonSpirit_InteeOn",
+                "MossJump_MoonSpirit_Following"
+              ],
+              "globalValueTarget": "TempTarget",
+              "removeAppliedModifier": true,
+              "actorIceSubHurtDelta": -1,
+              "valueSteps": [
+                -0.5,
+                0.5,
+                1.5
+              ],
+              "NEACJLMBFMN": true,
+              "isOnStageFalseSwitchValue": {
+                "__unk_Q16140806": "Aim_Target"
+              }
+            }
+          ],
+          "minus_one": -1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "SceneObj_Property_Ani_Prop_MossJump_Absorb"
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "SceneObj_Property_Ani_Prop_MossJump_Shoot"
+    }
+  },
+  {
+    "Default": {
+      "onKill": [
+        {
+          "$type": "SendEffectTrigger",
+          "doOffStage": false,
+          "value": 1,
+          "parameter": "JumpAir",
+          "actorIceSubHurtDelta": -1,
+          "effectPattern": "Eff_SceneObj_JumpAir_White_01",
+          "type": "Int",
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "SendEffectTrigger",
+          "doOffStage": false,
+          "value": 1,
+          "parameter": "JumpAir",
+          "actorIceSubHurtDelta": -1,
+          "effectPattern": "Eff_SceneObj_JumpAir_Red_01",
+          "type": "Int",
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "SendEffectTrigger",
+          "doOffStage": false,
+          "value": 1,
+          "parameter": "JumpAir",
+          "actorIceSubHurtDelta": -1,
+          "effectPattern": "Eff_SceneObj_JumpAir_Blue_01",
+          "type": "Int",
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "__unk_Q2982101340": [
+        "SGV_NK_SingleMagSet_Pole_1",
+        "SGV_JumpAir_ScaleRatio"
+      ],
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "SetGlobalValueV2",
+          "doOffStage": false,
+          "value": 1,
+          "key": "_JumpAir_Type",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "EnableColliderByName",
+          "doOffStage": false,
+          "actorIceSubHurtDelta": -1,
+          "setEnable": true,
+          "transformNames": [
+            "Trigger"
+          ],
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "AttachModifier",
+          "doOffStage": false,
+          "modifierName": "MossJump_ScaleOverride",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "SceneObj_Property_Ani_Prop_MossJump_02",
+      "abilityMixins": [
+        {
+          "$type": "AttachModifierToSelfGlobalValueNoInitMixin",
+          "enable": true,
+          "globalValueKey": "SGV_NK_SingleMagSet_Pole_1",
+          "modifierNameSteps": [
+            "MossJump_Trans_White",
+            "MossJump_Trans_N",
+            "MossJump_Trans_S"
+          ],
+          "removeAppliedModifier": true,
+          "actorIceSubHurtDelta": -1,
+          "valueSteps": [
+            -0.5,
+            0.5,
+            1.5,
+            2.5
+          ]
+        }
+      ],
+      "modifiers": {
+        "MossJump_ScaleOverride": {
+          "onAdded": [
+            {
+              "$type": "SetPartScaleByTransform",
+              "doOffStage": false,
+              "enable": true,
+              "IMCLOFNLBCD": {
+                "y": "SGV_JumpAir_ScaleRatio",
+                "z": "SGV_JumpAir_ScaleRatio",
+                "x": "SGV_JumpAir_ScaleRatio"
+              },
+              "actorIceSubHurtDelta": -1,
+              "LAOCFMDGFCE": "Trigger",
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "MossJump_Trans_N": {
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_SceneObj_JumpAir_Red_01",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "MossJump_Trans_S": {
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_SceneObj_JumpAir_Blue_01",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "MossJump_Trans_White": {
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_SceneObj_JumpAir_White_01",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "__unk_Q2982101340": [
+        "SGV_NK_SingleMagSet_Pole_1"
+      ],
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "SetGlobalValueV2",
+          "doOffStage": false,
+          "value": 2,
+          "key": "_JumpAir_Type",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "SetGlobalValueV2",
+          "doOffStage": false,
+          "key": "_MossJump_HasAvatar",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "SceneObj_Property_Ani_Prop_MossJump_03",
+      "abilityMixins": [
+        {
+          "$type": "AttachModifierToSelfGlobalValueNoInitMixin",
+          "enable": true,
+          "globalValueKey": "SGV_NK_SingleMagSet_Pole_1",
+          "modifierNameSteps": [
+            "MossJump_Trans_N",
+            "MossJump_Trans_S"
+          ],
+          "removeAppliedModifier": true,
+          "actorIceSubHurtDelta": -1,
+          "valueSteps": [
+            0.5,
+            1.5,
+            2.5
+          ]
+        }
+      ],
+      "modifiers": {
+        "MossJump_Trans_N": {
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_SceneObj_JumpAir_Red_01_S",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "AttachModifierToGlobalValueMixin",
+              "globalValueKey": "_MossJump_HasAvatar",
+              "modifierNameSteps": [
+                "MossJump_Trans_N_EmptyEff"
+              ],
+              "enable": true,
+              "removeAppliedModifier": true,
+              "actorIceSubHurtDelta": -1,
+              "valueSteps": [
+                -0.5,
+                0.5
+              ],
+              "NEACJLMBFMN": true
+            }
+          ],
+          "minus_one": -1
+        },
+        "MossJump_Trans_N_EmptyEff": {
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_SceneObj_MoonFinger_01_Red",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "LocalAttachToGlobalValueMixin",
+              "BBFHGDBAKGB": 0.10000000149011612,
+              "BNFFNNMDMNN": [
+                {
+                  "FEEADNDOIFM": 1,
+                  "NHLPAAHNCDB": 99
+                }
+              ],
+              "globalValueKey": "_Ability_MagnetRush_SkillState",
+              "globalValueTarget": "Team",
+              "HBMAEPOHFOL": [
+                {
+                  "DLCJIIIMDML": [
+                    {
+                      "effectPattern": "Eff_SceneObj_MoonFinger_01_RedActive",
+                      "born": {
+                        "direction": {
+                          "maxAngle": 180
+                        },
+                        "FDGAEDDEEDG": {
+                          "ELAJJIANFFM": 180
+                        },
+                        "onGroundRaycastUpDist": 2,
+                        "value": 10
+                      },
+                      "effectTempleteID": -1,
+                      "KMGMHDDEHOG": -1,
+                      "value": 1
+                    }
+                  ]
+                }
+              ],
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "minus_one": -1
+        },
+        "MossJump_Trans_S": {
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_SceneObj_JumpAir_Blue_01_S",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "AttachModifierToSelfGlobalValueMixin",
+              "globalValueKey": "_MossJump_HasAvatar",
+              "modifierNameSteps": [
+                "MossJump_Trans_S_EmptyEff"
+              ],
+              "removeAppliedModifier": true,
+              "actorIceSubHurtDelta": -1,
+              "valueSteps": [
+                -0.5,
+                0.5
+              ]
+            }
+          ],
+          "minus_one": -1
+        },
+        "MossJump_Trans_S_EmptyEff": {
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_SceneObj_MoonFinger_01_Blue",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "LocalAttachToGlobalValueMixin",
+              "BBFHGDBAKGB": 0.10000000149011612,
+              "BNFFNNMDMNN": [
+                {
+                  "FEEADNDOIFM": 1,
+                  "NHLPAAHNCDB": 99
+                }
+              ],
+              "globalValueKey": "_Ability_MagnetRush_SkillState",
+              "globalValueTarget": "Team",
+              "HBMAEPOHFOL": [
+                {
+                  "DLCJIIIMDML": [
+                    {
+                      "effectPattern": "Eff_SceneObj_MoonFinger_01_BlueActive",
+                      "born": {
+                        "direction": {
+                          "maxAngle": 180
+                        },
+                        "FDGAEDDEEDG": {
+                          "ELAJJIANFFM": 180
+                        },
+                        "onGroundRaycastUpDist": 2,
+                        "value": 10
+                      },
+                      "effectTempleteID": -1,
+                      "KMGMHDDEHOG": -1,
+                      "value": 1
+                    }
+                  ]
+                }
+              ],
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "minus_one": -1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "__unk_Q2982101340": [
+        "_Speed"
+      ],
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "HOKIPJHHJBE",
+          "doOffStage": false,
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true,
+          "globalValueList": [
+            {
+              "value": 2,
+              "key": "GV_NK_SingleMag_Pole_1"
+            },
+            {
+              "value": 1,
+              "key": "GV_NK_SingleMag_FieldType_1"
+            }
+          ]
+        },
+        {
+          "$type": "ChangeTag",
+          "doOffStage": false,
+          "tag": "BigMossBall",
+          "enable": true,
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "AttachModifier",
+          "doOffStage": false,
+          "modifierName": "MossBall_Animation",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "AttachModifier",
+          "doOffStage": false,
+          "modifierName": "MossBall_State",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "SceneObj_Property_Ani_Prop_MossBall_01",
+      "modifiers": {
+        "MossBall_Animation": {
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_SceneObj_Stages_MossBall_Flower_01",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetAnimatorFloat",
+              "doOffStage": false,
+              "floatID": "Speed",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SendEffectTrigger",
+              "doOffStage": false,
+              "value": -1,
+              "parameter": "GadgetState",
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_SceneObj_Stages_MossBall_Energy_01",
+              "type": "Int",
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "DoActionOnGlobalValueChangeMixin",
+              "globalValueKey": "_Speed",
+              "actions": [
+                {
+                  "$type": "Predicated",
+                  "doOffStage": false,
+                  "failActions": [
+                    {
+                      "$type": "SetAnimatorFloat",
+                      "doOffStage": false,
+                      "value": "_Speed",
+                      "floatID": "Speed",
+                      "actorIceSubHurtDelta": -1,
+                      "canBeHandledOnRecover": true
+                    }
+                  ],
+                  "targetPredicates": [
+                    {
+                      "$type": "ByTargetGlobalValue",
+                      "value": 0.30000001192092896,
+                      "target": "Target",
+                      "key": "_Speed",
+                      "compareType": "LessAndEqual"
+                    }
+                  ],
+                  "actorIceSubHurtDelta": -1,
+                  "successActions": [
+                    {
+                      "$type": "SetAnimatorFloat",
+                      "doOffStage": false,
+                      "value": 1,
+                      "floatID": "Speed",
+                      "actorIceSubHurtDelta": -1,
+                      "canBeHandledOnRecover": true
+                    }
+                  ],
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "SendEffectTrigger",
+                  "doOffStage": false,
+                  "value": 201,
+                  "parameter": "GadgetState",
+                  "actorIceSubHurtDelta": -1,
+                  "effectPattern": "Eff_SceneObj_Stages_MossBall_Energy_01",
+                  "type": "Int",
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "Predicated",
+                  "doOffStage": false,
+                  "targetPredicates": [
+                    {
+                      "$type": "ByTargetGlobalValue",
+                      "value": 0.800000011920929,
+                      "target": "Target",
+                      "key": "_Speed",
+                      "compareType": "MoreThanAndEqual"
+                    }
+                  ],
+                  "actorIceSubHurtDelta": -1,
+                  "successActions": [
+                    {
+                      "$type": "SetGlobalValueV2",
+                      "doOffStage": false,
+                      "value": 1,
+                      "key": "_MossBall_Actived",
+                      "actorIceSubHurtDelta": -1,
+                      "canBeHandledOnRecover": true
+                    },
+                    {
+                      "$type": "AttachModifier",
+                      "doOffStage": false,
+                      "modifierName": "MossBall_Trans_Eff",
+                      "predicatesForeach": [
+                        {
+                          "$type": "ByTargetPositionToSelfPosition",
+                          "value": 80,
+                          "target": "Target",
+                          "logic": "LesserOrEqual",
+                          "compareType": "XYZ"
+                        }
+                      ],
+                      "target": "AllTeams",
+                      "actorIceSubHurtDelta": -1,
+                      "canBeHandledOnRecover": true
+                    },
+                    {
+                      "$type": "SendEffectTrigger",
+                      "doOffStage": false,
+                      "value": 202,
+                      "parameter": "GadgetState",
+                      "actorIceSubHurtDelta": -1,
+                      "effectPattern": "Eff_SceneObj_Stages_MossBall_Energy_01",
+                      "type": "Int",
+                      "canBeHandledOnRecover": true
+                    },
+                    {
+                      "$type": "AttachModifier",
+                      "doOffStage": false,
+                      "modifierName": "Team_MossJump_TransportPrepare",
+                      "predicatesForeach": [
+                        {
+                          "$type": "ByHostOrGuest",
+                          "target": "Target",
+                          "isHost": true
+                        },
+                        {
+                          "$type": "ByTargetPositionToSelfPosition",
+                          "value": 80,
+                          "target": "Target",
+                          "logic": "LesserOrEqual",
+                          "compareType": "XYZ"
+                        }
+                      ],
+                      "target": "AllTeams",
+                      "actorIceSubHurtDelta": -1,
+                      "canBeHandledOnRecover": true
+                    },
+                    {
+                      "$type": "ChangeGadgetState",
+                      "doOffStage": false,
+                      "value": 201,
+                      "actorIceSubHurtDelta": -1,
+                      "canBeHandledOnRecover": true
+                    }
+                  ],
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "gvInTalk": true
+            }
+          ],
+          "minus_one": -1
+        },
+        "MossBall_Magnet": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValueV2",
+              "doOffStage": false,
+              "key": "_Speed",
+              "maxValue": 1,
+              "actorIceSubHurtDelta": -1,
+              "useLimitRange": true,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValueV2",
+              "doOffStage": false,
+              "key": "_MossBall_Actived",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "JELIAIDDBOM",
+              "AEFDCLLLILL": "GV_NK_SingleMag_Pole_1",
+              "fieldType": "GV_NK_SingleMag_FieldType_1",
+              "BHBBOBFCIPD": "MagnetNode_1",
+              "DCJJGBJELMD": "SGV_NK_SingleMag_OccupyMagnetID_",
+              "id": 1,
+              "DDLENOBOPLG": "Eff_SceneObj_Stages_MagForce_Thin_S300X300_01",
+              "DOJCBOOACOB": "GV_NK_SingleMagnet_AngleTolerance",
+              "FJKILLLACGJ": 1,
+              "GEJGANOOGEH": 0.20000000298023224,
+              "strength": 25,
+              "IFILIIIKCFC": "SGV_NK_SingleMag_OccupyAuth_",
+              "KANOMLNCFHC": "GV_NK_SingleMag_ScaleLength",
+              "actorIceSubHurtDelta": -1,
+              "KECFECNMGBF": "ThrowSinglePole",
+              "KMABGMKFGBB": "MagnetTrigger_1",
+              "MBNGEEAEDLM": "SGV_NK_SingleMag_OccupyTarget_",
+              "MPEFCIBMNPH": "NodKrai_MainTag",
+              "PHDOEFIHFMP": 1,
+              "PJFPJFCEPGD": "GV_NK_SingleMag_AttractType"
+            },
+            {
+              "$type": "DoActionOnGlobalValueChangeMixin",
+              "globalValueKey": "SGV_NK_SingleMag_OccupyTarget_1_1",
+              "actions": [
+                {
+                  "$type": "Predicated",
+                  "doOffStage": false,
+                  "failActions": [
+                    {
+                      "$type": "AttachModifier",
+                      "doOffStage": false,
+                      "modifierName": "MossBall_NotifyDisappear_Reborn",
+                      "target": "Target",
+                      "actorIceSubHurtDelta": -1,
+                      "canBeHandledOnRecover": true
+                    }
+                  ],
+                  "target": "TempTarget",
+                  "targetPredicates": [
+                    {
+                      "$type": "ByTargetGlobalValue",
+                      "value": 2,
+                      "target": "Target",
+                      "key": "_Ability_MixMagPlankton_Status"
+                    }
+                  ],
+                  "actorIceSubHurtDelta": -1,
+                  "successActions": [
+                    {
+                      "$type": "TriggerAbility",
+                      "doOffStage": false,
+                      "target": "Other",
+                      "abilityName": "SceneObj_Property_Ani_Prop_MossBall_01_SpeedUp",
+                      "actorIceSubHurtDelta": -1,
+                      "canBeHandledOnRecover": true
+                    },
+                    {
+                      "$type": "AttachModifier",
+                      "doOffStage": false,
+                      "modifierName": "MossBall_NotifyDisappear_Reborn",
+                      "target": "Target",
+                      "actorIceSubHurtDelta": -1,
+                      "canBeHandledOnRecover": true
+                    }
+                  ],
+                  "isOnStageFalseSwitchValue": {
+                    "__unk_Q16140806": "SGV_NK_SingleMag_OccupyTarget_1"
+                  },
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "minus_one": -1
+        },
+        "MossBall_NotifyDisappear_Reborn": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "SetGlobalValueV2",
+              "doOffStage": false,
+              "value": 1,
+              "key": "_MixMagnetObject_TryDisappear",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "duration": 0.20000000298023224
+        },
+        "MossBall_State": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "AttachToGadgetStateMixin",
+              "modifierName": "MossBall_Magnet",
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "minus_one": -1
+        },
+        "MossBall_Trans_Eff": {
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "target": "Caster",
+              "scale": 1,
+              "predicates": [
+                {
+                  "$type": "ByHostOrGuest",
+                  "target": "Target",
+                  "isHost": true
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_SceneObj_Stages_MossBall_MovingShell_01",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true,
+              "PBHJPBFJGME": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "duration": 5.5
+        },
+        "Team_MossJump_TransportPrepare": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "Predicated",
+              "doOffStage": false,
+              "target": "Caster",
+              "targetPredicates": [
+                {
+                  "$type": "ByTargetPositionToSelfPosition",
+                  "value": 80,
+                  "target": "Target",
+                  "logic": "LesserOrEqual",
+                  "compareType": "XYZ"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "successActions": [
+                {
+                  "$type": "ServerLuaCall",
+                  "doOffStage": false,
+                  "luaCallType": "SpecificGroup",
+                  "actorIceSubHurtDelta": -1,
+                  "funcName": "SLC_BigMoss_Notify",
+                  "CallParamList": [
+                    133604029
+                  ],
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "duration": 4.5
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "SceneObj_Property_Ani_Prop_MossBall_01_SpeedUp",
+      "onAbilityStart": [
+        {
+          "$type": "Predicated",
+          "doOffStage": false,
+          "targetPredicates": [
+            {
+              "$type": "ByAny",
+              "target": "Target",
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "target": "Target",
+                  "key": "_Speed",
+                  "compareType": "NoneOrEqual"
+                },
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "value": 1,
+                  "target": "Target",
+                  "key": "_Speed",
+                  "compareType": "LessAndEqual"
+                }
+              ]
+            },
+            {
+              "$type": "ByTargetGlobalValue",
+              "target": "Target",
+              "key": "_MossBall_Actived",
+              "compareType": "NoneOrEqual"
+            }
+          ],
+          "actorIceSubHurtDelta": -1,
+          "successActions": [
+            {
+              "$type": "FireEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_SceneObj_Stages_MossBall_Speedup_01",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AddGlobalValueV2",
+              "doOffStage": false,
+              "value": 0.30000001192092896,
+              "key": "_Speed",
+              "maxValue": 1,
+              "actorIceSubHurtDelta": -1,
+              "useLimitRange": true,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "canBeHandledOnRecover": true
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "SceneObj_Property_Ani_Prop_MossBall_01_SpeedDown",
+      "onAbilityStart": [
+        {
+          "$type": "AddGlobalValueV2",
+          "doOffStage": false,
+          "value": -0.30000001192092896,
+          "key": "_Speed",
+          "maxValue": 3,
+          "actorIceSubHurtDelta": -1,
+          "useLimitRange": true,
+          "canBeHandledOnRecover": true
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "SceneObj_Property_Ani_Prop_MossBallsmall_01",
+      "abilityMixins": [
+        {
+          "$type": "AttachToGadgetStateMixin",
+          "modifierName": "MossBallsmall_On",
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToGadgetStateMixin",
+          "modifierName": "MossBallsmall_Off",
+          "actorIceSubHurtDelta": -1,
+          "gadgetState": 202
+        }
+      ],
+      "modifiers": {
+        "MossBallsmall_Off": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "ShaderStateMachineSwitchMixin",
+              "value": 1,
+              "actorIceSubHurtDelta": -1,
+              "MMJHBMEAJDN": -1
+            }
+          ],
+          "minus_one": -1
+        },
+        "MossBallsmall_On": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "ShaderStateMachineSwitchMixin",
+              "value": 1,
+              "actorIceSubHurtDelta": -1,
+              "MMJHBMEAJDN": -1
+            }
+          ],
+          "minus_one": -1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "SceneObj_Property_Ani_Prop_MossBallsmall_02",
+      "abilityMixins": [
+        {
+          "$type": "AttachToGadgetStateMixin",
+          "modifierName": "MossBallsmall_On",
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToGadgetStateMixin",
+          "modifierName": "MossBallsmall_Off",
+          "actorIceSubHurtDelta": -1,
+          "gadgetState": 202
+        }
+      ],
+      "modifiers": {
+        "MossBallsmall_Off": {
+          "onAdded": [
+            {
+              "$type": "SetEffectShaderStateMachineState",
+              "doOffStage": false,
+              "value": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_SceneObj_Stages_MossBall_RedLine_01",
+              "MMJHBMEAJDN": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "MossBallsmall_On": {
+          "onAdded": [
+            {
+              "$type": "SetEffectShaderStateMachineState",
+              "doOffStage": false,
+              "value": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_SceneObj_Stages_MossBall_RedLine_01",
+              "MMJHBMEAJDN": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        }
+      }
+    }
+  }
+]

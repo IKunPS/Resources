@@ -1,0 +1,2661 @@
+[
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Monster_Fatuimecha_Component",
+      "abilityMixins": [
+        {
+          "$type": "AttachModifierToSelfGlobalValueMixin",
+          "globalValueKey": "_MONSTER_Fatuimecha_Component_DamagedTag_",
+          "modifierNameSteps": [
+            "Fatuimecha_Component_Normal",
+            "Fatuimecha_Component_Damaged"
+          ],
+          "removeAppliedModifier": true,
+          "actorIceSubHurtDelta": -1,
+          "valueSteps": [
+            -0.5,
+            0.5,
+            1.5
+          ]
+        },
+        {
+          "$type": "AttachToAIAlertnessMixin",
+          "modifierName": "Fatuimecha_Component_Handler",
+          "alertness": [
+            1,
+            2
+          ],
+          "actorIceSubHurtDelta": -1
+        }
+      ],
+      "modifiers": {
+        "Fatuimecha_Component_Damaged": {
+          "onAdded": [
+            {
+              "$type": "SetPoseBool",
+              "doOffStage": false,
+              "value": true,
+              "boolID": "ComponentDamagedTag",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AttachModifier",
+              "doOffStage": false,
+              "modifierName": "UNIQUE_Fatuimecha_Component_Damaged_CountDown",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "Fatuimecha_Component_Handler": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "RemoveUniqueModifier",
+              "doOffStage": false,
+              "modifierName": "UNIQUE_Fatuimecha_Component_Damaged_CountDown",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1
+        },
+        "Fatuimecha_Component_Normal": {
+          "onAdded": [
+            {
+              "$type": "SetPoseBool",
+              "doOffStage": false,
+              "boolID": "ComponentDamagedTag",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "UNIQUE_Fatuimecha_Component_Damaged_CountDown": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_MONSTER_Fatuimecha_Component_DamagedTag_",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "isUnique": true,
+          "duration": 10
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Monster_Fatuimecha_PartControl_Common",
+      "abilityMixins": [
+        {
+          "$type": "AttachToAnimatorStateIDMixin",
+          "modifierName": "Fatuimecha_PartControl_HibernationHandler",
+          "stateIDs": [
+            "Hibernation",
+            "Hibernation_AS"
+          ],
+          "value": -1,
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToAIAlertnessMixin",
+          "modifierName": "Fatuimecha_PartControl_Common",
+          "alertness": [
+            1,
+            2
+          ],
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToAbilityStateMixin",
+          "modifierName": "Fatuimecha_PartControl_AbilityState",
+          "abilityStates": [
+            "ElementFrozen",
+            "ElementPetrifaction"
+          ],
+          "actorIceSubHurtDelta": -1
+        }
+      ],
+      "modifiers": {
+        "Fatuimecha_PartControl_AbilityState": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_MONSTER_Fatuimecha_PartControl_DisabledImmediately_",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_MONSTER_Fatuimecha_PartControl_Core_",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_MONSTER_Fatuimecha_PartControl_Core_Skill_",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_MONSTER_Fatuimecha_PartControl_Gatling_",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_MONSTER_Fatuimecha_PartControl_DisabledImmediately_",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "Predicated",
+              "doOffStage": false,
+              "failActions": [
+                {
+                  "$type": "SetGlobalValue",
+                  "doOffStage": false,
+                  "key": "_MONSTER_Fatuimecha_PartControl_Core_",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "SetGlobalValue",
+                  "doOffStage": false,
+                  "value": 1,
+                  "key": "_MONSTER_Fatuimecha_PartControl_Core_Skill_",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "targetPredicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "target": "Target",
+                  "key": "_MONSTER_Fatuimecha_PartControl_GatlingSkillTag_",
+                  "compareType": "NoneOrEqual"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "successActions": [
+                {
+                  "$type": "SetGlobalValue",
+                  "doOffStage": false,
+                  "value": 1,
+                  "key": "_MONSTER_Fatuimecha_PartControl_Core_",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "SetGlobalValue",
+                  "doOffStage": false,
+                  "key": "_MONSTER_Fatuimecha_PartControl_Core_Skill_",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "value": 1,
+              "key": "_MONSTER_Fatuimecha_PartControl_Gatling_",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1
+        },
+        "Fatuimecha_PartControl_Common": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_MONSTER_Fatuimecha_PartControl_DisabledImmediately_",
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "target": "Target",
+                  "key": "_MONSTER_Fatuimecha_PartControl_Hibernation_",
+                  "compareType": "NoneOrEqual"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "value": 1,
+              "key": "_MONSTER_Fatuimecha_PartControl_Core_",
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "target": "Target",
+                  "key": "_MONSTER_Fatuimecha_PartControl_Hibernation_",
+                  "compareType": "NoneOrEqual"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "value": 1,
+              "key": "_MONSTER_Fatuimecha_PartControl_Core_Skill_",
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "target": "Target",
+                  "key": "_MONSTER_Fatuimecha_PartControl_Hibernation_",
+                  "compareType": "NoneOrEqual"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "value": 1,
+              "key": "_MONSTER_Fatuimecha_PartControl_Gatling_",
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "target": "Target",
+                  "key": "_MONSTER_Fatuimecha_PartControl_Hibernation_",
+                  "compareType": "NoneOrEqual"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "value": 1,
+              "key": "_MONSTER_Fatuimecha_PartControl_DisabledImmediately_",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_MONSTER_Fatuimecha_PartControl_Core_",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_MONSTER_Fatuimecha_PartControl_Core_Skill_",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_MONSTER_Fatuimecha_PartControl_Gatling_",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1
+        },
+        "Fatuimecha_PartControl_HibernationHandler": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "value": 1,
+              "key": "_MONSTER_Fatuimecha_PartControl_Hibernation_",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_MONSTER_Fatuimecha_PartControl_Hibernation_",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_MONSTER_Fatuimecha_PartControl_DisabledImmediately_",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "value": 1,
+              "key": "_MONSTER_Fatuimecha_PartControl_Core_",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "value": 1,
+              "key": "_MONSTER_Fatuimecha_PartControl_Core_Skill_",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "value": 1,
+              "key": "_MONSTER_Fatuimecha_PartControl_Gatling_",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Monster_Fatuimecha_PartControl_Core",
+      "abilityMixins": [
+        {
+          "$type": "AttachModifierToSelfGlobalValueMixin",
+          "globalValueKey": "_MONSTER_Fatuimecha_PartControl_Core_",
+          "modifierNameSteps": [
+            "Fatuimecha_PartControl_Core_Off",
+            "Fatuimecha_PartControl_Core_On"
+          ],
+          "removeAppliedModifier": true,
+          "actorIceSubHurtDelta": -1,
+          "valueSteps": [
+            -0.5,
+            0.5,
+            1.5
+          ]
+        }
+      ],
+      "modifiers": {
+        "Fatuimecha_PartControl_Core_Off": {
+          "onAdded": [
+            {
+              "$type": "EnablePartControl",
+              "doOffStage": false,
+              "CFKEDHBKEMA": "Stay",
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "target": "Target",
+                  "key": "_MONSTER_Fatuimecha_PartControl_DisabledImmediately_",
+                  "compareType": "NoneOrEqual"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "partRootNames": [
+                "CoreControl"
+              ],
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "EnablePartControl",
+              "doOffStage": false,
+              "CFKEDHBKEMA": "ToForwardImmediately",
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "value": 1,
+                  "target": "Target",
+                  "key": "_MONSTER_Fatuimecha_PartControl_DisabledImmediately_"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "partRootNames": [
+                "CoreControl"
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "Fatuimecha_PartControl_Core_On": {
+          "onAdded": [
+            {
+              "$type": "EnablePartControl",
+              "doOffStage": false,
+              "enable": true,
+              "actorIceSubHurtDelta": -1,
+              "partRootNames": [
+                "CoreControl"
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Monster_Fatuimecha_PartControl_Core_Skill",
+      "abilityMixins": [
+        {
+          "$type": "AttachModifierToSelfGlobalValueMixin",
+          "globalValueKey": "_MONSTER_Fatuimecha_PartControl_Core_Skill_",
+          "modifierNameSteps": [
+            "Fatuimecha_PartControl_Core_Skill_Off",
+            "Fatuimecha_PartControl_Core_Skill_On"
+          ],
+          "removeAppliedModifier": true,
+          "actorIceSubHurtDelta": -1,
+          "valueSteps": [
+            -0.5,
+            0.5,
+            1.5
+          ]
+        }
+      ],
+      "modifiers": {
+        "Fatuimecha_PartControl_Core_Skill_Off": {
+          "onAdded": [
+            {
+              "$type": "EnablePartControl",
+              "doOffStage": false,
+              "CFKEDHBKEMA": "Stay",
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "target": "Target",
+                  "key": "_MONSTER_Fatuimecha_PartControl_DisabledImmediately_",
+                  "compareType": "NoneOrEqual"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "partRootNames": [
+                "CoreControl_Skill"
+              ],
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "EnablePartControl",
+              "doOffStage": false,
+              "CFKEDHBKEMA": "ToForwardImmediately",
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "value": 1,
+                  "target": "Target",
+                  "key": "_MONSTER_Fatuimecha_PartControl_DisabledImmediately_"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "partRootNames": [
+                "CoreControl_Skill"
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "Fatuimecha_PartControl_Core_Skill_On": {
+          "onAdded": [
+            {
+              "$type": "EnablePartControl",
+              "doOffStage": false,
+              "enable": true,
+              "actorIceSubHurtDelta": -1,
+              "partRootNames": [
+                "CoreControl_Skill"
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Monster_Fatuimecha_PartControl_Gatling",
+      "abilityMixins": [
+        {
+          "$type": "AttachModifierToSelfGlobalValueMixin",
+          "globalValueKey": "_MONSTER_Fatuimecha_PartControl_Gatling_",
+          "modifierNameSteps": [
+            "Fatuimecha_PartControl_Gatling_Off",
+            "Fatuimecha_PartControl_Gatling_On"
+          ],
+          "removeAppliedModifier": true,
+          "actorIceSubHurtDelta": -1,
+          "valueSteps": [
+            -0.5,
+            0.5,
+            1.5
+          ]
+        }
+      ],
+      "modifiers": {
+        "Fatuimecha_PartControl_Gatling_Off": {
+          "onAdded": [
+            {
+              "$type": "EnablePartControl",
+              "doOffStage": false,
+              "CFKEDHBKEMA": "Stay",
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "target": "Target",
+                  "key": "_MONSTER_Fatuimecha_PartControl_DisabledImmediately_",
+                  "compareType": "NoneOrEqual"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "partRootNames": [
+                "GatlingControl"
+              ],
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "EnablePartControl",
+              "doOffStage": false,
+              "CFKEDHBKEMA": "ToForwardImmediately",
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "value": 1,
+                  "target": "Target",
+                  "key": "_MONSTER_Fatuimecha_PartControl_DisabledImmediately_"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "partRootNames": [
+                "GatlingControl"
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "Fatuimecha_PartControl_Gatling_On": {
+          "onAdded": [
+            {
+              "$type": "EnablePartControl",
+              "doOffStage": false,
+              "enable": true,
+              "actorIceSubHurtDelta": -1,
+              "partRootNames": [
+                "GatlingControl"
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Monster_Fatuimecha_CoreB_MoveB_AttackB_PartControl",
+      "abilityMixins": [
+        {
+          "$type": "AttachToAnimatorStateIDMixin",
+          "modifierName": "Fatuimecha_CoreB_MoveB_AttackB_PartControl",
+          "stateIDs": [
+            "AttackB_GatlingNormalAtk",
+            "AttackB_GatlingSpecialAtk_BS",
+            "AttackB_GatlingSpecialAtk_Loop",
+            "AttackB_GatlingSpecialAtk_AS"
+          ],
+          "value": 4,
+          "actorIceSubHurtDelta": -1
+        }
+      ],
+      "modifiers": {
+        "Fatuimecha_CoreB_MoveB_AttackB_PartControl": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "value": 1,
+              "key": "_MONSTER_Fatuimecha_PartControl_GatlingSkillTag_",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_MONSTER_Fatuimecha_PartControl_Core_",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "value": 1,
+              "key": "_MONSTER_Fatuimecha_PartControl_Core_Skill_",
+              "predicates": [
+                {
+                  "$type": "ByNot",
+                  "target": "Target",
+                  "predicates": [
+                    {
+                      "$type": "ByHasModifier",
+                      "modifierName": "Fatuimecha_PartControl_AbilityState",
+                      "target": "Target"
+                    }
+                  ]
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_MONSTER_Fatuimecha_PartControl_GatlingSkillTag_",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_MONSTER_Fatuimecha_PartControl_Core_Skill_",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "value": 1,
+              "key": "_MONSTER_Fatuimecha_PartControl_Core_",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Monster_Fatuimecha_CoreB_MoveA_AttackB_PartControl",
+      "abilityMixins": [
+        {
+          "$type": "AttachToAnimatorStateIDMixin",
+          "modifierName": "Fatuimecha_CoreB_MoveA_AttackB_PartControl",
+          "stateIDs": [
+            "AttackB_GatlingNormalAtk",
+            "AttackB_GatlingSpecialAtk_BS",
+            "AttackB_GatlingSpecialAtk_Loop",
+            "AttackB_GatlingSpecialAtk_AS"
+          ],
+          "value": 4,
+          "actorIceSubHurtDelta": -1
+        }
+      ],
+      "modifiers": {
+        "Fatuimecha_CoreB_MoveA_AttackB_PartControl": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "value": 1,
+              "key": "_MONSTER_Fatuimecha_PartControl_GatlingSkillTag_",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_MONSTER_Fatuimecha_PartControl_Core_",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "value": 1,
+              "key": "_MONSTER_Fatuimecha_PartControl_Core_Skill_",
+              "predicates": [
+                {
+                  "$type": "ByNot",
+                  "target": "Target",
+                  "predicates": [
+                    {
+                      "$type": "ByHasModifier",
+                      "modifierName": "Fatuimecha_PartControl_AbilityState",
+                      "target": "Target"
+                    }
+                  ]
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_MONSTER_Fatuimecha_PartControl_GatlingSkillTag_",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_MONSTER_Fatuimecha_PartControl_Core_Skill_",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "value": 1,
+              "key": "_MONSTER_Fatuimecha_PartControl_Core_",
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "target": "Target",
+                  "key": "_MONSTER_Fatuimecha_PartControl_DisabledImmediately_",
+                  "compareType": "NoneOrEqual"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Monster_Fatuimecha_CoreA_MoveB_AttackA_Steer",
+      "abilityMixins": [
+        {
+          "$type": "SteerAttackMixin",
+          "angularSpeed": 90,
+          "CCFNFIKKIDJ": true,
+          "GMEPMDNDBOP": 180,
+          "actorIceSubHurtDelta": -1,
+          "value": true,
+          "steerStateIDs": [
+            "Turn"
+          ],
+          "endNormalizedTime": 1,
+          "PMKCEJILFAF": true
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Monster_Fatuimecha__CoreA_MoveA_AttackC_Steer",
+      "abilityMixins": [
+        {
+          "$type": "SteerAttackMixin",
+          "angularSpeed": 90,
+          "CCFNFIKKIDJ": true,
+          "GMEPMDNDBOP": 180,
+          "actorIceSubHurtDelta": -1,
+          "value": true,
+          "steerStateIDs": [
+            "Turn"
+          ],
+          "endNormalizedTime": 0.1550000011920929,
+          "PMKCEJILFAF": true
+        },
+        {
+          "$type": "SteerAttackMixin",
+          "startNormalizedTime": 0.4519999921321869,
+          "angularSpeed": 90,
+          "CCFNFIKKIDJ": true,
+          "GMEPMDNDBOP": 180,
+          "actorIceSubHurtDelta": -1,
+          "value": true,
+          "steerStateIDs": [
+            "Turn"
+          ],
+          "endNormalizedTime": 0.7080000042915344,
+          "PMKCEJILFAF": true
+        },
+        {
+          "$type": "SteerAttackMixin",
+          "startNormalizedTime": 1,
+          "angularSpeed": 90,
+          "CCFNFIKKIDJ": true,
+          "GMEPMDNDBOP": 180,
+          "actorIceSubHurtDelta": -1,
+          "value": true,
+          "steerStateIDs": [
+            "Turn"
+          ],
+          "endNormalizedTime": 1.1549999713897705,
+          "PMKCEJILFAF": true
+        },
+        {
+          "$type": "SteerAttackMixin",
+          "startNormalizedTime": 1.4520000219345093,
+          "angularSpeed": 90,
+          "CCFNFIKKIDJ": true,
+          "GMEPMDNDBOP": 180,
+          "actorIceSubHurtDelta": -1,
+          "value": true,
+          "steerStateIDs": [
+            "Turn"
+          ],
+          "endNormalizedTime": 1.7079999446868896,
+          "PMKCEJILFAF": true
+        },
+        {
+          "$type": "SteerAttackMixin",
+          "startNormalizedTime": 2,
+          "angularSpeed": 90,
+          "CCFNFIKKIDJ": true,
+          "GMEPMDNDBOP": 180,
+          "actorIceSubHurtDelta": -1,
+          "value": true,
+          "steerStateIDs": [
+            "Turn"
+          ],
+          "endNormalizedTime": 2.1549999713897705,
+          "PMKCEJILFAF": true
+        },
+        {
+          "$type": "SteerAttackMixin",
+          "startNormalizedTime": 2.4519999027252197,
+          "angularSpeed": 90,
+          "CCFNFIKKIDJ": true,
+          "GMEPMDNDBOP": 180,
+          "actorIceSubHurtDelta": -1,
+          "value": true,
+          "steerStateIDs": [
+            "Turn"
+          ],
+          "endNormalizedTime": 2.7079999446868896,
+          "PMKCEJILFAF": true
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Monster_Fatuimecha_CoreB_MoveB_AttackB_Steer",
+      "abilityMixins": [
+        {
+          "$type": "SteerAttackMixin",
+          "angularSpeed": 90,
+          "CCFNFIKKIDJ": true,
+          "GMEPMDNDBOP": 180,
+          "actorIceSubHurtDelta": -1,
+          "value": true,
+          "steerStateIDs": [
+            "Turn"
+          ],
+          "endNormalizedTime": 1,
+          "PMKCEJILFAF": true
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Monster_Fatuimecha_CoreB_MoveA_AttackB_Steer",
+      "abilityMixins": [
+        {
+          "$type": "SteerAttackMixin",
+          "angularSpeed": 90,
+          "CCFNFIKKIDJ": true,
+          "GMEPMDNDBOP": 180,
+          "actorIceSubHurtDelta": -1,
+          "value": true,
+          "steerStateIDs": [
+            "Turn"
+          ],
+          "endNormalizedTime": 1,
+          "PMKCEJILFAF": true
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Monster_Fatuimecha_CoreB_MoveE_AttackB_Wind_Steer",
+      "abilityMixins": [
+        {
+          "$type": "SteerAttackMixin",
+          "angularSpeed": 5,
+          "CCFNFIKKIDJ": true,
+          "value": true,
+          "GMEPMDNDBOP": 180,
+          "IAPDKAEPIOJ": true,
+          "actorIceSubHurtDelta": -1,
+          "steerStateIDs": [
+            "NormalIdle"
+          ],
+          "endNormalizedTime": 1,
+          "PMKCEJILFAF": true
+        },
+        {
+          "$type": "SteerAttackMixin",
+          "angularSpeed": 120,
+          "CCFNFIKKIDJ": true,
+          "value": true,
+          "GMEPMDNDBOP": 180,
+          "IAPDKAEPIOJ": true,
+          "actorIceSubHurtDelta": -1,
+          "steerStateIDs": [
+            "Turn"
+          ],
+          "endNormalizedTime": 1,
+          "PMKCEJILFAF": true
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Monster_Fatuimecha_CoreC_MoveD_AttackA_AttackC_AttackB_Steer",
+      "abilityMixins": [
+        {
+          "$type": "SteerAttackMixin",
+          "angularSpeed": 90,
+          "CCFNFIKKIDJ": true,
+          "GMEPMDNDBOP": 180,
+          "actorIceSubHurtDelta": -1,
+          "value": true,
+          "steerStateIDs": [
+            "Turn"
+          ],
+          "endNormalizedTime": 1,
+          "PMKCEJILFAF": true
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Monster_Fatuimecha_CoreC_MoveC_AttackD_AttackC_AttackB_Steer",
+      "abilityMixins": [
+        {
+          "$type": "SteerAttackMixin",
+          "angularSpeed": 60,
+          "CCFNFIKKIDJ": true,
+          "GMEPMDNDBOP": 180,
+          "actorIceSubHurtDelta": -1,
+          "value": true,
+          "steerStateIDs": [
+            "Turn",
+            "TurnShield"
+          ],
+          "endNormalizedTime": 1,
+          "PMKCEJILFAF": true
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Monster_Fatuimecha_CoreC_MoveF_AttackB_Fire_Steer",
+      "abilityMixins": [
+        {
+          "$type": "SteerAttackMixin",
+          "angularSpeed": 120,
+          "CCFNFIKKIDJ": true,
+          "value": true,
+          "GMEPMDNDBOP": 180,
+          "IAPDKAEPIOJ": true,
+          "actorIceSubHurtDelta": -1,
+          "steerStateIDs": [
+            "Turn"
+          ],
+          "endNormalizedTime": 1,
+          "PMKCEJILFAF": true
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Monster_Fatuimecha_Hit",
+      "abilityMixins": [
+        {
+          "$type": "AttachToStateIDMixin",
+          "modifierName": "Fatuimecha_PartControl_Hit",
+          "stateIDs": [
+            "BeHit",
+            "HitPull",
+            "HitPush",
+            "HitAbsorb",
+            "HitThrow",
+            "HitShock"
+          ],
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "ShaderLerpOverrideDurationMixin",
+          "DIDPBAPMDBN": [
+            "CharacterFrozen",
+            "CharacterPetrifaction"
+          ],
+          "actorIceSubHurtDelta": -1
+        }
+      ],
+      "modifiers": {
+        "Fatuimecha_PartControl_Hit": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "value": 1,
+              "key": "_MONSTER_Fatuimecha_PartControl_DisabledImmediately_",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_MONSTER_Fatuimecha_PartControl_Core_",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_MONSTER_Fatuimecha_PartControl_Core_Skill_",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_MONSTER_Fatuimecha_PartControl_Gatling_",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_MONSTER_Fatuimecha_PartControl_DisabledImmediately_",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "value": 1,
+              "key": "_MONSTER_Fatuimecha_PartControl_Core_",
+              "predicates": [
+                {
+                  "$type": "ByNot",
+                  "target": "Target",
+                  "predicates": [
+                    {
+                      "$type": "ByHasModifier",
+                      "modifierName": "Fatuimecha_PartControl_AbilityState",
+                      "target": "Target"
+                    }
+                  ]
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "value": 1,
+              "key": "_MONSTER_Fatuimecha_PartControl_Gatling_",
+              "predicates": [
+                {
+                  "$type": "ByNot",
+                  "target": "Target",
+                  "predicates": [
+                    {
+                      "$type": "ByHasModifier",
+                      "modifierName": "Fatuimecha_PartControl_AbilityState",
+                      "target": "Target"
+                    }
+                  ]
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "modifierMixins": [
+            {
+              "$type": "AttachActionToModifierMixin",
+              "onAdded": [
+                {
+                  "$type": "SetAnimatorBool",
+                  "doOffStage": false,
+                  "value": true,
+                  "boolID": "HitTag",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "onRemoved": [
+                {
+                  "$type": "SetAnimatorBool",
+                  "doOffStage": false,
+                  "boolID": "HitTag",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "minus_one": -1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "onKill": [
+        {
+          "$type": "ApplyModifier",
+          "doOffStage": false,
+          "modifierName": "Fatuimecha_PartControl_Die",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Monster_Fatuimecha_Die",
+      "modifiers": {
+        "Fatuimecha_PartControl_Die": {
+          "onAdded": [
+            {
+              "$type": "SetAnimatorBool",
+              "doOffStage": false,
+              "value": true,
+              "boolID": "DieTag",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "EnablePartControl",
+              "doOffStage": false,
+              "CFKEDHBKEMA": "ToForwardImmediately",
+              "actorIceSubHurtDelta": -1,
+              "partRootNames": [
+                "CoreControl"
+              ],
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "EnablePartControl",
+              "doOffStage": false,
+              "CFKEDHBKEMA": "ToForwardImmediately",
+              "actorIceSubHurtDelta": -1,
+              "partRootNames": [
+                "CoreControl_Skill"
+              ],
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "EnablePartControl",
+              "doOffStage": false,
+              "CFKEDHBKEMA": "ToForwardImmediately",
+              "actorIceSubHurtDelta": -1,
+              "partRootNames": [
+                "GatlingControl"
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Monster_Fatuimecha_Track",
+      "abilityMixins": [
+        {
+          "$type": "AttachModifierToSelfGlobalValueMixin",
+          "globalValueKey": "_MONSTER_Fatuimecha_TrackL_",
+          "modifierNameSteps": [
+            "Fatuimecha_TrackL_Speed_B2",
+            "Fatuimecha_TrackL_Speed_B1",
+            "Fatuimecha_TrackL_Speed_Stop",
+            "Fatuimecha_TrackL_Speed_F1",
+            "Fatuimecha_TrackL_Speed_F2"
+          ],
+          "removeAppliedModifier": true,
+          "actorIceSubHurtDelta": -1,
+          "valueSteps": [
+            -2.5,
+            -1.5,
+            -0.5,
+            0.5,
+            1.5,
+            2.5
+          ]
+        },
+        {
+          "$type": "AttachModifierToSelfGlobalValueMixin",
+          "globalValueKey": "_MONSTER_Fatuimecha_TrackR_",
+          "modifierNameSteps": [
+            "Fatuimecha_TrackR_Speed_B2",
+            "Fatuimecha_TrackR_Speed_B1",
+            "Fatuimecha_TrackR_Speed_Stop",
+            "Fatuimecha_TrackR_Speed_F1",
+            "Fatuimecha_TrackR_Speed_F2"
+          ],
+          "removeAppliedModifier": true,
+          "actorIceSubHurtDelta": -1,
+          "valueSteps": [
+            -2.5,
+            -1.5,
+            -0.5,
+            0.5,
+            1.5,
+            2.5
+          ]
+        },
+        {
+          "$type": "AttachToAnimatorStateIDMixin",
+          "modifierName": "Fatuimecha_Track_WalkForward",
+          "stateIDs": [
+            "WalkForward",
+            "WalkForwardFree"
+          ],
+          "value": -1,
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToAnimatorStateIDMixin",
+          "modifierName": "Fatuimecha_Track_WalkBack",
+          "stateIDs": [
+            "WalkBack"
+          ],
+          "value": -1,
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToAnimatorStateIDMixin",
+          "modifierName": "Fatuimecha_Track_Run",
+          "stateIDs": [
+            "Run"
+          ],
+          "value": -1,
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToAnimatorStateIDMixin",
+          "modifierName": "Fatuimecha_Track_TurnLeft",
+          "stateIDs": [
+            "TurnLeft"
+          ],
+          "value": -1,
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToAnimatorStateIDMixin",
+          "modifierName": "Fatuimecha_Track_TurnRight",
+          "stateIDs": [
+            "TurnRight"
+          ],
+          "value": -1,
+          "actorIceSubHurtDelta": -1
+        }
+      ],
+      "modifiers": {
+        "Fatuimecha_TrackL_Speed_B1": {
+          "onAdded": [
+            {
+              "$type": "SetAnimatorFloat",
+              "doOffStage": false,
+              "value": -2,
+              "enable": true,
+              "floatID": "TrackL",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "Fatuimecha_TrackL_Speed_B2": {
+          "onAdded": [
+            {
+              "$type": "SetAnimatorFloat",
+              "doOffStage": false,
+              "value": -5,
+              "enable": true,
+              "floatID": "TrackL",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "Fatuimecha_TrackL_Speed_F1": {
+          "onAdded": [
+            {
+              "$type": "SetAnimatorFloat",
+              "doOffStage": false,
+              "value": 2,
+              "enable": true,
+              "floatID": "TrackL",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "Fatuimecha_TrackL_Speed_F2": {
+          "onAdded": [
+            {
+              "$type": "SetAnimatorFloat",
+              "doOffStage": false,
+              "value": 5,
+              "enable": true,
+              "floatID": "TrackL",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "Fatuimecha_TrackL_Speed_Stop": {
+          "onAdded": [
+            {
+              "$type": "SetAnimatorFloat",
+              "doOffStage": false,
+              "enable": true,
+              "floatID": "TrackL",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "Fatuimecha_TrackR_Speed_B1": {
+          "onAdded": [
+            {
+              "$type": "SetAnimatorFloat",
+              "doOffStage": false,
+              "value": -2,
+              "enable": true,
+              "floatID": "TrackR",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "Fatuimecha_TrackR_Speed_B2": {
+          "onAdded": [
+            {
+              "$type": "SetAnimatorFloat",
+              "doOffStage": false,
+              "value": -5,
+              "enable": true,
+              "floatID": "TrackR",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "Fatuimecha_TrackR_Speed_F1": {
+          "onAdded": [
+            {
+              "$type": "SetAnimatorFloat",
+              "doOffStage": false,
+              "value": 2,
+              "enable": true,
+              "floatID": "TrackR",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "Fatuimecha_TrackR_Speed_F2": {
+          "onAdded": [
+            {
+              "$type": "SetAnimatorFloat",
+              "doOffStage": false,
+              "value": 5,
+              "enable": true,
+              "floatID": "TrackR",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "Fatuimecha_TrackR_Speed_Stop": {
+          "onAdded": [
+            {
+              "$type": "SetAnimatorFloat",
+              "doOffStage": false,
+              "enable": true,
+              "floatID": "TrackR",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "Fatuimecha_Track_Run": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "value": 2,
+              "key": "_MONSTER_Fatuimecha_TrackL_",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "value": 2,
+              "key": "_MONSTER_Fatuimecha_TrackR_",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_MONSTER_Fatuimecha_TrackL_",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_MONSTER_Fatuimecha_TrackR_",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1
+        },
+        "Fatuimecha_Track_TurnLeft": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "value": -1,
+              "key": "_MONSTER_Fatuimecha_TrackL_",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "value": 2,
+              "key": "_MONSTER_Fatuimecha_TrackR_",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_MONSTER_Fatuimecha_TrackL_",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_MONSTER_Fatuimecha_TrackR_",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1
+        },
+        "Fatuimecha_Track_TurnRight": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "value": 2,
+              "key": "_MONSTER_Fatuimecha_TrackL_",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "value": -1,
+              "key": "_MONSTER_Fatuimecha_TrackR_",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_MONSTER_Fatuimecha_TrackL_",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_MONSTER_Fatuimecha_TrackR_",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1
+        },
+        "Fatuimecha_Track_WalkBack": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "value": -1,
+              "key": "_MONSTER_Fatuimecha_TrackL_",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "value": -1,
+              "key": "_MONSTER_Fatuimecha_TrackR_",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_MONSTER_Fatuimecha_TrackL_",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_MONSTER_Fatuimecha_TrackR_",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1
+        },
+        "Fatuimecha_Track_WalkForward": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "value": 1,
+              "key": "_MONSTER_Fatuimecha_TrackL_",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "value": 1,
+              "key": "_MONSTER_Fatuimecha_TrackR_",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_MONSTER_Fatuimecha_TrackL_",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_MONSTER_Fatuimecha_TrackR_",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Monster_Fatuimecha_Hibernation",
+      "abilityMixins": [
+        {
+          "$type": "AttachToPoseIDMixin",
+          "modifierName": "Fatuimecha_HibernationHandler",
+          "poseIDs": [
+            9001
+          ],
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToAnimatorStateIDMixin",
+          "modifierName": "UNIQUE_Fatuimecha_Hibernation",
+          "stateIDs": [
+            "Hibernation"
+          ],
+          "value": -1,
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToAIAlertnessMixin",
+          "modifierName": "Fatuimecha_PatrolHandler",
+          "alertness": [
+            1,
+            2
+          ],
+          "actorIceSubHurtDelta": -1
+        }
+      ],
+      "modifiers": {
+        "Fatuimecha_HibernationHandler": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "SetPoseBool",
+              "doOffStage": false,
+              "enable": true,
+              "boolID": "Hibernation",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "modifierMixins": [
+            {
+              "$type": "OverrideMassCapMixin",
+              "actorIceSubHurtDelta": -1,
+              "mass": 100000000
+            },
+            {
+              "$type": "AttachActionToModifierMixin",
+              "onAdded": [
+                {
+                  "$type": "SetAnimatorBool",
+                  "doOffStage": false,
+                  "enable": true,
+                  "boolID": "LightOn",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "onRemoved": [
+                {
+                  "$type": "SetAnimatorBool",
+                  "doOffStage": false,
+                  "value": true,
+                  "enable": true,
+                  "boolID": "LightOn",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "minus_one": -1
+        },
+        "Fatuimecha_PatrolHandler": {
+          "onAdded": [
+            {
+              "$type": "SetAnimatorBool",
+              "doOffStage": false,
+              "value": true,
+              "enable": true,
+              "boolID": "PatrolEnd",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "SetAnimatorBool",
+              "doOffStage": false,
+              "enable": true,
+              "boolID": "PatrolEnd",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1
+        },
+        "Hibernation_Invincible": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "state": "Invincible"
+        },
+        "Hibernation_IsGhostToAllied": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "state": "IsGhostToAllied"
+        },
+        "Hibernation_IsGhostToEnemy": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "state": "IsGhostToEnemy"
+        },
+        "Hibernation_MuteTaunt": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "state": "MuteTaunt"
+        },
+        "UNIQUE_Fatuimecha_Hibernation": {
+          "onAdded": [
+            {
+              "$type": "AttachModifier",
+              "doOffStage": false,
+              "modifierName": "Hibernation_Invincible",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AttachModifier",
+              "doOffStage": false,
+              "modifierName": "Hibernation_IsGhostToAllied",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AttachModifier",
+              "doOffStage": false,
+              "modifierName": "Hibernation_IsGhostToEnemy",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AttachModifier",
+              "doOffStage": false,
+              "modifierName": "Hibernation_MuteTaunt",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "HideUIBillBoard",
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1,
+              "hide": true,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "HideUIBillBoard",
+              "doOffStage": false,
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "target": "Target",
+                  "key": "_Ability_MagnetCanyon_MonsterTag",
+                  "compareType": "NoneOrEqual"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "properties": {
+            "Actor_EndureDelta": 0,
+            "Entity_MassRatio": 1000,
+            "Entity_WeightRatio": 5
+          },
+          "isUnique": true
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "ApplyModifier",
+          "doOffStage": false,
+          "modifierName": "Fatuimecha_FlyType",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "Monster_Fatuimecha_FlyType",
+      "modifiers": {
+        "Fatuimecha_FlyType": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "AttachModifierToSelfGlobalValueMixin",
+              "globalValueKey": "_MONSTER_Fatuimecha_FlyType_",
+              "modifierNameSteps": [
+                "Fatuimecha_FlyType_Low",
+                "Fatuimecha_FlyType_High"
+              ],
+              "removeAppliedModifier": true,
+              "actorIceSubHurtDelta": -1,
+              "valueSteps": [
+                -0.5,
+                0.5,
+                1.5
+              ]
+            }
+          ],
+          "minus_one": -1
+        },
+        "Fatuimecha_FlyType_High": {
+          "onAdded": [
+            {
+              "$type": "SetPoseInt",
+              "doOffStage": false,
+              "intID": "Flytype",
+              "enable": true,
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "Fatuimecha_FlyType_Low": {
+          "onAdded": [
+            {
+              "$type": "SetPoseInt",
+              "doOffStage": false,
+              "value": 1,
+              "intID": "Flytype",
+              "enable": true,
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "SetGlobalValue",
+          "doOffStage": false,
+          "value": 1,
+          "key": "_MONSTER_Fatuimecha_Energy_Type_",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "TriggerSetRenderersEnableV2",
+          "doOffStage": false,
+          "renderNames": [
+            "KuuvahkiCoil"
+          ],
+          "enable": true,
+          "actorIceSubHurtDelta": -1,
+          "setEnable": true,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "Monster_Fatuimecha_EnergyType_Kuuvahki",
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "SetGlobalValue",
+          "doOffStage": false,
+          "value": 2,
+          "key": "_MONSTER_Fatuimecha_Energy_Type_",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "TriggerSetRenderersEnableV2",
+          "doOffStage": false,
+          "renderNames": [
+            "SteamCoil"
+          ],
+          "enable": true,
+          "actorIceSubHurtDelta": -1,
+          "setEnable": true,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "Monster_Fatuimecha_EnergyType_Steam",
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "ApplyModifier",
+          "doOffStage": false,
+          "modifierName": "Fatuimecha_SquadAI_Manager_Handler",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "Fatuimecha_SquadAI_Manager",
+      "isDynamicAbility": true,
+      "modifiers": {
+        "Fatuimecha_SquadAI_Manager_Handler": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "KOAPNPDIBFJ",
+              "BGCHEFNNFEM": 5,
+              "actorIceSubHurtDelta": -1,
+              "checkInterval": 2
+            }
+          ],
+          "minus_one": -1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "ApplyModifier",
+          "doOffStage": false,
+          "modifierName": "Fatuimecha_SquadAI_Tank1_Handler",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "Monster_Fatuimecha_SquadAI_Tank1",
+      "isDynamicAbility": true,
+      "modifiers": {
+        "Fatuimecha_SquadAI_Tank1_Handler": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "value": 1,
+              "key": "_SQUAD_Fatuimecha_SquadAI_Tank1_",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "FGGHMECFCHB",
+              "doOffStage": false,
+              "value": 1,
+              "DNPDFDLKNCK": "_SQUAD_Fatuimecha_SquadAI_Tank1_",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "AttachToAIAlertnessMixin",
+              "modifierName": "Fatuimecha_SquadAI_Tank1_ShieldOnInitial",
+              "alertness": [
+                2
+              ],
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "SetAISkillCDAvailableNow",
+              "doOffStage": false,
+              "predicates": [
+                {
+                  "$type": "MENFDICIAHE",
+                  "DIOCNLGEHIP": [
+                    "_SQUAD_Fatuimecha_SquadAI_Tank2_",
+                    "_SQUAD_Fatuimecha_SquadAI_Tank3_",
+                    "_SQUAD_Fatuimecha_SquadAI_Tank4_",
+                    "_SQUAD_Fatuimecha_SquadAI_Range_",
+                    "_SQUAD_Fatuimecha_SquadAI_Support_"
+                  ],
+                  "target": "Target",
+                  "logic": "Equal"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "skillIDs": [
+                501
+              ],
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "UseSkillEliteSet",
+              "doOffStage": false,
+              "predicates": [
+                {
+                  "$type": "MENFDICIAHE",
+                  "DIOCNLGEHIP": [
+                    "_SQUAD_Fatuimecha_SquadAI_Tank2_",
+                    "_SQUAD_Fatuimecha_SquadAI_Tank3_",
+                    "_SQUAD_Fatuimecha_SquadAI_Tank4_",
+                    "_SQUAD_Fatuimecha_SquadAI_Range_",
+                    "_SQUAD_Fatuimecha_SquadAI_Support_"
+                  ],
+                  "target": "Target",
+                  "logic": "Equal"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true,
+              "skillEliteSetID": 1
+            }
+          ],
+          "thinkInterval": 2
+        },
+        "Fatuimecha_SquadAI_Tank1_ShieldOnInitial": {
+          "onAdded": [
+            {
+              "$type": "UseSkillEliteSet",
+              "doOffStage": false,
+              "predicates": [
+                {
+                  "$type": "MENFDICIAHE",
+                  "DIOCNLGEHIP": [
+                    "_SQUAD_Fatuimecha_SquadAI_Tank2_",
+                    "_SQUAD_Fatuimecha_SquadAI_Tank3_",
+                    "_SQUAD_Fatuimecha_SquadAI_Tank4_",
+                    "_SQUAD_Fatuimecha_SquadAI_Range_",
+                    "_SQUAD_Fatuimecha_SquadAI_Support_"
+                  ],
+                  "target": "Target"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetAISkillCDAvailableNow",
+              "doOffStage": false,
+              "predicates": [
+                {
+                  "$type": "MENFDICIAHE",
+                  "DIOCNLGEHIP": [
+                    "_SQUAD_Fatuimecha_SquadAI_Tank2_",
+                    "_SQUAD_Fatuimecha_SquadAI_Tank3_",
+                    "_SQUAD_Fatuimecha_SquadAI_Tank4_",
+                    "_SQUAD_Fatuimecha_SquadAI_Range_",
+                    "_SQUAD_Fatuimecha_SquadAI_Support_"
+                  ],
+                  "target": "Target"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "skillIDs": [
+                403
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "ApplyModifier",
+          "doOffStage": false,
+          "modifierName": "Fatuimecha_SquadAI_Tank2_Handler",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "Monster_Fatuimecha_SquadAI_Tank2",
+      "isDynamicAbility": true,
+      "modifiers": {
+        "Fatuimecha_SquadAI_Tank2_Handler": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "value": 1,
+              "key": "_SQUAD_Fatuimecha_SquadAI_Tank2_",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "FGGHMECFCHB",
+              "doOffStage": false,
+              "value": 1,
+              "DNPDFDLKNCK": "_SQUAD_Fatuimecha_SquadAI_Tank2_",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "ApplyModifier",
+          "doOffStage": false,
+          "modifierName": "Fatuimecha_SquadAI_Tank3_Handler",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "Monster_Fatuimecha_SquadAI_Tank3",
+      "isDynamicAbility": true,
+      "modifiers": {
+        "Fatuimecha_SquadAI_Tank3_Handler": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "value": 1,
+              "key": "_SQUAD_Fatuimecha_SquadAI_Tank3_",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "FGGHMECFCHB",
+              "doOffStage": false,
+              "value": 1,
+              "DNPDFDLKNCK": "_SQUAD_Fatuimecha_SquadAI_Tank3_",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "ApplyModifier",
+          "doOffStage": false,
+          "modifierName": "Fatuimecha_SquadAI_Tank4_Handler",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "Monster_Fatuimecha_SquadAI_Tank4",
+      "isDynamicAbility": true,
+      "modifiers": {
+        "Fatuimecha_SquadAI_Tank4_Handler": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "value": 1,
+              "key": "_SQUAD_Fatuimecha_SquadAI_Tank4_",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "FGGHMECFCHB",
+              "doOffStage": false,
+              "value": 1,
+              "DNPDFDLKNCK": "_SQUAD_Fatuimecha_SquadAI_Tank4_",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "ApplyModifier",
+          "doOffStage": false,
+          "modifierName": "Fatuimecha_SquadAI_Range_Handler",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "Monster_Fatuimecha_SquadAI_Range",
+      "isDynamicAbility": true,
+      "modifiers": {
+        "Fatuimecha_SquadAI_Range_Handler": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "value": 1,
+              "key": "_SQUAD_Fatuimecha_SquadAI_Range_",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "FGGHMECFCHB",
+              "doOffStage": false,
+              "value": 1,
+              "DNPDFDLKNCK": "_SQUAD_Fatuimecha_SquadAI_Range_",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "ApplyModifier",
+          "doOffStage": false,
+          "modifierName": "Fatuimecha_SquadAI_Support_Handler",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "Monster_Fatuimecha_SquadAI_Support",
+      "isDynamicAbility": true,
+      "modifiers": {
+        "Fatuimecha_SquadAI_Support_Handler": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "value": 1,
+              "key": "_SQUAD_Fatuimecha_SquadAI_Support_",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "FGGHMECFCHB",
+              "doOffStage": false,
+              "value": 1,
+              "DNPDFDLKNCK": "_SQUAD_Fatuimecha_SquadAI_Support_",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "ApplyModifier",
+          "doOffStage": false,
+          "modifierName": "Fatuimecha_SquadAI_RangeAir_Handler",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "Monster_Fatuimecha_SquadAI_RangeAir",
+      "isDynamicAbility": true,
+      "modifiers": {
+        "Fatuimecha_SquadAI_RangeAir_Handler": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "value": 1,
+              "key": "_SQUAD_Fatuimecha_SquadAI_RangeAir_",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "FGGHMECFCHB",
+              "doOffStage": false,
+              "value": 1,
+              "DNPDFDLKNCK": "_SQUAD_Fatuimecha_SquadAI_RangeAir_",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "value": 1,
+              "key": "_MONSTER_Fatuimecha_FlyType_",
+              "predicates": [
+                {
+                  "$type": "MENFDICIAHE",
+                  "DIOCNLGEHIP": [
+                    "_SQUAD_Fatuimecha_SquadAI_Tank1_",
+                    "_SQUAD_Fatuimecha_SquadAI_Tank2_",
+                    "_SQUAD_Fatuimecha_SquadAI_Tank3_",
+                    "_SQUAD_Fatuimecha_SquadAI_Tank4_",
+                    "_SQUAD_Fatuimecha_SquadAI_Range_",
+                    "_SQUAD_Fatuimecha_SquadAI_Support_"
+                  ],
+                  "target": "Target"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_MONSTER_Fatuimecha_FlyType_",
+              "predicates": [
+                {
+                  "$type": "MENFDICIAHE",
+                  "DIOCNLGEHIP": [
+                    "_SQUAD_Fatuimecha_SquadAI_Tank1_",
+                    "_SQUAD_Fatuimecha_SquadAI_Tank2_",
+                    "_SQUAD_Fatuimecha_SquadAI_Tank3_",
+                    "_SQUAD_Fatuimecha_SquadAI_Tank4_",
+                    "_SQUAD_Fatuimecha_SquadAI_Range_",
+                    "_SQUAD_Fatuimecha_SquadAI_Support_"
+                  ],
+                  "target": "Target",
+                  "logic": "Equal"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "thinkInterval": 2
+        }
+      }
+    }
+  }
+]

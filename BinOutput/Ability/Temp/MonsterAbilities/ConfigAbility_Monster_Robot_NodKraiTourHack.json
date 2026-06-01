@@ -1,0 +1,496 @@
+[
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "ApplyModifier",
+          "doOffStage": false,
+          "modifierName": "ScanEffect",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "Monster_Robot_NodKraiTourHack_NormalEnemy",
+      "abilityMixins": [
+        {
+          "$type": "AttachModifierToSelfGlobalValueMixin",
+          "globalValueKey": "GV_SpeedScale",
+          "modifierNameSteps": [
+            "Blank",
+            "MagAcc"
+          ],
+          "removeAppliedModifier": true,
+          "actorIceSubHurtDelta": -1,
+          "valueSteps": [
+            -0.5,
+            0.5,
+            2.5
+          ]
+        }
+      ],
+      "modifiers": {
+        "AcclerateSpeed": {
+          "onAdded": [
+            {
+              "$type": "FireEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "MonsterDestroy",
+                  "compareType": "NoneOrEqual"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_SceneObj_StandardSaosaoRobo_Emotion",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "Blank": {
+          "onAdded": [
+            {
+              "$type": "SetAnimatorFloat",
+              "doOffStage": false,
+              "value": 1,
+              "floatID": "MoveSpeedRatio",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "KillPlayer": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "value": 1,
+              "target": "AllTeams",
+              "key": "GV_FindByMonster",
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "MonsterDestroy",
+                  "compareType": "NoneOrEqual"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "duration": 0.10000000149011612
+        },
+        "MagAcc": {
+          "onAdded": [
+            {
+              "$type": "SetAnimatorFloat",
+              "doOffStage": false,
+              "value": 1.5,
+              "floatID": "MoveSpeedRatio",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "ScanEffect": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "value": 1,
+              "key": "_MONSTER_Oprichnik_SingleMagnet_Control_",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_SceneObj_StandardSaosaoRobo_Scan",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "onBeingHit": [
+            {
+              "$type": "Predicated",
+              "doOffStage": false,
+              "targetPredicates": [
+                {
+                  "$type": "ByAttackTags",
+                  "attackTags": [
+                    "Acitvity_NodKraiTourHack_Attack"
+                  ],
+                  "target": "Target"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "successActions": [
+                {
+                  "$type": "SetGlobalValue",
+                  "doOffStage": false,
+                  "value": 1,
+                  "key": "MonsterDestroy",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "KillSelf",
+                  "doOffStage": false,
+                  "configIdArray": [
+                    24920401,
+                    24920402
+                  ],
+                  "killSelfType": "Normal",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "AttachToAIAlertnessMixin",
+              "modifierName": "AcclerateSpeed",
+              "alertness": [
+                1,
+                2
+              ],
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "AttachToAIAlertnessMixin",
+              "modifierName": "KillPlayer",
+              "alertness": [
+                1,
+                2
+              ],
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "OverrideMassCapMixin",
+              "actorIceSubHurtDelta": -1,
+              "mass": 100000000
+            }
+          ],
+          "minus_one": -1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "ApplyModifier",
+          "doOffStage": false,
+          "modifierName": "DieGadget",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "AttachModifier",
+          "doOffStage": false,
+          "modifierName": "Limbo",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "Monster_Robot_NodKraiTourHack_TargetEnemy",
+      "modifiers": {
+        "AcclerateSpeed": {
+          "onAdded": [
+            {
+              "$type": "SetAnimatorFloat",
+              "doOffStage": false,
+              "value": 1.5,
+              "floatID": "MoveSpeedRatio",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "SetAnimatorFloat",
+              "doOffStage": false,
+              "value": 1,
+              "floatID": "MoveSpeedRatio",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1
+        },
+        "DieGadget": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "value": 1,
+              "key": "_MONSTER_Oprichnik_SingleMagnet_Control_",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_SceneObj_SaosaoKey_Idle",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "onBeingHit": [
+            {
+              "$type": "Predicated",
+              "doOffStage": false,
+              "targetPredicates": [
+                {
+                  "$type": "ByAttackTags",
+                  "attackTags": [
+                    "Acitvity_NodKraiTourHack_Attack"
+                  ],
+                  "target": "Target"
+                },
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "GV_DoOnce",
+                  "compareType": "NoneOrEqual"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "successActions": [
+                {
+                  "$type": "SetGlobalValueV2",
+                  "doOffStage": false,
+                  "value": 1,
+                  "key": "GV_DoOnce",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "CreateGadget",
+                  "doOffStage": false,
+                  "campID": 5001,
+                  "value": true,
+                  "HGPMDCCAHMK": {
+                    "IFAGHADONMB": true,
+                    "KCLDKFCKPEE": 0.5,
+                    "MJDMDBDMPAM": true,
+                    "PHCINBJNAOK": 0.5
+                  },
+                  "actorIceSubHurtDelta": -1,
+                  "born": {
+                    "$type": "ConfigBornBySelf",
+                    "direction": {
+                      "maxAngle": 180
+                    },
+                    "useRotation": true,
+                    "offset": {
+                      "x": 1.2000000476837158
+                    },
+                    "FDGAEDDEEDG": {
+                      "ELAJJIANFFM": 180
+                    },
+                    "alongGround": true,
+                    "onGroundRaycastUpDist": 2,
+                    "value": 10
+                  },
+                  "gadgetID": 73072011,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "AttachToAIAlertnessMixin",
+              "modifierName": "AcclerateSpeed",
+              "alertness": [
+                1,
+                2
+              ],
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "OverrideMassCapMixin",
+              "actorIceSubHurtDelta": -1,
+              "mass": 100000000
+            }
+          ],
+          "minus_one": -1
+        },
+        "Limbo": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "state": "Limbo"
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "ApplyModifier",
+          "doOffStage": false,
+          "modifierName": "BeHitKillself",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "ApplyModifier",
+          "doOffStage": false,
+          "modifierName": "Monster_Robot_NodKraiTourHack_UIConfig",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "Monster_Robot_NodKraiTourHack_QusetKillSelf",
+      "isDynamicAbility": true,
+      "modifiers": {
+        "BeHitKillself": {
+          "elementDurability": 100,
+          "onBeingHit": [
+            {
+              "$type": "Predicated",
+              "doOffStage": false,
+              "targetPredicates": [
+                {
+                  "$type": "ByAttackTags",
+                  "attackTags": [
+                    "Acitvity_NodKraiTourHack_Attack"
+                  ],
+                  "target": "Target"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "successActions": [
+                {
+                  "$type": "ApplyModifier",
+                  "doOffStage": false,
+                  "modifierName": "BeHitKillselfLogic",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "BeHitKillselfLogic": {
+          "onAdded": [
+            {
+              "$type": "LoseHP",
+              "doOffStage": false,
+              "amountByTargetMaxHPRatio": 1,
+              "enableInvincible": true,
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true,
+              "PFLFPMEHFEH": "Critical"
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "Monster_Robot_NodKraiTourHack_UIConfig": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "ChangeBillboardMixin",
+              "billboard": {
+                "$type": "GEMDMHBPKDO",
+                "forceShowDistance": 15,
+                "offset": {
+                  "x": -0.05000000074505806
+                },
+                "radiusOffset": 0.25,
+                "HKFOBGBMJNB": 35,
+                "IDEIAEFFKDN": 1,
+                "attachPoint": "BillboardAttach",
+                "offsetType": "Character",
+                "showDistance": 100
+              },
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "minus_one": -1
+        }
+      }
+    }
+  }
+]

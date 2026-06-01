@@ -1,0 +1,1172 @@
+[
+  {
+    "Default": {
+      "__unk_Q2982101340": [
+        "SGV_CeremonyGhost_Player",
+        "GV_GateForbidArea_GateMark",
+        "GV_GateForbidArea_PrevGateMark"
+      ],
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "doOffStage": false,
+          "modifierName": "UNIQUE_CeremonyGhost_CameraFix",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "AttachModifier",
+          "doOffStage": false,
+          "modifierName": "UNIQUE_CeremonyGhost_Forbid",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "AttachModifier",
+          "doOffStage": false,
+          "modifierName": "UNIQUE_CeremonyGhost_Immune",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "AttachModifier",
+          "doOffStage": false,
+          "modifierName": "CeremonyGhost_PunishScore",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "SetGlobalValueV2",
+          "doOffStage": false,
+          "key": "_CeremonyGhost_AreaWarning",
+          "maxValue": 15,
+          "actorIceSubHurtDelta": -1,
+          "useLimitRange": true,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "SetGlobalValueV2",
+          "doOffStage": false,
+          "key": "_CeremonyGhost_PunishmentCount",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "Activity_CeremonyGhost_TeamAbility",
+      "isDynamicAbility": true,
+      "abilityMixins": [
+        {
+          "$type": "CurLocalAvatarMixinV2",
+          "modifierName": "CeremonyGhost_Sprint_ReduceCost",
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachModifierToPredicateMixin",
+          "modifierName": "CeremonyGhost_PlayerInOthersArea",
+          "predicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "key": "GV_GateForbidArea_GateMark",
+              "compareType": "MoreThan"
+            }
+          ],
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "CurLocalAvatarMixinV2",
+          "modifierName": "CeremonyGhost_TeleportState",
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachModifierToSelfGlobalValueNoInitMixin",
+          "enable": true,
+          "globalValueKey": "SGV_CeremonyGhost_TeamBuff",
+          "modifierNameSteps": [
+            "CeremonyGhost_TeamBuff"
+          ],
+          "removeAppliedModifier": true,
+          "actorIceSubHurtDelta": -1,
+          "valueSteps": [
+            0.5,
+            1.5
+          ]
+        }
+      ],
+      "modifiers": {
+        "CeremonyGhost_Billboard_Avator": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "ChangeBillboardMixin",
+              "billboard": {
+                "$type": "EMJLLOCGAJJ",
+                "forceShowDistance": 15,
+                "offset": {
+                  "y": 2
+                },
+                "radiusOffset": 0.5,
+                "HKFOBGBMJNB": 35,
+                "IDEIAEFFKDN": 1,
+                "attachPoint": "BillboardAttach",
+                "type": "FilmfestBallgame",
+                "MMGEKDLPOIJ": "FilmfestBallGame",
+                "showDistance": 80
+              },
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "minus_one": -1
+        },
+        "CeremonyGhost_ClearIndicator": {
+          "onAdded": [
+            {
+              "$type": "KillGadget",
+              "doOffStage": false,
+              "gadgetInfo": {
+                "configID": 70331050
+              },
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "CeremonyGhost_PlayerInOthersArea": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "AttachModifierToSelfGlobalValueNoInitMixin",
+              "enable": true,
+              "globalValueKey": "_CeremonyGhost_PunishmentCount",
+              "modifierNameSteps": [
+                "CeremonyGhost_PlayerInOthersArea_Normal",
+                "CeremonyGhost_PlayerInOthersArea_Fatal"
+              ],
+              "removeAppliedModifier": true,
+              "actorIceSubHurtDelta": -1,
+              "valueSteps": [
+                -0.5,
+                2.5,
+                9999
+              ]
+            }
+          ],
+          "minus_one": -1
+        },
+        "CeremonyGhost_PlayerInOthersArea_Fatal": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "AttachModifierToSelfGlobalValueNoInitMixin",
+              "enable": true,
+              "globalValueKey": "_CeremonyGhost_AreaWarning",
+              "modifierNameSteps": [
+                "CeremonyGhost_PlayerInOthersArea_Warning",
+                "CeremonyGhost_PlayerInOthersArea_Punish"
+              ],
+              "removeAppliedModifier": true,
+              "actorIceSubHurtDelta": -1,
+              "valueSteps": [
+                8.5,
+                12.5,
+                9999
+              ]
+            }
+          ],
+          "minus_one": -1
+        },
+        "CeremonyGhost_PlayerInOthersArea_Normal": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "AttachModifierToSelfGlobalValueNoInitMixin",
+              "enable": true,
+              "globalValueKey": "_CeremonyGhost_AreaWarning",
+              "modifierNameSteps": [
+                "CeremonyGhost_PlayerInOthersArea_Warning",
+                "CeremonyGhost_PlayerInOthersArea_Punish"
+              ],
+              "removeAppliedModifier": true,
+              "actorIceSubHurtDelta": -1,
+              "valueSteps": [
+                10.5,
+                14.5,
+                9999
+              ]
+            }
+          ],
+          "minus_one": -1
+        },
+        "CeremonyGhost_PlayerInOthersArea_Punish": {
+          "onAdded": [
+            {
+              "$type": "ServerLuaCall",
+              "doOffStage": false,
+              "luaCallType": "CurGalleryControlGroup",
+              "paramNum": 1,
+              "actorIceSubHurtDelta": -1,
+              "param1": "GV_GateForbidArea_GateMark",
+              "funcName": "SLC_CeremonyGhost_Punish",
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValueV2",
+              "doOffStage": false,
+              "key": "GV_GateForbidArea_GateMark",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "CeremonyGhost_PlayerInOthersArea_Warning": {
+          "onAdded": [
+            {
+              "$type": "ShowReminder",
+              "doOffStage": false,
+              "id": 480600103,
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true,
+              "PBHJPBFJGME": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "CeremonyGhost_PlayerTeleporting": {
+          "onAdded": [
+            {
+              "$type": "AddGlobalValueV2",
+              "doOffStage": false,
+              "value": 1,
+              "target": "Team",
+              "key": "_CeremonyGhost_PunishmentCount",
+              "maxValue": 10,
+              "actorIceSubHurtDelta": -1,
+              "useLimitRange": true,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValueV2",
+              "doOffStage": false,
+              "target": "Team",
+              "key": "GV_GateForbidArea_GateMark",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "SetGlobalValueV2",
+              "doOffStage": false,
+              "target": "Team",
+              "key": "GV_GateForbidArea_GateMark",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "state": "IsGhostToEnemy"
+        },
+        "CeremonyGhost_PunishScore": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "Predicated",
+              "doOffStage": false,
+              "failActions": [
+                {
+                  "$type": "AddGlobalValueV2",
+                  "doOffStage": false,
+                  "value": -2,
+                  "key": "_CeremonyGhost_AreaWarning",
+                  "maxValue": 15,
+                  "actorIceSubHurtDelta": -1,
+                  "useLimitRange": true,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "target": "Team",
+              "targetPredicates": [
+                {
+                  "$type": "ByHasModifier",
+                  "modifierName": "CeremonyGhost_PlayerInOthersArea",
+                  "target": "Target"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "successActions": [
+                {
+                  "$type": "AddGlobalValueV2",
+                  "doOffStage": false,
+                  "value": 1,
+                  "key": "_CeremonyGhost_AreaWarning",
+                  "maxValue": 15,
+                  "actorIceSubHurtDelta": -1,
+                  "useLimitRange": true,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "thinkInterval": 1
+        },
+        "CeremonyGhost_Sprint_ReduceCost": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "properties": {
+            "Actor_CostStaminaRatio": -0.5
+          }
+        },
+        "CeremonyGhost_TeamBuff": {
+          "onAdded": [
+            {
+              "$type": "CameraScreenEffect",
+              "doOffStage": true,
+              "effectName": "Eff_UI_CeremonyGhost_Screen_01",
+              "enable": true,
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true,
+              "PBHJPBFJGME": true
+            },
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Activity_CeremonyGhost_Attract",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "CameraScreenEffect",
+              "doOffStage": true,
+              "effectName": "Eff_UI_CeremonyGhost_Screen_01",
+              "enable": true,
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true,
+              "PBHJPBFJGME": true
+            }
+          ],
+          "minus_one": -1
+        },
+        "CeremonyGhost_TeleportState": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "AttachToStateIDMixin",
+              "modifierName": "CeremonyGhost_PlayerTeleporting",
+              "stateIDs": [
+                "ActivitySkill_CommonMove"
+              ],
+              "value": -1,
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "minus_one": -1
+        },
+        "UNIQUE_CeremonyGhost_Billboard": {
+          "elementDurability": 100,
+          "stacking": "Unique",
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "CurLocalAvatarMixinV2",
+              "modifierName": "CeremonyGhost_Billboard_Avator",
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "minus_one": -1,
+          "isUnique": true
+        },
+        "UNIQUE_CeremonyGhost_CameraFix": {
+          "elementDurability": 100,
+          "stacking": "Unique",
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "ModifyCameraMaxDistanceMixin",
+              "lerpInDuration": 0.5,
+              "elevAngleOnStart": 6.5,
+              "lerpOutDuration": 2,
+              "resetToMaxOnStart": true,
+              "maxDistance": 10,
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "minus_one": -1,
+          "isUnique": true
+        },
+        "UNIQUE_CeremonyGhost_Forbid": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "HideAvatarSkillMixin",
+              "actorIceSubHurtDelta": -1,
+              "skillIDs": [
+                10413,
+                10013
+              ]
+            },
+            {
+              "$type": "HideActionSlotMixin",
+              "slotType": "SlotQuickUse",
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "HideActionSlotMixin",
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "HideActionSlotMixin",
+              "slotType": "Slot1",
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "HideActionSlotMixin",
+              "slotType": "Slot2",
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "HideActionSlotMixin",
+              "slotType": "Slot5",
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "ForbidAvatarFlyMixin",
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "minus_one": -1,
+          "isUnique": true
+        },
+        "UNIQUE_CeremonyGhost_Immune": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "CurLocalAvatarMixinV2",
+              "modifierName": "UNIQUE_CeremonyGhost_Immune_Avatar",
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "minus_one": -1,
+          "isUnique": true
+        },
+        "UNIQUE_CeremonyGhost_Immune_Avatar": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "properties": {
+            "Actor_FallingDamageRatio": -1
+          },
+          "isUnique": true
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "abilitySpecials": {
+        "buffDuration": 15
+      },
+      "__unk_Q2982101340": [
+        "_Ability_CeremonyGhost_StepCount"
+      ],
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Activity_CeremonyGhost_TeamAbility_Buff",
+      "isDynamicAbility": true,
+      "abilityMixins": [
+        {
+          "$type": "CurLocalAvatarMixinV2",
+          "modifierName": "CeremonyGhost_BuffDetect_Avatar_Normal",
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "LocalTeamTriggerMixin",
+          "triggerName": "CeremonyGhost",
+          "BCDEMLMKLFH": {
+            "campTargetType": "AllExceptSelf",
+            "DHJJPLGNKGA": "InterTarget",
+            "prefabName": "MTP_LocalTeamTriggerMixin_CeremonyGhost",
+            "triggerCD": 0.10000000149011612,
+            "triggerType": "TriggerAlways"
+          },
+          "GPLDLGGNBOD": [
+            {
+              "$type": "DebugLog",
+              "doOffStage": false,
+              "content": "CeremonyGhost: trigger action!!!",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "Predicated",
+              "doOffStage": false,
+              "target": "Target",
+              "targetPredicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "target": "Target",
+                  "key": "SGV_CeremonyGhost_FloorType",
+                  "compareType": "MoreThan"
+                },
+                {
+                  "$type": "ByTargetGadgetState",
+                  "target": "Target",
+                  "gadgetState": 201
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "successActions": [
+                {
+                  "$type": "DebugLog",
+                  "doOffStage": false,
+                  "content": "CeremonyGhost: target found!!!",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "AttachModifier",
+                  "doOffStage": false,
+                  "modifierName": "UNIQUE_CeremonyGhost_CheckJump_Avatar",
+                  "target": "CurLocalAvatar",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "SetTargetToTargetKey",
+                  "doOffStage": false,
+                  "targetKey": "_Ability_CeremonyGhost_CurFloor",
+                  "target": "CurLocalAvatar",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "IJGEPPKDOBO": 25,
+          "actorIceSubHurtDelta": -1,
+          "OHLNIBIFFCG": "EffectMesh"
+        }
+      ],
+      "modifiers": {
+        "CeremonyGhost_BuffDetect_Avatar_Normal": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "Predicated",
+              "doOffStage": false,
+              "otherTargets": {
+                "$type": "SelectTargetsByShape",
+                "shapeName": "CircleR1.5H3",
+                "campTargetType": "AllExceptSelf",
+                "sizeRatio": 1,
+                "sortType": "Nearest",
+                "ILLOOADJMLF": {
+                  "direction": {
+                    "maxAngle": 180
+                  },
+                  "FDGAEDDEEDG": {
+                    "ELAJJIANFFM": 180
+                  },
+                  "onGroundRaycastUpDist": 2,
+                  "value": 10
+                }
+              },
+              "targetPredicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "value": 1,
+                  "target": "Target",
+                  "key": "_Ability_CeremonyGhost_BuffType"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "successActions": [
+                {
+                  "$type": "ServerLuaCall",
+                  "doOffStage": false,
+                  "luaCallType": "CurGalleryControlGroup",
+                  "actorIceSubHurtDelta": -1,
+                  "funcName": "SLC_CeremonyGhost_BuffPicked",
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "ApplyModifier",
+                  "doOffStage": false,
+                  "modifierName": "UNIQUE_CeremonyGhost_Buff_01",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "ApplyModifier",
+                  "doOffStage": false,
+                  "modifierName": "DisableBuff",
+                  "target": "Other",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "Predicated",
+              "doOffStage": false,
+              "otherTargets": {
+                "$type": "SelectTargetsByShape",
+                "shapeName": "CircleR1.5H3",
+                "campTargetType": "AllExceptSelf",
+                "sizeRatio": 1,
+                "sortType": "Nearest",
+                "ILLOOADJMLF": {
+                  "direction": {
+                    "maxAngle": 180
+                  },
+                  "FDGAEDDEEDG": {
+                    "ELAJJIANFFM": 180
+                  },
+                  "onGroundRaycastUpDist": 2,
+                  "value": 10
+                }
+              },
+              "targetPredicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "value": 2,
+                  "target": "Target",
+                  "key": "_Ability_CeremonyGhost_BuffType"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "successActions": [
+                {
+                  "$type": "ServerLuaCall",
+                  "doOffStage": false,
+                  "luaCallType": "CurGalleryControlGroup",
+                  "actorIceSubHurtDelta": -1,
+                  "funcName": "SLC_CeremonyGhost_BuffPicked",
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "ApplyModifier",
+                  "doOffStage": false,
+                  "modifierName": "UNIQUE_CeremonyGhost_Buff_02",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "ApplyModifier",
+                  "doOffStage": false,
+                  "modifierName": "DisableBuff",
+                  "target": "Other",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "Predicated",
+              "doOffStage": false,
+              "otherTargets": {
+                "$type": "SelectTargetsByShape",
+                "shapeName": "CircleR1.5H3",
+                "campTargetType": "AllExceptSelf",
+                "sizeRatio": 1,
+                "sortType": "Nearest",
+                "ILLOOADJMLF": {
+                  "direction": {
+                    "maxAngle": 180
+                  },
+                  "FDGAEDDEEDG": {
+                    "ELAJJIANFFM": 180
+                  },
+                  "onGroundRaycastUpDist": 2,
+                  "value": 10
+                }
+              },
+              "targetPredicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "value": 3,
+                  "target": "Target",
+                  "key": "_Ability_CeremonyGhost_BuffType"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "successActions": [
+                {
+                  "$type": "ServerLuaCall",
+                  "doOffStage": false,
+                  "luaCallType": "CurGalleryControlGroup",
+                  "actorIceSubHurtDelta": -1,
+                  "funcName": "SLC_CeremonyGhost_BuffPicked",
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "ApplyModifier",
+                  "doOffStage": false,
+                  "modifierName": "UNIQUE_CeremonyGhost_Buff_03",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "ApplyModifier",
+                  "doOffStage": false,
+                  "modifierName": "DisableBuff",
+                  "target": "Other",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "thinkInterval": 0.20000000298023224
+        },
+        "CeremonyGhost_RocketJumpEffect": {
+          "onAdded": [
+            {
+              "$type": "ServerLuaCall",
+              "doOffStage": false,
+              "luaCallType": "CurGalleryControlGroup",
+              "actorIceSubHurtDelta": -1,
+              "funcName": "SLC_CeremonyGhost_DoJump",
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "FireEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Stages_Level_Common_Jumpplatform_01_Active",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "duration": 0.5
+        },
+        "DisableBuff": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "value": -10,
+              "key": "_Ability_CeremonyGhost_BuffType",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "duration": 0.10000000149011612
+        },
+        "SteppedOn_Once": {
+          "onAdded": [
+            {
+              "$type": "AddGlobalValueV2",
+              "doOffStage": false,
+              "value": 1,
+              "key": "_Ability_CeremonyGhost_StepCount",
+              "maxValue": "_Ability_CeremonyGhost_StepCount",
+              "actorIceSubHurtDelta": -1,
+              "useLimitRange": true,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "FireEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "value": [
+                    "_Ability_CeremonyGhost_StepCount",
+                    1,
+                    "SUB"
+                  ],
+                  "key": "_Ability_CeremonyGhost_StepCount",
+                  "compareType": "LessAndEqual"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_SceneObj_CeremonyGhostBox_01_CrackBurst",
+              "born": {
+                "$type": "ConfigBornByAttachPoint",
+                "direction": {
+                  "maxAngle": 180
+                },
+                "useRotation": true,
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "attachPointName": "AttachPoint",
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "stacking": "Multiple",
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "duration": 0.20000000298023224
+        },
+        "UNIQUE_CeremonyGhost_Buff_01": {
+          "onAdded": [
+            {
+              "$type": "ReviveStamina",
+              "doOffStage": true,
+              "value": 50,
+              "target": "CurLocalAvatar",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "stacking": "Unique",
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "isUnique": true,
+          "duration": 0.20000000298023224
+        },
+        "UNIQUE_CeremonyGhost_Buff_02": {
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Avatar_Properties_Speed_Up",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "KKBDDALAMKP": true,
+          "minus_one": -1,
+          "properties": {
+            "Animator_MoveSpeedRatio": 0.4000000059604645
+          },
+          "isUnique": true,
+          "duration": "buffDuration"
+        },
+        "UNIQUE_CeremonyGhost_Buff_03": {
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_SceneObj_JumpUp_01_Buff",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "EnableRocketJump",
+              "doOffStage": false,
+              "enable": true,
+              "actorIceSubHurtDelta": -1,
+              "extention": {
+                "CHNNOCOHOMA": 1.5,
+                "NJBEHIKHAJJ": 1.2999999523162842
+              },
+              "type": "DungeonJump",
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "EnableRocketJump",
+              "doOffStage": true,
+              "target": "CurTeamAvatars",
+              "actorIceSubHurtDelta": -1,
+              "type": "DungeonJump",
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "modifierMixins": [
+            {
+              "$type": "AttachToStateIDMixin",
+              "modifierName": "CeremonyGhost_RocketJumpEffect",
+              "stateIDs": [
+                "Jump"
+              ],
+              "value": -1,
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "minus_one": -1,
+          "isUnique": true,
+          "duration": "buffDuration"
+        },
+        "UNIQUE_CeremonyGhost_CheckJump_Avatar": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "AttachToAnimatorStateIDMixin",
+              "modifierName": "UNIQUE_CeremonyGhost_Land_Avatar",
+              "stateIDs": [
+                "FallOnGround",
+                "FallOnGroundLit",
+                "FallToGroundRun",
+                "FallToGroundRunHard",
+                "FallToGroundSprint"
+              ],
+              "value": -1,
+              "isCheckOnAttach": true,
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "minus_one": -1,
+          "isUnique": true,
+          "duration": 0.4000000059604645
+        },
+        "UNIQUE_CeremonyGhost_Land_Avatar": {
+          "onAdded": [
+            {
+              "$type": "CopyGlobalValue",
+              "doOffStage": true,
+              "otherTargets": {
+                "$type": "GJLDGPLCAAG",
+                "targetKey": "_Ability_CeremonyGhost_CurFloor"
+              },
+              "dstKey": "_Ability_CeremonyGhost_StepCount",
+              "srcTarget": "Other",
+              "actorIceSubHurtDelta": -1,
+              "srcKey": "SGV_CeremonyGhost_StepCount",
+              "canBeHandledOnRecover": true,
+              "dstTarget": "Team"
+            },
+            {
+              "$type": "ApplyModifier",
+              "doOffStage": false,
+              "otherTargets": {
+                "$type": "GJLDGPLCAAG",
+                "targetKey": "_Ability_CeremonyGhost_CurFloor"
+              },
+              "modifierName": "SteppedOn_Once",
+              "predicates": [
+                {
+                  "$type": "ByTargetPositionToSelfPosition",
+                  "value": 3.799999952316284,
+                  "target": "Target",
+                  "compareType": "Y"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "ServerLuaCall",
+              "doOffStage": false,
+              "otherTargets": {
+                "$type": "GJLDGPLCAAG",
+                "targetKey": "_Ability_CeremonyGhost_CurFloor"
+              },
+              "isTarget": true,
+              "target": "Other",
+              "luaCallType": "CurGalleryControlGroup",
+              "predicates": [
+                {
+                  "$type": "ByTargetPositionToSelfPosition",
+                  "value": 3.799999952316284,
+                  "target": "Target",
+                  "compareType": "Y"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "funcName": "SLC_CeremonyGhost_Step",
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "stacking": "Unique",
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "isUnique": true
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "ServerLuaCall",
+          "doOffStage": false,
+          "luaCallType": "SpecificGroup",
+          "actorIceSubHurtDelta": -1,
+          "funcName": "SLC_CeremonyGhost_GetPlayerIndex",
+          "CallParamList": [
+            248060001
+          ],
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "Activity_CeremonyGhost_TeamAbility_PlayerMark_01",
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "ServerLuaCall",
+          "doOffStage": false,
+          "luaCallType": "SpecificGroup",
+          "actorIceSubHurtDelta": -1,
+          "funcName": "SLC_CeremonyGhost_GetPlayerIndex",
+          "CallParamList": [
+            248061002
+          ],
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "Activity_CeremonyGhost_TeamAbility_PlayerMark_02",
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "ServerLuaCall",
+          "doOffStage": false,
+          "luaCallType": "SpecificGroup",
+          "actorIceSubHurtDelta": -1,
+          "funcName": "SLC_CeremonyGhost_GetPlayerIndex",
+          "CallParamList": [
+            248062002
+          ],
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "Activity_CeremonyGhost_TeamAbility_PlayerMark_03",
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "ServerLuaCall",
+          "doOffStage": false,
+          "luaCallType": "SpecificGroup",
+          "actorIceSubHurtDelta": -1,
+          "funcName": "SLC_CeremonyGhost_GetPlayerIndex",
+          "CallParamList": [
+            248063002
+          ],
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "Activity_CeremonyGhost_TeamAbility_PlayerMark_04",
+      "isDynamicAbility": true
+    }
+  }
+]

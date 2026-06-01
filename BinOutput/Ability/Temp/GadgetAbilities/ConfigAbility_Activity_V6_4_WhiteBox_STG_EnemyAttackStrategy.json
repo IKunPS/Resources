@@ -1,0 +1,1525 @@
+[
+  {
+    "Default": {
+      "__unk_Q2982101340": [
+        "SGV_AttackDelay",
+        "SGV_AttackCD",
+        "GV_AttackDelay",
+        "GV_AttackCD"
+      ],
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "SetGlobalValueV2",
+          "doOffStage": false,
+          "key": "GV_AttackDelay",
+          "maxValue": 4,
+          "value": true,
+          "actorIceSubHurtDelta": -1,
+          "useLimitRange": true,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "SetGlobalValueV2",
+          "doOffStage": false,
+          "minValue": 3,
+          "key": "GV_AttackCD",
+          "maxValue": 6,
+          "value": true,
+          "actorIceSubHurtDelta": -1,
+          "useLimitRange": true,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "AttachModifier",
+          "doOffStage": false,
+          "modifierName": "DelayAttach",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "SceneObj_Area_Common_Property_Ani_6_4_AirEmeny_ShootManagerNormal_NoTrack",
+      "modifiers": {
+        "DelayAttach": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "AttachModifier",
+              "doOffStage": false,
+              "modifierName": "StateMachineHandler",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "thinkInterval": 1
+        },
+        "ShootManager_Normal_NoTrack": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "AttachModifier",
+              "doOffStage": false,
+              "modifierName": "ShootManager_Normal_NoTrack_ShootLogic",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "thinkInterval": "GV_AttackDelay"
+        },
+        "ShootManager_Normal_NoTrack_ShootLogic": {
+          "onAdded": [
+            {
+              "$type": "TriggerThinkInterval",
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "stacking": "Unique",
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "Predicated",
+              "doOffStage": false,
+              "targetPredicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "value": -1,
+                  "target": "Target",
+                  "key": "GV_ContextData",
+                  "compareType": "MoreThan"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "successActions": [
+                {
+                  "$type": "TriggerBullet",
+                  "doOffStage": false,
+                  "trackTarget": "SelfAttackTarget",
+                  "bulletID": 73120003,
+                  "value": true,
+                  "actorIceSubHurtDelta": -1,
+                  "born": {
+                    "$type": "ConfigBornByAttachPoint",
+                    "direction": {
+                      "$type": "ConfigDirectionByAttachPoint",
+                      "maxAngle": 180,
+                      "attachPointTargetType": "Self",
+                      "attachPointName": "FireNode"
+                    },
+                    "useRotation": true,
+                    "FDGAEDDEEDG": {
+                      "ELAJJIANFFM": 180
+                    },
+                    "attachPointName": "FireNode",
+                    "onGroundRaycastUpDist": 2,
+                    "value": 10
+                  },
+                  "canBeHandledOnRecover": true,
+                  "POOEIFNLHDB": true
+                }
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "thinkInterval": "GV_AttackCD"
+        },
+        "StateMachineHandler": {
+          "elementDurability": 100,
+          "stacking": "Unique",
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "AttachToGadgetStateMixin",
+              "modifierName": "State_0",
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "minus_one": -1
+        },
+        "State_0": {
+          "onAdded": [
+            {
+              "$type": "CopyGlobalValue",
+              "doOffStage": true,
+              "dstKey": "GV_AttackDelay",
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "target": "Target",
+                  "key": "SGV_AttackDelay",
+                  "compareType": "MoreThan"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "srcKey": "SGV_AttackDelay",
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "CopyGlobalValue",
+              "doOffStage": true,
+              "dstKey": "GV_AttackCD",
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "target": "Target",
+                  "key": "SGV_AttackCD",
+                  "compareType": "MoreThan"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "srcKey": "SGV_AttackCD",
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AttachModifier",
+              "doOffStage": false,
+              "modifierName": "ShootManager_Normal_NoTrack",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "__unk_Q2982101340": [
+        "SGV_AttackDelay",
+        "SGV_AttackCD",
+        "GV_AttackDelay",
+        "GV_AttackCD"
+      ],
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "doOffStage": false,
+          "modifierName": "DelayAttach",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "SceneObj_Area_Common_Property_Ani_6_4_AirEmeny_ShootManagerNormal_NoTrack_LockTarget",
+      "modifiers": {
+        "DelayAttach": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "AttachModifier",
+              "doOffStage": false,
+              "modifierName": "StateMachineHandler",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "thinkInterval": 1
+        },
+        "ShootManager_Normal_NoTrack_LockTarget": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "AttachModifier",
+              "doOffStage": false,
+              "modifierName": "ShootManager_Normal_NoTrack_LockTarget_ShootLogic",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "thinkInterval": "GV_AttackDelay"
+        },
+        "ShootManager_Normal_NoTrack_LockTarget_ShootLogic": {
+          "onAdded": [
+            {
+              "$type": "TriggerThinkInterval",
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "stacking": "Unique",
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "SetGlobalPos",
+              "doOffStage": true,
+              "target": "TempTarget",
+              "key": "_CurrentPlayerPos",
+              "actorIceSubHurtDelta": -1,
+              "born": {
+                "$type": "ConfigBornByTarget",
+                "direction": {
+                  "maxAngle": 180
+                },
+                "useRotation": true,
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "isOnStageFalseSwitchValue": {
+                "__unk_Q16140806": "_LockTarget"
+              },
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "Predicated",
+              "doOffStage": false,
+              "targetPredicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "value": -1,
+                  "target": "Target",
+                  "key": "GV_ContextData",
+                  "compareType": "MoreThan"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "successActions": [
+                {
+                  "$type": "TriggerBullet",
+                  "doOffStage": false,
+                  "trackTarget": "SelfAttackTarget",
+                  "bulletID": 73120003,
+                  "value": true,
+                  "actorIceSubHurtDelta": -1,
+                  "born": {
+                    "$type": "ConfigBornByAttachPoint",
+                    "direction": {
+                      "$type": "JPHAJLFAABE",
+                      "positionKey": "_CurrentPlayerPos",
+                      "maxAngle": 180
+                    },
+                    "useRotation": true,
+                    "FDGAEDDEEDG": {
+                      "ELAJJIANFFM": 180
+                    },
+                    "attachPointName": "FireNode",
+                    "onGroundRaycastUpDist": 2,
+                    "value": 10
+                  },
+                  "canBeHandledOnRecover": true,
+                  "POOEIFNLHDB": true
+                }
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "thinkInterval": "GV_AttackCD"
+        },
+        "StateMachineHandler": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "AttachToGadgetStateMixin",
+              "modifierName": "State_1",
+              "actorIceSubHurtDelta": -1,
+              "gadgetState": 1
+            }
+          ],
+          "minus_one": -1
+        },
+        "State_1": {
+          "onAdded": [
+            {
+              "$type": "CopyGlobalValue",
+              "doOffStage": true,
+              "dstKey": "GV_AttackDelay",
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "target": "Target",
+                  "key": "SGV_AttackDelay",
+                  "compareType": "MoreThan"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "srcKey": "SGV_AttackDelay",
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "CopyGlobalValue",
+              "doOffStage": true,
+              "dstKey": "GV_AttackCD",
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "target": "Target",
+                  "key": "SGV_AttackCD",
+                  "compareType": "MoreThan"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "srcKey": "SGV_AttackCD",
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AttachModifier",
+              "doOffStage": false,
+              "modifierName": "ShootManager_Normal_NoTrack_LockTarget",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "__unk_Q2982101340": [
+        "SGV_AttackDelay",
+        "SGV_AttackCD",
+        "GV_AttackDelay",
+        "GV_AttackCD"
+      ],
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "doOffStage": false,
+          "modifierName": "DelayAttach",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "SceneObj_Area_Common_Property_Ani_6_4_AirEmeny_ShootManagerNormal_Track",
+      "modifiers": {
+        "DelayAttach": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "AttachModifier",
+              "doOffStage": false,
+              "modifierName": "StateMachineHandler",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "thinkInterval": 1
+        },
+        "ShootManager_Normal_Track": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "AttachModifier",
+              "doOffStage": false,
+              "modifierName": "ShootManager_Normal_Track_ShootLogic",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "thinkInterval": "GV_AttackDelay"
+        },
+        "ShootManager_Normal_Track_ShootLogic": {
+          "onAdded": [
+            {
+              "$type": "TriggerThinkInterval",
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "stacking": "Unique",
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "Predicated",
+              "doOffStage": false,
+              "targetPredicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "value": -1,
+                  "target": "Target",
+                  "key": "GV_ContextData",
+                  "compareType": "MoreThan"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "successActions": [
+                {
+                  "$type": "TriggerBullet",
+                  "doOffStage": false,
+                  "trackTarget": "TempTarget",
+                  "bulletID": 73120027,
+                  "value": true,
+                  "actorIceSubHurtDelta": -1,
+                  "born": {
+                    "$type": "ConfigBornByAttachPoint",
+                    "direction": {
+                      "$type": "ConfigDirectionByAttachPoint",
+                      "maxAngle": 180,
+                      "attachPointTargetType": "Self",
+                      "attachPointName": "FireNode"
+                    },
+                    "useRotation": true,
+                    "FDGAEDDEEDG": {
+                      "ELAJJIANFFM": 180
+                    },
+                    "attachPointName": "FireNode",
+                    "onGroundRaycastUpDist": 2,
+                    "value": 10
+                  },
+                  "isOnStageFalseSwitchValue": {
+                    "__unk_Q16140806": "_LockTarget"
+                  },
+                  "canBeHandledOnRecover": true,
+                  "POOEIFNLHDB": true
+                }
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "thinkInterval": "GV_AttackCD"
+        },
+        "StateMachineHandler": {
+          "onAdded": [
+            {
+              "$type": "SetTargetToTargetKey",
+              "doOffStage": false,
+              "otherTargets": {
+                "$type": "EKDIJCOKJDO",
+                "tag": "_CurrentLocalAvatarPredicate",
+                "topLimit": 1,
+                "sortType": "Nearest"
+              },
+              "targetKey": "_LockTarget",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "AttachToGadgetStateMixin",
+              "modifierName": "State_201",
+              "actorIceSubHurtDelta": -1,
+              "gadgetState": 201
+            }
+          ],
+          "minus_one": -1
+        },
+        "State_201": {
+          "onAdded": [
+            {
+              "$type": "CopyGlobalValue",
+              "doOffStage": true,
+              "dstKey": "GV_AttackDelay",
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "target": "Target",
+                  "key": "SGV_AttackDelay",
+                  "compareType": "MoreThan"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "srcKey": "SGV_AttackDelay",
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "CopyGlobalValue",
+              "doOffStage": true,
+              "dstKey": "GV_AttackCD",
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "target": "Target",
+                  "key": "SGV_AttackCD",
+                  "compareType": "MoreThan"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "srcKey": "SGV_AttackCD",
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AttachModifier",
+              "doOffStage": false,
+              "modifierName": "ShootManager_Normal_Track",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "__unk_Q2982101340": [
+        "SGV_AttackDelay",
+        "SGV_AttackCD",
+        "GV_AttackDelay",
+        "GV_AttackCD"
+      ],
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "doOffStage": false,
+          "modifierName": "DelayAttach",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "SceneObj_Area_Common_Property_Ani_6_4_AirEmeny_ShootManagerSplitMore_NoTrack",
+      "modifiers": {
+        "DelayAttach": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "AttachModifier",
+              "doOffStage": false,
+              "modifierName": "StateMachineHandler",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "thinkInterval": 1
+        },
+        "ShootManager_SplitMore_NoTrack": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "AttachModifier",
+              "doOffStage": false,
+              "modifierName": "ShootManager_SplitMore_NoTrack_ShootLogic",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "thinkInterval": "GV_AttackDelay"
+        },
+        "ShootManager_SplitMore_NoTrack_ShootLogic": {
+          "onAdded": [
+            {
+              "$type": "TriggerThinkInterval",
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "stacking": "Unique",
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "Predicated",
+              "doOffStage": false,
+              "targetPredicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "value": -1,
+                  "target": "Target",
+                  "key": "GV_ContextData",
+                  "compareType": "MoreThan"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "successActions": [
+                {
+                  "$type": "TriggerBullet",
+                  "doOffStage": false,
+                  "trackTarget": "SelfAttackTarget",
+                  "bulletID": 73120003,
+                  "value": true,
+                  "actorIceSubHurtDelta": -1,
+                  "born": {
+                    "$type": "ConfigBornByAttachPoint",
+                    "direction": {
+                      "$type": "ConfigDirectionByAttachPoint",
+                      "maxAngle": 180,
+                      "attachPointTargetType": "Self",
+                      "attachPointName": "FireNode"
+                    },
+                    "useRotation": true,
+                    "FDGAEDDEEDG": {
+                      "ELAJJIANFFM": 180
+                    },
+                    "attachPointName": "FireNode",
+                    "onGroundRaycastUpDist": 2,
+                    "value": 10
+                  },
+                  "canBeHandledOnRecover": true,
+                  "POOEIFNLHDB": true
+                },
+                {
+                  "$type": "TriggerBullet",
+                  "doOffStage": false,
+                  "trackTarget": "SelfAttackTarget",
+                  "bulletID": 73120046,
+                  "value": true,
+                  "actorIceSubHurtDelta": -1,
+                  "born": {
+                    "$type": "ConfigBornByAttachPoint",
+                    "direction": {
+                      "$type": "ConfigDirectionByAttachPoint",
+                      "maxAngle": 180,
+                      "attachPointTargetType": "Self",
+                      "attachPointName": "FireNode",
+                      "angleOffset": {
+                        "x": 75
+                      }
+                    },
+                    "useRotation": true,
+                    "FDGAEDDEEDG": {
+                      "ELAJJIANFFM": 180
+                    },
+                    "attachPointName": "FireNode",
+                    "onGroundRaycastUpDist": 2,
+                    "value": 10
+                  },
+                  "canBeHandledOnRecover": true,
+                  "POOEIFNLHDB": true
+                },
+                {
+                  "$type": "TriggerBullet",
+                  "doOffStage": false,
+                  "trackTarget": "SelfAttackTarget",
+                  "bulletID": 73120046,
+                  "value": true,
+                  "actorIceSubHurtDelta": -1,
+                  "born": {
+                    "$type": "ConfigBornByAttachPoint",
+                    "direction": {
+                      "$type": "ConfigDirectionByAttachPoint",
+                      "maxAngle": 180,
+                      "attachPointTargetType": "Self",
+                      "attachPointName": "FireNode",
+                      "angleOffset": {
+                        "x": 105
+                      }
+                    },
+                    "useRotation": true,
+                    "FDGAEDDEEDG": {
+                      "ELAJJIANFFM": 180
+                    },
+                    "attachPointName": "FireNode",
+                    "onGroundRaycastUpDist": 2,
+                    "value": 10
+                  },
+                  "canBeHandledOnRecover": true,
+                  "POOEIFNLHDB": true
+                },
+                {
+                  "$type": "TriggerBullet",
+                  "doOffStage": false,
+                  "trackTarget": "SelfAttackTarget",
+                  "bulletID": 73120046,
+                  "value": true,
+                  "actorIceSubHurtDelta": -1,
+                  "born": {
+                    "$type": "ConfigBornByAttachPoint",
+                    "direction": {
+                      "$type": "ConfigDirectionByAttachPoint",
+                      "maxAngle": 180,
+                      "attachPointTargetType": "Self",
+                      "attachPointName": "FireNode",
+                      "angleOffset": {
+                        "x": 145
+                      }
+                    },
+                    "useRotation": true,
+                    "FDGAEDDEEDG": {
+                      "ELAJJIANFFM": 180
+                    },
+                    "attachPointName": "FireNode",
+                    "onGroundRaycastUpDist": 2,
+                    "value": 10
+                  },
+                  "canBeHandledOnRecover": true,
+                  "POOEIFNLHDB": true
+                },
+                {
+                  "$type": "TriggerBullet",
+                  "doOffStage": false,
+                  "trackTarget": "SelfAttackTarget",
+                  "bulletID": 73120046,
+                  "value": true,
+                  "actorIceSubHurtDelta": -1,
+                  "born": {
+                    "$type": "ConfigBornByAttachPoint",
+                    "direction": {
+                      "$type": "ConfigDirectionByAttachPoint",
+                      "maxAngle": 180,
+                      "attachPointTargetType": "Self",
+                      "attachPointName": "FireNode",
+                      "angleOffset": {
+                        "x": -75
+                      }
+                    },
+                    "useRotation": true,
+                    "FDGAEDDEEDG": {
+                      "ELAJJIANFFM": 180
+                    },
+                    "attachPointName": "FireNode",
+                    "onGroundRaycastUpDist": 2,
+                    "value": 10
+                  },
+                  "canBeHandledOnRecover": true,
+                  "POOEIFNLHDB": true
+                },
+                {
+                  "$type": "TriggerBullet",
+                  "doOffStage": false,
+                  "trackTarget": "SelfAttackTarget",
+                  "bulletID": 73120046,
+                  "value": true,
+                  "actorIceSubHurtDelta": -1,
+                  "born": {
+                    "$type": "ConfigBornByAttachPoint",
+                    "direction": {
+                      "$type": "ConfigDirectionByAttachPoint",
+                      "maxAngle": 180,
+                      "attachPointTargetType": "Self",
+                      "attachPointName": "FireNode",
+                      "angleOffset": {
+                        "x": -105
+                      }
+                    },
+                    "useRotation": true,
+                    "FDGAEDDEEDG": {
+                      "ELAJJIANFFM": 180
+                    },
+                    "attachPointName": "FireNode",
+                    "onGroundRaycastUpDist": 2,
+                    "value": 10
+                  },
+                  "canBeHandledOnRecover": true,
+                  "POOEIFNLHDB": true
+                },
+                {
+                  "$type": "TriggerBullet",
+                  "doOffStage": false,
+                  "trackTarget": "SelfAttackTarget",
+                  "bulletID": 73120046,
+                  "value": true,
+                  "actorIceSubHurtDelta": -1,
+                  "born": {
+                    "$type": "ConfigBornByAttachPoint",
+                    "direction": {
+                      "$type": "ConfigDirectionByAttachPoint",
+                      "maxAngle": 180,
+                      "attachPointTargetType": "Self",
+                      "attachPointName": "FireNode",
+                      "angleOffset": {
+                        "x": -145
+                      }
+                    },
+                    "useRotation": true,
+                    "FDGAEDDEEDG": {
+                      "ELAJJIANFFM": 180
+                    },
+                    "attachPointName": "FireNode",
+                    "onGroundRaycastUpDist": 2,
+                    "value": 10
+                  },
+                  "canBeHandledOnRecover": true,
+                  "POOEIFNLHDB": true
+                }
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "thinkInterval": "GV_AttackCD"
+        },
+        "StateMachineHandler": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "AttachToGadgetStateMixin",
+              "modifierName": "State_301",
+              "actorIceSubHurtDelta": -1,
+              "gadgetState": 301
+            }
+          ],
+          "minus_one": -1
+        },
+        "State_301": {
+          "onAdded": [
+            {
+              "$type": "CopyGlobalValue",
+              "doOffStage": true,
+              "dstKey": "GV_AttackDelay",
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "target": "Target",
+                  "key": "SGV_AttackDelay",
+                  "compareType": "MoreThan"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "srcKey": "SGV_AttackDelay",
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "CopyGlobalValue",
+              "doOffStage": true,
+              "dstKey": "GV_AttackCD",
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "target": "Target",
+                  "key": "SGV_AttackCD",
+                  "compareType": "MoreThan"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "srcKey": "SGV_AttackCD",
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AttachModifier",
+              "doOffStage": false,
+              "modifierName": "ShootManager_SplitMore_NoTrack",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "__unk_Q2982101340": [
+        "SGV_AttackDelay",
+        "SGV_AttackCD",
+        "GV_AttackDelay",
+        "GV_AttackCD"
+      ],
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "doOffStage": false,
+          "modifierName": "DelayAttach",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "SceneObj_Area_Common_Property_Ani_6_4_AirEmeny_ShootManagerSplitLess_NoTrack",
+      "modifiers": {
+        "DelayAttach": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "AttachModifier",
+              "doOffStage": false,
+              "modifierName": "StateMachineHandler",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "thinkInterval": 1
+        },
+        "ShootManager_SplitLess_NoTrack": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "AttachModifier",
+              "doOffStage": false,
+              "modifierName": "ShootManager_SplitLess_NoTrack_ShootLogic",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "thinkInterval": "GV_AttackDelay"
+        },
+        "ShootManager_SplitLess_NoTrack_ShootLogic": {
+          "onAdded": [
+            {
+              "$type": "TriggerThinkInterval",
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "stacking": "Unique",
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "Predicated",
+              "doOffStage": false,
+              "targetPredicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "value": -1,
+                  "target": "Target",
+                  "key": "GV_ContextData",
+                  "compareType": "MoreThan"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "successActions": [
+                {
+                  "$type": "TriggerBullet",
+                  "doOffStage": false,
+                  "trackTarget": "SelfAttackTarget",
+                  "bulletID": 73120003,
+                  "value": true,
+                  "actorIceSubHurtDelta": -1,
+                  "born": {
+                    "$type": "ConfigBornByAttachPoint",
+                    "direction": {
+                      "$type": "ConfigDirectionByAttachPoint",
+                      "maxAngle": 180,
+                      "attachPointTargetType": "Self",
+                      "attachPointName": "FireNode"
+                    },
+                    "useRotation": true,
+                    "FDGAEDDEEDG": {
+                      "ELAJJIANFFM": 180
+                    },
+                    "attachPointName": "FireNode",
+                    "onGroundRaycastUpDist": 2,
+                    "value": 10
+                  },
+                  "canBeHandledOnRecover": true,
+                  "POOEIFNLHDB": true
+                },
+                {
+                  "$type": "TriggerBullet",
+                  "doOffStage": false,
+                  "trackTarget": "SelfAttackTarget",
+                  "bulletID": 73120003,
+                  "value": true,
+                  "actorIceSubHurtDelta": -1,
+                  "born": {
+                    "$type": "ConfigBornByAttachPoint",
+                    "direction": {
+                      "$type": "ConfigDirectionByAttachPoint",
+                      "maxAngle": 180,
+                      "attachPointTargetType": "Self",
+                      "attachPointName": "FireNode",
+                      "angleOffset": {
+                        "x": 30
+                      }
+                    },
+                    "useRotation": true,
+                    "FDGAEDDEEDG": {
+                      "ELAJJIANFFM": 180
+                    },
+                    "attachPointName": "FireNode",
+                    "onGroundRaycastUpDist": 2,
+                    "value": 10
+                  },
+                  "canBeHandledOnRecover": true,
+                  "POOEIFNLHDB": true
+                },
+                {
+                  "$type": "TriggerBullet",
+                  "doOffStage": false,
+                  "trackTarget": "SelfAttackTarget",
+                  "bulletID": 73120003,
+                  "value": true,
+                  "actorIceSubHurtDelta": -1,
+                  "born": {
+                    "$type": "ConfigBornByAttachPoint",
+                    "direction": {
+                      "$type": "ConfigDirectionByAttachPoint",
+                      "maxAngle": 180,
+                      "attachPointTargetType": "Self",
+                      "attachPointName": "FireNode",
+                      "angleOffset": {
+                        "x": -30
+                      }
+                    },
+                    "useRotation": true,
+                    "FDGAEDDEEDG": {
+                      "ELAJJIANFFM": 180
+                    },
+                    "attachPointName": "FireNode",
+                    "onGroundRaycastUpDist": 2,
+                    "value": 10
+                  },
+                  "canBeHandledOnRecover": true,
+                  "POOEIFNLHDB": true
+                }
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "thinkInterval": "GV_AttackCD"
+        },
+        "StateMachineHandler": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "AttachToGadgetStateMixin",
+              "modifierName": "State_302",
+              "actorIceSubHurtDelta": -1,
+              "gadgetState": 302
+            }
+          ],
+          "minus_one": -1
+        },
+        "State_302": {
+          "onAdded": [
+            {
+              "$type": "CopyGlobalValue",
+              "doOffStage": true,
+              "dstKey": "GV_AttackDelay",
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "target": "Target",
+                  "key": "SGV_AttackDelay",
+                  "compareType": "MoreThan"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "srcKey": "SGV_AttackDelay",
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "CopyGlobalValue",
+              "doOffStage": true,
+              "dstKey": "GV_AttackCD",
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "target": "Target",
+                  "key": "SGV_AttackCD",
+                  "compareType": "MoreThan"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "srcKey": "SGV_AttackCD",
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AttachModifier",
+              "doOffStage": false,
+              "modifierName": "ShootManager_SplitLess_NoTrack",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "__unk_Q2982101340": [
+        "SGV_AttackDelay",
+        "SGV_AttackCD",
+        "GV_AttackDelay",
+        "GV_AttackCD"
+      ],
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "doOffStage": false,
+          "modifierName": "DelayAttach",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "SceneObj_Area_Common_Property_Ani_6_4_AirEmeny_ShootManagerSplitMore_NoTrackFlyVertical",
+      "modifiers": {
+        "DelayAttach": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "AttachModifier",
+              "doOffStage": false,
+              "modifierName": "StateMachineHandler",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "thinkInterval": 1
+        },
+        "ShootManager_SplitMore_NoTrackFlyVertical": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "AttachModifier",
+              "doOffStage": false,
+              "modifierName": "ShootManager_SplitMore_NoTrackFlyVertical_ShootLogic",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "thinkInterval": "GV_AttackDelay"
+        },
+        "ShootManager_SplitMore_NoTrackFlyVertical_ShootLogic": {
+          "onAdded": [
+            {
+              "$type": "TriggerThinkInterval",
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "stacking": "Unique",
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "Predicated",
+              "doOffStage": false,
+              "targetPredicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "value": -1,
+                  "target": "Target",
+                  "key": "GV_ContextData",
+                  "compareType": "MoreThan"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "successActions": [
+                {
+                  "$type": "TriggerBullet",
+                  "doOffStage": false,
+                  "trackTarget": "SelfAttackTarget",
+                  "bulletID": 73120046,
+                  "value": true,
+                  "actorIceSubHurtDelta": -1,
+                  "born": {
+                    "$type": "ConfigBornByAttachPoint",
+                    "direction": {
+                      "$type": "ConfigDirectionByAttachPoint",
+                      "maxAngle": 180,
+                      "attachPointTargetType": "Self",
+                      "attachPointName": "FireNode"
+                    },
+                    "useRotation": true,
+                    "FDGAEDDEEDG": {
+                      "ELAJJIANFFM": 180
+                    },
+                    "attachPointName": "FireNode",
+                    "onGroundRaycastUpDist": 2,
+                    "value": 10
+                  },
+                  "canBeHandledOnRecover": true,
+                  "POOEIFNLHDB": true
+                },
+                {
+                  "$type": "TriggerBullet",
+                  "doOffStage": false,
+                  "trackTarget": "SelfAttackTarget",
+                  "bulletID": 73120046,
+                  "value": true,
+                  "actorIceSubHurtDelta": -1,
+                  "born": {
+                    "$type": "ConfigBornByAttachPoint",
+                    "direction": {
+                      "$type": "ConfigDirectionByAttachPoint",
+                      "maxAngle": 180,
+                      "attachPointTargetType": "Self",
+                      "attachPointName": "FireNode",
+                      "angleOffset": {
+                        "y": 75
+                      }
+                    },
+                    "useRotation": true,
+                    "FDGAEDDEEDG": {
+                      "ELAJJIANFFM": 180
+                    },
+                    "attachPointName": "FireNode",
+                    "onGroundRaycastUpDist": 2,
+                    "value": 10
+                  },
+                  "canBeHandledOnRecover": true,
+                  "POOEIFNLHDB": true
+                },
+                {
+                  "$type": "TriggerBullet",
+                  "doOffStage": false,
+                  "trackTarget": "SelfAttackTarget",
+                  "bulletID": 73120046,
+                  "value": true,
+                  "actorIceSubHurtDelta": -1,
+                  "born": {
+                    "$type": "ConfigBornByAttachPoint",
+                    "direction": {
+                      "$type": "ConfigDirectionByAttachPoint",
+                      "maxAngle": 180,
+                      "attachPointTargetType": "Self",
+                      "attachPointName": "FireNode",
+                      "angleOffset": {
+                        "y": 105
+                      }
+                    },
+                    "useRotation": true,
+                    "FDGAEDDEEDG": {
+                      "ELAJJIANFFM": 180
+                    },
+                    "attachPointName": "FireNode",
+                    "onGroundRaycastUpDist": 2,
+                    "value": 10
+                  },
+                  "canBeHandledOnRecover": true,
+                  "POOEIFNLHDB": true
+                },
+                {
+                  "$type": "TriggerBullet",
+                  "doOffStage": false,
+                  "trackTarget": "SelfAttackTarget",
+                  "bulletID": 73120046,
+                  "value": true,
+                  "actorIceSubHurtDelta": -1,
+                  "born": {
+                    "$type": "ConfigBornByAttachPoint",
+                    "direction": {
+                      "$type": "ConfigDirectionByAttachPoint",
+                      "maxAngle": 180,
+                      "attachPointTargetType": "Self",
+                      "attachPointName": "FireNode",
+                      "angleOffset": {
+                        "y": 145
+                      }
+                    },
+                    "useRotation": true,
+                    "FDGAEDDEEDG": {
+                      "ELAJJIANFFM": 180
+                    },
+                    "attachPointName": "FireNode",
+                    "onGroundRaycastUpDist": 2,
+                    "value": 10
+                  },
+                  "canBeHandledOnRecover": true,
+                  "POOEIFNLHDB": true
+                },
+                {
+                  "$type": "TriggerBullet",
+                  "doOffStage": false,
+                  "trackTarget": "SelfAttackTarget",
+                  "bulletID": 73120046,
+                  "value": true,
+                  "actorIceSubHurtDelta": -1,
+                  "born": {
+                    "$type": "ConfigBornByAttachPoint",
+                    "direction": {
+                      "$type": "ConfigDirectionByAttachPoint",
+                      "maxAngle": 180,
+                      "attachPointTargetType": "Self",
+                      "attachPointName": "FireNode",
+                      "angleOffset": {
+                        "y": -75
+                      }
+                    },
+                    "useRotation": true,
+                    "FDGAEDDEEDG": {
+                      "ELAJJIANFFM": 180
+                    },
+                    "attachPointName": "FireNode",
+                    "onGroundRaycastUpDist": 2,
+                    "value": 10
+                  },
+                  "canBeHandledOnRecover": true,
+                  "POOEIFNLHDB": true
+                },
+                {
+                  "$type": "TriggerBullet",
+                  "doOffStage": false,
+                  "trackTarget": "SelfAttackTarget",
+                  "bulletID": 73120046,
+                  "value": true,
+                  "actorIceSubHurtDelta": -1,
+                  "born": {
+                    "$type": "ConfigBornByAttachPoint",
+                    "direction": {
+                      "$type": "ConfigDirectionByAttachPoint",
+                      "maxAngle": 180,
+                      "attachPointTargetType": "Self",
+                      "attachPointName": "FireNode",
+                      "angleOffset": {
+                        "y": -105
+                      }
+                    },
+                    "useRotation": true,
+                    "FDGAEDDEEDG": {
+                      "ELAJJIANFFM": 180
+                    },
+                    "attachPointName": "FireNode",
+                    "onGroundRaycastUpDist": 2,
+                    "value": 10
+                  },
+                  "canBeHandledOnRecover": true,
+                  "POOEIFNLHDB": true
+                },
+                {
+                  "$type": "TriggerBullet",
+                  "doOffStage": false,
+                  "trackTarget": "SelfAttackTarget",
+                  "bulletID": 73120046,
+                  "value": true,
+                  "actorIceSubHurtDelta": -1,
+                  "born": {
+                    "$type": "ConfigBornByAttachPoint",
+                    "direction": {
+                      "$type": "ConfigDirectionByAttachPoint",
+                      "maxAngle": 180,
+                      "attachPointTargetType": "Self",
+                      "attachPointName": "FireNode",
+                      "angleOffset": {
+                        "y": -145
+                      }
+                    },
+                    "useRotation": true,
+                    "FDGAEDDEEDG": {
+                      "ELAJJIANFFM": 180
+                    },
+                    "attachPointName": "FireNode",
+                    "onGroundRaycastUpDist": 2,
+                    "value": 10
+                  },
+                  "canBeHandledOnRecover": true,
+                  "POOEIFNLHDB": true
+                }
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "thinkInterval": "GV_AttackCD"
+        },
+        "StateMachineHandler": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "AttachToGadgetStateMixin",
+              "modifierName": "State_303",
+              "actorIceSubHurtDelta": -1,
+              "gadgetState": 303
+            }
+          ],
+          "minus_one": -1
+        },
+        "State_303": {
+          "onAdded": [
+            {
+              "$type": "CopyGlobalValue",
+              "doOffStage": true,
+              "dstKey": "GV_AttackDelay",
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "target": "Target",
+                  "key": "SGV_AttackDelay",
+                  "compareType": "MoreThan"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "srcKey": "SGV_AttackDelay",
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "CopyGlobalValue",
+              "doOffStage": true,
+              "dstKey": "GV_AttackCD",
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "target": "Target",
+                  "key": "SGV_AttackCD",
+                  "compareType": "MoreThan"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "srcKey": "SGV_AttackCD",
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AttachModifier",
+              "doOffStage": false,
+              "modifierName": "ShootManager_SplitMore_NoTrackFlyVertical",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        }
+      }
+    }
+  }
+]

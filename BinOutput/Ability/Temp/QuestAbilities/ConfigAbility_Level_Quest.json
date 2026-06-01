@@ -1,0 +1,624 @@
+[
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "LevelAbility_Quest_XiaoDungeonStageReady",
+      "isDynamicAbility": true,
+      "abilityMixins": [
+        {
+          "$type": "StageReadyMixin",
+          "onStageReady": [
+            {
+              "$type": "ServerLuaCall",
+              "doOffStage": false,
+              "luaCallType": "SpecificGroup",
+              "actorIceSubHurtDelta": -1,
+              "funcName": "stage_ready",
+              "CallParamList": [
+                201032010
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "actorIceSubHurtDelta": -1
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "LevelAbility_Quest_ShougunDungeonStageReady",
+      "isDynamicAbility": true,
+      "abilityMixins": [
+        {
+          "$type": "StageReadyMixin",
+          "onStageReady": [
+            {
+              "$type": "ServerLuaCall",
+              "doOffStage": false,
+              "luaCallType": "FromGroup",
+              "actorIceSubHurtDelta": -1,
+              "funcName": "EndlessBladeDecliningEnergy",
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "actorIceSubHurtDelta": -1
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "SetGlobalValue",
+          "doOffStage": true,
+          "key": "_LevelAbility_WQ_JiWuPuMoveOnWater_Flag",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "LevelAbility_WQ_JiWuPuMoveOnWater",
+      "onRemoved": [
+        {
+          "$type": "SetGlobalValue",
+          "doOffStage": true,
+          "key": "_LevelAbility_WQ_JiWuPuMoveOnWater_Flag",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "isDynamicAbility": true,
+      "abilityMixins": [
+        {
+          "$type": "AttachModifierToSelfGlobalValueMixin",
+          "globalValueKey": "_LevelAbility_WQ_JiWuPuMoveOnWater_Flag",
+          "modifierNameSteps": [
+            "MoveOnWater_Off",
+            "MoveOnWater_On"
+          ],
+          "removeAppliedModifier": true,
+          "actorIceSubHurtDelta": -1,
+          "valueSteps": [
+            -0.5,
+            0.5,
+            1.5
+          ]
+        }
+      ],
+      "modifiers": {
+        "MoveOnWater_Off": {
+          "onAdded": [
+            {
+              "$type": "EnableAvatarMoveOnWater",
+              "doOffStage": true,
+              "enable": true,
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "MoveOnWater_On": {
+          "onAdded": [
+            {
+              "$type": "EnableAvatarMoveOnWater",
+              "doOffStage": true,
+              "enable": true,
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "doOffStage": false,
+          "modifierName": "NatlandFirstSightTele_handler",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "LevelAbility_Quest_NatlandFirstSightTele",
+      "isDynamicAbility": true,
+      "modifiers": {
+        "NatlandFirstSightTele_Tele": {
+          "onAdded": [
+            {
+              "$type": "ServerLuaCall",
+              "doOffStage": true,
+              "luaCallType": "SpecificGroup",
+              "actorIceSubHurtDelta": -1,
+              "funcName": "SLC_Start_Tele",
+              "CallParamList": [
+                133504009
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "stacking": "Unique",
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "RemoveModifier",
+              "doOffStage": false,
+              "modifierName": "NatlandFirstSightTele_Tele",
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "target": "Target",
+                  "key": "SGV_NatlandFirstSightTele_Teleported",
+                  "compareType": "NoneOrEqual"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "thinkInterval": 30
+        },
+        "NatlandFirstSightTele_handler": {
+          "onAdded": [
+            {
+              "$type": "AttachModifier",
+              "doOffStage": false,
+              "modifierName": "NatlandFirstSightTele_region_check",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "AttachModifier",
+              "doOffStage": false,
+              "modifierName": "NatlandFirstSightTele_region_check",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "thinkInterval": 5
+        },
+        "NatlandFirstSightTele_region_check": {
+          "onAdded": [
+            {
+              "$type": "Predicated",
+              "doOffStage": false,
+              "targetPredicates": [
+                {
+                  "$type": "BySceneLoaded",
+                  "target": "Target"
+                },
+                {
+                  "$type": "DADMNLOMFHH",
+                  "target": "Target",
+                  "sceneIds": [
+                    3
+                  ]
+                },
+                {
+                  "$type": "DGCFMGDJJDB",
+                  "target": "Target"
+                },
+                {
+                  "$type": "ByHostOrGuest",
+                  "target": "Target",
+                  "isHost": true
+                },
+                {
+                  "$type": "ByTargetAltitude",
+                  "value": 1,
+                  "target": "Target",
+                  "logic": "Lesser"
+                },
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "target": "Target",
+                  "key": "SGV_NatlandFirstSightTele_Teleported",
+                  "compareType": "NoneOrEqual"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "successActions": [
+                {
+                  "$type": "AttachModifier",
+                  "doOffStage": false,
+                  "modifierName": "NatlandFirstSightTele_Tele",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "duration": 1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "LevelAbility_Quest_TestingMedicine",
+      "isDynamicAbility": true,
+      "abilityMixins": [
+        {
+          "$type": "AttachModifierToSelfGlobalValueMixin",
+          "globalValueKey": "_Medicine_State",
+          "modifierNameSteps": [
+            "LockHP_50",
+            "Reminder_Timer",
+            "LockHP_1"
+          ],
+          "removeAppliedModifier": true,
+          "actorIceSubHurtDelta": -1,
+          "valueSteps": [
+            -0.5,
+            0.5,
+            1.5,
+            2.5
+          ]
+        },
+        {
+          "$type": "AttachModifierToHPPercentMixin",
+          "modifierNameSteps": [
+            "HP_Dummy",
+            "HP_Medicine"
+          ],
+          "actorIceSubHurtDelta": -1,
+          "valueSteps": [
+            0.5
+          ]
+        }
+      ],
+      "modifiers": {
+        "HP_Dummy": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "HP_Medicine": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "value": 1,
+              "key": "_Medicine_State",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "state": "DefenseDown"
+        },
+        "LockHP_1": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "LoseHP",
+              "doOffStage": false,
+              "amountByCasterMaxHPRatio": 0.019999999552965164,
+              "enableInvincible": true,
+              "actorIceSubHurtDelta": -1,
+              "disableWhenLoading": true,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "properties": {
+            "Actor_HpThresholdRatio": 0.008999999612569809
+          },
+          "thinkInterval": 0.30000001192092896,
+          "state": "Limbo"
+        },
+        "LockHP_50": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "properties": {
+            "Actor_HpThresholdRatio": 0.49900001287460327
+          },
+          "state": "Limbo"
+        },
+        "Reminder_Timer": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "value": 2,
+              "key": "_Medicine_State",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "thinkInterval": 3.5,
+          "state": "LockHP"
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "MonsterAffix_NoCombat_BeforeBattle",
+      "isDynamicAbility": true,
+      "abilityMixins": [
+        {
+          "$type": "AttachToAIAlertnessMixin",
+          "modifierName": "NoCombat_BeforeBattle",
+          "alertness": [
+            0
+          ],
+          "actorIceSubHurtDelta": -1
+        }
+      ],
+      "modifiers": {
+        "NoCombat_BeforeBattle": {
+          "onAdded": [
+            {
+              "$type": "AttachModifier",
+              "doOffStage": false,
+              "modifierName": "State_DenyLockOn",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AttachModifier",
+              "doOffStage": false,
+              "modifierName": "State_Invincible",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AttachModifier",
+              "doOffStage": false,
+              "modifierName": "State_IsGhostToEnemy",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AttachModifier",
+              "doOffStage": false,
+              "modifierName": "State_MuteTaunt",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "AttachActionToModifierMixin",
+              "onAdded": [
+                {
+                  "$type": "ResetAIThreatBroadcastRange",
+                  "doOffStage": false,
+                  "enable": true,
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "SetAIHitFeeling",
+                  "doOffStage": false,
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "HideUIBillBoard",
+                  "doOffStage": false,
+                  "actorIceSubHurtDelta": -1,
+                  "hide": true,
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "EnablePushColliderName",
+                  "doOffStage": false,
+                  "actorIceSubHurtDelta": -1,
+                  "pushColliderNames": [
+                    "MoveCollider",
+                    "PushCollider"
+                  ],
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "EnablePushColliderName",
+                  "doOffStage": false,
+                  "actorIceSubHurtDelta": -1,
+                  "setEnable": true,
+                  "pushColliderNames": [
+                    "PushCollider_Occluder"
+                  ],
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "EnableHitBoxByName",
+                  "doOffStage": false,
+                  "actorIceSubHurtDelta": -1,
+                  "hitBoxNames": [
+                    "HitBox"
+                  ],
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "onRemoved": [
+                {
+                  "$type": "ResetAIThreatBroadcastRange",
+                  "doOffStage": false,
+                  "CDLINBMLDIO": 15,
+                  "enable": true,
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "SetAIHitFeeling",
+                  "doOffStage": false,
+                  "enable": true,
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "HideUIBillBoard",
+                  "doOffStage": false,
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "EnablePushColliderName",
+                  "doOffStage": false,
+                  "actorIceSubHurtDelta": -1,
+                  "setEnable": true,
+                  "pushColliderNames": [
+                    "MoveCollider",
+                    "PushCollider"
+                  ],
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "EnablePushColliderName",
+                  "doOffStage": false,
+                  "actorIceSubHurtDelta": -1,
+                  "pushColliderNames": [
+                    "PushCollider_Occluder"
+                  ],
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "EnableHitBoxByName",
+                  "doOffStage": false,
+                  "actorIceSubHurtDelta": -1,
+                  "setEnable": true,
+                  "hitBoxNames": [
+                    "HitBox"
+                  ],
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "minus_one": -1
+        },
+        "State_DenyLockOn": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "state": "DenyLockOn"
+        },
+        "State_Invincible": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "state": "Invincible"
+        },
+        "State_IsGhostToEnemy": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "state": "IsGhostToEnemy"
+        },
+        "State_MuteTaunt": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "state": "MuteTaunt"
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "ApplyModifier",
+          "doOffStage": false,
+          "modifierName": "PartnerEnhanced",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "MonsterAffix_PartnerEnhanced",
+      "isDynamicAbility": true,
+      "modifiers": {
+        "PartnerEnhanced": {
+          "onAdded": [
+            {
+              "$type": "SetAISkillCDMultiplier",
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1,
+              "NGNENOOAHMP": 0.10000000149011612,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetAISkillGCD",
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "properties": {
+            "Actor_EndureDelta": 0.20000000298023224,
+            "Entity_MassRatio": 10
+          }
+        }
+      }
+    }
+  }
+]

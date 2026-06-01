@@ -1,0 +1,2056 @@
+[
+  {
+    "Default": {
+      "abilitySpecials": {
+        "DamageDown": 0,
+        "PunishmentDuration": 0
+      },
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "SetGlobalValue",
+          "doOffStage": true,
+          "target": "Team",
+          "key": "AUTOTIMESTOP_PUNISH_KEY",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "ApplyModifier",
+          "doOffStage": true,
+          "modifierName": "UNIQUE_AutoTimeStop_Punishment_Handler_OnTeam",
+          "target": "Team",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "ActivityAbility_AutoTimeStop_Punishment",
+      "isDynamicAbility": true,
+      "abilityMixins": [
+        {
+          "$type": "DoActionOnGlobalValueChangeMixin",
+          "globalValueKey": "AUTOTIMESTOP_PUNISH_KEY",
+          "actions": [
+            {
+              "$type": "Predicated",
+              "doOffStage": true,
+              "target": "Team",
+              "targetPredicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "value": 1,
+                  "target": "Team",
+                  "key": "AUTOTIMESTOP_PUNISH_KEY"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "successActions": [
+                {
+                  "$type": "RemoveUniqueModifier",
+                  "doOffStage": true,
+                  "modifierName": "UNIQUE_AutoTimeStop_Punishment_OnAvatar",
+                  "target": "CurTeamAvatars",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "RemoveUniqueModifier",
+                  "doOffStage": true,
+                  "modifierName": "UNIQUE_AutoTimeStop_Punishment_Handler_OnTeam",
+                  "target": "Team",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "ApplyModifier",
+                  "doOffStage": true,
+                  "modifierName": "UNIQUE_AutoTimeStop_Punishment_Handler_OnTeam",
+                  "target": "Team",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "actorIceSubHurtDelta": -1
+        }
+      ],
+      "modifiers": {
+        "UNIQUE_AutoTimeStop_Punishment_Handler_OnTeam": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": true,
+              "target": "Team",
+              "key": "AUTOTIMESTOP_PUNISH_KEY",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "ApplyModifier",
+              "doOffStage": false,
+              "modifierName": "UNIQUE_AutoTimeStop_Punishment_OnAvatar",
+              "target": "CurTeamAvatars",
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "target": "Team",
+                  "key": "AUTOTIMESTOP_PUNISH_KEY"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "isUnique": true,
+          "duration": "PunishmentDuration"
+        },
+        "UNIQUE_AutoTimeStop_Punishment_OnAvatar": {
+          "onAdded": [
+            {
+              "$type": "ShowReminder",
+              "doOffStage": false,
+              "id": 404416,
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true,
+              "PBHJPBFJGME": true
+            }
+          ],
+          "elementDurability": 100,
+          "stacking": "Unique",
+          "isLimitedProperties": true,
+          "KKBDDALAMKP": true,
+          "minus_one": -1,
+          "properties": {
+            "Actor_AddHurtDelta": "DamageDown"
+          },
+          "isUnique": true,
+          "duration": 120
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "abilitySpecials": {
+        "ChargeEfficiencyUpRate": 0
+      },
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "doOffStage": true,
+          "modifierName": "UNIQUE_AutoTimeStop_Common_Handler_OnTeam",
+          "target": "Team",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "ActivityAbility_AutoTimeStop_Common",
+      "isDynamicAbility": true,
+      "modifiers": {
+        "UNIQUE_AutoTimeStop_Common_Buff": {
+          "elementDurability": 100,
+          "stacking": "Unique",
+          "isLimitedProperties": true,
+          "KKBDDALAMKP": true,
+          "minus_one": -1,
+          "properties": {
+            "Actor_ChargeEfficiencyDelta": "ChargeEfficiencyUpRate"
+          },
+          "isUnique": true
+        },
+        "UNIQUE_AutoTimeStop_Common_Handler_OnTeam": {
+          "onAdded": [
+            {
+              "$type": "AttachModifier",
+              "doOffStage": true,
+              "modifierName": "UNIQUE_AutoTimeStop_Common_Buff",
+              "target": "CurTeamAvatars",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "AttachModifier",
+              "doOffStage": true,
+              "modifierName": "UNIQUE_AutoTimeStop_Common_Buff",
+              "target": "CurTeamAvatars",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "isUnique": true,
+          "thinkInterval": 1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "abilitySpecials": {
+        "ArtSkillUpRate": 0,
+        "CJB_Damage": 0,
+        "DamageSystemValue": 0,
+        "ExtraAttackUpRate": 0,
+        "FallingAttackUpRate": 0,
+        "HealHp_Ratio": 0,
+        "NormalAttackUpRate": 0,
+        "RandomBuffDuration": 0,
+        "UltimateSkillUpRate": 0
+      },
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "doOffStage": true,
+          "modifierName": "UNIQUE_AutoTimeStop_Random_Handler_OnTeam",
+          "target": "Team",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "SetSystemValueToOverrideMap",
+          "doOffStage": true,
+          "key": "DamageSystemValue",
+          "actorIceSubHurtDelta": -1,
+          "value": -1,
+          "type": "ElementLevelCo",
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "ActivityAbility_AutoTimeStop_Random",
+      "isDynamicAbility": true,
+      "modifiers": {
+        "AutoTimeStop_Common_CJB": {
+          "onAdded": [
+            {
+              "$type": "SetSystemValueToOverrideMap",
+              "doOffStage": true,
+              "key": "DamageSystemValue",
+              "actorIceSubHurtDelta": -1,
+              "value": -1,
+              "type": "ElementLevelCo",
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "FireEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Stages_SwirlDoField_DoAttack_R20",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "TriggerAttackEvent",
+              "doOffStage": false,
+              "attackEvent": {
+                "attackInfo": {
+                  "attenuationGroup": "default",
+                  "canBeModifiedBy": "OriginOwner",
+                  "hitPattern": {
+                    "hitImpulseType": "LV2",
+                    "onHitEffectName": "default",
+                    "hitHaltTimeScale": 0.019999999552965164,
+                    "JKLONEBKFKJ": {
+                      "JJGBOHIKHFM": true,
+                      "value": 1
+                    }
+                  },
+                  "FJNMGDHFOEH": {
+                    "GCPNPCOFFBP": "Shake"
+                  },
+                  "IODAJAKBOLG": {
+                    "onHitEffectName": "default",
+                    "JKLONEBKFKJ": {
+                      "JJGBOHIKHFM": true,
+                      "value": 1
+                    }
+                  },
+                  "attackProperty": {
+                    "attackType": "Default",
+                    "CGDGMKEJOKH": true,
+                    "strikeType": "None",
+                    "elementRank": 1,
+                    "HPPLKCPAKHP": true,
+                    "damageExtra": [
+                      "CJB_Damage",
+                      "DamageSystemValue",
+                      "MUL"
+                    ],
+                    "OBHHLNNKOCN": true
+                  },
+                  "cameraShake": {
+                    "extension": {
+                      "baseCycle": 0.11999999731779099,
+                      "cycleDamping": 0.11999999731779099,
+                      "baseOnCamera": true,
+                      "rangeAttenuation": 0.5
+                    },
+                    "FAKMJBNLPPB": -1,
+                    "shakeDistance": 20
+                  }
+                },
+                "attackPattern": {
+                  "$type": "ConfigAttackSphere",
+                  "radius": 20,
+                  "massiveAttackRatio": 1,
+                  "born": {
+                    "$type": "ConfigBornBySelf",
+                    "direction": {
+                      "maxAngle": 180
+                    },
+                    "useRotation": true,
+                    "FDGAEDDEEDG": {
+                      "ELAJJIANFFM": 180
+                    },
+                    "onGroundRaycastUpDist": 2,
+                    "value": 10
+                  },
+                  "PBFNLCIFCBO": {
+                    "GOAEBMPCPJL": {
+                      "JJGBOHIKHFM": true,
+                      "value": 1
+                    }
+                  },
+                  "triggerType": "TriggerNoRepeat"
+                }
+              },
+              "targetType": "Enemy",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": true,
+              "value": 1,
+              "target": "Team",
+              "key": "AUTOTIMESTOP_PUNISH_KEY",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "duration": 0.10000000149011612
+        },
+        "AutoTimeStop_Common_HealHP": {
+          "onAdded": [
+            {
+              "$type": "HealHP",
+              "doOffStage": true,
+              "amountByTargetMaxHPRatio": "HealHp_Ratio",
+              "value": 1,
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "duration": 0.10000000149011612
+        },
+        "AutoTimeStop_Random_Buff01_AvatarHandler": {
+          "onAdded": [
+            {
+              "$type": "AttachModifier",
+              "doOffStage": true,
+              "modifierName": "UNIQUE_AutoTimeStop_Random_Buff01",
+              "target": "CurTeamAvatars",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "AttachModifier",
+              "doOffStage": true,
+              "modifierName": "UNIQUE_AutoTimeStop_Random_Buff01",
+              "target": "CurTeamAvatars",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "thinkInterval": 2,
+          "duration": "RandomBuffDuration"
+        },
+        "AutoTimeStop_Random_Buff01_TeamHandler": {
+          "onAdded": [
+            {
+              "$type": "ShowReminder",
+              "doOffStage": false,
+              "id": 404341,
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true,
+              "PBHJPBFJGME": true
+            },
+            {
+              "$type": "RemoveModifier",
+              "doOffStage": true,
+              "modifierName": "AutoTimeStop_Random_Buff01_AvatarHandler",
+              "target": "Team",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "RemoveModifier",
+              "doOffStage": true,
+              "modifierName": "AutoTimeStop_Random_Buff02_AvatarHandler",
+              "target": "Team",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "RemoveModifier",
+              "doOffStage": true,
+              "modifierName": "AutoTimeStop_Random_Buff03_AvatarHandler",
+              "target": "Team",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "RemoveModifier",
+              "doOffStage": true,
+              "modifierName": "AutoTimeStop_Random_Buff04_AvatarHandler",
+              "target": "Team",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "RemoveModifier",
+              "doOffStage": true,
+              "modifierName": "AutoTimeStop_Random_Buff05_AvatarHandler",
+              "target": "Team",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "ApplyModifier",
+              "doOffStage": true,
+              "modifierName": "AutoTimeStop_Random_Buff01_AvatarHandler",
+              "target": "Team",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "duration": 0.10000000149011612
+        },
+        "AutoTimeStop_Random_Buff02_AvatarHandler": {
+          "onAdded": [
+            {
+              "$type": "AttachModifier",
+              "doOffStage": true,
+              "modifierName": "UNIQUE_AutoTimeStop_Random_Buff02",
+              "target": "CurTeamAvatars",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "AttachModifier",
+              "doOffStage": true,
+              "modifierName": "UNIQUE_AutoTimeStop_Random_Buff02",
+              "target": "CurTeamAvatars",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "thinkInterval": 2,
+          "duration": "RandomBuffDuration"
+        },
+        "AutoTimeStop_Random_Buff02_TeamHandler": {
+          "onAdded": [
+            {
+              "$type": "ShowReminder",
+              "doOffStage": false,
+              "id": 404342,
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true,
+              "PBHJPBFJGME": true
+            },
+            {
+              "$type": "RemoveModifier",
+              "doOffStage": true,
+              "modifierName": "AutoTimeStop_Random_Buff01_AvatarHandler",
+              "target": "Team",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "RemoveModifier",
+              "doOffStage": true,
+              "modifierName": "AutoTimeStop_Random_Buff02_AvatarHandler",
+              "target": "Team",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "RemoveModifier",
+              "doOffStage": true,
+              "modifierName": "AutoTimeStop_Random_Buff03_AvatarHandler",
+              "target": "Team",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "RemoveModifier",
+              "doOffStage": true,
+              "modifierName": "AutoTimeStop_Random_Buff04_AvatarHandler",
+              "target": "Team",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "RemoveModifier",
+              "doOffStage": true,
+              "modifierName": "AutoTimeStop_Random_Buff05_AvatarHandler",
+              "target": "Team",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "ApplyModifier",
+              "doOffStage": true,
+              "modifierName": "AutoTimeStop_Random_Buff02_AvatarHandler",
+              "target": "Team",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "duration": 0.10000000149011612
+        },
+        "AutoTimeStop_Random_Buff03_AvatarHandler": {
+          "onAdded": [
+            {
+              "$type": "AttachModifier",
+              "doOffStage": true,
+              "modifierName": "UNIQUE_AutoTimeStop_Random_Buff03",
+              "target": "CurTeamAvatars",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "AttachModifier",
+              "doOffStage": true,
+              "modifierName": "UNIQUE_AutoTimeStop_Random_Buff03",
+              "target": "CurTeamAvatars",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "thinkInterval": 2,
+          "duration": "RandomBuffDuration"
+        },
+        "AutoTimeStop_Random_Buff03_TeamHandler": {
+          "onAdded": [
+            {
+              "$type": "ShowReminder",
+              "doOffStage": false,
+              "id": 404343,
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true,
+              "PBHJPBFJGME": true
+            },
+            {
+              "$type": "RemoveModifier",
+              "doOffStage": true,
+              "modifierName": "AutoTimeStop_Random_Buff01_AvatarHandler",
+              "target": "Team",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "RemoveModifier",
+              "doOffStage": true,
+              "modifierName": "AutoTimeStop_Random_Buff02_AvatarHandler",
+              "target": "Team",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "RemoveModifier",
+              "doOffStage": true,
+              "modifierName": "AutoTimeStop_Random_Buff03_AvatarHandler",
+              "target": "Team",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "RemoveModifier",
+              "doOffStage": true,
+              "modifierName": "AutoTimeStop_Random_Buff04_AvatarHandler",
+              "target": "Team",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "RemoveModifier",
+              "doOffStage": true,
+              "modifierName": "AutoTimeStop_Random_Buff05_AvatarHandler",
+              "target": "Team",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "ApplyModifier",
+              "doOffStage": true,
+              "modifierName": "AutoTimeStop_Random_Buff03_AvatarHandler",
+              "target": "Team",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "duration": 0.10000000149011612
+        },
+        "AutoTimeStop_Random_Buff04_AvatarHandler": {
+          "onAdded": [
+            {
+              "$type": "AttachModifier",
+              "doOffStage": true,
+              "modifierName": "UNIQUE_AutoTimeStop_Random_Buff04",
+              "target": "CurTeamAvatars",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "AttachModifier",
+              "doOffStage": true,
+              "modifierName": "UNIQUE_AutoTimeStop_Random_Buff04",
+              "target": "CurTeamAvatars",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "thinkInterval": 2,
+          "duration": "RandomBuffDuration"
+        },
+        "AutoTimeStop_Random_Buff04_TeamHandler": {
+          "onAdded": [
+            {
+              "$type": "ShowReminder",
+              "doOffStage": false,
+              "id": 404344,
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true,
+              "PBHJPBFJGME": true
+            },
+            {
+              "$type": "RemoveModifier",
+              "doOffStage": true,
+              "modifierName": "AutoTimeStop_Random_Buff01_AvatarHandler",
+              "target": "Team",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "RemoveModifier",
+              "doOffStage": true,
+              "modifierName": "AutoTimeStop_Random_Buff02_AvatarHandler",
+              "target": "Team",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "RemoveModifier",
+              "doOffStage": true,
+              "modifierName": "AutoTimeStop_Random_Buff03_AvatarHandler",
+              "target": "Team",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "RemoveModifier",
+              "doOffStage": true,
+              "modifierName": "AutoTimeStop_Random_Buff04_AvatarHandler",
+              "target": "Team",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "RemoveModifier",
+              "doOffStage": true,
+              "modifierName": "AutoTimeStop_Random_Buff05_AvatarHandler",
+              "target": "Team",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "ApplyModifier",
+              "doOffStage": true,
+              "modifierName": "AutoTimeStop_Random_Buff04_AvatarHandler",
+              "target": "Team",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "duration": 0.10000000149011612
+        },
+        "AutoTimeStop_Random_Buff05_AvatarHandler": {
+          "onAdded": [
+            {
+              "$type": "AttachModifier",
+              "doOffStage": true,
+              "modifierName": "UNIQUE_AutoTimeStop_Random_Buff05",
+              "target": "CurTeamAvatars",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "AttachModifier",
+              "doOffStage": true,
+              "modifierName": "UNIQUE_AutoTimeStop_Random_Buff05",
+              "target": "CurTeamAvatars",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "thinkInterval": 2,
+          "duration": "RandomBuffDuration"
+        },
+        "AutoTimeStop_Random_Buff05_TeamHandler": {
+          "onAdded": [
+            {
+              "$type": "ShowReminder",
+              "doOffStage": false,
+              "id": 404345,
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true,
+              "PBHJPBFJGME": true
+            },
+            {
+              "$type": "RemoveModifier",
+              "doOffStage": true,
+              "modifierName": "AutoTimeStop_Random_Buff01_AvatarHandler",
+              "target": "Team",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "RemoveModifier",
+              "doOffStage": true,
+              "modifierName": "AutoTimeStop_Random_Buff02_AvatarHandler",
+              "target": "Team",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "RemoveModifier",
+              "doOffStage": true,
+              "modifierName": "AutoTimeStop_Random_Buff03_AvatarHandler",
+              "target": "Team",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "RemoveModifier",
+              "doOffStage": true,
+              "modifierName": "AutoTimeStop_Random_Buff04_AvatarHandler",
+              "target": "Team",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "RemoveModifier",
+              "doOffStage": true,
+              "modifierName": "AutoTimeStop_Random_Buff05_AvatarHandler",
+              "target": "Team",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "ApplyModifier",
+              "doOffStage": true,
+              "modifierName": "AutoTimeStop_Random_Buff05_AvatarHandler",
+              "target": "Team",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "duration": 0.10000000149011612
+        },
+        "UNIQUE_AutoTimeStop_Random_Buff01": {
+          "elementDurability": 100,
+          "stacking": "Unique",
+          "isLimitedProperties": true,
+          "KKBDDALAMKP": true,
+          "modifierMixins": [
+            {
+              "$type": "ModifyDamageMixin",
+              "attackTags": [
+                "NormalAttack_01",
+                "NormalAttack_02",
+                "NormalAttack_03",
+                "NormalAttack_04",
+                "NormalAttack_05",
+                "NormalAttack_06"
+              ],
+              "actorIceSubHurtDelta": -1,
+              "damagePercentageRatio": "NormalAttackUpRate"
+            }
+          ],
+          "minus_one": -1,
+          "isUnique": true,
+          "state": "AttackUp"
+        },
+        "UNIQUE_AutoTimeStop_Random_Buff02": {
+          "elementDurability": 100,
+          "stacking": "Unique",
+          "isLimitedProperties": true,
+          "KKBDDALAMKP": true,
+          "modifierMixins": [
+            {
+              "$type": "ModifyDamageMixin",
+              "attackTags": [
+                "ExtraAttack"
+              ],
+              "actorIceSubHurtDelta": -1,
+              "damagePercentageRatio": "ExtraAttackUpRate"
+            }
+          ],
+          "minus_one": -1,
+          "isUnique": true,
+          "state": "AttackUp"
+        },
+        "UNIQUE_AutoTimeStop_Random_Buff03": {
+          "elementDurability": 100,
+          "stacking": "Unique",
+          "isLimitedProperties": true,
+          "KKBDDALAMKP": true,
+          "modifierMixins": [
+            {
+              "$type": "ModifyDamageMixin",
+              "attackTags": [
+                "FallingAttack"
+              ],
+              "actorIceSubHurtDelta": -1,
+              "damagePercentageRatio": "FallingAttackUpRate"
+            }
+          ],
+          "minus_one": -1,
+          "isUnique": true,
+          "state": "AttackUp"
+        },
+        "UNIQUE_AutoTimeStop_Random_Buff04": {
+          "elementDurability": 100,
+          "stacking": "Unique",
+          "isLimitedProperties": true,
+          "KKBDDALAMKP": true,
+          "modifierMixins": [
+            {
+              "$type": "ModifyDamageMixin",
+              "attackTags": [
+                "Elemental_Art",
+                "Elemental_Art_Hold",
+                "Elemental_Art_Extra"
+              ],
+              "actorIceSubHurtDelta": -1,
+              "damagePercentageRatio": "ArtSkillUpRate"
+            }
+          ],
+          "minus_one": -1,
+          "isUnique": true,
+          "state": "AttackUp"
+        },
+        "UNIQUE_AutoTimeStop_Random_Buff05": {
+          "elementDurability": 100,
+          "stacking": "Unique",
+          "isLimitedProperties": true,
+          "KKBDDALAMKP": true,
+          "modifierMixins": [
+            {
+              "$type": "ModifyDamageMixin",
+              "attackTags": [
+                "Elemental_Burst"
+              ],
+              "actorIceSubHurtDelta": -1,
+              "damagePercentageRatio": "UltimateSkillUpRate"
+            }
+          ],
+          "minus_one": -1,
+          "isUnique": true,
+          "state": "AttackUp"
+        },
+        "UNIQUE_AutoTimeStop_Random_Handler_OnTeam": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "DoActionOnGlobalValueChangeMixin",
+              "globalValueKey": "SGV_AutoTimeStop_Random_Buff01",
+              "actions": [
+                {
+                  "$type": "ApplyModifier",
+                  "doOffStage": true,
+                  "modifierName": "AutoTimeStop_Random_Buff01_TeamHandler",
+                  "target": "Team",
+                  "predicates": [
+                    {
+                      "$type": "ByTargetGlobalValue",
+                      "target": "Team",
+                      "key": "SGV_AutoTimeStop_Random_Buff01",
+                      "compareType": "MoreThan"
+                    }
+                  ],
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "ApplyModifier",
+                  "doOffStage": true,
+                  "modifierName": "AutoTimeStop_Common_CJB",
+                  "target": "CurLocalAvatar",
+                  "predicates": [
+                    {
+                      "$type": "ByTargetGlobalValue",
+                      "target": "Team",
+                      "key": "SGV_AutoTimeStop_Random_Buff01",
+                      "compareType": "MoreThan"
+                    }
+                  ],
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "ApplyModifier",
+                  "doOffStage": true,
+                  "modifierName": "AutoTimeStop_Common_HealHP",
+                  "target": "CurTeamAvatars",
+                  "predicates": [
+                    {
+                      "$type": "ByTargetGlobalValue",
+                      "target": "Team",
+                      "key": "SGV_AutoTimeStop_Random_Buff01",
+                      "compareType": "MoreThan"
+                    }
+                  ],
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "DoActionOnGlobalValueChangeMixin",
+              "globalValueKey": "SGV_AutoTimeStop_Random_Buff02",
+              "actions": [
+                {
+                  "$type": "ApplyModifier",
+                  "doOffStage": true,
+                  "modifierName": "AutoTimeStop_Random_Buff02_TeamHandler",
+                  "target": "Team",
+                  "predicates": [
+                    {
+                      "$type": "ByTargetGlobalValue",
+                      "target": "Team",
+                      "key": "SGV_AutoTimeStop_Random_Buff02",
+                      "compareType": "MoreThan"
+                    }
+                  ],
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "ApplyModifier",
+                  "doOffStage": true,
+                  "modifierName": "AutoTimeStop_Common_CJB",
+                  "target": "CurLocalAvatar",
+                  "predicates": [
+                    {
+                      "$type": "ByTargetGlobalValue",
+                      "target": "Team",
+                      "key": "SGV_AutoTimeStop_Random_Buff02",
+                      "compareType": "MoreThan"
+                    }
+                  ],
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "ApplyModifier",
+                  "doOffStage": true,
+                  "modifierName": "AutoTimeStop_Common_HealHP",
+                  "target": "CurTeamAvatars",
+                  "predicates": [
+                    {
+                      "$type": "ByTargetGlobalValue",
+                      "target": "Team",
+                      "key": "SGV_AutoTimeStop_Random_Buff02",
+                      "compareType": "MoreThan"
+                    }
+                  ],
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "DoActionOnGlobalValueChangeMixin",
+              "globalValueKey": "SGV_AutoTimeStop_Random_Buff03",
+              "actions": [
+                {
+                  "$type": "ApplyModifier",
+                  "doOffStage": true,
+                  "modifierName": "AutoTimeStop_Random_Buff03_TeamHandler",
+                  "target": "Team",
+                  "predicates": [
+                    {
+                      "$type": "ByTargetGlobalValue",
+                      "target": "Team",
+                      "key": "SGV_AutoTimeStop_Random_Buff03",
+                      "compareType": "MoreThan"
+                    }
+                  ],
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "ApplyModifier",
+                  "doOffStage": true,
+                  "modifierName": "AutoTimeStop_Common_CJB",
+                  "target": "CurLocalAvatar",
+                  "predicates": [
+                    {
+                      "$type": "ByTargetGlobalValue",
+                      "target": "Team",
+                      "key": "SGV_AutoTimeStop_Random_Buff03",
+                      "compareType": "MoreThan"
+                    }
+                  ],
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "ApplyModifier",
+                  "doOffStage": true,
+                  "modifierName": "AutoTimeStop_Common_HealHP",
+                  "target": "CurTeamAvatars",
+                  "predicates": [
+                    {
+                      "$type": "ByTargetGlobalValue",
+                      "target": "Team",
+                      "key": "SGV_AutoTimeStop_Random_Buff03",
+                      "compareType": "MoreThan"
+                    }
+                  ],
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "DoActionOnGlobalValueChangeMixin",
+              "globalValueKey": "SGV_AutoTimeStop_Random_Buff04",
+              "actions": [
+                {
+                  "$type": "ApplyModifier",
+                  "doOffStage": true,
+                  "modifierName": "AutoTimeStop_Random_Buff04_TeamHandler",
+                  "target": "Team",
+                  "predicates": [
+                    {
+                      "$type": "ByTargetGlobalValue",
+                      "target": "Team",
+                      "key": "SGV_AutoTimeStop_Random_Buff04",
+                      "compareType": "MoreThan"
+                    }
+                  ],
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "ApplyModifier",
+                  "doOffStage": true,
+                  "modifierName": "AutoTimeStop_Common_CJB",
+                  "target": "CurLocalAvatar",
+                  "predicates": [
+                    {
+                      "$type": "ByTargetGlobalValue",
+                      "target": "Team",
+                      "key": "SGV_AutoTimeStop_Random_Buff04",
+                      "compareType": "MoreThan"
+                    }
+                  ],
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "ApplyModifier",
+                  "doOffStage": true,
+                  "modifierName": "AutoTimeStop_Common_HealHP",
+                  "target": "CurTeamAvatars",
+                  "predicates": [
+                    {
+                      "$type": "ByTargetGlobalValue",
+                      "target": "Team",
+                      "key": "SGV_AutoTimeStop_Random_Buff04",
+                      "compareType": "MoreThan"
+                    }
+                  ],
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "DoActionOnGlobalValueChangeMixin",
+              "globalValueKey": "SGV_AutoTimeStop_Random_Buff05",
+              "actions": [
+                {
+                  "$type": "ApplyModifier",
+                  "doOffStage": true,
+                  "modifierName": "AutoTimeStop_Random_Buff05_TeamHandler",
+                  "target": "Team",
+                  "predicates": [
+                    {
+                      "$type": "ByTargetGlobalValue",
+                      "target": "Team",
+                      "key": "SGV_AutoTimeStop_Random_Buff05",
+                      "compareType": "MoreThan"
+                    }
+                  ],
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "ApplyModifier",
+                  "doOffStage": true,
+                  "modifierName": "AutoTimeStop_Common_CJB",
+                  "target": "CurLocalAvatar",
+                  "predicates": [
+                    {
+                      "$type": "ByTargetGlobalValue",
+                      "target": "Team",
+                      "key": "SGV_AutoTimeStop_Random_Buff05",
+                      "compareType": "MoreThan"
+                    }
+                  ],
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "ApplyModifier",
+                  "doOffStage": true,
+                  "modifierName": "AutoTimeStop_Common_HealHP",
+                  "target": "CurTeamAvatars",
+                  "predicates": [
+                    {
+                      "$type": "ByTargetGlobalValue",
+                      "target": "Team",
+                      "key": "SGV_AutoTimeStop_Random_Buff05",
+                      "compareType": "MoreThan"
+                    }
+                  ],
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "minus_one": -1,
+          "isUnique": true
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "abilitySpecials": {
+        "Interval": 0,
+        "LevelBuffDuration": 0,
+        "ReviveEnergy": 0
+      },
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "doOffStage": true,
+          "modifierName": "UNIQUE_AutoTimeStop_Level01_Handler_OnTeam",
+          "target": "Team",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "ActivityAbility_AutoTimeStop_Level01",
+      "isDynamicAbility": true,
+      "modifiers": {
+        "UNIQUE_AutoTimeStop_Level01_Buff": {
+          "onAdded": [
+            {
+              "$type": "ReviveElemEnergy",
+              "doOffStage": true,
+              "value": "ReviveEnergy",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "ReviveElemEnergy",
+              "doOffStage": true,
+              "value": "ReviveEnergy",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "isUnique": true,
+          "thinkInterval": "Interval"
+        },
+        "UNIQUE_AutoTimeStop_Level01_BuffHandler": {
+          "onAdded": [
+            {
+              "$type": "AttachModifier",
+              "doOffStage": true,
+              "modifierName": "UNIQUE_AutoTimeStop_Level01_Buff",
+              "target": "CurTeamAvatars",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "AttachModifier",
+              "doOffStage": true,
+              "modifierName": "UNIQUE_AutoTimeStop_Level01_Buff",
+              "target": "CurTeamAvatars",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "isUnique": true,
+          "thinkInterval": 1,
+          "duration": "LevelBuffDuration"
+        },
+        "UNIQUE_AutoTimeStop_Level01_Handler_OnTeam": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "DoActionOnGlobalValueChangeMixin",
+              "globalValueKey": "SGV_AutoTimeStop_Level_Buff01",
+              "actions": [
+                {
+                  "$type": "ApplyModifier",
+                  "doOffStage": true,
+                  "modifierName": "UNIQUE_AutoTimeStop_Level01_BuffHandler",
+                  "target": "Team",
+                  "predicates": [
+                    {
+                      "$type": "ByTargetGlobalValue",
+                      "target": "Team",
+                      "key": "SGV_AutoTimeStop_Level_Buff01",
+                      "compareType": "MoreThan"
+                    }
+                  ],
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "minus_one": -1,
+          "isUnique": true
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "abilitySpecials": {
+        "DamageUpRate_Frozen": 0,
+        "LevelBuffDuration": 0
+      },
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "doOffStage": true,
+          "modifierName": "UNIQUE_AutoTimeStop_Level02_Handler_OnTeam",
+          "target": "Team",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "ActivityAbility_AutoTimeStop_Level02",
+      "isDynamicAbility": true,
+      "modifiers": {
+        "UNIQUE_AutoTimeStop_Level02_Buff": {
+          "elementDurability": 100,
+          "stacking": "Unique",
+          "isLimitedProperties": true,
+          "KKBDDALAMKP": true,
+          "modifierMixins": [
+            {
+              "$type": "ModifyDamageMixin",
+              "ignoreEventInfo": true,
+              "predicates": [
+                {
+                  "$type": "ByHasAbilityState",
+                  "target": "Target",
+                  "abilityState": "ElementFrozen"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "damagePercentageRatio": "DamageUpRate_Frozen"
+            }
+          ],
+          "minus_one": -1,
+          "isUnique": true
+        },
+        "UNIQUE_AutoTimeStop_Level02_BuffHandler": {
+          "onAdded": [
+            {
+              "$type": "AttachModifier",
+              "doOffStage": true,
+              "modifierName": "UNIQUE_AutoTimeStop_Level02_Buff",
+              "target": "CurTeamAvatars",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "AttachModifier",
+              "doOffStage": true,
+              "modifierName": "UNIQUE_AutoTimeStop_Level02_Buff",
+              "target": "CurTeamAvatars",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "isUnique": true,
+          "thinkInterval": 1,
+          "duration": "LevelBuffDuration"
+        },
+        "UNIQUE_AutoTimeStop_Level02_Handler_OnTeam": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "DoActionOnGlobalValueChangeMixin",
+              "globalValueKey": "SGV_AutoTimeStop_Level_Buff02",
+              "actions": [
+                {
+                  "$type": "ApplyModifier",
+                  "doOffStage": true,
+                  "modifierName": "UNIQUE_AutoTimeStop_Level02_BuffHandler",
+                  "target": "Team",
+                  "predicates": [
+                    {
+                      "$type": "ByTargetGlobalValue",
+                      "target": "Team",
+                      "key": "SGV_AutoTimeStop_Level_Buff02",
+                      "compareType": "MoreThan"
+                    }
+                  ],
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "minus_one": -1,
+          "isUnique": true
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "abilitySpecials": {
+        "CriticalHurtUp": 0,
+        "LevelBuffDuration": 0
+      },
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "doOffStage": true,
+          "modifierName": "UNIQUE_AutoTimeStop_Level03_Handler_OnTeam",
+          "target": "Team",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "ActivityAbility_AutoTimeStop_Level03",
+      "isDynamicAbility": true,
+      "modifiers": {
+        "UNIQUE_AutoTimeStop_Level03_Buff": {
+          "elementDurability": 100,
+          "stacking": "Unique",
+          "isLimitedProperties": true,
+          "KKBDDALAMKP": true,
+          "minus_one": -1,
+          "properties": {
+            "Actor_CriticalHurtDelta": "CriticalHurtUp"
+          },
+          "isUnique": true,
+          "state": "AttackUp"
+        },
+        "UNIQUE_AutoTimeStop_Level03_BuffHandler": {
+          "onAdded": [
+            {
+              "$type": "AttachModifier",
+              "doOffStage": true,
+              "modifierName": "UNIQUE_AutoTimeStop_Level03_Buff",
+              "target": "CurTeamAvatars",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "AttachModifier",
+              "doOffStage": true,
+              "modifierName": "UNIQUE_AutoTimeStop_Level03_Buff",
+              "target": "CurTeamAvatars",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "isUnique": true,
+          "thinkInterval": 1,
+          "duration": "LevelBuffDuration"
+        },
+        "UNIQUE_AutoTimeStop_Level03_Handler_OnTeam": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "DoActionOnGlobalValueChangeMixin",
+              "globalValueKey": "SGV_AutoTimeStop_Level_Buff03",
+              "actions": [
+                {
+                  "$type": "ApplyModifier",
+                  "doOffStage": true,
+                  "modifierName": "UNIQUE_AutoTimeStop_Level03_BuffHandler",
+                  "target": "Team",
+                  "predicates": [
+                    {
+                      "$type": "ByTargetGlobalValue",
+                      "target": "Team",
+                      "key": "SGV_AutoTimeStop_Level_Buff03",
+                      "compareType": "MoreThan"
+                    }
+                  ],
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "minus_one": -1,
+          "isUnique": true
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "abilitySpecials": {
+        "AoeDamage": 0,
+        "DamageSystemValue": 0,
+        "Interval": 0,
+        "LevelBuffDuration": 0
+      },
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "SetSystemValueToOverrideMap",
+          "doOffStage": true,
+          "key": "DamageSystemValue",
+          "actorIceSubHurtDelta": -1,
+          "value": -1,
+          "type": "ElementLevelCo",
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "AttachModifier",
+          "doOffStage": true,
+          "modifierName": "UNIQUE_AutoTimeStop_Level04_Handler_OnTeam",
+          "target": "Team",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "ActivityAbility_AutoTimeStop_Level04",
+      "isDynamicAbility": true,
+      "modifiers": {
+        "UNIQUE_AutoTimeStop_Level04_Buff": {
+          "onAdded": [
+            {
+              "$type": "SetSystemValueToOverrideMap",
+              "doOffStage": true,
+              "key": "DamageSystemValue",
+              "actorIceSubHurtDelta": -1,
+              "value": -1,
+              "type": "ElementLevelCo",
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "stacking": "Unique",
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "FireEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Activity_AutoTimeStop_Buff_Rock",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "TriggerAttackEvent",
+              "doOffStage": false,
+              "attackEvent": {
+                "attackInfo": {
+                  "attenuationGroup": "default",
+                  "hitPattern": {
+                    "onHitEffectName": "default",
+                    "JKLONEBKFKJ": {
+                      "JJGBOHIKHFM": true,
+                      "value": 1
+                    }
+                  },
+                  "FJNMGDHFOEH": {
+                    "GCPNPCOFFBP": "Shake"
+                  },
+                  "IODAJAKBOLG": {
+                    "onHitEffectName": "default",
+                    "JKLONEBKFKJ": {
+                      "JJGBOHIKHFM": true,
+                      "value": 1
+                    }
+                  },
+                  "attackProperty": {
+                    "attackType": "Default",
+                    "enBreak": 15,
+                    "CGDGMKEJOKH": true,
+                    "elementType": "Rock",
+                    "elementDurability": 25,
+                    "elementRank": 1,
+                    "HPPLKCPAKHP": true,
+                    "damageExtra": [
+                      "AoeDamage",
+                      "DamageSystemValue",
+                      "MUL"
+                    ],
+                    "OBHHLNNKOCN": true
+                  },
+                  "cameraShake": {
+                    "extension": {
+                      "baseCycle": 0.11999999731779099,
+                      "cycleDamping": 0.11999999731779099,
+                      "baseOnCamera": true,
+                      "rangeAttenuation": 0.5
+                    },
+                    "FAKMJBNLPPB": -1,
+                    "shakeDistance": 20
+                  }
+                },
+                "attackPattern": {
+                  "$type": "ConfigAttackCircle",
+                  "radius": 12.5,
+                  "massiveAttackRatio": 1,
+                  "born": {
+                    "$type": "ConfigBornBySelf",
+                    "direction": {
+                      "maxAngle": 180
+                    },
+                    "useRotation": true,
+                    "FDGAEDDEEDG": {
+                      "ELAJJIANFFM": 180
+                    },
+                    "onGroundRaycastUpDist": 2,
+                    "value": 10
+                  },
+                  "height": 2,
+                  "fanAngle": 360,
+                  "PBFNLCIFCBO": {
+                    "GOAEBMPCPJL": {
+                      "JJGBOHIKHFM": true,
+                      "value": 1
+                    }
+                  },
+                  "triggerType": "TriggerNoRepeat"
+                }
+              },
+              "targetType": "Enemy",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "isUnique": true,
+          "thinkInterval": "Interval"
+        },
+        "UNIQUE_AutoTimeStop_Level04_BuffHandler": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "RemoveModifier",
+              "doOffStage": true,
+              "modifierName": "UNIQUE_AutoTimeStop_Level04_Buff",
+              "target": "CurTeamAvatars",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "modifierMixins": [
+            {
+              "$type": "CurLocalAvatarMixinV2",
+              "modifierName": "UNIQUE_AutoTimeStop_Level04_Buff",
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "minus_one": -1,
+          "isUnique": true,
+          "duration": "LevelBuffDuration"
+        },
+        "UNIQUE_AutoTimeStop_Level04_Handler_OnTeam": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "DoActionOnGlobalValueChangeMixin",
+              "globalValueKey": "SGV_AutoTimeStop_Level_Buff04",
+              "actions": [
+                {
+                  "$type": "ApplyModifier",
+                  "doOffStage": true,
+                  "modifierName": "UNIQUE_AutoTimeStop_Level04_BuffHandler",
+                  "target": "Team",
+                  "predicates": [
+                    {
+                      "$type": "ByTargetGlobalValue",
+                      "target": "Team",
+                      "key": "SGV_AutoTimeStop_Level_Buff04",
+                      "compareType": "MoreThan"
+                    }
+                  ],
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "minus_one": -1,
+          "isUnique": true
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "abilitySpecials": {
+        "LevelBuffDuration": 0,
+        "WindAddHurt": 0
+      },
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "doOffStage": true,
+          "modifierName": "UNIQUE_AutoTimeStop_Level05_Handler_OnTeam",
+          "target": "Team",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "ActivityAbility_AutoTimeStop_Level05",
+      "isDynamicAbility": true,
+      "modifiers": {
+        "UNIQUE_AutoTimeStop_Level05_Buff": {
+          "elementDurability": 100,
+          "stacking": "Unique",
+          "isLimitedProperties": true,
+          "KKBDDALAMKP": true,
+          "minus_one": -1,
+          "properties": {
+            "Actor_WindAddHurtDelta": "WindAddHurt"
+          },
+          "isUnique": true,
+          "state": "AttackUp"
+        },
+        "UNIQUE_AutoTimeStop_Level05_BuffHandler": {
+          "onAdded": [
+            {
+              "$type": "AttachModifier",
+              "doOffStage": true,
+              "modifierName": "UNIQUE_AutoTimeStop_Level05_Buff",
+              "target": "CurTeamAvatars",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "AttachModifier",
+              "doOffStage": true,
+              "modifierName": "UNIQUE_AutoTimeStop_Level05_Buff",
+              "target": "CurTeamAvatars",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "isUnique": true,
+          "thinkInterval": 1,
+          "duration": "LevelBuffDuration"
+        },
+        "UNIQUE_AutoTimeStop_Level05_Handler_OnTeam": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "DoActionOnGlobalValueChangeMixin",
+              "globalValueKey": "SGV_AutoTimeStop_Level_Buff05",
+              "actions": [
+                {
+                  "$type": "ApplyModifier",
+                  "doOffStage": true,
+                  "modifierName": "UNIQUE_AutoTimeStop_Level05_BuffHandler",
+                  "target": "Team",
+                  "predicates": [
+                    {
+                      "$type": "ByTargetGlobalValue",
+                      "target": "Team",
+                      "key": "SGV_AutoTimeStop_Level_Buff05",
+                      "compareType": "MoreThan"
+                    }
+                  ],
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "minus_one": -1,
+          "isUnique": true
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "abilitySpecials": {
+        "ElemMasteryUpDelta": 0,
+        "LevelBuffDuration": 0
+      },
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "doOffStage": true,
+          "modifierName": "UNIQUE_AutoTimeStop_Level06_Handler_OnTeam",
+          "target": "Team",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "ActivityAbility_AutoTimeStop_Level06",
+      "isDynamicAbility": true,
+      "modifiers": {
+        "UNIQUE_AutoTimeStop_Level06_Buff": {
+          "elementDurability": 100,
+          "stacking": "Unique",
+          "isLimitedProperties": true,
+          "KKBDDALAMKP": true,
+          "minus_one": -1,
+          "properties": {
+            "Actor_ElemMasteryDelta": "ElemMasteryUpDelta"
+          },
+          "isUnique": true,
+          "state": "AttackUp"
+        },
+        "UNIQUE_AutoTimeStop_Level06_BuffHandler": {
+          "onAdded": [
+            {
+              "$type": "AttachModifier",
+              "doOffStage": true,
+              "modifierName": "UNIQUE_AutoTimeStop_Level06_Buff",
+              "target": "CurTeamAvatars",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "AttachModifier",
+              "doOffStage": true,
+              "modifierName": "UNIQUE_AutoTimeStop_Level06_Buff",
+              "target": "CurTeamAvatars",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "isUnique": true,
+          "thinkInterval": 1,
+          "duration": "LevelBuffDuration"
+        },
+        "UNIQUE_AutoTimeStop_Level06_Handler_OnTeam": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "DoActionOnGlobalValueChangeMixin",
+              "globalValueKey": "SGV_AutoTimeStop_Level_Buff06",
+              "actions": [
+                {
+                  "$type": "ApplyModifier",
+                  "doOffStage": true,
+                  "modifierName": "UNIQUE_AutoTimeStop_Level06_BuffHandler",
+                  "target": "Team",
+                  "predicates": [
+                    {
+                      "$type": "ByTargetGlobalValue",
+                      "target": "Team",
+                      "key": "SGV_AutoTimeStop_Level_Buff06",
+                      "compareType": "MoreThan"
+                    }
+                  ],
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "minus_one": -1,
+          "isUnique": true
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "abilitySpecials": {
+        "LevelBuffDuration": 0,
+        "RockAddHurt": 0
+      },
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "doOffStage": true,
+          "modifierName": "UNIQUE_AutoTimeStop_Level07_Handler_OnTeam",
+          "target": "Team",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "ActivityAbility_AutoTimeStop_Level07",
+      "isDynamicAbility": true,
+      "modifiers": {
+        "UNIQUE_AutoTimeStop_Level07_Buff": {
+          "elementDurability": 100,
+          "stacking": "Unique",
+          "isLimitedProperties": true,
+          "KKBDDALAMKP": true,
+          "minus_one": -1,
+          "properties": {
+            "Actor_RockAddHurtDelta": "RockAddHurt"
+          },
+          "isUnique": true,
+          "state": "AttackUp"
+        },
+        "UNIQUE_AutoTimeStop_Level07_BuffHandler": {
+          "onAdded": [
+            {
+              "$type": "AttachModifier",
+              "doOffStage": true,
+              "modifierName": "UNIQUE_AutoTimeStop_Level07_Buff",
+              "target": "CurTeamAvatars",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "AttachModifier",
+              "doOffStage": true,
+              "modifierName": "UNIQUE_AutoTimeStop_Level07_Buff",
+              "target": "CurTeamAvatars",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "isUnique": true,
+          "thinkInterval": 1,
+          "duration": "LevelBuffDuration"
+        },
+        "UNIQUE_AutoTimeStop_Level07_Handler_OnTeam": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "DoActionOnGlobalValueChangeMixin",
+              "globalValueKey": "SGV_AutoTimeStop_Level_Buff07",
+              "actions": [
+                {
+                  "$type": "ApplyModifier",
+                  "doOffStage": true,
+                  "modifierName": "UNIQUE_AutoTimeStop_Level07_BuffHandler",
+                  "target": "Team",
+                  "predicates": [
+                    {
+                      "$type": "ByTargetGlobalValue",
+                      "target": "Team",
+                      "key": "SGV_AutoTimeStop_Level_Buff07",
+                      "compareType": "MoreThan"
+                    }
+                  ],
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "minus_one": -1,
+          "isUnique": true
+        }
+      }
+    }
+  }
+]

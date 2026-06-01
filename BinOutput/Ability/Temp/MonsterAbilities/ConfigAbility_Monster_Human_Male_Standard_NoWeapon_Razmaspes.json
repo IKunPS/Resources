@@ -1,0 +1,341 @@
+[
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "ApplyModifier",
+          "doOffStage": false,
+          "modifierName": "Distance_Check",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "Monster_Human_Male_Standard_NoWeapon_Razmaspes_DitherByDistance",
+      "modifiers": {
+        "Behit_Idle": {
+          "onAdded": [
+            {
+              "$type": "SetPoseBool",
+              "doOffStage": false,
+              "value": true,
+              "boolID": "Idle",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "SetPoseBool",
+              "doOffStage": false,
+              "boolID": "Idle",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "duration": 8
+        },
+        "Distance_Check": {
+          "elementDurability": 100,
+          "onBeingHit": [
+            {
+              "$type": "ApplyModifier",
+              "doOffStage": false,
+              "modifierName": "Behit_Idle",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "Predicated",
+              "doOffStage": false,
+              "failActions": [
+                {
+                  "$type": "RemoveModifier",
+                  "doOffStage": false,
+                  "modifierName": "Dither_ByDistance",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "target": "CurLocalAvatar",
+              "targetPredicates": [
+                {
+                  "$type": "ByTargetPositionToSelfPosition",
+                  "value": 0.800000011920929,
+                  "target": "Target",
+                  "logic": "LesserOrEqual"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "successActions": [
+                {
+                  "$type": "ApplyModifier",
+                  "doOffStage": false,
+                  "modifierName": "Dither_ByDistance",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "properties": {
+            "Actor_HpThresholdRatio": 0.009999999776482582
+          },
+          "thinkInterval": 0.10000000149011612,
+          "state": "Limbo"
+        },
+        "Dither_ByDistance": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "EntityDitherMixinV2",
+              "cutInTime": 0.20000000298023224,
+              "actorIceSubHurtDelta": -1,
+              "cutOutTime": 0.20000000298023224,
+              "NIFBJPABNDG": 1
+            }
+          ],
+          "minus_one": -1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Monster_Human_Male_Standard_NoWeapon_Razmaspes_StateInformGroup",
+      "abilityMixins": [
+        {
+          "$type": "DoActionByStateIDMixin",
+          "stateIDs": [
+            "Think",
+            "Akimbo",
+            "Confuse",
+            "Investigate",
+            "Kneel",
+            "Frightened02",
+            "Afraid"
+          ],
+          "value": -1,
+          "FLHDLKHMKEJ": [
+            {
+              "$type": "ServerLuaCall",
+              "doOffStage": false,
+              "luaCallType": "FromGroup",
+              "actorIceSubHurtDelta": -1,
+              "funcName": "SLC_OnRazmaspesAnimFinish",
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "actorIceSubHurtDelta": -1
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Monster_Human_Male_Standard_NoWeapon_Razmaspes_TriggerThink",
+      "onAbilityStart": [
+        {
+          "$type": "SetAnimatorInt",
+          "doOffStage": false,
+          "value": 101,
+          "intID": "SkillID",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "SetAnimatorTrigger",
+          "doOffStage": false,
+          "triggerID": "DoSkill",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Monster_Human_Male_Standard_NoWeapon_Razmaspes_TriggerAkimbo",
+      "onAbilityStart": [
+        {
+          "$type": "SetAnimatorInt",
+          "doOffStage": false,
+          "value": 102,
+          "intID": "SkillID",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "SetAnimatorTrigger",
+          "doOffStage": false,
+          "triggerID": "DoSkill",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Monster_Human_Male_Standard_NoWeapon_Razmaspes_TriggerConfuse",
+      "onAbilityStart": [
+        {
+          "$type": "SetAnimatorInt",
+          "doOffStage": false,
+          "value": 103,
+          "intID": "SkillID",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "SetAnimatorTrigger",
+          "doOffStage": false,
+          "triggerID": "DoSkill",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Monster_Human_Male_Standard_NoWeapon_Razmaspes_TriggerInvestigate",
+      "onAbilityStart": [
+        {
+          "$type": "SetAnimatorInt",
+          "doOffStage": false,
+          "value": 104,
+          "intID": "SkillID",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "SetAnimatorTrigger",
+          "doOffStage": false,
+          "triggerID": "DoSkill",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Monster_Human_Male_Standard_NoWeapon_Razmaspes_TriggerKneel",
+      "onAbilityStart": [
+        {
+          "$type": "SetAnimatorInt",
+          "doOffStage": false,
+          "value": 105,
+          "intID": "SkillID",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "SetAnimatorTrigger",
+          "doOffStage": false,
+          "triggerID": "DoSkill",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Monster_Human_Male_Standard_NoWeapon_Razmaspes_TriggerFrightened02",
+      "onAbilityStart": [
+        {
+          "$type": "SetAnimatorInt",
+          "doOffStage": false,
+          "value": 106,
+          "intID": "SkillID",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "SetAnimatorTrigger",
+          "doOffStage": false,
+          "triggerID": "DoSkill",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "Monster_Human_Male_Standard_NoWeapon_Razmaspes_TriggerAfraid",
+      "onAbilityStart": [
+        {
+          "$type": "SetAnimatorInt",
+          "doOffStage": false,
+          "value": 107,
+          "intID": "SkillID",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "SetAnimatorTrigger",
+          "doOffStage": false,
+          "triggerID": "DoSkill",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ]
+    }
+  }
+]

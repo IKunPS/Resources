@@ -1,0 +1,936 @@
+[
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "DynamicAbility_JNQTribalQuest_5_0",
+      "isDynamicAbility": true,
+      "abilityMixins": [
+        {
+          "$type": "AttachModifierToGlobalValueMixin",
+          "enable": true,
+          "globalValueKey": "SGV_JNQTribalQuest_HasFire",
+          "modifierNameSteps": [
+            "JNQTribalQuest_FireHandler"
+          ],
+          "removeAppliedModifier": true,
+          "actorIceSubHurtDelta": -1,
+          "valueSteps": [
+            0.5,
+            1.5
+          ],
+          "NEACJLMBFMN": true
+        }
+      ],
+      "modifiers": {
+        "Avatar_In_Natsaurus": {
+          "onAdded": [
+            {
+              "$type": "AttachModifier",
+              "doOffStage": false,
+              "modifierName": "BulletBuff_Vehicle",
+              "target": "Vehicle",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AttachModifier",
+              "doOffStage": false,
+              "modifierName": "FireBuff_Vehicle",
+              "target": "Vehicle",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "AttachModifier",
+              "doOffStage": false,
+              "modifierName": "BulletBuff_Vehicle",
+              "target": "Vehicle",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AttachModifier",
+              "doOffStage": false,
+              "modifierName": "FireBuff_Vehicle",
+              "target": "Vehicle",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "thinkInterval": 0.800000011920929
+        },
+        "Avatar_Is_Qiniqui": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "CurLocalAvatarMixinV2",
+              "modifierName": "BulletBuff",
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "minus_one": -1
+        },
+        "Avatar_NotIn_Natsaurus": {
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_SceneObj_FlameAltar_01",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "AttachModifierToSelfGlobalValueMixin",
+              "enable": true,
+              "globalValueKey": "Natsaurus_Curent_Vehicle_Type",
+              "modifierNameSteps": [
+                "Avatar_Is_Qiniqui"
+              ],
+              "removeAppliedModifier": true,
+              "actorIceSubHurtDelta": -1,
+              "valueSteps": [
+                1.5,
+                2.5
+              ]
+            },
+            {
+              "$type": "CurLocalAvatarMixinV2",
+              "modifierName": "FireBuff",
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "minus_one": -1
+        },
+        "BulletBuff": {
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "predicates": [
+                {
+                  "$type": "ByEntityTypes",
+                  "target": "Target",
+                  "value": -1,
+                  "entityTypes": [
+                    "Vehicle"
+                  ]
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_SceneObj_FlameAltar_01_Dragon",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "DoActionByCreateGadgetMixin",
+              "actorIceSubHurtDelta": -1,
+              "actionQueue": [
+                {
+                  "$type": "Predicated",
+                  "doOffStage": false,
+                  "target": "Other",
+                  "targetPredicates": [
+                    {
+                      "$type": "ByTargetGlobalValue",
+                      "value": 1,
+                      "target": "Target",
+                      "key": "_Hookwalker_Bullet_Type"
+                    }
+                  ],
+                  "actorIceSubHurtDelta": -1,
+                  "successActions": [
+                    {
+                      "$type": "ApplyModifier",
+                      "doOffStage": false,
+                      "modifierName": "JNQTribal_FireHit",
+                      "target": "Other",
+                      "actorIceSubHurtDelta": -1,
+                      "canBeHandledOnRecover": true
+                    },
+                    {
+                      "$type": "SendEffectTrigger",
+                      "doOffStage": false,
+                      "target": "Team",
+                      "parameter": "Active",
+                      "actorIceSubHurtDelta": -1,
+                      "effectPattern": "Eff_SceneObj_FlameAltar_01",
+                      "canBeHandledOnRecover": true
+                    },
+                    {
+                      "$type": "SendEffectTrigger",
+                      "doOffStage": false,
+                      "target": "Vehicle",
+                      "parameter": "Active",
+                      "actorIceSubHurtDelta": -1,
+                      "effectPattern": "Eff_SceneObj_FlameAltar_01_Dragon",
+                      "canBeHandledOnRecover": true
+                    }
+                  ],
+                  "canBeHandledOnRecover": true
+                }
+              ]
+            }
+          ],
+          "minus_one": -1
+        },
+        "BulletBuff_Vehicle": {
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "predicates": [
+                {
+                  "$type": "ByEntityTypes",
+                  "target": "Target",
+                  "value": -1,
+                  "entityTypes": [
+                    "Vehicle"
+                  ]
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_SceneObj_FlameAltar_01_Dragon",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "DoActionByCreateGadgetMixin",
+              "actorIceSubHurtDelta": -1,
+              "actionQueue": [
+                {
+                  "$type": "Predicated",
+                  "doOffStage": false,
+                  "target": "Other",
+                  "targetPredicates": [
+                    {
+                      "$type": "ByTargetGlobalValue",
+                      "value": 1,
+                      "target": "Target",
+                      "key": "_Hookwalker_Bullet_Type"
+                    }
+                  ],
+                  "actorIceSubHurtDelta": -1,
+                  "successActions": [
+                    {
+                      "$type": "ApplyModifier",
+                      "doOffStage": false,
+                      "modifierName": "JNQTribal_FireHit",
+                      "target": "Other",
+                      "actorIceSubHurtDelta": -1,
+                      "canBeHandledOnRecover": true
+                    },
+                    {
+                      "$type": "SendEffectTrigger",
+                      "doOffStage": false,
+                      "target": "Team",
+                      "parameter": "Active",
+                      "actorIceSubHurtDelta": -1,
+                      "effectPattern": "Eff_SceneObj_FlameAltar_01",
+                      "canBeHandledOnRecover": true
+                    },
+                    {
+                      "$type": "SendEffectTrigger",
+                      "doOffStage": false,
+                      "target": "Vehicle",
+                      "parameter": "Active",
+                      "actorIceSubHurtDelta": -1,
+                      "effectPattern": "Eff_SceneObj_FlameAltar_01_Dragon",
+                      "canBeHandledOnRecover": true
+                    }
+                  ],
+                  "canBeHandledOnRecover": true
+                }
+              ]
+            }
+          ],
+          "minus_one": -1,
+          "duration": 1
+        },
+        "FireBuff": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "Predicated",
+              "doOffStage": false,
+              "otherTargets": {
+                "$type": "SelectTargetsByShape",
+                "shapeName": "CircleR7",
+                "campTargetType": "All",
+                "sizeRatio": 1,
+                "ILLOOADJMLF": {
+                  "direction": {
+                    "maxAngle": 180
+                  },
+                  "FDGAEDDEEDG": {
+                    "ELAJJIANFFM": 180
+                  },
+                  "onGroundRaycastUpDist": 2,
+                  "value": 10
+                },
+                "campBasedOn": "CurLocalAvatar"
+              },
+              "targetPredicates": [
+                {
+                  "$type": "ByTargetGadgetState",
+                  "target": "Target"
+                },
+                {
+                  "$type": "ByHasTag",
+                  "tag": "_Is_JNQTribalQuestFire",
+                  "target": "Target"
+                },
+                {
+                  "$type": "ByTargetPositionToSelfPosition",
+                  "value": 5,
+                  "target": "Target",
+                  "logic": "LesserOrEqual",
+                  "compareType": "Y"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "successActions": [
+                {
+                  "$type": "ApplyModifier",
+                  "doOffStage": false,
+                  "modifierName": "SetFireState",
+                  "target": "Other",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "SendEffectTrigger",
+                  "doOffStage": false,
+                  "target": "Team",
+                  "parameter": "Active",
+                  "actorIceSubHurtDelta": -1,
+                  "effectPattern": "Eff_SceneObj_FlameAltar_01",
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "SendEffectTrigger",
+                  "doOffStage": false,
+                  "target": "Vehicle",
+                  "parameter": "Active",
+                  "actorIceSubHurtDelta": -1,
+                  "effectPattern": "Eff_SceneObj_FlameAltar_01_Dragon",
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "thinkInterval": 0.20000000298023224
+        },
+        "FireBuff_Vehicle": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "Predicated",
+              "doOffStage": false,
+              "otherTargets": {
+                "$type": "SelectTargetsByShape",
+                "shapeName": "CircleR7",
+                "campTargetType": "All",
+                "sizeRatio": 1,
+                "ILLOOADJMLF": {
+                  "direction": {
+                    "maxAngle": 180
+                  },
+                  "FDGAEDDEEDG": {
+                    "ELAJJIANFFM": 180
+                  },
+                  "onGroundRaycastUpDist": 2,
+                  "value": 10
+                },
+                "campBasedOn": "CurLocalAvatar"
+              },
+              "targetPredicates": [
+                {
+                  "$type": "ByTargetGadgetState",
+                  "target": "Target"
+                },
+                {
+                  "$type": "ByHasTag",
+                  "tag": "_Is_JNQTribalQuestFire",
+                  "target": "Target"
+                },
+                {
+                  "$type": "ByTargetPositionToSelfPosition",
+                  "value": 5,
+                  "target": "Target",
+                  "logic": "LesserOrEqual",
+                  "compareType": "Y"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "successActions": [
+                {
+                  "$type": "ApplyModifier",
+                  "doOffStage": false,
+                  "modifierName": "SetFireState",
+                  "target": "Other",
+                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "SendEffectTrigger",
+                  "doOffStage": false,
+                  "target": "Team",
+                  "parameter": "Active",
+                  "actorIceSubHurtDelta": -1,
+                  "effectPattern": "Eff_SceneObj_FlameAltar_01",
+                  "canBeHandledOnRecover": true
+                },
+                {
+                  "$type": "SendEffectTrigger",
+                  "doOffStage": false,
+                  "target": "Vehicle",
+                  "parameter": "Active",
+                  "actorIceSubHurtDelta": -1,
+                  "effectPattern": "Eff_SceneObj_FlameAltar_01_Dragon",
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "thinkInterval": 0.20000000298023224
+        },
+        "JNQTribalQuest_FireHandler": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "AttachModifierToSelfGlobalValueMixin",
+              "enable": true,
+              "globalValueKey": "Is_In_Vehicle",
+              "modifierNameSteps": [
+                "Avatar_NotIn_Natsaurus",
+                "Avatar_In_Natsaurus"
+              ],
+              "removeAppliedModifier": true,
+              "actorIceSubHurtDelta": -1,
+              "valueSteps": [
+                -0.5,
+                0.5,
+                1.5
+              ]
+            }
+          ],
+          "minus_one": -1
+        },
+        "JNQTribal_FireHit": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onHittingOther": [
+            {
+              "$type": "ApplyModifier",
+              "doOffStage": false,
+              "modifierName": "Kill_Self",
+              "target": "Other",
+              "predicates": [
+                {
+                  "$type": "ByHasTag",
+                  "tag": "_Is_JNQTribalQuestBlcakMud",
+                  "target": "Target"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1
+        },
+        "Kill_Self": {
+          "onAdded": [
+            {
+              "$type": "FireEffect",
+              "doOffStage": false,
+              "scale": 1,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_SceneObj_FlameAltar_03",
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "FDGAEDDEEDG": {
+                  "ELAJJIANFFM": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "value": 10
+              },
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "KillSelf",
+              "doOffStage": false,
+              "configIdArray": [
+                73003016
+              ],
+              "killSelfType": "Normal",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "SetFireState": {
+          "onAdded": [
+            {
+              "$type": "ChangeGadgetState",
+              "doOffStage": false,
+              "value": 201,
+              "configIdArray": [
+                73003013,
+                73003049,
+                73003015,
+                73003014,
+                73003055
+              ],
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "duration": 1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "abilityName": "DynamicAbility_DragonStone_5_5",
+      "isDynamicAbility": true,
+      "abilityMixins": [
+        {
+          "$type": "AttachModifierToGlobalValueMixin",
+          "enable": true,
+          "globalValueKey": "_ABILITY_HookWalker_IsFatState",
+          "modifierNameSteps": [
+            "DragonStoneHandler"
+          ],
+          "removeAppliedModifier": true,
+          "actorIceSubHurtDelta": -1,
+          "valueSteps": [
+            0.5,
+            1.5
+          ],
+          "NEACJLMBFMN": true
+        }
+      ],
+      "modifiers": {
+        "DragonStoneHandler": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "AttachModifierToGlobalValueMixin",
+              "enable": true,
+              "globalValueKey": "_ABILITY_HookWalker_Seed_Type",
+              "modifierNameSteps": [
+                "Has_DragonStone"
+              ],
+              "removeAppliedModifier": true,
+              "actorIceSubHurtDelta": -1,
+              "valueSteps": [
+                7.5,
+                8.5
+              ],
+              "NEACJLMBFMN": true
+            }
+          ],
+          "minus_one": -1
+        },
+        "Has_DragonStone": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "DoWatcherSystemAction",
+          "doOffStage": false,
+          "target": "CurLocalAvatar",
+          "watcherId": 10234,
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "DynamicAbility_Phlogiston",
+      "isDynamicAbility": true,
+      "abilityMixins": [
+        {
+          "$type": "PhlogistonAreaMixin",
+          "actorIceSubHurtDelta": -1
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "doOffStage": false,
+          "modifierName": "UNIQUE_DrillheadChallenge_CameraFix",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "DynamicAbility_Drillhead_Camera",
+      "isDynamicAbility": true,
+      "modifiers": {
+        "UNIQUE_DrillheadChallenge_CameraFix": {
+          "elementDurability": 100,
+          "stacking": "Unique",
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "CameraModifierMixin",
+              "DJJMACHBJBP": [
+                "LandVehicle",
+                "Normal"
+              ],
+              "actorIceSubHurtDelta": -1,
+              "ONGBGIPFMNH": {
+                "$type": "HGKGGKHGKKK",
+                "CLOEFPFFOGG": true,
+                "DHEPHDGCFFA": 6,
+                "DIHEMBGNMBH": 15,
+                "priority": "PlayModeExtra",
+                "FEEHGKCIHCL": 1.5,
+                "GPFNPBKJEDF": "DefaultRadius",
+                "KMKPPLJDONI": "EaseOutQuad",
+                "LDHDJNBKGNJ": 1,
+                "MGIFGAABNKH": "EaseOutQuad",
+                "POCOPPOIMEB": 15
+              }
+            }
+          ],
+          "minus_one": -1,
+          "isUnique": true
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "doOffStage": false,
+          "modifierName": "UNIQUE_NameHunter_CameraFix",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "DynamicAbility_NameHunter_Camera",
+      "isDynamicAbility": true,
+      "modifiers": {
+        "UNIQUE_NameHunter_CameraFix": {
+          "elementDurability": 100,
+          "stacking": "Unique",
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "CameraModifierMixin",
+              "DJJMACHBJBP": [
+                "LandVehicle",
+                "Normal"
+              ],
+              "actorIceSubHurtDelta": -1,
+              "ONGBGIPFMNH": {
+                "$type": "HGKGGKHGKKK",
+                "CLOEFPFFOGG": true,
+                "DHEPHDGCFFA": 6,
+                "DIHEMBGNMBH": 12,
+                "priority": "PlayModeExtra",
+                "FEEHGKCIHCL": 1.5,
+                "GPFNPBKJEDF": "DefaultRadius",
+                "KMKPPLJDONI": "EaseOutQuad",
+                "LDHDJNBKGNJ": 1,
+                "MGIFGAABNKH": "EaseOutQuad",
+                "POCOPPOIMEB": 9
+              }
+            }
+          ],
+          "minus_one": -1,
+          "isUnique": true
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "DDNHHMIBNLF": {
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "minus_one": -1
+      },
+      "onAdded": [
+        {
+          "$type": "Predicated",
+          "doOffStage": false,
+          "targetPredicates": [
+            {
+              "$type": "ByHostOrGuest",
+              "target": "Target",
+              "isHost": true
+            }
+          ],
+          "actorIceSubHurtDelta": -1,
+          "successActions": [
+            {
+              "$type": "ApplyModifier",
+              "doOffStage": false,
+              "modifierName": "VolcanoEruption_Handler",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "ApplyModifier",
+              "doOffStage": false,
+              "modifierName": "First_Erupation",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "canBeHandledOnRecover": true
+        },
+        {
+          "$type": "ApplyModifier",
+          "doOffStage": false,
+          "modifierName": "TestTrigger",
+          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true
+        }
+      ],
+      "abilityName": "DynamicAbility_VolcanoEruption",
+      "isDynamicAbility": true,
+      "modifiers": {
+        "First_Erupation": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onRemoved": [
+            {
+              "$type": "ApplyModifier",
+              "doOffStage": false,
+              "modifierName": "Trigger_VolcanoEruption",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "minus_one": -1,
+          "duration": 180
+        },
+        "TestTrigger": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "AttachModifierToGlobalValueMixin",
+              "enable": true,
+              "globalValueKey": "GV_Trigger_VolcanoEruption_Test",
+              "modifierNameSteps": [
+                "Trigger_VolcanoEruption_Test"
+              ],
+              "removeAppliedModifier": true,
+              "actorIceSubHurtDelta": -1,
+              "valueSteps": [
+                0.5,
+                1.5
+              ],
+              "NEACJLMBFMN": true
+            }
+          ],
+          "minus_one": -1
+        },
+        "Trigger_VolcanoEruption": {
+          "onAdded": [
+            {
+              "$type": "TriggerSpecialLevelEffect",
+              "doOffStage": false,
+              "paramName": "Open",
+              "predicates": [
+                {
+                  "$type": "ByNot",
+                  "target": "Target",
+                  "predicates": [
+                    {
+                      "$type": "ByIsCombat",
+                      "target": "CurLocalAvatar"
+                    }
+                  ]
+                },
+                {
+                  "$type": "DGCFMGDJJDB",
+                  "target": "Target"
+                },
+                {
+                  "$type": "MMKGDCPLEAJ",
+                  "target": "Target"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "CloudEffect_Nt_Volcano_Smoke_01",
+              "canBeHandledOnRecover": true,
+              "PBHJPBFJGME": true
+            },
+            {
+              "$type": "TriggerSpecialLevelEffect",
+              "doOffStage": false,
+              "paramName": "Open",
+              "predicates": [
+                {
+                  "$type": "ByNot",
+                  "target": "Target",
+                  "predicates": [
+                    {
+                      "$type": "ByIsCombat",
+                      "target": "CurLocalAvatar"
+                    }
+                  ]
+                },
+                {
+                  "$type": "DGCFMGDJJDB",
+                  "target": "Target"
+                },
+                {
+                  "$type": "MMKGDCPLEAJ",
+                  "target": "Target"
+                }
+              ],
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "CloudEffect_Nt_Volcano_Smoke_02",
+              "canBeHandledOnRecover": true,
+              "PBHJPBFJGME": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "duration": 0.5
+        },
+        "Trigger_VolcanoEruption_Test": {
+          "onAdded": [
+            {
+              "$type": "ApplyModifier",
+              "doOffStage": false,
+              "modifierName": "Trigger_VolcanoEruption",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1
+        },
+        "VolcanoEruption_Handler": {
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "minus_one": -1,
+          "onThinkInterval": [
+            {
+              "$type": "ApplyModifier",
+              "doOffStage": false,
+              "modifierName": "Trigger_VolcanoEruption",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "thinkInterval": 1200
+        }
+      }
+    }
+  }
+]
