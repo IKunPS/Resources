@@ -48,6 +48,7 @@ regions = {
 
 -- 触发器
 triggers = {
+    { config_id = 1001001, name = "ANY_MONSTER_DIE_1001", event = EventType.EVENT_ANY_MONSTER_DIE, source = "", condition = "condition_EVENT_ANY_MONSTER_DIE_1001", action = "action_EVENT_ANY_MONSTER_DIE_1001" },
     { config_id = 1001002, name = "SPECIFIC_MONSTER_HP_CHANGE_1002", event = EventType.EVENT_SPECIFIC_MONSTER_HP_CHANGE, source = "", condition = "condition_EVENT_SPECIFIC_MONSTER_HP_CHANGE_1002", action = "action_EVENT_SPECIFIC_MONSTER_HP_CHANGE_1002" },
     { config_id = 1001007, name = "ANY_MONSTER_DIE_1007", event = EventType.EVENT_ANY_MONSTER_DIE, source = "", condition = "condition_EVENT_ANY_MONSTER_DIE_1007", action = "action_EVENT_ANY_MONSTER_DIE_1007" },
     { config_id = 1001019, name = "GADGET_STATE_CHANGE_1019", event = EventType.EVENT_GADGET_STATE_CHANGE, source = "", condition = "condition_EVENT_GADGET_STATE_CHANGE_1019", action = "action_EVENT_GADGET_STATE_CHANGE_1019" }
@@ -79,7 +80,7 @@ suites = {
         monsters = { 1002 },
         gadgets = { 1001, 1010, 1011, 1012, 1013, 1014, 1015, 1016, 1023},
         regions = { },
-        triggers = { "SPECIFIC_MONSTER_HP_CHANGE_1002" },
+        triggers = { "SPECIFIC_MONSTER_HP_CHANGE_1002", "ANY_MONSTER_DIE_1001" },
         rand_weight = 100
     },
     {
@@ -98,23 +99,25 @@ suites = {
 -- 触发器
 --
 --================================================================
--- 评价是服务器没实现
--- 触发条件
-function condition_EVENT_SPECIFIC_MONSTER_HP_CHANGE_1002(context, evt)
-    -- 血量百分比 ≤ 5% 时触发
-    if evt.type ~= EventType.EVENT_SPECIFIC_MONSTER_HP_CHANGE or evt.param3 > 5 then
-            return false
-    end
 
+-- 触发条件
+function condition_EVENT_ANY_MONSTER_DIE_1001(context, evt)
+    -- 判断死亡怪物的configid是否为1002
+    if 1002 ~= evt.param1 then
+        return false
+    end
     return true
 end
 
 -- 触发操作
-function action_EVENT_SPECIFIC_MONSTER_HP_CHANGE_1002(context, evt)
+function action_EVENT_ANY_MONSTER_DIE_1001(context, evt)
     ScriptLib.PlayCutScene(context, defs.cutSceneID, 0)
 
+    ScriptLib.DelSceneTag(context, 20214, 1434)
+    ScriptLib.AddSceneTag(context, 20214, 1435)
+
     -- 移除第一阶段的gadgets
-    local phase1_gadgets = {1010, 1011, 1012, 1013, 1014, 1015, 1016, 1023}
+    local phase1_gadgets = { 1010, 1011, 1012, 1013, 1014, 1015, 1016, 1023 }
     for _, config_id in ipairs(phase1_gadgets) do
         ScriptLib.RemoveEntityByConfigId(context, defs.groupID, EntityType.GADGET, config_id)
     end
@@ -124,6 +127,37 @@ function action_EVENT_SPECIFIC_MONSTER_HP_CHANGE_1002(context, evt)
 
     return 0
 end
+
+-- 评价是服务器没实现
+-- -- 触发条件
+-- function condition_EVENT_SPECIFIC_MONSTER_HP_CHANGE_1002(context, evt)
+--     -- 血量百分比 ≤ 5% 时触发
+--     if evt.type ~= EventType.EVENT_SPECIFIC_MONSTER_HP_CHANGE or evt.param3 > 5 then
+--         return false
+--     end
+--
+--     return true
+-- end
+--
+-- -- 触发操作
+-- function action_EVENT_SPECIFIC_MONSTER_HP_CHANGE_1002(context, evt)
+--     ScriptLib.PlayCutScene(context, defs.cutSceneID, 0)
+--
+--     ScriptLib.DelSceneTag(context, 20214, 1434)
+--     ScriptLib.AddSceneTag(context, 20214, 1435)
+--
+--     -- 移除第一阶段的gadgets
+--     local phase1_gadgets = { 1010, 1011, 1012, 1013, 1014, 1015, 1016, 1023 }
+--     for _, config_id in ipairs(phase1_gadgets) do
+--         ScriptLib.RemoveEntityByConfigId(context, defs.groupID, EntityType.GADGET, config_id)
+--     end
+--
+--     -- 切换到第二阶段suite
+--     ScriptLib.AddExtraGroupSuite(context, defs.groupID, 2)
+--
+--     return 0
+-- end
+
 
 -- 触发条件
 function condition_EVENT_ANY_MONSTER_DIE_1007(context, evt)
