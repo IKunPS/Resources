@@ -128,6 +128,14 @@ function action_EVENT_ANY_MONSTER_DIE_1001(context, evt)
 	return 0
 end
 
+-- 触发操作
+function action_REMOVE_GADGET_1014(context, evt)
+    ScriptLib.RemoveEntityByConfigId(context, 220342001, EntityType.GADGET, 1014)
+
+    return 0
+end
+
+
 -- 触发条件
 function condition_EVENT_ANY_MONSTER_DIE_1002(context, evt)
 	--判断死亡怪物的configid是否为 1002
@@ -140,7 +148,6 @@ end
 
 -- 触发操作
 function action_EVENT_ANY_MONSTER_DIE_1002(context, evt)
-    -- 移除第二阶段的gadgets
 	-- 将configid为 1004 的物件更改为状态 GadgetState.Action01
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 1004, GadgetState.Action01) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
@@ -168,10 +175,4 @@ function action_EVENT_GADGET_STATE_CHANGE_1003(context, evt)
 	end
 
 	return 0
-end
-
-function action_REMOVE_GADGET_1014(context, evt)
-    ScriptLib.RemoveEntityByConfigId(context, 220342001, EntityType.GADGET, 1014)
-
-    return 0
 end

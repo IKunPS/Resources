@@ -4,57 +4,441 @@
       "onKill": [
         {
           "$type": "ShowReminder",
-          "doOffStage": false,
           "id": 31020010,
-          "actorIceSubHurtDelta": -1,
-          "canBeHandledOnRecover": true
+          "doOffStage": false,
+          "canBeHandledOnRecover": true,
+          "actorIceSubHurtDelta": -1
         },
         {
           "$type": "DoWatcherSystemAction",
-          "doOffStage": false,
-          "BPGNHIPPEIF": true,
           "predicates": [
             {
               "$type": "ByTargetGlobalValue",
-              "key": "_OCEANID_DEATHEXPLODED_",
-              "compareType": "NoneOrEqual"
+              "compareType": "NoneOrEqual",
+              "key": "_OCEANID_DEATHEXPLODED_"
             }
           ],
+          "DBFLDIHEEOF": true,
+          "doOffStage": false,
           "watcherId": 82054,
-          "actorIceSubHurtDelta": -1,
-          "canBeHandledOnRecover": true
+          "canBeHandledOnRecover": true,
+          "actorIceSubHurtDelta": -1
         }
       ],
-      "DDNHHMIBNLF": {
-        "elementDurability": 100,
-        "isLimitedProperties": true,
-        "minus_one": -1
-      },
       "onAdded": [
         {
           "$type": "AddGlobalValue",
           "doOffStage": false,
           "key": "_STAGE_",
-          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true,
           "useLimitRange": true,
-          "canBeHandledOnRecover": true
+          "actorIceSubHurtDelta": -1
         },
         {
           "$type": "AddGlobalValue",
           "doOffStage": false,
-          "value": 1,
-          "minValue": 1,
           "key": "_ISOCEANID_",
-          "maxValue": 1,
-          "actorIceSubHurtDelta": -1,
+          "minValue": 1,
+          "value": 1,
+          "canBeHandledOnRecover": true,
           "useLimitRange": true,
-          "canBeHandledOnRecover": true
+          "actorIceSubHurtDelta": -1,
+          "maxValue": 1
         }
       ],
       "abilityName": "Monster_Oceanid_StageControl",
+      "onAbilityStart": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "Oceanid_ReturnToBornState",
+          "doOffStage": false,
+          "canBeHandledOnRecover": true,
+          "actorIceSubHurtDelta": -1
+        }
+      ],
+      "modifiers": {
+        "Born_Reminder": {
+          "onAdded": [
+            {
+              "$type": "ShowReminder",
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "compareType": "NoneOrEqual",
+                  "key": "_BORNREMINDERSHOWED_"
+                }
+              ],
+              "id": 31020001,
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "AddGlobalValue",
+              "doOffStage": false,
+              "key": "_BORNREMINDERSHOWED_",
+              "minValue": 1,
+              "value": 1,
+              "canBeHandledOnRecover": true,
+              "useLimitRange": true,
+              "actorIceSubHurtDelta": -1,
+              "maxValue": 1
+            }
+          ],
+          "elementDurability": 100,
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "isLimitedProperties": true
+        },
+        "Oceanid_ReturnToBorn": {
+          "onAdded": [
+            {
+              "$type": "SetAnimatorTrigger",
+              "triggerID": "ReturnToBorn",
+              "doOffStage": false,
+              "mpTriggerOnRemote": true,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "elementDurability": 100,
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "isLimitedProperties": true
+        },
+        "Oceanid_ReturnToBornEnd": {
+          "elementDurability": 100,
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "onRemoved": [
+            {
+              "$type": "RemoveModifier",
+              "modifierName": "Oceanid_ReturnToBornState",
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "isLimitedProperties": true
+        },
+        "Oceanid_ReturnToBornState": {
+          "onAdded": [
+            {
+              "$type": "TriggerSetVisible",
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "EnableHitBoxByName",
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1,
+              "hitBoxNames": [
+                "HitBox"
+              ]
+            }
+          ],
+          "elementDurability": 100,
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "onRemoved": [
+            {
+              "$type": "TriggerSetVisible",
+              "doOffStage": false,
+              "visible": true,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "EnableHitBoxByName",
+              "doOffStage": false,
+              "setEnable": true,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1,
+              "hitBoxNames": [
+                "HitBox"
+              ]
+            }
+          ],
+          "isLimitedProperties": true
+        },
+        "Oceanid_ReturnToBorn_ServerluaCall": {
+          "elementDurability": 100,
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "onRemoved": [
+            {
+              "$type": "ServerLuaCall",
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1,
+              "luaCallType": "FromGroup",
+              "funcName": "SLC_OCEANID_ESCAPE"
+            }
+          ],
+          "isLimitedProperties": true
+        },
+        "UNIQUE_Stage1": {
+          "onAdded": [
+            {
+              "$type": "SetPoseBool",
+              "doOffStage": false,
+              "value": true,
+              "canBeHandledOnRecover": true,
+              "boolID": "Stage1",
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "ReTriggerAISkillInitialCD",
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "skillIDs": [
+                301
+              ],
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "elementDurability": 100,
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "onRemoved": [
+            {
+              "$type": "SetPoseBool",
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "boolID": "Stage1",
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "isUnique": true,
+          "isLimitedProperties": true
+        },
+        "UNIQUE_Stage2": {
+          "onAdded": [
+            {
+              "$type": "SetPoseBool",
+              "doOffStage": false,
+              "value": true,
+              "canBeHandledOnRecover": true,
+              "boolID": "Stage2",
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "LoseHP",
+              "amountByTargetMaxHPRatio": 0.125,
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1,
+              "lethal": true
+            },
+            {
+              "$type": "ReTriggerAISkillInitialCD",
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "skillIDs": [
+                302
+              ],
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "elementDurability": 100,
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "onRemoved": [
+            {
+              "$type": "SetPoseBool",
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "boolID": "Stage2",
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "isUnique": true,
+          "isLimitedProperties": true
+        },
+        "UNIQUE_Stage3": {
+          "onAdded": [
+            {
+              "$type": "SetPoseBool",
+              "doOffStage": false,
+              "value": true,
+              "canBeHandledOnRecover": true,
+              "boolID": "Stage3",
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "LoseHP",
+              "amountByTargetMaxHPRatio": 0.125,
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1,
+              "lethal": true
+            },
+            {
+              "$type": "ReTriggerAISkillInitialCD",
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "skillIDs": [
+                303
+              ],
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "elementDurability": 100,
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "onRemoved": [
+            {
+              "$type": "SetPoseBool",
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "boolID": "Stage3",
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "isUnique": true,
+          "isLimitedProperties": true
+        },
+        "UNIQUE_Stage4": {
+          "onAdded": [
+            {
+              "$type": "SetPoseBool",
+              "doOffStage": false,
+              "value": true,
+              "canBeHandledOnRecover": true,
+              "boolID": "Stage4",
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "LoseHP",
+              "amountByTargetMaxHPRatio": 0.25,
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1,
+              "lethal": true
+            },
+            {
+              "$type": "ReTriggerAISkillInitialCD",
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "skillIDs": [
+                304
+              ],
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "elementDurability": 100,
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "onRemoved": [
+            {
+              "$type": "SetPoseBool",
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "boolID": "Stage4",
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "isUnique": true,
+          "isLimitedProperties": true
+        },
+        "UNIQUE_Stage5": {
+          "onAdded": [
+            {
+              "$type": "SetPoseBool",
+              "doOffStage": false,
+              "value": true,
+              "canBeHandledOnRecover": true,
+              "boolID": "Stage5",
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "LoseHP",
+              "amountByTargetMaxHPRatio": 0.25,
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1,
+              "lethal": true
+            },
+            {
+              "$type": "ReTriggerAISkillInitialCD",
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "skillIDs": [
+                305
+              ],
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "elementDurability": 100,
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "onRemoved": [
+            {
+              "$type": "SetPoseBool",
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "boolID": "Stage5",
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "isUnique": true,
+          "isLimitedProperties": true
+        },
+        "UNIQUE_StageEnd": {
+          "onAdded": [
+            {
+              "$type": "SetPoseBool",
+              "doOffStage": false,
+              "value": true,
+              "canBeHandledOnRecover": true,
+              "boolID": "StageEnd",
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "LoseHP",
+              "amountByTargetMaxHPRatio": 0.25999999046325684,
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1,
+              "lethal": true
+            }
+          ],
+          "elementDurability": 100,
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "onRemoved": [
+            {
+              "$type": "SetPoseBool",
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "boolID": "StageEnd",
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "isUnique": true,
+          "isLimitedProperties": true
+        }
+      },
+      "OOAKLMJCDAG": {
+        "elementDurability": 100,
+        "minus_one": -1,
+        "HGPKLIANAGB": -1,
+        "isLimitedProperties": true
+      },
       "abilityMixins": [
         {
           "$type": "AttachModifierToSelfGlobalValueMixin",
+          "valueSteps": [
+            -0.5,
+            0.5,
+            1.5,
+            2.5,
+            3.5,
+            4.5,
+            5.5
+          ],
           "globalValueKey": "_STAGE_",
           "modifierNameSteps": [
             "UNIQUE_Stage1",
@@ -65,24 +449,15 @@
             "UNIQUE_StageEnd"
           ],
           "removeAppliedModifier": true,
-          "actorIceSubHurtDelta": -1,
-          "valueSteps": [
-            -0.5,
-            0.5,
-            1.5,
-            2.5,
-            3.5,
-            4.5,
-            5.5
-          ]
+          "actorIceSubHurtDelta": -1
         },
         {
           "$type": "AttachToStateIDMixin",
+          "value": -1,
           "modifierName": "Born_Reminder",
           "stateIDs": [
             "Alert"
           ],
-          "value": -1,
           "actorIceSubHurtDelta": -1
         },
         {
@@ -95,11 +470,11 @@
         },
         {
           "$type": "AttachToStateIDMixin",
+          "value": -1,
           "modifierName": "Oceanid_ReturnToBornEnd",
           "stateIDs": [
             "ReturnToBorn"
           ],
-          "value": -1,
           "actorIceSubHurtDelta": -1
         },
         {
@@ -111,386 +486,18 @@
           ],
           "actorIceSubHurtDelta": -1
         }
-      ],
-      "onAbilityStart": [
-        {
-          "$type": "ApplyModifier",
-          "doOffStage": false,
-          "modifierName": "Oceanid_ReturnToBornState",
-          "actorIceSubHurtDelta": -1,
-          "canBeHandledOnRecover": true
-        }
-      ],
-      "modifiers": {
-        "Born_Reminder": {
-          "onAdded": [
-            {
-              "$type": "ShowReminder",
-              "doOffStage": false,
-              "id": 31020001,
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "key": "_BORNREMINDERSHOWED_",
-                  "compareType": "NoneOrEqual"
-                }
-              ],
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            },
-            {
-              "$type": "AddGlobalValue",
-              "doOffStage": false,
-              "value": 1,
-              "minValue": 1,
-              "key": "_BORNREMINDERSHOWED_",
-              "maxValue": 1,
-              "actorIceSubHurtDelta": -1,
-              "useLimitRange": true,
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "elementDurability": 100,
-          "isLimitedProperties": true,
-          "minus_one": -1
-        },
-        "Oceanid_ReturnToBorn": {
-          "onAdded": [
-            {
-              "$type": "SetAnimatorTrigger",
-              "doOffStage": false,
-              "mpTriggerOnRemote": true,
-              "triggerID": "ReturnToBorn",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "elementDurability": 100,
-          "isLimitedProperties": true,
-          "minus_one": -1
-        },
-        "Oceanid_ReturnToBornEnd": {
-          "elementDurability": 100,
-          "isLimitedProperties": true,
-          "onRemoved": [
-            {
-              "$type": "RemoveModifier",
-              "doOffStage": false,
-              "modifierName": "Oceanid_ReturnToBornState",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "minus_one": -1
-        },
-        "Oceanid_ReturnToBornState": {
-          "onAdded": [
-            {
-              "$type": "TriggerSetVisible",
-              "doOffStage": false,
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            },
-            {
-              "$type": "EnableHitBoxByName",
-              "doOffStage": false,
-              "actorIceSubHurtDelta": -1,
-              "hitBoxNames": [
-                "HitBox"
-              ],
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "elementDurability": 100,
-          "isLimitedProperties": true,
-          "onRemoved": [
-            {
-              "$type": "TriggerSetVisible",
-              "doOffStage": false,
-              "visible": true,
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            },
-            {
-              "$type": "EnableHitBoxByName",
-              "doOffStage": false,
-              "actorIceSubHurtDelta": -1,
-              "setEnable": true,
-              "hitBoxNames": [
-                "HitBox"
-              ],
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "minus_one": -1
-        },
-        "Oceanid_ReturnToBorn_ServerluaCall": {
-          "elementDurability": 100,
-          "isLimitedProperties": true,
-          "onRemoved": [
-            {
-              "$type": "ServerLuaCall",
-              "doOffStage": false,
-              "luaCallType": "FromGroup",
-              "actorIceSubHurtDelta": -1,
-              "funcName": "SLC_OCEANID_ESCAPE",
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "minus_one": -1
-        },
-        "UNIQUE_Stage1": {
-          "onAdded": [
-            {
-              "$type": "SetPoseBool",
-              "doOffStage": false,
-              "value": true,
-              "boolID": "Stage1",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            },
-            {
-              "$type": "ReTriggerAISkillInitialCD",
-              "doOffStage": false,
-              "actorIceSubHurtDelta": -1,
-              "skillIDs": [
-                301
-              ],
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "elementDurability": 100,
-          "isLimitedProperties": true,
-          "onRemoved": [
-            {
-              "$type": "SetPoseBool",
-              "doOffStage": false,
-              "boolID": "Stage1",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "minus_one": -1,
-          "isUnique": true
-        },
-        "UNIQUE_Stage2": {
-          "onAdded": [
-            {
-              "$type": "SetPoseBool",
-              "doOffStage": false,
-              "value": true,
-              "boolID": "Stage2",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            },
-            {
-              "$type": "LoseHP",
-              "doOffStage": false,
-              "amountByTargetMaxHPRatio": 0.125,
-              "enableInvincible": true,
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            },
-            {
-              "$type": "ReTriggerAISkillInitialCD",
-              "doOffStage": false,
-              "actorIceSubHurtDelta": -1,
-              "skillIDs": [
-                302
-              ],
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "elementDurability": 100,
-          "isLimitedProperties": true,
-          "onRemoved": [
-            {
-              "$type": "SetPoseBool",
-              "doOffStage": false,
-              "boolID": "Stage2",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "minus_one": -1,
-          "isUnique": true
-        },
-        "UNIQUE_Stage3": {
-          "onAdded": [
-            {
-              "$type": "SetPoseBool",
-              "doOffStage": false,
-              "value": true,
-              "boolID": "Stage3",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            },
-            {
-              "$type": "LoseHP",
-              "doOffStage": false,
-              "amountByTargetMaxHPRatio": 0.125,
-              "enableInvincible": true,
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            },
-            {
-              "$type": "ReTriggerAISkillInitialCD",
-              "doOffStage": false,
-              "actorIceSubHurtDelta": -1,
-              "skillIDs": [
-                303
-              ],
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "elementDurability": 100,
-          "isLimitedProperties": true,
-          "onRemoved": [
-            {
-              "$type": "SetPoseBool",
-              "doOffStage": false,
-              "boolID": "Stage3",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "minus_one": -1,
-          "isUnique": true
-        },
-        "UNIQUE_Stage4": {
-          "onAdded": [
-            {
-              "$type": "SetPoseBool",
-              "doOffStage": false,
-              "value": true,
-              "boolID": "Stage4",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            },
-            {
-              "$type": "LoseHP",
-              "doOffStage": false,
-              "amountByTargetMaxHPRatio": 0.25,
-              "enableInvincible": true,
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            },
-            {
-              "$type": "ReTriggerAISkillInitialCD",
-              "doOffStage": false,
-              "actorIceSubHurtDelta": -1,
-              "skillIDs": [
-                304
-              ],
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "elementDurability": 100,
-          "isLimitedProperties": true,
-          "onRemoved": [
-            {
-              "$type": "SetPoseBool",
-              "doOffStage": false,
-              "boolID": "Stage4",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "minus_one": -1,
-          "isUnique": true
-        },
-        "UNIQUE_Stage5": {
-          "onAdded": [
-            {
-              "$type": "SetPoseBool",
-              "doOffStage": false,
-              "value": true,
-              "boolID": "Stage5",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            },
-            {
-              "$type": "LoseHP",
-              "doOffStage": false,
-              "amountByTargetMaxHPRatio": 0.25,
-              "enableInvincible": true,
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            },
-            {
-              "$type": "ReTriggerAISkillInitialCD",
-              "doOffStage": false,
-              "actorIceSubHurtDelta": -1,
-              "skillIDs": [
-                305
-              ],
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "elementDurability": 100,
-          "isLimitedProperties": true,
-          "onRemoved": [
-            {
-              "$type": "SetPoseBool",
-              "doOffStage": false,
-              "boolID": "Stage5",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "minus_one": -1,
-          "isUnique": true
-        },
-        "UNIQUE_StageEnd": {
-          "onAdded": [
-            {
-              "$type": "SetPoseBool",
-              "doOffStage": false,
-              "value": true,
-              "boolID": "StageEnd",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            },
-            {
-              "$type": "LoseHP",
-              "doOffStage": false,
-              "amountByTargetMaxHPRatio": 0.25999999046325684,
-              "enableInvincible": true,
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "elementDurability": 100,
-          "isLimitedProperties": true,
-          "onRemoved": [
-            {
-              "$type": "SetPoseBool",
-              "doOffStage": false,
-              "boolID": "StageEnd",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "minus_one": -1,
-          "isUnique": true
-        }
-      }
+      ]
     }
   },
   {
     "Default": {
-      "DDNHHMIBNLF": {
-        "elementDurability": 100,
-        "isLimitedProperties": true,
-        "minus_one": -1
-      },
       "onAdded": [
         {
           "$type": "ApplyModifier",
-          "doOffStage": false,
           "modifierName": "Oceanid_LockHp",
-          "actorIceSubHurtDelta": -1,
-          "canBeHandledOnRecover": true
+          "doOffStage": false,
+          "canBeHandledOnRecover": true,
+          "actorIceSubHurtDelta": -1
         }
       ],
       "abilityName": "Monster_Oceanid_HpDetect",
@@ -499,529 +506,693 @@
           "onAdded": [
             {
               "$type": "AttachAbilityStateResistance",
-              "doOffStage": false,
               "durationRatio": 1,
-              "actorIceSubHurtDelta": -1,
+              "doOffStage": false,
               "resistanceListID": 11001,
-              "canBeHandledOnRecover": true
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             }
           ],
           "elementDurability": 100,
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "state": "LockHP",
           "onBeingHit": [
             {
               "$type": "Predicated",
-              "doOffStage": false,
-              "failActions": [
-                {
-                  "$type": "SetGlobalDir",
-                  "doOffStage": false,
-                  "target": "Target",
-                  "key": "_OCEANID_BEINGHIT_DIR_",
-                  "actorIceSubHurtDelta": -1,
-                  "born": {
-                    "$type": "ConfigBornBySelf",
-                    "direction": {
-                      "$type": "ConfigDirectionByLookAtEntity",
-                      "maxAngle": 180
-                    },
-                    "FDGAEDDEEDG": {
-                      "ELAJJIANFFM": 180
-                    },
-                    "onGroundRaycastUpDist": 2,
-                    "value": 10
-                  },
-                  "canBeHandledOnRecover": true
-                }
-              ],
-              "target": "Target",
               "targetPredicates": [
                 {
                   "$type": "ByEntityTypes",
                   "target": "Target",
-                  "value": -1,
                   "entityTypes": [
                     "Avatar"
-                  ]
+                  ],
+                  "value": -1
                 }
               ],
-              "actorIceSubHurtDelta": -1,
               "successActions": [
                 {
                   "$type": "SetGlobalDir",
-                  "doOffStage": false,
                   "target": "Target",
-                  "key": "_OCEANID_BEINGHIT_DIR_",
-                  "actorIceSubHurtDelta": -1,
                   "born": {
                     "$type": "ConfigBornBySelf",
+                    "value": 10,
+                    "DPCANLOOHCH": {
+                      "NJIPHOKCEGN": 180
+                    },
+                    "onGroundRaycastUpDist": 2,
                     "direction": {
                       "$type": "ConfigDirectionByLookAtEntity",
                       "maxAngle": 180
-                    },
-                    "FDGAEDDEEDG": {
-                      "ELAJJIANFFM": 180
-                    },
-                    "onGroundRaycastUpDist": 2,
-                    "value": 10
+                    }
                   },
-                  "canBeHandledOnRecover": true
+                  "doOffStage": false,
+                  "key": "_OCEANID_BEINGHIT_DIR_",
+                  "canBeHandledOnRecover": true,
+                  "actorIceSubHurtDelta": -1
                 }
               ],
-              "canBeHandledOnRecover": true
+              "target": "Target",
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1,
+              "failActions": [
+                {
+                  "$type": "SetGlobalDir",
+                  "target": "TargetOriginOwner",
+                  "born": {
+                    "$type": "ConfigBornBySelf",
+                    "value": 10,
+                    "DPCANLOOHCH": {
+                      "NJIPHOKCEGN": 180
+                    },
+                    "onGroundRaycastUpDist": 2,
+                    "direction": {
+                      "$type": "ConfigDirectionByLookAtEntity",
+                      "maxAngle": 180
+                    }
+                  },
+                  "doOffStage": false,
+                  "key": "_OCEANID_BEINGHIT_DIR_",
+                  "canBeHandledOnRecover": true,
+                  "actorIceSubHurtDelta": -1
+                }
+              ]
             },
             {
               "$type": "FireEffect",
-              "doOffStage": false,
+              "effectTempleteID": -1,
               "scale": 1,
-              "actorIceSubHurtDelta": -1,
-              "effectPattern": "Eff_Monster_Oceanid_BeHit",
               "born": {
                 "$type": "ConfigBornByAttachPoint",
+                "attachPointName": "RootNode",
+                "value": 10,
+                "DPCANLOOHCH": {
+                  "NJIPHOKCEGN": 180
+                },
+                "onGroundRaycastUpDist": 2,
                 "direction": {
                   "$type": "ConfigDirectionByGlobalValue",
-                  "maxAngle": 180,
-                  "directionKey": "_OCEANID_BEINGHIT_DIR_"
+                  "directionKey": "_OCEANID_BEINGHIT_DIR_",
+                  "maxAngle": 180
                 },
-                "FDGAEDDEEDG": {
-                  "ELAJJIANFFM": 180
-                },
-                "attachPointTargetType": "Self",
-                "attachPointName": "RootNode",
-                "onGroundRaycastUpDist": 2,
-                "value": 10
+                "attachPointTargetType": "Self"
               },
-              "effectTempleteID": -1,
-              "canBeHandledOnRecover": true
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Oceanid_BeHit"
             }
           ],
-          "isLimitedProperties": true,
-          "minus_one": -1,
-          "state": "LockHP"
+          "isLimitedProperties": true
         }
+      },
+      "OOAKLMJCDAG": {
+        "elementDurability": 100,
+        "minus_one": -1,
+        "HGPKLIANAGB": -1,
+        "isLimitedProperties": true
       }
     }
   },
   {
     "Default": {
-      "DDNHHMIBNLF": {
-        "elementDurability": 100,
-        "isLimitedProperties": true,
-        "minus_one": -1
-      },
       "onAdded": [
         {
           "$type": "ApplyModifier",
-          "doOffStage": false,
           "modifierName": "Avatar_Checker",
-          "actorIceSubHurtDelta": -1,
-          "canBeHandledOnRecover": true
+          "doOffStage": false,
+          "canBeHandledOnRecover": true,
+          "actorIceSubHurtDelta": -1
         }
       ],
       "abilityName": "Oceanid_HpController_Stage",
-      "abilityMixins": [
-        {
-          "$type": "AttachToGadgetStateMixin",
-          "modifierName": "HpController_Stage1",
-          "actorIceSubHurtDelta": -1,
-          "gadgetState": 203
-        },
-        {
-          "$type": "AttachToGadgetStateMixin",
-          "modifierName": "HpController_Stage2",
-          "actorIceSubHurtDelta": -1,
-          "gadgetState": 204
-        },
-        {
-          "$type": "AttachToGadgetStateMixin",
-          "modifierName": "HpController_Stage3",
-          "actorIceSubHurtDelta": -1,
-          "gadgetState": 901
-        },
-        {
-          "$type": "AttachToGadgetStateMixin",
-          "modifierName": "HpController_Stage4",
-          "actorIceSubHurtDelta": -1,
-          "gadgetState": 902
-        },
-        {
-          "$type": "AttachToGadgetStateMixin",
-          "modifierName": "HpController_Stage5",
-          "actorIceSubHurtDelta": -1,
-          "gadgetState": 903
-        }
-      ],
       "modifiers": {
         "Avatar_Checker": {
           "elementDurability": 100,
-          "isLimitedProperties": true,
-          "minus_one": -1
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "isLimitedProperties": true
         },
         "ForceSet_Oceanid_Stage1": {
           "elementDurability": 100,
-          "isLimitedProperties": true,
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
           "onRemoved": [
             {
               "$type": "AddGlobalValue",
-              "doOffStage": false,
               "otherTargets": {
                 "$type": "SelectTargetsBySelfGroup",
                 "value": 26,
-                "operation": "XOR",
-                "compareType": "Equal"
+                "compareType": "Equal",
+                "operation": "XOR"
               },
-              "value": 1,
-              "minValue": 1,
+              "doOffStage": false,
               "key": "_STAGE_",
-              "maxValue": 1,
-              "actorIceSubHurtDelta": -1,
+              "minValue": 1,
+              "value": 1,
+              "canBeHandledOnRecover": true,
               "useLimitRange": true,
-              "canBeHandledOnRecover": true
+              "actorIceSubHurtDelta": -1,
+              "maxValue": 1
             }
           ],
-          "minus_one": -1,
-          "duration": 0.699999988079071
+          "duration": 0.699999988079071,
+          "isLimitedProperties": true
         },
         "ForceSet_Oceanid_Stage2": {
           "elementDurability": 100,
-          "isLimitedProperties": true,
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
           "onRemoved": [
             {
               "$type": "AddGlobalValue",
-              "doOffStage": false,
               "otherTargets": {
                 "$type": "SelectTargetsBySelfGroup",
                 "value": 26,
-                "operation": "XOR",
-                "compareType": "Equal"
+                "compareType": "Equal",
+                "operation": "XOR"
               },
-              "value": 2,
-              "minValue": 2,
+              "doOffStage": false,
               "key": "_STAGE_",
-              "maxValue": 2,
-              "actorIceSubHurtDelta": -1,
+              "minValue": 2,
+              "value": 2,
+              "canBeHandledOnRecover": true,
               "useLimitRange": true,
-              "canBeHandledOnRecover": true
+              "actorIceSubHurtDelta": -1,
+              "maxValue": 2
             }
           ],
-          "minus_one": -1,
-          "duration": 0.699999988079071
+          "duration": 0.699999988079071,
+          "isLimitedProperties": true
         },
         "ForceSet_Oceanid_Stage3": {
           "elementDurability": 100,
-          "isLimitedProperties": true,
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
           "onRemoved": [
             {
               "$type": "AddGlobalValue",
-              "doOffStage": false,
               "otherTargets": {
                 "$type": "SelectTargetsBySelfGroup",
                 "value": 26,
-                "operation": "XOR",
-                "compareType": "Equal"
+                "compareType": "Equal",
+                "operation": "XOR"
               },
-              "value": 3,
-              "minValue": 3,
+              "doOffStage": false,
               "key": "_STAGE_",
-              "maxValue": 3,
-              "actorIceSubHurtDelta": -1,
+              "minValue": 3,
+              "value": 3,
+              "canBeHandledOnRecover": true,
               "useLimitRange": true,
-              "canBeHandledOnRecover": true
+              "actorIceSubHurtDelta": -1,
+              "maxValue": 3
             }
           ],
-          "minus_one": -1,
-          "duration": 0.699999988079071
+          "duration": 0.699999988079071,
+          "isLimitedProperties": true
         },
         "ForceSet_Oceanid_Stage4": {
           "elementDurability": 100,
-          "isLimitedProperties": true,
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
           "onRemoved": [
             {
               "$type": "AddGlobalValue",
-              "doOffStage": false,
               "otherTargets": {
                 "$type": "SelectTargetsBySelfGroup",
                 "value": 26,
-                "operation": "XOR",
-                "compareType": "Equal"
+                "compareType": "Equal",
+                "operation": "XOR"
               },
-              "value": 4,
-              "minValue": 4,
+              "doOffStage": false,
               "key": "_STAGE_",
-              "maxValue": 4,
-              "actorIceSubHurtDelta": -1,
+              "minValue": 4,
+              "value": 4,
+              "canBeHandledOnRecover": true,
               "useLimitRange": true,
-              "canBeHandledOnRecover": true
+              "actorIceSubHurtDelta": -1,
+              "maxValue": 4
             }
           ],
-          "minus_one": -1,
-          "duration": 0.699999988079071
+          "duration": 0.699999988079071,
+          "isLimitedProperties": true
         },
         "ForceSet_Oceanid_Stage5": {
           "elementDurability": 100,
-          "isLimitedProperties": true,
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
           "onRemoved": [
             {
               "$type": "AddGlobalValue",
-              "doOffStage": false,
               "otherTargets": {
                 "$type": "SelectTargetsBySelfGroup",
                 "value": 26,
-                "operation": "XOR",
-                "compareType": "Equal"
+                "compareType": "Equal",
+                "operation": "XOR"
               },
-              "value": 5,
-              "minValue": 5,
+              "doOffStage": false,
               "key": "_STAGE_",
-              "maxValue": 5,
-              "actorIceSubHurtDelta": -1,
+              "minValue": 5,
+              "value": 5,
+              "canBeHandledOnRecover": true,
               "useLimitRange": true,
-              "canBeHandledOnRecover": true
+              "actorIceSubHurtDelta": -1,
+              "maxValue": 5
             }
           ],
-          "minus_one": -1,
-          "duration": 0.699999988079071
+          "duration": 0.699999988079071,
+          "isLimitedProperties": true
         },
         "HpController_Stage1": {
           "onAdded": [
             {
               "$type": "ApplyModifier",
-              "doOffStage": false,
               "otherTargets": {
                 "$type": "SelectTargetsBySelfGroup",
                 "value": 26,
-                "operation": "XOR",
-                "compareType": "Equal"
+                "compareType": "Equal",
+                "operation": "XOR"
               },
               "modifierName": "Oceanid_Stage1",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             },
             {
               "$type": "ApplyModifier",
-              "doOffStage": false,
               "modifierName": "ForceSet_Oceanid_Stage1",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             }
           ],
           "elementDurability": 100,
-          "isLimitedProperties": true,
-          "minus_one": -1
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "isLimitedProperties": true
         },
         "HpController_Stage2": {
           "onAdded": [
             {
               "$type": "ApplyModifier",
-              "doOffStage": false,
               "otherTargets": {
                 "$type": "SelectTargetsBySelfGroup",
                 "value": 26,
-                "operation": "XOR",
-                "compareType": "Equal"
+                "compareType": "Equal",
+                "operation": "XOR"
               },
               "modifierName": "Oceanid_Stage2",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             },
             {
               "$type": "ApplyModifier",
-              "doOffStage": false,
               "modifierName": "ForceSet_Oceanid_Stage2",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             }
           ],
           "elementDurability": 100,
-          "isLimitedProperties": true,
-          "minus_one": -1
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "isLimitedProperties": true
         },
         "HpController_Stage3": {
           "onAdded": [
             {
               "$type": "ApplyModifier",
-              "doOffStage": false,
               "otherTargets": {
                 "$type": "SelectTargetsBySelfGroup",
                 "value": 26,
-                "operation": "XOR",
-                "compareType": "Equal"
+                "compareType": "Equal",
+                "operation": "XOR"
               },
               "modifierName": "Oceanid_Stage3",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             },
             {
               "$type": "ApplyModifier",
-              "doOffStage": false,
               "modifierName": "ForceSet_Oceanid_Stage3",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             }
           ],
           "elementDurability": 100,
-          "isLimitedProperties": true,
-          "minus_one": -1
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "isLimitedProperties": true
         },
         "HpController_Stage4": {
           "onAdded": [
             {
               "$type": "ApplyModifier",
-              "doOffStage": false,
               "otherTargets": {
                 "$type": "SelectTargetsBySelfGroup",
                 "value": 26,
-                "operation": "XOR",
-                "compareType": "Equal"
+                "compareType": "Equal",
+                "operation": "XOR"
               },
               "modifierName": "Oceanid_Stage4",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             },
             {
               "$type": "ApplyModifier",
-              "doOffStage": false,
               "modifierName": "ForceSet_Oceanid_Stage4",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             }
           ],
           "elementDurability": 100,
-          "isLimitedProperties": true,
-          "minus_one": -1
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "isLimitedProperties": true
         },
         "HpController_Stage5": {
           "onAdded": [
             {
               "$type": "ApplyModifier",
-              "doOffStage": false,
               "otherTargets": {
                 "$type": "SelectTargetsBySelfGroup",
                 "value": 26,
-                "operation": "XOR",
-                "compareType": "Equal"
+                "compareType": "Equal",
+                "operation": "XOR"
               },
               "modifierName": "Oceanid_Stage5",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             },
             {
               "$type": "ApplyModifier",
-              "doOffStage": false,
               "modifierName": "ForceSet_Oceanid_Stage5",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             }
           ],
           "elementDurability": 100,
-          "isLimitedProperties": true,
-          "minus_one": -1
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "isLimitedProperties": true
         },
         "Oceanid_Stage1": {
           "elementDurability": 100,
-          "isLimitedProperties": true,
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
           "onRemoved": [
             {
               "$type": "AddGlobalValue",
               "doOffStage": false,
-              "value": 1,
-              "minValue": 1,
               "key": "_STAGE_",
-              "maxValue": 1,
-              "actorIceSubHurtDelta": -1,
+              "minValue": 1,
+              "value": 1,
+              "canBeHandledOnRecover": true,
               "useLimitRange": true,
-              "canBeHandledOnRecover": true
+              "actorIceSubHurtDelta": -1,
+              "maxValue": 1
             }
           ],
-          "minus_one": -1,
-          "duration": 0.10000000149011612
+          "duration": 0.10000000149011612,
+          "isLimitedProperties": true
         },
         "Oceanid_Stage2": {
           "elementDurability": 100,
-          "isLimitedProperties": true,
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
           "onRemoved": [
             {
               "$type": "AddGlobalValue",
               "doOffStage": false,
-              "value": 2,
-              "minValue": 2,
               "key": "_STAGE_",
-              "maxValue": 2,
-              "actorIceSubHurtDelta": -1,
+              "minValue": 2,
+              "value": 2,
+              "canBeHandledOnRecover": true,
               "useLimitRange": true,
-              "canBeHandledOnRecover": true
+              "actorIceSubHurtDelta": -1,
+              "maxValue": 2
             }
           ],
-          "minus_one": -1,
-          "duration": 0.10000000149011612
+          "duration": 0.10000000149011612,
+          "isLimitedProperties": true
         },
         "Oceanid_Stage3": {
           "elementDurability": 100,
-          "isLimitedProperties": true,
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
           "onRemoved": [
             {
               "$type": "AddGlobalValue",
               "doOffStage": false,
-              "value": 3,
-              "minValue": 3,
               "key": "_STAGE_",
-              "maxValue": 3,
-              "actorIceSubHurtDelta": -1,
+              "minValue": 3,
+              "value": 3,
+              "canBeHandledOnRecover": true,
               "useLimitRange": true,
-              "canBeHandledOnRecover": true
+              "actorIceSubHurtDelta": -1,
+              "maxValue": 3
             }
           ],
-          "minus_one": -1,
-          "duration": 0.10000000149011612
+          "duration": 0.10000000149011612,
+          "isLimitedProperties": true
         },
         "Oceanid_Stage4": {
           "elementDurability": 100,
-          "isLimitedProperties": true,
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
           "onRemoved": [
             {
               "$type": "AddGlobalValue",
               "doOffStage": false,
-              "value": 4,
-              "minValue": 4,
               "key": "_STAGE_",
-              "maxValue": 4,
-              "actorIceSubHurtDelta": -1,
+              "minValue": 4,
+              "value": 4,
+              "canBeHandledOnRecover": true,
               "useLimitRange": true,
-              "canBeHandledOnRecover": true
+              "actorIceSubHurtDelta": -1,
+              "maxValue": 4
             }
           ],
-          "minus_one": -1,
-          "duration": 0.10000000149011612
+          "duration": 0.10000000149011612,
+          "isLimitedProperties": true
         },
         "Oceanid_Stage5": {
           "elementDurability": 100,
-          "isLimitedProperties": true,
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
           "onRemoved": [
             {
               "$type": "AddGlobalValue",
               "doOffStage": false,
-              "value": 5,
-              "minValue": 5,
               "key": "_STAGE_",
-              "maxValue": 5,
-              "actorIceSubHurtDelta": -1,
+              "minValue": 5,
+              "value": 5,
+              "canBeHandledOnRecover": true,
               "useLimitRange": true,
-              "canBeHandledOnRecover": true
+              "actorIceSubHurtDelta": -1,
+              "maxValue": 5
             }
           ],
-          "minus_one": -1,
-          "duration": 0.10000000149011612
+          "duration": 0.10000000149011612,
+          "isLimitedProperties": true
         }
-      }
+      },
+      "OOAKLMJCDAG": {
+        "elementDurability": 100,
+        "minus_one": -1,
+        "HGPKLIANAGB": -1,
+        "isLimitedProperties": true
+      },
+      "abilityMixins": [
+        {
+          "$type": "AttachToGadgetStateMixin",
+          "gadgetState": 203,
+          "modifierName": "HpController_Stage1",
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToGadgetStateMixin",
+          "gadgetState": 204,
+          "modifierName": "HpController_Stage2",
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToGadgetStateMixin",
+          "gadgetState": 901,
+          "modifierName": "HpController_Stage3",
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToGadgetStateMixin",
+          "gadgetState": 902,
+          "modifierName": "HpController_Stage4",
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToGadgetStateMixin",
+          "gadgetState": 903,
+          "modifierName": "HpController_Stage5",
+          "actorIceSubHurtDelta": -1
+        }
+      ]
     }
   },
   {
     "Default": {
-      "DDNHHMIBNLF": {
-        "elementDurability": 100,
-        "isLimitedProperties": true,
-        "minus_one": -1
-      },
       "abilityName": "Monster_Oceanid_Surround",
+      "modifiers": {
+        "MoveEffect": {
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "effectTempleteID": -1,
+              "scale": 1,
+              "born": {
+                "value": 10,
+                "DPCANLOOHCH": {
+                  "NJIPHOKCEGN": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "direction": {
+                  "maxAngle": 180
+                }
+              },
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Oceanid_WalkLoop"
+            },
+            {
+              "$type": "AttachEffect",
+              "effectTempleteID": -1,
+              "scale": 1,
+              "born": {
+                "value": 10,
+                "DPCANLOOHCH": {
+                  "NJIPHOKCEGN": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "direction": {
+                  "maxAngle": 180
+                }
+              },
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Oceanid_WalkLoop_Trail_Bone_L_Finger_02"
+            },
+            {
+              "$type": "AttachEffect",
+              "effectTempleteID": -1,
+              "scale": 1,
+              "born": {
+                "value": 10,
+                "DPCANLOOHCH": {
+                  "NJIPHOKCEGN": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "direction": {
+                  "maxAngle": 180
+                }
+              },
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Oceanid_WalkLoop_Trail_Bone_R_Finger_02"
+            }
+          ],
+          "elementDurability": 100,
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "isLimitedProperties": true
+        },
+        "MovePose": {
+          "onAdded": [
+            {
+              "$type": "EBNODJMDJAJ",
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actionPointType": "OceanidMovePoint",
+              "value": true,
+              "actorIceSubHurtDelta": -1,
+              "PFAFODFOEHH": true
+            }
+          ],
+          "elementDurability": 100,
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "onRemoved": [
+            {
+              "$type": "EBNODJMDJAJ",
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actionPointType": "OceanidMovePoint",
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "isLimitedProperties": true
+        },
+        "StandbyEffect": {
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "effectTempleteID": -1,
+              "scale": 1,
+              "born": {
+                "value": 10,
+                "DPCANLOOHCH": {
+                  "NJIPHOKCEGN": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "direction": {
+                  "maxAngle": 180
+                }
+              },
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Oceanid_StandbyLoop_LHand"
+            },
+            {
+              "$type": "AttachEffect",
+              "effectTempleteID": -1,
+              "scale": 1,
+              "born": {
+                "value": 10,
+                "DPCANLOOHCH": {
+                  "NJIPHOKCEGN": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "direction": {
+                  "maxAngle": 180
+                }
+              },
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Oceanid_StandbyLoop_RHand"
+            }
+          ],
+          "elementDurability": 100,
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "isLimitedProperties": true
+        }
+      },
+      "OOAKLMJCDAG": {
+        "elementDurability": 100,
+        "minus_one": -1,
+        "HGPKLIANAGB": -1,
+        "isLimitedProperties": true
+      },
       "abilityMixins": [
         {
           "$type": "AttachToAIAlertnessMixin",
@@ -1034,6 +1205,7 @@
         },
         {
           "$type": "AttachToAnimatorStateIDMixin",
+          "value": -1,
           "modifierName": "MoveEffect",
           "stateIDs": [
             "Born",
@@ -1046,11 +1218,11 @@
             "PlatformControl_Appear",
             "ReturnToBorn"
           ],
-          "value": -1,
           "actorIceSubHurtDelta": -1
         },
         {
           "$type": "AttachToAnimatorStateIDMixin",
+          "value": -1,
           "modifierName": "StandbyEffect",
           "stateIDs": [
             "Standby",
@@ -1061,183 +1233,21 @@
             "OverTimeAtk_Standby",
             "OverTimeAtk_AS"
           ],
-          "value": -1,
           "actorIceSubHurtDelta": -1
         }
-      ],
-      "modifiers": {
-        "MoveEffect": {
-          "onAdded": [
-            {
-              "$type": "AttachEffect",
-              "doOffStage": false,
-              "scale": 1,
-              "actorIceSubHurtDelta": -1,
-              "effectPattern": "Eff_Monster_Oceanid_WalkLoop",
-              "born": {
-                "direction": {
-                  "maxAngle": 180
-                },
-                "FDGAEDDEEDG": {
-                  "ELAJJIANFFM": 180
-                },
-                "onGroundRaycastUpDist": 2,
-                "value": 10
-              },
-              "effectTempleteID": -1,
-              "canBeHandledOnRecover": true
-            },
-            {
-              "$type": "AttachEffect",
-              "doOffStage": false,
-              "scale": 1,
-              "actorIceSubHurtDelta": -1,
-              "effectPattern": "Eff_Monster_Oceanid_WalkLoop_Trail_Bone_L_Finger_02",
-              "born": {
-                "direction": {
-                  "maxAngle": 180
-                },
-                "FDGAEDDEEDG": {
-                  "ELAJJIANFFM": 180
-                },
-                "onGroundRaycastUpDist": 2,
-                "value": 10
-              },
-              "effectTempleteID": -1,
-              "canBeHandledOnRecover": true
-            },
-            {
-              "$type": "AttachEffect",
-              "doOffStage": false,
-              "scale": 1,
-              "actorIceSubHurtDelta": -1,
-              "effectPattern": "Eff_Monster_Oceanid_WalkLoop_Trail_Bone_R_Finger_02",
-              "born": {
-                "direction": {
-                  "maxAngle": 180
-                },
-                "FDGAEDDEEDG": {
-                  "ELAJJIANFFM": 180
-                },
-                "onGroundRaycastUpDist": 2,
-                "value": 10
-              },
-              "effectTempleteID": -1,
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "elementDurability": 100,
-          "isLimitedProperties": true,
-          "minus_one": -1
-        },
-        "MovePose": {
-          "onAdded": [
-            {
-              "$type": "ALPPIOGJIDI",
-              "doOffStage": false,
-              "enable": true,
-              "actorIceSubHurtDelta": -1,
-              "actionPointType": "OceanidMovePoint",
-              "canBeHandledOnRecover": true,
-              "PCDDEOFEJJD": true
-            }
-          ],
-          "elementDurability": 100,
-          "isLimitedProperties": true,
-          "onRemoved": [
-            {
-              "$type": "ALPPIOGJIDI",
-              "doOffStage": false,
-              "actorIceSubHurtDelta": -1,
-              "actionPointType": "OceanidMovePoint",
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "minus_one": -1
-        },
-        "StandbyEffect": {
-          "onAdded": [
-            {
-              "$type": "AttachEffect",
-              "doOffStage": false,
-              "scale": 1,
-              "actorIceSubHurtDelta": -1,
-              "effectPattern": "Eff_Monster_Oceanid_StandbyLoop_LHand",
-              "born": {
-                "direction": {
-                  "maxAngle": 180
-                },
-                "FDGAEDDEEDG": {
-                  "ELAJJIANFFM": 180
-                },
-                "onGroundRaycastUpDist": 2,
-                "value": 10
-              },
-              "effectTempleteID": -1,
-              "canBeHandledOnRecover": true
-            },
-            {
-              "$type": "AttachEffect",
-              "doOffStage": false,
-              "scale": 1,
-              "actorIceSubHurtDelta": -1,
-              "effectPattern": "Eff_Monster_Oceanid_StandbyLoop_RHand",
-              "born": {
-                "direction": {
-                  "maxAngle": 180
-                },
-                "FDGAEDDEEDG": {
-                  "ELAJJIANFFM": 180
-                },
-                "onGroundRaycastUpDist": 2,
-                "value": 10
-              },
-              "effectTempleteID": -1,
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "elementDurability": 100,
-          "isLimitedProperties": true,
-          "minus_one": -1
-        }
-      }
+      ]
     }
   },
   {
     "Default": {
-      "DDNHHMIBNLF": {
-        "elementDurability": 100,
-        "isLimitedProperties": true,
-        "minus_one": -1
-      },
       "abilityName": "Monster_Oceanid_FireSummonBullet",
-      "abilityMixins": [
-        {
-          "$type": "AttachToStateIDMixin",
-          "modifierName": "SummonEffect",
-          "stateIDs": [
-            "Summon_BS"
-          ],
-          "value": -1,
-          "actorIceSubHurtDelta": -1
-        },
-        {
-          "$type": "AttachToStateIDMixin",
-          "modifierName": "Summon_SelectPlatform",
-          "stateIDs": [
-            "Summon_Standby"
-          ],
-          "value": -1,
-          "actorIceSubHurtDelta": -1
-        }
-      ],
       "onAbilityStart": [
         {
           "$type": "ApplyModifier",
-          "doOffStage": false,
           "modifierName": "SummonBullet",
-          "actorIceSubHurtDelta": -1,
-          "canBeHandledOnRecover": true
+          "doOffStage": false,
+          "canBeHandledOnRecover": true,
+          "actorIceSubHurtDelta": -1
         }
       ],
       "modifiers": {
@@ -1245,280 +1255,305 @@
           "onAdded": [
             {
               "$type": "TriggerAbility",
+              "target": "Other",
               "doOffStage": false,
               "abilityName": "Oceanid_Platform_SummonMonster",
-              "actorIceSubHurtDelta": -1,
-              "target": "Other",
-              "canBeHandledOnRecover": true
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             }
           ],
           "elementDurability": 100,
-          "isLimitedProperties": true,
           "minus_one": -1,
-          "duration": 1
+          "HGPKLIANAGB": -1,
+          "duration": 1,
+          "isLimitedProperties": true
         },
         "SummonBullet": {
           "onAdded": [
             {
               "$type": "Predicated",
-              "doOffStage": false,
-              "otherTargets": {
-                "$type": "SelectTargetsBySelfGroup",
-                "value": 25,
-                "operation": "XOR",
-                "compareType": "LesserOrEqual"
-              },
               "targetPredicates": [
                 {
                   "$type": "ByTargetGadgetState",
-                  "target": "Target",
-                  "gadgetState": 901
+                  "gadgetState": 901,
+                  "target": "Target"
                 }
               ],
-              "actorIceSubHurtDelta": -1,
               "successActions": [
                 {
                   "$type": "TriggerBullet",
-                  "doOffStage": false,
-                  "trackTarget": "Target",
-                  "target": "Target",
-                  "bulletID": 42005008,
                   "value": true,
-                  "actorIceSubHurtDelta": -1,
+                  "onGround": true,
+                  "target": "Target",
+                  "trackTarget": "Target",
                   "born": {
                     "$type": "ConfigBornByAttachPoint",
+                    "attachPointName": "BulletAttachPoint",
+                    "value": 10,
+                    "DPCANLOOHCH": {
+                      "NJIPHOKCEGN": 180
+                    },
+                    "onGroundRaycastUpDist": 2,
                     "direction": {
                       "$type": "ConfigDirectionByEntity",
+                      "ANEGBIMIJIK": 15,
                       "randomAngleHor": 15,
-                      "CDBMJDKEEGD": 15,
                       "maxAngle": 180
                     },
-                    "FDGAEDDEEDG": {
-                      "ELAJJIANFFM": 180
-                    },
-                    "attachPointTargetType": "Self",
-                    "attachPointName": "BulletAttachPoint",
-                    "onGroundRaycastUpDist": 2,
-                    "value": 10
+                    "attachPointTargetType": "Self"
                   },
+                  "doOffStage": false,
+                  "bulletID": 42005008,
                   "canBeHandledOnRecover": true,
-                  "POOEIFNLHDB": true
+                  "actorIceSubHurtDelta": -1
                 }
               ],
-              "canBeHandledOnRecover": true
+              "otherTargets": {
+                "$type": "SelectTargetsBySelfGroup",
+                "value": 25,
+                "compareType": "LesserOrEqual",
+                "operation": "XOR"
+              },
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             }
           ],
           "elementDurability": 100,
-          "isLimitedProperties": true,
           "minus_one": -1,
-          "duration": 2
+          "HGPKLIANAGB": -1,
+          "duration": 2,
+          "isLimitedProperties": true
         },
         "SummonEffect": {
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "doOffStage": false,
+              "effectTempleteID": -1,
               "scale": 1,
-              "actorIceSubHurtDelta": -1,
-              "effectPattern": "Eff_Monster_Oceanid_SummonBS",
               "born": {
                 "$type": "ConfigBornByAttachPoint",
+                "attachPointName": "BulletAttachPoint",
+                "value": 10,
+                "DPCANLOOHCH": {
+                  "NJIPHOKCEGN": 180
+                },
+                "onGroundRaycastUpDist": 2,
                 "direction": {
                   "maxAngle": 180
                 },
-                "FDGAEDDEEDG": {
-                  "ELAJJIANFFM": 180
-                },
-                "attachPointTargetType": "Self",
-                "attachPointName": "BulletAttachPoint",
-                "onGroundRaycastUpDist": 2,
-                "value": 10
+                "attachPointTargetType": "Self"
               },
-              "effectTempleteID": -1,
-              "canBeHandledOnRecover": true
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Oceanid_SummonBS"
             }
           ],
           "elementDurability": 100,
-          "isLimitedProperties": true,
-          "minus_one": -1
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "isLimitedProperties": true
         },
         "Summon_SelectPlatform": {
           "onAdded": [
             {
               "$type": "Predicated",
-              "doOffStage": false,
-              "otherTargets": {
-                "$type": "SelectTargetsBySelfGroup",
-                "value": 25,
-                "operation": "XOR",
-                "compareType": "LesserOrEqual"
-              },
               "targetPredicates": [
                 {
                   "$type": "ByTargetGadgetState",
-                  "target": "Target",
-                  "gadgetState": 901
+                  "gadgetState": 901,
+                  "target": "Target"
                 }
               ],
-              "actorIceSubHurtDelta": -1,
               "successActions": [
                 {
                   "$type": "ApplyModifier",
-                  "doOffStage": false,
-                  "modifierName": "Platform_SummonMonster",
                   "target": "Target",
-                  "actorIceSubHurtDelta": -1,
-                  "canBeHandledOnRecover": true
+                  "modifierName": "Platform_SummonMonster",
+                  "doOffStage": false,
+                  "canBeHandledOnRecover": true,
+                  "actorIceSubHurtDelta": -1
                 }
               ],
-              "canBeHandledOnRecover": true
+              "otherTargets": {
+                "$type": "SelectTargetsBySelfGroup",
+                "value": 25,
+                "compareType": "LesserOrEqual",
+                "operation": "XOR"
+              },
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             },
             {
               "$type": "ShowReminder",
-              "doOffStage": false,
-              "id": 31020004,
               "predicates": [
                 {
                   "$type": "ByTargetGlobalValue",
-                  "value": 1,
-                  "key": "_STAGE_"
+                  "key": "_STAGE_",
+                  "value": 1
                 }
               ],
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "id": 31020004,
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             },
             {
               "$type": "ShowReminder",
-              "doOffStage": false,
-              "id": 31020004,
               "predicates": [
                 {
                   "$type": "ByTargetGlobalValue",
-                  "value": 2,
-                  "key": "_STAGE_"
+                  "key": "_STAGE_",
+                  "value": 2
                 }
               ],
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "id": 31020004,
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             },
             {
               "$type": "ShowReminder",
-              "doOffStage": false,
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_STAGE_",
+                  "value": 3
+                }
+              ],
               "id": 31020005,
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "value": 3,
-                  "key": "_STAGE_"
-                }
-              ],
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             },
             {
               "$type": "ShowReminder",
-              "doOffStage": false,
-              "id": 31020004,
               "predicates": [
                 {
                   "$type": "ByTargetGlobalValue",
-                  "value": 4,
-                  "key": "_STAGE_"
+                  "key": "_STAGE_",
+                  "value": 4
                 }
               ],
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "id": 31020004,
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             }
           ],
           "elementDurability": 100,
-          "isLimitedProperties": true,
-          "minus_one": -1
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "isLimitedProperties": true
         }
-      }
+      },
+      "OOAKLMJCDAG": {
+        "elementDurability": 100,
+        "minus_one": -1,
+        "HGPKLIANAGB": -1,
+        "isLimitedProperties": true
+      },
+      "abilityMixins": [
+        {
+          "$type": "AttachToStateIDMixin",
+          "value": -1,
+          "modifierName": "SummonEffect",
+          "stateIDs": [
+            "Summon_BS"
+          ],
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToStateIDMixin",
+          "value": -1,
+          "modifierName": "Summon_SelectPlatform",
+          "stateIDs": [
+            "Summon_Standby"
+          ],
+          "actorIceSubHurtDelta": -1
+        }
+      ]
     }
   },
   {
     "Default": {
-      "DDNHHMIBNLF": {
-        "elementDurability": 100,
-        "isLimitedProperties": true,
-        "minus_one": -1
-      },
       "onAdded": [
         {
           "$type": "AttachModifier",
-          "doOffStage": false,
           "modifierName": "EffectModifier",
-          "actorIceSubHurtDelta": -1,
-          "canBeHandledOnRecover": true
+          "doOffStage": false,
+          "canBeHandledOnRecover": true,
+          "actorIceSubHurtDelta": -1
         }
       ],
       "abilityName": "Oceanid_SummonBullet_Explode",
       "onAbilityStart": [
         {
           "$type": "Predicated",
-          "doOffStage": false,
-          "target": "Target",
           "targetPredicates": [
             {
               "$type": "ByTargetGlobalValue",
-              "value": 1,
               "target": "Target",
-              "key": "_ISOCEANIDPLATFORM_"
+              "key": "_ISOCEANIDPLATFORM_",
+              "value": 1
             },
             {
               "$type": "ByTargetGadgetState",
-              "target": "Target",
-              "gadgetState": 901
+              "gadgetState": 901,
+              "target": "Target"
             }
           ],
-          "actorIceSubHurtDelta": -1,
           "successActions": [
             {
               "$type": "RemoveUniqueModifier",
-              "doOffStage": false,
-              "modifierName": "UNIQUE_SummonMonsterHandler",
               "target": "Target",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "modifierName": "UNIQUE_SummonMonsterHandler",
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             },
             {
               "$type": "FireEffect",
-              "doOffStage": false,
+              "effectTempleteID": -1,
               "scale": 1,
-              "actorIceSubHurtDelta": -1,
-              "effectPattern": "Eff_Monster_Oceanid_Summon_BulletAS",
               "born": {
                 "$type": "ConfigBornBySelf",
-                "direction": {
-                  "maxAngle": 180
-                },
-                "FDGAEDDEEDG": {
-                  "ELAJJIANFFM": 180
+                "value": 10,
+                "DPCANLOOHCH": {
+                  "NJIPHOKCEGN": 180
                 },
                 "onGroundRaycastUpDist": 2,
-                "value": 10
+                "direction": {
+                  "maxAngle": 180
+                }
               },
-              "effectTempleteID": -1,
-              "canBeHandledOnRecover": true
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Oceanid_Summon_BulletAS"
             },
             {
               "$type": "ShowReminder",
-              "doOffStage": false,
               "id": 31020012,
               "target": "Owner",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             },
             {
               "$type": "KillSelf",
-              "doOffStage": false,
               "killSelfType": "Normal",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             }
           ],
-          "canBeHandledOnRecover": true
+          "target": "Target",
+          "doOffStage": false,
+          "canBeHandledOnRecover": true,
+          "actorIceSubHurtDelta": -1
         }
       ],
       "modifiers": {
@@ -1526,139 +1561,130 @@
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "doOffStage": false,
+              "effectTempleteID": -1,
               "scale": 1,
-              "actorIceSubHurtDelta": -1,
-              "effectPattern": "Eff_Monster_Oceanid_Summon_BulletLoop",
               "born": {
-                "direction": {
-                  "maxAngle": 180
-                },
-                "FDGAEDDEEDG": {
-                  "ELAJJIANFFM": 180
+                "value": 10,
+                "DPCANLOOHCH": {
+                  "NJIPHOKCEGN": 180
                 },
                 "onGroundRaycastUpDist": 2,
-                "value": 10
+                "direction": {
+                  "maxAngle": 180
+                }
               },
-              "effectTempleteID": -1,
-              "canBeHandledOnRecover": true
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Oceanid_Summon_BulletLoop"
             }
           ],
           "elementDurability": 100,
-          "isLimitedProperties": true,
-          "minus_one": -1
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "isLimitedProperties": true
         }
+      },
+      "OOAKLMJCDAG": {
+        "elementDurability": 100,
+        "minus_one": -1,
+        "HGPKLIANAGB": -1,
+        "isLimitedProperties": true
       }
     }
   },
   {
     "Default": {
-      "DDNHHMIBNLF": {
-        "elementDurability": 100,
-        "isLimitedProperties": true,
-        "minus_one": -1
-      },
       "abilityName": "Monster_Oceanid_PlatformControl_SelectPlatform",
-      "abilityMixins": [
-        {
-          "$type": "AttachToStateIDMixin",
-          "modifierName": "PlatformControl_Reminder",
-          "stateIDs": [
-            "PlatformControl_Standby"
-          ],
-          "value": -1,
-          "actorIceSubHurtDelta": -1
-        }
-      ],
       "onAbilityStart": [
         {
           "$type": "SetAnimatorBool",
           "doOffStage": false,
+          "canBeHandledOnRecover": true,
           "boolID": "SecondPlatformControl",
-          "actorIceSubHurtDelta": -1,
-          "canBeHandledOnRecover": true
+          "actorIceSubHurtDelta": -1
         },
         {
           "$type": "SetAnimatorBool",
           "doOffStage": false,
+          "canBeHandledOnRecover": true,
           "boolID": "PlatformControlAppear",
-          "actorIceSubHurtDelta": -1,
-          "canBeHandledOnRecover": true
+          "actorIceSubHurtDelta": -1
         },
         {
           "$type": "Predicated",
-          "doOffStage": false,
-          "otherTargets": {
-            "$type": "SelectTargetsBySelfGroup",
-            "value": 25,
-            "operation": "XOR",
-            "compareType": "LesserOrEqual"
-          },
           "targetPredicates": [
             {
               "$type": "ByTargetGadgetState",
-              "target": "Target",
-              "gadgetState": 201
+              "gadgetState": 201,
+              "target": "Target"
             }
           ],
-          "actorIceSubHurtDelta": -1,
           "successActions": [
             {
               "$type": "SetSelfAttackTarget",
-              "doOffStage": false,
               "target": "Target",
-              "JELKDCKGOBE": true,
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "turnToTargetImmediately": true,
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             },
             {
               "$type": "SetGlobalPos",
-              "doOffStage": false,
               "target": "Target",
-              "key": "_RUSHMOVEPOS_",
-              "actorIceSubHurtDelta": -1,
               "born": {
                 "$type": "ConfigBornByAttachPoint",
+                "attachPointName": "RootNode",
+                "value": 10,
+                "DPCANLOOHCH": {
+                  "NJIPHOKCEGN": 180
+                },
+                "onGroundRaycastUpDist": 2,
                 "direction": {
                   "maxAngle": 180
-                },
-                "FDGAEDDEEDG": {
-                  "ELAJJIANFFM": 180
-                },
-                "attachPointName": "RootNode",
-                "onGroundRaycastUpDist": 2,
-                "value": 10
+                }
               },
-              "canBeHandledOnRecover": true
+              "doOffStage": false,
+              "key": "_RUSHMOVEPOS_",
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             },
             {
               "$type": "FixedMonsterRushMove",
-              "doOffStage": false,
-              "FMLEGJIKPGH": -1,
-              "FPCBFHKNDED": -1,
-              "HHOAGAKMODA": true,
+              "isInAir": true,
               "timeRange": 1.600000023841858,
-              "actorIceSubHurtDelta": -1,
-              "toPos": {
-                "$type": "ConfigBornByGlobalValue",
-                "direction": {
-                  "maxAngle": 180
-                },
-                "positionKey": "_RUSHMOVEPOS_",
-                "FDGAEDDEEDG": {
-                  "ELAJJIANFFM": 180
-                },
-                "onGroundRaycastUpDist": 2,
-                "value": 10
-              },
+              "GOINCPLMDCM": -1,
               "animatorStateIDs": [
                 "PlatformControl01",
                 "PlatformControl02"
               ],
-              "canBeHandledOnRecover": true
+              "HAKOHOJFGCP": -1,
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1,
+              "toPos": {
+                "$type": "ConfigBornByGlobalValue",
+                "value": 10,
+                "DPCANLOOHCH": {
+                  "NJIPHOKCEGN": 180
+                },
+                "positionKey": "_RUSHMOVEPOS_",
+                "onGroundRaycastUpDist": 2,
+                "direction": {
+                  "maxAngle": 180
+                }
+              }
             }
           ],
-          "canBeHandledOnRecover": true
+          "otherTargets": {
+            "$type": "SelectTargetsBySelfGroup",
+            "value": 25,
+            "compareType": "LesserOrEqual",
+            "operation": "XOR"
+          },
+          "doOffStage": false,
+          "canBeHandledOnRecover": true,
+          "actorIceSubHurtDelta": -1
         }
       ],
       "modifiers": {
@@ -1666,249 +1692,262 @@
           "onAdded": [
             {
               "$type": "ShowReminder",
-              "doOffStage": false,
-              "id": 31020007,
               "predicates": [
                 {
                   "$type": "ByTargetGlobalValue",
-                  "value": 2,
                   "target": "Target",
-                  "key": "_STAGE_"
+                  "key": "_STAGE_",
+                  "value": 2
                 }
               ],
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "id": 31020007,
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             },
             {
               "$type": "ShowReminder",
-              "doOffStage": false,
-              "id": 31020008,
               "predicates": [
                 {
                   "$type": "ByTargetGlobalValue",
-                  "value": 4,
                   "target": "Target",
-                  "key": "_STAGE_"
+                  "key": "_STAGE_",
+                  "value": 4
                 }
               ],
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "id": 31020008,
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             }
           ],
           "elementDurability": 100,
-          "isLimitedProperties": true,
-          "minus_one": -1
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "isLimitedProperties": true
         }
-      }
-    }
-  },
-  {
-    "Default": {
-      "DDNHHMIBNLF": {
-        "elementDurability": 100,
-        "isLimitedProperties": true,
-        "minus_one": -1
       },
-      "abilityName": "Monster_Oceanid_PlatformControl_JumpToPlatform",
-      "onAbilityStart": [
+      "OOAKLMJCDAG": {
+        "elementDurability": 100,
+        "minus_one": -1,
+        "HGPKLIANAGB": -1,
+        "isLimitedProperties": true
+      },
+      "abilityMixins": [
         {
-          "$type": "Predicated",
-          "doOffStage": false,
-          "otherTargets": {
-            "$type": "SelectTargetsBySelfGroup",
-            "value": 25,
-            "operation": "XOR",
-            "compareType": "LesserOrEqual"
-          },
-          "targetPredicates": [
-            {
-              "$type": "ByTargetGadgetState",
-              "target": "Target",
-              "gadgetState": 201
-            }
+          "$type": "AttachToStateIDMixin",
+          "value": -1,
+          "modifierName": "PlatformControl_Reminder",
+          "stateIDs": [
+            "PlatformControl_Standby"
           ],
-          "actorIceSubHurtDelta": -1,
-          "successActions": [
-            {
-              "$type": "FireEffect",
-              "doOffStage": false,
-              "target": "Target",
-              "scale": 1,
-              "actorIceSubHurtDelta": -1,
-              "effectPattern": "Eff_Monster_Oceanid_PlatformControlAS",
-              "born": {
-                "$type": "ConfigBornByAttachPoint",
-                "direction": {
-                  "maxAngle": 180
-                },
-                "FDGAEDDEEDG": {
-                  "ELAJJIANFFM": 180
-                },
-                "attachPointName": "RootNode",
-                "onGroundRaycastUpDist": 2,
-                "value": 10
-              },
-              "effectTempleteID": -1,
-              "canBeHandledOnRecover": true
-            },
-            {
-              "$type": "DamageByAttackValue",
-              "attackInfo": {
-                "attenuationGroup": "default",
-                "hitPattern": {
-                  "retreatType": "ByHitDirection",
-                  "hitImpulseType": "LV5",
-                  "onHitEffectName": "default",
-                  "hitHaltTimeScale": 0.05000000074505806,
-                  "JKLONEBKFKJ": {
-                    "JJGBOHIKHFM": true,
-                    "value": 1
-                  }
-                },
-                "forceCameraShake": true,
-                "FJNMGDHFOEH": {
-                  "GCPNPCOFFBP": "Shake"
-                },
-                "IODAJAKBOLG": {
-                  "onHitEffectName": "default",
-                  "JKLONEBKFKJ": {
-                    "JJGBOHIKHFM": true,
-                    "value": 1
-                  }
-                },
-                "attackProperty": {
-                  "attackType": "Default",
-                  "enBreak": 10000,
-                  "elementType": "Water",
-                  "elementDurability": 25,
-                  "strikeType": "None",
-                  "elementRank": 1,
-                  "damagePercentage": 0.5
-                },
-                "cameraShake": {
-                  "extension": {
-                    "baseCycle": 0.11999999731779099,
-                    "cycleDamping": 0.11999999731779099,
-                    "baseOnCamera": true,
-                    "rangeAttenuation": 0.5
-                  },
-                  "FAKMJBNLPPB": -1,
-                  "shakeDistance": 30,
-                  "shakeRange": 1,
-                  "shakeType": "CustomVector",
-                  "shakeTime": 0.30000001192092896
-                }
-              },
-              "doOffStage": false,
-              "otherTargets": {
-                "$type": "SelectTargetsByShape",
-                "shapeName": "CircleR5",
-                "campTargetType": "Enemy",
-                "sizeRatio": 1,
-                "ILLOOADJMLF": {
-                  "direction": {
-                    "maxAngle": 180
-                  },
-                  "FDGAEDDEEDG": {
-                    "ELAJJIANFFM": 180
-                  },
-                  "onGroundRaycastUpDist": 2,
-                  "value": 10
-                }
-              },
-              "actorIceSubHurtDelta": -1,
-              "born": {
-                "direction": {
-                  "maxAngle": 180
-                },
-                "FDGAEDDEEDG": {
-                  "ELAJJIANFFM": 180
-                },
-                "onGroundRaycastUpDist": 2,
-                "value": 10
-              },
-              "canBeHandledOnRecover": true
-            },
-            {
-              "$type": "SetGlobalPos",
-              "doOffStage": false,
-              "target": "Target",
-              "key": "_JUMPPOS_",
-              "actorIceSubHurtDelta": -1,
-              "born": {
-                "$type": "ConfigBornByAttachPoint",
-                "direction": {
-                  "$type": "ConfigDirectionByAttachPoint",
-                  "maxAngle": 180,
-                  "attachPointName": "RootNode"
-                },
-                "FDGAEDDEEDG": {
-                  "ELAJJIANFFM": 180
-                },
-                "attachPointName": "RootNode",
-                "onGroundRaycastUpDist": 2,
-                "value": 10
-              },
-              "canBeHandledOnRecover": true
-            },
-            {
-              "$type": "ShowReminder",
-              "doOffStage": false,
-              "id": 31020013,
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "canBeHandledOnRecover": true
+          "actorIceSubHurtDelta": -1
         }
       ]
     }
   },
   {
     "Default": {
-      "DDNHHMIBNLF": {
+      "abilityName": "Monster_Oceanid_PlatformControl_JumpToPlatform",
+      "onAbilityStart": [
+        {
+          "$type": "Predicated",
+          "targetPredicates": [
+            {
+              "$type": "ByTargetGadgetState",
+              "gadgetState": 201,
+              "target": "Target"
+            }
+          ],
+          "successActions": [
+            {
+              "$type": "FireEffect",
+              "effectTempleteID": -1,
+              "target": "Target",
+              "scale": 1,
+              "born": {
+                "$type": "ConfigBornByAttachPoint",
+                "attachPointName": "RootNode",
+                "value": 10,
+                "DPCANLOOHCH": {
+                  "NJIPHOKCEGN": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "direction": {
+                  "maxAngle": 180
+                }
+              },
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Oceanid_PlatformControlAS"
+            },
+            {
+              "$type": "DamageByAttackValue",
+              "attackInfo": {
+                "AKKPNIMNNGE": {
+                  "JMEJGMOJIJJ": "Shake"
+                },
+                "attackProperty": {
+                  "enBreak": 10000,
+                  "elementDurability": 25,
+                  "damagePercentage": 0.5,
+                  "attackType": "Default",
+                  "elementRank": 1,
+                  "elementType": "Water",
+                  "strikeType": "None"
+                },
+                "hitPattern": {
+                  "hitImpulseType": "LV5",
+                  "hitHaltTimeScale": 0.05000000074505806,
+                  "retreatType": "ByHitDirection",
+                  "onHitEffectName": "default",
+                  "NCKKCKDNLCC": {
+                    "value": 1,
+                    "JGHPGBHFEHK": true
+                  }
+                },
+                "forceCameraShake": true,
+                "cameraShake": {
+                  "shakeTime": 0.30000001192092896,
+                  "shakeRange": 1,
+                  "shakeDistance": 30,
+                  "shakeType": "CustomVector",
+                  "extension": {
+                    "baseCycle": 0.11999999731779099,
+                    "cycleDamping": 0.11999999731779099,
+                    "rangeAttenuation": 0.5,
+                    "baseOnCamera": true
+                  }
+                },
+                "attenuationGroup": "default",
+                "POIJCDIFPAA": {
+                  "onHitEffectName": "default",
+                  "NCKKCKDNLCC": {
+                    "value": 1,
+                    "JGHPGBHFEHK": true
+                  }
+                }
+              },
+              "otherTargets": {
+                "$type": "SelectTargetsByShape",
+                "shapeName": "CircleR5",
+                "JCNBPJBFJNM": {
+                  "value": 10,
+                  "DPCANLOOHCH": {
+                    "NJIPHOKCEGN": 180
+                  },
+                  "onGroundRaycastUpDist": 2,
+                  "direction": {
+                    "maxAngle": 180
+                  }
+                },
+                "campTargetType": "Enemy",
+                "sizeRatio": 1
+              },
+              "born": {
+                "value": 10,
+                "DPCANLOOHCH": {
+                  "NJIPHOKCEGN": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "direction": {
+                  "maxAngle": 180
+                }
+              },
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "SetGlobalPos",
+              "target": "Target",
+              "born": {
+                "$type": "ConfigBornByAttachPoint",
+                "attachPointName": "RootNode",
+                "value": 10,
+                "DPCANLOOHCH": {
+                  "NJIPHOKCEGN": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "direction": {
+                  "$type": "ConfigDirectionByAttachPoint",
+                  "attachPointName": "RootNode",
+                  "maxAngle": 180
+                }
+              },
+              "doOffStage": false,
+              "key": "_JUMPPOS_",
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "ShowReminder",
+              "id": 31020013,
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "otherTargets": {
+            "$type": "SelectTargetsBySelfGroup",
+            "value": 25,
+            "compareType": "LesserOrEqual",
+            "operation": "XOR"
+          },
+          "doOffStage": false,
+          "canBeHandledOnRecover": true,
+          "actorIceSubHurtDelta": -1
+        }
+      ],
+      "OOAKLMJCDAG": {
         "elementDurability": 100,
-        "isLimitedProperties": true,
-        "minus_one": -1
-      },
+        "minus_one": -1,
+        "HGPKLIANAGB": -1,
+        "isLimitedProperties": true
+      }
+    }
+  },
+  {
+    "Default": {
       "abilityName": "Monster_Oceanid_PlatformControl_SinkPlatform",
       "onAbilityStart": [
         {
           "$type": "AddGlobalValue",
           "doOffStage": false,
           "key": "_PLATFORMSINKED_",
-          "actorIceSubHurtDelta": -1,
+          "canBeHandledOnRecover": true,
           "useLimitRange": true,
-          "canBeHandledOnRecover": true
+          "actorIceSubHurtDelta": -1
         },
         {
           "$type": "Predicated",
-          "doOffStage": false,
-          "otherTargets": {
-            "$type": "SelectTargetsBySelfGroup",
-            "value": 25,
-            "operation": "XOR",
-            "compareType": "LesserOrEqual"
-          },
           "targetPredicates": [
             {
               "$type": "ByTargetGadgetState",
-              "target": "Target",
-              "gadgetState": 201
+              "gadgetState": 201,
+              "target": "Target"
             }
           ],
-          "actorIceSubHurtDelta": -1,
           "successActions": [
             {
               "$type": "ApplyModifier",
-              "doOffStage": false,
-              "modifierName": "PlatformSink",
               "target": "Target",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "modifierName": "PlatformSink",
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             }
           ],
-          "canBeHandledOnRecover": true
+          "otherTargets": {
+            "$type": "SelectTargetsBySelfGroup",
+            "value": 25,
+            "compareType": "LesserOrEqual",
+            "operation": "XOR"
+          },
+          "doOffStage": false,
+          "canBeHandledOnRecover": true,
+          "actorIceSubHurtDelta": -1
         }
       ],
       "modifiers": {
@@ -1916,701 +1955,696 @@
           "onAdded": [
             {
               "$type": "FireEffect",
-              "doOffStage": false,
+              "effectTempleteID": -1,
               "scale": 1,
-              "actorIceSubHurtDelta": -1,
-              "effectPattern": "Eff_Monster_Oceanid_PlatformSink",
               "born": {
                 "$type": "ConfigBornByAttachPoint",
+                "attachPointName": "RootNode",
+                "value": 10,
+                "DPCANLOOHCH": {
+                  "NJIPHOKCEGN": 180
+                },
+                "onGroundRaycastUpDist": 2,
                 "direction": {
                   "maxAngle": 180
                 },
-                "FDGAEDDEEDG": {
-                  "ELAJJIANFFM": 180
-                },
-                "attachPointTargetType": "Self",
-                "attachPointName": "RootNode",
-                "onGroundRaycastUpDist": 2,
-                "value": 10
+                "attachPointTargetType": "Self"
               },
-              "effectTempleteID": -1,
-              "canBeHandledOnRecover": true
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Oceanid_PlatformSink"
             }
           ],
           "elementDurability": 100,
-          "isLimitedProperties": true,
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
           "onRemoved": [
             {
               "$type": "ExecuteGadgetLua",
               "doOffStage": false,
               "param1": 202,
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             },
             {
               "$type": "AddGlobalValue",
-              "doOffStage": false,
-              "value": 1,
               "target": "Caster",
-              "minValue": 1,
+              "doOffStage": false,
               "key": "_PLATFORMSINKED_",
-              "maxValue": 1,
-              "actorIceSubHurtDelta": -1,
+              "minValue": 1,
+              "value": 1,
+              "canBeHandledOnRecover": true,
               "useLimitRange": true,
-              "canBeHandledOnRecover": true
+              "actorIceSubHurtDelta": -1,
+              "maxValue": 1
             },
             {
               "$type": "AddGlobalValue",
               "doOffStage": false,
-              "value": 1,
-              "minValue": 1,
               "key": "_SINKED_",
-              "maxValue": 1,
-              "actorIceSubHurtDelta": -1,
+              "minValue": 1,
+              "value": 1,
+              "canBeHandledOnRecover": true,
               "useLimitRange": true,
-              "canBeHandledOnRecover": true
+              "actorIceSubHurtDelta": -1,
+              "maxValue": 1
             }
           ],
-          "minus_one": -1,
-          "duration": 1
+          "duration": 1,
+          "isLimitedProperties": true
         }
+      },
+      "OOAKLMJCDAG": {
+        "elementDurability": 100,
+        "minus_one": -1,
+        "HGPKLIANAGB": -1,
+        "isLimitedProperties": true
       }
     }
   },
   {
     "Default": {
-      "DDNHHMIBNLF": {
-        "elementDurability": 100,
-        "isLimitedProperties": true,
-        "minus_one": -1
-      },
       "abilityName": "Monster_Oceanid_PlatformControl_UnderWater",
-      "abilityMixins": [
-        {
-          "$type": "AttachToAnimatorStateIDMixin",
-          "modifierName": "FirstJump_UnderWater",
-          "stateIDs": [
-            "PlatformControl01_AS"
-          ],
-          "value": -1,
-          "actorIceSubHurtDelta": -1
-        },
-        {
-          "$type": "AttachToAnimatorStateIDMixin",
-          "modifierName": "SecondJump_UnderWater",
-          "stateIDs": [
-            "PlatformControl02_AS"
-          ],
-          "value": -1,
-          "actorIceSubHurtDelta": -1
-        },
-        {
-          "$type": "AttachToAnimatorStateIDMixin",
-          "modifierName": "PlatformControl_Appear",
-          "stateIDs": [
-            "PlatformControl_Appear"
-          ],
-          "value": -1,
-          "actorIceSubHurtDelta": -1
-        },
-        {
-          "$type": "AttachToAnimatorStateIDMixin",
-          "modifierName": "Born_UnderWater",
-          "stateIDs": [
-            "Born",
-            "Standby_Free"
-          ],
-          "value": -1,
-          "actorIceSubHurtDelta": -1
-        }
-      ],
       "modifiers": {
         "Born_UnderWater": {
           "onAdded": [
             {
               "$type": "EnableHitBoxByName",
               "doOffStage": false,
+              "canBeHandledOnRecover": true,
               "actorIceSubHurtDelta": -1,
               "hitBoxNames": [
                 "HitBox"
-              ],
-              "canBeHandledOnRecover": true
+              ]
             },
             {
               "$type": "TriggerSetVisible",
               "doOffStage": false,
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             }
           ],
           "elementDurability": 100,
-          "isLimitedProperties": true,
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
           "onRemoved": [
             {
               "$type": "EnableHitBoxByName",
               "doOffStage": false,
-              "actorIceSubHurtDelta": -1,
               "setEnable": true,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1,
               "hitBoxNames": [
                 "HitBox"
-              ],
-              "canBeHandledOnRecover": true
+              ]
             },
             {
               "$type": "TriggerSetVisible",
               "doOffStage": false,
               "visible": true,
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             }
           ],
-          "minus_one": -1
+          "isLimitedProperties": true
         },
         "FirstJump_UnderWater": {
           "onAdded": [
             {
               "$type": "ResetAIAttackTarget",
               "doOffStage": false,
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             },
             {
               "$type": "TriggerSetVisible",
               "doOffStage": false,
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             },
             {
               "$type": "EnableHitBoxByName",
               "doOffStage": false,
+              "canBeHandledOnRecover": true,
               "actorIceSubHurtDelta": -1,
               "hitBoxNames": [
                 "HitBox"
-              ],
-              "canBeHandledOnRecover": true
+              ]
             },
             {
               "$type": "SetAnimatorBool",
               "doOffStage": false,
+              "canBeHandledOnRecover": true,
               "boolID": "SecondPlatformControl",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "actorIceSubHurtDelta": -1
             },
             {
               "$type": "SetAnimatorBool",
               "doOffStage": false,
+              "canBeHandledOnRecover": true,
               "boolID": "PlatformControlAppear",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "actorIceSubHurtDelta": -1
             },
             {
               "$type": "ApplyModifier",
-              "doOffStage": false,
               "modifierName": "FirstJump_UnderWater_Timer",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             }
           ],
           "elementDurability": 100,
-          "isLimitedProperties": true,
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
           "onRemoved": [
             {
               "$type": "EnableHitBoxByName",
               "doOffStage": false,
-              "actorIceSubHurtDelta": -1,
               "setEnable": true,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1,
               "hitBoxNames": [
                 "HitBox"
-              ],
-              "canBeHandledOnRecover": true
+              ]
             },
             {
               "$type": "TriggerSetVisible",
               "doOffStage": false,
               "visible": true,
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             },
             {
               "$type": "Predicated",
-              "doOffStage": false,
-              "otherTargets": {
-                "$type": "SelectTargetsBySelfGroup",
-                "value": 25,
-                "operation": "XOR",
-                "compareType": "LesserOrEqual"
-              },
               "targetPredicates": [
                 {
                   "$type": "ByTargetGadgetState",
-                  "target": "Target",
-                  "gadgetState": 201
+                  "gadgetState": 201,
+                  "target": "Target"
                 },
                 {
                   "$type": "ByTargetGlobalValue",
-                  "key": "_PLATFORMSINKED_",
-                  "compareType": "NoneOrEqual"
+                  "compareType": "NoneOrEqual",
+                  "key": "_PLATFORMSINKED_"
                 }
               ],
-              "actorIceSubHurtDelta": -1,
               "successActions": [
                 {
                   "$type": "ExecuteGadgetLua",
-                  "doOffStage": false,
                   "target": "Target",
+                  "doOffStage": false,
                   "param1": 202,
-                  "actorIceSubHurtDelta": -1,
-                  "canBeHandledOnRecover": true
+                  "canBeHandledOnRecover": true,
+                  "actorIceSubHurtDelta": -1
                 },
                 {
                   "$type": "AddGlobalValue",
                   "doOffStage": false,
-                  "value": 1,
-                  "minValue": 1,
                   "key": "_PLATFORMSINKED_",
-                  "maxValue": 1,
-                  "actorIceSubHurtDelta": -1,
+                  "minValue": 1,
+                  "value": 1,
+                  "canBeHandledOnRecover": true,
                   "useLimitRange": true,
-                  "canBeHandledOnRecover": true
+                  "actorIceSubHurtDelta": -1,
+                  "maxValue": 1
                 }
               ],
-              "canBeHandledOnRecover": true
+              "otherTargets": {
+                "$type": "SelectTargetsBySelfGroup",
+                "value": 25,
+                "compareType": "LesserOrEqual",
+                "operation": "XOR"
+              },
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             },
             {
               "$type": "FireEffect",
-              "doOffStage": false,
+              "effectTempleteID": -1,
               "scale": 1,
-              "actorIceSubHurtDelta": -1,
-              "effectPattern": "Eff_Monster_Oceanid_BornAS",
               "born": {
                 "$type": "ConfigBornByGlobalValue",
-                "direction": {
-                  "$type": "ConfigDirectionByGlobalValue",
-                  "maxAngle": 180,
-                  "directionKey": "_JUMPPOS_"
+                "value": 10,
+                "DPCANLOOHCH": {
+                  "NJIPHOKCEGN": 180
                 },
                 "positionKey": "_JUMPPOS_",
-                "FDGAEDDEEDG": {
-                  "ELAJJIANFFM": 180
-                },
                 "onGroundRaycastUpDist": 2,
-                "value": 10
+                "direction": {
+                  "$type": "ConfigDirectionByGlobalValue",
+                  "directionKey": "_JUMPPOS_",
+                  "maxAngle": 180
+                }
               },
-              "effectTempleteID": -1,
-              "canBeHandledOnRecover": true
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Oceanid_BornAS"
             }
           ],
-          "minus_one": -1
+          "isLimitedProperties": true
         },
         "FirstJump_UnderWater_Timer": {
           "elementDurability": 100,
-          "isLimitedProperties": true,
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
           "onRemoved": [
             {
               "$type": "SetAnimatorBool",
               "doOffStage": false,
               "value": true,
+              "canBeHandledOnRecover": true,
               "boolID": "SecondPlatformControl",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "actorIceSubHurtDelta": -1
             }
           ],
-          "minus_one": -1,
-          "duration": 3
+          "duration": 3,
+          "isLimitedProperties": true
         },
         "PlatformControl_Appear": {
           "onAdded": [
             {
               "$type": "SetSelfAttackTarget",
-              "doOffStage": false,
               "target": "CurLocalAvatar",
-              "JELKDCKGOBE": true,
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "turnToTargetImmediately": true,
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             }
           ],
           "elementDurability": 100,
-          "isLimitedProperties": true,
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
           "onRemoved": [
             {
               "$type": "ResetAIAttackTarget",
               "doOffStage": false,
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             }
           ],
-          "minus_one": -1
+          "isLimitedProperties": true
         },
         "SecondJump_UnderWater": {
           "onAdded": [
             {
               "$type": "ResetAIAttackTarget",
               "doOffStage": false,
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             },
             {
               "$type": "EnableHitBoxByName",
               "doOffStage": false,
+              "canBeHandledOnRecover": true,
               "actorIceSubHurtDelta": -1,
               "hitBoxNames": [
                 "HitBox"
-              ],
-              "canBeHandledOnRecover": true
+              ]
             },
             {
               "$type": "SetAnimatorBool",
               "doOffStage": false,
+              "canBeHandledOnRecover": true,
               "boolID": "SecondPlatformControl",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "actorIceSubHurtDelta": -1
             },
             {
               "$type": "SetAnimatorBool",
               "doOffStage": false,
+              "canBeHandledOnRecover": true,
               "boolID": "PlatformControlAppear",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "actorIceSubHurtDelta": -1
             },
             {
               "$type": "TriggerSetVisible",
               "doOffStage": false,
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             },
             {
               "$type": "ApplyModifier",
-              "doOffStage": false,
               "modifierName": "SecondJump_UnderWater_Timer",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             }
           ],
           "elementDurability": 100,
-          "isLimitedProperties": true,
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
           "onRemoved": [
             {
               "$type": "EnableHitBoxByName",
               "doOffStage": false,
-              "actorIceSubHurtDelta": -1,
               "setEnable": true,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1,
               "hitBoxNames": [
                 "HitBox"
-              ],
-              "canBeHandledOnRecover": true
+              ]
             },
             {
               "$type": "TriggerSetVisible",
               "doOffStage": false,
               "visible": true,
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             },
             {
               "$type": "Predicated",
-              "doOffStage": false,
-              "otherTargets": {
-                "$type": "SelectTargetsBySelfGroup",
-                "value": 25,
-                "operation": "XOR",
-                "compareType": "LesserOrEqual"
-              },
               "targetPredicates": [
                 {
                   "$type": "ByTargetGadgetState",
-                  "target": "Target",
-                  "gadgetState": 201
+                  "gadgetState": 201,
+                  "target": "Target"
                 },
                 {
                   "$type": "ByTargetGlobalValue",
-                  "key": "_PLATFORMSINKED_",
-                  "compareType": "NoneOrEqual"
+                  "compareType": "NoneOrEqual",
+                  "key": "_PLATFORMSINKED_"
                 }
               ],
-              "actorIceSubHurtDelta": -1,
               "successActions": [
                 {
                   "$type": "ExecuteGadgetLua",
-                  "doOffStage": false,
                   "target": "Target",
+                  "doOffStage": false,
                   "param1": 202,
-                  "actorIceSubHurtDelta": -1,
-                  "canBeHandledOnRecover": true
+                  "canBeHandledOnRecover": true,
+                  "actorIceSubHurtDelta": -1
                 },
                 {
                   "$type": "AddGlobalValue",
                   "doOffStage": false,
-                  "value": 1,
-                  "minValue": 1,
                   "key": "_PLATFORMSINKED_",
-                  "maxValue": 1,
-                  "actorIceSubHurtDelta": -1,
+                  "minValue": 1,
+                  "value": 1,
+                  "canBeHandledOnRecover": true,
                   "useLimitRange": true,
-                  "canBeHandledOnRecover": true
+                  "actorIceSubHurtDelta": -1,
+                  "maxValue": 1
                 }
               ],
-              "canBeHandledOnRecover": true
+              "otherTargets": {
+                "$type": "SelectTargetsBySelfGroup",
+                "value": 25,
+                "compareType": "LesserOrEqual",
+                "operation": "XOR"
+              },
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             },
             {
               "$type": "FireEffect",
-              "doOffStage": false,
+              "effectTempleteID": -1,
               "scale": 1,
-              "actorIceSubHurtDelta": -1,
-              "effectPattern": "Eff_Monster_Oceanid_BornAS",
               "born": {
                 "$type": "ConfigBornByGlobalValue",
-                "direction": {
-                  "$type": "ConfigDirectionByGlobalValue",
-                  "maxAngle": 180,
-                  "directionKey": "_JUMPPOS_"
+                "value": 10,
+                "DPCANLOOHCH": {
+                  "NJIPHOKCEGN": 180
                 },
                 "positionKey": "_JUMPPOS_",
-                "FDGAEDDEEDG": {
-                  "ELAJJIANFFM": 180
-                },
                 "onGroundRaycastUpDist": 2,
-                "value": 10
+                "direction": {
+                  "$type": "ConfigDirectionByGlobalValue",
+                  "directionKey": "_JUMPPOS_",
+                  "maxAngle": 180
+                }
               },
-              "effectTempleteID": -1,
-              "canBeHandledOnRecover": true
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Oceanid_BornAS"
             }
           ],
-          "minus_one": -1
+          "isLimitedProperties": true
         },
         "SecondJump_UnderWater_Timer": {
           "elementDurability": 100,
-          "isLimitedProperties": true,
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
           "onRemoved": [
             {
               "$type": "SetAnimatorBool",
               "doOffStage": false,
               "value": true,
+              "canBeHandledOnRecover": true,
               "boolID": "PlatformControlAppear",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "actorIceSubHurtDelta": -1
             }
           ],
-          "minus_one": -1,
-          "duration": 3
+          "duration": 3,
+          "isLimitedProperties": true
         }
-      }
+      },
+      "OOAKLMJCDAG": {
+        "elementDurability": 100,
+        "minus_one": -1,
+        "HGPKLIANAGB": -1,
+        "isLimitedProperties": true
+      },
+      "abilityMixins": [
+        {
+          "$type": "AttachToAnimatorStateIDMixin",
+          "value": -1,
+          "modifierName": "FirstJump_UnderWater",
+          "stateIDs": [
+            "PlatformControl01_AS"
+          ],
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToAnimatorStateIDMixin",
+          "value": -1,
+          "modifierName": "SecondJump_UnderWater",
+          "stateIDs": [
+            "PlatformControl02_AS"
+          ],
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToAnimatorStateIDMixin",
+          "value": -1,
+          "modifierName": "PlatformControl_Appear",
+          "stateIDs": [
+            "PlatformControl_Appear"
+          ],
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToAnimatorStateIDMixin",
+          "value": -1,
+          "modifierName": "Born_UnderWater",
+          "stateIDs": [
+            "Born",
+            "Standby_Free"
+          ],
+          "actorIceSubHurtDelta": -1
+        }
+      ]
     }
   },
   {
     "Default": {
-      "DDNHHMIBNLF": {
-        "elementDurability": 100,
-        "isLimitedProperties": true,
-        "minus_one": -1
-      },
       "abilityName": "Monster_Oceanid_PlatformControl_OverTimeAtk",
-      "abilityMixins": [
-        {
-          "$type": "AttachToStateIDMixin",
-          "modifierName": "OverTimeAtk_Reminder",
-          "stateIDs": [
-            "OverTimeAtk_BS"
-          ],
-          "value": -1,
-          "actorIceSubHurtDelta": -1
-        }
-      ],
       "onAbilityStart": [
         {
           "$type": "ApplyModifier",
-          "doOffStage": false,
-          "modifierName": "OverTimeAtk_DamageHandler",
           "target": "AllPlayerAvatars",
-          "actorIceSubHurtDelta": -1,
-          "canBeHandledOnRecover": true
+          "modifierName": "OverTimeAtk_DamageHandler",
+          "doOffStage": false,
+          "canBeHandledOnRecover": true,
+          "actorIceSubHurtDelta": -1
         },
         {
           "$type": "ShowReminder",
-          "doOffStage": false,
           "id": 31020009,
-          "actorIceSubHurtDelta": -1,
-          "canBeHandledOnRecover": true
+          "doOffStage": false,
+          "canBeHandledOnRecover": true,
+          "actorIceSubHurtDelta": -1
         }
       ],
       "modifiers": {
         "OverTimeAtk_Damage": {
-          "onAdded": [
-            {
-              "$type": "AttachEffect",
-              "doOffStage": false,
-              "scale": 1,
-              "actorIceSubHurtDelta": -1,
-              "effectPattern": "Eff_Monster_Oceanid_WaterWaveLoop",
-              "born": {
-                "direction": {
-                  "maxAngle": 180
-                },
-                "FDGAEDDEEDG": {
-                  "ELAJJIANFFM": 180
-                },
-                "onGroundRaycastUpDist": 2,
-                "value": 10
-              },
-              "effectTempleteID": -1,
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "elementDurability": 100,
-          "stacking": "Unique",
-          "isLimitedProperties": true,
-          "onRemoved": [
-            {
-              "$type": "DamageByAttackValue",
-              "attackInfo": {
-                "attenuationGroup": "default",
-                "hitPattern": {
-                  "retreatType": "ByHitDirection",
-                  "hitImpulseType": "LV5",
-                  "onHitEffectName": "default",
-                  "hitHaltTimeScale": 0.05000000074505806,
-                  "JKLONEBKFKJ": {
-                    "JJGBOHIKHFM": true,
-                    "value": 1
-                  }
-                },
-                "forceCameraShake": true,
-                "FJNMGDHFOEH": {
-                  "GCPNPCOFFBP": "Shake"
-                },
-                "IODAJAKBOLG": {
-                  "onHitEffectName": "default",
-                  "JKLONEBKFKJ": {
-                    "JJGBOHIKHFM": true,
-                    "value": 1
-                  }
-                },
-                "attackProperty": {
-                  "attackType": "Default",
-                  "enBreak": 100,
-                  "elementType": "Water",
-                  "elementDurability": 50,
-                  "strikeType": "None",
-                  "elementRank": 1,
-                  "damagePercentage": 2
-                },
-                "cameraShake": {
-                  "extension": {
-                    "baseCycle": 0.11999999731779099,
-                    "cycleDamping": 0.11999999731779099,
-                    "baseOnCamera": true,
-                    "rangeAttenuation": 0.5
-                  },
-                  "FAKMJBNLPPB": -1,
-                  "shakeDistance": 30,
-                  "shakeDir": {
-                    "y": 1,
-                    "z": 1
-                  },
-                  "shakeRange": 1,
-                  "shakeType": "CustomVector",
-                  "shakeTime": 0.30000001192092896
-                }
-              },
-              "doOffStage": false,
-              "actorIceSubHurtDelta": -1,
-              "born": {
-                "direction": {
-                  "maxAngle": 180
-                },
-                "FDGAEDDEEDG": {
-                  "ELAJJIANFFM": 180
-                },
-                "onGroundRaycastUpDist": 2,
-                "value": 10
-              },
-              "canBeHandledOnRecover": true
-            },
-            {
-              "$type": "FireEffect",
-              "doOffStage": false,
-              "scale": 1,
-              "actorIceSubHurtDelta": -1,
-              "effectPattern": "Eff_Monster_Oceanid_WaterWaveAS",
-              "born": {
-                "direction": {
-                  "maxAngle": 180
-                },
-                "FDGAEDDEEDG": {
-                  "ELAJJIANFFM": 180
-                },
-                "onGroundRaycastUpDist": 2,
-                "value": 10
-              },
-              "effectTempleteID": -1,
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "minus_one": -1,
           "onThinkInterval": [
             {
               "$type": "DamageByAttackValue",
               "attackInfo": {
-                "attenuationGroup": "default",
-                "hitPattern": {
-                  "retreatType": "ByHitDirection",
-                  "hitImpulseType": "LV1",
-                  "onHitEffectName": "default",
-                  "hitHaltTimeScale": 0.05000000074505806,
-                  "JKLONEBKFKJ": {
-                    "JJGBOHIKHFM": true,
-                    "value": 1
-                  }
-                },
-                "FJNMGDHFOEH": {
-                  "GCPNPCOFFBP": "Shake"
-                },
-                "IODAJAKBOLG": {
-                  "onHitEffectName": "default",
-                  "JKLONEBKFKJ": {
-                    "JJGBOHIKHFM": true,
-                    "value": 1
-                  }
+                "AKKPNIMNNGE": {
+                  "JMEJGMOJIJJ": "Shake"
                 },
                 "attackProperty": {
-                  "attackType": "Default",
                   "enBreak": 1,
-                  "elementType": "Water",
                   "elementDurability": 25,
-                  "strikeType": "None",
+                  "damagePercentage": 0.5,
+                  "attackType": "Default",
                   "elementRank": 1,
-                  "damagePercentage": 0.5
+                  "elementType": "Water",
+                  "strikeType": "None"
+                },
+                "hitPattern": {
+                  "hitImpulseType": "LV1",
+                  "hitHaltTimeScale": 0.05000000074505806,
+                  "retreatType": "ByHitDirection",
+                  "onHitEffectName": "default",
+                  "NCKKCKDNLCC": {
+                    "value": 1,
+                    "JGHPGBHFEHK": true
+                  }
                 },
                 "cameraShake": {
+                  "shakeDistance": 20,
                   "extension": {
                     "baseCycle": 0.11999999731779099,
                     "cycleDamping": 0.11999999731779099,
-                    "baseOnCamera": true,
-                    "rangeAttenuation": 0.5
-                  },
-                  "FAKMJBNLPPB": -1,
-                  "shakeDistance": 20
+                    "rangeAttenuation": 0.5,
+                    "baseOnCamera": true
+                  }
+                },
+                "attenuationGroup": "default",
+                "POIJCDIFPAA": {
+                  "onHitEffectName": "default",
+                  "NCKKCKDNLCC": {
+                    "value": 1,
+                    "JGHPGBHFEHK": true
+                  }
+                }
+              },
+              "born": {
+                "value": 10,
+                "DPCANLOOHCH": {
+                  "NJIPHOKCEGN": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "direction": {
+                  "maxAngle": 180
                 }
               },
               "doOffStage": false,
-              "actorIceSubHurtDelta": -1,
-              "born": {
-                "direction": {
-                  "maxAngle": 180
-                },
-                "FDGAEDDEEDG": {
-                  "ELAJJIANFFM": 180
-                },
-                "onGroundRaycastUpDist": 2,
-                "value": 10
-              },
-              "canBeHandledOnRecover": true
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             }
           ],
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "effectTempleteID": -1,
+              "scale": 1,
+              "born": {
+                "value": 10,
+                "DPCANLOOHCH": {
+                  "NJIPHOKCEGN": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "direction": {
+                  "maxAngle": 180
+                }
+              },
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Oceanid_WaterWaveLoop"
+            }
+          ],
+          "elementDurability": 100,
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "stacking": "Unique",
+          "onRemoved": [
+            {
+              "$type": "DamageByAttackValue",
+              "attackInfo": {
+                "AKKPNIMNNGE": {
+                  "JMEJGMOJIJJ": "Shake"
+                },
+                "attackProperty": {
+                  "enBreak": 100,
+                  "elementDurability": 50,
+                  "damagePercentage": 2,
+                  "attackType": "Default",
+                  "elementRank": 1,
+                  "elementType": "Water",
+                  "strikeType": "None"
+                },
+                "hitPattern": {
+                  "hitImpulseType": "LV5",
+                  "hitHaltTimeScale": 0.05000000074505806,
+                  "retreatType": "ByHitDirection",
+                  "onHitEffectName": "default",
+                  "NCKKCKDNLCC": {
+                    "value": 1,
+                    "JGHPGBHFEHK": true
+                  }
+                },
+                "forceCameraShake": true,
+                "cameraShake": {
+                  "shakeDir": {
+                    "y": 1,
+                    "z": 1
+                  },
+                  "shakeTime": 0.30000001192092896,
+                  "shakeRange": 1,
+                  "shakeDistance": 30,
+                  "shakeType": "CustomVector",
+                  "extension": {
+                    "baseCycle": 0.11999999731779099,
+                    "cycleDamping": 0.11999999731779099,
+                    "rangeAttenuation": 0.5,
+                    "baseOnCamera": true
+                  }
+                },
+                "attenuationGroup": "default",
+                "POIJCDIFPAA": {
+                  "onHitEffectName": "default",
+                  "NCKKCKDNLCC": {
+                    "value": 1,
+                    "JGHPGBHFEHK": true
+                  }
+                }
+              },
+              "born": {
+                "value": 10,
+                "DPCANLOOHCH": {
+                  "NJIPHOKCEGN": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "direction": {
+                  "maxAngle": 180
+                }
+              },
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "FireEffect",
+              "effectTempleteID": -1,
+              "scale": 1,
+              "born": {
+                "value": 10,
+                "DPCANLOOHCH": {
+                  "NJIPHOKCEGN": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "direction": {
+                  "maxAngle": 180
+                }
+              },
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Oceanid_WaterWaveAS"
+            }
+          ],
+          "isLimitedProperties": true,
           "thinkInterval": 0.5
         },
         "OverTimeAtk_DamageHandler": {
-          "elementDurability": 100,
-          "isLimitedProperties": true,
           "modifierMixins": [
             {
               "$type": "CurLocalAvatarMixin",
@@ -2618,81 +2652,72 @@
               "actorIceSubHurtDelta": -1
             }
           ],
+          "elementDurability": 100,
           "minus_one": -1,
-          "duration": 3
+          "HGPKLIANAGB": -1,
+          "duration": 3,
+          "isLimitedProperties": true
         },
         "OverTimeAtk_Reminder": {
           "onAdded": [
             {
               "$type": "ShowReminder",
-              "doOffStage": false,
               "id": 31020014,
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             }
           ],
           "elementDurability": 100,
-          "isLimitedProperties": true,
-          "minus_one": -1
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "isLimitedProperties": true
         }
-      }
+      },
+      "OOAKLMJCDAG": {
+        "elementDurability": 100,
+        "minus_one": -1,
+        "HGPKLIANAGB": -1,
+        "isLimitedProperties": true
+      },
+      "abilityMixins": [
+        {
+          "$type": "AttachToStateIDMixin",
+          "value": -1,
+          "modifierName": "OverTimeAtk_Reminder",
+          "stateIDs": [
+            "OverTimeAtk_BS"
+          ],
+          "actorIceSubHurtDelta": -1
+        }
+      ]
     }
   },
   {
     "Default": {
-      "DDNHHMIBNLF": {
-        "elementDurability": 100,
-        "isLimitedProperties": true,
-        "minus_one": -1
-      },
       "onAdded": [
         {
           "$type": "AddGlobalValue",
           "doOffStage": false,
-          "value": 1,
-          "minValue": 1,
           "key": "_ISOCEANIDPLATFORM_",
-          "maxValue": 1,
-          "actorIceSubHurtDelta": -1,
+          "minValue": 1,
+          "value": 1,
+          "canBeHandledOnRecover": true,
           "useLimitRange": true,
-          "canBeHandledOnRecover": true
+          "actorIceSubHurtDelta": -1,
+          "maxValue": 1
         },
         {
           "$type": "EnableHitBoxByName",
           "doOffStage": false,
+          "canBeHandledOnRecover": true,
           "actorIceSubHurtDelta": -1,
           "hitBoxNames": [
             "HitBox2"
-          ],
-          "canBeHandledOnRecover": true
+          ]
         }
       ],
       "abilityName": "Oceanid_Platform_SwitchHitBox",
-      "abilityMixins": [
-        {
-          "$type": "AttachToGadgetStateMixin",
-          "modifierName": "GadgetState_202",
-          "actorIceSubHurtDelta": -1,
-          "gadgetState": 202
-        },
-        {
-          "$type": "AttachToGadgetStateMixin",
-          "modifierName": "GadgetState_201",
-          "actorIceSubHurtDelta": -1,
-          "gadgetState": 201
-        },
-        {
-          "$type": "AttachToGadgetStateMixin",
-          "modifierName": "GadgetState_901",
-          "actorIceSubHurtDelta": -1,
-          "gadgetState": 901
-        },
-        {
-          "$type": "AttachToGadgetStateMixin",
-          "modifierName": "GadgetState_0",
-          "actorIceSubHurtDelta": -1
-        }
-      ],
       "modifiers": {
         "GadgetState_0": {
           "onAdded": [
@@ -2700,87 +2725,117 @@
               "$type": "AddGlobalValue",
               "doOffStage": false,
               "key": "_GADGETSTATE_",
-              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true,
               "useLimitRange": true,
-              "canBeHandledOnRecover": true
+              "actorIceSubHurtDelta": -1
             }
           ],
           "elementDurability": 100,
-          "isLimitedProperties": true,
-          "minus_one": -1
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "isLimitedProperties": true
         },
         "GadgetState_201": {
           "onAdded": [
             {
               "$type": "AddGlobalValue",
               "doOffStage": false,
-              "value": 201,
-              "minValue": 201,
               "key": "_GADGETSTATE_",
-              "maxValue": 201,
-              "actorIceSubHurtDelta": -1,
+              "minValue": 201,
+              "value": 201,
+              "canBeHandledOnRecover": true,
               "useLimitRange": true,
-              "canBeHandledOnRecover": true
+              "actorIceSubHurtDelta": -1,
+              "maxValue": 201
             }
           ],
           "elementDurability": 100,
-          "isLimitedProperties": true,
-          "minus_one": -1
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "isLimitedProperties": true
         },
         "GadgetState_202": {
           "onAdded": [
             {
               "$type": "AddGlobalValue",
               "doOffStage": false,
-              "value": 202,
-              "minValue": 202,
               "key": "_GADGETSTATE_",
-              "maxValue": 202,
-              "actorIceSubHurtDelta": -1,
+              "minValue": 202,
+              "value": 202,
+              "canBeHandledOnRecover": true,
               "useLimitRange": true,
-              "canBeHandledOnRecover": true
+              "actorIceSubHurtDelta": -1,
+              "maxValue": 202
             }
           ],
           "elementDurability": 100,
-          "isLimitedProperties": true,
-          "minus_one": -1
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "isLimitedProperties": true
         },
         "GadgetState_901": {
           "onAdded": [
             {
               "$type": "AddGlobalValue",
               "doOffStage": false,
-              "value": 901,
-              "minValue": 901,
               "key": "_GADGETSTATE_",
-              "maxValue": 901,
-              "actorIceSubHurtDelta": -1,
+              "minValue": 901,
+              "value": 901,
+              "canBeHandledOnRecover": true,
               "useLimitRange": true,
-              "canBeHandledOnRecover": true
+              "actorIceSubHurtDelta": -1,
+              "maxValue": 901
             }
           ],
           "elementDurability": 100,
-          "isLimitedProperties": true,
-          "minus_one": -1
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "isLimitedProperties": true
         }
-      }
+      },
+      "OOAKLMJCDAG": {
+        "elementDurability": 100,
+        "minus_one": -1,
+        "HGPKLIANAGB": -1,
+        "isLimitedProperties": true
+      },
+      "abilityMixins": [
+        {
+          "$type": "AttachToGadgetStateMixin",
+          "gadgetState": 202,
+          "modifierName": "GadgetState_202",
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToGadgetStateMixin",
+          "gadgetState": 201,
+          "modifierName": "GadgetState_201",
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToGadgetStateMixin",
+          "gadgetState": 901,
+          "modifierName": "GadgetState_901",
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToGadgetStateMixin",
+          "modifierName": "GadgetState_0",
+          "actorIceSubHurtDelta": -1
+        }
+      ]
     }
   },
   {
     "Default": {
-      "DDNHHMIBNLF": {
-        "elementDurability": 100,
-        "isLimitedProperties": true,
-        "minus_one": -1
-      },
       "abilityName": "Oceanid_Platform_SummonMonster",
       "onAbilityStart": [
         {
           "$type": "ApplyModifier",
-          "doOffStage": false,
           "modifierName": "UNIQUE_SummonMonsterHandler",
-          "actorIceSubHurtDelta": -1,
-          "canBeHandledOnRecover": true
+          "doOffStage": false,
+          "canBeHandledOnRecover": true,
+          "actorIceSubHurtDelta": -1
         }
       ],
       "modifiers": {
@@ -2788,158 +2843,164 @@
           "onAdded": [
             {
               "$type": "FireEffect",
-              "doOffStage": false,
+              "effectTempleteID": -1,
               "scale": 1,
-              "actorIceSubHurtDelta": -1,
-              "effectPattern": "Eff_Monster_Oceanid_Summon_PlatfromAS",
               "born": {
                 "$type": "ConfigBornByAttachPoint",
+                "attachPointName": "RootNode",
+                "value": 10,
+                "DPCANLOOHCH": {
+                  "NJIPHOKCEGN": 180
+                },
+                "onGroundRaycastUpDist": 2,
                 "direction": {
                   "maxAngle": 180
                 },
-                "FDGAEDDEEDG": {
-                  "ELAJJIANFFM": 180
-                },
-                "attachPointTargetType": "Self",
-                "attachPointName": "RootNode",
-                "onGroundRaycastUpDist": 2,
-                "value": 10
+                "attachPointTargetType": "Self"
               },
-              "effectTempleteID": -1,
-              "canBeHandledOnRecover": true
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Oceanid_Summon_PlatfromAS"
             }
           ],
           "elementDurability": 100,
-          "isLimitedProperties": true,
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
           "onRemoved": [
             {
               "$type": "ExecuteGadgetLua",
               "doOffStage": false,
               "param1": 1,
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             }
           ],
-          "minus_one": -1,
+          "duration": 1,
           "isUnique": true,
-          "duration": 1
+          "isLimitedProperties": true
         },
         "UNIQUE_SummonMonsterHandler": {
           "elementDurability": 100,
-          "isLimitedProperties": true,
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
           "onRemoved": [
             {
               "$type": "ApplyModifier",
-              "doOffStage": false,
               "modifierName": "UNIQUE_SummonMonster",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             }
           ],
-          "minus_one": -1,
+          "duration": 15,
           "isUnique": true,
-          "duration": 15
+          "isLimitedProperties": true
         }
+      },
+      "OOAKLMJCDAG": {
+        "elementDurability": 100,
+        "minus_one": -1,
+        "HGPKLIANAGB": -1,
+        "isLimitedProperties": true
       }
     }
   },
   {
     "Default": {
-      "DDNHHMIBNLF": {
-        "elementDurability": 100,
-        "isLimitedProperties": true,
-        "minus_one": -1
-      },
       "onAdded": [
         {
           "$type": "AttachEffect",
-          "doOffStage": false,
+          "effectTempleteID": -1,
           "scale": 1,
-          "actorIceSubHurtDelta": -1,
-          "effectPattern": "Eff_Monster_Oceanid_BornBS",
           "born": {
-            "direction": {
-              "maxAngle": 180
-            },
-            "FDGAEDDEEDG": {
-              "ELAJJIANFFM": 180
+            "value": 10,
+            "DPCANLOOHCH": {
+              "NJIPHOKCEGN": 180
             },
             "onGroundRaycastUpDist": 2,
-            "value": 10
+            "direction": {
+              "maxAngle": 180
+            }
           },
-          "effectTempleteID": -1,
-          "canBeHandledOnRecover": true
+          "doOffStage": false,
+          "canBeHandledOnRecover": true,
+          "actorIceSubHurtDelta": -1,
+          "effectPattern": "Eff_Monster_Oceanid_BornBS"
         }
       ],
-      "abilityName": "Oceanid_BornAnchor_State"
+      "abilityName": "Oceanid_BornAnchor_State",
+      "OOAKLMJCDAG": {
+        "elementDurability": 100,
+        "minus_one": -1,
+        "HGPKLIANAGB": -1,
+        "isLimitedProperties": true
+      }
     }
   },
   {
     "Default": {
-      "DDNHHMIBNLF": {
-        "elementDurability": 100,
-        "isLimitedProperties": true,
-        "minus_one": -1
-      },
       "abilityName": "Monster_Oceanid_Steer",
+      "OOAKLMJCDAG": {
+        "elementDurability": 100,
+        "minus_one": -1,
+        "HGPKLIANAGB": -1,
+        "isLimitedProperties": true
+      },
       "abilityMixins": [
         {
           "$type": "SteerAttackMixin",
-          "angularSpeed": 180,
-          "CCFNFIKKIDJ": true,
           "value": -1,
-          "GMEPMDNDBOP": 180,
+          "angularSpeed": 180,
+          "JACOJAHKMOJ": true,
+          "attackDistance": 1.5,
+          "endNormalizedTime": 1,
           "actorIceSubHurtDelta": -1,
+          "PCIDOIJNPME": 180,
           "steerStateIDs": [
             "NormalIdle"
-          ],
-          "endNormalizedTime": 1,
-          "attackDistance": 1.5,
-          "PMKCEJILFAF": true
+          ]
         },
         {
           "$type": "SteerAttackMixin",
-          "angularSpeed": 120,
-          "CCFNFIKKIDJ": true,
           "value": -1,
-          "GMEPMDNDBOP": 180,
+          "angularSpeed": 120,
+          "JACOJAHKMOJ": true,
+          "attackDistance": 1.5,
+          "endNormalizedTime": 1,
           "actorIceSubHurtDelta": -1,
+          "PCIDOIJNPME": 180,
           "steerStateIDs": [
             "Summon_Standby",
             "Summon_AS"
-          ],
-          "endNormalizedTime": 1,
-          "attackDistance": 1.5,
-          "PMKCEJILFAF": true
+          ]
         },
         {
           "$type": "SteerAttackMixin",
-          "angularSpeed": 120,
-          "CCFNFIKKIDJ": true,
           "value": -1,
-          "GMEPMDNDBOP": 180,
+          "angularSpeed": 120,
+          "JACOJAHKMOJ": true,
+          "attackDistance": 1.5,
+          "endNormalizedTime": 1,
           "actorIceSubHurtDelta": -1,
+          "PCIDOIJNPME": 180,
           "steerStateIDs": [
             "OverTimeAtk_Standby",
             "OverTimeAtk_AS"
-          ],
-          "endNormalizedTime": 1,
-          "attackDistance": 1.5,
-          "PMKCEJILFAF": true
+          ]
         },
         {
           "$type": "SteerAttackMixin",
-          "angularSpeed": 120,
-          "CCFNFIKKIDJ": true,
           "value": -1,
-          "GMEPMDNDBOP": 180,
+          "angularSpeed": 120,
+          "JACOJAHKMOJ": true,
+          "attackDistance": 1.5,
+          "endNormalizedTime": 1,
           "actorIceSubHurtDelta": -1,
+          "PCIDOIJNPME": 180,
           "steerStateIDs": [
             "PlatformControl_Standby"
-          ],
-          "endNormalizedTime": 1,
-          "attackDistance": 1.5,
-          "PMKCEJILFAF": true
+          ]
         }
       ]
     }

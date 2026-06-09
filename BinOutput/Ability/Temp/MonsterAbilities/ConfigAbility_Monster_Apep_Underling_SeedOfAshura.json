@@ -1,63 +1,365 @@
 [
   {
     "Default": {
-      "DDNHHMIBNLF": {
-        "elementDurability": 100,
-        "isLimitedProperties": true,
-        "minus_one": -1
-      },
       "abilityName": "Monster_Apep_Underling_SeedOfAshura_ChaseAttack",
+      "OOAKLMJCDAG": {
+        "elementDurability": 100,
+        "minus_one": -1,
+        "HGPKLIANAGB": -1,
+        "isLimitedProperties": true
+      },
       "abilityMixins": [
         {
           "$type": "SteerAttackMixin",
-          "angularSpeed": 45,
-          "CCFNFIKKIDJ": true,
           "value": -1,
-          "GMEPMDNDBOP": 180,
+          "angularSpeed": 45,
+          "JACOJAHKMOJ": true,
+          "endNormalizedTime": 99,
           "actorIceSubHurtDelta": -1,
+          "PCIDOIJNPME": 180,
           "steerStateIDs": [
             "Standby"
-          ],
-          "endNormalizedTime": 99,
-          "PMKCEJILFAF": true
+          ]
         },
         {
           "$type": "SteerAttackMixin",
-          "angularSpeed": 180,
-          "CCFNFIKKIDJ": true,
           "value": -1,
-          "GMEPMDNDBOP": 180,
+          "angularSpeed": 180,
+          "JACOJAHKMOJ": true,
+          "endNormalizedTime": 2,
           "actorIceSubHurtDelta": -1,
+          "PCIDOIJNPME": 180,
           "steerStateIDs": [
             "ChaseAttack"
-          ],
-          "endNormalizedTime": 2,
-          "PMKCEJILFAF": true
+          ]
         },
         {
           "$type": "SteerAttackMixin",
-          "angularSpeed": 90,
-          "CCFNFIKKIDJ": true,
           "value": -1,
-          "GMEPMDNDBOP": 180,
+          "angularSpeed": 90,
+          "JACOJAHKMOJ": true,
+          "endNormalizedTime": 0.30000001192092896,
           "actorIceSubHurtDelta": -1,
+          "PCIDOIJNPME": 180,
           "steerStateIDs": [
             "MeleeAttack"
-          ],
-          "endNormalizedTime": 0.30000001192092896,
-          "PMKCEJILFAF": true
+          ]
         }
       ]
     }
   },
   {
     "Default": {
-      "DDNHHMIBNLF": {
-        "elementDurability": 100,
-        "isLimitedProperties": true,
-        "minus_one": -1
-      },
       "abilityName": "Monster_Apep_Underling_SeedOfAshura_Swallow_ChoseTarget",
+      "modifiers": {
+        "ChosingTarget": {
+          "onThinkInterval": [
+            {
+              "$type": "Predicated",
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "target": "Target",
+                  "key": "_MONSTER_Apep_Underling_SeedOfKarna_Tag",
+                  "value": 1
+                }
+              ],
+              "successActions": [
+                {
+                  "$type": "ApplyModifier",
+                  "target": "Target",
+                  "modifierName": "UNIQUE_Swallow_Target_TriggerTaunt",
+                  "doOffStage": false,
+                  "canBeHandledOnRecover": true,
+                  "actorIceSubHurtDelta": -1
+                },
+                {
+                  "$type": "SetGlobalValue",
+                  "doOffStage": false,
+                  "key": "_MONSTER_Apep_Underling_SeedOfAshura_Swallow_HasTarget",
+                  "value": 1,
+                  "canBeHandledOnRecover": true,
+                  "actorIceSubHurtDelta": -1
+                }
+              ],
+              "otherTargets": {
+                "$type": "SelectTargetsByShape",
+                "topLimit": 1,
+                "shapeName": "CircleR50",
+                "JCNBPJBFJNM": {
+                  "value": 10,
+                  "DPCANLOOHCH": {
+                    "NJIPHOKCEGN": 180
+                  },
+                  "onGroundRaycastUpDist": 2,
+                  "direction": {
+                    "maxAngle": 180
+                  }
+                },
+                "campTargetType": "SelfCamp",
+                "sizeRatio": 1,
+                "sortType": "Nearest"
+              },
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "elementDurability": 100,
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "isLimitedProperties": true,
+          "thinkInterval": 0.20000000298023224
+        },
+        "RunStateCheck": {
+          "modifierMixins": [
+            {
+              "$type": "AttachToAnimatorStateIDMixin",
+              "value": -1,
+              "modifierName": "SwallowTrigger",
+              "stateIDs": [
+                "Run"
+              ],
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "elementDurability": 100,
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "isLimitedProperties": true
+        },
+        "SwallowTrigger": {
+          "elementDurability": 100,
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "onRemoved": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_MONSTER_Ashura_SwallowTrigger",
+              "value": 1,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "isLimitedProperties": true
+        },
+        "Swallow_ChoseTarget_Manager": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_MONSTER_Apep_Underling_SeedOfAshura_Swallow_HasTarget",
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "RemoveUniqueModifier",
+              "otherTargets": {
+                "$type": "SelectTargetsByShape",
+                "shapeName": "CircleR50",
+                "JCNBPJBFJNM": {
+                  "value": 10,
+                  "DPCANLOOHCH": {
+                    "NJIPHOKCEGN": 180
+                  },
+                  "onGroundRaycastUpDist": 2,
+                  "direction": {
+                    "maxAngle": 180
+                  }
+                },
+                "campTargetType": "SelfCamp",
+                "sizeRatio": 1
+              },
+              "modifierName": "UNIQUE_Swallow_Target_TriggerTaunt",
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "modifierMixins": [
+            {
+              "$type": "AttachModifierToGlobalValueMixin",
+              "valueSteps": [
+                -0.5,
+                0.5
+              ],
+              "globalValueKey": "_MONSTER_Apep_Underling_SeedOfAshura_Swallow_HasTarget",
+              "modifierNameSteps": [
+                "ChosingTarget"
+              ],
+              "enable": true,
+              "FKGGKLJLDGN": true,
+              "removeAppliedModifier": true,
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "elementDurability": 100,
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "onRemoved": [
+            {
+              "$type": "RemoveUniqueModifier",
+              "otherTargets": {
+                "$type": "SelectTargetsByShape",
+                "shapeName": "CircleR50",
+                "JCNBPJBFJNM": {
+                  "value": 10,
+                  "DPCANLOOHCH": {
+                    "NJIPHOKCEGN": 180
+                  },
+                  "onGroundRaycastUpDist": 2,
+                  "direction": {
+                    "maxAngle": 180
+                  }
+                },
+                "campTargetType": "SelfCamp",
+                "sizeRatio": 1
+              },
+              "modifierName": "UNIQUE_Swallow_Target_TriggerTaunt",
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "isLimitedProperties": true
+        },
+        "Target_Die": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_MONSTER_Apep_Underling_SeedOfAshura_Swallow_HasTarget",
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "elementDurability": 100,
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "duration": 0.5,
+          "isLimitedProperties": true
+        },
+        "UNIQUE_Swallow_Target_TriggerTaunt": {
+          "onThinkInterval": [
+            {
+              "$type": "SetGlobalPos",
+              "setTarget": true,
+              "born": {
+                "$type": "ConfigBornBySelf",
+                "value": 10,
+                "DPCANLOOHCH": {
+                  "NJIPHOKCEGN": 180
+                },
+                "useRotation": true,
+                "onGroundRaycastUpDist": 2,
+                "direction": {
+                  "maxAngle": 180
+                }
+              },
+              "doOffStage": false,
+              "key": "_Target_Pos",
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "SetCommandPos",
+              "target": "Caster",
+              "doOffStage": false,
+              "key": "_Target_Pos",
+              "enable": true,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "onKill": [
+            {
+              "$type": "ApplyModifier",
+              "target": "Caster",
+              "modifierName": "Target_Die",
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_MONSTER_Apep_Underling_SeedOfAshura_TriggerTaunt",
+              "value": 1,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "SetGlobalPos",
+              "setTarget": true,
+              "born": {
+                "$type": "ConfigBornBySelf",
+                "value": 10,
+                "DPCANLOOHCH": {
+                  "NJIPHOKCEGN": 180
+                },
+                "useRotation": true,
+                "onGroundRaycastUpDist": 2,
+                "direction": {
+                  "maxAngle": 180
+                }
+              },
+              "doOffStage": false,
+              "key": "_Target_Pos",
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "SetCommandPos",
+              "target": "Caster",
+              "doOffStage": false,
+              "key": "_Target_Pos",
+              "enable": true,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "AttachModifier",
+              "target": "Caster",
+              "modifierName": "RunStateCheck",
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "elementDurability": 100,
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "onRemoved": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_MONSTER_Apep_Underling_SeedOfAshura_TriggerTaunt",
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "ApplyModifier",
+              "target": "Caster",
+              "modifierName": "Target_Die",
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "isUnique": true,
+          "isLimitedProperties": true,
+          "thinkInterval": 1
+        }
+      },
+      "OOAKLMJCDAG": {
+        "elementDurability": 100,
+        "minus_one": -1,
+        "HGPKLIANAGB": -1,
+        "isLimitedProperties": true
+      },
       "abilityMixins": [
         {
           "$type": "AttachToPoseIDMixin",
@@ -67,607 +369,270 @@
           ],
           "actorIceSubHurtDelta": -1
         }
-      ],
-      "modifiers": {
-        "ChosingTarget": {
-          "elementDurability": 100,
-          "isLimitedProperties": true,
-          "minus_one": -1,
-          "onThinkInterval": [
-            {
-              "$type": "Predicated",
-              "doOffStage": false,
-              "otherTargets": {
-                "$type": "SelectTargetsByShape",
-                "shapeName": "CircleR50",
-                "campTargetType": "SelfCamp",
-                "topLimit": 1,
-                "sizeRatio": 1,
-                "sortType": "Nearest",
-                "ILLOOADJMLF": {
-                  "direction": {
-                    "maxAngle": 180
-                  },
-                  "FDGAEDDEEDG": {
-                    "ELAJJIANFFM": 180
-                  },
-                  "onGroundRaycastUpDist": 2,
-                  "value": 10
-                }
-              },
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "value": 1,
-                  "target": "Target",
-                  "key": "_MONSTER_Apep_Underling_SeedOfKarna_Tag"
-                }
-              ],
-              "actorIceSubHurtDelta": -1,
-              "successActions": [
-                {
-                  "$type": "ApplyModifier",
-                  "doOffStage": false,
-                  "modifierName": "UNIQUE_Swallow_Target_TriggerTaunt",
-                  "target": "Target",
-                  "actorIceSubHurtDelta": -1,
-                  "canBeHandledOnRecover": true
-                },
-                {
-                  "$type": "SetGlobalValue",
-                  "doOffStage": false,
-                  "value": 1,
-                  "key": "_MONSTER_Apep_Underling_SeedOfAshura_Swallow_HasTarget",
-                  "actorIceSubHurtDelta": -1,
-                  "canBeHandledOnRecover": true
-                }
-              ],
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "thinkInterval": 0.20000000298023224
-        },
-        "RunStateCheck": {
-          "elementDurability": 100,
-          "isLimitedProperties": true,
-          "modifierMixins": [
-            {
-              "$type": "AttachToAnimatorStateIDMixin",
-              "modifierName": "SwallowTrigger",
-              "stateIDs": [
-                "Run"
-              ],
-              "value": -1,
-              "actorIceSubHurtDelta": -1
-            }
-          ],
-          "minus_one": -1
-        },
-        "SwallowTrigger": {
-          "elementDurability": 100,
-          "isLimitedProperties": true,
-          "onRemoved": [
-            {
-              "$type": "SetGlobalValue",
-              "doOffStage": false,
-              "value": 1,
-              "key": "_MONSTER_Ashura_SwallowTrigger",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "minus_one": -1
-        },
-        "Swallow_ChoseTarget_Manager": {
-          "onAdded": [
-            {
-              "$type": "SetGlobalValue",
-              "doOffStage": false,
-              "key": "_MONSTER_Apep_Underling_SeedOfAshura_Swallow_HasTarget",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            },
-            {
-              "$type": "RemoveUniqueModifier",
-              "doOffStage": false,
-              "otherTargets": {
-                "$type": "SelectTargetsByShape",
-                "shapeName": "CircleR50",
-                "campTargetType": "SelfCamp",
-                "sizeRatio": 1,
-                "ILLOOADJMLF": {
-                  "direction": {
-                    "maxAngle": 180
-                  },
-                  "FDGAEDDEEDG": {
-                    "ELAJJIANFFM": 180
-                  },
-                  "onGroundRaycastUpDist": 2,
-                  "value": 10
-                }
-              },
-              "modifierName": "UNIQUE_Swallow_Target_TriggerTaunt",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "elementDurability": 100,
-          "isLimitedProperties": true,
-          "onRemoved": [
-            {
-              "$type": "RemoveUniqueModifier",
-              "doOffStage": false,
-              "otherTargets": {
-                "$type": "SelectTargetsByShape",
-                "shapeName": "CircleR50",
-                "campTargetType": "SelfCamp",
-                "sizeRatio": 1,
-                "ILLOOADJMLF": {
-                  "direction": {
-                    "maxAngle": 180
-                  },
-                  "FDGAEDDEEDG": {
-                    "ELAJJIANFFM": 180
-                  },
-                  "onGroundRaycastUpDist": 2,
-                  "value": 10
-                }
-              },
-              "modifierName": "UNIQUE_Swallow_Target_TriggerTaunt",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "modifierMixins": [
-            {
-              "$type": "AttachModifierToGlobalValueMixin",
-              "globalValueKey": "_MONSTER_Apep_Underling_SeedOfAshura_Swallow_HasTarget",
-              "modifierNameSteps": [
-                "ChosingTarget"
-              ],
-              "enable": true,
-              "removeAppliedModifier": true,
-              "actorIceSubHurtDelta": -1,
-              "valueSteps": [
-                -0.5,
-                0.5
-              ],
-              "NEACJLMBFMN": true
-            }
-          ],
-          "minus_one": -1
-        },
-        "Target_Die": {
-          "onAdded": [
-            {
-              "$type": "SetGlobalValue",
-              "doOffStage": false,
-              "key": "_MONSTER_Apep_Underling_SeedOfAshura_Swallow_HasTarget",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "elementDurability": 100,
-          "isLimitedProperties": true,
-          "minus_one": -1,
-          "duration": 0.5
-        },
-        "UNIQUE_Swallow_Target_TriggerTaunt": {
-          "onKill": [
-            {
-              "$type": "ApplyModifier",
-              "doOffStage": false,
-              "modifierName": "Target_Die",
-              "target": "Caster",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "onAdded": [
-            {
-              "$type": "SetGlobalValue",
-              "doOffStage": false,
-              "value": 1,
-              "key": "_MONSTER_Apep_Underling_SeedOfAshura_TriggerTaunt",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            },
-            {
-              "$type": "SetGlobalPos",
-              "doOffStage": false,
-              "setTarget": true,
-              "key": "_Target_Pos",
-              "actorIceSubHurtDelta": -1,
-              "born": {
-                "$type": "ConfigBornBySelf",
-                "direction": {
-                  "maxAngle": 180
-                },
-                "useRotation": true,
-                "FDGAEDDEEDG": {
-                  "ELAJJIANFFM": 180
-                },
-                "onGroundRaycastUpDist": 2,
-                "value": 10
-              },
-              "canBeHandledOnRecover": true
-            },
-            {
-              "$type": "SetCommandPos",
-              "doOffStage": false,
-              "target": "Caster",
-              "key": "_Target_Pos",
-              "enable": true,
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            },
-            {
-              "$type": "AttachModifier",
-              "doOffStage": false,
-              "modifierName": "RunStateCheck",
-              "target": "Caster",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "elementDurability": 100,
-          "isLimitedProperties": true,
-          "onRemoved": [
-            {
-              "$type": "SetGlobalValue",
-              "doOffStage": false,
-              "key": "_MONSTER_Apep_Underling_SeedOfAshura_TriggerTaunt",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            },
-            {
-              "$type": "ApplyModifier",
-              "doOffStage": false,
-              "modifierName": "Target_Die",
-              "target": "Caster",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "minus_one": -1,
-          "onThinkInterval": [
-            {
-              "$type": "SetGlobalPos",
-              "doOffStage": false,
-              "setTarget": true,
-              "key": "_Target_Pos",
-              "actorIceSubHurtDelta": -1,
-              "born": {
-                "$type": "ConfigBornBySelf",
-                "direction": {
-                  "maxAngle": 180
-                },
-                "useRotation": true,
-                "FDGAEDDEEDG": {
-                  "ELAJJIANFFM": 180
-                },
-                "onGroundRaycastUpDist": 2,
-                "value": 10
-              },
-              "canBeHandledOnRecover": true
-            },
-            {
-              "$type": "SetCommandPos",
-              "doOffStage": false,
-              "target": "Caster",
-              "key": "_Target_Pos",
-              "enable": true,
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "isUnique": true,
-          "thinkInterval": 1
-        }
-      }
+      ]
     }
   },
   {
     "Default": {
-      "DDNHHMIBNLF": {
-        "elementDurability": 100,
-        "isLimitedProperties": true,
-        "minus_one": -1
-      },
       "onAdded": [
         {
           "$type": "SetGlobalValue",
           "doOffStage": false,
-          "value": 1,
           "key": "_MONSTER_Apep_Underling_SeedOfAshura_Tag",
-          "actorIceSubHurtDelta": -1,
-          "canBeHandledOnRecover": true
+          "value": 1,
+          "canBeHandledOnRecover": true,
+          "actorIceSubHurtDelta": -1
         },
         {
           "$type": "ServerMonsterLog",
           "doOffStage": false,
+          "canBeHandledOnRecover": true,
+          "actorIceSubHurtDelta": -1,
           "paramList": [
             1,
             0
-          ],
-          "actorIceSubHurtDelta": -1,
-          "canBeHandledOnRecover": true
+          ]
         }
       ],
       "abilityName": "Monster_Apep_Underling_SeedOfAshura_Swallow",
-      "abilityMixins": [
-        {
-          "$type": "AttachToAnimatorStateIDMixin",
-          "modifierName": "Monster_Apep_Underling_SeedOfAshura_Swallow",
-          "stateIDs": [
-            "Swallow"
-          ],
-          "value": -1,
-          "actorIceSubHurtDelta": -1
-        },
-        {
-          "$type": "AttachModifierToSelfGlobalValueMixin",
-          "globalValueKey": "_MONSTER_Apep_Underling_SeedOfAshura_RageMode",
-          "modifierNameSteps": [
-            "NormalMode",
-            "RageMode"
-          ],
-          "removeAppliedModifier": true,
-          "actorIceSubHurtDelta": -1,
-          "valueSteps": [
-            -0.5,
-            0.5,
-            1.5
-          ]
-        },
-        {
-          "$type": "AttachToAnimatorStateIDMixin",
-          "modifierName": "RageMode_Monitor",
-          "stateIDs": [
-            "ChaseAttack"
-          ],
-          "value": -1,
-          "actorIceSubHurtDelta": -1
-        }
-      ],
       "onAbilityStart": [
         {
           "$type": "SetGlobalValue",
           "doOffStage": false,
           "key": "_MONSTER_Apep_Underling_SeedOfAshura_SwallowCount_Once",
-          "actorIceSubHurtDelta": -1,
-          "canBeHandledOnRecover": true
+          "canBeHandledOnRecover": true,
+          "actorIceSubHurtDelta": -1
         },
         {
           "$type": "Predicated",
-          "doOffStage": false,
-          "failActions": [
+          "targetPredicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "target": "Target",
+              "key": "_MONSTER_Apep_Underling_SeedOfAshura_Swallow_HasTarget",
+              "value": 1
+            }
+          ],
+          "successActions": [
             {
               "$type": "Predicated",
-              "doOffStage": false,
+              "targetPredicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "target": "Target",
+                  "key": "_MONSTER_Apep_Underling_SeedOfKarna_Tag",
+                  "value": 1
+                },
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "target": "Target",
+                  "key": "_MONSTER_Apep_Underling_SeedOfAshura_TriggerTaunt",
+                  "value": 1
+                }
+              ],
+              "successActions": [
+                {
+                  "$type": "AddGlobalValue",
+                  "doOffStage": false,
+                  "key": "_MONSTER_Apep_Underling_SeedOfAshura_SwallowCount_Once",
+                  "value": 1,
+                  "canBeHandledOnRecover": true,
+                  "actorIceSubHurtDelta": -1
+                },
+                {
+                  "$type": "ApplyModifier",
+                  "target": "Target",
+                  "modifierName": "UNIQUE_Monster_Apep_Underling_SeedOfAshura_ChosenOne",
+                  "doOffStage": false,
+                  "canBeHandledOnRecover": true,
+                  "actorIceSubHurtDelta": -1
+                },
+                {
+                  "$type": "TriggerBullet",
+                  "value": true,
+                  "onGround": true,
+                  "lifeByOwnerIsAlive": true,
+                  "target": "Target",
+                  "trackTarget": "Caster",
+                  "born": {
+                    "$type": "ConfigBornByTarget",
+                    "value": 10,
+                    "DPCANLOOHCH": {
+                      "NJIPHOKCEGN": 180
+                    },
+                    "onGroundRaycastUpDist": 2,
+                    "direction": {
+                      "maxAngle": 180
+                    }
+                  },
+                  "doOffStage": false,
+                  "bulletID": 42908205,
+                  "canBeHandledOnRecover": true,
+                  "actorIceSubHurtDelta": -1
+                }
+              ],
               "otherTargets": {
                 "$type": "SelectTargetsByShape",
                 "shapeName": "CircleR6",
-                "campTargetType": "SelfCamp",
-                "topLimit": 1,
-                "sizeRatio": 1,
-                "sortType": "Nearest",
-                "ILLOOADJMLF": {
-                  "direction": {
-                    "maxAngle": 180
-                  },
-                  "FDGAEDDEEDG": {
-                    "ELAJJIANFFM": 180
+                "JCNBPJBFJNM": {
+                  "value": 10,
+                  "DPCANLOOHCH": {
+                    "NJIPHOKCEGN": 180
                   },
                   "onGroundRaycastUpDist": 2,
-                  "value": 10
-                }
+                  "direction": {
+                    "maxAngle": 180
+                  }
+                },
+                "campTargetType": "SelfCamp",
+                "sizeRatio": 1
               },
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "doOffStage": false,
+          "canBeHandledOnRecover": true,
+          "actorIceSubHurtDelta": -1,
+          "failActions": [
+            {
+              "$type": "Predicated",
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "target": "Target",
+                  "key": "_MONSTER_Apep_Underling_SeedOfKarna_Tag",
+                  "value": 1
+                }
+              ],
+              "successActions": [
+                {
+                  "$type": "AddGlobalValue",
+                  "doOffStage": false,
+                  "key": "_MONSTER_Apep_Underling_SeedOfAshura_SwallowCount_Once",
+                  "value": 1,
+                  "canBeHandledOnRecover": true,
+                  "actorIceSubHurtDelta": -1
+                },
+                {
+                  "$type": "ApplyModifier",
+                  "target": "Target",
+                  "modifierName": "UNIQUE_Monster_Apep_Underling_SeedOfAshura_ChosenOne",
+                  "doOffStage": false,
+                  "canBeHandledOnRecover": true,
+                  "actorIceSubHurtDelta": -1
+                },
+                {
+                  "$type": "TriggerBullet",
+                  "value": true,
+                  "onGround": true,
+                  "lifeByOwnerIsAlive": true,
+                  "target": "Target",
+                  "trackTarget": "Caster",
+                  "born": {
+                    "$type": "ConfigBornByTarget",
+                    "value": 10,
+                    "DPCANLOOHCH": {
+                      "NJIPHOKCEGN": 180
+                    },
+                    "onGroundRaycastUpDist": 2,
+                    "direction": {
+                      "maxAngle": 180
+                    }
+                  },
+                  "doOffStage": false,
+                  "bulletID": 42908205,
+                  "canBeHandledOnRecover": true,
+                  "actorIceSubHurtDelta": -1
+                }
+              ],
+              "otherTargets": {
+                "$type": "SelectTargetsByShape",
+                "topLimit": 1,
+                "shapeName": "CircleR6",
+                "JCNBPJBFJNM": {
+                  "value": 10,
+                  "DPCANLOOHCH": {
+                    "NJIPHOKCEGN": 180
+                  },
+                  "onGroundRaycastUpDist": 2,
+                  "direction": {
+                    "maxAngle": 180
+                  }
+                },
+                "campTargetType": "SelfCamp",
+                "sizeRatio": 1,
+                "sortType": "Nearest"
+              },
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1,
               "failActions": [
                 {
                   "$type": "SetGlobalValue",
                   "doOffStage": false,
                   "key": "_MONSTER_Ashura_SwallowTrigger",
-                  "actorIceSubHurtDelta": -1,
-                  "canBeHandledOnRecover": true
-                }
-              ],
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "value": 1,
-                  "target": "Target",
-                  "key": "_MONSTER_Apep_Underling_SeedOfKarna_Tag"
-                }
-              ],
-              "actorIceSubHurtDelta": -1,
-              "successActions": [
-                {
-                  "$type": "AddGlobalValue",
-                  "doOffStage": false,
-                  "value": 1,
-                  "key": "_MONSTER_Apep_Underling_SeedOfAshura_SwallowCount_Once",
-                  "actorIceSubHurtDelta": -1,
-                  "canBeHandledOnRecover": true
-                },
-                {
-                  "$type": "ApplyModifier",
-                  "doOffStage": false,
-                  "modifierName": "UNIQUE_Monster_Apep_Underling_SeedOfAshura_ChosenOne",
-                  "target": "Target",
-                  "actorIceSubHurtDelta": -1,
-                  "canBeHandledOnRecover": true
-                },
-                {
-                  "$type": "TriggerBullet",
-                  "doOffStage": false,
-                  "trackTarget": "Caster",
-                  "target": "Target",
-                  "bulletID": 42908205,
-                  "value": true,
-                  "actorIceSubHurtDelta": -1,
-                  "born": {
-                    "$type": "ConfigBornByTarget",
-                    "direction": {
-                      "maxAngle": 180
-                    },
-                    "FDGAEDDEEDG": {
-                      "ELAJJIANFFM": 180
-                    },
-                    "onGroundRaycastUpDist": 2,
-                    "value": 10
-                  },
-                  "lifeByOwnerIsAlive": true,
                   "canBeHandledOnRecover": true,
-                  "POOEIFNLHDB": true
+                  "actorIceSubHurtDelta": -1
                 }
-              ],
-              "canBeHandledOnRecover": true
+              ]
             }
-          ],
-          "targetPredicates": [
-            {
-              "$type": "ByTargetGlobalValue",
-              "value": 1,
-              "target": "Target",
-              "key": "_MONSTER_Apep_Underling_SeedOfAshura_Swallow_HasTarget"
-            }
-          ],
-          "actorIceSubHurtDelta": -1,
-          "successActions": [
-            {
-              "$type": "Predicated",
-              "doOffStage": false,
-              "otherTargets": {
-                "$type": "SelectTargetsByShape",
-                "shapeName": "CircleR6",
-                "campTargetType": "SelfCamp",
-                "sizeRatio": 1,
-                "ILLOOADJMLF": {
-                  "direction": {
-                    "maxAngle": 180
-                  },
-                  "FDGAEDDEEDG": {
-                    "ELAJJIANFFM": 180
-                  },
-                  "onGroundRaycastUpDist": 2,
-                  "value": 10
-                }
-              },
-              "targetPredicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "value": 1,
-                  "target": "Target",
-                  "key": "_MONSTER_Apep_Underling_SeedOfKarna_Tag"
-                },
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "value": 1,
-                  "target": "Target",
-                  "key": "_MONSTER_Apep_Underling_SeedOfAshura_TriggerTaunt"
-                }
-              ],
-              "actorIceSubHurtDelta": -1,
-              "successActions": [
-                {
-                  "$type": "AddGlobalValue",
-                  "doOffStage": false,
-                  "value": 1,
-                  "key": "_MONSTER_Apep_Underling_SeedOfAshura_SwallowCount_Once",
-                  "actorIceSubHurtDelta": -1,
-                  "canBeHandledOnRecover": true
-                },
-                {
-                  "$type": "ApplyModifier",
-                  "doOffStage": false,
-                  "modifierName": "UNIQUE_Monster_Apep_Underling_SeedOfAshura_ChosenOne",
-                  "target": "Target",
-                  "actorIceSubHurtDelta": -1,
-                  "canBeHandledOnRecover": true
-                },
-                {
-                  "$type": "TriggerBullet",
-                  "doOffStage": false,
-                  "trackTarget": "Caster",
-                  "target": "Target",
-                  "bulletID": 42908205,
-                  "value": true,
-                  "actorIceSubHurtDelta": -1,
-                  "born": {
-                    "$type": "ConfigBornByTarget",
-                    "direction": {
-                      "maxAngle": 180
-                    },
-                    "FDGAEDDEEDG": {
-                      "ELAJJIANFFM": 180
-                    },
-                    "onGroundRaycastUpDist": 2,
-                    "value": 10
-                  },
-                  "lifeByOwnerIsAlive": true,
-                  "canBeHandledOnRecover": true,
-                  "POOEIFNLHDB": true
-                }
-              ],
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "canBeHandledOnRecover": true
+          ]
         },
         {
           "$type": "Predicated",
-          "doOffStage": false,
           "targetPredicates": [
             {
               "$type": "ByTargetGlobalValue",
-              "value": 1,
+              "compareType": "MoreThanAndEqual",
               "target": "Target",
               "key": "_MONSTER_Apep_Underling_SeedOfAshura_SwallowCount_Once",
-              "compareType": "MoreThanAndEqual"
+              "value": 1
             }
           ],
-          "actorIceSubHurtDelta": -1,
           "successActions": [
             {
               "$type": "FireEffect",
-              "doOffStage": false,
+              "effectTempleteID": -1,
               "scale": 1,
-              "actorIceSubHurtDelta": -1,
-              "effectPattern": "Eff_Monster_Apep_Underling_SeedOfAshura_Swallow_Success_Mouth",
               "born": {
-                "direction": {
-                  "maxAngle": 180
-                },
-                "FDGAEDDEEDG": {
-                  "ELAJJIANFFM": 180
+                "value": 10,
+                "DPCANLOOHCH": {
+                  "NJIPHOKCEGN": 180
                 },
                 "onGroundRaycastUpDist": 2,
-                "value": 10
+                "direction": {
+                  "maxAngle": 180
+                }
               },
-              "effectTempleteID": -1,
-              "canBeHandledOnRecover": true
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Apep_Underling_SeedOfAshura_Swallow_Success_Mouth"
             },
             {
               "$type": "SetGlobalValue",
               "doOffStage": false,
-              "value": 1,
               "key": "_MONSTER_Apep_Underling_SeedOfAshura_RageMode",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "value": 1,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             },
             {
               "$type": "ServerMonsterLog",
               "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1,
               "paramList": [
                 1,
                 1
-              ],
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              ]
             }
           ],
-          "canBeHandledOnRecover": true
+          "doOffStage": false,
+          "canBeHandledOnRecover": true,
+          "actorIceSubHurtDelta": -1
         }
       ],
       "modifiers": {
@@ -675,60 +640,63 @@
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "doOffStage": false,
+              "effectTempleteID": -1,
               "scale": 1,
-              "actorIceSubHurtDelta": -1,
-              "effectPattern": "Eff_Monster_Apep_Underling_SeedOfAshura_Swallow_Range",
               "born": {
-                "direction": {
-                  "maxAngle": 180
-                },
-                "FDGAEDDEEDG": {
-                  "ELAJJIANFFM": 180
+                "value": 10,
+                "DPCANLOOHCH": {
+                  "NJIPHOKCEGN": 180
                 },
                 "onGroundRaycastUpDist": 2,
-                "value": 10
+                "direction": {
+                  "maxAngle": 180
+                }
               },
-              "effectTempleteID": -1,
-              "canBeHandledOnRecover": true
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Apep_Underling_SeedOfAshura_Swallow_Range"
             }
           ],
           "elementDurability": 100,
-          "isLimitedProperties": true,
-          "minus_one": -1
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "isLimitedProperties": true
         },
         "Monster_Apep_Underling_SeedOfAshura_Swallow_Properties": {
           "onAdded": [
             {
               "$type": "AttachAbilityStateResistance",
-              "doOffStage": false,
               "durationRatio": 0.800000011920929,
-              "actorIceSubHurtDelta": -1,
+              "doOffStage": false,
               "resistanceListID": 14002,
-              "canBeHandledOnRecover": true
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             }
           ],
-          "elementDurability": 100,
-          "stacking": "Unique",
-          "isLimitedProperties": true,
-          "minus_one": -1,
           "properties": {
             "Actor_EndureDelta": 0.009999999776482582
-          }
+          },
+          "elementDurability": 100,
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "stacking": "Unique",
+          "isLimitedProperties": true
         },
         "NormalMode": {
-          "elementDurability": 100,
           "onReconnect": [
             {
               "$type": "SetGlobalValue",
               "doOffStage": false,
               "key": "_MONSTER_Apep_Underling_SeedOfAshura_ScaleUp",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             }
           ],
-          "isLimitedProperties": true,
-          "minus_one": -1
+          "elementDurability": 100,
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "isLimitedProperties": true
         },
         "RageMode": {
           "onAdded": [
@@ -736,280 +704,306 @@
               "$type": "SetPoseBool",
               "doOffStage": false,
               "value": true,
+              "canBeHandledOnRecover": true,
               "boolID": "RageMode",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "actorIceSubHurtDelta": -1
             },
             {
               "$type": "AttachModifier",
-              "doOffStage": false,
               "modifierName": "RageMode_Timer",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             },
             {
               "$type": "AttachModifier",
-              "doOffStage": false,
               "modifierName": "Monster_Apep_Underling_SeedOfAshura_Swallow_Properties",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             }
           ],
-          "elementDurability": 100,
           "onReconnect": [
             {
               "$type": "SetGlobalValue",
               "doOffStage": false,
-              "value": 1,
               "key": "_MONSTER_Apep_Underling_SeedOfAshura_ScaleUp",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "value": 1,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             },
             {
               "$type": "SetAnimatorBool",
               "doOffStage": false,
               "value": true,
+              "canBeHandledOnRecover": true,
               "boolID": "RageMode",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "actorIceSubHurtDelta": -1
             }
           ],
-          "isLimitedProperties": true,
+          "elementDurability": 100,
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
           "onRemoved": [
             {
               "$type": "SetPoseBool",
               "doOffStage": false,
+              "canBeHandledOnRecover": true,
               "boolID": "RageMode",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "actorIceSubHurtDelta": -1
             },
             {
               "$type": "SetAnimatorBool",
               "doOffStage": false,
+              "canBeHandledOnRecover": true,
               "boolID": "RageMode",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "actorIceSubHurtDelta": -1
             },
             {
               "$type": "SetGlobalValue",
               "doOffStage": false,
               "key": "_MONSTER_Ashura_SwallowTrigger",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             }
           ],
-          "minus_one": -1
+          "isLimitedProperties": true
         },
         "RageMode_Monitor": {
-          "elementDurability": 100,
-          "isLimitedProperties": true,
-          "onRemoved": [
-            {
-              "$type": "SetGlobalValue",
-              "doOffStage": false,
-              "key": "_MONSTER_Apep_Underling_SeedOfAshura_ScaleUp",
-              "predicates": [
-                {
-                  "$type": "ByNot",
-                  "target": "Target",
-                  "predicates": [
-                    {
-                      "$type": "ByHasModifier",
-                      "modifierName": "RageMode",
-                      "target": "Target"
-                    }
-                  ]
-                }
-              ],
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "minus_one": -1,
           "onThinkInterval": [
             {
               "$type": "SetGlobalValue",
-              "doOffStage": false,
-              "key": "_MONSTER_Apep_Underling_SeedOfAshura_RageMode",
               "predicates": [
                 {
                   "$type": "ByNot",
-                  "target": "Target",
                   "predicates": [
                     {
                       "$type": "ByHasModifier",
-                      "modifierName": "RageMode_Timer",
-                      "target": "Target"
+                      "target": "Target",
+                      "modifierName": "RageMode_Timer"
                     }
-                  ]
+                  ],
+                  "target": "Target"
                 }
               ],
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "doOffStage": false,
+              "key": "_MONSTER_Apep_Underling_SeedOfAshura_RageMode",
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             }
           ],
+          "elementDurability": 100,
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "onRemoved": [
+            {
+              "$type": "SetGlobalValue",
+              "predicates": [
+                {
+                  "$type": "ByNot",
+                  "predicates": [
+                    {
+                      "$type": "ByHasModifier",
+                      "target": "Target",
+                      "modifierName": "RageMode"
+                    }
+                  ],
+                  "target": "Target"
+                }
+              ],
+              "doOffStage": false,
+              "key": "_MONSTER_Apep_Underling_SeedOfAshura_ScaleUp",
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "isLimitedProperties": true,
           "thinkInterval": 3.5
         },
         "RageMode_Timer": {
           "elementDurability": 100,
-          "isLimitedProperties": true,
           "minus_one": -1,
-          "duration": 20
+          "HGPKLIANAGB": -1,
+          "duration": 20,
+          "isLimitedProperties": true
         },
         "UNIQUE_Monster_Apep_Underling_SeedOfAshura_ChosenOne": {
           "onAdded": [
             {
               "$type": "SetGlobalValue",
               "doOffStage": false,
-              "value": 1,
               "key": "_MONSTER_Apep_Underling_SeedOfAshura_SwallowTarget",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "value": 1,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             },
             {
               "$type": "KillSelf",
+              "duHPRation": 0.10000000149011612,
+              "killSelfType": "Normal",
               "doOffStage": false,
+              "canBeHandledOnRecover": true,
               "configIdArray": [
                 29080201,
                 29080202
               ],
-              "killSelfType": "Normal",
-              "actorIceSubHurtDelta": -1,
-              "duHPRation": 0.10000000149011612,
-              "canBeHandledOnRecover": true
+              "actorIceSubHurtDelta": -1
             }
           ],
-          "elementDurability": 100,
-          "stacking": "Unique",
-          "isLimitedProperties": true,
           "modifierMixins": [
             {
               "$type": "DiePatternSwitchMixin",
+              "dieShaderDisableDurationTime": -1,
               "hasAnimatorDie": true,
-              "dieDenyLockOn": true,
-              "dieIsGhostToEnemy": true,
+              "useRagDoll": true,
+              "dieDisappearEffect": "Eff_Monster_Apep_Underling_SeedOfAshura_Swallow_Target",
+              "muteHitBox": true,
               "dieIgnoreTriggerBullet": true,
               "muteBillboard": true,
+              "useCreatorProperty": true,
+              "actorIceSubHurtDelta": -1,
               "dieShaderEnableDurationTime": -1,
-              "HNJCCGAFABL": true,
               "mutePushCollider": true,
-              "dieDisappearEffect": "Eff_Monster_Apep_Underling_SeedOfAshura_Swallow_Target",
-              "actorIceSubHurtDelta": -1,
-              "dieShaderDisableDurationTime": -1,
-              "OPHINBIFIME": true
+              "PGIEEFDEFFF": true
             }
           ],
+          "elementDurability": 100,
           "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "stacking": "Unique",
+          "duration": 0.5,
           "isUnique": true,
-          "duration": 0.5
+          "isLimitedProperties": true
         }
-      }
-    }
-  },
-  {
-    "Default": {
-      "DDNHHMIBNLF": {
-        "elementDurability": 100,
-        "isLimitedProperties": true,
-        "minus_one": -1
       },
-      "abilityName": "Monster_Apep_Underling_SeedOfAshura_Swallow_ScaleUp_Start",
-      "onAbilityStart": [
+      "OOAKLMJCDAG": {
+        "elementDurability": 100,
+        "minus_one": -1,
+        "HGPKLIANAGB": -1,
+        "isLimitedProperties": true
+      },
+      "abilityMixins": [
         {
-          "$type": "Predicated",
-          "doOffStage": false,
-          "targetPredicates": [
-            {
-              "$type": "ByTargetGlobalValue",
-              "value": 1,
-              "target": "Target",
-              "key": "_MONSTER_Apep_Underling_SeedOfAshura_SwallowCount_Once",
-              "compareType": "MoreThanAndEqual"
-            }
+          "$type": "AttachToAnimatorStateIDMixin",
+          "value": -1,
+          "modifierName": "Monster_Apep_Underling_SeedOfAshura_Swallow",
+          "stateIDs": [
+            "Swallow"
           ],
-          "actorIceSubHurtDelta": -1,
-          "successActions": [
-            {
-              "$type": "FireEffect",
-              "doOffStage": false,
-              "scale": 1,
-              "actorIceSubHurtDelta": -1,
-              "effectPattern": "Eff_Monster_Apep_Underling_SeedOfAshura_Swallow_Success_02",
-              "born": {
-                "direction": {
-                  "maxAngle": 180
-                },
-                "FDGAEDDEEDG": {
-                  "ELAJJIANFFM": 180
-                },
-                "onGroundRaycastUpDist": 2,
-                "value": 10
-              },
-              "effectTempleteID": -1,
-              "canBeHandledOnRecover": true
-            },
-            {
-              "$type": "SetAnimatorBool",
-              "doOffStage": false,
-              "value": true,
-              "boolID": "RageMode",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            }
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachModifierToSelfGlobalValueMixin",
+          "valueSteps": [
+            -0.5,
+            0.5,
+            1.5
           ],
-          "canBeHandledOnRecover": true
+          "globalValueKey": "_MONSTER_Apep_Underling_SeedOfAshura_RageMode",
+          "modifierNameSteps": [
+            "NormalMode",
+            "RageMode"
+          ],
+          "removeAppliedModifier": true,
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToAnimatorStateIDMixin",
+          "value": -1,
+          "modifierName": "RageMode_Monitor",
+          "stateIDs": [
+            "ChaseAttack"
+          ],
+          "actorIceSubHurtDelta": -1
         }
       ]
     }
   },
   {
     "Default": {
-      "DDNHHMIBNLF": {
-        "elementDurability": 100,
-        "isLimitedProperties": true,
-        "minus_one": -1
-      },
-      "abilityName": "Monster_Apep_Underling_SeedOfAshura_Swallow_ScaleUp",
-      "abilityMixins": [
-        {
-          "$type": "AttachModifierToSelfGlobalValueMixin",
-          "globalValueKey": "_MONSTER_Apep_Underling_SeedOfAshura_ScaleUp",
-          "modifierNameSteps": [
-            "UNIQUE_Monster_Apep_Underling_SeedOfAshura_ScaleUp"
-          ],
-          "removeAppliedModifier": true,
-          "actorIceSubHurtDelta": -1,
-          "valueSteps": [
-            0.5,
-            1.5
-          ]
-        }
-      ],
+      "abilityName": "Monster_Apep_Underling_SeedOfAshura_Swallow_ScaleUp_Start",
       "onAbilityStart": [
         {
           "$type": "Predicated",
-          "doOffStage": false,
           "targetPredicates": [
             {
               "$type": "ByTargetGlobalValue",
-              "value": 1,
+              "compareType": "MoreThanAndEqual",
               "target": "Target",
               "key": "_MONSTER_Apep_Underling_SeedOfAshura_SwallowCount_Once",
-              "compareType": "MoreThanAndEqual"
+              "value": 1
             }
           ],
-          "actorIceSubHurtDelta": -1,
+          "successActions": [
+            {
+              "$type": "FireEffect",
+              "effectTempleteID": -1,
+              "scale": 1,
+              "born": {
+                "value": 10,
+                "DPCANLOOHCH": {
+                  "NJIPHOKCEGN": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "direction": {
+                  "maxAngle": 180
+                }
+              },
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Apep_Underling_SeedOfAshura_Swallow_Success_02"
+            },
+            {
+              "$type": "SetAnimatorBool",
+              "doOffStage": false,
+              "value": true,
+              "canBeHandledOnRecover": true,
+              "boolID": "RageMode",
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "doOffStage": false,
+          "canBeHandledOnRecover": true,
+          "actorIceSubHurtDelta": -1
+        }
+      ],
+      "OOAKLMJCDAG": {
+        "elementDurability": 100,
+        "minus_one": -1,
+        "HGPKLIANAGB": -1,
+        "isLimitedProperties": true
+      }
+    }
+  },
+  {
+    "Default": {
+      "abilityName": "Monster_Apep_Underling_SeedOfAshura_Swallow_ScaleUp",
+      "onAbilityStart": [
+        {
+          "$type": "Predicated",
+          "targetPredicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "compareType": "MoreThanAndEqual",
+              "target": "Target",
+              "key": "_MONSTER_Apep_Underling_SeedOfAshura_SwallowCount_Once",
+              "value": 1
+            }
+          ],
           "successActions": [
             {
               "$type": "SetGlobalValue",
               "doOffStage": false,
-              "value": 1,
               "key": "_MONSTER_Apep_Underling_SeedOfAshura_ScaleUp",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "value": 1,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             }
           ],
-          "canBeHandledOnRecover": true
+          "doOffStage": false,
+          "canBeHandledOnRecover": true,
+          "actorIceSubHurtDelta": -1
         }
       ],
       "modifiers": {
@@ -1017,57 +1011,78 @@
           "onAdded": [
             {
               "$type": "SetEntityScale",
+              "value": true,
               "doOffStage": false,
-              "enable": true,
-              "actorIceSubHurtDelta": -1,
-              "value": 1.2999999523162842,
-              "canBeHandledOnRecover": true
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             }
           ],
           "elementDurability": 100,
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
           "stacking": "Unique",
-          "isLimitedProperties": true,
           "onRemoved": [
             {
               "$type": "SetEntityScale",
+              "value": true,
               "doOffStage": false,
-              "enable": true,
-              "actorIceSubHurtDelta": -1,
-              "value": 0.800000011920929,
-              "canBeHandledOnRecover": true
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             }
           ],
-          "minus_one": -1,
-          "isUnique": true
+          "isUnique": true,
+          "isLimitedProperties": true
         }
-      }
+      },
+      "OOAKLMJCDAG": {
+        "elementDurability": 100,
+        "minus_one": -1,
+        "HGPKLIANAGB": -1,
+        "isLimitedProperties": true
+      },
+      "abilityMixins": [
+        {
+          "$type": "AttachModifierToSelfGlobalValueMixin",
+          "valueSteps": [
+            0.5,
+            1.5
+          ],
+          "globalValueKey": "_MONSTER_Apep_Underling_SeedOfAshura_ScaleUp",
+          "modifierNameSteps": [
+            "UNIQUE_Monster_Apep_Underling_SeedOfAshura_ScaleUp"
+          ],
+          "removeAppliedModifier": true,
+          "actorIceSubHurtDelta": -1
+        }
+      ]
     }
   },
   {
     "Default": {
-      "DDNHHMIBNLF": {
-        "elementDurability": 100,
-        "isLimitedProperties": true,
-        "minus_one": -1
-      },
       "abilityName": "Apep_Underling_SeedOfAshura_SwallowTarget",
       "onAbilityStart": [
         {
           "$type": "KillSelf",
-          "doOffStage": false,
-          "killSelfType": "Normal",
           "predicates": [
             {
               "$type": "ByTargetGlobalValue",
-              "value": 1,
               "target": "Target",
-              "key": "_MONSTER_Apep_Underling_SeedOfKarna_Tag"
+              "key": "_MONSTER_Apep_Underling_SeedOfKarna_Tag",
+              "value": 1
             }
           ],
-          "actorIceSubHurtDelta": -1,
-          "canBeHandledOnRecover": true
+          "killSelfType": "Normal",
+          "doOffStage": false,
+          "canBeHandledOnRecover": true,
+          "actorIceSubHurtDelta": -1
         }
-      ]
+      ],
+      "OOAKLMJCDAG": {
+        "elementDurability": 100,
+        "minus_one": -1,
+        "HGPKLIANAGB": -1,
+        "isLimitedProperties": true
+      }
     }
   }
 ]

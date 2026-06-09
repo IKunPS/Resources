@@ -1,22 +1,52 @@
 [
   {
     "Default": {
-      "DDNHHMIBNLF": {
-        "elementDurability": 100,
-        "isLimitedProperties": true,
-        "minus_one": -1
-      },
       "onAdded": [
         {
           "$type": "SetGlobalValue",
           "doOffStage": false,
-          "value": 4,
           "key": "_GLOBALVALUE_EnigmaType",
-          "actorIceSubHurtDelta": -1,
-          "canBeHandledOnRecover": true
+          "value": 4,
+          "canBeHandledOnRecover": true,
+          "actorIceSubHurtDelta": -1
         }
       ],
       "abilityName": "Monster_Apparatus_Enigma_BionicNettler_Initialization",
+      "modifiers": {
+        "Reset_EnergyLineState": {
+          "onAdded": [
+            {
+              "$type": "AddGlobalValue",
+              "doOffStage": false,
+              "key": "_MONSTER_Apparatus_Enigma_BionicNettler_EnergyLine_TimesCounter",
+              "value": -9999,
+              "canBeHandledOnRecover": true,
+              "useLimitRange": true,
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "KillGadget",
+              "doOffStage": false,
+              "gadgetInfo": {
+                "configID": 42401009,
+                "sortType": "Reversed"
+              },
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "elementDurability": 100,
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "isLimitedProperties": true
+        }
+      },
+      "OOAKLMJCDAG": {
+        "elementDurability": 100,
+        "minus_one": -1,
+        "HGPKLIANAGB": -1,
+        "isLimitedProperties": true
+      },
       "abilityMixins": [
         {
           "$type": "AttachToAIAlertnessMixin",
@@ -26,35 +56,7 @@
           ],
           "actorIceSubHurtDelta": -1
         }
-      ],
-      "modifiers": {
-        "Reset_EnergyLineState": {
-          "onAdded": [
-            {
-              "$type": "AddGlobalValue",
-              "doOffStage": false,
-              "value": -9999,
-              "key": "_MONSTER_Apparatus_Enigma_BionicNettler_EnergyLine_TimesCounter",
-              "actorIceSubHurtDelta": -1,
-              "useLimitRange": true,
-              "canBeHandledOnRecover": true
-            },
-            {
-              "$type": "KillGadget",
-              "doOffStage": false,
-              "gadgetInfo": {
-                "sortType": "Reversed",
-                "configID": 42401009
-              },
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "elementDurability": 100,
-          "isLimitedProperties": true,
-          "minus_one": -1
-        }
-      }
+      ]
     }
   },
   {
@@ -62,29 +64,122 @@
       "onKill": [
         {
           "$type": "SetGlobalValue",
-          "doOffStage": false,
-          "value": 1,
           "target": "Owner",
+          "doOffStage": false,
           "key": "_WATCHER_80105_",
-          "actorIceSubHurtDelta": -1,
-          "canBeHandledOnRecover": true
+          "value": 1,
+          "canBeHandledOnRecover": true,
+          "actorIceSubHurtDelta": -1
         }
       ],
-      "DDNHHMIBNLF": {
-        "elementDurability": 100,
-        "isLimitedProperties": true,
-        "minus_one": -1
-      },
       "abilityName": "Monster_Apparatus_Enigma_BionicNettler_CoreActive",
+      "modifiers": {
+        "Enigma_BionicNettler_Weak": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "target": "Owner",
+              "doOffStage": false,
+              "key": "_WATCHER_80104_4",
+              "value": 1,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "elementDurability": 100,
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "isLimitedProperties": true
+        },
+        "UNIQUE_Monster_Apparatus_Enigma_BionicNettler_CoreState": {
+          "onAdded": [
+            {
+              "$type": "AddGlobalValue",
+              "doOffStage": false,
+              "key": "_MONSTER_Apparatus_Enigma_CoreActive",
+              "value": 1,
+              "canBeHandledOnRecover": true,
+              "useLimitRange": true,
+              "actorIceSubHurtDelta": -1,
+              "maxValue": 1
+            },
+            {
+              "$type": "SetAnimatorInt",
+              "doOffStage": false,
+              "intID": "PowerStage",
+              "value": 2,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "EnableHitBoxByName",
+              "doOffStage": false,
+              "setEnable": true,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1,
+              "hitBoxNames": [
+                "CoreBox"
+              ]
+            }
+          ],
+          "elementDurability": 100,
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "onRemoved": [
+            {
+              "$type": "EnableHitBoxByName",
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1,
+              "hitBoxNames": [
+                "CoreBox"
+              ]
+            },
+            {
+              "$type": "SetAnimatorInt",
+              "predicates": [
+                {
+                  "$type": "ByAnimatorInt",
+                  "target": "Target",
+                  "parameter": "PowerStage"
+                }
+              ],
+              "doOffStage": false,
+              "intID": "PowerStage",
+              "value": 1,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "AddGlobalValue",
+              "doOffStage": false,
+              "key": "_MONSTER_Apparatus_Enigma_CoreActive",
+              "value": -1,
+              "canBeHandledOnRecover": true,
+              "useLimitRange": true,
+              "actorIceSubHurtDelta": -1,
+              "maxValue": 1
+            }
+          ],
+          "isUnique": true,
+          "isLimitedProperties": true
+        }
+      },
+      "OOAKLMJCDAG": {
+        "elementDurability": 100,
+        "minus_one": -1,
+        "HGPKLIANAGB": -1,
+        "isLimitedProperties": true
+      },
       "abilityMixins": [
         {
           "$type": "AttachToNormalizedTimeMixin",
-          "stateID": "Sting",
-          "modifierName": "UNIQUE_Monster_Apparatus_Enigma_BionicNettler_CoreState",
           "normalizeEnd": 0.800000011920929,
           "value": -1,
-          "actorIceSubHurtDelta": -1,
-          "normalizeStart": 0.15000000596046448
+          "stateID": "Sting",
+          "modifierName": "UNIQUE_Monster_Apparatus_Enigma_BionicNettler_CoreState",
+          "normalizeStart": 0.15000000596046448,
+          "actorIceSubHurtDelta": -1
         },
         {
           "$type": "AttachToPoseIDMixin",
@@ -94,204 +189,98 @@
           ],
           "actorIceSubHurtDelta": -1
         }
-      ],
-      "modifiers": {
-        "Enigma_BionicNettler_Weak": {
-          "onAdded": [
-            {
-              "$type": "SetGlobalValue",
-              "doOffStage": false,
-              "value": 1,
-              "target": "Owner",
-              "key": "_WATCHER_80104_4",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "elementDurability": 100,
-          "isLimitedProperties": true,
-          "minus_one": -1
-        },
-        "UNIQUE_Monster_Apparatus_Enigma_BionicNettler_CoreState": {
-          "onAdded": [
-            {
-              "$type": "AddGlobalValue",
-              "doOffStage": false,
-              "value": 1,
-              "key": "_MONSTER_Apparatus_Enigma_CoreActive",
-              "maxValue": 1,
-              "actorIceSubHurtDelta": -1,
-              "useLimitRange": true,
-              "canBeHandledOnRecover": true
-            },
-            {
-              "$type": "SetAnimatorInt",
-              "doOffStage": false,
-              "value": 2,
-              "intID": "PowerStage",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            },
-            {
-              "$type": "EnableHitBoxByName",
-              "doOffStage": false,
-              "actorIceSubHurtDelta": -1,
-              "setEnable": true,
-              "hitBoxNames": [
-                "CoreBox"
-              ],
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "elementDurability": 100,
-          "isLimitedProperties": true,
-          "onRemoved": [
-            {
-              "$type": "EnableHitBoxByName",
-              "doOffStage": false,
-              "actorIceSubHurtDelta": -1,
-              "hitBoxNames": [
-                "CoreBox"
-              ],
-              "canBeHandledOnRecover": true
-            },
-            {
-              "$type": "SetAnimatorInt",
-              "doOffStage": false,
-              "value": 1,
-              "intID": "PowerStage",
-              "predicates": [
-                {
-                  "$type": "ByAnimatorInt",
-                  "target": "Target",
-                  "parameter": "PowerStage"
-                }
-              ],
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            },
-            {
-              "$type": "AddGlobalValue",
-              "doOffStage": false,
-              "value": -1,
-              "key": "_MONSTER_Apparatus_Enigma_CoreActive",
-              "maxValue": 1,
-              "actorIceSubHurtDelta": -1,
-              "useLimitRange": true,
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "minus_one": -1,
-          "isUnique": true
-        }
-      }
-    }
-  },
-  {
-    "Default": {
-      "DDNHHMIBNLF": {
-        "elementDurability": 100,
-        "isLimitedProperties": true,
-        "minus_one": -1
-      },
-      "abilityName": "Monster_Apparatus_Enigma_BionicNettler_CounterAtk",
-      "onAbilityStart": [
-        {
-          "$type": "TriggerAttackEvent",
-          "doOffStage": false,
-          "attackEvent": {
-            "attackInfo": {
-              "attenuationGroup": "default",
-              "hitPattern": {
-                "hitImpulseType": "LV1",
-                "onHitEffectName": "default",
-                "hitHaltTimeScale": 0.05000000074505806,
-                "JKLONEBKFKJ": {
-                  "JJGBOHIKHFM": true,
-                  "value": 1
-                }
-              },
-              "FJNMGDHFOEH": {
-                "GCPNPCOFFBP": "Shake"
-              },
-              "IODAJAKBOLG": {
-                "onHitEffectName": "default",
-                "JKLONEBKFKJ": {
-                  "JJGBOHIKHFM": true,
-                  "value": 1
-                }
-              },
-              "attackProperty": {
-                "attackType": "Default",
-                "enBreak": 30,
-                "elementDurability": 100,
-                "strikeType": "None",
-                "elementRank": 1,
-                "damagePercentage": 0.3070000112056732
-              },
-              "cameraShake": {
-                "extension": {
-                  "baseCycle": 0.11999999731779099,
-                  "cycleDamping": 0.11999999731779099,
-                  "baseOnCamera": true,
-                  "rangeAttenuation": 0.5
-                },
-                "FAKMJBNLPPB": -1,
-                "shakeDistance": 20
-              }
-            },
-            "attackPattern": {
-              "$type": "ConfigAttackCircle",
-              "radius": 3.5,
-              "massiveAttackRatio": 1,
-              "born": {
-                "$type": "ConfigBornBySelf",
-                "direction": {
-                  "maxAngle": 180
-                },
-                "FDGAEDDEEDG": {
-                  "ELAJJIANFFM": 180
-                },
-                "onGroundRaycastUpDist": 2,
-                "value": 10
-              },
-              "height": 3,
-              "fanAngle": 360,
-              "PBFNLCIFCBO": {
-                "GOAEBMPCPJL": {
-                  "JJGBOHIKHFM": true,
-                  "value": 1
-                }
-              },
-              "triggerType": "TriggerNoRepeat"
-            }
-          },
-          "targetType": "Enemy",
-          "actorIceSubHurtDelta": -1,
-          "canBeHandledOnRecover": true
-        }
       ]
     }
   },
   {
     "Default": {
-      "DDNHHMIBNLF": {
-        "elementDurability": 100,
-        "isLimitedProperties": true,
-        "minus_one": -1
-      },
-      "abilityName": "Monster_Apparatus_Enigma_BionicNettler_Sting",
-      "abilityMixins": [
+      "abilityName": "Monster_Apparatus_Enigma_BionicNettler_CounterAtk",
+      "onAbilityStart": [
         {
-          "$type": "AttachToStateIDMixin",
-          "modifierName": "Monster_Apparatus_Enigma_BionicNettler_Sting_ResetCD",
-          "stateIDs": [
-            "Sting"
-          ],
-          "value": -1,
+          "$type": "TriggerAttackEvent",
+          "doOffStage": false,
+          "targetType": "Enemy",
+          "attackEvent": {
+            "attackInfo": {
+              "AKKPNIMNNGE": {
+                "JMEJGMOJIJJ": "Shake"
+              },
+              "attackProperty": {
+                "enBreak": 30,
+                "elementDurability": 100,
+                "damagePercentage": 0.3070000112056732,
+                "attackType": "Default",
+                "elementRank": 1,
+                "strikeType": "None"
+              },
+              "hitPattern": {
+                "hitImpulseType": "LV1",
+                "hitHaltTimeScale": 0.05000000074505806,
+                "onHitEffectName": "default",
+                "NCKKCKDNLCC": {
+                  "value": 1,
+                  "JGHPGBHFEHK": true
+                }
+              },
+              "cameraShake": {
+                "shakeDistance": 20,
+                "extension": {
+                  "baseCycle": 0.11999999731779099,
+                  "cycleDamping": 0.11999999731779099,
+                  "rangeAttenuation": 0.5,
+                  "baseOnCamera": true
+                }
+              },
+              "attenuationGroup": "default",
+              "POIJCDIFPAA": {
+                "onHitEffectName": "default",
+                "NCKKCKDNLCC": {
+                  "value": 1,
+                  "JGHPGBHFEHK": true
+                }
+              }
+            },
+            "attackPattern": {
+              "$type": "ConfigAttackCircle",
+              "massiveAttackRatio": 1,
+              "triggerType": "TriggerNoRepeat",
+              "height": 3,
+              "radius": 3.5,
+              "GDAOKKMAFHB": {
+                "DPBBLBOHAHM": {
+                  "value": 1,
+                  "JGHPGBHFEHK": true
+                }
+              },
+              "born": {
+                "$type": "ConfigBornBySelf",
+                "value": 10,
+                "DPCANLOOHCH": {
+                  "NJIPHOKCEGN": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "direction": {
+                  "maxAngle": 180
+                }
+              },
+              "fanAngle": 360
+            }
+          },
+          "canBeHandledOnRecover": true,
           "actorIceSubHurtDelta": -1
         }
       ],
+      "OOAKLMJCDAG": {
+        "elementDurability": 100,
+        "minus_one": -1,
+        "HGPKLIANAGB": -1,
+        "isLimitedProperties": true
+      }
+    }
+  },
+  {
+    "Default": {
+      "abilityName": "Monster_Apparatus_Enigma_BionicNettler_Sting",
       "modifiers": {
         "Monster_Apparatus_Enigma_BionicNettler_StingCombo": {
           "onAdded": [
@@ -299,206 +288,199 @@
               "$type": "SetPoseBool",
               "doOffStage": false,
               "value": true,
+              "canBeHandledOnRecover": true,
               "boolID": "StingCombo",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "actorIceSubHurtDelta": -1
             }
           ],
           "elementDurability": 100,
-          "isLimitedProperties": true,
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
           "onRemoved": [
             {
               "$type": "SetPoseBool",
               "doOffStage": false,
+              "canBeHandledOnRecover": true,
               "boolID": "StingCombo",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "actorIceSubHurtDelta": -1
             }
           ],
-          "minus_one": -1,
-          "duration": 8
+          "duration": 8,
+          "isLimitedProperties": true
         },
         "Monster_Apparatus_Enigma_BionicNettler_Sting_ResetCD": {
           "onAdded": [
             {
               "$type": "SetGlobalValue",
+              "value": true,
               "doOffStage": false,
               "key": "_MONSTER_Apparatus_Enigma_BionicNettler_Reset",
-              "maxValue": 3,
-              "value": true,
-              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true,
               "useLimitRange": true,
-              "canBeHandledOnRecover": true
+              "actorIceSubHurtDelta": -1,
+              "maxValue": 3
             },
             {
               "$type": "ApplyModifier",
-              "doOffStage": false,
               "modifierName": "Monster_Apparatus_Enigma_BionicNettler_StingCombo",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             }
           ],
           "elementDurability": 100,
-          "isLimitedProperties": true,
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
           "onRemoved": [
             {
               "$type": "SetAISkillCDAvailableNow",
-              "doOffStage": false,
               "predicates": [
                 {
                   "$type": "ByTargetGlobalValue",
-                  "value": 2,
+                  "compareType": "LessAndEqual",
                   "target": "Target",
                   "key": "_MONSTER_Apparatus_Enigma_BionicNettler_Reset",
-                  "compareType": "LessAndEqual"
+                  "value": 2
                 },
                 {
                   "$type": "ByTargetGlobalValue",
+                  "compareType": "MoreThanAndEqual",
                   "target": "Target",
-                  "key": "_MONSTER_Apparatus_Enigma_BionicNettler_Reset",
-                  "compareType": "MoreThanAndEqual"
+                  "key": "_MONSTER_Apparatus_Enigma_BionicNettler_Reset"
                 }
               ],
-              "actorIceSubHurtDelta": -1,
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
               "skillIDs": [
                 202
               ],
-              "canBeHandledOnRecover": true
+              "actorIceSubHurtDelta": -1
             },
             {
               "$type": "ReTriggerAISkillInitialCD",
-              "doOffStage": false,
               "predicates": [
                 {
                   "$type": "ByTargetGlobalValue",
-                  "value": 2,
+                  "compareType": "LessAndEqual",
                   "target": "Target",
                   "key": "_MONSTER_Apparatus_Enigma_BionicNettler_Reset",
-                  "compareType": "LessAndEqual"
+                  "value": 2
                 },
                 {
                   "$type": "ByTargetGlobalValue",
+                  "compareType": "MoreThanAndEqual",
                   "target": "Target",
-                  "key": "_MONSTER_Apparatus_Enigma_BionicNettler_Reset",
-                  "compareType": "MoreThanAndEqual"
+                  "key": "_MONSTER_Apparatus_Enigma_BionicNettler_Reset"
                 }
               ],
-              "actorIceSubHurtDelta": -1,
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
               "skillIDs": [
                 212
               ],
-              "canBeHandledOnRecover": true
+              "actorIceSubHurtDelta": -1
             },
             {
               "$type": "SetAISkillCDAvailableNow",
-              "doOffStage": false,
               "predicates": [
                 {
                   "$type": "ByTargetGlobalValue",
-                  "value": 2,
+                  "compareType": "MoreThan",
                   "target": "Target",
                   "key": "_MONSTER_Apparatus_Enigma_BionicNettler_Reset",
-                  "compareType": "MoreThan"
+                  "value": 2
                 }
               ],
-              "actorIceSubHurtDelta": -1,
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
               "skillIDs": [
                 212
               ],
-              "canBeHandledOnRecover": true
+              "actorIceSubHurtDelta": -1
             },
             {
               "$type": "ReTriggerAISkillInitialCD",
-              "doOffStage": false,
               "predicates": [
                 {
                   "$type": "ByTargetGlobalValue",
-                  "value": 2,
+                  "compareType": "MoreThan",
                   "target": "Target",
                   "key": "_MONSTER_Apparatus_Enigma_BionicNettler_Reset",
-                  "compareType": "MoreThan"
+                  "value": 2
                 }
               ],
-              "actorIceSubHurtDelta": -1,
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
               "skillIDs": [
                 202
               ],
-              "canBeHandledOnRecover": true
+              "actorIceSubHurtDelta": -1
             }
           ],
-          "minus_one": -1
+          "isLimitedProperties": true
         }
-      }
+      },
+      "OOAKLMJCDAG": {
+        "elementDurability": 100,
+        "minus_one": -1,
+        "HGPKLIANAGB": -1,
+        "isLimitedProperties": true
+      },
+      "abilityMixins": [
+        {
+          "$type": "AttachToStateIDMixin",
+          "value": -1,
+          "modifierName": "Monster_Apparatus_Enigma_BionicNettler_Sting_ResetCD",
+          "stateIDs": [
+            "Sting"
+          ],
+          "actorIceSubHurtDelta": -1
+        }
+      ]
     }
   },
   {
     "Default": {
-      "DDNHHMIBNLF": {
-        "elementDurability": 100,
-        "isLimitedProperties": true,
-        "minus_one": -1
-      },
       "abilityName": "Monster_Apparatus_Enigma_BionicNettler_EnergyLine_CreateGadget",
-      "abilityMixins": [
-        {
-          "$type": "AttachToStateIDMixin",
-          "modifierName": "Monster_Apparatus_Enigma_BionicNettler_EnergyLine_CDReset",
-          "stateIDs": [
-            "CounterAtk",
-            "Discharge",
-            "Sting"
-          ],
-          "value": -1,
-          "actorIceSubHurtDelta": -1
-        },
-        {
-          "$type": "AttachToStateIDMixin",
-          "modifierName": "Monster_Apparatus_Enigma_BionicNettler_EnergyLine_RushMove",
-          "stateIDs": [
-            "EnergyLineRushMove"
-          ],
-          "value": -1,
-          "actorIceSubHurtDelta": -1
-        }
-      ],
       "onAbilityStart": [
         {
           "$type": "AddGlobalValue",
           "doOffStage": false,
-          "value": 1,
           "key": "_MONSTER_Apparatus_Enigma_BionicNettler_EnergyLine_TimesCounter",
-          "actorIceSubHurtDelta": -1,
-          "canBeHandledOnRecover": true
+          "value": 1,
+          "canBeHandledOnRecover": true,
+          "actorIceSubHurtDelta": -1
         },
         {
           "$type": "CreateGadget",
-          "doOffStage": false,
           "value": true,
           "campID": 4001,
-          "campTargetType": "Alliance",
-          "HGPMDCCAHMK": {
-            "IFAGHADONMB": true,
-            "KCLDKFCKPEE": 0.5,
-            "MJDMDBDMPAM": true,
-            "PHCINBJNAOK": 0.5
+          "lifeByOwnerV2": true,
+          "gadgetID": 42401009,
+          "FOMFJNNGMGB": {
+            "enable": true,
+            "GJFBJPEPFEN": 0.5,
+            "MCHBPOKIPOF": true,
+            "MPPMKLOFEDA": 0.5
           },
-          "actorIceSubHurtDelta": -1,
           "born": {
             "$type": "ConfigBornBySelf",
-            "direction": {
-              "maxAngle": 180
+            "value": 10,
+            "DPCANLOOHCH": {
+              "NJIPHOKCEGN": 180
             },
+            "onGroundRaycastUpDist": 2,
             "offset": {
               "x": 0.800000011920929
             },
-            "FDGAEDDEEDG": {
-              "ELAJJIANFFM": 180
-            },
-            "onGroundRaycastUpDist": 2,
-            "value": 10
+            "direction": {
+              "maxAngle": 180
+            }
           },
-          "gadgetID": 42401009,
-          "canBeHandledOnRecover": true
+          "doOffStage": false,
+          "campTargetType": "Alliance",
+          "canBeHandledOnRecover": true,
+          "actorIceSubHurtDelta": -1
         }
       ],
       "modifiers": {
@@ -507,66 +489,65 @@
             {
               "$type": "AddGlobalValue",
               "doOffStage": false,
-              "value": -1,
               "key": "_HAS_NearTarget",
-              "maxValue": 1,
-              "actorIceSubHurtDelta": -1,
+              "value": -1,
+              "canBeHandledOnRecover": true,
               "useLimitRange": true,
-              "canBeHandledOnRecover": true
+              "actorIceSubHurtDelta": -1,
+              "maxValue": 1
             },
             {
               "$type": "Predicated",
-              "doOffStage": false,
-              "otherTargets": {
-                "$type": "SelectTargetsByShape",
-                "shapeName": "CircleR10",
-                "campTargetType": "SelfCamp",
-                "sizeRatio": 1,
-                "ILLOOADJMLF": {
-                  "direction": {
-                    "maxAngle": 180
-                  },
-                  "FDGAEDDEEDG": {
-                    "ELAJJIANFFM": 180
-                  },
-                  "onGroundRaycastUpDist": 2,
-                  "value": 10
-                }
-              },
               "targetPredicates": [
                 {
                   "$type": "ByEntityTypes",
                   "target": "Target",
-                  "value": -1,
                   "entityTypes": [
                     "Gadget"
-                  ]
+                  ],
+                  "value": -1
                 },
                 {
                   "$type": "ByTargetGlobalValue",
+                  "compareType": "MoreThan",
                   "target": "Target",
-                  "key": "_MONSTER_Apparatus_Enigma_BionicNettler_EnergyLine_GadgetID",
-                  "compareType": "MoreThan"
+                  "key": "_MONSTER_Apparatus_Enigma_BionicNettler_EnergyLine_GadgetID"
                 }
               ],
-              "actorIceSubHurtDelta": -1,
               "successActions": [
                 {
                   "$type": "AddGlobalValue",
                   "doOffStage": false,
-                  "value": 1,
                   "key": "_HAS_NearTarget",
-                  "maxValue": 1,
-                  "actorIceSubHurtDelta": -1,
+                  "value": 1,
+                  "canBeHandledOnRecover": true,
                   "useLimitRange": true,
-                  "canBeHandledOnRecover": true
+                  "actorIceSubHurtDelta": -1,
+                  "maxValue": 1
                 }
               ],
-              "canBeHandledOnRecover": true
+              "otherTargets": {
+                "$type": "SelectTargetsByShape",
+                "shapeName": "CircleR10",
+                "JCNBPJBFJNM": {
+                  "value": 10,
+                  "DPCANLOOHCH": {
+                    "NJIPHOKCEGN": 180
+                  },
+                  "onGroundRaycastUpDist": 2,
+                  "direction": {
+                    "maxAngle": 180
+                  }
+                },
+                "campTargetType": "SelfCamp",
+                "sizeRatio": 1
+              },
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             },
             {
               "$type": "SetAISkillCDAvailableNow",
-              "doOffStage": false,
               "predicates": [
                 {
                   "$type": "ByTargetGlobalValue",
@@ -574,77 +555,108 @@
                   "key": "_HAS_NearTarget"
                 }
               ],
-              "actorIceSubHurtDelta": -1,
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
               "skillIDs": [
                 221
               ],
-              "canBeHandledOnRecover": true
+              "actorIceSubHurtDelta": -1
             }
           ],
           "elementDurability": 100,
-          "isLimitedProperties": true,
-          "minus_one": -1
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "isLimitedProperties": true
         },
         "Monster_Apparatus_Enigma_BionicNettler_EnergyLine_RushMove": {
           "onAdded": [
             {
               "$type": "Predicated",
-              "doOffStage": false,
-              "failActions": [
-                {
-                  "$type": "SetAnimatorTrigger",
-                  "doOffStage": false,
-                  "triggerID": "NoRushMoveTrigger",
-                  "actorIceSubHurtDelta": -1,
-                  "canBeHandledOnRecover": true
-                }
-              ],
-              "target": "SelfAttackTarget",
               "targetPredicates": [
                 {
                   "$type": "ByTargetPositionToSelfPosition",
-                  "value": 5,
                   "target": "Target",
+                  "value": 5,
                   "logic": "GreaterOrEqual"
                 }
               ],
-              "actorIceSubHurtDelta": -1,
               "successActions": [
                 {
                   "$type": "FixedMonsterRushMove",
-                  "doOffStage": false,
-                  "target": "SelfAttackTarget",
-                  "FMLEGJIKPGH": -1,
-                  "FPCBFHKNDED": -1,
                   "timeRange": 1.8329999446868896,
-                  "actorIceSubHurtDelta": -1,
-                  "toPos": {
-                    "$type": "ConfigBornByTarget",
-                    "direction": {
-                      "maxAngle": 180
-                    },
-                    "FDGAEDDEEDG": {
-                      "ELAJJIANFFM": 180
-                    },
-                    "alongGround": true,
-                    "onGroundRaycastUpDist": 2,
-                    "value": 10
-                  },
+                  "target": "SelfAttackTarget",
                   "maxRange": 10,
+                  "GOINCPLMDCM": -1,
                   "animatorStateIDs": [
                     "EnergyLineRushMove"
                   ],
-                  "canBeHandledOnRecover": true
+                  "HAKOHOJFGCP": -1,
+                  "doOffStage": false,
+                  "canBeHandledOnRecover": true,
+                  "actorIceSubHurtDelta": -1,
+                  "toPos": {
+                    "$type": "ConfigBornByTarget",
+                    "value": 10,
+                    "DPCANLOOHCH": {
+                      "NJIPHOKCEGN": 180
+                    },
+                    "onGroundRaycastUpDist": 2,
+                    "direction": {
+                      "maxAngle": 180
+                    },
+                    "onGroundIgnoreWater": true
+                  }
                 }
               ],
-              "canBeHandledOnRecover": true
+              "target": "SelfAttackTarget",
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1,
+              "failActions": [
+                {
+                  "$type": "SetAnimatorTrigger",
+                  "triggerID": "NoRushMoveTrigger",
+                  "doOffStage": false,
+                  "canBeHandledOnRecover": true,
+                  "actorIceSubHurtDelta": -1
+                }
+              ]
             }
           ],
           "elementDurability": 100,
-          "isLimitedProperties": true,
-          "minus_one": -1
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "isLimitedProperties": true
         }
-      }
+      },
+      "OOAKLMJCDAG": {
+        "elementDurability": 100,
+        "minus_one": -1,
+        "HGPKLIANAGB": -1,
+        "isLimitedProperties": true
+      },
+      "abilityMixins": [
+        {
+          "$type": "AttachToStateIDMixin",
+          "value": -1,
+          "modifierName": "Monster_Apparatus_Enigma_BionicNettler_EnergyLine_CDReset",
+          "stateIDs": [
+            "CounterAtk",
+            "Discharge",
+            "Sting"
+          ],
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToStateIDMixin",
+          "value": -1,
+          "modifierName": "Monster_Apparatus_Enigma_BionicNettler_EnergyLine_RushMove",
+          "stateIDs": [
+            "EnergyLineRushMove"
+          ],
+          "actorIceSubHurtDelta": -1
+        }
+      ]
     }
   },
   {
@@ -652,617 +664,618 @@
       "onKill": [
         {
           "$type": "RemoveModifier",
-          "doOffStage": false,
           "modifierName": "Monster_Apparatus_Enigma_BionicNettler_EnergyLine_Gadget",
-          "actorIceSubHurtDelta": -1,
-          "canBeHandledOnRecover": true
+          "doOffStage": false,
+          "canBeHandledOnRecover": true,
+          "actorIceSubHurtDelta": -1
         },
         {
           "$type": "FireEffect",
-          "doOffStage": false,
+          "effectTempleteID": -1,
           "scale": 1,
-          "actorIceSubHurtDelta": -1,
-          "effectPattern": "Eff_Monster_Apparatus_Enigma_BionicNettler_EnergyBallAS",
           "born": {
-            "direction": {
-              "maxAngle": 180
-            },
-            "FDGAEDDEEDG": {
-              "ELAJJIANFFM": 180
+            "value": 10,
+            "DPCANLOOHCH": {
+              "NJIPHOKCEGN": 180
             },
             "onGroundRaycastUpDist": 2,
-            "value": 10
-          },
-          "effectTempleteID": -1,
-          "canBeHandledOnRecover": true
-        },
-        {
-          "$type": "RemoveUniqueModifier",
-          "doOffStage": false,
-          "modifierName": "UNIQUE_Monster_Apparatus_Enigma_BionicNettler_Line_Effect",
-          "actorIceSubHurtDelta": -1,
-          "canBeHandledOnRecover": true
-        },
-        {
-          "$type": "RemoveUniqueModifier",
-          "doOffStage": false,
-          "otherTargets": {
-            "$type": "SelectTargetsByShape",
-            "shapeName": "CircleR30",
-            "campTargetType": "All",
-            "sizeRatio": 1,
-            "ILLOOADJMLF": {
-              "direction": {
-                "maxAngle": 180
-              },
-              "FDGAEDDEEDG": {
-                "ELAJJIANFFM": 180
-              },
-              "onGroundRaycastUpDist": 2,
-              "value": 10
+            "direction": {
+              "maxAngle": 180
             }
           },
+          "doOffStage": false,
+          "canBeHandledOnRecover": true,
+          "actorIceSubHurtDelta": -1,
+          "effectPattern": "Eff_Monster_Apparatus_Enigma_BionicNettler_EnergyBallAS"
+        },
+        {
+          "$type": "RemoveUniqueModifier",
           "modifierName": "UNIQUE_Monster_Apparatus_Enigma_BionicNettler_Line_Effect",
+          "doOffStage": false,
+          "canBeHandledOnRecover": true,
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "RemoveUniqueModifier",
           "predicates": [
             {
               "$type": "ByTargetGlobalValue",
+              "target": "Target",
+              "key": "_MONSTER_Apparatus_Enigma_BionicNettler_EnergyLine_GadgetID",
               "value": [
                 "temp_sort_id",
                 1,
                 "ADD"
-              ],
-              "target": "Target",
-              "key": "_MONSTER_Apparatus_Enigma_BionicNettler_EnergyLine_GadgetID"
+              ]
             }
           ],
-          "actorIceSubHurtDelta": -1,
-          "canBeHandledOnRecover": true
+          "otherTargets": {
+            "$type": "SelectTargetsByShape",
+            "shapeName": "CircleR30",
+            "JCNBPJBFJNM": {
+              "value": 10,
+              "DPCANLOOHCH": {
+                "NJIPHOKCEGN": 180
+              },
+              "onGroundRaycastUpDist": 2,
+              "direction": {
+                "maxAngle": 180
+              }
+            },
+            "campTargetType": "All",
+            "sizeRatio": 1
+          },
+          "modifierName": "UNIQUE_Monster_Apparatus_Enigma_BionicNettler_Line_Effect",
+          "doOffStage": false,
+          "canBeHandledOnRecover": true,
+          "actorIceSubHurtDelta": -1
+        }
+      ],
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "Monster_Apparatus_Enigma_BionicNettler_EnergyLine_Gadget",
+          "doOffStage": false,
+          "canBeHandledOnRecover": true,
+          "actorIceSubHurtDelta": -1
         }
       ],
       "abilitySpecials": {
         "minus_one": -1,
         "temp_sort_id": 0
       },
-      "DDNHHMIBNLF": {
-        "elementDurability": 100,
-        "isLimitedProperties": true,
-        "minus_one": -1
-      },
-      "onAdded": [
-        {
-          "$type": "AttachModifier",
-          "doOffStage": false,
-          "modifierName": "Monster_Apparatus_Enigma_BionicNettler_EnergyLine_Gadget",
-          "actorIceSubHurtDelta": -1,
-          "canBeHandledOnRecover": true
-        }
-      ],
       "abilityName": "Monster_Apparatus_Enigma_BionicNettler_EnergyLine_Gadget",
       "modifiers": {
         "Effect_Latency": {
           "elementDurability": 100,
-          "isLimitedProperties": true,
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
           "onRemoved": [
             {
               "$type": "ApplyModifier",
-              "doOffStage": false,
               "modifierName": "UNIQUE_Monster_Apparatus_Enigma_BionicNettler_Line_Effect",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             }
           ],
-          "minus_one": -1,
-          "duration": 0.5
+          "duration": 0.5,
+          "isLimitedProperties": true
         },
         "Monster_Apparatus_Enigma_BionicNettler_EnergyLine_Gadget": {
-          "onAdded": [
-            {
-              "$type": "AttachEffect",
-              "doOffStage": false,
-              "scale": 1,
-              "actorIceSubHurtDelta": -1,
-              "effectPattern": "Eff_Monster_Apparatus_Enigma_BionicNettler_EnergyBall",
-              "born": {
-                "$type": "ConfigBornByTarget",
-                "direction": {
-                  "maxAngle": 180
-                },
-                "offset": {
-                  "x": -0.800000011920929
-                },
-                "FDGAEDDEEDG": {
-                  "ELAJJIANFFM": 180
-                },
-                "onGroundRaycastUpDist": 2,
-                "value": 10
-              },
-              "effectTempleteID": -1,
-              "canBeHandledOnRecover": true
-            },
-            {
-              "$type": "ApplyModifier",
-              "doOffStage": false,
-              "modifierName": "Effect_Latency",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            },
-            {
-              "$type": "CopyGlobalValue",
-              "doOffStage": false,
-              "dstKey": "_MONSTER_Apparatus_Enigma_BionicNettler_EnergyLine_GadgetID",
-              "srcTarget": "Owner",
-              "actorIceSubHurtDelta": -1,
-              "srcKey": "_MONSTER_Apparatus_Enigma_BionicNettler_EnergyLine_TimesCounter",
-              "canBeHandledOnRecover": true
-            },
-            {
-              "$type": "SetGlobalValueToOverrideMap",
-              "doOffStage": false,
-              "overrideMapKey": "temp_sort_id",
-              "globalValueKey": "_MONSTER_Apparatus_Enigma_BionicNettler_EnergyLine_GadgetID",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "elementDurability": 100,
-          "isLimitedProperties": true,
-          "minus_one": -1,
           "onThinkInterval": [
             {
               "$type": "TriggerAttackEvent",
               "doOffStage": false,
+              "targetType": "Enemy",
               "attackEvent": {
                 "attackInfo": {
-                  "attenuationGroup": "Monster_Konungmathr_Attenuation_1",
-                  "canBeModifiedBy": "OriginOwner",
-                  "hitPattern": {
-                    "retreatType": "ByOriginOwner",
-                    "hitImpulseType": "LV1",
-                    "onHitEffectName": "default",
-                    "JKLONEBKFKJ": {
-                      "JJGBOHIKHFM": true,
-                      "value": 1
-                    }
-                  },
-                  "FJNMGDHFOEH": {
-                    "GCPNPCOFFBP": "Shake"
-                  },
-                  "attenuationTag": "Monster_Konungmathr_Attenuation_1",
-                  "IODAJAKBOLG": {
-                    "onHitEffectName": "default",
-                    "JKLONEBKFKJ": {
-                      "JJGBOHIKHFM": true,
-                      "value": 1
-                    }
+                  "AKKPNIMNNGE": {
+                    "JMEJGMOJIJJ": "Shake"
                   },
                   "attackProperty": {
-                    "attackType": "Default",
                     "enBreak": 30,
                     "elementDurability": 100,
-                    "elementRank": 1,
-                    "damagePercentage": 0.3840000033378601
+                    "damagePercentage": 0.3840000033378601,
+                    "attackType": "Default",
+                    "elementRank": 1
+                  },
+                  "hitPattern": {
+                    "hitImpulseType": "LV1",
+                    "retreatType": "ByOriginOwner",
+                    "onHitEffectName": "default",
+                    "NCKKCKDNLCC": {
+                      "value": 1,
+                      "JGHPGBHFEHK": true
+                    }
                   },
                   "cameraShake": {
+                    "shakeDistance": 20,
                     "extension": {
                       "baseCycle": 0.11999999731779099,
                       "cycleDamping": 0.11999999731779099,
-                      "baseOnCamera": true,
-                      "rangeAttenuation": 0.5
-                    },
-                    "FAKMJBNLPPB": -1,
-                    "shakeDistance": 20
+                      "rangeAttenuation": 0.5,
+                      "baseOnCamera": true
+                    }
+                  },
+                  "attenuationGroup": "Monster_Konungmathr_Attenuation_1",
+                  "attenuationTag": "Monster_Konungmathr_Attenuation_1",
+                  "canBeModifiedBy": "OriginOwner",
+                  "POIJCDIFPAA": {
+                    "onHitEffectName": "default",
+                    "NCKKCKDNLCC": {
+                      "value": 1,
+                      "JGHPGBHFEHK": true
+                    }
                   }
                 },
                 "attackPattern": {
                   "$type": "ConfigAttackCircle",
-                  "radius": 1.2000000476837158,
                   "massiveAttackRatio": 1,
+                  "triggerType": "TriggerNoRepeat",
+                  "height": 1,
+                  "radius": 1.2000000476837158,
+                  "GDAOKKMAFHB": {
+                    "DPBBLBOHAHM": {
+                      "value": 1,
+                      "JGHPGBHFEHK": true
+                    }
+                  },
                   "born": {
                     "$type": "ConfigBornBySelf",
-                    "direction": {
-                      "maxAngle": 180
+                    "value": 10,
+                    "DPCANLOOHCH": {
+                      "NJIPHOKCEGN": 180
                     },
+                    "onGroundRaycastUpDist": 2,
                     "offset": {
                       "x": -0.6000000238418579
                     },
-                    "FDGAEDDEEDG": {
-                      "ELAJJIANFFM": 180
-                    },
-                    "onGroundRaycastUpDist": 2,
-                    "value": 10
-                  },
-                  "height": 1,
-                  "fanAngle": 360,
-                  "PBFNLCIFCBO": {
-                    "GOAEBMPCPJL": {
-                      "JJGBOHIKHFM": true,
-                      "value": 1
+                    "direction": {
+                      "maxAngle": 180
                     }
                   },
-                  "triggerType": "TriggerNoRepeat"
+                  "fanAngle": 360
                 }
               },
-              "targetType": "Enemy",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             },
             {
               "$type": "KillSelf",
-              "doOffStage": false,
-              "killSelfType": "Normal",
               "predicates": [
                 {
                   "$type": "ByNot",
-                  "target": "Target",
                   "predicates": [
                     {
                       "$type": "ByEntityIsAlive",
                       "target": "Owner"
                     }
-                  ]
+                  ],
+                  "target": "Target"
                 }
               ],
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "killSelfType": "Normal",
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             }
           ],
-          "thinkInterval": 0.30000001192092896
-        },
-        "UNIQUE_Monster_Apparatus_Enigma_BionicNettler_Line_Effect": {
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "doOffStage": false,
-              "otherTargets": {
-                "$type": "SelectTargetsByShape",
-                "shapeName": "CircleR30",
-                "campTargetType": "All",
-                "sizeRatio": 1,
-                "ILLOOADJMLF": {
-                  "direction": {
-                    "maxAngle": 180
-                  },
-                  "FDGAEDDEEDG": {
-                    "ELAJJIANFFM": 180
-                  },
-                  "onGroundRaycastUpDist": 2,
-                  "value": 10
-                }
-              },
+              "effectTempleteID": -1,
               "scale": 1,
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "value": [
-                    "temp_sort_id",
-                    "minus_one",
-                    "ADD"
-                  ],
-                  "target": "Target",
-                  "key": "_MONSTER_Apparatus_Enigma_BionicNettler_EnergyLine_GadgetID"
-                }
-              ],
-              "actorIceSubHurtDelta": -1,
-              "effectPattern": "Eff_Monster_Apparatus_Enigma_BionicNettler_EnergyBall_Line",
               "born": {
-                "direction": {
-                  "maxAngle": 180
-                },
-                "FDGAEDDEEDG": {
-                  "ELAJJIANFFM": 180
+                "$type": "ConfigBornByTarget",
+                "value": 10,
+                "DPCANLOOHCH": {
+                  "NJIPHOKCEGN": 180
                 },
                 "onGroundRaycastUpDist": 2,
-                "value": 10
+                "offset": {
+                  "x": -0.800000011920929
+                },
+                "direction": {
+                  "maxAngle": 180
+                }
               },
-              "effectTempleteID": -1,
+              "doOffStage": false,
               "canBeHandledOnRecover": true,
-              "OMPCBPHLEAN": true
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Apparatus_Enigma_BionicNettler_EnergyBall"
             },
             {
-              "$type": "SetGlobalValueByTargetDistance",
+              "$type": "ApplyModifier",
+              "modifierName": "Effect_Latency",
               "doOffStage": false,
-              "otherTargets": {
-                "$type": "SelectTargetsByShape",
-                "shapeName": "CircleR30",
-                "campTargetType": "All",
-                "sizeRatio": 1,
-                "ILLOOADJMLF": {
-                  "direction": {
-                    "maxAngle": 180
-                  },
-                  "FDGAEDDEEDG": {
-                    "ELAJJIANFFM": 180
-                  },
-                  "onGroundRaycastUpDist": 2,
-                  "value": 10
-                }
-              },
-              "key": "_MONSTER_Apparatus_Enigma_BionicNettler_EnergyLine_Distance",
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "value": [
-                    "temp_sort_id",
-                    "minus_one",
-                    "ADD"
-                  ],
-                  "target": "Target",
-                  "key": "_MONSTER_Apparatus_Enigma_BionicNettler_EnergyLine_GadgetID"
-                }
-              ],
-              "actorIceSubHurtDelta": -1,
-              "born": {
-                "direction": {
-                  "maxAngle": 180
-                },
-                "FDGAEDDEEDG": {
-                  "ELAJJIANFFM": 180
-                },
-                "onGroundRaycastUpDist": 2,
-                "value": 10
-              },
               "canBeHandledOnRecover": true,
-              "PAKHAJBHCNM": {
-                "direction": {
-                  "maxAngle": 180
-                },
-                "FDGAEDDEEDG": {
-                  "ELAJJIANFFM": 180
-                },
-                "onGroundRaycastUpDist": 2,
-                "value": 10
-              }
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "CopyGlobalValue",
+              "dstKey": "_MONSTER_Apparatus_Enigma_BionicNettler_EnergyLine_GadgetID",
+              "srcTarget": "Owner",
+              "srcKey": "_MONSTER_Apparatus_Enigma_BionicNettler_EnergyLine_TimesCounter",
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "SetGlobalValueToOverrideMap",
+              "globalValueKey": "_MONSTER_Apparatus_Enigma_BionicNettler_EnergyLine_GadgetID",
+              "overrideMapKey": "temp_sort_id",
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             }
           ],
           "elementDurability": 100,
-          "isLimitedProperties": true,
           "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "isLimitedProperties": true,
+          "thinkInterval": 0.30000001192092896
+        },
+        "UNIQUE_Monster_Apparatus_Enigma_BionicNettler_Line_Effect": {
           "onThinkInterval": [
             {
               "$type": "Predicated",
-              "doOffStage": false,
-              "otherTargets": {
-                "$type": "SelectTargetsByShape",
-                "shapeName": "CircleR30",
-                "campTargetType": "SelfCamp",
-                "sizeRatio": 1,
-                "ILLOOADJMLF": {
-                  "direction": {
-                    "maxAngle": 180
-                  },
-                  "FDGAEDDEEDG": {
-                    "ELAJJIANFFM": 180
-                  },
-                  "onGroundRaycastUpDist": 2,
-                  "value": 10
-                }
-              },
               "targetPredicates": [
                 {
                   "$type": "ByEntityTypes",
                   "target": "Target",
-                  "value": -1,
                   "entityTypes": [
                     "Gadget"
-                  ]
+                  ],
+                  "value": -1
                 },
                 {
                   "$type": "ByTargetGlobalValue",
+                  "target": "Target",
+                  "key": "_MONSTER_Apparatus_Enigma_BionicNettler_EnergyLine_GadgetID",
                   "value": [
                     "temp_sort_id",
                     "minus_one",
                     "ADD"
-                  ],
-                  "target": "Target",
-                  "key": "_MONSTER_Apparatus_Enigma_BionicNettler_EnergyLine_GadgetID"
+                  ]
                 }
               ],
-              "actorIceSubHurtDelta": -1,
               "successActions": [
                 {
                   "$type": "SetSelfAttackTarget",
-                  "doOffStage": false,
                   "target": "Target",
-                  "actorIceSubHurtDelta": -1,
-                  "canBeHandledOnRecover": true
+                  "doOffStage": false,
+                  "canBeHandledOnRecover": true,
+                  "actorIceSubHurtDelta": -1
                 },
                 {
                   "$type": "TriggerBullet",
-                  "doOffStage": false,
-                  "trackTarget": "SelfAttackTarget",
-                  "bulletID": 42401010,
                   "value": true,
-                  "actorIceSubHurtDelta": -1,
+                  "onGround": true,
+                  "trackTarget": "SelfAttackTarget",
                   "born": {
                     "$type": "ConfigBornByAttachPoint",
+                    "attachPointName": "RootNode",
+                    "value": 10,
+                    "DPCANLOOHCH": {
+                      "NJIPHOKCEGN": 180
+                    },
+                    "onGroundRaycastUpDist": 2,
                     "direction": {
                       "$type": "ConfigDirectionByAttackTarget",
                       "maxAngle": 180
-                    },
-                    "FDGAEDDEEDG": {
-                      "ELAJJIANFFM": 180
-                    },
-                    "attachPointName": "RootNode",
-                    "onGroundRaycastUpDist": 2,
-                    "value": 10
+                    }
                   },
+                  "doOffStage": false,
+                  "bulletID": 42401010,
                   "canBeHandledOnRecover": true,
-                  "POOEIFNLHDB": true
+                  "actorIceSubHurtDelta": -1
                 }
               ],
-              "canBeHandledOnRecover": true
+              "otherTargets": {
+                "$type": "SelectTargetsByShape",
+                "shapeName": "CircleR30",
+                "JCNBPJBFJNM": {
+                  "value": 10,
+                  "DPCANLOOHCH": {
+                    "NJIPHOKCEGN": 180
+                  },
+                  "onGroundRaycastUpDist": 2,
+                  "direction": {
+                    "maxAngle": 180
+                  }
+                },
+                "campTargetType": "SelfCamp",
+                "sizeRatio": 1
+              },
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             }
           ],
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "effectTempleteID": -1,
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "target": "Target",
+                  "key": "_MONSTER_Apparatus_Enigma_BionicNettler_EnergyLine_GadgetID",
+                  "value": [
+                    "temp_sort_id",
+                    "minus_one",
+                    "ADD"
+                  ]
+                }
+              ],
+              "otherTargets": {
+                "$type": "SelectTargetsByShape",
+                "shapeName": "CircleR30",
+                "JCNBPJBFJNM": {
+                  "value": 10,
+                  "DPCANLOOHCH": {
+                    "NJIPHOKCEGN": 180
+                  },
+                  "onGroundRaycastUpDist": 2,
+                  "direction": {
+                    "maxAngle": 180
+                  }
+                },
+                "campTargetType": "All",
+                "sizeRatio": 1
+              },
+              "scale": 1,
+              "born": {
+                "value": 10,
+                "DPCANLOOHCH": {
+                  "NJIPHOKCEGN": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "direction": {
+                  "maxAngle": 180
+                }
+              },
+              "doOffStage": false,
+              "setSelfAsEffectPluginTarget": true,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Apparatus_Enigma_BionicNettler_EnergyBall_Line"
+            },
+            {
+              "$type": "SetGlobalValueByTargetDistance",
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "target": "Target",
+                  "key": "_MONSTER_Apparatus_Enigma_BionicNettler_EnergyLine_GadgetID",
+                  "value": [
+                    "temp_sort_id",
+                    "minus_one",
+                    "ADD"
+                  ]
+                }
+              ],
+              "otherTargets": {
+                "$type": "SelectTargetsByShape",
+                "shapeName": "CircleR30",
+                "JCNBPJBFJNM": {
+                  "value": 10,
+                  "DPCANLOOHCH": {
+                    "NJIPHOKCEGN": 180
+                  },
+                  "onGroundRaycastUpDist": 2,
+                  "direction": {
+                    "maxAngle": 180
+                  }
+                },
+                "campTargetType": "All",
+                "sizeRatio": 1
+              },
+              "born": {
+                "value": 10,
+                "DPCANLOOHCH": {
+                  "NJIPHOKCEGN": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "direction": {
+                  "maxAngle": 180
+                }
+              },
+              "doOffStage": false,
+              "key": "_MONSTER_Apparatus_Enigma_BionicNettler_EnergyLine_Distance",
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1,
+              "OGIIPOLKINO": {
+                "value": 10,
+                "DPCANLOOHCH": {
+                  "NJIPHOKCEGN": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "direction": {
+                  "maxAngle": 180
+                }
+              }
+            }
+          ],
+          "elementDurability": 100,
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
           "isUnique": true,
+          "isLimitedProperties": true,
           "thinkInterval": 0.30000001192092896
         }
+      },
+      "OOAKLMJCDAG": {
+        "elementDurability": 100,
+        "minus_one": -1,
+        "HGPKLIANAGB": -1,
+        "isLimitedProperties": true
       }
     }
   },
   {
     "Default": {
-      "abilitySpecials": {
-        "DischargeTargetDistance": 10
-      },
-      "DDNHHMIBNLF": {
-        "elementDurability": 100,
-        "isLimitedProperties": true,
-        "minus_one": -1
-      },
       "onAdded": [
         {
           "$type": "CopyGlobalValue",
-          "doOffStage": false,
           "dstKey": "_MONSTER_Apparatus_Enigma_BionicNettler_EnergyLine_Distance",
           "srcTarget": "Owner",
-          "actorIceSubHurtDelta": -1,
           "srcKey": "_MONSTER_Apparatus_Enigma_BionicNettler_EnergyLine_Distance",
-          "canBeHandledOnRecover": true
+          "doOffStage": false,
+          "canBeHandledOnRecover": true,
+          "actorIceSubHurtDelta": -1
         },
         {
           "$type": "SetGlobalValueToOverrideMap",
-          "doOffStage": false,
-          "overrideMapKey": "DischargeTargetDistance",
           "globalValueKey": "_MONSTER_Apparatus_Enigma_BionicNettler_EnergyLine_Distance",
-          "actorIceSubHurtDelta": -1,
-          "canBeHandledOnRecover": true
+          "overrideMapKey": "DischargeTargetDistance",
+          "doOffStage": false,
+          "canBeHandledOnRecover": true,
+          "actorIceSubHurtDelta": -1
         },
         {
           "$type": "SetSelfAttackTarget",
-          "doOffStage": false,
           "target": "Owner",
-          "actorIceSubHurtDelta": -1,
-          "canBeHandledOnRecover": true
+          "doOffStage": false,
+          "canBeHandledOnRecover": true,
+          "actorIceSubHurtDelta": -1
         },
         {
           "$type": "TriggerAttackEvent",
           "doOffStage": false,
+          "targetType": "Enemy",
           "attackEvent": {
             "attackInfo": {
-              "attenuationGroup": "Monster_Konungmathr_Attenuation_1",
-              "canBeModifiedBy": "OriginOwner",
-              "hitPattern": {
-                "retreatType": "ByOriginOwner",
-                "hitImpulseType": "LV1",
-                "onHitEffectName": "default",
-                "JKLONEBKFKJ": {
-                  "JJGBOHIKHFM": true,
-                  "value": 1
-                }
-              },
-              "FJNMGDHFOEH": {
-                "GCPNPCOFFBP": "Shake"
-              },
-              "attenuationTag": "Monster_Konungmathr_Attenuation_1",
-              "IODAJAKBOLG": {
-                "onHitEffectName": "default",
-                "JKLONEBKFKJ": {
-                  "JJGBOHIKHFM": true,
-                  "value": 1
-                }
+              "AKKPNIMNNGE": {
+                "JMEJGMOJIJJ": "Shake"
               },
               "attackProperty": {
-                "attackType": "Default",
                 "enBreak": 30,
                 "elementDurability": 100,
-                "elementRank": 1,
-                "damagePercentage": 0.3840000033378601
+                "damagePercentage": 0.3840000033378601,
+                "attackType": "Default",
+                "elementRank": 1
+              },
+              "hitPattern": {
+                "hitImpulseType": "LV1",
+                "retreatType": "ByOriginOwner",
+                "onHitEffectName": "default",
+                "NCKKCKDNLCC": {
+                  "value": 1,
+                  "JGHPGBHFEHK": true
+                }
               },
               "cameraShake": {
+                "shakeDistance": 20,
                 "extension": {
                   "baseCycle": 0.11999999731779099,
                   "cycleDamping": 0.11999999731779099,
-                  "baseOnCamera": true,
-                  "rangeAttenuation": 0.5
-                },
-                "FAKMJBNLPPB": -1,
-                "shakeDistance": 20
+                  "rangeAttenuation": 0.5,
+                  "baseOnCamera": true
+                }
+              },
+              "attenuationGroup": "Monster_Konungmathr_Attenuation_1",
+              "attenuationTag": "Monster_Konungmathr_Attenuation_1",
+              "canBeModifiedBy": "OriginOwner",
+              "POIJCDIFPAA": {
+                "onHitEffectName": "default",
+                "NCKKCKDNLCC": {
+                  "value": 1,
+                  "JGHPGBHFEHK": true
+                }
               }
             },
             "attackPattern": {
               "$type": "ConfigAttackBox",
               "massiveAttackRatio": 1,
+              "triggerType": "TriggerNoRepeat",
+              "GDAOKKMAFHB": {
+                "DPBBLBOHAHM": {
+                  "value": 1,
+                  "JGHPGBHFEHK": true
+                }
+              },
               "born": {
                 "$type": "ConfigBornBySelf",
+                "value": 10,
+                "DPCANLOOHCH": {
+                  "NJIPHOKCEGN": 180
+                },
+                "onGroundRaycastUpDist": 2,
                 "direction": {
                   "$type": "ConfigDirectionByAttackTarget",
                   "maxAngle": 180
-                },
-                "FDGAEDDEEDG": {
-                  "ELAJJIANFFM": 180
-                },
-                "onGroundRaycastUpDist": 2,
-                "value": 10
-              },
-              "size": {
-                "y": 0.6000000238418579,
-                "z": "DischargeTargetDistance",
-                "x": 1.2000000476837158
-              },
-              "PBFNLCIFCBO": {
-                "GOAEBMPCPJL": {
-                  "JJGBOHIKHFM": true,
-                  "value": 1
                 }
               },
-              "triggerType": "TriggerNoRepeat"
+              "size": {
+                "z": "DischargeTargetDistance",
+                "x": 1.2000000476837158,
+                "y": 0.6000000238418579
+              }
             }
           },
-          "targetType": "Enemy",
-          "actorIceSubHurtDelta": -1,
-          "canBeHandledOnRecover": true
+          "canBeHandledOnRecover": true,
+          "actorIceSubHurtDelta": -1
         }
       ],
-      "abilityName": "Monster_Apparatus_Enigma_BionicNettler_EnergyLine_TriggerBullet"
+      "abilitySpecials": {
+        "DischargeTargetDistance": 10
+      },
+      "abilityName": "Monster_Apparatus_Enigma_BionicNettler_EnergyLine_TriggerBullet",
+      "OOAKLMJCDAG": {
+        "elementDurability": 100,
+        "minus_one": -1,
+        "HGPKLIANAGB": -1,
+        "isLimitedProperties": true
+      }
     }
   },
   {
     "Default": {
-      "DDNHHMIBNLF": {
-        "elementDurability": 100,
-        "isLimitedProperties": true,
-        "minus_one": -1
-      },
       "abilityName": "Monster_Apparatus_Enigma_BionicNettler_Steer",
+      "OOAKLMJCDAG": {
+        "elementDurability": 100,
+        "minus_one": -1,
+        "HGPKLIANAGB": -1,
+        "isLimitedProperties": true
+      },
       "abilityMixins": [
         {
           "$type": "SteerAttackMixin",
-          "angularSpeed": 180,
-          "CCFNFIKKIDJ": true,
           "value": -1,
-          "GMEPMDNDBOP": 180,
+          "angularSpeed": 180,
+          "JACOJAHKMOJ": true,
+          "endNormalizedTime": 0.30000001192092896,
           "actorIceSubHurtDelta": -1,
+          "PCIDOIJNPME": 180,
           "steerStateIDs": [
             "EnergyLine"
-          ],
-          "endNormalizedTime": 0.30000001192092896,
-          "PMKCEJILFAF": true
+          ]
         },
         {
           "$type": "SteerAttackMixin",
-          "angularSpeed": 180,
-          "CCFNFIKKIDJ": true,
           "value": -1,
-          "GMEPMDNDBOP": 180,
+          "angularSpeed": 180,
+          "JACOJAHKMOJ": true,
+          "endNormalizedTime": 0.5,
           "actorIceSubHurtDelta": -1,
+          "PCIDOIJNPME": 180,
           "steerStateIDs": [
             "Sting"
-          ],
-          "endNormalizedTime": 0.5,
-          "PMKCEJILFAF": true
+          ]
         },
         {
           "$type": "SteerAttackMixin",
-          "angularSpeed": 180,
-          "CCFNFIKKIDJ": true,
           "value": -1,
-          "GMEPMDNDBOP": 180,
+          "angularSpeed": 180,
+          "JACOJAHKMOJ": true,
+          "endNormalizedTime": 1,
           "actorIceSubHurtDelta": -1,
+          "PCIDOIJNPME": 180,
           "steerStateIDs": [
             "EnergyLineRushMove"
-          ],
-          "endNormalizedTime": 1,
-          "PMKCEJILFAF": true
+          ]
         }
       ]
     }

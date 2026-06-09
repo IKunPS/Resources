@@ -101,62 +101,30 @@ suites = {
 --================================================================
 
 -- 触发条件
-function condition_EVENT_ANY_MONSTER_DIE_1001(context, evt)
-    -- 判断死亡怪物的configid是否为1002
-    if 1002 ~= evt.param1 then
+function condition_EVENT_SPECIFIC_MONSTER_HP_CHANGE_1002(context, evt)
+    -- 血量百分比 ≤ 10% 时触发
+    if evt.type ~= EventType.EVENT_SPECIFIC_MONSTER_HP_CHANGE or evt.param3 > 10 then
         return false
     end
+
     return true
 end
 
 -- 触发操作
-function action_EVENT_ANY_MONSTER_DIE_1001(context, evt)
+function action_EVENT_SPECIFIC_MONSTER_HP_CHANGE_1002(context, evt)
+    -- 移除第一阶段suite
+	ScriptLib.RemoveExtraGroupSuite(context, defs.groupID, 1)
+
     ScriptLib.PlayCutScene(context, defs.cutSceneID, 0)
 
     ScriptLib.DelSceneTag(context, 20214, 1434)
     ScriptLib.AddSceneTag(context, 20214, 1435)
-
-    -- 移除第一阶段的gadgets
-    local phase1_gadgets = { 1010, 1011, 1012, 1013, 1014, 1015, 1016, 1023 }
-    for _, config_id in ipairs(phase1_gadgets) do
-        ScriptLib.RemoveEntityByConfigId(context, defs.groupID, EntityType.GADGET, config_id)
-    end
 
     -- 切换到第二阶段suite
     ScriptLib.AddExtraGroupSuite(context, defs.groupID, 2)
 
     return 0
 end
-
--- 评价是服务器没实现
--- -- 触发条件
--- function condition_EVENT_SPECIFIC_MONSTER_HP_CHANGE_1002(context, evt)
---     -- 血量百分比 ≤ 5% 时触发
---     if evt.type ~= EventType.EVENT_SPECIFIC_MONSTER_HP_CHANGE or evt.param3 > 5 then
---         return false
---     end
---
---     return true
--- end
---
--- -- 触发操作
--- function action_EVENT_SPECIFIC_MONSTER_HP_CHANGE_1002(context, evt)
---     ScriptLib.PlayCutScene(context, defs.cutSceneID, 0)
---
---     ScriptLib.DelSceneTag(context, 20214, 1434)
---     ScriptLib.AddSceneTag(context, 20214, 1435)
---
---     -- 移除第一阶段的gadgets
---     local phase1_gadgets = { 1010, 1011, 1012, 1013, 1014, 1015, 1016, 1023 }
---     for _, config_id in ipairs(phase1_gadgets) do
---         ScriptLib.RemoveEntityByConfigId(context, defs.groupID, EntityType.GADGET, config_id)
---     end
---
---     -- 切换到第二阶段suite
---     ScriptLib.AddExtraGroupSuite(context, defs.groupID, 2)
---
---     return 0
--- end
 
 
 -- 触发条件

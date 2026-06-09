@@ -1,3 +1,6 @@
+-- 这个场景太过复杂
+
+
 -- 基础信息
 local base_info = {
 	group_id = 220258004
@@ -5,7 +8,6 @@ local base_info = {
 
 -- Trigger变量
 local defs = {
-	cutsceneId = 172,
 }
 
 --================================================================
@@ -58,8 +60,9 @@ gadgets = {
 	{ config_id = 4052, gadget_id = 70350356, pos = { x = 114.0, y = 77.562, z = 69.5 }, rot = { x = 0.000, y = 0.000, z = 0.000 }, level = 1 },
 	{ config_id = 4053, gadget_id = 70350356, pos = { x = 114.0, y = 77.562, z = 74.5 }, rot = { x = 0.000, y = 0.000, z = 0.000 }, level = 1 },
 	{ config_id = 4054, gadget_id = 70350356, pos = { x = 114.0, y = 77.562, z = 79.5 }, rot = { x = 0.000, y = 0.000, z = 0.000 }, level = 1 },
-	{ config_id = 4001, gadget_id = 42912100, pos = { x = 202.957, y = 84.663, z = 65.465 }, rot = { x = 0.000, y = 0.000, z = 0.000 }, level = 1 },
+	{ config_id = 4001, gadget_id = 42912100, pos = { x = 202.957, y = 84.663, z = 65.465 }, rot = { x = 0.000, y = -90.000, z = 0.000 }, level = 1 },
 	{ config_id = 4064, gadget_id = 73052004, pos = { x = 101.68, y = 77.562, z = 62.154 }, rot = { x = 0.000, y = 0.000, z = 0.000 }, level = 1 },
+	-- 跳转
 	{ config_id = 4066, gadget_id = 70800930, pos = { x = 101.886, y = 77.562, z = 62.114 }, rot = { x = 0.000, y = 0.000, z = 0.000 }, level = 1 },
 
 	-- 第二阶段场地（x < 0 的区域）
@@ -68,7 +71,7 @@ gadgets = {
 	{ config_id = 4037, gadget_id = 42912101, pos = { x = -1488.667, y = 58.731, z = 95.207 }, rot = { x = 17.150, y = 190.950, z = 0.000 }, level = 1 },
 	{ config_id = 4038, gadget_id = 42912103, pos = { x = -1485.927, y = 55.484, z = 62.962 }, rot = { x = 0.036, y = 7.512, z = 0.215 }, level = 1 },
 	{ config_id = 4061, gadget_id = 70360001, pos = { x = -1485.917, y = 55.467, z = 63.002 }, rot = { x = 0.000, y = 0.000, z = 0.000 }, level = 1 },
-	{ config_id = 4060, gadget_id = 70210106, pos = { x = -1485.917, y = 55.467, z = 63.002 }, rot = { x = 0.000, y = 0.000, z = 0.000 }, level = 1 },
+	{ config_id = 4060, gadget_id = 70210106, pos = { x = -1485.917, y = 55.467, z = 63.002 }, rot = { x = 0.000, y = 0.000, z = 0.000 }, level = 1, drop_tag = "魔女", persistent = true, boss_chest = { monster_config_id = 1002, resin=60, life_time = 1800, take_num = 1} },
 }
 
 -- 区域
@@ -77,9 +80,11 @@ regions = {
 
 -- 触发器
 triggers = {
-	{ config_id = 14001001, name = "ANY_MONSTER_DIE_4002", event = EventType.EVENT_ANY_MONSTER_DIE, source = "", condition = "condition_ANY_MONSTER_DIE_4002", action = "action_ANY_MONSTER_DIE_4002" },
-	{ config_id = 14001002, name = "ANY_MONSTER_DIE_4063", event = EventType.EVENT_ANY_MONSTER_DIE, source = "", condition = "condition_ANY_MONSTER_DIE_4063", action = "action_ANY_MONSTER_DIE_4063" },
-	{ config_id = 14001003, name = "GADGET_STATE_CHANGE_4061", event = EventType.EVENT_GADGET_STATE_CHANGE, source = "", condition = "condition_GADGET_STATE_CHANGE_4061", action = "action_GADGET_STATE_CHANGE_4061" },
+	{ config_id = 1001001, name = "ANY_MONSTER_DIE_1001", event = EventType.EVENT_ANY_MONSTER_DIE, source = "", condition = "condition_ANY_MONSTER_DIE_1001", action = "action_ANY_MONSTER_DIE_1001" },
+	{ config_id = 1001002, name = "ANY_MONSTER_DIE_1002", event = EventType.EVENT_ANY_MONSTER_DIE, source = "", condition = "condition_ANY_MONSTER_DIE_1002", action = "action_ANY_MONSTER_DIE_1002" },
+	{ config_id = 1001003, name = "REMOVE_GADGET_1003", event = EventType.EVENT_TIMER_EVENT, source = "remove", condition = "", action = "action_REMOVE_GADGET_1003" },
+	{ config_id = 1001004, name = "SPECIFIC_MONSTER_HP_CHANGE_1004", event = EventType.EVENT_SPECIFIC_MONSTER_HP_CHANGE, source = "4002", condition = "condition_EVENT_SPECIFIC_MONSTER_HP_CHANGE_1004", action = "action_EVENT_SPECIFIC_MONSTER_HP_CHANGE_1004" },
+	{ config_id = 1001005, name = "GADGET_STATE_CHANGE_1005", event = EventType.EVENT_GADGET_STATE_CHANGE, source = "", condition = "condition_GADGET_STATE_CHANGE_1005", action = "action_GADGET_STATE_CHANGE_1005" }
 }
 
 -- 点位
@@ -117,25 +122,25 @@ suites = {
 	{
 		-- suite_id = 1,
 		-- description = 第一阶段：初始平台战斗，
-		monsters = { 4002, 4033 },
+		monsters = { 4002 },
 		gadgets = {
 			4008, 4014, 4017, 4007, 4012, 4015, 4006, 4010, 4011,
 			4018, 4019, 4020, 4047, 4048, 4049, 4050,
 			4004, 4005, 4013, 4016, 4021, 4022, 4023, 4024,
 			4051, 4052, 4053, 4054,
-			4001, 4064, 4066
+			4001, 4064
 		},
 		regions = { },
-		triggers = { "ANY_MONSTER_DIE_4002" },
+		triggers = { "ANY_MONSTER_DIE_1001", "SPECIFIC_MONSTER_HP_CHANGE_1004" },
 		rand_weight = 100
 	},
 	{
 		-- suite_id = 2,
 		-- description = 第二阶段：Boss战，
-		monsters = { 4035, 4036, 4063 },
-		gadgets = { 4034, 4065, 4037, 4038, 4061, 4060 },
+		monsters = {  },
+		gadgets = { 4034, 4065, 4037, 4038, 4061, 4066 },
 		regions = { },
-		triggers = { "ANY_MONSTER_DIE_4063", "GADGET_STATE_CHANGE_4061" },
+		triggers = { "ANY_MONSTER_DIE_1002", "REMOVE_GADGET_1003", "GADGET_STATE_CHANGE_1005" },
 		rand_weight = 100
 	}
 }
@@ -146,47 +151,76 @@ suites = {
 --
 --================================================================
 
--- 第一阶段怪物死亡检测（4002 或 4033）
-function condition_ANY_MONSTER_DIE_4002(context, evt)
-	local deadMonster = evt.param1
-	if deadMonster ~= 4002 and deadMonster ~= 4033 then
+-- 触发条件
+function condition_EVENT_SPECIFIC_MONSTER_HP_CHANGE_1004(context, evt)
+	--[[判断指定configid的怪物的血量小于%5时触发指定后续操作]]--
+	if evt.type ~= EventType.EVENT_SPECIFIC_MONSTER_HP_CHANGE or evt.param3 > 5 then
 		return false
 	end
+
 	return true
 end
 
-function action_ANY_MONSTER_DIE_4002(context, evt)
-	-- 播放过场动画
-	ScriptLib.PlayCutScene(context, defs.cutsceneId, 0)
-
-	-- 移除第一阶段所有装置（清理战场）
-	local phase1_gadgets = {
-		4008, 4014, 4017, 4007, 4012, 4015, 4006, 4010, 4011,
-		4018, 4019, 4020, 4047, 4048, 4049, 4050,
-		4004, 4005, 4013, 4016, 4021, 4022, 4023, 4024,
-		4051, 4052, 4053, 4054,
-		4001, 4064, 4066
-	}
-	for _, config_id in ipairs(phase1_gadgets) do
-		ScriptLib.RemoveEntityByConfigId(context, 220258004, EntityType.GADGET, config_id)
-	end
-
-	-- 激活第二阶段 suite
-	ScriptLib.AddExtraGroupSuite(context, 220258004, 2)
+-- 触发操作
+function action_EVENT_SPECIFIC_MONSTER_HP_CHANGE_1004(context, evt)
+	-- 延迟0秒刷怪
+    if 0 ~= ScriptLib.CreateMonster(context, { config_id = 4033, delay_time = 0 }) then
+        return -1
+    end
 
 	return 0
 end
 
--- Boss 死亡检测 (4063)
-function condition_ANY_MONSTER_DIE_4063(context, evt)
-	if evt.param1 ~= 4063 then
-		return false
-	end
+-- 触发条件
+function condition_ANY_MONSTER_DIE_1001(context, evt)
+	--判断死亡怪物的config_id是否为 4002
+    if evt.param1 ~= 4002 then
+        return false
+    end
+
 	return true
 end
 
-function action_ANY_MONSTER_DIE_4063(context, evt)
-	-- 将机关 4061 切换为激活状态
+-- 触发操作
+function action_ANY_MONSTER_DIE_1001(context, evt)
+    -- 移除suite1的内容
+    ScriptLib.RemoveExtraGroupSuite(context, 220258004, 1)
+
+	-- 播放过场动画
+    ScriptLib.PlayCutScene(context, 172, 0)
+
+    -- 重新生成指定group，指定suite
+    if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 220258004, suite = 2 }) then
+        ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
+            return -1
+    end
+
+	-- 延迟移除装置1014
+    ScriptLib.CreateGroupTimerEvent(context, 220258004, "remove", 5)
+
+	return 0
+end
+
+-- 触发操作
+function action_REMOVE_GADGET_1003(context, evt)
+    ScriptLib.RemoveEntityByConfigId(context, 220258004, EntityType.GADGET, 4066)
+
+    return 0
+end
+
+-- 触发条件
+function condition_ANY_MONSTER_DIE_1002(context, evt)
+	--判断死亡怪物的config_id是否为 4035
+    if evt.param1 ~= 4035 then
+        return false
+    end
+
+	return true
+end
+
+-- 触发操作
+function action_ANY_MONSTER_DIE_1002(context, evt)
+	-- 将configid为 4061 的物件更改为状态 GadgetState.Action01
 	if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, 4061, GadgetState.Action01) then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_configId")
 		return -1
@@ -194,16 +228,22 @@ function action_ANY_MONSTER_DIE_4063(context, evt)
 	return 0
 end
 
--- 机关 4061 状态改变后生成宝箱
-function condition_GADGET_STATE_CHANGE_4061(context, evt)
-	if evt.param2 ~= 4061 or evt.param1 ~= GadgetState.Action01 then
+-- 触发条件
+function condition_GADGET_STATE_CHANGE_1005(context, evt)
+	if 4061 ~= evt.param2 or GadgetState.Action01 ~= evt.param1 then
 		return false
 	end
+
 	return true
 end
 
-function action_GADGET_STATE_CHANGE_4061(context, evt)
-	-- 创建宝箱 4060
-	ScriptLib.CreateGadget(context, { config_id = 4060 })
+-- 触发操作
+function action_GADGET_STATE_CHANGE_1005(context, evt)
+	-- 创建id为4060的gadget
+	if 0 ~= ScriptLib.CreateGadget(context, { config_id = 4060 }) then
+	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : create_gadget")
+	  return -1
+	end
+
 	return 0
 end

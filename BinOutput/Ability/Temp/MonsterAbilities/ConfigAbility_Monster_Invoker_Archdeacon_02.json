@@ -1,90 +1,30 @@
 [
   {
     "Default": {
+      "onAdded": [
+        {
+          "$type": "SetGlobalValue",
+          "doOffStage": false,
+          "key": "_INVOKER_WQ_BOSS_V57",
+          "value": 1,
+          "canBeHandledOnRecover": true,
+          "actorIceSubHurtDelta": -1
+        }
+      ],
       "abilitySpecials": {
         "ShieldElement1": 1500,
         "ShieldElement2": 1500,
         "WeakDuration": 15
       },
-      "DDNHHMIBNLF": {
-        "elementDurability": 100,
-        "isLimitedProperties": true,
-        "minus_one": -1
-      },
-      "onAdded": [
-        {
-          "$type": "SetGlobalValue",
-          "doOffStage": false,
-          "value": 1,
-          "key": "_INVOKER_WQ_BOSS_V57",
-          "actorIceSubHurtDelta": -1,
-          "canBeHandledOnRecover": true
-        }
-      ],
       "abilityName": "Monster_Invoker_Archdeacon_01_ShieldControl_V57Quest",
-      "abilityMixins": [
-        {
-          "$type": "AttachModifierToSelfGlobalValueMixin",
-          "globalValueKey": "_SHIELD_STATE",
-          "modifierNameSteps": [
-            "Shield_Close",
-            "Shield_Open"
-          ],
-          "removeAppliedModifier": true,
-          "actorIceSubHurtDelta": -1,
-          "valueSteps": [
-            -0.5,
-            0.5,
-            1.5
-          ]
-        },
-        {
-          "$type": "AttachModifierToSelfGlobalValueMixin",
-          "globalValueKey": "_WEAK_STATE",
-          "modifierNameSteps": [
-            "Invoker_Archdeacon_NotInWeak",
-            "Invoker_Archdeacon_InWeak"
-          ],
-          "removeAppliedModifier": true,
-          "actorIceSubHurtDelta": -1,
-          "valueSteps": [
-            -0.5,
-            0.5,
-            1.5
-          ]
-        },
-        {
-          "$type": "AttachModifierToSelfGlobalValueMixin",
-          "globalValueKey": "_GO_CREATE_SHIELD_INITIAL",
-          "modifierNameSteps": [
-            "Invoker_Archdeacon_NoShieldInitial",
-            "Invoker_Archdeacon_ShieldInitial"
-          ],
-          "removeAppliedModifier": true,
-          "actorIceSubHurtDelta": -1,
-          "valueSteps": [
-            -0.5,
-            0.5,
-            1.5
-          ]
-        },
-        {
-          "$type": "AttachToAIAlertnessMixin",
-          "modifierName": "Invoker_Archdeacon_CheckHit_BySupportSkill",
-          "alertness": [
-            2,
-            3
-          ],
-          "actorIceSubHurtDelta": -1
-        }
-      ],
       "modifiers": {
         "Invoker_Archdeacon_CheckHit_BySupportSkill": {
           "elementDurability": 100,
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
           "onBeingHit": [
             {
               "$type": "Predicated",
-              "doOffStage": false,
               "targetPredicates": [
                 {
                   "$type": "ByAttackTags",
@@ -95,17 +35,23 @@
                 },
                 {
                   "$type": "ByTargetGlobalValue",
+                  "compareType": "NoneOrEqual",
                   "target": "Target",
-                  "key": "_INVOKER_IN_ALERT",
-                  "compareType": "NoneOrEqual"
+                  "key": "_INVOKER_IN_ALERT"
                 }
               ],
-              "actorIceSubHurtDelta": -1,
               "successActions": [
                 {
                   "$type": "AddElementDurability",
-                  "doOffStage": false,
+                  "predicates": [
+                    {
+                      "$type": "ByHasModifier",
+                      "target": "Target",
+                      "modifierName": "Monster_Invoker_Archdeacon_01_Shield_Fire"
+                    }
+                  ],
                   "modifierName": "Monster_Invoker_Archdeacon_01_Shield_Fire",
+                  "doOffStage": false,
                   "value": [
                     0,
                     0.6600000262260437,
@@ -113,22 +59,22 @@
                     "MUL",
                     "SUB"
                   ],
-                  "maxValue": "ShieldElement1",
-                  "predicates": [
-                    {
-                      "$type": "ByHasModifier",
-                      "modifierName": "Monster_Invoker_Archdeacon_01_Shield_Fire",
-                      "target": "Target"
-                    }
-                  ],
-                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true,
                   "useLimitRange": true,
-                  "canBeHandledOnRecover": true
+                  "actorIceSubHurtDelta": -1,
+                  "maxValue": "ShieldElement1"
                 },
                 {
                   "$type": "AddElementDurability",
-                  "doOffStage": false,
+                  "predicates": [
+                    {
+                      "$type": "ByHasModifier",
+                      "target": "Target",
+                      "modifierName": "Monster_Invoker_Archdeacon_01_Shield_Thunder"
+                    }
+                  ],
                   "modifierName": "Monster_Invoker_Archdeacon_01_Shield_Thunder",
+                  "doOffStage": false,
                   "value": [
                     0,
                     0.6600000262260437,
@@ -136,22 +82,22 @@
                     "MUL",
                     "SUB"
                   ],
-                  "maxValue": "ShieldElement1",
-                  "predicates": [
-                    {
-                      "$type": "ByHasModifier",
-                      "modifierName": "Monster_Invoker_Archdeacon_01_Shield_Thunder",
-                      "target": "Target"
-                    }
-                  ],
-                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true,
                   "useLimitRange": true,
-                  "canBeHandledOnRecover": true
+                  "actorIceSubHurtDelta": -1,
+                  "maxValue": "ShieldElement1"
                 },
                 {
                   "$type": "AddElementDurability",
-                  "doOffStage": false,
+                  "predicates": [
+                    {
+                      "$type": "ByHasModifier",
+                      "target": "Target",
+                      "modifierName": "Monster_Invoker_Archdeacon_01_Shield_Ice"
+                    }
+                  ],
                   "modifierName": "Monster_Invoker_Archdeacon_01_Shield_Ice",
+                  "doOffStage": false,
                   "value": [
                     0,
                     0.6600000262260437,
@@ -159,72 +105,65 @@
                     "MUL",
                     "SUB"
                   ],
-                  "maxValue": "ShieldElement1",
-                  "predicates": [
-                    {
-                      "$type": "ByHasModifier",
-                      "modifierName": "Monster_Invoker_Archdeacon_01_Shield_Ice",
-                      "target": "Target"
-                    }
-                  ],
-                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true,
                   "useLimitRange": true,
-                  "canBeHandledOnRecover": true
+                  "actorIceSubHurtDelta": -1,
+                  "maxValue": "ShieldElement1"
                 }
               ],
-              "canBeHandledOnRecover": true
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             }
           ],
-          "isLimitedProperties": true,
-          "minus_one": -1
+          "isLimitedProperties": true
         },
         "Invoker_Archdeacon_GoWeak": {
           "onAdded": [
             {
               "$type": "SetGlobalValueToOverrideMap",
-              "doOffStage": false,
-              "overrideMapKey": "WeakDuration",
               "globalValueKey": "_WEAK_DURATION",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "overrideMapKey": "WeakDuration",
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             },
             {
               "$type": "SetAnimatorTrigger",
-              "doOffStage": false,
               "triggerID": "GoWeak",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             },
             {
               "$type": "ApplyModifier",
-              "doOffStage": false,
               "modifierName": "Invoker_Archdeacon_WeakDuration",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             },
             {
               "$type": "FireEffect",
-              "doOffStage": false,
+              "effectTempleteID": -1,
               "scale": 1,
-              "actorIceSubHurtDelta": -1,
-              "effectPattern": "Eff_Monster_Invoker_Archdeacon_WeakBS",
               "born": {
-                "direction": {
-                  "maxAngle": 180
-                },
-                "FDGAEDDEEDG": {
-                  "ELAJJIANFFM": 180
+                "value": 10,
+                "DPCANLOOHCH": {
+                  "NJIPHOKCEGN": 180
                 },
                 "onGroundRaycastUpDist": 2,
-                "value": 10
+                "direction": {
+                  "maxAngle": 180
+                }
               },
-              "effectTempleteID": -1,
-              "canBeHandledOnRecover": true
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Invoker_Archdeacon_WeakBS"
             },
             {
               "$type": "FireEffect",
-              "doOffStage": false,
-              "scale": 1,
+              "effectTempleteID": -1,
               "predicates": [
                 {
                   "$type": "ByTargetGlobalValue",
@@ -232,121 +171,123 @@
                   "key": "_MID_LIGHT_ELEMENT"
                 }
               ],
-              "actorIceSubHurtDelta": -1,
-              "effectPattern": "Eff_Monster_Invoker_Archdeacon_WeakBreak_Fire",
+              "scale": 1,
               "born": {
-                "direction": {
-                  "maxAngle": 180
-                },
-                "FDGAEDDEEDG": {
-                  "ELAJJIANFFM": 180
+                "value": 10,
+                "DPCANLOOHCH": {
+                  "NJIPHOKCEGN": 180
                 },
                 "onGroundRaycastUpDist": 2,
-                "value": 10
+                "direction": {
+                  "maxAngle": 180
+                }
               },
-              "effectTempleteID": -1,
-              "canBeHandledOnRecover": true
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Invoker_Archdeacon_WeakBreak_Fire"
             },
             {
               "$type": "FireEffect",
-              "doOffStage": false,
-              "scale": 1,
+              "effectTempleteID": -1,
               "predicates": [
                 {
                   "$type": "ByTargetGlobalValue",
-                  "value": 1,
                   "target": "Target",
-                  "key": "_MID_LIGHT_ELEMENT"
+                  "key": "_MID_LIGHT_ELEMENT",
+                  "value": 1
                 }
               ],
-              "actorIceSubHurtDelta": -1,
-              "effectPattern": "Eff_Monster_Invoker_Archdeacon_WeakBreak_Thunder",
+              "scale": 1,
               "born": {
-                "direction": {
-                  "maxAngle": 180
-                },
-                "FDGAEDDEEDG": {
-                  "ELAJJIANFFM": 180
+                "value": 10,
+                "DPCANLOOHCH": {
+                  "NJIPHOKCEGN": 180
                 },
                 "onGroundRaycastUpDist": 2,
-                "value": 10
+                "direction": {
+                  "maxAngle": 180
+                }
               },
-              "effectTempleteID": -1,
-              "canBeHandledOnRecover": true
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Invoker_Archdeacon_WeakBreak_Thunder"
             },
             {
               "$type": "FireEffect",
-              "doOffStage": false,
-              "scale": 1,
+              "effectTempleteID": -1,
               "predicates": [
                 {
                   "$type": "ByTargetGlobalValue",
-                  "value": 2,
                   "target": "Target",
-                  "key": "_MID_LIGHT_ELEMENT"
+                  "key": "_MID_LIGHT_ELEMENT",
+                  "value": 2
                 }
               ],
-              "actorIceSubHurtDelta": -1,
-              "effectPattern": "Eff_Monster_Invoker_Archdeacon_WeakBreak_Ice",
+              "scale": 1,
               "born": {
-                "direction": {
-                  "maxAngle": 180
-                },
-                "FDGAEDDEEDG": {
-                  "ELAJJIANFFM": 180
+                "value": 10,
+                "DPCANLOOHCH": {
+                  "NJIPHOKCEGN": 180
                 },
                 "onGroundRaycastUpDist": 2,
-                "value": 10
+                "direction": {
+                  "maxAngle": 180
+                }
               },
-              "effectTempleteID": -1,
-              "canBeHandledOnRecover": true
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Invoker_Archdeacon_WeakBreak_Ice"
             },
             {
               "$type": "FireEffect",
-              "doOffStage": false,
-              "scale": 1,
+              "effectTempleteID": -1,
               "predicates": [
                 {
                   "$type": "ByTargetGlobalValue",
-                  "value": 3,
                   "target": "Target",
-                  "key": "_MID_LIGHT_ELEMENT"
+                  "key": "_MID_LIGHT_ELEMENT",
+                  "value": 3
                 }
               ],
-              "actorIceSubHurtDelta": -1,
-              "effectPattern": "Eff_Monster_Invoker_Archdeacon_WeakBreak_Water",
+              "scale": 1,
               "born": {
-                "direction": {
-                  "maxAngle": 180
-                },
-                "FDGAEDDEEDG": {
-                  "ELAJJIANFFM": 180
+                "value": 10,
+                "DPCANLOOHCH": {
+                  "NJIPHOKCEGN": 180
                 },
                 "onGroundRaycastUpDist": 2,
-                "value": 10
+                "direction": {
+                  "maxAngle": 180
+                }
               },
-              "effectTempleteID": -1,
-              "canBeHandledOnRecover": true
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Invoker_Archdeacon_WeakBreak_Water"
             },
             {
               "$type": "SetGlobalValue",
               "doOffStage": false,
               "key": "_SWITCH_TIMES",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             },
             {
               "$type": "SetGlobalValue",
               "doOffStage": false,
               "key": "_SHIELD_STATE",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             }
           ],
           "elementDurability": 100,
-          "isLimitedProperties": true,
           "minus_one": -1,
-          "duration": 0.10000000149011612
+          "HGPKLIANAGB": -1,
+          "duration": 0.10000000149011612,
+          "isLimitedProperties": true
         },
         "Invoker_Archdeacon_InWeak": {
           "onAdded": [
@@ -354,525 +295,539 @@
               "$type": "SetGlobalValue",
               "doOffStage": false,
               "key": "_INWEAK_RECOVER",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             },
             {
               "$type": "SetPoseBool",
               "doOffStage": false,
               "value": true,
+              "canBeHandledOnRecover": true,
               "boolID": "InWeak",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "actorIceSubHurtDelta": -1
             },
             {
               "$type": "SetAnimatorBool",
               "doOffStage": false,
               "value": true,
+              "canBeHandledOnRecover": true,
               "boolID": "InWeak",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "actorIceSubHurtDelta": -1
             }
           ],
-          "elementDurability": 100,
           "onReconnect": [
             {
               "$type": "SetGlobalValue",
               "doOffStage": false,
+              "key": "_INWEAK_RECOVER",
               "value": 1,
-              "key": "_INWEAK_RECOVER",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "isLimitedProperties": true,
-          "onRemoved": [
-            {
-              "$type": "SetGlobalValue",
-              "doOffStage": false,
-              "key": "_INWEAK_RECOVER",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             }
           ],
           "modifierMixins": [
             {
               "$type": "AttachModifierToSelfGlobalValueMixin",
-              "enable": true,
+              "valueSteps": [
+                0.5,
+                1.5
+              ],
               "globalValueKey": "_INWEAK_RECOVER",
               "modifierNameSteps": [
                 "RecoverWeakTrigger"
               ],
+              "enable": true,
               "removeAppliedModifier": true,
-              "actorIceSubHurtDelta": -1,
-              "valueSteps": [
-                0.5,
-                1.5
-              ]
+              "actorIceSubHurtDelta": -1
             }
           ],
+          "elementDurability": 100,
           "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "onRemoved": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_INWEAK_RECOVER",
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
+            }
+          ],
           "onChangeAuthority": [
             {
               "$type": "SetGlobalValue",
               "doOffStage": false,
-              "value": 1,
               "key": "_INWEAK_RECOVER",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "value": 1,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             }
-          ]
+          ],
+          "isLimitedProperties": true
         },
         "Invoker_Archdeacon_NoShieldInitial": {
           "elementDurability": 100,
-          "isLimitedProperties": true,
-          "minus_one": -1
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "isLimitedProperties": true
         },
         "Invoker_Archdeacon_NotInWeak": {
           "onAdded": [
             {
               "$type": "SetPoseBool",
               "doOffStage": false,
+              "canBeHandledOnRecover": true,
               "boolID": "InWeak",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "actorIceSubHurtDelta": -1
             },
             {
               "$type": "SetAnimatorBool",
               "doOffStage": false,
+              "canBeHandledOnRecover": true,
               "boolID": "InWeak",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "actorIceSubHurtDelta": -1
             }
           ],
           "elementDurability": 100,
-          "isLimitedProperties": true,
-          "minus_one": -1
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "isLimitedProperties": true
         },
         "Invoker_Archdeacon_ShieldInitial": {
           "onAdded": [
             {
               "$type": "TriggerAbility",
+              "target": "Other",
               "doOffStage": false,
               "abilityName": "Monster_Invoker_Archdeacon_01_CreateLightInitial",
-              "actorIceSubHurtDelta": -1,
-              "target": "Other",
-              "canBeHandledOnRecover": true
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             },
             {
               "$type": "ApplyModifier",
-              "doOffStage": false,
               "modifierName": "Reset_ShieldInitial",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             }
           ],
           "elementDurability": 100,
-          "isLimitedProperties": true,
-          "minus_one": -1
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "isLimitedProperties": true
         },
         "Invoker_Archdeacon_WeakDuration": {
           "onAdded": [
             {
               "$type": "SetGlobalValue",
               "doOffStage": false,
-              "value": 1,
               "key": "_WEAK_STATE",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "value": 1,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             }
           ],
           "elementDurability": 100,
-          "isLimitedProperties": true,
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
               "doOffStage": false,
               "key": "_WEAK_STATE",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             },
             {
               "$type": "SetGlobalValue",
               "doOffStage": false,
-              "value": 1,
               "key": "_WEAK_TIMES",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "value": 1,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             }
           ],
-          "minus_one": -1,
-          "duration": "WeakDuration"
+          "duration": "WeakDuration",
+          "isLimitedProperties": true
         },
         "Monster_Invoker_Archdeacon_01_BreakActionList": {
           "elementDurability": 100,
-          "isLimitedProperties": true,
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
           "onRemoved": [
             {
               "$type": "Predicated",
-              "doOffStage": false,
               "targetPredicates": [
                 {
                   "$type": "ByTargetGlobalValue",
+                  "compareType": "NoneOrEqual",
                   "target": "Target",
-                  "key": "_ARCHDEACON_IN_SWITCH",
-                  "compareType": "NoneOrEqual"
+                  "key": "_ARCHDEACON_IN_SWITCH"
                 }
               ],
-              "actorIceSubHurtDelta": -1,
               "successActions": [
                 {
                   "$type": "ApplyModifier",
-                  "doOffStage": false,
                   "modifierName": "Invoker_Archdeacon_GoWeak",
-                  "actorIceSubHurtDelta": -1,
-                  "canBeHandledOnRecover": true
+                  "doOffStage": false,
+                  "canBeHandledOnRecover": true,
+                  "actorIceSubHurtDelta": -1
                 },
                 {
                   "$type": "SetGlobalValue",
                   "doOffStage": false,
                   "key": "_SHIELD_STATE",
-                  "actorIceSubHurtDelta": -1,
-                  "canBeHandledOnRecover": true
+                  "canBeHandledOnRecover": true,
+                  "actorIceSubHurtDelta": -1
                 },
                 {
                   "$type": "TriggerAudio",
-                  "doOffStage": false,
                   "operation": {
                     "$type": "ConfigAudioEventOp",
                     "operation": {
                       "text": "Play_vo_SZAQ403_10_haden_02"
                     }
                   },
-                  "actorIceSubHurtDelta": -1,
-                  "canBeHandledOnRecover": true
+                  "doOffStage": false,
+                  "canBeHandledOnRecover": true,
+                  "actorIceSubHurtDelta": -1
                 }
               ],
-              "canBeHandledOnRecover": true
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             }
           ],
-          "minus_one": -1,
-          "duration": 0.029999999329447746
+          "duration": 0.029999999329447746,
+          "isLimitedProperties": true
         },
         "Monster_Invoker_Archdeacon_01_Shield_Fire": {
-          "elementType": "Fire",
-          "elementDurability": "ShieldElement1",
-          "isLimitedProperties": true,
           "modifierMixins": [
             {
               "$type": "ElementShieldMixin",
-              "maxShieldByHPRatio": 1,
-              "elementType": "Fire",
               "onShieldBroken": [
                 {
                   "$type": "ApplyModifier",
-                  "doOffStage": false,
                   "modifierName": "Monster_Invoker_Archdeacon_01_BreakActionList",
-                  "actorIceSubHurtDelta": -1,
-                  "canBeHandledOnRecover": true
+                  "doOffStage": false,
+                  "canBeHandledOnRecover": true,
+                  "actorIceSubHurtDelta": -1
                 },
                 {
                   "$type": "FireEffect",
-                  "doOffStage": false,
+                  "effectTempleteID": -1,
                   "scale": 1,
-                  "actorIceSubHurtDelta": -1,
-                  "effectPattern": "Eff_Monster_Invoker_Archdeacon_ShieldBreak_Fire",
                   "born": {
-                    "direction": {
-                      "maxAngle": 180
-                    },
-                    "FDGAEDDEEDG": {
-                      "ELAJJIANFFM": 180
+                    "value": 10,
+                    "DPCANLOOHCH": {
+                      "NJIPHOKCEGN": 180
                     },
                     "onGroundRaycastUpDist": 2,
-                    "value": 10
+                    "direction": {
+                      "maxAngle": 180
+                    }
                   },
-                  "effectTempleteID": -1,
-                  "canBeHandledOnRecover": true
+                  "doOffStage": false,
+                  "canBeHandledOnRecover": true,
+                  "actorIceSubHurtDelta": -1,
+                  "effectPattern": "Eff_Monster_Invoker_Archdeacon_ShieldBreak_Fire"
                 }
               ],
+              "FIDEOFDJCDE": 360,
               "useMutiPlayerFixData": true,
+              "maxShieldByHPRatio": 1,
+              "JEJEPKOBGOO": true,
               "actorIceSubHurtDelta": -1,
-              "NADBHIKGCJA": 360,
-              "NMJJJHMJADK": true
+              "elementType": "Fire"
             }
           ],
-          "minus_one": -1
+          "elementDurability": "ShieldElement1",
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "isLimitedProperties": true,
+          "elementType": "Fire"
         },
         "Monster_Invoker_Archdeacon_01_Shield_Ice": {
-          "elementType": "Frozen",
-          "elementDurability": "ShieldElement1",
-          "isLimitedProperties": true,
           "modifierMixins": [
             {
               "$type": "ElementShieldMixin",
-              "maxShieldByHPRatio": 1,
-              "elementType": "Frozen",
               "onShieldBroken": [
                 {
                   "$type": "ApplyModifier",
-                  "doOffStage": false,
                   "modifierName": "Monster_Invoker_Archdeacon_01_BreakActionList",
-                  "actorIceSubHurtDelta": -1,
-                  "canBeHandledOnRecover": true
+                  "doOffStage": false,
+                  "canBeHandledOnRecover": true,
+                  "actorIceSubHurtDelta": -1
                 },
                 {
                   "$type": "FireEffect",
-                  "doOffStage": false,
+                  "effectTempleteID": -1,
                   "scale": 1,
-                  "actorIceSubHurtDelta": -1,
-                  "effectPattern": "Eff_Monster_Invoker_Archdeacon_ShieldBreak_Ice",
                   "born": {
-                    "direction": {
-                      "maxAngle": 180
-                    },
-                    "FDGAEDDEEDG": {
-                      "ELAJJIANFFM": 180
+                    "value": 10,
+                    "DPCANLOOHCH": {
+                      "NJIPHOKCEGN": 180
                     },
                     "onGroundRaycastUpDist": 2,
-                    "value": 10
+                    "direction": {
+                      "maxAngle": 180
+                    }
                   },
-                  "effectTempleteID": -1,
-                  "canBeHandledOnRecover": true
+                  "doOffStage": false,
+                  "canBeHandledOnRecover": true,
+                  "actorIceSubHurtDelta": -1,
+                  "effectPattern": "Eff_Monster_Invoker_Archdeacon_ShieldBreak_Ice"
                 }
               ],
+              "FIDEOFDJCDE": 360,
               "useMutiPlayerFixData": true,
+              "maxShieldByHPRatio": 1,
+              "JEJEPKOBGOO": true,
               "actorIceSubHurtDelta": -1,
-              "NADBHIKGCJA": 360,
-              "NMJJJHMJADK": true
+              "elementType": "Frozen"
             }
           ],
-          "minus_one": -1
+          "elementDurability": "ShieldElement1",
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "isLimitedProperties": true,
+          "elementType": "Frozen"
         },
         "Monster_Invoker_Archdeacon_01_Shield_Thunder": {
-          "elementType": "Electric",
-          "elementDurability": "ShieldElement2",
-          "isLimitedProperties": true,
           "modifierMixins": [
             {
               "$type": "ElementShieldMixin",
-              "maxShieldByHPRatio": 1,
-              "elementType": "Electric",
               "onShieldBroken": [
                 {
                   "$type": "ApplyModifier",
-                  "doOffStage": false,
                   "modifierName": "Monster_Invoker_Archdeacon_01_BreakActionList",
-                  "actorIceSubHurtDelta": -1,
-                  "canBeHandledOnRecover": true
+                  "doOffStage": false,
+                  "canBeHandledOnRecover": true,
+                  "actorIceSubHurtDelta": -1
                 },
                 {
                   "$type": "FireEffect",
-                  "doOffStage": false,
+                  "effectTempleteID": -1,
                   "scale": 1,
-                  "actorIceSubHurtDelta": -1,
-                  "effectPattern": "Eff_Monster_Invoker_Archdeacon_ShieldBreak_Thunder",
                   "born": {
-                    "direction": {
-                      "maxAngle": 180
-                    },
-                    "FDGAEDDEEDG": {
-                      "ELAJJIANFFM": 180
+                    "value": 10,
+                    "DPCANLOOHCH": {
+                      "NJIPHOKCEGN": 180
                     },
                     "onGroundRaycastUpDist": 2,
-                    "value": 10
+                    "direction": {
+                      "maxAngle": 180
+                    }
                   },
-                  "effectTempleteID": -1,
-                  "canBeHandledOnRecover": true
+                  "doOffStage": false,
+                  "canBeHandledOnRecover": true,
+                  "actorIceSubHurtDelta": -1,
+                  "effectPattern": "Eff_Monster_Invoker_Archdeacon_ShieldBreak_Thunder"
                 }
               ],
+              "FIDEOFDJCDE": 360,
               "useMutiPlayerFixData": true,
+              "maxShieldByHPRatio": 1,
+              "JEJEPKOBGOO": true,
               "actorIceSubHurtDelta": -1,
-              "NADBHIKGCJA": 360,
-              "NMJJJHMJADK": true
+              "elementType": "Electric"
             }
           ],
-          "minus_one": -1
+          "elementDurability": "ShieldElement2",
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "isLimitedProperties": true,
+          "elementType": "Electric"
         },
         "Monster_Invoker_Archdeacon_01_Shield_Water": {
-          "elementType": "Water",
-          "elementDurability": "ShieldElement1",
-          "isLimitedProperties": true,
           "modifierMixins": [
             {
               "$type": "ElementShieldMixin",
-              "maxShieldByHPRatio": 1,
-              "elementType": "Water",
               "onShieldBroken": [
                 {
                   "$type": "ApplyModifier",
-                  "doOffStage": false,
                   "modifierName": "Monster_Invoker_Archdeacon_01_BreakActionList",
-                  "actorIceSubHurtDelta": -1,
-                  "canBeHandledOnRecover": true
+                  "doOffStage": false,
+                  "canBeHandledOnRecover": true,
+                  "actorIceSubHurtDelta": -1
                 },
                 {
                   "$type": "FireEffect",
-                  "doOffStage": false,
+                  "effectTempleteID": -1,
                   "scale": 1,
-                  "actorIceSubHurtDelta": -1,
-                  "effectPattern": "Eff_Monster_Invoker_Archdeacon_ShieldBreak_Water",
                   "born": {
-                    "direction": {
-                      "maxAngle": 180
-                    },
-                    "FDGAEDDEEDG": {
-                      "ELAJJIANFFM": 180
+                    "value": 10,
+                    "DPCANLOOHCH": {
+                      "NJIPHOKCEGN": 180
                     },
                     "onGroundRaycastUpDist": 2,
-                    "value": 10
+                    "direction": {
+                      "maxAngle": 180
+                    }
                   },
-                  "effectTempleteID": -1,
-                  "canBeHandledOnRecover": true
+                  "doOffStage": false,
+                  "canBeHandledOnRecover": true,
+                  "actorIceSubHurtDelta": -1,
+                  "effectPattern": "Eff_Monster_Invoker_Archdeacon_ShieldBreak_Water"
                 }
               ],
+              "FIDEOFDJCDE": 360,
               "useMutiPlayerFixData": true,
+              "maxShieldByHPRatio": 1,
+              "JEJEPKOBGOO": true,
               "actorIceSubHurtDelta": -1,
-              "NADBHIKGCJA": 360,
-              "NMJJJHMJADK": true
+              "elementType": "Water"
             }
           ],
-          "minus_one": -1
+          "elementDurability": "ShieldElement1",
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "isLimitedProperties": true,
+          "elementType": "Water"
         },
         "RecoverWeakTrigger": {
           "onAdded": [
             {
               "$type": "SetAnimatorTrigger",
-              "doOffStage": false,
               "triggerID": "RecoverWeak",
-              "enable": true,
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "value": true,
+              "actorIceSubHurtDelta": -1
             }
           ],
           "elementDurability": 100,
-          "isLimitedProperties": true,
-          "minus_one": -1
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "isLimitedProperties": true
         },
         "Reset_ShieldInitial": {
           "elementDurability": 100,
-          "isLimitedProperties": true,
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
               "doOffStage": false,
               "key": "_GO_CREATE_SHIELD_INITIAL",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             }
           ],
-          "minus_one": -1,
-          "duration": 0.30000001192092896
+          "duration": 0.30000001192092896,
+          "isLimitedProperties": true
         },
         "Shield_Close": {
           "onAdded": [
             {
               "$type": "SetAnimatorBool",
               "doOffStage": false,
+              "canBeHandledOnRecover": true,
               "boolID": "ShieldOn",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "actorIceSubHurtDelta": -1
             }
           ],
           "elementDurability": 100,
-          "isLimitedProperties": true,
-          "minus_one": -1
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "isLimitedProperties": true
         },
         "Shield_Open": {
           "onAdded": [
             {
               "$type": "Predicated",
-              "doOffStage": false,
               "targetPredicates": [
                 {
                   "$type": "ByTargetGlobalValue",
-                  "value": 1,
                   "target": "Target",
-                  "key": "_MID_LIGHT_ON"
+                  "key": "_MID_LIGHT_ON",
+                  "value": 1
                 }
               ],
-              "actorIceSubHurtDelta": -1,
               "successActions": [
                 {
                   "$type": "AttachModifier",
-                  "doOffStage": false,
                   "modifierName": "Shield_Open_SetAnimatorBool",
-                  "actorIceSubHurtDelta": -1,
-                  "canBeHandledOnRecover": true
+                  "doOffStage": false,
+                  "canBeHandledOnRecover": true,
+                  "actorIceSubHurtDelta": -1
                 },
                 {
                   "$type": "SetGlobalValue",
                   "doOffStage": false,
                   "key": "_NOT_BREAK_REMOVE",
-                  "actorIceSubHurtDelta": -1,
-                  "canBeHandledOnRecover": true
+                  "canBeHandledOnRecover": true,
+                  "actorIceSubHurtDelta": -1
                 },
                 {
                   "$type": "AttachModifier",
-                  "doOffStage": false,
+                  "predicates": [
+                    {
+                      "$type": "ByTargetGlobalValue",
+                      "target": "Target",
+                      "key": "_MID_LIGHT_ELEMENT"
+                    }
+                  ],
                   "modifierName": "Monster_Invoker_Archdeacon_01_Shield_Fire",
+                  "doOffStage": false,
+                  "canBeHandledOnRecover": true,
+                  "actorIceSubHurtDelta": -1
+                },
+                {
+                  "$type": "AttachModifier",
                   "predicates": [
                     {
                       "$type": "ByTargetGlobalValue",
                       "target": "Target",
-                      "key": "_MID_LIGHT_ELEMENT"
+                      "key": "_MID_LIGHT_ELEMENT",
+                      "value": 1
                     }
                   ],
-                  "actorIceSubHurtDelta": -1,
-                  "canBeHandledOnRecover": true
-                },
-                {
-                  "$type": "AttachModifier",
-                  "doOffStage": false,
                   "modifierName": "Monster_Invoker_Archdeacon_01_Shield_Thunder",
-                  "predicates": [
-                    {
-                      "$type": "ByTargetGlobalValue",
-                      "value": 1,
-                      "target": "Target",
-                      "key": "_MID_LIGHT_ELEMENT"
-                    }
-                  ],
-                  "actorIceSubHurtDelta": -1,
-                  "canBeHandledOnRecover": true
+                  "doOffStage": false,
+                  "canBeHandledOnRecover": true,
+                  "actorIceSubHurtDelta": -1
                 },
                 {
                   "$type": "AttachModifier",
-                  "doOffStage": false,
+                  "predicates": [
+                    {
+                      "$type": "ByTargetGlobalValue",
+                      "target": "Target",
+                      "key": "_MID_LIGHT_ELEMENT",
+                      "value": 2
+                    }
+                  ],
                   "modifierName": "Monster_Invoker_Archdeacon_01_Shield_Ice",
-                  "predicates": [
-                    {
-                      "$type": "ByTargetGlobalValue",
-                      "value": 2,
-                      "target": "Target",
-                      "key": "_MID_LIGHT_ELEMENT"
-                    }
-                  ],
-                  "actorIceSubHurtDelta": -1,
-                  "canBeHandledOnRecover": true
+                  "doOffStage": false,
+                  "canBeHandledOnRecover": true,
+                  "actorIceSubHurtDelta": -1
                 },
                 {
                   "$type": "AttachModifier",
-                  "doOffStage": false,
-                  "modifierName": "Monster_Invoker_Archdeacon_01_Shield_Water",
                   "predicates": [
                     {
                       "$type": "ByTargetGlobalValue",
-                      "value": 3,
                       "target": "Target",
-                      "key": "_MID_LIGHT_ELEMENT"
+                      "key": "_MID_LIGHT_ELEMENT",
+                      "value": 3
                     }
                   ],
-                  "actorIceSubHurtDelta": -1,
-                  "canBeHandledOnRecover": true
+                  "modifierName": "Monster_Invoker_Archdeacon_01_Shield_Water",
+                  "doOffStage": false,
+                  "canBeHandledOnRecover": true,
+                  "actorIceSubHurtDelta": -1
                 }
               ],
-              "canBeHandledOnRecover": true
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             }
           ],
           "elementDurability": 100,
-          "isLimitedProperties": true,
-          "minus_one": -1
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "isLimitedProperties": true
         },
         "Shield_Open_SetAnimatorBool": {
           "onAdded": [
@@ -880,59 +835,550 @@
               "$type": "SetAnimatorBool",
               "doOffStage": false,
               "value": true,
+              "canBeHandledOnRecover": true,
               "boolID": "ShieldOn",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "actorIceSubHurtDelta": -1
             }
           ],
           "elementDurability": 100,
-          "isLimitedProperties": true,
-          "minus_one": -1
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "isLimitedProperties": true
         }
-      }
-    }
-  },
-  {
-    "Default": {
-      "DDNHHMIBNLF": {
-        "elementDurability": 100,
-        "isLimitedProperties": true,
-        "minus_one": -1
       },
-      "abilityName": "Monster_Invoker_Archdeacon_01_Alert_QuestV57",
+      "OOAKLMJCDAG": {
+        "elementDurability": 100,
+        "minus_one": -1,
+        "HGPKLIANAGB": -1,
+        "isLimitedProperties": true
+      },
       "abilityMixins": [
         {
-          "$type": "AttachToStateIDMixin",
-          "modifierName": "Monster_Invoker_Archdeacon_01_Alert_CreateGate",
-          "stateIDs": [
-            "Alert_BS"
+          "$type": "AttachModifierToSelfGlobalValueMixin",
+          "valueSteps": [
+            -0.5,
+            0.5,
+            1.5
           ],
-          "value": -1,
-          "actorIceSubHurtDelta": -1
-        },
-        {
-          "$type": "AttachToStateIDMixin",
-          "modifierName": "Monster_Invoker_Archdeacon_01_Alert_Effect",
-          "stateIDs": [
-            "Alert"
+          "globalValueKey": "_SHIELD_STATE",
+          "modifierNameSteps": [
+            "Shield_Close",
+            "Shield_Open"
           ],
-          "value": -1,
+          "removeAppliedModifier": true,
           "actorIceSubHurtDelta": -1
         },
         {
           "$type": "AttachModifierToSelfGlobalValueMixin",
+          "valueSteps": [
+            -0.5,
+            0.5,
+            1.5
+          ],
+          "globalValueKey": "_WEAK_STATE",
+          "modifierNameSteps": [
+            "Invoker_Archdeacon_NotInWeak",
+            "Invoker_Archdeacon_InWeak"
+          ],
+          "removeAppliedModifier": true,
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachModifierToSelfGlobalValueMixin",
+          "valueSteps": [
+            -0.5,
+            0.5,
+            1.5
+          ],
+          "globalValueKey": "_GO_CREATE_SHIELD_INITIAL",
+          "modifierNameSteps": [
+            "Invoker_Archdeacon_NoShieldInitial",
+            "Invoker_Archdeacon_ShieldInitial"
+          ],
+          "removeAppliedModifier": true,
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToAIAlertnessMixin",
+          "modifierName": "Invoker_Archdeacon_CheckHit_BySupportSkill",
+          "alertness": [
+            2,
+            3
+          ],
+          "actorIceSubHurtDelta": -1
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "abilityName": "Monster_Invoker_Archdeacon_01_Alert_QuestV57",
+      "modifiers": {
+        "Archdeacon_HPFull": {
+          "elementDurability": 100,
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "isLimitedProperties": true
+        },
+        "Archdeacon_HPLow": {
+          "onAdded": [
+            {
+              "$type": "TriggerAudio",
+              "operation": {
+                "$type": "ConfigAudioEventOp",
+                "operation": {
+                  "text": "Play_vo_SZAQ403_10_haden_01"
+                }
+              },
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "elementDurability": 100,
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "isLimitedProperties": true
+        },
+        "EffBack_Invisible": {
+          "onAdded": [
+            {
+              "$type": "TriggerSetRenderersEnableV2",
+              "doOffStage": false,
+              "renderNames": [
+                "Eff_Back"
+              ],
+              "canBeHandledOnRecover": true,
+              "value": true,
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "elementDurability": 100,
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "isLimitedProperties": true
+        },
+        "EffBack_Visible": {
+          "onAdded": [
+            {
+              "$type": "TriggerSetRenderersEnableV2",
+              "doOffStage": false,
+              "setEnable": true,
+              "renderNames": [
+                "Eff_Back"
+              ],
+              "canBeHandledOnRecover": true,
+              "value": true,
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "elementDurability": 100,
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "isLimitedProperties": true
+        },
+        "GoBattle": {
+          "onAdded": [
+            {
+              "$type": "SetPoseBool",
+              "doOffStage": false,
+              "value": true,
+              "canBeHandledOnRecover": true,
+              "boolID": "BeginBattle",
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "TriggerAbility",
+              "target": "Other",
+              "doOffStage": false,
+              "abilityName": "Monster_Invoker_Archdeacon_01_CreateLightInitial",
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "elementDurability": 100,
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "isLimitedProperties": true
+        },
+        "In_Peace": {
+          "onAdded": [
+            {
+              "$type": "SetPoseBool",
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "boolID": "BeginBattle",
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "elementDurability": 100,
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "isLimitedProperties": true
+        },
+        "Monster_Invoker_Archdeacon_01_AlertDelayOpenShield": {
+          "elementDurability": 100,
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "onRemoved": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_SHIELD_STATE",
+              "value": 1,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "duration": 5.099999904632568,
+          "isLimitedProperties": true
+        },
+        "Monster_Invoker_Archdeacon_01_AlertDelayOpenShieldEffect": {
+          "elementDurability": 100,
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "onRemoved": [
+            {
+              "$type": "TriggerAbility",
+              "target": "Other",
+              "doOffStage": false,
+              "abilityName": "Monster_Invoker_Archdeacon_01_FireShieldCreateEffect",
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "duration": 4.5,
+          "isLimitedProperties": true
+        },
+        "Monster_Invoker_Archdeacon_01_AlertDelayShowLight": {
+          "elementDurability": 100,
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "onRemoved": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_BORN_EFFECT_OFF",
+              "value": 1,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_INVOKER_BEGIN_FIGHT",
+              "value": 1,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "duration": 4.400000095367432,
+          "isLimitedProperties": true
+        },
+        "Monster_Invoker_Archdeacon_01_AlertSubHurtDown": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_INVOKER_IN_ALERT",
+              "value": 1,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "properties": {
+            "Actor_ElecSubHurtDelta": 10,
+            "Actor_FireSubHurtDelta": 10,
+            "Actor_GrassSubHurtDelta": 10,
+            "Actor_IceSubHurtDelta": 10,
+            "Actor_PhysicalSubHurtDelta": 10,
+            "Actor_RockSubHurtDelta": 10,
+            "Actor_WaterSubHurtDelta": 10,
+            "Actor_WindSubHurtDelta": 10
+          },
+          "elementDurability": 100,
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "onRemoved": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_INVOKER_IN_ALERT",
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "isLimitedProperties": true
+        },
+        "Monster_Invoker_Archdeacon_01_Alert_CreateGate": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalPos",
+              "target": "SelfAttackActiveTarget",
+              "born": {
+                "$type": "ConfigBornByTarget",
+                "value": 10,
+                "DPCANLOOHCH": {
+                  "NJIPHOKCEGN": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "direction": {
+                  "maxAngle": 180
+                }
+              },
+              "doOffStage": false,
+              "key": "_AVATAR_POS",
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "TurnDirectionToPos",
+              "minAngle": -1,
+              "maxAngle": -1,
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1,
+              "toPos": {
+                "$type": "ConfigBornByGlobalValue",
+                "value": 10,
+                "DPCANLOOHCH": {
+                  "NJIPHOKCEGN": 180
+                },
+                "positionKey": "_AVATAR_POS",
+                "onGroundRaycastUpDist": 2,
+                "direction": {
+                  "maxAngle": 180
+                }
+              }
+            },
+            {
+              "$type": "CreateGadget",
+              "value": true,
+              "lifeByOwnerV2": true,
+              "gadgetID": 42210004,
+              "FOMFJNNGMGB": {
+                "enable": true,
+                "GJFBJPEPFEN": 0.5,
+                "MCHBPOKIPOF": true,
+                "MPPMKLOFEDA": 0.5
+              },
+              "born": {
+                "$type": "ConfigBornBySelf",
+                "value": 10,
+                "DPCANLOOHCH": {
+                  "NJIPHOKCEGN": 180
+                },
+                "useRotation": true,
+                "onGroundRaycastUpDist": 2,
+                "offset": {
+                  "z": -5.199999809265137,
+                  "x": 2
+                },
+                "direction": {
+                  "$type": "ConfigDirectionByEntity",
+                  "maxAngle": 180,
+                  "useCorrectDir": true,
+                  "angleOffsetCorrect": {
+                    "y": -32.20000076293945
+                  }
+                }
+              },
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "elementDurability": 100,
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "isLimitedProperties": true
+        },
+        "Monster_Invoker_Archdeacon_01_Alert_Effect": {
+          "onAdded": [
+            {
+              "$type": "ApplyModifier",
+              "modifierName": "Monster_Invoker_Archdeacon_01_EffBack_DelayOpen",
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "ApplyModifier",
+              "modifierName": "Monster_Invoker_Archdeacon_01_AlertDelayShowLight",
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "ApplyModifier",
+              "modifierName": "Monster_Invoker_Archdeacon_01_AlertDelayOpenShieldEffect",
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "ApplyModifier",
+              "modifierName": "Monster_Invoker_Archdeacon_01_AlertDelayOpenShield",
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "elementDurability": 100,
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "isLimitedProperties": true
+        },
+        "Monster_Invoker_Archdeacon_01_CreateGateDelay": {
+          "elementDurability": 100,
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "isLimitedProperties": true
+        },
+        "Monster_Invoker_Archdeacon_01_DelaySayWordGoBattle": {
+          "elementDurability": 100,
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "onRemoved": [
+            {
+              "$type": "TriggerAudio",
+              "operation": {
+                "$type": "ConfigAudioEventOp",
+                "operation": {
+                  "text": "Play_vo_SZAQ403_10_haden_03"
+                }
+              },
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "duration": 5,
+          "isLimitedProperties": true
+        },
+        "Monster_Invoker_Archdeacon_01_EffBack_DelayOpen": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_EFFBACK_INVISIBLE",
+              "value": 1,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "elementDurability": 100,
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "onRemoved": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_EFFBACK_INVISIBLE",
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "duration": 5.739999771118164,
+          "isLimitedProperties": true
+        },
+        "Monster_Invoker_Archdeacon_01_Ensure_BattleGV": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_BORN_EFFECT_OFF",
+              "value": 1,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_INVOKER_BEGIN_FIGHT",
+              "value": 1,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "elementDurability": 100,
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "onRemoved": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_SHIELD_STATE",
+              "value": 1,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "ApplyModifier",
+              "modifierName": "Monster_Invoker_Archdeacon_01_DelaySayWordGoBattle",
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "duration": 0.20000000298023224,
+          "isLimitedProperties": true
+        },
+        "Monster_Invoker_Archdeacon_01_Ensure_BattleGVDelay": {
+          "onAdded": [
+            {
+              "$type": "ApplyModifier",
+              "modifierName": "Monster_Invoker_Archdeacon_01_Ensure_BattleGV",
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "elementDurability": 100,
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "isLimitedProperties": true
+        }
+      },
+      "OOAKLMJCDAG": {
+        "elementDurability": 100,
+        "minus_one": -1,
+        "HGPKLIANAGB": -1,
+        "isLimitedProperties": true
+      },
+      "abilityMixins": [
+        {
+          "$type": "AttachToStateIDMixin",
+          "value": -1,
+          "modifierName": "Monster_Invoker_Archdeacon_01_Alert_CreateGate",
+          "stateIDs": [
+            "Alert_BS"
+          ],
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToStateIDMixin",
+          "value": -1,
+          "modifierName": "Monster_Invoker_Archdeacon_01_Alert_Effect",
+          "stateIDs": [
+            "Alert"
+          ],
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachModifierToSelfGlobalValueMixin",
+          "valueSteps": [
+            -0.5,
+            0.5,
+            1.5
+          ],
           "globalValueKey": "_INVOKER_BEGIN_FIGHT",
           "modifierNameSteps": [
             "In_Peace",
             "GoBattle"
           ],
           "removeAppliedModifier": true,
-          "actorIceSubHurtDelta": -1,
-          "valueSteps": [
-            -0.5,
-            0.5,
-            1.5
-          ]
+          "actorIceSubHurtDelta": -1
         },
         {
           "$type": "AttachToAIAlertnessMixin",
@@ -944,454 +1390,55 @@
         },
         {
           "$type": "AttachModifierToSelfGlobalValueMixin",
+          "valueSteps": [
+            -0.5,
+            0.5,
+            1.5
+          ],
           "globalValueKey": "_EFFBACK_INVISIBLE",
           "modifierNameSteps": [
             "EffBack_Visible",
             "EffBack_Invisible"
           ],
           "removeAppliedModifier": true,
-          "actorIceSubHurtDelta": -1,
-          "valueSteps": [
-            -0.5,
-            0.5,
-            1.5
-          ]
+          "actorIceSubHurtDelta": -1
         },
         {
           "$type": "AttachToStateIDMixin",
+          "value": -1,
           "modifierName": "Monster_Invoker_Archdeacon_01_AlertSubHurtDown",
           "stateIDs": [
             "Alert_BS",
             "Alert"
           ],
-          "value": -1,
           "actorIceSubHurtDelta": -1
         },
         {
           "$type": "AttachModifierToHPPercentMixin",
+          "valueSteps": [
+            0.5
+          ],
           "modifierNameSteps": [
             "Archdeacon_HPFull",
             "Archdeacon_HPLow"
           ],
-          "actorIceSubHurtDelta": -1,
-          "valueSteps": [
-            0.5
-          ]
+          "actorIceSubHurtDelta": -1
         }
-      ],
-      "modifiers": {
-        "Archdeacon_HPFull": {
-          "elementDurability": 100,
-          "isLimitedProperties": true,
-          "minus_one": -1
-        },
-        "Archdeacon_HPLow": {
-          "onAdded": [
-            {
-              "$type": "TriggerAudio",
-              "doOffStage": false,
-              "operation": {
-                "$type": "ConfigAudioEventOp",
-                "operation": {
-                  "text": "Play_vo_SZAQ403_10_haden_01"
-                }
-              },
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "elementDurability": 100,
-          "isLimitedProperties": true,
-          "minus_one": -1
-        },
-        "EffBack_Invisible": {
-          "onAdded": [
-            {
-              "$type": "TriggerSetRenderersEnableV2",
-              "doOffStage": false,
-              "renderNames": [
-                "Eff_Back"
-              ],
-              "enable": true,
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "elementDurability": 100,
-          "isLimitedProperties": true,
-          "minus_one": -1
-        },
-        "EffBack_Visible": {
-          "onAdded": [
-            {
-              "$type": "TriggerSetRenderersEnableV2",
-              "doOffStage": false,
-              "renderNames": [
-                "Eff_Back"
-              ],
-              "enable": true,
-              "actorIceSubHurtDelta": -1,
-              "setEnable": true,
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "elementDurability": 100,
-          "isLimitedProperties": true,
-          "minus_one": -1
-        },
-        "GoBattle": {
-          "onAdded": [
-            {
-              "$type": "SetPoseBool",
-              "doOffStage": false,
-              "value": true,
-              "boolID": "BeginBattle",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            },
-            {
-              "$type": "TriggerAbility",
-              "doOffStage": false,
-              "abilityName": "Monster_Invoker_Archdeacon_01_CreateLightInitial",
-              "actorIceSubHurtDelta": -1,
-              "target": "Other",
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "elementDurability": 100,
-          "isLimitedProperties": true,
-          "minus_one": -1
-        },
-        "In_Peace": {
-          "onAdded": [
-            {
-              "$type": "SetPoseBool",
-              "doOffStage": false,
-              "boolID": "BeginBattle",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "elementDurability": 100,
-          "isLimitedProperties": true,
-          "minus_one": -1
-        },
-        "Monster_Invoker_Archdeacon_01_AlertDelayOpenShield": {
-          "elementDurability": 100,
-          "isLimitedProperties": true,
-          "onRemoved": [
-            {
-              "$type": "SetGlobalValue",
-              "doOffStage": false,
-              "value": 1,
-              "key": "_SHIELD_STATE",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "minus_one": -1,
-          "duration": 5.099999904632568
-        },
-        "Monster_Invoker_Archdeacon_01_AlertDelayOpenShieldEffect": {
-          "elementDurability": 100,
-          "isLimitedProperties": true,
-          "onRemoved": [
-            {
-              "$type": "TriggerAbility",
-              "doOffStage": false,
-              "abilityName": "Monster_Invoker_Archdeacon_01_FireShieldCreateEffect",
-              "actorIceSubHurtDelta": -1,
-              "target": "Other",
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "minus_one": -1,
-          "duration": 4.5
-        },
-        "Monster_Invoker_Archdeacon_01_AlertDelayShowLight": {
-          "elementDurability": 100,
-          "isLimitedProperties": true,
-          "onRemoved": [
-            {
-              "$type": "SetGlobalValue",
-              "doOffStage": false,
-              "value": 1,
-              "key": "_BORN_EFFECT_OFF",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            },
-            {
-              "$type": "SetGlobalValue",
-              "doOffStage": false,
-              "value": 1,
-              "key": "_INVOKER_BEGIN_FIGHT",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "minus_one": -1,
-          "duration": 4.400000095367432
-        },
-        "Monster_Invoker_Archdeacon_01_AlertSubHurtDown": {
-          "onAdded": [
-            {
-              "$type": "SetGlobalValue",
-              "doOffStage": false,
-              "value": 1,
-              "key": "_INVOKER_IN_ALERT",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "elementDurability": 100,
-          "isLimitedProperties": true,
-          "onRemoved": [
-            {
-              "$type": "SetGlobalValue",
-              "doOffStage": false,
-              "key": "_INVOKER_IN_ALERT",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "minus_one": -1,
-          "properties": {
-            "Actor_ElecSubHurtDelta": 10,
-            "Actor_FireSubHurtDelta": 10,
-            "Actor_GrassSubHurtDelta": 10,
-            "Actor_IceSubHurtDelta": 10,
-            "Actor_PhysicalSubHurtDelta": 10,
-            "Actor_RockSubHurtDelta": 10,
-            "Actor_WaterSubHurtDelta": 10,
-            "Actor_WindSubHurtDelta": 10
-          }
-        },
-        "Monster_Invoker_Archdeacon_01_Alert_CreateGate": {
-          "onAdded": [
-            {
-              "$type": "SetGlobalPos",
-              "doOffStage": false,
-              "target": "SelfAttackActiveTarget",
-              "key": "_AVATAR_POS",
-              "actorIceSubHurtDelta": -1,
-              "born": {
-                "$type": "ConfigBornByTarget",
-                "direction": {
-                  "maxAngle": 180
-                },
-                "FDGAEDDEEDG": {
-                  "ELAJJIANFFM": 180
-                },
-                "onGroundRaycastUpDist": 2,
-                "value": 10
-              },
-              "canBeHandledOnRecover": true
-            },
-            {
-              "$type": "TurnDirectionToPos",
-              "doOffStage": false,
-              "maxAngle": -1,
-              "value": -1,
-              "actorIceSubHurtDelta": -1,
-              "toPos": {
-                "$type": "ConfigBornByGlobalValue",
-                "direction": {
-                  "maxAngle": 180
-                },
-                "positionKey": "_AVATAR_POS",
-                "FDGAEDDEEDG": {
-                  "ELAJJIANFFM": 180
-                },
-                "onGroundRaycastUpDist": 2,
-                "value": 10
-              },
-              "canBeHandledOnRecover": true
-            },
-            {
-              "$type": "CreateGadget",
-              "doOffStage": false,
-              "value": true,
-              "HGPMDCCAHMK": {
-                "IFAGHADONMB": true,
-                "KCLDKFCKPEE": 0.5,
-                "MJDMDBDMPAM": true,
-                "PHCINBJNAOK": 0.5
-              },
-              "actorIceSubHurtDelta": -1,
-              "born": {
-                "$type": "ConfigBornBySelf",
-                "direction": {
-                  "$type": "ConfigDirectionByEntity",
-                  "maxAngle": 180,
-                  "FIDMAMPCMOI": true,
-                  "JHNCMGENOIP": {
-                    "y": -32.20000076293945
-                  }
-                },
-                "useRotation": true,
-                "offset": {
-                  "z": -5.199999809265137,
-                  "x": 2
-                },
-                "FDGAEDDEEDG": {
-                  "ELAJJIANFFM": 180
-                },
-                "onGroundRaycastUpDist": 2,
-                "value": 10
-              },
-              "gadgetID": 42210004,
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "elementDurability": 100,
-          "isLimitedProperties": true,
-          "minus_one": -1
-        },
-        "Monster_Invoker_Archdeacon_01_Alert_Effect": {
-          "onAdded": [
-            {
-              "$type": "ApplyModifier",
-              "doOffStage": false,
-              "modifierName": "Monster_Invoker_Archdeacon_01_EffBack_DelayOpen",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            },
-            {
-              "$type": "ApplyModifier",
-              "doOffStage": false,
-              "modifierName": "Monster_Invoker_Archdeacon_01_AlertDelayShowLight",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            },
-            {
-              "$type": "ApplyModifier",
-              "doOffStage": false,
-              "modifierName": "Monster_Invoker_Archdeacon_01_AlertDelayOpenShieldEffect",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            },
-            {
-              "$type": "ApplyModifier",
-              "doOffStage": false,
-              "modifierName": "Monster_Invoker_Archdeacon_01_AlertDelayOpenShield",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "elementDurability": 100,
-          "isLimitedProperties": true,
-          "minus_one": -1
-        },
-        "Monster_Invoker_Archdeacon_01_CreateGateDelay": {
-          "elementDurability": 100,
-          "isLimitedProperties": true,
-          "minus_one": -1
-        },
-        "Monster_Invoker_Archdeacon_01_DelaySayWordGoBattle": {
-          "elementDurability": 100,
-          "isLimitedProperties": true,
-          "onRemoved": [
-            {
-              "$type": "TriggerAudio",
-              "doOffStage": false,
-              "operation": {
-                "$type": "ConfigAudioEventOp",
-                "operation": {
-                  "text": "Play_vo_SZAQ403_10_haden_03"
-                }
-              },
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "minus_one": -1,
-          "duration": 5
-        },
-        "Monster_Invoker_Archdeacon_01_EffBack_DelayOpen": {
-          "onAdded": [
-            {
-              "$type": "SetGlobalValue",
-              "doOffStage": false,
-              "value": 1,
-              "key": "_EFFBACK_INVISIBLE",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "elementDurability": 100,
-          "isLimitedProperties": true,
-          "onRemoved": [
-            {
-              "$type": "SetGlobalValue",
-              "doOffStage": false,
-              "key": "_EFFBACK_INVISIBLE",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "minus_one": -1,
-          "duration": 5.739999771118164
-        },
-        "Monster_Invoker_Archdeacon_01_Ensure_BattleGV": {
-          "onAdded": [
-            {
-              "$type": "SetGlobalValue",
-              "doOffStage": false,
-              "value": 1,
-              "key": "_BORN_EFFECT_OFF",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            },
-            {
-              "$type": "SetGlobalValue",
-              "doOffStage": false,
-              "value": 1,
-              "key": "_INVOKER_BEGIN_FIGHT",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "elementDurability": 100,
-          "isLimitedProperties": true,
-          "onRemoved": [
-            {
-              "$type": "SetGlobalValue",
-              "doOffStage": false,
-              "value": 1,
-              "key": "_SHIELD_STATE",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            },
-            {
-              "$type": "ApplyModifier",
-              "doOffStage": false,
-              "modifierName": "Monster_Invoker_Archdeacon_01_DelaySayWordGoBattle",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "minus_one": -1,
-          "duration": 0.20000000298023224
-        },
-        "Monster_Invoker_Archdeacon_01_Ensure_BattleGVDelay": {
-          "onAdded": [
-            {
-              "$type": "ApplyModifier",
-              "doOffStage": false,
-              "modifierName": "Monster_Invoker_Archdeacon_01_Ensure_BattleGV",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "elementDurability": 100,
-          "isLimitedProperties": true,
-          "minus_one": -1
-        }
-      }
+      ]
     }
   },
   {
     "Default": {
+      "onAdded": [
+        {
+          "$type": "SetGlobalValue",
+          "doOffStage": false,
+          "key": "_CHALLENGE_82166_FAILED_",
+          "value": 1,
+          "canBeHandledOnRecover": true,
+          "actorIceSubHurtDelta": -1
+        }
+      ],
       "abilitySpecials": {
         "ShieldElement1": 450,
         "ShieldElement2": 300,
@@ -1401,209 +1448,97 @@
         "_SHIELD_ABSORB_TOTAL_DAMAGE",
         "_MONSTER_MAXHP"
       ],
-      "DDNHHMIBNLF": {
-        "elementDurability": 100,
-        "isLimitedProperties": true,
-        "minus_one": -1
-      },
-      "onAdded": [
-        {
-          "$type": "SetGlobalValue",
-          "doOffStage": false,
-          "value": 1,
-          "key": "_CHALLENGE_82166_FAILED_",
-          "actorIceSubHurtDelta": -1,
-          "canBeHandledOnRecover": true
-        }
-      ],
       "abilityName": "Monster_Invoker_Archdeacon_01_ShieldControl_LeyLineChallenge",
-      "abilityMixins": [
-        {
-          "$type": "AttachModifierToSelfGlobalValueMixin",
-          "enable": true,
-          "globalValueKey": "_SHIELD_STATE",
-          "modifierNameSteps": [
-            "Shield_Close",
-            "Shield_Open"
-          ],
-          "removeAppliedModifier": true,
-          "actorIceSubHurtDelta": -1,
-          "valueSteps": [
-            -0.5,
-            0.5,
-            1.5
-          ]
-        },
-        {
-          "$type": "AttachModifierToSelfGlobalValueMixin",
-          "enable": true,
-          "globalValueKey": "_LIGHT_CLOSE_NUM",
-          "modifierNameSteps": [
-            "Invoker_Archdeacon_NoWeak",
-            "Invoker_Archdeacon_RemainTwo",
-            "Invoker_Archdeacon_RemainOne",
-            "Invoker_Archdeacon_GoWeak"
-          ],
-          "removeAppliedModifier": true,
-          "actorIceSubHurtDelta": -1,
-          "valueSteps": [
-            -0.5,
-            0.5,
-            1.5,
-            2.5,
-            3.5
-          ]
-        },
-        {
-          "$type": "AttachModifierToSelfGlobalValueMixin",
-          "enable": true,
-          "globalValueKey": "_WEAK_STATE",
-          "modifierNameSteps": [
-            "Invoker_Archdeacon_NotInWeak",
-            "Invoker_Archdeacon_InWeak"
-          ],
-          "removeAppliedModifier": true,
-          "actorIceSubHurtDelta": -1,
-          "valueSteps": [
-            -0.5,
-            0.5,
-            1.5
-          ]
-        },
-        {
-          "$type": "AttachModifierToSelfGlobalValueMixin",
-          "enable": true,
-          "globalValueKey": "_GO_CREATE_SHIELD_INITIAL",
-          "modifierNameSteps": [
-            "Invoker_Archdeacon_NoShieldInitial",
-            "Invoker_Archdeacon_ShieldInitial"
-          ],
-          "removeAppliedModifier": true,
-          "actorIceSubHurtDelta": -1,
-          "valueSteps": [
-            -0.5,
-            0.5,
-            1.5
-          ]
-        },
-        {
-          "$type": "AttachToStateIDMixin",
-          "modifierName": "Invoker_Archdeacon_ShakeTemp",
-          "stateIDs": [
-            "BreakDown_BS",
-            "BreakDown_Loop",
-            "BreakDown_AS"
-          ],
-          "value": -1,
-          "actorIceSubHurtDelta": -1
-        },
-        {
-          "$type": "AttachModifierToSelfGlobalValueMixin",
-          "enable": true,
-          "globalValueKey": "_BREAK_STATE",
-          "modifierNameSteps": [
-            "Invoker_Archdeacon_NotInBreak",
-            "Invoker_Archdeacon_InBreak"
-          ],
-          "removeAppliedModifier": true,
-          "actorIceSubHurtDelta": -1,
-          "valueSteps": [
-            -0.5,
-            0.5,
-            1.5
-          ]
-        }
-      ],
       "modifiers": {
         "InBreak_Recover": {
           "onAdded": [
             {
               "$type": "SetAnimatorTrigger",
-              "doOffStage": false,
               "triggerID": "RecoverBreak",
-              "enable": true,
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "value": true,
+              "actorIceSubHurtDelta": -1
             }
           ],
           "elementDurability": 100,
-          "isLimitedProperties": true,
-          "minus_one": -1
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "isLimitedProperties": true
         },
         "Invoker_Archdeacon_GoWeak": {
           "onAdded": [
             {
               "$type": "ServerMonsterLog",
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "target": "Target",
+                  "key": "_MONSTERLOG_WEAKFLAG"
+                }
+              ],
               "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1,
               "paramList": [
                 1,
                 0
-              ],
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "target": "Target",
-                  "key": "_MONSTERLOG_WEAKFLAG"
-                }
-              ],
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              ]
             },
             {
               "$type": "ServerMonsterLog",
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "target": "Target",
+                  "key": "_MONSTERLOG_WEAKFLAG",
+                  "value": 1
+                }
+              ],
               "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1,
               "paramList": [
                 1,
                 1
-              ],
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "value": 1,
-                  "target": "Target",
-                  "key": "_MONSTERLOG_WEAKFLAG"
-                }
-              ],
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              ]
             },
             {
               "$type": "SetAnimatorTrigger",
-              "doOffStage": false,
               "triggerID": "GoWeak",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             },
             {
               "$type": "ApplyModifier",
-              "doOffStage": false,
               "modifierName": "Invoker_Archdeacon_WeakDuration",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             },
             {
               "$type": "FireEffect",
-              "doOffStage": false,
+              "effectTempleteID": -1,
               "scale": 1,
-              "actorIceSubHurtDelta": -1,
-              "effectPattern": "Eff_Monster_Invoker_Archdeacon_WeakBS",
               "born": {
-                "direction": {
-                  "maxAngle": 180
-                },
-                "FDGAEDDEEDG": {
-                  "ELAJJIANFFM": 180
+                "value": 10,
+                "DPCANLOOHCH": {
+                  "NJIPHOKCEGN": 180
                 },
                 "onGroundRaycastUpDist": 2,
-                "value": 10
+                "direction": {
+                  "maxAngle": 180
+                }
               },
-              "effectTempleteID": -1,
-              "canBeHandledOnRecover": true
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Invoker_Archdeacon_WeakBS"
             },
             {
               "$type": "FireEffect",
-              "doOffStage": false,
-              "scale": 1,
+              "effectTempleteID": -1,
               "predicates": [
                 {
                   "$type": "ByTargetGlobalValue",
@@ -1611,113 +1546,115 @@
                   "key": "_MID_LIGHT_ELEMENT"
                 }
               ],
-              "actorIceSubHurtDelta": -1,
-              "effectPattern": "Eff_Monster_Invoker_Archdeacon_WeakBreak_Fire",
+              "scale": 1,
               "born": {
-                "direction": {
-                  "maxAngle": 180
-                },
-                "FDGAEDDEEDG": {
-                  "ELAJJIANFFM": 180
+                "value": 10,
+                "DPCANLOOHCH": {
+                  "NJIPHOKCEGN": 180
                 },
                 "onGroundRaycastUpDist": 2,
-                "value": 10
+                "direction": {
+                  "maxAngle": 180
+                }
               },
-              "effectTempleteID": -1,
-              "canBeHandledOnRecover": true
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Invoker_Archdeacon_WeakBreak_Fire"
             },
             {
               "$type": "FireEffect",
-              "doOffStage": false,
-              "scale": 1,
+              "effectTempleteID": -1,
               "predicates": [
                 {
                   "$type": "ByTargetGlobalValue",
-                  "value": 1,
                   "target": "Target",
-                  "key": "_MID_LIGHT_ELEMENT"
+                  "key": "_MID_LIGHT_ELEMENT",
+                  "value": 1
                 }
               ],
-              "actorIceSubHurtDelta": -1,
-              "effectPattern": "Eff_Monster_Invoker_Archdeacon_WeakBreak_Thunder",
+              "scale": 1,
               "born": {
-                "direction": {
-                  "maxAngle": 180
-                },
-                "FDGAEDDEEDG": {
-                  "ELAJJIANFFM": 180
+                "value": 10,
+                "DPCANLOOHCH": {
+                  "NJIPHOKCEGN": 180
                 },
                 "onGroundRaycastUpDist": 2,
-                "value": 10
+                "direction": {
+                  "maxAngle": 180
+                }
               },
-              "effectTempleteID": -1,
-              "canBeHandledOnRecover": true
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Invoker_Archdeacon_WeakBreak_Thunder"
             },
             {
               "$type": "FireEffect",
-              "doOffStage": false,
-              "scale": 1,
+              "effectTempleteID": -1,
               "predicates": [
                 {
                   "$type": "ByTargetGlobalValue",
-                  "value": 2,
                   "target": "Target",
-                  "key": "_MID_LIGHT_ELEMENT"
+                  "key": "_MID_LIGHT_ELEMENT",
+                  "value": 2
                 }
               ],
-              "actorIceSubHurtDelta": -1,
-              "effectPattern": "Eff_Monster_Invoker_Archdeacon_WeakBreak_Ice",
+              "scale": 1,
               "born": {
-                "direction": {
-                  "maxAngle": 180
-                },
-                "FDGAEDDEEDG": {
-                  "ELAJJIANFFM": 180
+                "value": 10,
+                "DPCANLOOHCH": {
+                  "NJIPHOKCEGN": 180
                 },
                 "onGroundRaycastUpDist": 2,
-                "value": 10
+                "direction": {
+                  "maxAngle": 180
+                }
               },
-              "effectTempleteID": -1,
-              "canBeHandledOnRecover": true
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Invoker_Archdeacon_WeakBreak_Ice"
             },
             {
               "$type": "FireEffect",
-              "doOffStage": false,
-              "scale": 1,
+              "effectTempleteID": -1,
               "predicates": [
                 {
                   "$type": "ByTargetGlobalValue",
-                  "value": 3,
                   "target": "Target",
-                  "key": "_MID_LIGHT_ELEMENT"
+                  "key": "_MID_LIGHT_ELEMENT",
+                  "value": 3
                 }
               ],
-              "actorIceSubHurtDelta": -1,
-              "effectPattern": "Eff_Monster_Invoker_Archdeacon_WeakBreak_Water",
+              "scale": 1,
               "born": {
-                "direction": {
-                  "maxAngle": 180
-                },
-                "FDGAEDDEEDG": {
-                  "ELAJJIANFFM": 180
+                "value": 10,
+                "DPCANLOOHCH": {
+                  "NJIPHOKCEGN": 180
                 },
                 "onGroundRaycastUpDist": 2,
-                "value": 10
+                "direction": {
+                  "maxAngle": 180
+                }
               },
-              "effectTempleteID": -1,
-              "canBeHandledOnRecover": true
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1,
+              "effectPattern": "Eff_Monster_Invoker_Archdeacon_WeakBreak_Water"
             },
             {
               "$type": "SetGlobalValue",
               "doOffStage": false,
               "key": "_SWITCH_TIMES",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             }
           ],
           "elementDurability": 100,
-          "isLimitedProperties": true,
-          "minus_one": -1
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "isLimitedProperties": true
         },
         "Invoker_Archdeacon_InBreak": {
           "onAdded": [
@@ -1725,74 +1662,75 @@
               "$type": "SetAnimatorBool",
               "doOffStage": false,
               "value": true,
+              "canBeHandledOnRecover": true,
               "boolID": "InBreak",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "actorIceSubHurtDelta": -1
             },
             {
               "$type": "SetPoseBool",
               "doOffStage": false,
               "value": true,
+              "canBeHandledOnRecover": true,
               "boolID": "InWeak",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "actorIceSubHurtDelta": -1
             },
             {
               "$type": "SetGlobalValue",
               "doOffStage": false,
               "key": "_INBREAK_RECOVER",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             }
           ],
-          "elementDurability": 100,
           "onReconnect": [
             {
               "$type": "SetGlobalValue",
               "doOffStage": false,
+              "key": "_INBREAK_RECOVER",
               "value": 1,
-              "key": "_INBREAK_RECOVER",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "isLimitedProperties": true,
-          "onRemoved": [
-            {
-              "$type": "SetGlobalValue",
-              "doOffStage": false,
-              "key": "_INBREAK_RECOVER",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             }
           ],
           "modifierMixins": [
             {
               "$type": "AttachModifierToSelfGlobalValueMixin",
-              "enable": true,
+              "valueSteps": [
+                0.5,
+                1.5
+              ],
               "globalValueKey": "_INBREAK_RECOVER",
               "modifierNameSteps": [
                 "InBreak_Recover"
               ],
+              "enable": true,
               "removeAppliedModifier": true,
-              "actorIceSubHurtDelta": -1,
-              "valueSteps": [
-                0.5,
-                1.5
-              ]
+              "actorIceSubHurtDelta": -1
             }
           ],
+          "elementDurability": 100,
           "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "onRemoved": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_INBREAK_RECOVER",
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
+            }
+          ],
           "onChangeAuthority": [
             {
               "$type": "SetGlobalValue",
               "doOffStage": false,
-              "value": 1,
               "key": "_INBREAK_RECOVER",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "value": 1,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             }
-          ]
+          ],
+          "isLimitedProperties": true
         },
         "Invoker_Archdeacon_InWeak": {
           "onAdded": [
@@ -1800,278 +1738,288 @@
               "$type": "SetGlobalValue",
               "doOffStage": false,
               "key": "_INWEAK_RECOVER",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             },
             {
               "$type": "SetPoseBool",
               "doOffStage": false,
               "value": true,
+              "canBeHandledOnRecover": true,
               "boolID": "InWeak",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "actorIceSubHurtDelta": -1
             },
             {
               "$type": "SetAnimatorBool",
               "doOffStage": false,
               "value": true,
+              "canBeHandledOnRecover": true,
               "boolID": "InWeak",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "actorIceSubHurtDelta": -1
             }
           ],
-          "elementDurability": 100,
           "onReconnect": [
             {
               "$type": "SetGlobalValue",
               "doOffStage": false,
+              "key": "_INWEAK_RECOVER",
               "value": 1,
-              "key": "_INWEAK_RECOVER",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "isLimitedProperties": true,
-          "onRemoved": [
-            {
-              "$type": "SetGlobalValue",
-              "doOffStage": false,
-              "key": "_INWEAK_RECOVER",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             }
           ],
           "modifierMixins": [
             {
               "$type": "AttachModifierToSelfGlobalValueMixin",
-              "enable": true,
+              "valueSteps": [
+                0.5,
+                1.5
+              ],
               "globalValueKey": "_INWEAK_RECOVER",
               "modifierNameSteps": [
                 "RecoverWeakTrigger"
               ],
+              "enable": true,
               "removeAppliedModifier": true,
-              "actorIceSubHurtDelta": -1,
-              "valueSteps": [
-                0.5,
-                1.5
-              ]
+              "actorIceSubHurtDelta": -1
             }
           ],
+          "elementDurability": 100,
           "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "onRemoved": [
+            {
+              "$type": "SetGlobalValue",
+              "doOffStage": false,
+              "key": "_INWEAK_RECOVER",
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
+            }
+          ],
           "onChangeAuthority": [
             {
               "$type": "SetGlobalValue",
               "doOffStage": false,
-              "value": 1,
               "key": "_INWEAK_RECOVER",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "value": 1,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             }
-          ]
+          ],
+          "isLimitedProperties": true
         },
         "Invoker_Archdeacon_InitialWeakDuration": {
           "onAdded": [
             {
               "$type": "SetGlobalValue",
               "doOffStage": false,
-              "value": 10.5,
               "key": "_WEAK_DURATION",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "value": 10.5,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             },
             {
               "$type": "SetGlobalValueToOverrideMap",
-              "doOffStage": false,
-              "overrideMapKey": "WeakDuration",
               "globalValueKey": "_WEAK_DURATION",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "overrideMapKey": "WeakDuration",
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             }
           ],
           "elementDurability": 100,
-          "isLimitedProperties": true,
-          "minus_one": -1
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "isLimitedProperties": true
         },
         "Invoker_Archdeacon_NoShieldInitial": {
           "elementDurability": 100,
-          "isLimitedProperties": true,
-          "minus_one": -1
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "isLimitedProperties": true
         },
         "Invoker_Archdeacon_NoWeak": {
           "onAdded": [
             {
               "$type": "SetAnimatorInt",
               "doOffStage": false,
-              "value": 3,
               "intID": "RemainBallNum",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "value": 3,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             },
             {
               "$type": "SetGlobalValue",
               "doOffStage": false,
               "key": "_MONSTERLOG_WEAKFLAG",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             }
           ],
-          "elementDurability": 100,
-          "isLimitedProperties": true,
           "modifierMixins": [
             {
               "$type": "AttachModifierToSelfGlobalValueMixin",
-              "enable": true,
+              "valueSteps": [
+                -0.5,
+                2.5,
+                3.5
+              ],
               "globalValueKey": "_MAGIC_CIRCLE_BROKEN_NUM",
               "modifierNameSteps": [
                 "Invoker_Archdeacon_ThreeCircleEmpty",
                 "Invoker_Archdeacon_ThreeCircleToWeak"
               ],
+              "enable": true,
               "removeAppliedModifier": true,
-              "actorIceSubHurtDelta": -1,
-              "valueSteps": [
-                -0.5,
-                2.5,
-                3.5
-              ]
+              "actorIceSubHurtDelta": -1
             }
           ],
-          "minus_one": -1
+          "elementDurability": 100,
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "isLimitedProperties": true
         },
         "Invoker_Archdeacon_NotInBreak": {
           "onAdded": [
             {
               "$type": "SetAnimatorBool",
               "doOffStage": false,
+              "canBeHandledOnRecover": true,
               "boolID": "InBreak",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "actorIceSubHurtDelta": -1
             },
             {
               "$type": "SetPoseBool",
               "doOffStage": false,
+              "canBeHandledOnRecover": true,
               "boolID": "InWeak",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "actorIceSubHurtDelta": -1
             }
           ],
           "elementDurability": 100,
-          "isLimitedProperties": true,
-          "minus_one": -1
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "isLimitedProperties": true
         },
         "Invoker_Archdeacon_NotInWeak": {
           "onAdded": [
             {
               "$type": "SetPoseBool",
               "doOffStage": false,
+              "canBeHandledOnRecover": true,
               "boolID": "InWeak",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "actorIceSubHurtDelta": -1
             },
             {
               "$type": "SetAnimatorBool",
               "doOffStage": false,
+              "canBeHandledOnRecover": true,
               "boolID": "InWeak",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "actorIceSubHurtDelta": -1
             }
           ],
           "elementDurability": 100,
-          "isLimitedProperties": true,
-          "minus_one": -1
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "isLimitedProperties": true
         },
         "Invoker_Archdeacon_OneCircleEmpty": {
           "elementDurability": 100,
-          "isLimitedProperties": true,
-          "minus_one": -1
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "isLimitedProperties": true
         },
         "Invoker_Archdeacon_OneCircleToWeak": {
           "onAdded": [
             {
               "$type": "SetGlobalValue",
               "doOffStage": false,
-              "value": 1,
               "key": "_MONSTERLOG_WEAKFLAG",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "value": 1,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             },
             {
               "$type": "SetGlobalValue",
               "doOffStage": false,
-              "value": 3,
               "key": "_LIGHT_CLOSE_NUM",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "value": 3,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             }
           ],
           "elementDurability": 100,
-          "isLimitedProperties": true,
-          "minus_one": -1
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "isLimitedProperties": true
         },
         "Invoker_Archdeacon_RemainOne": {
           "onAdded": [
             {
               "$type": "SetAnimatorInt",
               "doOffStage": false,
-              "value": 1,
               "intID": "RemainBallNum",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "value": 1,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             }
           ],
-          "elementDurability": 100,
-          "isLimitedProperties": true,
           "modifierMixins": [
             {
               "$type": "AttachModifierToSelfGlobalValueMixin",
-              "enable": true,
+              "valueSteps": [
+                -0.5,
+                0.5,
+                1.5
+              ],
               "globalValueKey": "_MAGIC_CIRCLE_BROKEN_NUM",
               "modifierNameSteps": [
                 "Invoker_Archdeacon_OneCircleEmpty",
                 "Invoker_Archdeacon_OneCircleToWeak"
               ],
+              "enable": true,
               "removeAppliedModifier": true,
-              "actorIceSubHurtDelta": -1,
-              "valueSteps": [
-                -0.5,
-                0.5,
-                1.5
-              ]
+              "actorIceSubHurtDelta": -1
             }
           ],
-          "minus_one": -1
+          "elementDurability": 100,
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "isLimitedProperties": true
         },
         "Invoker_Archdeacon_RemainTwo": {
           "onAdded": [
             {
               "$type": "SetAnimatorInt",
               "doOffStage": false,
-              "value": 2,
               "intID": "RemainBallNum",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "value": 2,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             }
           ],
-          "elementDurability": 100,
-          "isLimitedProperties": true,
           "modifierMixins": [
             {
               "$type": "AttachModifierToSelfGlobalValueMixin",
-              "enable": true,
+              "valueSteps": [
+                -0.5,
+                1.5,
+                2.5
+              ],
               "globalValueKey": "_MAGIC_CIRCLE_BROKEN_NUM",
               "modifierNameSteps": [
                 "Invoker_Archdeacon_TwoCircleEmpty",
                 "Invoker_Archdeacon_TwoCircleToWeak"
               ],
+              "enable": true,
               "removeAppliedModifier": true,
-              "actorIceSubHurtDelta": -1,
-              "valueSteps": [
-                -0.5,
-                1.5,
-                2.5
-              ]
+              "actorIceSubHurtDelta": -1
             }
           ],
-          "minus_one": -1
+          "elementDurability": 100,
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "isLimitedProperties": true
         },
         "Invoker_Archdeacon_ShakeTemp": {
           "onAdded": [
@@ -2079,1094 +2027,1109 @@
               "$type": "SetAnimatorBool",
               "doOffStage": false,
               "value": true,
+              "canBeHandledOnRecover": true,
               "boolID": "WeakTemp",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "actorIceSubHurtDelta": -1
             }
           ],
           "elementDurability": 100,
-          "isLimitedProperties": true,
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
           "onRemoved": [
             {
               "$type": "SetAnimatorBool",
               "doOffStage": false,
+              "canBeHandledOnRecover": true,
               "boolID": "WeakTemp",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "actorIceSubHurtDelta": -1
             }
           ],
-          "minus_one": -1
+          "isLimitedProperties": true
         },
         "Invoker_Archdeacon_ShieldInitial": {
           "onAdded": [
             {
               "$type": "TriggerAbility",
+              "target": "Other",
               "doOffStage": false,
               "abilityName": "Monster_Invoker_Archdeacon_01_CreateLightInitial",
-              "actorIceSubHurtDelta": -1,
-              "target": "Other",
-              "canBeHandledOnRecover": true
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             },
             {
               "$type": "ApplyModifier",
-              "doOffStage": false,
               "modifierName": "Reset_ShieldInitial",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             }
           ],
           "elementDurability": 100,
-          "isLimitedProperties": true,
-          "minus_one": -1
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "isLimitedProperties": true
         },
         "Invoker_Archdeacon_ThreeCircleEmpty": {
           "elementDurability": 100,
-          "isLimitedProperties": true,
-          "minus_one": -1
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "isLimitedProperties": true
         },
         "Invoker_Archdeacon_ThreeCircleToWeak": {
           "onAdded": [
             {
               "$type": "SetGlobalValue",
               "doOffStage": false,
-              "value": 1,
               "key": "_MONSTERLOG_WEAKFLAG",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "value": 1,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             },
             {
               "$type": "SetGlobalValue",
               "doOffStage": false,
-              "value": 3,
               "key": "_LIGHT_CLOSE_NUM",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "value": 3,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             }
           ],
           "elementDurability": 100,
-          "isLimitedProperties": true,
-          "minus_one": -1
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "isLimitedProperties": true
         },
         "Invoker_Archdeacon_TwoCircleEmpty": {
           "elementDurability": 100,
-          "isLimitedProperties": true,
-          "minus_one": -1
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "isLimitedProperties": true
         },
         "Invoker_Archdeacon_TwoCircleToWeak": {
           "onAdded": [
             {
               "$type": "SetGlobalValue",
               "doOffStage": false,
-              "value": 1,
               "key": "_MONSTERLOG_WEAKFLAG",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "value": 1,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             },
             {
               "$type": "SetGlobalValue",
               "doOffStage": false,
-              "value": 3,
               "key": "_LIGHT_CLOSE_NUM",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "value": 3,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             }
           ],
           "elementDurability": 100,
-          "isLimitedProperties": true,
-          "minus_one": -1
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "isLimitedProperties": true
         },
         "Invoker_Archdeacon_WeakDuration": {
           "onAdded": [
             {
               "$type": "SetGlobalValue",
               "doOffStage": false,
-              "value": 1,
               "key": "_WEAK_STATE",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "value": 1,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             }
           ],
           "elementDurability": 100,
-          "isLimitedProperties": true,
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
               "doOffStage": false,
               "key": "_WEAK_STATE",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             }
           ],
-          "minus_one": -1,
-          "duration": "WeakDuration"
+          "duration": "WeakDuration",
+          "isLimitedProperties": true
         },
         "Invoker_Archdeacon_WeakRecoverShield": {
           "elementDurability": 100,
-          "isLimitedProperties": true,
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
               "doOffStage": false,
-              "value": 1,
               "key": "_GO_CREATE_SHIELD_INITIAL",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "value": 1,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             }
           ],
-          "minus_one": -1,
-          "duration": 2
+          "duration": 2,
+          "isLimitedProperties": true
         },
         "Monster_Invoker_Archdeacon_01_BreakActionList": {
           "elementDurability": 100,
-          "isLimitedProperties": true,
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
           "onRemoved": [
             {
               "$type": "Predicated",
-              "doOffStage": false,
               "targetPredicates": [
                 {
                   "$type": "ByTargetGlobalValue",
+                  "compareType": "NoneOrEqual",
                   "target": "Target",
-                  "key": "_ARCHDEACON_IN_SWITCH",
-                  "compareType": "NoneOrEqual"
+                  "key": "_ARCHDEACON_IN_SWITCH"
                 }
               ],
-              "actorIceSubHurtDelta": -1,
               "successActions": [
                 {
                   "$type": "AddGlobalValue",
                   "doOffStage": false,
-                  "value": 1,
                   "key": "_LIGHT_CLOSE_NUM",
-                  "maxValue": 3,
-                  "actorIceSubHurtDelta": -1,
+                  "value": 1,
+                  "canBeHandledOnRecover": true,
                   "useLimitRange": true,
-                  "canBeHandledOnRecover": true
+                  "actorIceSubHurtDelta": -1,
+                  "maxValue": 3
                 },
                 {
                   "$type": "Predicated",
-                  "doOffStage": false,
                   "targetPredicates": [
                     {
                       "$type": "ByTargetGlobalValue",
-                      "value": 2,
+                      "compareType": "LessAndEqual",
                       "target": "Target",
                       "key": "_LIGHT_CLOSE_NUM",
-                      "compareType": "LessAndEqual"
+                      "value": 2
                     }
                   ],
-                  "actorIceSubHurtDelta": -1,
                   "successActions": [
                     {
                       "$type": "SetAnimatorTrigger",
-                      "doOffStage": false,
                       "triggerID": "ShieldBreak",
-                      "actorIceSubHurtDelta": -1,
-                      "canBeHandledOnRecover": true
+                      "doOffStage": false,
+                      "canBeHandledOnRecover": true,
+                      "actorIceSubHurtDelta": -1
                     },
                     {
                       "$type": "ApplyModifier",
-                      "doOffStage": false,
                       "modifierName": "Monster_Invoker_Archdeacon_01_BreakDuration",
-                      "actorIceSubHurtDelta": -1,
-                      "canBeHandledOnRecover": true
+                      "doOffStage": false,
+                      "canBeHandledOnRecover": true,
+                      "actorIceSubHurtDelta": -1
                     },
                     {
                       "$type": "ApplyModifier",
-                      "doOffStage": false,
                       "modifierName": "Monster_Invoker_Archdeacon_01_BreakRecover_LeyLineChallenge",
-                      "actorIceSubHurtDelta": -1,
-                      "canBeHandledOnRecover": true
+                      "doOffStage": false,
+                      "canBeHandledOnRecover": true,
+                      "actorIceSubHurtDelta": -1
                     }
                   ],
-                  "canBeHandledOnRecover": true
+                  "doOffStage": false,
+                  "canBeHandledOnRecover": true,
+                  "actorIceSubHurtDelta": -1
                 },
                 {
                   "$type": "SetGlobalValue",
                   "doOffStage": false,
                   "key": "_MID_LIGHT_ON",
-                  "actorIceSubHurtDelta": -1,
-                  "canBeHandledOnRecover": true
+                  "canBeHandledOnRecover": true,
+                  "actorIceSubHurtDelta": -1
                 },
                 {
                   "$type": "SetGlobalValue",
                   "doOffStage": false,
                   "key": "_SHIELD_STATE",
-                  "actorIceSubHurtDelta": -1,
-                  "canBeHandledOnRecover": true
+                  "canBeHandledOnRecover": true,
+                  "actorIceSubHurtDelta": -1
                 }
               ],
-              "canBeHandledOnRecover": true
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             }
           ],
-          "minus_one": -1,
-          "duration": 0.029999999329447746
+          "duration": 0.029999999329447746,
+          "isLimitedProperties": true
         },
         "Monster_Invoker_Archdeacon_01_BreakDuration": {
           "onAdded": [
             {
               "$type": "SetGlobalValue",
               "doOffStage": false,
-              "value": 1,
               "key": "_BREAK_STATE",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "value": 1,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             }
           ],
           "elementDurability": 100,
-          "isLimitedProperties": true,
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
               "doOffStage": false,
               "key": "_BREAK_STATE",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             }
           ],
-          "minus_one": -1,
-          "duration": 1.600000023841858
+          "duration": 1.600000023841858,
+          "isLimitedProperties": true
         },
         "Monster_Invoker_Archdeacon_01_BreakRecover_LeyLineChallenge": {
           "elementDurability": 100,
-          "isLimitedProperties": true,
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
           "onRemoved": [
             {
               "$type": "SetAnimatorBool",
               "doOffStage": false,
+              "canBeHandledOnRecover": true,
               "boolID": "InBreak",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "actorIceSubHurtDelta": -1
             }
           ],
-          "minus_one": -1,
-          "duration": 0.10000000149011612
+          "duration": 0.10000000149011612,
+          "isLimitedProperties": true
         },
         "Monster_Invoker_Archdeacon_01_Shield_Fire": {
-          "elementType": "Fire",
-          "elementDurability": "ShieldElement1",
-          "isLimitedProperties": true,
-          "onRemoved": [
-            {
-              "$type": "GetFightProperty",
-              "doOffStage": false,
-              "globalValueKey": "_MONSTER_MAXHP",
-              "fightProp": "FIGHT_PROP_MAX_HP",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            },
-            {
-              "$type": "Predicated",
-              "doOffStage": false,
-              "targetPredicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "value": [
-                    "_MONSTER_MAXHP",
-                    0.25,
-                    "MUL"
-                  ],
-                  "target": "Target",
-                  "key": "_SHIELD_ABSORB_TOTAL_DAMAGE",
-                  "compareType": "MoreThanAndEqual"
-                }
-              ],
-              "actorIceSubHurtDelta": -1,
-              "successActions": [
-                {
-                  "$type": "SetGlobalValue",
-                  "doOffStage": false,
-                  "value": [
-                    "_MONSTER_MAXHP",
-                    0.25,
-                    "MUL"
-                  ],
-                  "key": "_SHIELD_ABSORB_TOTAL_DAMAGE",
-                  "actorIceSubHurtDelta": -1,
-                  "canBeHandledOnRecover": true
-                }
-              ],
-              "canBeHandledOnRecover": true
-            },
-            {
-              "$type": "Predicated",
-              "doOffStage": false,
-              "targetPredicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "target": "Target",
-                  "key": "_NOT_BREAK_REMOVE",
-                  "compareType": "NoneOrEqual"
-                }
-              ],
-              "actorIceSubHurtDelta": -1,
-              "successActions": [
-                {
-                  "$type": "DamageByAttackValue",
-                  "attackInfo": {
-                    "attenuationGroup": "default",
-                    "hitPattern": {
-                      "hitImpulseType": "LV5",
-                      "onHitEffectName": "default",
-                      "JKLONEBKFKJ": {
-                        "JJGBOHIKHFM": true,
-                        "value": 1
-                      }
-                    },
-                    "FJNMGDHFOEH": {
-                      "GCPNPCOFFBP": "Shake"
-                    },
-                    "IODAJAKBOLG": {
-                      "onHitEffectName": "default",
-                      "JKLONEBKFKJ": {
-                        "JJGBOHIKHFM": true,
-                        "value": 1
-                      }
-                    },
-                    "attackProperty": {
-                      "attackType": "Default",
-                      "elementDurability": 25,
-                      "strikeType": "Blunt",
-                      "bonusCritical": 1,
-                      "elementRank": 1,
-                      "damageExtra": [
-                        "_SHIELD_ABSORB_TOTAL_DAMAGE",
-                        0.5,
-                        "MUL"
-                      ]
-                    },
-                    "cameraShake": {
-                      "extension": {
-                        "baseCycle": 0.11999999731779099,
-                        "cycleDamping": 0.11999999731779099,
-                        "baseOnCamera": true,
-                        "rangeAttenuation": 0.5
-                      },
-                      "FAKMJBNLPPB": -1,
-                      "shakeDistance": 20
-                    }
-                  },
-                  "doOffStage": false,
-                  "actorIceSubHurtDelta": -1,
-                  "born": {
-                    "$type": "ConfigBornBySelf",
-                    "direction": {
-                      "maxAngle": 180
-                    },
-                    "useRotation": true,
-                    "offset": {
-                      "x": 1.2000000476837158
-                    },
-                    "FDGAEDDEEDG": {
-                      "ELAJJIANFFM": 180
-                    },
-                    "onGroundRaycastUpDist": 2,
-                    "value": 10
-                  },
-                  "canBeHandledOnRecover": true
-                },
-                {
-                  "$type": "ApplyModifier",
-                  "doOffStage": false,
-                  "modifierName": "Monster_Invoker_Archdeacon_01_BreakActionList",
-                  "actorIceSubHurtDelta": -1,
-                  "canBeHandledOnRecover": true
-                },
-                {
-                  "$type": "FireEffect",
-                  "doOffStage": false,
-                  "scale": 1,
-                  "actorIceSubHurtDelta": -1,
-                  "effectPattern": "Eff_Monster_Invoker_Archdeacon_ShieldBreak_Fire",
-                  "born": {
-                    "direction": {
-                      "maxAngle": 180
-                    },
-                    "FDGAEDDEEDG": {
-                      "ELAJJIANFFM": 180
-                    },
-                    "onGroundRaycastUpDist": 2,
-                    "value": 10
-                  },
-                  "effectTempleteID": -1,
-                  "canBeHandledOnRecover": true
-                }
-              ],
-              "canBeHandledOnRecover": true
-            }
-          ],
           "modifierMixins": [
             {
               "$type": "ElementShieldMixin",
-              "maxShieldByHPRatio": 0.5,
-              "elementType": "Fire",
-              "useMutiPlayerFixData": true,
-              "actorIceSubHurtDelta": -1,
+              "BOHCNFLFIKA": "_SHIELD_ABSORB_TOTAL_DAMAGE",
               "damageRatio": 1,
-              "NADBHIKGCJA": 360,
-              "ONABLHLGMEL": "_SHIELD_ABSORB_TOTAL_DAMAGE"
+              "FIDEOFDJCDE": 360,
+              "useMutiPlayerFixData": true,
+              "maxShieldByHPRatio": 0.5,
+              "actorIceSubHurtDelta": -1,
+              "elementType": "Fire"
             }
           ],
-          "minus_one": -1,
           "properties": {
             "Actor_FireMuteHurtDelta": 1
-          }
+          },
+          "elementDurability": "ShieldElement1",
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "onRemoved": [
+            {
+              "$type": "GetFightProperty",
+              "globalValueKey": "_MONSTER_MAXHP",
+              "doOffStage": false,
+              "fightProp": "FIGHT_PROP_MAX_HP",
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "Predicated",
+              "targetPredicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "compareType": "MoreThanAndEqual",
+                  "target": "Target",
+                  "key": "_SHIELD_ABSORB_TOTAL_DAMAGE",
+                  "value": [
+                    "_MONSTER_MAXHP",
+                    0.25,
+                    "MUL"
+                  ]
+                }
+              ],
+              "successActions": [
+                {
+                  "$type": "SetGlobalValue",
+                  "doOffStage": false,
+                  "key": "_SHIELD_ABSORB_TOTAL_DAMAGE",
+                  "value": [
+                    "_MONSTER_MAXHP",
+                    0.25,
+                    "MUL"
+                  ],
+                  "canBeHandledOnRecover": true,
+                  "actorIceSubHurtDelta": -1
+                }
+              ],
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "Predicated",
+              "targetPredicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "compareType": "NoneOrEqual",
+                  "target": "Target",
+                  "key": "_NOT_BREAK_REMOVE"
+                }
+              ],
+              "successActions": [
+                {
+                  "$type": "DamageByAttackValue",
+                  "attackInfo": {
+                    "AKKPNIMNNGE": {
+                      "JMEJGMOJIJJ": "Shake"
+                    },
+                    "attackProperty": {
+                      "elementDurability": 25,
+                      "damageExtra": [
+                        "_SHIELD_ABSORB_TOTAL_DAMAGE",
+                        0.5,
+                        "MUL"
+                      ],
+                      "attackType": "Default",
+                      "elementRank": 1,
+                      "bonusCritical": 1,
+                      "strikeType": "Blunt"
+                    },
+                    "hitPattern": {
+                      "hitImpulseType": "LV5",
+                      "onHitEffectName": "default",
+                      "NCKKCKDNLCC": {
+                        "value": 1,
+                        "JGHPGBHFEHK": true
+                      }
+                    },
+                    "cameraShake": {
+                      "shakeDistance": 20,
+                      "extension": {
+                        "baseCycle": 0.11999999731779099,
+                        "cycleDamping": 0.11999999731779099,
+                        "rangeAttenuation": 0.5,
+                        "baseOnCamera": true
+                      }
+                    },
+                    "attenuationGroup": "default",
+                    "POIJCDIFPAA": {
+                      "onHitEffectName": "default",
+                      "NCKKCKDNLCC": {
+                        "value": 1,
+                        "JGHPGBHFEHK": true
+                      }
+                    }
+                  },
+                  "born": {
+                    "$type": "ConfigBornBySelf",
+                    "value": 10,
+                    "DPCANLOOHCH": {
+                      "NJIPHOKCEGN": 180
+                    },
+                    "useRotation": true,
+                    "onGroundRaycastUpDist": 2,
+                    "offset": {
+                      "x": 1.2000000476837158
+                    },
+                    "direction": {
+                      "maxAngle": 180
+                    }
+                  },
+                  "doOffStage": false,
+                  "canBeHandledOnRecover": true,
+                  "actorIceSubHurtDelta": -1
+                },
+                {
+                  "$type": "ApplyModifier",
+                  "modifierName": "Monster_Invoker_Archdeacon_01_BreakActionList",
+                  "doOffStage": false,
+                  "canBeHandledOnRecover": true,
+                  "actorIceSubHurtDelta": -1
+                },
+                {
+                  "$type": "FireEffect",
+                  "effectTempleteID": -1,
+                  "scale": 1,
+                  "born": {
+                    "value": 10,
+                    "DPCANLOOHCH": {
+                      "NJIPHOKCEGN": 180
+                    },
+                    "onGroundRaycastUpDist": 2,
+                    "direction": {
+                      "maxAngle": 180
+                    }
+                  },
+                  "doOffStage": false,
+                  "canBeHandledOnRecover": true,
+                  "actorIceSubHurtDelta": -1,
+                  "effectPattern": "Eff_Monster_Invoker_Archdeacon_ShieldBreak_Fire"
+                }
+              ],
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "isLimitedProperties": true,
+          "elementType": "Fire"
         },
         "Monster_Invoker_Archdeacon_01_Shield_Ice": {
-          "elementType": "Frozen",
-          "elementDurability": "ShieldElement1",
-          "isLimitedProperties": true,
-          "onRemoved": [
-            {
-              "$type": "GetFightProperty",
-              "doOffStage": false,
-              "globalValueKey": "_MONSTER_MAXHP",
-              "fightProp": "FIGHT_PROP_MAX_HP",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            },
-            {
-              "$type": "Predicated",
-              "doOffStage": false,
-              "targetPredicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "value": [
-                    "_MONSTER_MAXHP",
-                    0.25,
-                    "MUL"
-                  ],
-                  "target": "Target",
-                  "key": "_SHIELD_ABSORB_TOTAL_DAMAGE",
-                  "compareType": "MoreThanAndEqual"
-                }
-              ],
-              "actorIceSubHurtDelta": -1,
-              "successActions": [
-                {
-                  "$type": "SetGlobalValue",
-                  "doOffStage": false,
-                  "value": [
-                    "_MONSTER_MAXHP",
-                    0.25,
-                    "MUL"
-                  ],
-                  "key": "_SHIELD_ABSORB_TOTAL_DAMAGE",
-                  "actorIceSubHurtDelta": -1,
-                  "canBeHandledOnRecover": true
-                }
-              ],
-              "canBeHandledOnRecover": true
-            },
-            {
-              "$type": "Predicated",
-              "doOffStage": false,
-              "targetPredicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "target": "Target",
-                  "key": "_NOT_BREAK_REMOVE",
-                  "compareType": "NoneOrEqual"
-                }
-              ],
-              "actorIceSubHurtDelta": -1,
-              "successActions": [
-                {
-                  "$type": "DamageByAttackValue",
-                  "attackInfo": {
-                    "attenuationGroup": "default",
-                    "hitPattern": {
-                      "hitImpulseType": "LV5",
-                      "onHitEffectName": "default",
-                      "JKLONEBKFKJ": {
-                        "JJGBOHIKHFM": true,
-                        "value": 1
-                      }
-                    },
-                    "FJNMGDHFOEH": {
-                      "GCPNPCOFFBP": "Shake"
-                    },
-                    "IODAJAKBOLG": {
-                      "onHitEffectName": "default",
-                      "JKLONEBKFKJ": {
-                        "JJGBOHIKHFM": true,
-                        "value": 1
-                      }
-                    },
-                    "attackProperty": {
-                      "attackType": "Default",
-                      "elementDurability": 25,
-                      "strikeType": "Blunt",
-                      "bonusCritical": 1,
-                      "elementRank": 1,
-                      "damageExtra": [
-                        "_SHIELD_ABSORB_TOTAL_DAMAGE",
-                        0.5,
-                        "MUL"
-                      ]
-                    },
-                    "cameraShake": {
-                      "extension": {
-                        "baseCycle": 0.11999999731779099,
-                        "cycleDamping": 0.11999999731779099,
-                        "baseOnCamera": true,
-                        "rangeAttenuation": 0.5
-                      },
-                      "FAKMJBNLPPB": -1,
-                      "shakeDistance": 20
-                    }
-                  },
-                  "doOffStage": false,
-                  "actorIceSubHurtDelta": -1,
-                  "born": {
-                    "$type": "ConfigBornBySelf",
-                    "direction": {
-                      "maxAngle": 180
-                    },
-                    "useRotation": true,
-                    "offset": {
-                      "x": 1.2000000476837158
-                    },
-                    "FDGAEDDEEDG": {
-                      "ELAJJIANFFM": 180
-                    },
-                    "onGroundRaycastUpDist": 2,
-                    "value": 10
-                  },
-                  "canBeHandledOnRecover": true
-                },
-                {
-                  "$type": "ApplyModifier",
-                  "doOffStage": false,
-                  "modifierName": "Monster_Invoker_Archdeacon_01_BreakActionList",
-                  "actorIceSubHurtDelta": -1,
-                  "canBeHandledOnRecover": true
-                },
-                {
-                  "$type": "FireEffect",
-                  "doOffStage": false,
-                  "scale": 1,
-                  "actorIceSubHurtDelta": -1,
-                  "effectPattern": "Eff_Monster_Invoker_Archdeacon_ShieldBreak_Ice",
-                  "born": {
-                    "direction": {
-                      "maxAngle": 180
-                    },
-                    "FDGAEDDEEDG": {
-                      "ELAJJIANFFM": 180
-                    },
-                    "onGroundRaycastUpDist": 2,
-                    "value": 10
-                  },
-                  "effectTempleteID": -1,
-                  "canBeHandledOnRecover": true
-                }
-              ],
-              "canBeHandledOnRecover": true
-            }
-          ],
           "modifierMixins": [
             {
               "$type": "ElementShieldMixin",
-              "maxShieldByHPRatio": 0.5,
-              "elementType": "Frozen",
-              "useMutiPlayerFixData": true,
-              "actorIceSubHurtDelta": -1,
+              "BOHCNFLFIKA": "_SHIELD_ABSORB_TOTAL_DAMAGE",
               "damageRatio": 1,
-              "NADBHIKGCJA": 360,
-              "ONABLHLGMEL": "_SHIELD_ABSORB_TOTAL_DAMAGE"
+              "FIDEOFDJCDE": 360,
+              "useMutiPlayerFixData": true,
+              "maxShieldByHPRatio": 0.5,
+              "actorIceSubHurtDelta": -1,
+              "elementType": "Frozen"
             }
           ],
-          "minus_one": -1,
           "properties": {
             "Actor_IceMuteHurtDelta": 1
-          }
+          },
+          "elementDurability": "ShieldElement1",
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "onRemoved": [
+            {
+              "$type": "GetFightProperty",
+              "globalValueKey": "_MONSTER_MAXHP",
+              "doOffStage": false,
+              "fightProp": "FIGHT_PROP_MAX_HP",
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "Predicated",
+              "targetPredicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "compareType": "MoreThanAndEqual",
+                  "target": "Target",
+                  "key": "_SHIELD_ABSORB_TOTAL_DAMAGE",
+                  "value": [
+                    "_MONSTER_MAXHP",
+                    0.25,
+                    "MUL"
+                  ]
+                }
+              ],
+              "successActions": [
+                {
+                  "$type": "SetGlobalValue",
+                  "doOffStage": false,
+                  "key": "_SHIELD_ABSORB_TOTAL_DAMAGE",
+                  "value": [
+                    "_MONSTER_MAXHP",
+                    0.25,
+                    "MUL"
+                  ],
+                  "canBeHandledOnRecover": true,
+                  "actorIceSubHurtDelta": -1
+                }
+              ],
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "Predicated",
+              "targetPredicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "compareType": "NoneOrEqual",
+                  "target": "Target",
+                  "key": "_NOT_BREAK_REMOVE"
+                }
+              ],
+              "successActions": [
+                {
+                  "$type": "DamageByAttackValue",
+                  "attackInfo": {
+                    "AKKPNIMNNGE": {
+                      "JMEJGMOJIJJ": "Shake"
+                    },
+                    "attackProperty": {
+                      "elementDurability": 25,
+                      "damageExtra": [
+                        "_SHIELD_ABSORB_TOTAL_DAMAGE",
+                        0.5,
+                        "MUL"
+                      ],
+                      "attackType": "Default",
+                      "elementRank": 1,
+                      "bonusCritical": 1,
+                      "strikeType": "Blunt"
+                    },
+                    "hitPattern": {
+                      "hitImpulseType": "LV5",
+                      "onHitEffectName": "default",
+                      "NCKKCKDNLCC": {
+                        "value": 1,
+                        "JGHPGBHFEHK": true
+                      }
+                    },
+                    "cameraShake": {
+                      "shakeDistance": 20,
+                      "extension": {
+                        "baseCycle": 0.11999999731779099,
+                        "cycleDamping": 0.11999999731779099,
+                        "rangeAttenuation": 0.5,
+                        "baseOnCamera": true
+                      }
+                    },
+                    "attenuationGroup": "default",
+                    "POIJCDIFPAA": {
+                      "onHitEffectName": "default",
+                      "NCKKCKDNLCC": {
+                        "value": 1,
+                        "JGHPGBHFEHK": true
+                      }
+                    }
+                  },
+                  "born": {
+                    "$type": "ConfigBornBySelf",
+                    "value": 10,
+                    "DPCANLOOHCH": {
+                      "NJIPHOKCEGN": 180
+                    },
+                    "useRotation": true,
+                    "onGroundRaycastUpDist": 2,
+                    "offset": {
+                      "x": 1.2000000476837158
+                    },
+                    "direction": {
+                      "maxAngle": 180
+                    }
+                  },
+                  "doOffStage": false,
+                  "canBeHandledOnRecover": true,
+                  "actorIceSubHurtDelta": -1
+                },
+                {
+                  "$type": "ApplyModifier",
+                  "modifierName": "Monster_Invoker_Archdeacon_01_BreakActionList",
+                  "doOffStage": false,
+                  "canBeHandledOnRecover": true,
+                  "actorIceSubHurtDelta": -1
+                },
+                {
+                  "$type": "FireEffect",
+                  "effectTempleteID": -1,
+                  "scale": 1,
+                  "born": {
+                    "value": 10,
+                    "DPCANLOOHCH": {
+                      "NJIPHOKCEGN": 180
+                    },
+                    "onGroundRaycastUpDist": 2,
+                    "direction": {
+                      "maxAngle": 180
+                    }
+                  },
+                  "doOffStage": false,
+                  "canBeHandledOnRecover": true,
+                  "actorIceSubHurtDelta": -1,
+                  "effectPattern": "Eff_Monster_Invoker_Archdeacon_ShieldBreak_Ice"
+                }
+              ],
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "isLimitedProperties": true,
+          "elementType": "Frozen"
         },
         "Monster_Invoker_Archdeacon_01_Shield_Thunder": {
-          "elementType": "Electric",
-          "elementDurability": "ShieldElement2",
-          "isLimitedProperties": true,
-          "onRemoved": [
-            {
-              "$type": "GetFightProperty",
-              "doOffStage": false,
-              "globalValueKey": "_MONSTER_MAXHP",
-              "fightProp": "FIGHT_PROP_MAX_HP",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            },
-            {
-              "$type": "Predicated",
-              "doOffStage": false,
-              "targetPredicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "value": [
-                    "_MONSTER_MAXHP",
-                    0.25,
-                    "MUL"
-                  ],
-                  "target": "Target",
-                  "key": "_SHIELD_ABSORB_TOTAL_DAMAGE",
-                  "compareType": "MoreThanAndEqual"
-                }
-              ],
-              "actorIceSubHurtDelta": -1,
-              "successActions": [
-                {
-                  "$type": "SetGlobalValue",
-                  "doOffStage": false,
-                  "value": [
-                    "_MONSTER_MAXHP",
-                    0.25,
-                    "MUL"
-                  ],
-                  "key": "_SHIELD_ABSORB_TOTAL_DAMAGE",
-                  "actorIceSubHurtDelta": -1,
-                  "canBeHandledOnRecover": true
-                }
-              ],
-              "canBeHandledOnRecover": true
-            },
-            {
-              "$type": "Predicated",
-              "doOffStage": false,
-              "targetPredicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "target": "Target",
-                  "key": "_NOT_BREAK_REMOVE",
-                  "compareType": "NoneOrEqual"
-                }
-              ],
-              "actorIceSubHurtDelta": -1,
-              "successActions": [
-                {
-                  "$type": "DamageByAttackValue",
-                  "attackInfo": {
-                    "attenuationGroup": "default",
-                    "hitPattern": {
-                      "hitImpulseType": "LV5",
-                      "onHitEffectName": "default",
-                      "JKLONEBKFKJ": {
-                        "JJGBOHIKHFM": true,
-                        "value": 1
-                      }
-                    },
-                    "FJNMGDHFOEH": {
-                      "GCPNPCOFFBP": "Shake"
-                    },
-                    "IODAJAKBOLG": {
-                      "onHitEffectName": "default",
-                      "JKLONEBKFKJ": {
-                        "JJGBOHIKHFM": true,
-                        "value": 1
-                      }
-                    },
-                    "attackProperty": {
-                      "attackType": "Default",
-                      "elementDurability": 25,
-                      "strikeType": "Blunt",
-                      "bonusCritical": 1,
-                      "elementRank": 1,
-                      "damageExtra": [
-                        "_SHIELD_ABSORB_TOTAL_DAMAGE",
-                        0.5,
-                        "MUL"
-                      ]
-                    },
-                    "cameraShake": {
-                      "extension": {
-                        "baseCycle": 0.11999999731779099,
-                        "cycleDamping": 0.11999999731779099,
-                        "baseOnCamera": true,
-                        "rangeAttenuation": 0.5
-                      },
-                      "FAKMJBNLPPB": -1,
-                      "shakeDistance": 20
-                    }
-                  },
-                  "doOffStage": false,
-                  "actorIceSubHurtDelta": -1,
-                  "born": {
-                    "$type": "ConfigBornBySelf",
-                    "direction": {
-                      "maxAngle": 180
-                    },
-                    "useRotation": true,
-                    "offset": {
-                      "x": 1.2000000476837158
-                    },
-                    "FDGAEDDEEDG": {
-                      "ELAJJIANFFM": 180
-                    },
-                    "onGroundRaycastUpDist": 2,
-                    "value": 10
-                  },
-                  "canBeHandledOnRecover": true
-                },
-                {
-                  "$type": "ApplyModifier",
-                  "doOffStage": false,
-                  "modifierName": "Monster_Invoker_Archdeacon_01_BreakActionList",
-                  "actorIceSubHurtDelta": -1,
-                  "canBeHandledOnRecover": true
-                },
-                {
-                  "$type": "FireEffect",
-                  "doOffStage": false,
-                  "scale": 1,
-                  "actorIceSubHurtDelta": -1,
-                  "effectPattern": "Eff_Monster_Invoker_Archdeacon_ShieldBreak_Thunder",
-                  "born": {
-                    "direction": {
-                      "maxAngle": 180
-                    },
-                    "FDGAEDDEEDG": {
-                      "ELAJJIANFFM": 180
-                    },
-                    "onGroundRaycastUpDist": 2,
-                    "value": 10
-                  },
-                  "effectTempleteID": -1,
-                  "canBeHandledOnRecover": true
-                }
-              ],
-              "canBeHandledOnRecover": true
-            }
-          ],
           "modifierMixins": [
             {
               "$type": "ElementShieldMixin",
-              "maxShieldByHPRatio": 0.5,
-              "elementType": "Electric",
-              "useMutiPlayerFixData": true,
-              "actorIceSubHurtDelta": -1,
+              "BOHCNFLFIKA": "_SHIELD_ABSORB_TOTAL_DAMAGE",
               "damageRatio": 1,
-              "NADBHIKGCJA": 360,
-              "ONABLHLGMEL": "_SHIELD_ABSORB_TOTAL_DAMAGE"
+              "FIDEOFDJCDE": 360,
+              "useMutiPlayerFixData": true,
+              "maxShieldByHPRatio": 0.5,
+              "actorIceSubHurtDelta": -1,
+              "elementType": "Electric"
             }
           ],
-          "minus_one": -1,
           "properties": {
             "Actor_ElecMuteHurtDelta": 1
-          }
-        },
-        "Monster_Invoker_Archdeacon_01_Shield_Water": {
-          "elementType": "Water",
-          "elementDurability": "ShieldElement1",
-          "isLimitedProperties": true,
+          },
+          "elementDurability": "ShieldElement2",
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
           "onRemoved": [
             {
               "$type": "GetFightProperty",
-              "doOffStage": false,
               "globalValueKey": "_MONSTER_MAXHP",
+              "doOffStage": false,
               "fightProp": "FIGHT_PROP_MAX_HP",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             },
             {
               "$type": "Predicated",
-              "doOffStage": false,
               "targetPredicates": [
                 {
                   "$type": "ByTargetGlobalValue",
+                  "compareType": "MoreThanAndEqual",
+                  "target": "Target",
+                  "key": "_SHIELD_ABSORB_TOTAL_DAMAGE",
                   "value": [
                     "_MONSTER_MAXHP",
                     0.25,
                     "MUL"
-                  ],
-                  "target": "Target",
-                  "key": "_SHIELD_ABSORB_TOTAL_DAMAGE",
-                  "compareType": "MoreThanAndEqual"
+                  ]
                 }
               ],
-              "actorIceSubHurtDelta": -1,
               "successActions": [
                 {
                   "$type": "SetGlobalValue",
                   "doOffStage": false,
+                  "key": "_SHIELD_ABSORB_TOTAL_DAMAGE",
                   "value": [
                     "_MONSTER_MAXHP",
                     0.25,
                     "MUL"
                   ],
-                  "key": "_SHIELD_ABSORB_TOTAL_DAMAGE",
-                  "actorIceSubHurtDelta": -1,
-                  "canBeHandledOnRecover": true
+                  "canBeHandledOnRecover": true,
+                  "actorIceSubHurtDelta": -1
                 }
               ],
-              "canBeHandledOnRecover": true
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             },
             {
               "$type": "Predicated",
-              "doOffStage": false,
               "targetPredicates": [
                 {
                   "$type": "ByTargetGlobalValue",
+                  "compareType": "NoneOrEqual",
                   "target": "Target",
-                  "key": "_NOT_BREAK_REMOVE",
-                  "compareType": "NoneOrEqual"
+                  "key": "_NOT_BREAK_REMOVE"
                 }
               ],
-              "actorIceSubHurtDelta": -1,
               "successActions": [
                 {
                   "$type": "DamageByAttackValue",
                   "attackInfo": {
-                    "attenuationGroup": "default",
-                    "hitPattern": {
-                      "hitImpulseType": "LV5",
-                      "onHitEffectName": "default",
-                      "JKLONEBKFKJ": {
-                        "JJGBOHIKHFM": true,
-                        "value": 1
-                      }
-                    },
-                    "FJNMGDHFOEH": {
-                      "GCPNPCOFFBP": "Shake"
-                    },
-                    "IODAJAKBOLG": {
-                      "onHitEffectName": "default",
-                      "JKLONEBKFKJ": {
-                        "JJGBOHIKHFM": true,
-                        "value": 1
-                      }
+                    "AKKPNIMNNGE": {
+                      "JMEJGMOJIJJ": "Shake"
                     },
                     "attackProperty": {
-                      "attackType": "Default",
                       "elementDurability": 25,
-                      "strikeType": "Blunt",
-                      "bonusCritical": 1,
-                      "elementRank": 1,
                       "damageExtra": [
                         "_SHIELD_ABSORB_TOTAL_DAMAGE",
                         0.5,
                         "MUL"
-                      ]
+                      ],
+                      "attackType": "Default",
+                      "elementRank": 1,
+                      "bonusCritical": 1,
+                      "strikeType": "Blunt"
+                    },
+                    "hitPattern": {
+                      "hitImpulseType": "LV5",
+                      "onHitEffectName": "default",
+                      "NCKKCKDNLCC": {
+                        "value": 1,
+                        "JGHPGBHFEHK": true
+                      }
                     },
                     "cameraShake": {
+                      "shakeDistance": 20,
                       "extension": {
                         "baseCycle": 0.11999999731779099,
                         "cycleDamping": 0.11999999731779099,
-                        "baseOnCamera": true,
-                        "rangeAttenuation": 0.5
-                      },
-                      "FAKMJBNLPPB": -1,
-                      "shakeDistance": 20
+                        "rangeAttenuation": 0.5,
+                        "baseOnCamera": true
+                      }
+                    },
+                    "attenuationGroup": "default",
+                    "POIJCDIFPAA": {
+                      "onHitEffectName": "default",
+                      "NCKKCKDNLCC": {
+                        "value": 1,
+                        "JGHPGBHFEHK": true
+                      }
                     }
                   },
-                  "doOffStage": false,
-                  "actorIceSubHurtDelta": -1,
                   "born": {
                     "$type": "ConfigBornBySelf",
-                    "direction": {
-                      "maxAngle": 180
+                    "value": 10,
+                    "DPCANLOOHCH": {
+                      "NJIPHOKCEGN": 180
                     },
                     "useRotation": true,
+                    "onGroundRaycastUpDist": 2,
                     "offset": {
                       "x": 1.2000000476837158
                     },
-                    "FDGAEDDEEDG": {
-                      "ELAJJIANFFM": 180
-                    },
-                    "onGroundRaycastUpDist": 2,
-                    "value": 10
+                    "direction": {
+                      "maxAngle": 180
+                    }
                   },
-                  "canBeHandledOnRecover": true
+                  "doOffStage": false,
+                  "canBeHandledOnRecover": true,
+                  "actorIceSubHurtDelta": -1
                 },
                 {
                   "$type": "ApplyModifier",
-                  "doOffStage": false,
                   "modifierName": "Monster_Invoker_Archdeacon_01_BreakActionList",
-                  "actorIceSubHurtDelta": -1,
-                  "canBeHandledOnRecover": true
+                  "doOffStage": false,
+                  "canBeHandledOnRecover": true,
+                  "actorIceSubHurtDelta": -1
                 },
                 {
                   "$type": "FireEffect",
-                  "doOffStage": false,
+                  "effectTempleteID": -1,
                   "scale": 1,
-                  "actorIceSubHurtDelta": -1,
-                  "effectPattern": "Eff_Monster_Invoker_Archdeacon_ShieldBreak_Water",
                   "born": {
-                    "direction": {
-                      "maxAngle": 180
-                    },
-                    "FDGAEDDEEDG": {
-                      "ELAJJIANFFM": 180
+                    "value": 10,
+                    "DPCANLOOHCH": {
+                      "NJIPHOKCEGN": 180
                     },
                     "onGroundRaycastUpDist": 2,
-                    "value": 10
+                    "direction": {
+                      "maxAngle": 180
+                    }
                   },
-                  "effectTempleteID": -1,
-                  "canBeHandledOnRecover": true
+                  "doOffStage": false,
+                  "canBeHandledOnRecover": true,
+                  "actorIceSubHurtDelta": -1,
+                  "effectPattern": "Eff_Monster_Invoker_Archdeacon_ShieldBreak_Thunder"
                 }
               ],
-              "canBeHandledOnRecover": true
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             }
           ],
+          "isLimitedProperties": true,
+          "elementType": "Electric"
+        },
+        "Monster_Invoker_Archdeacon_01_Shield_Water": {
           "modifierMixins": [
             {
               "$type": "ElementShieldMixin",
-              "maxShieldByHPRatio": 0.5,
-              "elementType": "Water",
-              "useMutiPlayerFixData": true,
-              "actorIceSubHurtDelta": -1,
+              "BOHCNFLFIKA": "_SHIELD_ABSORB_TOTAL_DAMAGE",
               "damageRatio": 1,
-              "NADBHIKGCJA": 360,
-              "ONABLHLGMEL": "_SHIELD_ABSORB_TOTAL_DAMAGE"
+              "FIDEOFDJCDE": 360,
+              "useMutiPlayerFixData": true,
+              "maxShieldByHPRatio": 0.5,
+              "actorIceSubHurtDelta": -1,
+              "elementType": "Water"
             }
           ],
-          "minus_one": -1,
           "properties": {
             "Actor_WaterMuteHurtDelta": 1
-          }
+          },
+          "elementDurability": "ShieldElement1",
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "onRemoved": [
+            {
+              "$type": "GetFightProperty",
+              "globalValueKey": "_MONSTER_MAXHP",
+              "doOffStage": false,
+              "fightProp": "FIGHT_PROP_MAX_HP",
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "Predicated",
+              "targetPredicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "compareType": "MoreThanAndEqual",
+                  "target": "Target",
+                  "key": "_SHIELD_ABSORB_TOTAL_DAMAGE",
+                  "value": [
+                    "_MONSTER_MAXHP",
+                    0.25,
+                    "MUL"
+                  ]
+                }
+              ],
+              "successActions": [
+                {
+                  "$type": "SetGlobalValue",
+                  "doOffStage": false,
+                  "key": "_SHIELD_ABSORB_TOTAL_DAMAGE",
+                  "value": [
+                    "_MONSTER_MAXHP",
+                    0.25,
+                    "MUL"
+                  ],
+                  "canBeHandledOnRecover": true,
+                  "actorIceSubHurtDelta": -1
+                }
+              ],
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "Predicated",
+              "targetPredicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "compareType": "NoneOrEqual",
+                  "target": "Target",
+                  "key": "_NOT_BREAK_REMOVE"
+                }
+              ],
+              "successActions": [
+                {
+                  "$type": "DamageByAttackValue",
+                  "attackInfo": {
+                    "AKKPNIMNNGE": {
+                      "JMEJGMOJIJJ": "Shake"
+                    },
+                    "attackProperty": {
+                      "elementDurability": 25,
+                      "damageExtra": [
+                        "_SHIELD_ABSORB_TOTAL_DAMAGE",
+                        0.5,
+                        "MUL"
+                      ],
+                      "attackType": "Default",
+                      "elementRank": 1,
+                      "bonusCritical": 1,
+                      "strikeType": "Blunt"
+                    },
+                    "hitPattern": {
+                      "hitImpulseType": "LV5",
+                      "onHitEffectName": "default",
+                      "NCKKCKDNLCC": {
+                        "value": 1,
+                        "JGHPGBHFEHK": true
+                      }
+                    },
+                    "cameraShake": {
+                      "shakeDistance": 20,
+                      "extension": {
+                        "baseCycle": 0.11999999731779099,
+                        "cycleDamping": 0.11999999731779099,
+                        "rangeAttenuation": 0.5,
+                        "baseOnCamera": true
+                      }
+                    },
+                    "attenuationGroup": "default",
+                    "POIJCDIFPAA": {
+                      "onHitEffectName": "default",
+                      "NCKKCKDNLCC": {
+                        "value": 1,
+                        "JGHPGBHFEHK": true
+                      }
+                    }
+                  },
+                  "born": {
+                    "$type": "ConfigBornBySelf",
+                    "value": 10,
+                    "DPCANLOOHCH": {
+                      "NJIPHOKCEGN": 180
+                    },
+                    "useRotation": true,
+                    "onGroundRaycastUpDist": 2,
+                    "offset": {
+                      "x": 1.2000000476837158
+                    },
+                    "direction": {
+                      "maxAngle": 180
+                    }
+                  },
+                  "doOffStage": false,
+                  "canBeHandledOnRecover": true,
+                  "actorIceSubHurtDelta": -1
+                },
+                {
+                  "$type": "ApplyModifier",
+                  "modifierName": "Monster_Invoker_Archdeacon_01_BreakActionList",
+                  "doOffStage": false,
+                  "canBeHandledOnRecover": true,
+                  "actorIceSubHurtDelta": -1
+                },
+                {
+                  "$type": "FireEffect",
+                  "effectTempleteID": -1,
+                  "scale": 1,
+                  "born": {
+                    "value": 10,
+                    "DPCANLOOHCH": {
+                      "NJIPHOKCEGN": 180
+                    },
+                    "onGroundRaycastUpDist": 2,
+                    "direction": {
+                      "maxAngle": 180
+                    }
+                  },
+                  "doOffStage": false,
+                  "canBeHandledOnRecover": true,
+                  "actorIceSubHurtDelta": -1,
+                  "effectPattern": "Eff_Monster_Invoker_Archdeacon_ShieldBreak_Water"
+                }
+              ],
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "isLimitedProperties": true,
+          "elementType": "Water"
         },
         "RecoverWeakTrigger": {
           "onAdded": [
             {
               "$type": "SetAnimatorTrigger",
-              "doOffStage": false,
               "triggerID": "RecoverWeak",
-              "enable": true,
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "value": true,
+              "actorIceSubHurtDelta": -1
             }
           ],
           "elementDurability": 100,
-          "isLimitedProperties": true,
-          "minus_one": -1
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "isLimitedProperties": true
         },
         "Reset_ShieldInitial": {
           "elementDurability": 100,
-          "isLimitedProperties": true,
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
               "doOffStage": false,
               "key": "_GO_CREATE_SHIELD_INITIAL",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             }
           ],
-          "minus_one": -1,
-          "duration": 0.30000001192092896
+          "duration": 0.30000001192092896,
+          "isLimitedProperties": true
         },
         "Shield_Close": {
           "onAdded": [
             {
               "$type": "SetAnimatorBool",
               "doOffStage": false,
+              "canBeHandledOnRecover": true,
               "boolID": "ShieldOn",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "actorIceSubHurtDelta": -1
             }
           ],
           "elementDurability": 100,
-          "isLimitedProperties": true,
-          "minus_one": -1
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "isLimitedProperties": true
         },
         "Shield_Open": {
           "onAdded": [
             {
               "$type": "Predicated",
-              "doOffStage": false,
               "targetPredicates": [
                 {
                   "$type": "ByTargetGlobalValue",
-                  "value": 1,
                   "target": "Target",
-                  "key": "_MID_LIGHT_ON"
+                  "key": "_MID_LIGHT_ON",
+                  "value": 1
                 },
                 {
                   "$type": "ByTargetGlobalValue",
+                  "compareType": "NoneOrEqual",
                   "target": "Target",
-                  "key": "_IS_WQ_ARCHDEACON",
-                  "compareType": "NoneOrEqual"
+                  "key": "_IS_WQ_ARCHDEACON"
                 }
               ],
-              "actorIceSubHurtDelta": -1,
               "successActions": [
                 {
                   "$type": "AttachModifier",
-                  "doOffStage": false,
                   "modifierName": "Shield_Open_SetAnimatorBool",
-                  "actorIceSubHurtDelta": -1,
-                  "canBeHandledOnRecover": true
+                  "doOffStage": false,
+                  "canBeHandledOnRecover": true,
+                  "actorIceSubHurtDelta": -1
                 },
                 {
                   "$type": "SetGlobalValue",
                   "doOffStage": false,
                   "key": "_NOT_BREAK_REMOVE",
-                  "actorIceSubHurtDelta": -1,
-                  "canBeHandledOnRecover": true
+                  "canBeHandledOnRecover": true,
+                  "actorIceSubHurtDelta": -1
                 },
                 {
                   "$type": "AttachModifier",
-                  "doOffStage": false,
+                  "predicates": [
+                    {
+                      "$type": "ByTargetGlobalValue",
+                      "target": "Target",
+                      "key": "_MID_LIGHT_ELEMENT"
+                    }
+                  ],
                   "modifierName": "Monster_Invoker_Archdeacon_01_Shield_Fire",
+                  "doOffStage": false,
+                  "canBeHandledOnRecover": true,
+                  "actorIceSubHurtDelta": -1
+                },
+                {
+                  "$type": "AttachModifier",
                   "predicates": [
                     {
                       "$type": "ByTargetGlobalValue",
                       "target": "Target",
-                      "key": "_MID_LIGHT_ELEMENT"
+                      "key": "_MID_LIGHT_ELEMENT",
+                      "value": 1
                     }
                   ],
-                  "actorIceSubHurtDelta": -1,
-                  "canBeHandledOnRecover": true
-                },
-                {
-                  "$type": "AttachModifier",
-                  "doOffStage": false,
                   "modifierName": "Monster_Invoker_Archdeacon_01_Shield_Thunder",
-                  "predicates": [
-                    {
-                      "$type": "ByTargetGlobalValue",
-                      "value": 1,
-                      "target": "Target",
-                      "key": "_MID_LIGHT_ELEMENT"
-                    }
-                  ],
-                  "actorIceSubHurtDelta": -1,
-                  "canBeHandledOnRecover": true
+                  "doOffStage": false,
+                  "canBeHandledOnRecover": true,
+                  "actorIceSubHurtDelta": -1
                 },
                 {
                   "$type": "AttachModifier",
-                  "doOffStage": false,
+                  "predicates": [
+                    {
+                      "$type": "ByTargetGlobalValue",
+                      "target": "Target",
+                      "key": "_MID_LIGHT_ELEMENT",
+                      "value": 2
+                    }
+                  ],
                   "modifierName": "Monster_Invoker_Archdeacon_01_Shield_Ice",
-                  "predicates": [
-                    {
-                      "$type": "ByTargetGlobalValue",
-                      "value": 2,
-                      "target": "Target",
-                      "key": "_MID_LIGHT_ELEMENT"
-                    }
-                  ],
-                  "actorIceSubHurtDelta": -1,
-                  "canBeHandledOnRecover": true
+                  "doOffStage": false,
+                  "canBeHandledOnRecover": true,
+                  "actorIceSubHurtDelta": -1
                 },
                 {
                   "$type": "AttachModifier",
-                  "doOffStage": false,
-                  "modifierName": "Monster_Invoker_Archdeacon_01_Shield_Water",
                   "predicates": [
                     {
                       "$type": "ByTargetGlobalValue",
-                      "value": 3,
                       "target": "Target",
-                      "key": "_MID_LIGHT_ELEMENT"
+                      "key": "_MID_LIGHT_ELEMENT",
+                      "value": 3
                     }
                   ],
-                  "actorIceSubHurtDelta": -1,
-                  "canBeHandledOnRecover": true
+                  "modifierName": "Monster_Invoker_Archdeacon_01_Shield_Water",
+                  "doOffStage": false,
+                  "canBeHandledOnRecover": true,
+                  "actorIceSubHurtDelta": -1
                 }
               ],
-              "canBeHandledOnRecover": true
+              "doOffStage": false,
+              "canBeHandledOnRecover": true,
+              "actorIceSubHurtDelta": -1
             }
           ],
           "elementDurability": 100,
-          "isLimitedProperties": true,
-          "minus_one": -1
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "isLimitedProperties": true
         },
         "Shield_Open_SetAnimatorBool": {
           "onAdded": [
@@ -3174,16 +3137,120 @@
               "$type": "SetAnimatorBool",
               "doOffStage": false,
               "value": true,
+              "canBeHandledOnRecover": true,
               "boolID": "ShieldOn",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "actorIceSubHurtDelta": -1
             }
           ],
           "elementDurability": 100,
-          "isLimitedProperties": true,
-          "minus_one": -1
+          "minus_one": -1,
+          "HGPKLIANAGB": -1,
+          "isLimitedProperties": true
         }
-      }
+      },
+      "OOAKLMJCDAG": {
+        "elementDurability": 100,
+        "minus_one": -1,
+        "HGPKLIANAGB": -1,
+        "isLimitedProperties": true
+      },
+      "abilityMixins": [
+        {
+          "$type": "AttachModifierToSelfGlobalValueMixin",
+          "valueSteps": [
+            -0.5,
+            0.5,
+            1.5
+          ],
+          "globalValueKey": "_SHIELD_STATE",
+          "modifierNameSteps": [
+            "Shield_Close",
+            "Shield_Open"
+          ],
+          "enable": true,
+          "removeAppliedModifier": true,
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachModifierToSelfGlobalValueMixin",
+          "valueSteps": [
+            -0.5,
+            0.5,
+            1.5,
+            2.5,
+            3.5
+          ],
+          "globalValueKey": "_LIGHT_CLOSE_NUM",
+          "modifierNameSteps": [
+            "Invoker_Archdeacon_NoWeak",
+            "Invoker_Archdeacon_RemainTwo",
+            "Invoker_Archdeacon_RemainOne",
+            "Invoker_Archdeacon_GoWeak"
+          ],
+          "enable": true,
+          "removeAppliedModifier": true,
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachModifierToSelfGlobalValueMixin",
+          "valueSteps": [
+            -0.5,
+            0.5,
+            1.5
+          ],
+          "globalValueKey": "_WEAK_STATE",
+          "modifierNameSteps": [
+            "Invoker_Archdeacon_NotInWeak",
+            "Invoker_Archdeacon_InWeak"
+          ],
+          "enable": true,
+          "removeAppliedModifier": true,
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachModifierToSelfGlobalValueMixin",
+          "valueSteps": [
+            -0.5,
+            0.5,
+            1.5
+          ],
+          "globalValueKey": "_GO_CREATE_SHIELD_INITIAL",
+          "modifierNameSteps": [
+            "Invoker_Archdeacon_NoShieldInitial",
+            "Invoker_Archdeacon_ShieldInitial"
+          ],
+          "enable": true,
+          "removeAppliedModifier": true,
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachToStateIDMixin",
+          "value": -1,
+          "modifierName": "Invoker_Archdeacon_ShakeTemp",
+          "stateIDs": [
+            "BreakDown_BS",
+            "BreakDown_Loop",
+            "BreakDown_AS"
+          ],
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachModifierToSelfGlobalValueMixin",
+          "valueSteps": [
+            -0.5,
+            0.5,
+            1.5
+          ],
+          "globalValueKey": "_BREAK_STATE",
+          "modifierNameSteps": [
+            "Invoker_Archdeacon_NotInBreak",
+            "Invoker_Archdeacon_InBreak"
+          ],
+          "enable": true,
+          "removeAppliedModifier": true,
+          "actorIceSubHurtDelta": -1
+        }
+      ]
     }
   }
 ]
