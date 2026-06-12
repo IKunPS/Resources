@@ -3,7 +3,7 @@ scene_config = {
 	size = { x = 2048.0, z = 4096.0 },
 	born_pos = { x = 84.96, y = 77.562, z = 59.579 },
 	born_rot = { x = 0.0, y = 90.0, z = 0.0 },
-	die_y = -500,
+	die_y = -80,
 	city_id = 5,
 	vision_anchor = { x = -1000.0, z = -1000.0 }
 }

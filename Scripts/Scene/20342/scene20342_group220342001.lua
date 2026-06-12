@@ -122,8 +122,8 @@ function action_EVENT_ANY_MONSTER_DIE_1001(context, evt)
 	ScriptLib.DelSceneTag(context, 20342, 1958)
     ScriptLib.AddSceneTag(context, 20342, 1959)
 
-    -- 延迟移除装置1014
-    ScriptLib.CreateGroupTimerEvent(context, 220342001, "remove", 5)
+    -- 延迟1秒移除装置1014
+    ScriptLib.CreateGroupTimerEvent(context, 220342001, "remove", 1)
 
 	return 0
 end

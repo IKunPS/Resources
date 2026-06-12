@@ -121,7 +121,7 @@ init_config = {
 suites = {
 	{
 		-- suite_id = 1,
-		-- description = 第一阶段：初始平台战斗，
+		-- description = ，
 		monsters = { 4002 },
 		gadgets = {
 			4008, 4014, 4017, 4007, 4012, 4015, 4006, 4010, 4011,
@@ -136,8 +136,8 @@ suites = {
 	},
 	{
 		-- suite_id = 2,
-		-- description = 第二阶段：Boss战，
-		monsters = {  },
+		-- description = ，
+		monsters = { 4035, 4036, 4063 },
 		gadgets = { 4034, 4065, 4037, 4038, 4061, 4066 },
 		regions = { },
 		triggers = { "ANY_MONSTER_DIE_1002", "REMOVE_GADGET_1003", "GADGET_STATE_CHANGE_1005" },
@@ -183,20 +183,16 @@ end
 
 -- 触发操作
 function action_ANY_MONSTER_DIE_1001(context, evt)
+	ScriptLib.AddExtraGroupSuite(context, 220258004, 2)
+
     -- 移除suite1的内容
     ScriptLib.RemoveExtraGroupSuite(context, 220258004, 1)
 
 	-- 播放过场动画
     ScriptLib.PlayCutScene(context, 172, 0)
 
-    -- 重新生成指定group，指定suite
-    if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 220258004, suite = 2 }) then
-        ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
-            return -1
-    end
-
 	-- 延迟移除装置1014
-    ScriptLib.CreateGroupTimerEvent(context, 220258004, "remove", 5)
+    ScriptLib.CreateGroupTimerEvent(context, 220258004, "remove", 1)
 
 	return 0
 end
