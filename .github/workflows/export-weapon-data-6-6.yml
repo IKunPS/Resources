@@ -1,0 +1,66 @@
+name: Export 6.6 game equipment source data
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened]
+
+permissions:
+  contents: read
+
+jobs:
+  export:
+    if: github.head_ref == 'export-weapon-data-6-6'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+          show-progress: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            ExcelBinOutput/WeaponExcelConfigData.json
+            ExcelBinOutput/EquipAffixExcelConfigData.json
+            ExcelBinOutput/WeaponCodexExcelConfigData.json
+            ExcelBinOutput/WeaponCurveExcelConfigData.json
+            ExcelBinOutput/WeaponLevelExcelConfigData.json
+            BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Bow2.json
+            BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Catalyst2.json
+            BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Claymore2.json
+            BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Pole2.json
+            BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Sword2.json
+            BinOutput/Talent/EquipTalents/ConfigAffix_Bow.json
+            BinOutput/Talent/EquipTalents/ConfigAffix_Catalyst.json
+            BinOutput/Talent/EquipTalents/ConfigAffix_Claymore.json
+            BinOutput/Talent/EquipTalents/ConfigAffix_Pole.json
+            BinOutput/Talent/EquipTalents/ConfigAffix_Sword.json
+
+      - name: Package source files
+        shell: bash
+        run: |
+          set -euo pipefail
+          tar -czf /tmp/gio-weapon-source-6-6.tar.gz \
+            ExcelBinOutput/WeaponExcelConfigData.json \
+            ExcelBinOutput/EquipAffixExcelConfigData.json \
+            ExcelBinOutput/WeaponCodexExcelConfigData.json \
+            ExcelBinOutput/WeaponCurveExcelConfigData.json \
+            ExcelBinOutput/WeaponLevelExcelConfigData.json \
+            BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Bow2.json \
+            BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Catalyst2.json \
+            BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Claymore2.json \
+            BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Pole2.json \
+            BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Sword2.json \
+            BinOutput/Talent/EquipTalents/ConfigAffix_Bow.json \
+            BinOutput/Talent/EquipTalents/ConfigAffix_Catalyst.json \
+            BinOutput/Talent/EquipTalents/ConfigAffix_Claymore.json \
+            BinOutput/Talent/EquipTalents/ConfigAffix_Pole.json \
+            BinOutput/Talent/EquipTalents/ConfigAffix_Sword.json
+          ls -lh /tmp/gio-weapon-source-6-6.tar.gz
+
+      - name: Upload source artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: gio-weapon-source-6-6
+          path: /tmp/gio-weapon-source-6-6.tar.gz
+          if-no-files-found: error
+          retention-days: 1
