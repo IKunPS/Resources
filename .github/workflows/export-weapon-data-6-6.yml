@@ -13,47 +13,16 @@ jobs:
     if: github.head_ref == 'export-weapon-data-6-6'
     runs-on: ubuntu-latest
     steps:
-      - name: Quietly package private 6.6 source files
+      - name: Package private 6.6 source files
         shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
-          git clone -q --depth 1 --filter=blob:none --sparse \
-            "https://x-access-token:${GH_TOKEN}@github.com/IKunPS/Resources.git" /tmp/resources
+          git clone -q --depth 1 --filter=blob:none --sparse "https://x-access-token:${GH_TOKEN}@github.com/IKunPS/Resources.git" /tmp/resources
           cd /tmp/resources
-          git sparse-checkout set --no-cone \
-            ExcelBinOutput/WeaponExcelConfigData.json \
-            ExcelBinOutput/EquipAffixExcelConfigData.json \
-            ExcelBinOutput/WeaponCodexExcelConfigData.json \
-            ExcelBinOutput/WeaponCurveExcelConfigData.json \
-            ExcelBinOutput/WeaponLevelExcelConfigData.json \
-            BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Bow2.json \
-            BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Catalyst2.json \
-            BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Claymore2.json \
-            BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Pole2.json \
-            BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Sword2.json \
-            BinOutput/Talent/EquipTalents/ConfigAffix_Bow.json \
-            BinOutput/Talent/EquipTalents/ConfigAffix_Catalyst.json \
-            BinOutput/Talent/EquipTalents/ConfigAffix_Claymore.json \
-            BinOutput/Talent/EquipTalents/ConfigAffix_Pole.json \
-            BinOutput/Talent/EquipTalents/ConfigAffix_Sword.json
-          tar -czf /tmp/gio-weapon-source-6-6.tar.gz \
-            ExcelBinOutput/WeaponExcelConfigData.json \
-            ExcelBinOutput/EquipAffixExcelConfigData.json \
-            ExcelBinOutput/WeaponCodexExcelConfigData.json \
-            ExcelBinOutput/WeaponCurveExcelConfigData.json \
-            ExcelBinOutput/WeaponLevelExcelConfigData.json \
-            BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Bow2.json \
-            BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Catalyst2.json \
-            BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Claymore2.json \
-            BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Pole2.json \
-            BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Sword2.json \
-            BinOutput/Talent/EquipTalents/ConfigAffix_Bow.json \
-            BinOutput/Talent/EquipTalents/ConfigAffix_Catalyst.json \
-            BinOutput/Talent/EquipTalents/ConfigAffix_Claymore.json \
-            BinOutput/Talent/EquipTalents/ConfigAffix_Pole.json \
-            BinOutput/Talent/EquipTalents/ConfigAffix_Sword.json
+          git sparse-checkout set --no-cone /ExcelBinOutput/WeaponExcelConfigData.json /ExcelBinOutput/EquipAffixExcelConfigData.json /ExcelBinOutput/WeaponCodexExcelConfigData.json /ExcelBinOutput/WeaponCurveExcelConfigData.json /ExcelBinOutput/WeaponLevelExcelConfigData.json /BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Bow2.json /BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Catalyst2.json /BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Claymore2.json /BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Pole2.json /BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Sword2.json /BinOutput/Talent/EquipTalents/ConfigAffix_Bow.json /BinOutput/Talent/EquipTalents/ConfigAffix_Catalyst.json /BinOutput/Talent/EquipTalents/ConfigAffix_Claymore.json /BinOutput/Talent/EquipTalents/ConfigAffix_Pole.json /BinOutput/Talent/EquipTalents/ConfigAffix_Sword.json
+          tar -czf /tmp/gio-weapon-source-6-6.tar.gz ExcelBinOutput/WeaponExcelConfigData.json ExcelBinOutput/EquipAffixExcelConfigData.json ExcelBinOutput/WeaponCodexExcelConfigData.json ExcelBinOutput/WeaponCurveExcelConfigData.json ExcelBinOutput/WeaponLevelExcelConfigData.json BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Bow2.json BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Catalyst2.json BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Claymore2.json BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Pole2.json BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Sword2.json BinOutput/Talent/EquipTalents/ConfigAffix_Bow.json BinOutput/Talent/EquipTalents/ConfigAffix_Catalyst.json BinOutput/Talent/EquipTalents/ConfigAffix_Claymore.json BinOutput/Talent/EquipTalents/ConfigAffix_Pole.json BinOutput/Talent/EquipTalents/ConfigAffix_Sword.json
           ls -lh /tmp/gio-weapon-source-6-6.tar.gz
 
       - name: Upload source artifact
