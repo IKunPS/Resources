@@ -6,29 +6,33 @@ on:
     types: [opened, synchronize]
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   export:
     if: github.head_ref == 'export-weapon-data-6-6'
     runs-on: ubuntu-latest
     steps:
-      - name: Package private 6.6 source files
+      - name: Package and split private 6.6 source files
         shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
-          git clone -q --depth 1 --filter=blob:none --sparse "https://x-access-token:${GH_TOKEN}@github.com/IKunPS/Resources.git" /tmp/resources
+          git clone -q --branch export-weapon-data-6-6 --depth 1 --filter=blob:none --sparse "https://x-access-token:${GH_TOKEN}@github.com/IKunPS/Resources.git" /tmp/resources
           cd /tmp/resources
           git sparse-checkout set --no-cone /ExcelBinOutput/WeaponExcelConfigData.json /ExcelBinOutput/EquipAffixExcelConfigData.json /ExcelBinOutput/WeaponCodexExcelConfigData.json /ExcelBinOutput/WeaponCurveExcelConfigData.json /ExcelBinOutput/WeaponLevelExcelConfigData.json /BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Bow2.json /BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Catalyst2.json /BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Claymore2.json /BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Pole2.json /BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Sword2.json /BinOutput/Talent/EquipTalents/ConfigAffix_Bow.json /BinOutput/Talent/EquipTalents/ConfigAffix_Catalyst.json /BinOutput/Talent/EquipTalents/ConfigAffix_Claymore.json /BinOutput/Talent/EquipTalents/ConfigAffix_Pole.json /BinOutput/Talent/EquipTalents/ConfigAffix_Sword.json
           tar -czf /tmp/gio-weapon-source-6-6.tar.gz ExcelBinOutput/WeaponExcelConfigData.json ExcelBinOutput/EquipAffixExcelConfigData.json ExcelBinOutput/WeaponCodexExcelConfigData.json ExcelBinOutput/WeaponCurveExcelConfigData.json ExcelBinOutput/WeaponLevelExcelConfigData.json BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Bow2.json BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Catalyst2.json BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Claymore2.json BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Pole2.json BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Sword2.json BinOutput/Talent/EquipTalents/ConfigAffix_Bow.json BinOutput/Talent/EquipTalents/ConfigAffix_Catalyst.json BinOutput/Talent/EquipTalents/ConfigAffix_Claymore.json BinOutput/Talent/EquipTalents/ConfigAffix_Pole.json BinOutput/Talent/EquipTalents/ConfigAffix_Sword.json
-          ls -lh /tmp/gio-weapon-source-6-6.tar.gz
-
-      - name: Upload source artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: gio-weapon-source-6-6
-          path: /tmp/gio-weapon-source-6-6.tar.gz
-          if-no-files-found: error
-          retention-days: 1
+          base64 -w0 /tmp/gio-weapon-source-6-6.tar.gz > /tmp/gio-weapon-source-6-6.b64
+          rm -rf export/weapon66
+          mkdir -p export/weapon66
+          split -b 30000 -d -a 3 --additional-suffix=.b64 /tmp/gio-weapon-source-6-6.b64 export/weapon66/chunk_
+          sha256sum /tmp/gio-weapon-source-6-6.tar.gz | awk '{print $1}' > export/weapon66/sha256.txt
+          wc -c /tmp/gio-weapon-source-6-6.tar.gz | awk '{print $1}' > export/weapon66/size.txt
+          ls -l export/weapon66
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add export/weapon66
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'build: export 6.6 equipment source chunks'
+          git push origin HEAD:export-weapon-data-6-6
