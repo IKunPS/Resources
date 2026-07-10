@@ -1,6 +1,8 @@
 name: Export 6.6 game equipment source data
 
 on:
+  push:
+    branches: [export-weapon-data-6-6]
   pull_request:
     branches: [main]
     types: [opened]
@@ -10,12 +12,12 @@ permissions:
 
 jobs:
   export:
-    if: github.head_ref == 'export-weapon-data-6-6'
+    if: github.ref_name == 'export-weapon-data-6-6' || github.head_ref == 'export-weapon-data-6-6'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ github.head_ref }}
+          ref: export-weapon-data-6-6
           show-progress: false
           sparse-checkout-cone-mode: false
           sparse-checkout: |
