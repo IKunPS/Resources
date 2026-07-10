@@ -26,26 +26,24 @@ jobs:
           sha256sum /tmp/gio-private-binout-6-6.tar.gz | awk '{print $1}' > /tmp/sha256.txt
           wc -c /tmp/gio-private-binout-6-6.tar.gz | awk '{print $1}' > /tmp/size.txt
 
-      - name: Publish temporary private release asset and capture signed URL
+      - name: Publish unique temporary private release asset and capture signed URL
         shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
-          TAG='gio-weapon66-temp-export'
-          gh release delete "$TAG" --repo IKunPS/Resources --cleanup-tag -y >/dev/null 2>&1 || true
-          gh release create "$TAG" /tmp/gio-private-binout-6-6.tar.gz --repo IKunPS/Resources --title 'Temporary GIO 6.6 export' --notes 'Temporary private export; do not use directly.' >/dev/null
+          TAG="gio-weapon66-temp-${GITHUB_RUN_ID}"
+          gh release create "$TAG" /tmp/gio-private-binout-6-6.tar.gz --repo IKunPS/Resources --title "Temporary GIO 6.6 export ${GITHUB_RUN_ID}" --notes 'Temporary private export; do not use directly.' >/dev/null
           ASSET_ID=$(gh api "repos/IKunPS/Resources/releases/tags/$TAG" --jq '.assets[] | select(.name=="gio-private-binout-6-6.tar.gz") | .id')
           SIGNED_URL=$(curl -sS -L -o /dev/null -w '%{url_effective}' -H "Authorization: Bearer ${GH_TOKEN}" -H 'Accept: application/octet-stream' "https://api.github.com/repos/IKunPS/Resources/releases/assets/${ASSET_ID}")
           cd /tmp/resources
           mkdir -p export/weapon66
           printf '%s\n' "$SIGNED_URL" > export/weapon66/signed_url.txt
+          printf '%s\n' "$TAG" > export/weapon66/release_tag.txt
           cp /tmp/sha256.txt export/weapon66/sha256.txt
           cp /tmp/size.txt export/weapon66/size.txt
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add --sparse export/weapon66/signed_url.txt export/weapon66/sha256.txt export/weapon66/size.txt
-          git commit -m 'build: refresh temporary signed export URL'
+          git add --sparse export/weapon66/signed_url.txt export/weapon66/release_tag.txt export/weapon66/sha256.txt export/weapon66/size.txt
+          git commit -m 'build: publish stable temporary signed export URL'
           git push origin HEAD:export-weapon-data-6-6
-
-      # refresh signed URL for the final clean 5.0 -> 6.6 diff build
