@@ -1,0 +1,74 @@
+name: Arlecchino resource dump
+
+on:
+  push:
+    branches:
+      - debug/arlecchino-resource-dump-20260725
+
+jobs:
+  dump:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Dump managed actions
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+
+          path = Path('BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Arlecchino.json')
+          roots = json.loads(path.read_text(encoding='utf-8'))
+          direct = [
+              'onAdded','onRemoved','onAbilityStart','onKill','onFieldEnter','onExit',
+              'onAttach','onDetach','onAvatarIn','onAvatarOut','onTriggerAvatarRay',
+              'onVehicleIn','onVehicleOut'
+          ]
+          modifier = [
+              'onAdded','onRemoved','onBeingHit','onAttackLanded','onHittingOther',
+              'onThinkInterval','onKill','onCrash','onAvatarIn','onAvatarOut',
+              'onReconnect','onChangeAuthority','onVehicleIn','onVehicleOut',
+              'onZoneEnter','onZoneExit','onHeal','onBeingHealed'
+          ]
+          managed = {'AddHPDebts','ReduceHPDebts','GetHPPaidDebts','HealHP','SetOverrideMapValue'}
+
+          def walk(actions, kind, modifier_index, config_index, source, state, ability_name):
+              if not isinstance(actions, list):
+                  return
+              for array_index, action in enumerate(actions):
+                  if not isinstance(action, dict):
+                      continue
+                  state[0] += 1
+                  if kind == 1:
+                      local_id = kind + (config_index << 3) + (state[0] << 9)
+                  else:
+                      local_id = kind + (modifier_index << 3) + (config_index << 9) + (state[0] << 15)
+                  if action.get('$type') in managed:
+                      print(json.dumps({
+                          'ability': ability_name,
+                          'localId': local_id,
+                          'source': f'{source}[{array_index}]',
+                          'action': action,
+                      }, ensure_ascii=False, sort_keys=True))
+                  if isinstance(action.get('actions'), list):
+                      walk(action['actions'], kind, modifier_index, config_index, source + '.actions', state, ability_name)
+                  else:
+                      if isinstance(action.get('successActions'), list):
+                          walk(action['successActions'], kind, modifier_index, config_index, source + '.successActions', state, ability_name)
+                      if isinstance(action.get('failActions'), list):
+                          walk(action['failActions'], kind, modifier_index, config_index, source + '.failActions', state, ability_name)
+
+          for root_index, wrapper in enumerate(roots):
+              data = wrapper.get('Default', {})
+              ability_name = data.get('abilityName', '')
+              if not ability_name.startswith('Avatar_Arlecchino_'):
+                  continue
+              for config_index, category in enumerate(direct):
+                  walk(data.get(category), 1, 0, config_index, f'root[{root_index}].ability.{category}', [0], ability_name)
+              modifiers = data.get('modifiers') or {}
+              for modifier_index, modifier_name in enumerate(sorted(modifiers)):
+                  mod = modifiers[modifier_name] or {}
+                  for config_index, category in enumerate(modifier):
+                      walk(mod.get(category), 3, modifier_index, config_index,
+                           f'root[{root_index}].modifier.{modifier_name}.{category}', [0], ability_name)
+          PY
