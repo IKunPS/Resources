@@ -1,120 +1,128 @@
 [
   {
     "Default": {
-      "onAdded": [
-        {
-          "$type": "ApplyModifier",
-          "predicates": [
-            {
-              "$type": "ByTargetGlobalValue",
-              "target": "Target",
-              "key": "_MagDebuff_PergesaTag",
-              "value": 1
-            }
-          ],
-          "modifierName": "DebuffPergesa_Reset",
-          "doOffStage": false,
-          "canBeHandledOnRecover": true,
-          "actorIceSubHurtDelta": -1
-        },
-        {
-          "$type": "AttachModifier",
-          "modifierName": "MagSkill_CastMonitor",
-          "doOffStage": false,
-          "canBeHandledOnRecover": true,
-          "actorIceSubHurtDelta": -1
-        }
-      ],
-      "abilitySpecials": {
-        "CriticalDelta": -0.10000000149011612,
-        "DamageReduce": -0.10000000149011612,
-        "DebuffRange": 15,
-        "HealedAddDelta": -0.10000000149011612,
-        "MaxHP": 0
-      },
-      "abilityName": "Monster_Magbeast_Common_MagDebuff",
       "onAbilityStart": [
         {
           "$type": "FireEffect",
-          "effectTempleteID": -1,
           "predicates": [
             {
               "$type": "ByTargetGlobalValue",
+              "key": "_MagDebuff_PergesaTag",
               "compareType": "NoneOrEqual",
-              "target": "Target",
-              "key": "_MagDebuff_PergesaTag"
+              "target": "Target"
             }
           ],
+          "canBeHandledOnRecover": true,
+          "effectTempleteID": -1,
+          "effectPattern": "Eff_Monster_Magbeast_Elite_Field",
           "scale": 1,
+          "doOffStage": false,
           "born": {
-            "value": 10,
-            "DPCANLOOHCH": {
-              "NJIPHOKCEGN": 180
-            },
-            "onGroundRaycastUpDist": 2,
             "direction": {
               "maxAngle": 180
-            }
+            },
+            "EALBHHJEFGH": {
+              "BKAPGJCLCIO": 180
+            },
+            "value": 10,
+            "onGroundRaycastUpDist": 2
           },
-          "doOffStage": false,
-          "canBeHandledOnRecover": true,
-          "actorIceSubHurtDelta": -1,
-          "effectPattern": "Eff_Monster_Magbeast_Elite_Field"
+          "actorIceSubHurtDelta": -1
         },
         {
           "$type": "FireEffect",
-          "effectTempleteID": -1,
           "predicates": [
             {
               "$type": "ByTargetGlobalValue",
-              "target": "Target",
               "key": "_MagDebuff_PergesaTag",
+              "target": "Target",
               "value": 1
             }
           ],
+          "canBeHandledOnRecover": true,
+          "effectTempleteID": -1,
+          "effectPattern": "Eff_Monster_Magbeast_Elite_Field_Big",
           "scale": 1,
+          "doOffStage": false,
           "born": {
-            "value": 10,
-            "DPCANLOOHCH": {
-              "NJIPHOKCEGN": 180
-            },
-            "onGroundRaycastUpDist": 2,
             "direction": {
               "maxAngle": 180
-            }
+            },
+            "EALBHHJEFGH": {
+              "BKAPGJCLCIO": 180
+            },
+            "value": 10,
+            "onGroundRaycastUpDist": 2
           },
-          "doOffStage": false,
-          "canBeHandledOnRecover": true,
-          "actorIceSubHurtDelta": -1,
-          "effectPattern": "Eff_Monster_Magbeast_Elite_Field_Big"
+          "actorIceSubHurtDelta": -1
         },
         {
           "$type": "Predicated",
+          "failActions": [
+            {
+              "$type": "LoseHP",
+              "predicates": [
+                {
+                  "$type": "ByTargetPositionToSelfPosition",
+                  "logic": "LesserOrEqual",
+                  "target": "Target",
+                  "value": "DebuffRange"
+                },
+                {
+                  "$type": "ByTargetPositionToSelfPosition",
+                  "compareType": "Y",
+                  "logic": "LesserOrEqual",
+                  "target": "Target",
+                  "value": 20
+                },
+                {
+                  "$type": "ByNot",
+                  "predicates": [
+                    {
+                      "$type": "PPOPJAALOFD",
+                      "target": "Target",
+                      "PEACGJNKIDN": true
+                    }
+                  ],
+                  "target": "Target"
+                }
+              ],
+              "canBeHandledOnRecover": true,
+              "enableInvincible": true,
+              "target": "Target",
+              "doOffStage": true,
+              "amountByTargetMaxHPRatio": 0.3499999940395355,
+              "actorIceSubHurtDelta": -1,
+              "lethal": true
+            }
+          ],
+          "canBeHandledOnRecover": true,
+          "target": "AllPlayerAvatars",
           "targetPredicates": [
             {
-              "$type": "BKEDIKDOFBP",
+              "$type": "KLDILOFGJCD",
               "value": 7200,
-              "target": "Target",
-              "fightProp": "FIGHT_PROP_MAX_HP"
+              "fightProp": "FIGHT_PROP_MAX_HP",
+              "target": "Target"
             }
           ],
           "successActions": [
             {
               "$type": "GetFightProperty",
-              "globalValueKey": "_Target_MaxHP",
-              "target": "Target",
-              "doOffStage": false,
-              "fightProp": "FIGHT_PROP_MAX_HP",
               "canBeHandledOnRecover": true,
+              "fightProp": "FIGHT_PROP_MAX_HP",
+              "target": "Target",
+              "globalValueKey": "_Target_MaxHP",
+              "doOffStage": false,
               "actorIceSubHurtDelta": -1
             },
             {
               "$type": "SetGlobalValueToOverrideMap",
-              "globalValueKey": "_Target_MaxHP",
-              "overrideMapKey": "MaxHP",
-              "target": "Caster",
-              "doOffStage": false,
               "canBeHandledOnRecover": true,
+              "target": "Caster",
+              "overrideMapKey": "MaxHP",
+              "globalValueKey": "_Target_MaxHP",
+              "doOffStage": false,
               "actorIceSubHurtDelta": -1
             },
             {
@@ -122,29 +130,30 @@
               "predicates": [
                 {
                   "$type": "ByTargetPositionToSelfPosition",
+                  "logic": "LesserOrEqual",
                   "target": "Target",
-                  "value": "DebuffRange",
-                  "logic": "LesserOrEqual"
+                  "value": "DebuffRange"
                 },
                 {
                   "$type": "ByTargetPositionToSelfPosition",
                   "compareType": "Y",
+                  "logic": "LesserOrEqual",
                   "target": "Target",
-                  "value": 20,
-                  "logic": "LesserOrEqual"
+                  "value": 20
                 },
                 {
                   "$type": "ByNot",
                   "predicates": [
                     {
-                      "$type": "JDPCNOLJNMF",
+                      "$type": "PPOPJAALOFD",
                       "target": "Target",
-                      "KBEDBGBKKLP": true
+                      "PEACGJNKIDN": true
                     }
                   ],
                   "target": "Target"
                 }
               ],
+              "canBeHandledOnRecover": true,
               "enableInvincible": true,
               "target": "Target",
               "amount": [
@@ -155,120 +164,102 @@
                 "ADD"
               ],
               "doOffStage": true,
-              "canBeHandledOnRecover": true,
               "actorIceSubHurtDelta": -1,
               "lethal": true
             }
           ],
-          "target": "AllPlayerAvatars",
           "doOffStage": false,
-          "canBeHandledOnRecover": true,
-          "actorIceSubHurtDelta": -1,
-          "failActions": [
-            {
-              "$type": "LoseHP",
-              "predicates": [
-                {
-                  "$type": "ByTargetPositionToSelfPosition",
-                  "target": "Target",
-                  "value": "DebuffRange",
-                  "logic": "LesserOrEqual"
-                },
-                {
-                  "$type": "ByTargetPositionToSelfPosition",
-                  "compareType": "Y",
-                  "target": "Target",
-                  "value": 20,
-                  "logic": "LesserOrEqual"
-                },
-                {
-                  "$type": "ByNot",
-                  "predicates": [
-                    {
-                      "$type": "JDPCNOLJNMF",
-                      "target": "Target",
-                      "KBEDBGBKKLP": true
-                    }
-                  ],
-                  "target": "Target"
-                }
-              ],
-              "enableInvincible": true,
-              "target": "Target",
-              "amountByTargetMaxHPRatio": 0.3499999940395355,
-              "doOffStage": true,
-              "canBeHandledOnRecover": true,
-              "actorIceSubHurtDelta": -1,
-              "lethal": true
-            }
-          ]
+          "actorIceSubHurtDelta": -1
         },
         {
           "$type": "AttachModifier",
           "predicates": [
             {
               "$type": "ByTargetPositionToSelfPosition",
+              "logic": "LesserOrEqual",
               "target": "Target",
-              "value": "DebuffRange",
-              "logic": "LesserOrEqual"
+              "value": "DebuffRange"
             },
             {
               "$type": "ByTargetPositionToSelfPosition",
               "compareType": "Y",
+              "logic": "LesserOrEqual",
               "target": "Target",
-              "value": 20,
-              "logic": "LesserOrEqual"
+              "value": 20
             },
             {
               "$type": "ByNot",
               "predicates": [
                 {
-                  "$type": "JDPCNOLJNMF",
+                  "$type": "PPOPJAALOFD",
                   "target": "Target",
-                  "KBEDBGBKKLP": true
+                  "PEACGJNKIDN": true
                 }
               ],
               "target": "Target"
             }
           ],
-          "target": "AllPlayerAvatars",
-          "modifierName": "UNIQUE_MagDebuff_Monitor_Dummy",
-          "doOffStage": false,
           "canBeHandledOnRecover": true,
+          "target": "AllPlayerAvatars",
+          "doOffStage": false,
+          "modifierName": "UNIQUE_MagDebuff_Monitor_Dummy",
           "actorIceSubHurtDelta": -1
         },
         {
           "$type": "ApplyModifier",
+          "otherTargets": {
+            "$type": "SelectTargetsByShape",
+            "sizeRatio": 1,
+            "centerBasedOn": "Caster",
+            "GLDMBEOHPHB": {
+              "direction": {
+                "maxAngle": 180
+              },
+              "EALBHHJEFGH": {
+                "BKAPGJCLCIO": 180
+              },
+              "value": 10,
+              "onGroundRaycastUpDist": 2
+            },
+            "campBasedOn": "Caster",
+            "campTargetType": "AllianceIncludeSelf",
+            "shapeName": "CircleR50H40C"
+          },
           "predicates": [
             {
               "$type": "ByHasFeatureTag",
-              "target": "Target",
               "featureTagIDs": [
                 4067
-              ]
+              ],
+              "target": "Target"
             }
           ],
-          "otherTargets": {
-            "$type": "SelectTargetsByShape",
-            "centerBasedOn": "Caster",
-            "shapeName": "CircleR50H40C",
-            "JCNBPJBFJNM": {
-              "value": 10,
-              "DPCANLOOHCH": {
-                "NJIPHOKCEGN": 180
-              },
-              "onGroundRaycastUpDist": 2,
-              "direction": {
-                "maxAngle": 180
-              }
-            },
-            "campTargetType": "AllianceIncludeSelf",
-            "campBasedOn": "Caster",
-            "sizeRatio": 1
-          },
-          "modifierName": "MagDebuffTag_Mask",
-          "doOffStage": true,
           "canBeHandledOnRecover": true,
+          "doOffStage": true,
+          "modifierName": "MagDebuffTag_Mask",
+          "actorIceSubHurtDelta": -1
+        }
+      ],
+      "CAKPDBGADEA": {
+        "minus_one": -1,
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "NLBKJKDNFFP": -1
+      },
+      "abilityMixins": [
+        {
+          "$type": "AttachModifierToSelfGlobalValueMixin",
+          "modifierNameSteps": [
+            "Empty",
+            "LV1"
+          ],
+          "valueSteps": [
+            -0.5,
+            0.5,
+            1.5
+          ],
+          "removeAppliedModifier": true,
+          "globalValueKey": "_MONSTER_Magbeast_DebuffEhance",
           "actorIceSubHurtDelta": -1
         }
       ],
@@ -277,141 +268,149 @@
           "onAdded": [
             {
               "$type": "SetOverrideMapValue",
+              "canBeHandledOnRecover": true,
               "overrideMapKey": "DebuffRange",
               "doOffStage": false,
               "value": 25,
-              "canBeHandledOnRecover": true,
               "actorIceSubHurtDelta": -1
             },
             {
               "$type": "SetOverrideMapValue",
+              "canBeHandledOnRecover": true,
               "overrideMapKey": "CriticalDelta",
               "doOffStage": false,
               "value": -1,
-              "canBeHandledOnRecover": true,
               "actorIceSubHurtDelta": -1
             },
             {
               "$type": "SetOverrideMapValue",
+              "canBeHandledOnRecover": true,
               "overrideMapKey": "DamageReduce",
               "doOffStage": false,
               "value": -0.5,
-              "canBeHandledOnRecover": true,
               "actorIceSubHurtDelta": -1
             },
             {
               "$type": "SetOverrideMapValue",
+              "canBeHandledOnRecover": true,
               "overrideMapKey": "HealedAddDelta",
               "doOffStage": false,
               "value": -0.4000000059604645,
-              "canBeHandledOnRecover": true,
               "actorIceSubHurtDelta": -1
             }
           ],
-          "elementDurability": 100,
           "minus_one": -1,
-          "HGPKLIANAGB": -1,
-          "isLimitedProperties": true
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "NLBKJKDNFFP": -1
         },
         "Empty": {
-          "elementDurability": 100,
           "minus_one": -1,
-          "HGPKLIANAGB": -1,
-          "isLimitedProperties": true
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "NLBKJKDNFFP": -1
         },
         "ExitBattle_LateCheck": {
-          "onAdded": [
-            {
-              "$type": "SetGlobalValue",
-              "doOffStage": true,
-              "key": "_TimeOut",
-              "value": 1,
-              "canBeHandledOnRecover": true,
-              "actorIceSubHurtDelta": -1
-            }
-          ],
-          "modifierMixins": [
-            {
-              "$type": "AvatarCombatMixin",
-              "onEnterCombat": [
-                {
-                  "$type": "SetGlobalValue",
-                  "doOffStage": true,
-                  "key": "_TimeOut",
-                  "canBeHandledOnRecover": true,
-                  "actorIceSubHurtDelta": -1
-                },
-                {
-                  "$type": "RemoveModifier",
-                  "modifierName": "ExitBattle_LateCheck",
-                  "doOffStage": true,
-                  "canBeHandledOnRecover": true,
-                  "actorIceSubHurtDelta": -1
-                }
-              ],
-              "actorIceSubHurtDelta": -1
-            }
-          ],
-          "elementDurability": 100,
-          "minus_one": -1,
-          "HGPKLIANAGB": -1,
           "onRemoved": [
             {
               "$type": "RemoveUniqueModifier",
               "predicates": [
                 {
                   "$type": "ByTargetGlobalValue",
-                  "target": "Target",
                   "key": "_TimeOut",
+                  "target": "Target",
                   "value": 1
                 }
               ],
-              "modifierName": "UNIQUE_MagDebuff_Monitor_Dummy",
-              "doOffStage": true,
               "canBeHandledOnRecover": true,
+              "doOffStage": true,
+              "modifierName": "UNIQUE_MagDebuff_Monitor_Dummy",
               "actorIceSubHurtDelta": -1
             }
           ],
           "duration": 1,
-          "isLimitedProperties": true
-        },
-        "FullHP": {
-          "onThinkInterval": [
+          "onAdded": [
             {
-              "$type": "RemoveUniqueModifier",
-              "modifierName": "UNIQUE_MagDebuff_Monitor_Dummy",
-              "doOffStage": true,
+              "$type": "SetGlobalValue",
+              "key": "_TimeOut",
               "canBeHandledOnRecover": true,
+              "doOffStage": true,
+              "value": 1,
               "actorIceSubHurtDelta": -1
             }
           ],
-          "elementDurability": 100,
           "minus_one": -1,
-          "HGPKLIANAGB": -1,
+          "elementDurability": 100,
           "isLimitedProperties": true,
-          "thinkInterval": 0.5
+          "modifierMixins": [
+            {
+              "$type": "AvatarCombatMixin",
+              "onEnterCombat": [
+                {
+                  "$type": "SetGlobalValue",
+                  "key": "_TimeOut",
+                  "canBeHandledOnRecover": true,
+                  "doOffStage": true,
+                  "actorIceSubHurtDelta": -1
+                },
+                {
+                  "$type": "RemoveModifier",
+                  "canBeHandledOnRecover": true,
+                  "doOffStage": true,
+                  "modifierName": "ExitBattle_LateCheck",
+                  "actorIceSubHurtDelta": -1
+                }
+              ],
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "NLBKJKDNFFP": -1
+        },
+        "FullHP": {
+          "thinkInterval": 0.5,
+          "minus_one": -1,
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onThinkInterval": [
+            {
+              "$type": "RemoveUniqueModifier",
+              "canBeHandledOnRecover": true,
+              "doOffStage": true,
+              "modifierName": "UNIQUE_MagDebuff_Monitor_Dummy",
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "NLBKJKDNFFP": -1
         },
         "FullHP_RemoveBuff": {
+          "properties": {
+            "Actor_CriticalDelta": 0.15000000596046448
+          },
+          "duration": 15,
           "onAdded": [
             {
               "$type": "ServerMonsterLog",
-              "target": "Caster",
-              "doOffStage": true,
-              "canBeHandledOnRecover": true,
-              "actorIceSubHurtDelta": -1,
               "paramList": [
                 1
-              ]
+              ],
+              "canBeHandledOnRecover": true,
+              "target": "Caster",
+              "doOffStage": true,
+              "actorIceSubHurtDelta": -1
             },
             {
               "$type": "DoWatcherSystemAction",
               "enable": true,
-              "doOffStage": true,
-              "watcherId": 82299,
               "canBeHandledOnRecover": true,
+              "watcherId": 82299,
+              "doOffStage": true,
               "actorIceSubHurtDelta": -1
             }
           ],
+          "minus_one": -1,
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "state": "AttackUp",
           "modifierMixins": [
             {
               "$type": "ModifyDamageMixin",
@@ -424,99 +423,122 @@
               "onExitCombat": [
                 {
                   "$type": "RemoveModifier",
-                  "modifierName": "FullHP_RemoveBuff",
-                  "doOffStage": true,
                   "canBeHandledOnRecover": true,
+                  "doOffStage": true,
+                  "modifierName": "FullHP_RemoveBuff",
                   "actorIceSubHurtDelta": -1
                 }
               ],
               "actorIceSubHurtDelta": -1
             }
           ],
-          "properties": {
-            "Actor_CriticalDelta": 0.15000000596046448
-          },
-          "elementDurability": 100,
-          "minus_one": -1,
-          "HGPKLIANAGB": -1,
-          "state": "AttackUp",
-          "duration": 15,
-          "isLimitedProperties": true
+          "NLBKJKDNFFP": -1
         },
         "LV1": {
           "onAdded": [
             {
               "$type": "SetOverrideMapValue",
+              "canBeHandledOnRecover": true,
               "overrideMapKey": "DamageReduce",
               "doOffStage": false,
               "value": -0.5,
-              "canBeHandledOnRecover": true,
               "actorIceSubHurtDelta": -1
             },
             {
               "$type": "SetOverrideMapValue",
+              "canBeHandledOnRecover": true,
               "overrideMapKey": "HealedAddDelta",
               "doOffStage": false,
               "value": -0.4000000059604645,
-              "canBeHandledOnRecover": true,
               "actorIceSubHurtDelta": -1
             }
           ],
-          "elementDurability": 100,
           "minus_one": -1,
-          "HGPKLIANAGB": -1,
-          "isLimitedProperties": true
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "NLBKJKDNFFP": -1
         },
         "MagDebuff": {
+          "onRemoved": [
+            {
+              "$type": "ApplyModifier",
+              "predicates": [
+                {
+                  "$type": "ByTargetHPRatio",
+                  "HPRatio": 0.9900000095367432
+                }
+              ],
+              "canBeHandledOnRecover": true,
+              "doOffStage": true,
+              "modifierName": "FullHP_RemoveBuff",
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "SetGlobalValue",
+              "key": "_MagDebuff_Mask",
+              "canBeHandledOnRecover": true,
+              "doOffStage": true,
+              "value": 1,
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "properties": {
+            "Actor_CriticalDelta": "CriticalDelta",
+            "Actor_HealedAddDelta": "HealedAddDelta"
+          },
+          "buffID": 90008,
           "onKill": [
             {
               "$type": "RemoveUniqueModifier",
-              "modifierName": "UNIQUE_MagDebuff_Monitor_Dummy",
-              "doOffStage": false,
               "canBeHandledOnRecover": true,
+              "doOffStage": false,
+              "modifierName": "UNIQUE_MagDebuff_Monitor_Dummy",
               "actorIceSubHurtDelta": -1
             }
           ],
           "onAdded": [
             {
               "$type": "AttachEffect",
+              "canBeHandledOnRecover": true,
               "effectTempleteID": -1,
+              "effectPattern": "Eff_Monster_Magbeast_Elite_Debuff",
               "scale": 1,
+              "doOffStage": true,
               "born": {
-                "value": 10,
-                "DPCANLOOHCH": {
-                  "NJIPHOKCEGN": 180
-                },
-                "onGroundRaycastUpDist": 2,
                 "direction": {
                   "maxAngle": 180
-                }
+                },
+                "EALBHHJEFGH": {
+                  "BKAPGJCLCIO": 180
+                },
+                "value": 10,
+                "onGroundRaycastUpDist": 2
               },
-              "doOffStage": true,
-              "canBeHandledOnRecover": true,
-              "actorIceSubHurtDelta": -1,
-              "effectPattern": "Eff_Monster_Magbeast_Elite_Debuff"
+              "actorIceSubHurtDelta": -1
             },
             {
               "$type": "CameraScreenEffect",
               "muteRemoteAction": true,
-              "doOffStage": false,
               "enable": true,
               "canBeHandledOnRecover": true,
               "effectName": "Eff_Monster_Magbeast_Elite_Debuff_Screen",
+              "doOffStage": false,
               "actorIceSubHurtDelta": -1
             },
             {
               "$type": "ServerMonsterLog",
-              "target": "Caster",
-              "doOffStage": true,
-              "canBeHandledOnRecover": true,
-              "actorIceSubHurtDelta": -1,
               "paramList": [
                 0
-              ]
+              ],
+              "canBeHandledOnRecover": true,
+              "target": "Caster",
+              "doOffStage": true,
+              "actorIceSubHurtDelta": -1
             }
           ],
+          "minus_one": -1,
+          "elementDurability": 100,
+          "isLimitedProperties": true,
           "modifierMixins": [
             {
               "$type": "ModifyDamageMixin",
@@ -529,104 +551,68 @@
               "onExitCombat": [
                 {
                   "$type": "ApplyModifier",
-                  "modifierName": "ExitBattle_LateCheck",
-                  "doOffStage": true,
                   "canBeHandledOnRecover": true,
+                  "doOffStage": true,
+                  "modifierName": "ExitBattle_LateCheck",
                   "actorIceSubHurtDelta": -1
                 }
               ],
               "actorIceSubHurtDelta": -1
             }
           ],
-          "properties": {
-            "Actor_CriticalDelta": "CriticalDelta",
-            "Actor_HealedAddDelta": "HealedAddDelta"
-          },
-          "elementDurability": 100,
-          "minus_one": -1,
-          "HGPKLIANAGB": -1,
-          "stacking": "GlobalUnique",
-          "onRemoved": [
-            {
-              "$type": "ApplyModifier",
-              "predicates": [
-                {
-                  "$type": "ByTargetHPRatio",
-                  "HPRatio": 0.9900000095367432
-                }
-              ],
-              "modifierName": "FullHP_RemoveBuff",
-              "doOffStage": true,
-              "canBeHandledOnRecover": true,
-              "actorIceSubHurtDelta": -1
-            },
-            {
-              "$type": "SetGlobalValue",
-              "doOffStage": true,
-              "key": "_MagDebuff_Mask",
-              "value": 1,
-              "canBeHandledOnRecover": true,
-              "actorIceSubHurtDelta": -1
-            }
-          ],
-          "buffID": 90008,
-          "isLimitedProperties": true
+          "NLBKJKDNFFP": -1,
+          "stacking": "GlobalUnique"
         },
         "MagDebuffTag_Mask": {
+          "duration": 0.5,
           "onAdded": [
             {
               "$type": "SetGlobalValue",
-              "doOffStage": false,
               "key": "_MONSTER_Magbeast_MagbuffTag",
               "canBeHandledOnRecover": true,
+              "doOffStage": false,
               "actorIceSubHurtDelta": -1
             }
           ],
-          "elementDurability": 100,
           "minus_one": -1,
-          "HGPKLIANAGB": -1,
-          "duration": 0.5,
-          "isLimitedProperties": true
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "NLBKJKDNFFP": -1
         },
         "MagDebuff_Manager": {
+          "minus_one": -1,
+          "elementDurability": 100,
+          "isLimitedProperties": true,
           "modifierMixins": [
             {
               "$type": "AttachModifierToSelfGlobalValueMixin",
+              "modifierNameSteps": [
+                "MagDebuff"
+              ],
               "valueSteps": [
                 -0.5,
                 0.5
               ],
-              "globalValueKey": "_MagDebuff_Mask",
-              "modifierNameSteps": [
-                "MagDebuff"
-              ],
               "removeAppliedModifier": true,
+              "globalValueKey": "_MagDebuff_Mask",
               "actorIceSubHurtDelta": -1
             }
           ],
-          "elementDurability": 100,
-          "minus_one": -1,
-          "HGPKLIANAGB": -1,
-          "isLimitedProperties": true
+          "NLBKJKDNFFP": -1
         },
         "MagSkill_CastMonitor": {
+          "thinkInterval": 3,
+          "minus_one": -1,
+          "elementDurability": 100,
+          "isLimitedProperties": true,
           "onThinkInterval": [
             {
               "$type": "Predicated",
-              "targetPredicates": [
-                {
-                  "$type": "ByHasModifier",
-                  "target": "Target",
-                  "modifierName": "MagDebuff"
-                }
-              ],
-              "target": "AllPlayerAvatars",
-              "doOffStage": false,
-              "canBeHandledOnRecover": true,
-              "actorIceSubHurtDelta": -1,
               "failActions": [
                 {
                   "$type": "Predicated",
+                  "canBeHandledOnRecover": true,
+                  "target": "Target",
                   "targetPredicates": [
                     {
                       "$type": "ByEntityIsAlive",
@@ -634,178 +620,192 @@
                     },
                     {
                       "$type": "ByTargetPositionToSelfPosition",
+                      "logic": "Lesser",
                       "target": "Target",
-                      "value": 30,
-                      "logic": "Lesser"
+                      "value": 30
                     },
                     {
                       "$type": "ByTargetPositionToSelfPosition",
                       "compareType": "Y",
+                      "logic": "LesserOrEqual",
                       "target": "Target",
-                      "value": 20,
-                      "logic": "LesserOrEqual"
+                      "value": 20
                     }
                   ],
                   "successActions": [
                     {
                       "$type": "SetGlobalValue",
+                      "key": "_MONSTER_Magbeast_MagbuffTag",
+                      "canBeHandledOnRecover": true,
                       "target": "Caster",
                       "doOffStage": false,
-                      "key": "_MONSTER_Magbeast_MagbuffTag",
                       "value": 1,
-                      "canBeHandledOnRecover": true,
                       "actorIceSubHurtDelta": -1
                     }
                   ],
-                  "target": "Target",
                   "doOffStage": false,
-                  "canBeHandledOnRecover": true,
                   "actorIceSubHurtDelta": -1
                 }
-              ]
-            }
-          ],
-          "elementDurability": 100,
-          "minus_one": -1,
-          "HGPKLIANAGB": -1,
-          "isLimitedProperties": true,
-          "thinkInterval": 3
-        },
-        "UNIQUE_MagDebuff_Monitor": {
-          "onAdded": [
-            {
-              "$type": "SetGlobalValue",
-              "doOffStage": true,
-              "key": "_MagDebuff_Mask",
+              ],
               "canBeHandledOnRecover": true,
+              "target": "AllPlayerAvatars",
+              "targetPredicates": [
+                {
+                  "$type": "ByHasModifier",
+                  "target": "Target",
+                  "modifierName": "MagDebuff"
+                }
+              ],
+              "doOffStage": false,
               "actorIceSubHurtDelta": -1
             }
           ],
+          "NLBKJKDNFFP": -1
+        },
+        "UNIQUE_MagDebuff_Monitor": {
+          "isUnique": true,
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "key": "_MagDebuff_Mask",
+              "canBeHandledOnRecover": true,
+              "doOffStage": true,
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "minus_one": -1,
+          "elementDurability": 100,
+          "isLimitedProperties": true,
           "modifierMixins": [
             {
               "$type": "AttachModifierToHPPercentMixinV2",
-              "valueSteps": [
-                0.9900000095367432
-              ],
               "modifierNameSteps": [
                 "FullHP",
                 "MagDebuff_Manager"
               ],
-              "ECHPPJJKHAK": true,
               "value": 1,
-              "actorIceSubHurtDelta": -1,
-              "NKBKDHFLJOB": true
+              "valueSteps": [
+                0.9900000095367432
+              ],
+              "MCDNJPLMFJL": true,
+              "OJMDJNBPNHL": true,
+              "actorIceSubHurtDelta": -1
             }
           ],
-          "elementDurability": 100,
-          "minus_one": -1,
-          "HGPKLIANAGB": -1,
-          "stacking": "Unique",
-          "isUnique": true,
-          "isLimitedProperties": true
+          "NLBKJKDNFFP": -1,
+          "stacking": "Unique"
         },
         "UNIQUE_MagDebuff_Monitor_Dummy": {
-          "onThinkInterval": [
-            {
-              "$type": "Predicated",
-              "targetPredicates": [
-                {
-                  "$type": "CFPEIABOAOD",
-                  "__unk_Q16140806": "_Monster_MagDebuff_Caster"
-                }
-              ],
-              "doOffStage": true,
-              "canBeHandledOnRecover": true,
-              "actorIceSubHurtDelta": -1,
-              "failActions": [
-                {
-                  "$type": "RemoveUniqueModifier",
-                  "modifierName": "UNIQUE_MagDebuff_Monitor",
-                  "doOffStage": true,
-                  "canBeHandledOnRecover": true,
-                  "actorIceSubHurtDelta": -1
-                },
-                {
-                  "$type": "RemoveModifier",
-                  "modifierName": "MagDebuff_Manager",
-                  "doOffStage": true,
-                  "canBeHandledOnRecover": true,
-                  "actorIceSubHurtDelta": -1
-                },
-                {
-                  "$type": "RemoveModifier",
-                  "modifierName": "FullHP",
-                  "doOffStage": true,
-                  "canBeHandledOnRecover": true,
-                  "actorIceSubHurtDelta": -1
-                },
-                {
-                  "$type": "RemoveModifier",
-                  "modifierName": "MagDebuff",
-                  "doOffStage": true,
-                  "canBeHandledOnRecover": true,
-                  "actorIceSubHurtDelta": -1
-                },
-                {
-                  "$type": "RemoveUniqueModifier",
-                  "modifierName": "UNIQUE_MagDebuff_Monitor_Dummy",
-                  "doOffStage": true,
-                  "canBeHandledOnRecover": true,
-                  "actorIceSubHurtDelta": -1
-                }
-              ]
-            }
-          ],
+          "isUnique": true,
           "reApplyModifierOnStateChange": true,
+          "thinkInterval": 1,
           "onAdded": [
             {
               "$type": "SetTargetToTargetKey",
               "targetKey": "_Monster_MagDebuff_Caster",
+              "canBeHandledOnRecover": true,
               "target": "Caster",
               "doOffStage": true,
-              "canBeHandledOnRecover": true,
               "actorIceSubHurtDelta": -1
             },
             {
               "$type": "AttachModifier",
-              "modifierName": "UNIQUE_MagDebuff_Monitor",
-              "doOffStage": true,
               "canBeHandledOnRecover": true,
+              "doOffStage": true,
+              "modifierName": "UNIQUE_MagDebuff_Monitor",
               "actorIceSubHurtDelta": -1
             }
           ],
-          "elementDurability": 100,
           "minus_one": -1,
-          "HGPKLIANAGB": -1,
-          "stacking": "Unique",
-          "isUnique": true,
+          "elementDurability": 100,
           "isLimitedProperties": true,
-          "thinkInterval": 1
+          "onThinkInterval": [
+            {
+              "$type": "Predicated",
+              "failActions": [
+                {
+                  "$type": "RemoveUniqueModifier",
+                  "canBeHandledOnRecover": true,
+                  "doOffStage": true,
+                  "modifierName": "UNIQUE_MagDebuff_Monitor",
+                  "actorIceSubHurtDelta": -1
+                },
+                {
+                  "$type": "RemoveModifier",
+                  "canBeHandledOnRecover": true,
+                  "doOffStage": true,
+                  "modifierName": "MagDebuff_Manager",
+                  "actorIceSubHurtDelta": -1
+                },
+                {
+                  "$type": "RemoveModifier",
+                  "canBeHandledOnRecover": true,
+                  "doOffStage": true,
+                  "modifierName": "FullHP",
+                  "actorIceSubHurtDelta": -1
+                },
+                {
+                  "$type": "RemoveModifier",
+                  "canBeHandledOnRecover": true,
+                  "doOffStage": true,
+                  "modifierName": "MagDebuff",
+                  "actorIceSubHurtDelta": -1
+                },
+                {
+                  "$type": "RemoveUniqueModifier",
+                  "canBeHandledOnRecover": true,
+                  "doOffStage": true,
+                  "modifierName": "UNIQUE_MagDebuff_Monitor_Dummy",
+                  "actorIceSubHurtDelta": -1
+                }
+              ],
+              "canBeHandledOnRecover": true,
+              "targetPredicates": [
+                {
+                  "$type": "JPAJKMFBIPK",
+                  "__unk_Q16140806": "_Monster_MagDebuff_Caster"
+                }
+              ],
+              "doOffStage": true,
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "NLBKJKDNFFP": -1,
+          "stacking": "Unique"
         }
       },
-      "OOAKLMJCDAG": {
-        "elementDurability": 100,
-        "minus_one": -1,
-        "HGPKLIANAGB": -1,
-        "isLimitedProperties": true
+      "abilitySpecials": {
+        "CriticalDelta": -0.10000000149011612,
+        "DamageReduce": -0.10000000149011612,
+        "DebuffRange": 15,
+        "HealedAddDelta": -0.10000000149011612,
+        "MaxHP": 0
       },
-      "abilityMixins": [
+      "onAdded": [
         {
-          "$type": "AttachModifierToSelfGlobalValueMixin",
-          "valueSteps": [
-            -0.5,
-            0.5,
-            1.5
+          "$type": "ApplyModifier",
+          "predicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "key": "_MagDebuff_PergesaTag",
+              "target": "Target",
+              "value": 1
+            }
           ],
-          "globalValueKey": "_MONSTER_Magbeast_DebuffEhance",
-          "modifierNameSteps": [
-            "Empty",
-            "LV1"
-          ],
-          "removeAppliedModifier": true,
+          "canBeHandledOnRecover": true,
+          "doOffStage": false,
+          "modifierName": "DebuffPergesa_Reset",
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "AttachModifier",
+          "canBeHandledOnRecover": true,
+          "doOffStage": false,
+          "modifierName": "MagSkill_CastMonitor",
           "actorIceSubHurtDelta": -1
         }
-      ]
+      ],
+      "abilityName": "Monster_Magbeast_Common_MagDebuff"
     }
   }
 ]

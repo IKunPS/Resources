@@ -1,15 +1,138 @@
 [
   {
     "Default": {
-      "DDNHHMIBNLF": {
+      "CAKPDBGADEA": {
+        "minus_one": -1,
         "elementDurability": 100,
         "isLimitedProperties": true,
-        "minus_one": -1
+        "NLBKJKDNFFP": -1
+      },
+      "abilityMixins": [
+        {
+          "$type": "AttachModifierToGlobalValueMixin",
+          "modifierNameSteps": [
+            "V6_1_Quest_Rerir_Fight_Nefer_SpecialElementalBurst_Handler"
+          ],
+          "enable": true,
+          "valueSteps": [
+            0.5,
+            999
+          ],
+          "globalValueTarget": "Team",
+          "removeAppliedModifier": true,
+          "globalValueKey": "GV_V6_1_Quest_Rerir_Fight_IsNeferSpecialElementalBurst",
+          "PGNFKDOAEMM": true,
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "ButtonHoldChargeMixin",
+          "chargeTime": 0.10000000149011612,
+          "skillID": 20633,
+          "secondChargeTime": 99,
+          "OnBeginUncharged": [
+            {
+              "$type": "DebugLog",
+              "canBeHandledOnRecover": true,
+              "content": "【奈芙尔】按下了特殊大招",
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "DebugLog",
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "GV_V6_1_Quest_Rerir_Fight_NeferSpecialEnergy",
+                  "compareType": "MoreThanAndEqual",
+                  "value": 99
+                }
+              ],
+              "canBeHandledOnRecover": true,
+              "content": "【奈芙尔】放了特殊大招",
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "ServerLuaCall",
+              "CallParamList": [
+                111101349,
+                220286001
+              ],
+              "funcName": "SLC_AVATAR_Q_Pressed",
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "GV_V6_1_Quest_Rerir_Fight_NeferSpecialEnergy",
+                  "compareType": "MoreThanAndEqual",
+                  "value": 99
+                }
+              ],
+              "canBeHandledOnRecover": true,
+              "doOffStage": true,
+              "luaCallType": "SpecificGroup",
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "SwitchSkillIDMixin",
+          "skillID": 20633,
+          "priority": "Quest",
+          "skillIndex": 4,
+          "actorIceSubHurtDelta": -1
+        }
+      ],
+      "modifiers": {
+        "V6_1_Quest_Rerir_Fight_Nefer_SpecialElementalBurst_Handler": {
+          "thinkInterval": 0.10000000149011612,
+          "minus_one": -1,
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onThinkInterval": [
+            {
+              "$type": "AttachModifier",
+              "predicates": [
+                {
+                  "$type": "ByHasFeatureTag",
+                  "featureTagIDs": [
+                    10122
+                  ],
+                  "target": "CurLocalAvatar"
+                }
+              ],
+              "canBeHandledOnRecover": true,
+              "target": "CurLocalAvatar",
+              "doOffStage": true,
+              "modifierName": "V6_1_Quest_Rerir_Fight_Nefer_SpecialElementalBurst_OnAvatar",
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "NLBKJKDNFFP": -1
+        },
+        "V6_1_Quest_Rerir_Fight_Nefer_SpecialElementalBurst_OnAvatar": {
+          "thinkInterval": 0.10000000149011612,
+          "minus_one": -1,
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onThinkInterval": [
+            {
+              "$type": "CopyGlobalValue",
+              "canBeHandledOnRecover": true,
+              "srcTarget": "Team",
+              "srcKey": "GV_V6_1_Quest_Rerir_Fight_NeferSpecialEnergy",
+              "dstKey": "GV_V6_1_Quest_Rerir_Fight_NeferSpecialEnergy",
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "NLBKJKDNFFP": -1
+        }
       },
       "onAdded": [
         {
-          "$type": "RemoveAvatarSkillInfo",
-          "doOffStage": true,
+          "$type": "AddAvatarSkillInfo",
+          "skillID": 20633,
           "predicates": [
             {
               "$type": "ByHasFeatureTag",
@@ -18,14 +141,12 @@
               ]
             }
           ],
-          "actorIceSubHurtDelta": -1,
-          "skillID": 20633,
-          "canBeHandledOnRecover": true
+          "canBeHandledOnRecover": true,
+          "doOffStage": true,
+          "actorIceSubHurtDelta": -1
         },
         {
           "$type": "SetGlobalValue",
-          "doOffStage": true,
-          "target": "Team",
           "key": "GV_V6_1_Quest_Rerir_Fight_IsNeferSpecialElementalBurst",
           "predicates": [
             {
@@ -35,13 +156,13 @@
               ]
             }
           ],
-          "actorIceSubHurtDelta": -1,
-          "canBeHandledOnRecover": true
+          "canBeHandledOnRecover": true,
+          "target": "Team",
+          "doOffStage": true,
+          "actorIceSubHurtDelta": -1
         },
         {
           "$type": "SetGlobalValue",
-          "doOffStage": true,
-          "target": "Team",
           "key": "GV_V6_1_Quest_Rerir_Fight_NeferSpecialEnergy",
           "predicates": [
             {
@@ -51,132 +172,14 @@
               ]
             }
           ],
-          "actorIceSubHurtDelta": -1,
-          "canBeHandledOnRecover": true
+          "canBeHandledOnRecover": true,
+          "target": "Team",
+          "doOffStage": true,
+          "actorIceSubHurtDelta": -1
         }
       ],
-      "abilityName": "V6_1_Quest_Rerir_Fight_Nefer_SpecialElementalBurst",
       "isDynamicAbility": true,
-      "abilityMixins": [
-        {
-          "$type": "AttachModifierToGlobalValueMixin",
-          "globalValueKey": "GV_V6_1_Quest_Rerir_Fight_IsNeferSpecialElementalBurst",
-          "modifierNameSteps": [
-            "V6_1_Quest_Rerir_Fight_Nefer_SpecialElementalBurst_Handler"
-          ],
-          "globalValueTarget": "Team",
-          "enable": true,
-          "removeAppliedModifier": true,
-          "actorIceSubHurtDelta": -1,
-          "valueSteps": [
-            0.5,
-            999
-          ],
-          "NEACJLMBFMN": true
-        },
-        {
-          "$type": "ButtonHoldChargeMixin",
-          "chargeTime": 0.10000000149011612,
-          "OnBeginUncharged": [
-            {
-              "$type": "DebugLog",
-              "doOffStage": false,
-              "content": "【奈芙尔】按下了特殊大招",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            },
-            {
-              "$type": "DebugLog",
-              "doOffStage": false,
-              "content": "【奈芙尔】放了特殊大招",
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "value": 99,
-                  "key": "GV_V6_1_Quest_Rerir_Fight_NeferSpecialEnergy",
-                  "compareType": "MoreThanAndEqual"
-                }
-              ],
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            },
-            {
-              "$type": "ServerLuaCall",
-              "doOffStage": true,
-              "luaCallType": "SpecificGroup",
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "value": 99,
-                  "key": "GV_V6_1_Quest_Rerir_Fight_NeferSpecialEnergy",
-                  "compareType": "MoreThanAndEqual"
-                }
-              ],
-              "actorIceSubHurtDelta": -1,
-              "funcName": "SLC_AVATAR_Q_Pressed",
-              "CallParamList": [
-                111101349,
-                220286001
-              ],
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "secondChargeTime": 99,
-          "actorIceSubHurtDelta": -1,
-          "skillID": 20633
-        },
-        {
-          "$type": "SwitchSkillIDMixin",
-          "skillIndex": 4,
-          "priority": "Quest",
-          "actorIceSubHurtDelta": -1,
-          "skillID": 20633
-        }
-      ],
-      "modifiers": {
-        "V6_1_Quest_Rerir_Fight_Nefer_SpecialElementalBurst_Handler": {
-          "elementDurability": 100,
-          "isLimitedProperties": true,
-          "minus_one": -1,
-          "onThinkInterval": [
-            {
-              "$type": "AttachModifier",
-              "doOffStage": true,
-              "modifierName": "V6_1_Quest_Rerir_Fight_Nefer_SpecialElementalBurst_OnAvatar",
-              "target": "CurLocalAvatar",
-              "predicates": [
-                {
-                  "$type": "ByHasFeatureTag",
-                  "target": "CurLocalAvatar",
-                  "featureTagIDs": [
-                    10122
-                  ]
-                }
-              ],
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "thinkInterval": 0.10000000149011612
-        },
-        "V6_1_Quest_Rerir_Fight_Nefer_SpecialElementalBurst_OnAvatar": {
-          "elementDurability": 100,
-          "isLimitedProperties": true,
-          "minus_one": -1,
-          "onThinkInterval": [
-            {
-              "$type": "CopyGlobalValue",
-              "doOffStage": false,
-              "dstKey": "GV_V6_1_Quest_Rerir_Fight_NeferSpecialEnergy",
-              "srcTarget": "Team",
-              "actorIceSubHurtDelta": -1,
-              "srcKey": "GV_V6_1_Quest_Rerir_Fight_NeferSpecialEnergy",
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "thinkInterval": 0.10000000149011612
-        }
-      }
+      "abilityName": "V6_1_Quest_Rerir_Fight_Nefer_SpecialElementalBurst"
     }
   }
 ]

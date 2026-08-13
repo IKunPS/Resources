@@ -1,106 +1,141 @@
 [
   {
     "Default": {
-      "abilitySpecials": {
-        "ElementMastery_Up": 0
-      },
-      "DDNHHMIBNLF": {
+      "CAKPDBGADEA": {
+        "minus_one": -1,
         "elementDurability": 100,
         "isLimitedProperties": true,
-        "minus_one": -1
+        "NLBKJKDNFFP": -1
+      },
+      "modifiers": {
+        "MultiAvatar_Potion_Phase_1_1_Avatar": {
+          "properties": {
+            "Actor_ElemMasteryDelta": "ElementMastery_Up"
+          },
+          "HBLJELGPNMI": true,
+          "minus_one": -1,
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "state": "AttackUp",
+          "NLBKJKDNFFP": -1,
+          "stacking": "Unique"
+        },
+        "MultiAvatar_Potion_Phase_1_1_Driver_Team": {
+          "thinkInterval": 1,
+          "onAdded": [
+            {
+              "$type": "AttachModifier",
+              "canBeHandledOnRecover": true,
+              "target": "CurTeamAvatars",
+              "doOffStage": true,
+              "modifierName": "MultiAvatar_Potion_Phase_1_1_Avatar",
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "minus_one": -1,
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onThinkInterval": [
+            {
+              "$type": "AttachModifier",
+              "canBeHandledOnRecover": true,
+              "target": "CurTeamAvatars",
+              "doOffStage": true,
+              "modifierName": "MultiAvatar_Potion_Phase_1_1_Avatar",
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "NLBKJKDNFFP": -1
+        }
+      },
+      "abilitySpecials": {
+        "ElementMastery_Up": 0
       },
       "onAdded": [
         {
           "$type": "AttachModifier",
+          "canBeHandledOnRecover": true,
+          "target": "Team",
           "doOffStage": false,
           "modifierName": "MultiAvatar_Potion_Phase_1_1_Driver_Team",
-          "target": "Team",
-          "actorIceSubHurtDelta": -1,
-          "canBeHandledOnRecover": true
+          "actorIceSubHurtDelta": -1
         }
       ],
-      "abilityName": "Activity_MultiAvatar_Potion_Phase_1_1",
       "isDynamicAbility": true,
-      "modifiers": {
-        "MultiAvatar_Potion_Phase_1_1_Avatar": {
-          "elementDurability": 100,
-          "stacking": "Unique",
-          "isLimitedProperties": true,
-          "KKBDDALAMKP": true,
-          "minus_one": -1,
-          "properties": {
-            "Actor_ElemMasteryDelta": "ElementMastery_Up"
-          },
-          "state": "AttackUp"
-        },
-        "MultiAvatar_Potion_Phase_1_1_Driver_Team": {
-          "onAdded": [
-            {
-              "$type": "AttachModifier",
-              "doOffStage": true,
-              "modifierName": "MultiAvatar_Potion_Phase_1_1_Avatar",
-              "target": "CurTeamAvatars",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "elementDurability": 100,
-          "isLimitedProperties": true,
-          "minus_one": -1,
-          "onThinkInterval": [
-            {
-              "$type": "AttachModifier",
-              "doOffStage": true,
-              "modifierName": "MultiAvatar_Potion_Phase_1_1_Avatar",
-              "target": "CurTeamAvatars",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "thinkInterval": 1
-        }
-      }
+      "abilityName": "Activity_MultiAvatar_Potion_Phase_1_1"
     }
   },
   {
     "Default": {
-      "abilitySpecials": {
-        "Duration": 0,
-        "SubHurtRatio": 0
-      },
-      "DDNHHMIBNLF": {
+      "CAKPDBGADEA": {
+        "minus_one": -1,
         "elementDurability": 100,
         "isLimitedProperties": true,
-        "minus_one": -1
+        "NLBKJKDNFFP": -1
       },
-      "onAdded": [
-        {
-          "$type": "AttachModifier",
-          "doOffStage": false,
-          "modifierName": "MultiAvatar_Potion_Phase_1_2_Driver_Team",
-          "target": "Team",
-          "actorIceSubHurtDelta": -1,
-          "canBeHandledOnRecover": true
-        }
-      ],
-      "abilityName": "Activity_MultiAvatar_Potion_Phase_1_2",
-      "isDynamicAbility": true,
       "modifiers": {
         "MultiAvatar_Potion_Phase_1_2_Avatar": {
+          "onHittingOther": [
+            {
+              "$type": "Predicated",
+              "canBeHandledOnRecover": true,
+              "target": "Other",
+              "targetPredicates": [
+                {
+                  "$type": "ByAttackTags",
+                  "target": "Target",
+                  "attackTags": [
+                    "OverGrowDamage",
+                    "OverGrow_Fire_Damage",
+                    "OverGrow_Electric_Damage"
+                  ]
+                },
+                {
+                  "$type": "ByEntityTypes",
+                  "value": -1,
+                  "target": "Target",
+                  "entityTypes": [
+                    "Monster"
+                  ]
+                },
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_ANIMAL_ENTITY_TYPE",
+                  "compareType": "NoneOrEqual",
+                  "target": "Target"
+                }
+              ],
+              "successActions": [
+                {
+                  "$type": "ApplyModifier",
+                  "canBeHandledOnRecover": true,
+                  "target": "Other",
+                  "doOffStage": true,
+                  "modifierName": "UNIQUE_MultiAvatar_Potion_Phase_1_2_SubHurt",
+                  "actorIceSubHurtDelta": -1
+                }
+              ],
+              "doOffStage": true,
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "minus_one": -1,
           "elementDurability": 100,
-          "stacking": "Unique",
           "isLimitedProperties": true,
           "modifierMixins": [
             {
               "$type": "DoActionByElementReactionMixin",
+              "entityTypes": [
+                "Monster"
+              ],
               "actions": [
                 {
                   "$type": "ApplyModifier",
+                  "canBeHandledOnRecover": true,
+                  "target": "Other",
                   "doOffStage": true,
                   "modifierName": "UNIQUE_MultiAvatar_Potion_Phase_1_2_SubHurt",
-                  "target": "Other",
-                  "actorIceSubHurtDelta": -1,
-                  "canBeHandledOnRecover": true
+                  "actorIceSubHurtDelta": -1
                 }
               ],
               "range": 20,
@@ -113,90 +148,41 @@
                 "OvergrowMushroomElectric",
                 "OvergrowMushroomFire"
               ],
-              "actorIceSubHurtDelta": -1,
-              "entityTypes": [
-                "Monster"
-              ]
+              "actorIceSubHurtDelta": -1
             }
           ],
-          "onHittingOther": [
-            {
-              "$type": "Predicated",
-              "doOffStage": true,
-              "target": "Other",
-              "targetPredicates": [
-                {
-                  "$type": "ByAttackTags",
-                  "attackTags": [
-                    "OverGrowDamage",
-                    "OverGrow_Fire_Damage",
-                    "OverGrow_Electric_Damage"
-                  ],
-                  "target": "Target"
-                },
-                {
-                  "$type": "ByEntityTypes",
-                  "target": "Target",
-                  "value": -1,
-                  "entityTypes": [
-                    "Monster"
-                  ]
-                },
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "target": "Target",
-                  "key": "_ANIMAL_ENTITY_TYPE",
-                  "compareType": "NoneOrEqual"
-                }
-              ],
-              "actorIceSubHurtDelta": -1,
-              "successActions": [
-                {
-                  "$type": "ApplyModifier",
-                  "doOffStage": true,
-                  "modifierName": "UNIQUE_MultiAvatar_Potion_Phase_1_2_SubHurt",
-                  "target": "Other",
-                  "actorIceSubHurtDelta": -1,
-                  "canBeHandledOnRecover": true
-                }
-              ],
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "minus_one": -1
+          "NLBKJKDNFFP": -1,
+          "stacking": "Unique"
         },
         "MultiAvatar_Potion_Phase_1_2_Driver_Team": {
+          "thinkInterval": 1,
           "onAdded": [
             {
               "$type": "AttachModifier",
+              "canBeHandledOnRecover": true,
+              "target": "CurTeamAvatars",
               "doOffStage": true,
               "modifierName": "MultiAvatar_Potion_Phase_1_2_Avatar",
-              "target": "CurTeamAvatars",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "actorIceSubHurtDelta": -1
             }
           ],
+          "minus_one": -1,
           "elementDurability": 100,
           "isLimitedProperties": true,
-          "minus_one": -1,
           "onThinkInterval": [
             {
               "$type": "AttachModifier",
+              "canBeHandledOnRecover": true,
+              "target": "CurTeamAvatars",
               "doOffStage": true,
               "modifierName": "MultiAvatar_Potion_Phase_1_2_Avatar",
-              "target": "CurTeamAvatars",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "actorIceSubHurtDelta": -1
             }
           ],
-          "thinkInterval": 1
+          "NLBKJKDNFFP": -1
         },
         "UNIQUE_MultiAvatar_Potion_Phase_1_2_SubHurt": {
-          "elementDurability": 100,
-          "stacking": "RefreshUniqueDurability",
-          "isLimitedProperties": true,
-          "KKBDDALAMKP": true,
-          "minus_one": -1,
+          "isUnique": true,
           "properties": {
             "Actor_ElecSubHurtDelta": "SubHurtRatio",
             "Actor_FireSubHurtDelta": "SubHurtRatio",
@@ -207,248 +193,495 @@
             "Actor_WaterSubHurtDelta": "SubHurtRatio",
             "Actor_WindSubHurtDelta": "SubHurtRatio"
           },
-          "isUnique": true,
           "duration": "Duration",
-          "state": "DefenseDown"
+          "HBLJELGPNMI": true,
+          "minus_one": -1,
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "state": "DefenseDown",
+          "NLBKJKDNFFP": -1,
+          "stacking": "RefreshUniqueDurability"
         }
-      }
-    }
-  },
-  {
-    "Default": {
-      "abilitySpecials": {
-        "DamageRatio": 0,
-        "DamageSystemValue": 0,
-        "ImpactCD": 0
       },
-      "DDNHHMIBNLF": {
-        "elementDurability": 100,
-        "isLimitedProperties": true,
-        "minus_one": -1
+      "abilitySpecials": {
+        "Duration": 0,
+        "SubHurtRatio": 0
       },
       "onAdded": [
         {
           "$type": "AttachModifier",
-          "doOffStage": false,
-          "modifierName": "MultiAvatar_Potion_Phase_1_3_Driver_Team",
+          "canBeHandledOnRecover": true,
           "target": "Team",
-          "actorIceSubHurtDelta": -1,
-          "canBeHandledOnRecover": true
+          "doOffStage": false,
+          "modifierName": "MultiAvatar_Potion_Phase_1_2_Driver_Team",
+          "actorIceSubHurtDelta": -1
         }
       ],
-      "abilityName": "Activity_MultiAvatar_Potion_Phase_1_3",
       "isDynamicAbility": true,
+      "abilityName": "Activity_MultiAvatar_Potion_Phase_1_2"
+    }
+  },
+  {
+    "Default": {
+      "CAKPDBGADEA": {
+        "minus_one": -1,
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "NLBKJKDNFFP": -1
+      },
       "modifiers": {
         "MultiAvatar_Potion_Phase_1_3_Avatar": {
-          "onAdded": [
+          "onHittingOther": [
             {
-              "$type": "SetSystemValueToOverrideMap",
-              "doOffStage": true,
-              "key": "DamageSystemValue",
-              "actorIceSubHurtDelta": -1,
-              "value": -1,
-              "type": "ElementLevelCo",
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "elementDurability": 100,
-          "stacking": "Unique",
-          "isLimitedProperties": true,
-          "modifierMixins": [
-            {
-              "$type": "DoActionByElementReactionMixin",
-              "actions": [
+              "$type": "Predicated",
+              "canBeHandledOnRecover": true,
+              "target": "Other",
+              "targetPredicates": [
+                {
+                  "$type": "ByAttackTags",
+                  "target": "Target",
+                  "attackTags": [
+                    "OverGrowDamage",
+                    "OverGrow_Fire_Damage",
+                    "OverGrow_Electric_Damage"
+                  ]
+                },
+                {
+                  "$type": "ByEntityTypes",
+                  "value": -1,
+                  "target": "Target",
+                  "entityTypes": [
+                    "Monster"
+                  ]
+                },
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_ANIMAL_ENTITY_TYPE",
+                  "compareType": "NoneOrEqual",
+                  "target": "Target"
+                }
+              ],
+              "successActions": [
                 {
                   "$type": "SetGlobalPos",
-                  "doOffStage": true,
-                  "target": "Other",
                   "key": "_ABILITY_MultiAvatar_Potion_Phase_1_3_Impact_Pos_Team",
                   "predicates": [
                     {
                       "$type": "ByTargetGlobalValue",
-                      "target": "Team",
                       "key": "_ABILITY_MultiAvatar_Potion_Phase_1_3_CD_Mark",
-                      "compareType": "NoneOrEqual"
+                      "compareType": "NoneOrEqual",
+                      "target": "Team"
                     }
                   ],
-                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true,
+                  "target": "Other",
+                  "doOffStage": true,
                   "born": {
                     "$type": "ConfigBornByTarget",
                     "direction": {
                       "maxAngle": 180
                     },
-                    "useRotation": true,
-                    "FDGAEDDEEDG": {
-                      "ELAJJIANFFM": 180
+                    "EALBHHJEFGH": {
+                      "BKAPGJCLCIO": 180
                     },
-                    "alongGround": true,
+                    "useRotation": true,
+                    "value": 10,
                     "onGroundRaycastUpDist": 2,
-                    "value": 10
+                    "KFHHKFNAKFP": true
                   },
-                  "canBeHandledOnRecover": true
+                  "actorIceSubHurtDelta": -1
                 },
                 {
                   "$type": "Predicated",
-                  "doOffStage": true,
-                  "targetPredicates": [
-                    {
-                      "$type": "ByTargetGlobalValue",
-                      "target": "Team",
-                      "key": "_ABILITY_MultiAvatar_Potion_Phase_1_3_CD_Mark",
-                      "compareType": "NoneOrEqual"
-                    }
-                  ],
                   "predicates": [
                     {
                       "$type": "ByTargetGlobalValue",
-                      "target": "Team",
                       "key": "_ABILITY_MultiAvatar_Potion_Phase_1_3_CD_Mark",
-                      "compareType": "NoneOrEqual"
+                      "compareType": "NoneOrEqual",
+                      "target": "Team"
                     }
                   ],
-                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true,
                   "successActions": [
                     {
                       "$type": "ApplyModifier",
+                      "canBeHandledOnRecover": true,
+                      "target": "Team",
                       "doOffStage": true,
                       "modifierName": "UNIQUE_MultiAvatar_Potion_Phase_1_3_Impact_TeamCD",
-                      "target": "Team",
-                      "actorIceSubHurtDelta": -1,
-                      "canBeHandledOnRecover": true
+                      "actorIceSubHurtDelta": -1
+                    },
+                    {
+                      "$type": "SetGlobalPos",
+                      "setTarget": true,
+                      "key": "_ABILITY_MultiAvatar_Potion_Phase_1_3_Impact_Pos_Avatar",
+                      "canBeHandledOnRecover": true,
+                      "doOffStage": true,
+                      "born": {
+                        "$type": "ConfigBornBySelf",
+                        "direction": {
+                          "maxAngle": 180
+                        },
+                        "EALBHHJEFGH": {
+                          "BKAPGJCLCIO": 180
+                        },
+                        "useRotation": true,
+                        "value": 10,
+                        "onGroundRaycastUpDist": 2
+                      },
+                      "actorIceSubHurtDelta": -1
                     },
                     {
                       "$type": "CopyGlobalValue",
-                      "doOffStage": true,
-                      "dstKey": "_ABILITY_MultiAvatar_Potion_Phase_1_3_Impact_Pos_Avatar_0",
+                      "canBeHandledOnRecover": true,
                       "srcTarget": "Team",
-                      "actorIceSubHurtDelta": -1,
                       "srcKey": "_ABILITY_MultiAvatar_Potion_Phase_1_3_Impact_Pos_Team_0",
-                      "canBeHandledOnRecover": true
+                      "dstKey": "_ABILITY_MultiAvatar_Potion_Phase_1_3_Impact_Pos_Avatar_0",
+                      "doOffStage": true,
+                      "actorIceSubHurtDelta": -1
                     },
                     {
                       "$type": "CopyGlobalValue",
-                      "doOffStage": true,
-                      "dstKey": "_ABILITY_MultiAvatar_Potion_Phase_1_3_Impact_Pos_Avatar_1",
+                      "canBeHandledOnRecover": true,
                       "srcTarget": "Team",
-                      "actorIceSubHurtDelta": -1,
                       "srcKey": "_ABILITY_MultiAvatar_Potion_Phase_1_3_Impact_Pos_Team_1",
-                      "canBeHandledOnRecover": true
+                      "dstKey": "_ABILITY_MultiAvatar_Potion_Phase_1_3_Impact_Pos_Avatar_1",
+                      "doOffStage": true,
+                      "actorIceSubHurtDelta": -1
                     },
                     {
                       "$type": "CopyGlobalValue",
-                      "doOffStage": true,
-                      "dstKey": "_ABILITY_MultiAvatar_Potion_Phase_1_3_Impact_Pos_Avatar_2",
+                      "canBeHandledOnRecover": true,
                       "srcTarget": "Team",
-                      "actorIceSubHurtDelta": -1,
                       "srcKey": "_ABILITY_MultiAvatar_Potion_Phase_1_3_Impact_Pos_Team_2",
-                      "canBeHandledOnRecover": true
+                      "dstKey": "_ABILITY_MultiAvatar_Potion_Phase_1_3_Impact_Pos_Avatar_2",
+                      "doOffStage": true,
+                      "actorIceSubHurtDelta": -1
                     },
                     {
                       "$type": "TriggerAttackEvent",
-                      "doOffStage": true,
                       "attackEvent": {
                         "attackInfo": {
-                          "attenuationGroup": "default",
                           "hitPattern": {
-                            "retreatType": "ByHitDirectionInverse",
                             "hitImpulseType": "LV3",
+                            "retreatType": "ByHitDirectionInverse",
                             "onHitEffectName": "default",
-                            "hitHaltTimeScale": 0.05000000074505806,
-                            "JKLONEBKFKJ": {
-                              "JJGBOHIKHFM": true,
-                              "value": 1
-                            }
+                            "NPLKKCCDEDJ": {
+                              "value": 1,
+                              "NJICIOFCOPD": true
+                            },
+                            "hitHaltTimeScale": 0.05000000074505806
                           },
-                          "FJNMGDHFOEH": {
-                            "GCPNPCOFFBP": "Shake"
-                          },
-                          "IODAJAKBOLG": {
-                            "onHitEffectName": "default",
-                            "JKLONEBKFKJ": {
-                              "JJGBOHIKHFM": true,
-                              "value": 1
-                            }
+                          "cameraShake": {
+                            "extension": {
+                              "cycleDamping": 0.11999999731779099,
+                              "baseOnCamera": true,
+                              "rangeAttenuation": 0.5,
+                              "baseCycle": 0.11999999731779099
+                            },
+                            "shakeDistance": 20
                           },
                           "attackProperty": {
-                            "attackType": "Range",
                             "enBreak": 20,
-                            "elementDurability": 20,
-                            "elementRank": 1,
-                            "HPPLKCPAKHP": true,
                             "damageExtra": [
                               "DamageRatio",
                               "DamageSystemValue",
                               "MUL"
-                            ]
+                            ],
+                            "IOLHEGDMIBF": true,
+                            "elementDurability": 20,
+                            "attackType": "Range",
+                            "elementRank": 1
                           },
-                          "cameraShake": {
-                            "extension": {
-                              "baseCycle": 0.11999999731779099,
-                              "cycleDamping": 0.11999999731779099,
-                              "baseOnCamera": true,
-                              "rangeAttenuation": 0.5
-                            },
-                            "FAKMJBNLPPB": -1,
-                            "shakeDistance": 20
+                          "KMBBLIMOMBH": {
+                            "LMEIODIINNM": "Shake"
+                          },
+                          "attenuationGroup": "default",
+                          "OLHIHLILEKH": {
+                            "onHitEffectName": "default",
+                            "NPLKKCCDEDJ": {
+                              "value": 1,
+                              "NJICIOFCOPD": true
+                            }
                           }
                         },
                         "attackPattern": {
                           "$type": "ConfigAttackCircle",
+                          "BCIDGAKNEBH": {
+                            "BPIDFNFCNHP": {
+                              "value": 1,
+                              "NJICIOFCOPD": true
+                            }
+                          },
                           "radius": 10,
+                          "triggerType": "TriggerNoRepeat",
                           "massiveAttackRatio": 0.30000001192092896,
+                          "fanAngle": 360,
+                          "height": 6,
                           "born": {
                             "$type": "ConfigBornByGlobalValue",
                             "direction": {
                               "maxAngle": 180
                             },
-                            "useRotation": true,
-                            "positionKey": "_ABILITY_MultiAvatar_Potion_Phase_1_3_Impact_Pos_Avatar",
-                            "FDGAEDDEEDG": {
-                              "ELAJJIANFFM": 180
+                            "EALBHHJEFGH": {
+                              "BKAPGJCLCIO": 180
                             },
-                            "alongGround": true,
+                            "useRotation": true,
+                            "value": 10,
                             "onGroundRaycastUpDist": 2,
-                            "value": 10
-                          },
-                          "height": 6,
-                          "fanAngle": 360,
-                          "PBFNLCIFCBO": {
-                            "GOAEBMPCPJL": {
-                              "JJGBOHIKHFM": true,
-                              "value": 1
-                            }
-                          },
-                          "triggerType": "TriggerNoRepeat"
+                            "KFHHKFNAKFP": true,
+                            "positionKey": "_ABILITY_MultiAvatar_Potion_Phase_1_3_Impact_Pos_Avatar"
+                          }
                         }
                       },
-                      "targetType": "Enemy",
+                      "canBeHandledOnRecover": true,
+                      "doOffStage": true,
                       "actorIceSubHurtDelta": -1,
-                      "canBeHandledOnRecover": true
+                      "targetType": "Enemy"
                     },
                     {
                       "$type": "FireEffect",
-                      "doOffStage": true,
-                      "scale": 1,
-                      "actorIceSubHurtDelta": -1,
+                      "canBeHandledOnRecover": true,
+                      "effectTempleteID": -1,
                       "effectPattern": "Eff_Activity_AkaFesPotion_Blast_R8",
+                      "scale": 1,
+                      "doOffStage": false,
                       "born": {
                         "$type": "ConfigBornByGlobalValue",
                         "direction": {
                           "maxAngle": 180
                         },
-                        "useRotation": true,
-                        "positionKey": "_ABILITY_MultiAvatar_Potion_Phase_1_3_Impact_Pos_Avatar",
-                        "FDGAEDDEEDG": {
-                          "ELAJJIANFFM": 180
+                        "EALBHHJEFGH": {
+                          "BKAPGJCLCIO": 180
                         },
+                        "useRotation": true,
+                        "value": 10,
                         "onGroundRaycastUpDist": 2,
-                        "value": 10
+                        "KFHHKFNAKFP": true,
+                        "positionKey": "_ABILITY_MultiAvatar_Potion_Phase_1_3_Impact_Pos_Avatar"
                       },
-                      "effectTempleteID": -1,
-                      "canBeHandledOnRecover": true
+                      "actorIceSubHurtDelta": -1
                     }
                   ],
-                  "canBeHandledOnRecover": true
+                  "doOffStage": true,
+                  "actorIceSubHurtDelta": -1
+                }
+              ],
+              "doOffStage": true,
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "onAdded": [
+            {
+              "$type": "SetSystemValueToOverrideMap",
+              "type": "ElementLevelCo",
+              "key": "DamageSystemValue",
+              "canBeHandledOnRecover": true,
+              "doOffStage": true,
+              "MMAFMANEAND": -1,
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "minus_one": -1,
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "DoActionByElementReactionMixin",
+              "entityTypes": [
+                "Monster"
+              ],
+              "actions": [
+                {
+                  "$type": "SetGlobalPos",
+                  "key": "_ABILITY_MultiAvatar_Potion_Phase_1_3_Impact_Pos_Team",
+                  "predicates": [
+                    {
+                      "$type": "ByTargetGlobalValue",
+                      "key": "_ABILITY_MultiAvatar_Potion_Phase_1_3_CD_Mark",
+                      "compareType": "NoneOrEqual",
+                      "target": "Team"
+                    }
+                  ],
+                  "canBeHandledOnRecover": true,
+                  "target": "Other",
+                  "doOffStage": true,
+                  "born": {
+                    "$type": "ConfigBornByTarget",
+                    "direction": {
+                      "maxAngle": 180
+                    },
+                    "EALBHHJEFGH": {
+                      "BKAPGJCLCIO": 180
+                    },
+                    "useRotation": true,
+                    "value": 10,
+                    "onGroundRaycastUpDist": 2,
+                    "KFHHKFNAKFP": true
+                  },
+                  "actorIceSubHurtDelta": -1
+                },
+                {
+                  "$type": "Predicated",
+                  "predicates": [
+                    {
+                      "$type": "ByTargetGlobalValue",
+                      "key": "_ABILITY_MultiAvatar_Potion_Phase_1_3_CD_Mark",
+                      "compareType": "NoneOrEqual",
+                      "target": "Team"
+                    }
+                  ],
+                  "canBeHandledOnRecover": true,
+                  "targetPredicates": [
+                    {
+                      "$type": "ByTargetGlobalValue",
+                      "key": "_ABILITY_MultiAvatar_Potion_Phase_1_3_CD_Mark",
+                      "compareType": "NoneOrEqual",
+                      "target": "Team"
+                    }
+                  ],
+                  "successActions": [
+                    {
+                      "$type": "ApplyModifier",
+                      "canBeHandledOnRecover": true,
+                      "target": "Team",
+                      "doOffStage": true,
+                      "modifierName": "UNIQUE_MultiAvatar_Potion_Phase_1_3_Impact_TeamCD",
+                      "actorIceSubHurtDelta": -1
+                    },
+                    {
+                      "$type": "CopyGlobalValue",
+                      "canBeHandledOnRecover": true,
+                      "srcTarget": "Team",
+                      "srcKey": "_ABILITY_MultiAvatar_Potion_Phase_1_3_Impact_Pos_Team_0",
+                      "dstKey": "_ABILITY_MultiAvatar_Potion_Phase_1_3_Impact_Pos_Avatar_0",
+                      "doOffStage": true,
+                      "actorIceSubHurtDelta": -1
+                    },
+                    {
+                      "$type": "CopyGlobalValue",
+                      "canBeHandledOnRecover": true,
+                      "srcTarget": "Team",
+                      "srcKey": "_ABILITY_MultiAvatar_Potion_Phase_1_3_Impact_Pos_Team_1",
+                      "dstKey": "_ABILITY_MultiAvatar_Potion_Phase_1_3_Impact_Pos_Avatar_1",
+                      "doOffStage": true,
+                      "actorIceSubHurtDelta": -1
+                    },
+                    {
+                      "$type": "CopyGlobalValue",
+                      "canBeHandledOnRecover": true,
+                      "srcTarget": "Team",
+                      "srcKey": "_ABILITY_MultiAvatar_Potion_Phase_1_3_Impact_Pos_Team_2",
+                      "dstKey": "_ABILITY_MultiAvatar_Potion_Phase_1_3_Impact_Pos_Avatar_2",
+                      "doOffStage": true,
+                      "actorIceSubHurtDelta": -1
+                    },
+                    {
+                      "$type": "TriggerAttackEvent",
+                      "attackEvent": {
+                        "attackInfo": {
+                          "hitPattern": {
+                            "hitImpulseType": "LV3",
+                            "retreatType": "ByHitDirectionInverse",
+                            "onHitEffectName": "default",
+                            "NPLKKCCDEDJ": {
+                              "value": 1,
+                              "NJICIOFCOPD": true
+                            },
+                            "hitHaltTimeScale": 0.05000000074505806
+                          },
+                          "cameraShake": {
+                            "extension": {
+                              "cycleDamping": 0.11999999731779099,
+                              "baseOnCamera": true,
+                              "rangeAttenuation": 0.5,
+                              "baseCycle": 0.11999999731779099
+                            },
+                            "shakeDistance": 20
+                          },
+                          "attackProperty": {
+                            "enBreak": 20,
+                            "damageExtra": [
+                              "DamageRatio",
+                              "DamageSystemValue",
+                              "MUL"
+                            ],
+                            "IOLHEGDMIBF": true,
+                            "elementDurability": 20,
+                            "attackType": "Range",
+                            "elementRank": 1
+                          },
+                          "KMBBLIMOMBH": {
+                            "LMEIODIINNM": "Shake"
+                          },
+                          "attenuationGroup": "default",
+                          "OLHIHLILEKH": {
+                            "onHitEffectName": "default",
+                            "NPLKKCCDEDJ": {
+                              "value": 1,
+                              "NJICIOFCOPD": true
+                            }
+                          }
+                        },
+                        "attackPattern": {
+                          "$type": "ConfigAttackCircle",
+                          "BCIDGAKNEBH": {
+                            "BPIDFNFCNHP": {
+                              "value": 1,
+                              "NJICIOFCOPD": true
+                            }
+                          },
+                          "radius": 10,
+                          "triggerType": "TriggerNoRepeat",
+                          "massiveAttackRatio": 0.30000001192092896,
+                          "fanAngle": 360,
+                          "height": 6,
+                          "born": {
+                            "$type": "ConfigBornByGlobalValue",
+                            "direction": {
+                              "maxAngle": 180
+                            },
+                            "EALBHHJEFGH": {
+                              "BKAPGJCLCIO": 180
+                            },
+                            "useRotation": true,
+                            "value": 10,
+                            "onGroundRaycastUpDist": 2,
+                            "KFHHKFNAKFP": true,
+                            "positionKey": "_ABILITY_MultiAvatar_Potion_Phase_1_3_Impact_Pos_Avatar"
+                          }
+                        }
+                      },
+                      "canBeHandledOnRecover": true,
+                      "doOffStage": true,
+                      "actorIceSubHurtDelta": -1,
+                      "targetType": "Enemy"
+                    },
+                    {
+                      "$type": "FireEffect",
+                      "canBeHandledOnRecover": true,
+                      "effectTempleteID": -1,
+                      "effectPattern": "Eff_Activity_AkaFesPotion_Blast_R8",
+                      "scale": 1,
+                      "doOffStage": true,
+                      "born": {
+                        "$type": "ConfigBornByGlobalValue",
+                        "direction": {
+                          "maxAngle": 180
+                        },
+                        "EALBHHJEFGH": {
+                          "BKAPGJCLCIO": 180
+                        },
+                        "useRotation": true,
+                        "value": 10,
+                        "onGroundRaycastUpDist": 2,
+                        "positionKey": "_ABILITY_MultiAvatar_Potion_Phase_1_3_Impact_Pos_Avatar"
+                      },
+                      "actorIceSubHurtDelta": -1
+                    }
+                  ],
+                  "doOffStage": true,
+                  "actorIceSubHurtDelta": -1
                 }
               ],
               "range": 20,
@@ -461,406 +694,167 @@
                 "OvergrowMushroomElectric",
                 "OvergrowMushroomFire"
               ],
-              "actorIceSubHurtDelta": -1,
-              "entityTypes": [
-                "Monster"
-              ]
+              "actorIceSubHurtDelta": -1
             }
           ],
-          "onHittingOther": [
-            {
-              "$type": "Predicated",
-              "doOffStage": true,
-              "target": "Other",
-              "targetPredicates": [
-                {
-                  "$type": "ByAttackTags",
-                  "attackTags": [
-                    "OverGrowDamage",
-                    "OverGrow_Fire_Damage",
-                    "OverGrow_Electric_Damage"
-                  ],
-                  "target": "Target"
-                },
-                {
-                  "$type": "ByEntityTypes",
-                  "target": "Target",
-                  "value": -1,
-                  "entityTypes": [
-                    "Monster"
-                  ]
-                },
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "target": "Target",
-                  "key": "_ANIMAL_ENTITY_TYPE",
-                  "compareType": "NoneOrEqual"
-                }
-              ],
-              "actorIceSubHurtDelta": -1,
-              "successActions": [
-                {
-                  "$type": "SetGlobalPos",
-                  "doOffStage": true,
-                  "target": "Other",
-                  "key": "_ABILITY_MultiAvatar_Potion_Phase_1_3_Impact_Pos_Team",
-                  "predicates": [
-                    {
-                      "$type": "ByTargetGlobalValue",
-                      "target": "Team",
-                      "key": "_ABILITY_MultiAvatar_Potion_Phase_1_3_CD_Mark",
-                      "compareType": "NoneOrEqual"
-                    }
-                  ],
-                  "actorIceSubHurtDelta": -1,
-                  "born": {
-                    "$type": "ConfigBornByTarget",
-                    "direction": {
-                      "maxAngle": 180
-                    },
-                    "useRotation": true,
-                    "FDGAEDDEEDG": {
-                      "ELAJJIANFFM": 180
-                    },
-                    "alongGround": true,
-                    "onGroundRaycastUpDist": 2,
-                    "value": 10
-                  },
-                  "canBeHandledOnRecover": true
-                },
-                {
-                  "$type": "Predicated",
-                  "doOffStage": true,
-                  "predicates": [
-                    {
-                      "$type": "ByTargetGlobalValue",
-                      "target": "Team",
-                      "key": "_ABILITY_MultiAvatar_Potion_Phase_1_3_CD_Mark",
-                      "compareType": "NoneOrEqual"
-                    }
-                  ],
-                  "actorIceSubHurtDelta": -1,
-                  "successActions": [
-                    {
-                      "$type": "ApplyModifier",
-                      "doOffStage": true,
-                      "modifierName": "UNIQUE_MultiAvatar_Potion_Phase_1_3_Impact_TeamCD",
-                      "target": "Team",
-                      "actorIceSubHurtDelta": -1,
-                      "canBeHandledOnRecover": true
-                    },
-                    {
-                      "$type": "SetGlobalPos",
-                      "doOffStage": true,
-                      "setTarget": true,
-                      "key": "_ABILITY_MultiAvatar_Potion_Phase_1_3_Impact_Pos_Avatar",
-                      "actorIceSubHurtDelta": -1,
-                      "born": {
-                        "$type": "ConfigBornBySelf",
-                        "direction": {
-                          "maxAngle": 180
-                        },
-                        "useRotation": true,
-                        "FDGAEDDEEDG": {
-                          "ELAJJIANFFM": 180
-                        },
-                        "onGroundRaycastUpDist": 2,
-                        "value": 10
-                      },
-                      "canBeHandledOnRecover": true
-                    },
-                    {
-                      "$type": "CopyGlobalValue",
-                      "doOffStage": true,
-                      "dstKey": "_ABILITY_MultiAvatar_Potion_Phase_1_3_Impact_Pos_Avatar_0",
-                      "srcTarget": "Team",
-                      "actorIceSubHurtDelta": -1,
-                      "srcKey": "_ABILITY_MultiAvatar_Potion_Phase_1_3_Impact_Pos_Team_0",
-                      "canBeHandledOnRecover": true
-                    },
-                    {
-                      "$type": "CopyGlobalValue",
-                      "doOffStage": true,
-                      "dstKey": "_ABILITY_MultiAvatar_Potion_Phase_1_3_Impact_Pos_Avatar_1",
-                      "srcTarget": "Team",
-                      "actorIceSubHurtDelta": -1,
-                      "srcKey": "_ABILITY_MultiAvatar_Potion_Phase_1_3_Impact_Pos_Team_1",
-                      "canBeHandledOnRecover": true
-                    },
-                    {
-                      "$type": "CopyGlobalValue",
-                      "doOffStage": true,
-                      "dstKey": "_ABILITY_MultiAvatar_Potion_Phase_1_3_Impact_Pos_Avatar_2",
-                      "srcTarget": "Team",
-                      "actorIceSubHurtDelta": -1,
-                      "srcKey": "_ABILITY_MultiAvatar_Potion_Phase_1_3_Impact_Pos_Team_2",
-                      "canBeHandledOnRecover": true
-                    },
-                    {
-                      "$type": "TriggerAttackEvent",
-                      "doOffStage": true,
-                      "attackEvent": {
-                        "attackInfo": {
-                          "attenuationGroup": "default",
-                          "hitPattern": {
-                            "retreatType": "ByHitDirectionInverse",
-                            "hitImpulseType": "LV3",
-                            "onHitEffectName": "default",
-                            "hitHaltTimeScale": 0.05000000074505806,
-                            "JKLONEBKFKJ": {
-                              "JJGBOHIKHFM": true,
-                              "value": 1
-                            }
-                          },
-                          "FJNMGDHFOEH": {
-                            "GCPNPCOFFBP": "Shake"
-                          },
-                          "IODAJAKBOLG": {
-                            "onHitEffectName": "default",
-                            "JKLONEBKFKJ": {
-                              "JJGBOHIKHFM": true,
-                              "value": 1
-                            }
-                          },
-                          "attackProperty": {
-                            "attackType": "Range",
-                            "enBreak": 20,
-                            "elementDurability": 20,
-                            "elementRank": 1,
-                            "HPPLKCPAKHP": true,
-                            "damageExtra": [
-                              "DamageRatio",
-                              "DamageSystemValue",
-                              "MUL"
-                            ]
-                          },
-                          "cameraShake": {
-                            "extension": {
-                              "baseCycle": 0.11999999731779099,
-                              "cycleDamping": 0.11999999731779099,
-                              "baseOnCamera": true,
-                              "rangeAttenuation": 0.5
-                            },
-                            "FAKMJBNLPPB": -1,
-                            "shakeDistance": 20
-                          }
-                        },
-                        "attackPattern": {
-                          "$type": "ConfigAttackCircle",
-                          "radius": 10,
-                          "massiveAttackRatio": 0.30000001192092896,
-                          "born": {
-                            "$type": "ConfigBornByGlobalValue",
-                            "direction": {
-                              "maxAngle": 180
-                            },
-                            "useRotation": true,
-                            "positionKey": "_ABILITY_MultiAvatar_Potion_Phase_1_3_Impact_Pos_Avatar",
-                            "FDGAEDDEEDG": {
-                              "ELAJJIANFFM": 180
-                            },
-                            "alongGround": true,
-                            "onGroundRaycastUpDist": 2,
-                            "value": 10
-                          },
-                          "height": 6,
-                          "fanAngle": 360,
-                          "PBFNLCIFCBO": {
-                            "GOAEBMPCPJL": {
-                              "JJGBOHIKHFM": true,
-                              "value": 1
-                            }
-                          },
-                          "triggerType": "TriggerNoRepeat"
-                        }
-                      },
-                      "targetType": "Enemy",
-                      "actorIceSubHurtDelta": -1,
-                      "canBeHandledOnRecover": true
-                    },
-                    {
-                      "$type": "FireEffect",
-                      "doOffStage": false,
-                      "scale": 1,
-                      "actorIceSubHurtDelta": -1,
-                      "effectPattern": "Eff_Activity_AkaFesPotion_Blast_R8",
-                      "born": {
-                        "$type": "ConfigBornByGlobalValue",
-                        "direction": {
-                          "maxAngle": 180
-                        },
-                        "useRotation": true,
-                        "positionKey": "_ABILITY_MultiAvatar_Potion_Phase_1_3_Impact_Pos_Avatar",
-                        "FDGAEDDEEDG": {
-                          "ELAJJIANFFM": 180
-                        },
-                        "alongGround": true,
-                        "onGroundRaycastUpDist": 2,
-                        "value": 10
-                      },
-                      "effectTempleteID": -1,
-                      "canBeHandledOnRecover": true
-                    }
-                  ],
-                  "canBeHandledOnRecover": true
-                }
-              ],
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "minus_one": -1
+          "NLBKJKDNFFP": -1,
+          "stacking": "Unique"
         },
         "MultiAvatar_Potion_Phase_1_3_Driver_Team": {
+          "thinkInterval": 1,
           "onAdded": [
             {
               "$type": "AttachModifier",
+              "canBeHandledOnRecover": true,
+              "target": "CurTeamAvatars",
               "doOffStage": true,
               "modifierName": "MultiAvatar_Potion_Phase_1_3_Avatar",
-              "target": "CurTeamAvatars",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "actorIceSubHurtDelta": -1
             }
           ],
+          "minus_one": -1,
           "elementDurability": 100,
           "isLimitedProperties": true,
-          "minus_one": -1,
           "onThinkInterval": [
             {
               "$type": "AttachModifier",
+              "canBeHandledOnRecover": true,
+              "target": "CurTeamAvatars",
               "doOffStage": true,
               "modifierName": "MultiAvatar_Potion_Phase_1_3_Avatar",
-              "target": "CurTeamAvatars",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "actorIceSubHurtDelta": -1
             }
           ],
-          "thinkInterval": 1
+          "NLBKJKDNFFP": -1
         },
         "UNIQUE_MultiAvatar_Potion_Phase_1_3_Impact_TeamCD": {
-          "onAdded": [
-            {
-              "$type": "SetGlobalValue",
-              "doOffStage": true,
-              "value": 1,
-              "target": "Team",
-              "key": "_ABILITY_MultiAvatar_Potion_Phase_1_3_CD_Mark",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "elementDurability": 100,
-          "stacking": "Unique",
-          "isLimitedProperties": true,
+          "isUnique": true,
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
-              "doOffStage": true,
-              "target": "Team",
               "key": "_ABILITY_MultiAvatar_Potion_Phase_1_3_CD_Mark",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "canBeHandledOnRecover": true,
+              "target": "Team",
+              "doOffStage": true,
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "duration": "ImpactCD",
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "key": "_ABILITY_MultiAvatar_Potion_Phase_1_3_CD_Mark",
+              "canBeHandledOnRecover": true,
+              "target": "Team",
+              "doOffStage": true,
+              "value": 1,
+              "actorIceSubHurtDelta": -1
             }
           ],
           "minus_one": -1,
-          "isUnique": true,
-          "duration": "ImpactCD"
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "NLBKJKDNFFP": -1,
+          "stacking": "Unique"
         }
-      }
-    }
-  },
-  {
-    "Default": {
-      "abilitySpecials": {
-        "MaxHPRatio": 0
       },
-      "DDNHHMIBNLF": {
-        "elementDurability": 100,
-        "isLimitedProperties": true,
-        "minus_one": -1
+      "abilitySpecials": {
+        "DamageRatio": 0,
+        "DamageSystemValue": 0,
+        "ImpactCD": 0
       },
       "onAdded": [
         {
           "$type": "AttachModifier",
-          "doOffStage": false,
-          "modifierName": "MultiAvatar_Potion_Phase_2_1_Driver_Team",
+          "canBeHandledOnRecover": true,
           "target": "Team",
-          "actorIceSubHurtDelta": -1,
-          "canBeHandledOnRecover": true
+          "doOffStage": false,
+          "modifierName": "MultiAvatar_Potion_Phase_1_3_Driver_Team",
+          "actorIceSubHurtDelta": -1
         }
       ],
-      "abilityName": "Activity_MultiAvatar_Potion_Phase_2_1",
       "isDynamicAbility": true,
+      "abilityName": "Activity_MultiAvatar_Potion_Phase_1_3"
+    }
+  },
+  {
+    "Default": {
+      "CAKPDBGADEA": {
+        "minus_one": -1,
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "NLBKJKDNFFP": -1
+      },
       "modifiers": {
         "MultiAvatar_Potion_Phase_2_1_Avatar": {
-          "elementDurability": 100,
-          "stacking": "Unique",
-          "isLimitedProperties": true,
-          "KKBDDALAMKP": true,
-          "minus_one": -1,
           "properties": {
             "Actor_MaxHPRatio": "MaxHPRatio"
-          }
+          },
+          "HBLJELGPNMI": true,
+          "minus_one": -1,
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "NLBKJKDNFFP": -1,
+          "stacking": "Unique"
         },
         "MultiAvatar_Potion_Phase_2_1_Driver_Team": {
+          "thinkInterval": 1,
           "onAdded": [
             {
               "$type": "AttachModifier",
+              "canBeHandledOnRecover": true,
+              "target": "CurTeamAvatars",
               "doOffStage": true,
               "modifierName": "MultiAvatar_Potion_Phase_2_1_Avatar",
-              "target": "CurTeamAvatars",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "actorIceSubHurtDelta": -1
             }
           ],
+          "minus_one": -1,
           "elementDurability": 100,
           "isLimitedProperties": true,
-          "minus_one": -1,
           "onThinkInterval": [
             {
               "$type": "AttachModifier",
+              "canBeHandledOnRecover": true,
+              "target": "CurTeamAvatars",
               "doOffStage": true,
               "modifierName": "MultiAvatar_Potion_Phase_2_1_Avatar",
-              "target": "CurTeamAvatars",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "actorIceSubHurtDelta": -1
             }
           ],
-          "thinkInterval": 1
+          "NLBKJKDNFFP": -1
         }
-      }
-    }
-  },
-  {
-    "Default": {
-      "abilitySpecials": {
-        "CriticalHurt_Ratio": 0,
-        "Critical_Ratio": 0,
-        "HP_Ratio": 0
       },
-      "DDNHHMIBNLF": {
-        "elementDurability": 100,
-        "isLimitedProperties": true,
-        "minus_one": -1
+      "abilitySpecials": {
+        "MaxHPRatio": 0
       },
       "onAdded": [
         {
           "$type": "AttachModifier",
-          "doOffStage": false,
-          "modifierName": "MultiAvatar_Potion_Phase_2_2_Driver_Team",
+          "canBeHandledOnRecover": true,
           "target": "Team",
-          "actorIceSubHurtDelta": -1,
-          "canBeHandledOnRecover": true
+          "doOffStage": false,
+          "modifierName": "MultiAvatar_Potion_Phase_2_1_Driver_Team",
+          "actorIceSubHurtDelta": -1
         }
       ],
-      "abilityName": "Activity_MultiAvatar_Potion_Phase_2_2",
       "isDynamicAbility": true,
+      "abilityName": "Activity_MultiAvatar_Potion_Phase_2_1"
+    }
+  },
+  {
+    "Default": {
+      "CAKPDBGADEA": {
+        "minus_one": -1,
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "NLBKJKDNFFP": -1
+      },
       "modifiers": {
         "MultiAvatar_Potion_Phase_2_2_Avatar": {
           "onAdded": [
             {
               "$type": "AttachModifier",
-              "doOffStage": true,
-              "modifierName": "MultiAvatar_Potion_Phase_2_2_Avatar_CritBuff",
               "predicates": [
                 {
                   "$type": "ByTargetHPRatio",
@@ -868,17 +862,18 @@
                   "HPRatio": "HP_Ratio"
                 }
               ],
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "canBeHandledOnRecover": true,
+              "doOffStage": true,
+              "modifierName": "MultiAvatar_Potion_Phase_2_2_Avatar_CritBuff",
+              "actorIceSubHurtDelta": -1
             }
           ],
+          "minus_one": -1,
           "elementDurability": 100,
-          "stacking": "Unique",
           "isLimitedProperties": true,
           "modifierMixins": [
             {
               "$type": "AttachModifierToPredicateMixin",
-              "modifierName": "MultiAvatar_Potion_Phase_2_2_Avatar_CritBuff",
               "onEvent": "HP",
               "predicates": [
                 {
@@ -887,400 +882,408 @@
                   "HPRatio": "HP_Ratio"
                 }
               ],
+              "modifierName": "MultiAvatar_Potion_Phase_2_2_Avatar_CritBuff",
               "actorIceSubHurtDelta": -1
             }
           ],
-          "minus_one": -1
+          "NLBKJKDNFFP": -1,
+          "stacking": "Unique"
         },
         "MultiAvatar_Potion_Phase_2_2_Avatar_CritBuff": {
-          "elementDurability": 100,
-          "isLimitedProperties": true,
-          "KKBDDALAMKP": true,
-          "minus_one": -1,
           "properties": {
             "Actor_CriticalExtraDelta": "Critical_Ratio",
             "Actor_CriticalHurtExtraDelta": "CriticalHurt_Ratio"
           },
-          "state": "AttackUp"
+          "HBLJELGPNMI": true,
+          "minus_one": -1,
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "state": "AttackUp",
+          "NLBKJKDNFFP": -1
         },
         "MultiAvatar_Potion_Phase_2_2_Driver_Team": {
+          "thinkInterval": 1,
           "onAdded": [
             {
               "$type": "AttachModifier",
+              "canBeHandledOnRecover": true,
+              "target": "CurTeamAvatars",
               "doOffStage": true,
               "modifierName": "MultiAvatar_Potion_Phase_2_2_Avatar",
-              "target": "CurTeamAvatars",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "actorIceSubHurtDelta": -1
             }
           ],
+          "minus_one": -1,
           "elementDurability": 100,
           "isLimitedProperties": true,
-          "minus_one": -1,
           "onThinkInterval": [
             {
               "$type": "AttachModifier",
+              "canBeHandledOnRecover": true,
+              "target": "CurTeamAvatars",
               "doOffStage": true,
               "modifierName": "MultiAvatar_Potion_Phase_2_2_Avatar",
-              "target": "CurTeamAvatars",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "actorIceSubHurtDelta": -1
             }
           ],
-          "thinkInterval": 1
+          "NLBKJKDNFFP": -1
         }
-      }
-    }
-  },
-  {
-    "Default": {
-      "abilitySpecials": {
-        "DamageRatio": 0,
-        "DamageSystemValue": 0,
-        "ImpactCD": 0
       },
-      "DDNHHMIBNLF": {
-        "elementDurability": 100,
-        "isLimitedProperties": true,
-        "minus_one": -1
+      "abilitySpecials": {
+        "CriticalHurt_Ratio": 0,
+        "Critical_Ratio": 0,
+        "HP_Ratio": 0
       },
       "onAdded": [
         {
           "$type": "AttachModifier",
-          "doOffStage": false,
-          "modifierName": "MultiAvatar_Potion_Phase_2_3_Driver_Team",
+          "canBeHandledOnRecover": true,
           "target": "Team",
-          "actorIceSubHurtDelta": -1,
-          "canBeHandledOnRecover": true
+          "doOffStage": false,
+          "modifierName": "MultiAvatar_Potion_Phase_2_2_Driver_Team",
+          "actorIceSubHurtDelta": -1
         }
       ],
-      "abilityName": "Activity_MultiAvatar_Potion_Phase_2_3",
       "isDynamicAbility": true,
+      "abilityName": "Activity_MultiAvatar_Potion_Phase_2_2"
+    }
+  },
+  {
+    "Default": {
+      "CAKPDBGADEA": {
+        "minus_one": -1,
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "NLBKJKDNFFP": -1
+      },
       "modifiers": {
         "MultiAvatar_Potion_Phase_2_3_Avatar": {
+          "thinkInterval": 0.25,
+          "HBLJELGPNMI": true,
           "onAdded": [
             {
               "$type": "SetSystemValueToOverrideMap",
-              "doOffStage": true,
-              "key": "DamageSystemValue",
-              "actorIceSubHurtDelta": -1,
-              "value": -1,
               "type": "ElementLevelCo",
-              "canBeHandledOnRecover": true
+              "key": "DamageSystemValue",
+              "canBeHandledOnRecover": true,
+              "doOffStage": true,
+              "MMAFMANEAND": -1,
+              "actorIceSubHurtDelta": -1
             }
           ],
-          "elementDurability": 100,
-          "stacking": "Unique",
-          "isLimitedProperties": true,
-          "KKBDDALAMKP": true,
           "minus_one": -1,
+          "elementDurability": 100,
+          "isLimitedProperties": true,
           "onThinkInterval": [
             {
               "$type": "ApplyModifier",
-              "doOffStage": false,
-              "modifierName": "MultiAvatar_Potion_Phase_2_3_Impact_Team",
-              "target": "Team",
               "predicates": [
                 {
-                  "$type": "KIODAJAKEDI",
+                  "$type": "KGDFKACEPFA",
                   "type": "All"
                 }
               ],
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "canBeHandledOnRecover": true,
+              "target": "Team",
+              "doOffStage": false,
+              "modifierName": "MultiAvatar_Potion_Phase_2_3_Impact_Team",
+              "actorIceSubHurtDelta": -1
             }
           ],
+          "NLBKJKDNFFP": -1,
           "onHeal": [
             {
               "$type": "ApplyModifier",
+              "canBeHandledOnRecover": true,
+              "target": "Team",
               "doOffStage": false,
               "modifierName": "MultiAvatar_Potion_Phase_2_3_Impact_Team",
-              "target": "Team",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "actorIceSubHurtDelta": -1
             }
           ],
-          "thinkInterval": 0.25
+          "stacking": "Unique"
         },
         "MultiAvatar_Potion_Phase_2_3_Driver_Team": {
+          "thinkInterval": 1,
           "onAdded": [
             {
               "$type": "AttachModifier",
+              "canBeHandledOnRecover": true,
+              "target": "CurTeamAvatars",
               "doOffStage": true,
               "modifierName": "MultiAvatar_Potion_Phase_2_3_Avatar",
-              "target": "CurTeamAvatars",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "actorIceSubHurtDelta": -1
             }
           ],
+          "minus_one": -1,
           "elementDurability": 100,
           "isLimitedProperties": true,
-          "minus_one": -1,
           "onThinkInterval": [
             {
               "$type": "AttachModifier",
+              "canBeHandledOnRecover": true,
+              "target": "CurTeamAvatars",
               "doOffStage": true,
               "modifierName": "MultiAvatar_Potion_Phase_2_3_Avatar",
-              "target": "CurTeamAvatars",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "actorIceSubHurtDelta": -1
             }
           ],
-          "thinkInterval": 1
+          "NLBKJKDNFFP": -1
         },
         "MultiAvatar_Potion_Phase_2_3_Impact": {
+          "duration": 1,
           "onAdded": [
             {
               "$type": "TriggerAttackEvent",
-              "doOffStage": false,
               "attackEvent": {
                 "attackInfo": {
-                  "attenuationGroup": "default",
                   "hitPattern": {
-                    "retreatType": "ByHitDirectionInverse",
                     "hitImpulseType": "LV3",
+                    "retreatType": "ByHitDirectionInverse",
                     "onHitEffectName": "default",
-                    "hitHaltTimeScale": 0.05000000074505806,
-                    "JKLONEBKFKJ": {
-                      "JJGBOHIKHFM": true,
-                      "value": 1
-                    }
+                    "NPLKKCCDEDJ": {
+                      "value": 1,
+                      "NJICIOFCOPD": true
+                    },
+                    "hitHaltTimeScale": 0.05000000074505806
                   },
-                  "FJNMGDHFOEH": {
-                    "GCPNPCOFFBP": "Shake"
-                  },
-                  "IODAJAKBOLG": {
-                    "onHitEffectName": "default",
-                    "JKLONEBKFKJ": {
-                      "JJGBOHIKHFM": true,
-                      "value": 1
-                    }
+                  "cameraShake": {
+                    "extension": {
+                      "cycleDamping": 0.11999999731779099,
+                      "baseOnCamera": true,
+                      "rangeAttenuation": 0.5,
+                      "baseCycle": 0.11999999731779099
+                    },
+                    "shakeDistance": 20
                   },
                   "attackProperty": {
-                    "attackType": "Range",
                     "enBreak": 20,
-                    "elementDurability": 20,
-                    "elementRank": 1,
-                    "HPPLKCPAKHP": true,
                     "damageExtra": [
                       "DamageRatio",
                       "DamageSystemValue",
                       "MUL"
-                    ]
+                    ],
+                    "IOLHEGDMIBF": true,
+                    "elementDurability": 20,
+                    "attackType": "Range",
+                    "elementRank": 1
                   },
-                  "cameraShake": {
-                    "extension": {
-                      "baseCycle": 0.11999999731779099,
-                      "cycleDamping": 0.11999999731779099,
-                      "baseOnCamera": true,
-                      "rangeAttenuation": 0.5
-                    },
-                    "FAKMJBNLPPB": -1,
-                    "shakeDistance": 20
+                  "KMBBLIMOMBH": {
+                    "LMEIODIINNM": "Shake"
+                  },
+                  "attenuationGroup": "default",
+                  "OLHIHLILEKH": {
+                    "onHitEffectName": "default",
+                    "NPLKKCCDEDJ": {
+                      "value": 1,
+                      "NJICIOFCOPD": true
+                    }
                   }
                 },
                 "attackPattern": {
                   "$type": "ConfigAttackCircle",
+                  "BCIDGAKNEBH": {
+                    "BPIDFNFCNHP": {
+                      "value": 1,
+                      "NJICIOFCOPD": true
+                    }
+                  },
                   "radius": 10,
+                  "triggerType": "TriggerNoRepeat",
                   "massiveAttackRatio": 0.30000001192092896,
+                  "fanAngle": 360,
+                  "height": 6,
                   "born": {
                     "$type": "ConfigBornBySelf",
                     "direction": {
                       "maxAngle": 180
                     },
-                    "useRotation": true,
-                    "FDGAEDDEEDG": {
-                      "ELAJJIANFFM": 180
+                    "EALBHHJEFGH": {
+                      "BKAPGJCLCIO": 180
                     },
-                    "alongGround": true,
+                    "useRotation": true,
+                    "value": 10,
                     "onGroundRaycastUpDist": 2,
-                    "value": 10
-                  },
-                  "height": 6,
-                  "fanAngle": 360,
-                  "PBFNLCIFCBO": {
-                    "GOAEBMPCPJL": {
-                      "JJGBOHIKHFM": true,
-                      "value": 1
-                    }
-                  },
-                  "triggerType": "TriggerNoRepeat"
+                    "KFHHKFNAKFP": true
+                  }
                 }
               },
-              "targetType": "Enemy",
+              "canBeHandledOnRecover": true,
+              "doOffStage": false,
               "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "targetType": "Enemy"
             },
             {
               "$type": "FireEffect",
-              "doOffStage": false,
-              "scale": 1,
-              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true,
+              "effectTempleteID": -1,
               "effectPattern": "Eff_Activity_AkaFesPotion_Blast_R8",
+              "scale": 1,
+              "doOffStage": false,
               "born": {
                 "direction": {
                   "maxAngle": 180
                 },
-                "FDGAEDDEEDG": {
-                  "ELAJJIANFFM": 180
+                "EALBHHJEFGH": {
+                  "BKAPGJCLCIO": 180
                 },
-                "onGroundRaycastUpDist": 2,
-                "value": 10
+                "value": 10,
+                "onGroundRaycastUpDist": 2
               },
-              "effectTempleteID": -1,
-              "canBeHandledOnRecover": true
+              "actorIceSubHurtDelta": -1
             }
           ],
-          "elementDurability": 100,
-          "stacking": "Multiple",
-          "isLimitedProperties": true,
           "minus_one": -1,
-          "duration": 1
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "NLBKJKDNFFP": -1,
+          "stacking": "Multiple"
         },
         "MultiAvatar_Potion_Phase_2_3_Impact_Team": {
+          "duration": "ImpactCD",
           "onAdded": [
             {
               "$type": "ApplyModifier",
+              "canBeHandledOnRecover": true,
+              "target": "CurLocalAvatar",
               "doOffStage": true,
               "modifierName": "MultiAvatar_Potion_Phase_2_3_Impact",
-              "target": "CurLocalAvatar",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "actorIceSubHurtDelta": -1
             }
           ],
-          "elementDurability": 100,
-          "stacking": "Unique",
-          "isLimitedProperties": true,
           "minus_one": -1,
-          "duration": "ImpactCD"
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "NLBKJKDNFFP": -1,
+          "stacking": "Unique"
         }
-      }
-    }
-  },
-  {
-    "Default": {
-      "abilitySpecials": {
-        "Charge_EfficiencyDelta": 0
       },
-      "DDNHHMIBNLF": {
-        "elementDurability": 100,
-        "isLimitedProperties": true,
-        "minus_one": -1
+      "abilitySpecials": {
+        "DamageRatio": 0,
+        "DamageSystemValue": 0,
+        "ImpactCD": 0
       },
       "onAdded": [
         {
           "$type": "AttachModifier",
-          "doOffStage": false,
-          "modifierName": "MultiAvatar_Potion_Phase_3_1_Driver_Team",
+          "canBeHandledOnRecover": true,
           "target": "Team",
-          "actorIceSubHurtDelta": -1,
-          "canBeHandledOnRecover": true
+          "doOffStage": false,
+          "modifierName": "MultiAvatar_Potion_Phase_2_3_Driver_Team",
+          "actorIceSubHurtDelta": -1
         }
       ],
-      "abilityName": "Activity_MultiAvatar_Potion_Phase_3_1",
       "isDynamicAbility": true,
+      "abilityName": "Activity_MultiAvatar_Potion_Phase_2_3"
+    }
+  },
+  {
+    "Default": {
+      "CAKPDBGADEA": {
+        "minus_one": -1,
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "NLBKJKDNFFP": -1
+      },
       "modifiers": {
         "MultiAvatar_Potion_Phase_3_1_Avatar": {
-          "elementDurability": 100,
-          "stacking": "Unique",
-          "isLimitedProperties": true,
-          "KKBDDALAMKP": true,
-          "minus_one": -1,
           "properties": {
             "Actor_ChargeEfficiencyDelta": "Charge_EfficiencyDelta"
-          }
+          },
+          "HBLJELGPNMI": true,
+          "minus_one": -1,
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "NLBKJKDNFFP": -1,
+          "stacking": "Unique"
         },
         "MultiAvatar_Potion_Phase_3_1_Driver_Team": {
+          "thinkInterval": 1,
           "onAdded": [
             {
               "$type": "AttachModifier",
+              "canBeHandledOnRecover": true,
+              "target": "CurTeamAvatars",
               "doOffStage": true,
               "modifierName": "MultiAvatar_Potion_Phase_3_1_Avatar",
-              "target": "CurTeamAvatars",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "actorIceSubHurtDelta": -1
             }
           ],
+          "minus_one": -1,
           "elementDurability": 100,
           "isLimitedProperties": true,
-          "minus_one": -1,
           "onThinkInterval": [
             {
               "$type": "AttachModifier",
+              "canBeHandledOnRecover": true,
+              "target": "CurTeamAvatars",
               "doOffStage": true,
               "modifierName": "MultiAvatar_Potion_Phase_3_1_Avatar",
-              "target": "CurTeamAvatars",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "actorIceSubHurtDelta": -1
             }
           ],
-          "thinkInterval": 1
+          "NLBKJKDNFFP": -1
         }
-      }
-    }
-  },
-  {
-    "Default": {
-      "abilitySpecials": {
-        "BuffDuration": 0,
-        "BurstDamageUpRatio": 0,
-        "Element_DamgeUpRatio": 0
       },
-      "DDNHHMIBNLF": {
-        "elementDurability": 100,
-        "isLimitedProperties": true,
-        "minus_one": -1
+      "abilitySpecials": {
+        "Charge_EfficiencyDelta": 0
       },
       "onAdded": [
         {
           "$type": "AttachModifier",
-          "doOffStage": false,
-          "modifierName": "MultiAvatar_Potion_Phase_3_2_Driver_Team",
+          "canBeHandledOnRecover": true,
           "target": "Team",
-          "actorIceSubHurtDelta": -1,
-          "canBeHandledOnRecover": true
+          "doOffStage": false,
+          "modifierName": "MultiAvatar_Potion_Phase_3_1_Driver_Team",
+          "actorIceSubHurtDelta": -1
         }
       ],
-      "abilityName": "Activity_MultiAvatar_Potion_Phase_3_2",
       "isDynamicAbility": true,
+      "abilityName": "Activity_MultiAvatar_Potion_Phase_3_1"
+    }
+  },
+  {
+    "Default": {
+      "CAKPDBGADEA": {
+        "minus_one": -1,
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "NLBKJKDNFFP": -1
+      },
       "modifiers": {
         "MultiAvatar_Potion_Phase_3_2_Avatar": {
+          "minus_one": -1,
           "elementDurability": 100,
-          "stacking": "Unique",
           "isLimitedProperties": true,
           "modifierMixins": [
             {
               "$type": "ModifyDamageMixin",
+              "damagePercentageRatio": "BurstDamageUpRatio",
               "attackTags": [
                 "Elemental_Burst"
               ],
-              "actorIceSubHurtDelta": -1,
-              "damagePercentageRatio": "BurstDamageUpRatio"
+              "actorIceSubHurtDelta": -1
             },
             {
               "$type": "OnAvatarUseSkillMixin",
-              "actorIceSubHurtDelta": -1,
               "onTriggerUltimateSkill": [
                 {
                   "$type": "AttachModifier",
+                  "canBeHandledOnRecover": true,
+                  "target": "Team",
                   "doOffStage": true,
                   "modifierName": "MultiAvatar_Potion_Phase_3_2_BurstBuff_Team",
-                  "target": "Team",
-                  "actorIceSubHurtDelta": -1,
-                  "canBeHandledOnRecover": true
+                  "actorIceSubHurtDelta": -1
                 }
               ],
-              "clearSkillIdDelay": 0.20000000298023224
+              "clearSkillIdDelay": 0.20000000298023224,
+              "actorIceSubHurtDelta": -1
             }
           ],
-          "minus_one": -1
+          "NLBKJKDNFFP": -1,
+          "stacking": "Unique"
         },
         "MultiAvatar_Potion_Phase_3_2_BurstBuff_Avatar": {
-          "elementDurability": 100,
-          "stacking": "Multiple",
-          "isLimitedProperties": true,
-          "KKBDDALAMKP": true,
-          "minus_one": -1,
           "properties": {
             "Actor_ElecAddHurtDelta": "Element_DamgeUpRatio",
             "Actor_FireAddHurtDelta": "Element_DamgeUpRatio",
@@ -1289,131 +1292,123 @@
             "Actor_RockAddHurtDelta": "Element_DamgeUpRatio",
             "Actor_WaterAddHurtDelta": "Element_DamgeUpRatio",
             "Actor_WindAddHurtDelta": "Element_DamgeUpRatio"
-          }
+          },
+          "HBLJELGPNMI": true,
+          "minus_one": -1,
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "NLBKJKDNFFP": -1,
+          "stacking": "Multiple"
         },
         "MultiAvatar_Potion_Phase_3_2_BurstBuff_Team": {
-          "onAdded": [
-            {
-              "$type": "AttachModifier",
-              "doOffStage": true,
-              "modifierName": "MultiAvatar_Potion_Phase_3_2_BurstBuff_Avatar",
-              "target": "CurTeamAvatars",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "elementDurability": 100,
-          "stacking": "MultipleAllRefresh",
-          "isLimitedProperties": true,
           "stackingOption": {
             "maxModifierNumForMultipleType": 3
           },
-          "minus_one": -1,
-          "duration": "BuffDuration"
-        },
-        "MultiAvatar_Potion_Phase_3_2_Driver_Team": {
+          "duration": "BuffDuration",
           "onAdded": [
             {
               "$type": "AttachModifier",
-              "doOffStage": true,
-              "modifierName": "MultiAvatar_Potion_Phase_3_2_Avatar",
+              "canBeHandledOnRecover": true,
               "target": "CurTeamAvatars",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "doOffStage": true,
+              "modifierName": "MultiAvatar_Potion_Phase_3_2_BurstBuff_Avatar",
+              "actorIceSubHurtDelta": -1
             }
           ],
+          "minus_one": -1,
           "elementDurability": 100,
           "isLimitedProperties": true,
+          "NLBKJKDNFFP": -1,
+          "stacking": "MultipleAllRefresh"
+        },
+        "MultiAvatar_Potion_Phase_3_2_Driver_Team": {
+          "thinkInterval": 1,
+          "onAdded": [
+            {
+              "$type": "AttachModifier",
+              "canBeHandledOnRecover": true,
+              "target": "CurTeamAvatars",
+              "doOffStage": true,
+              "modifierName": "MultiAvatar_Potion_Phase_3_2_Avatar",
+              "actorIceSubHurtDelta": -1
+            }
+          ],
           "minus_one": -1,
+          "elementDurability": 100,
+          "isLimitedProperties": true,
           "onThinkInterval": [
             {
               "$type": "AttachModifier",
+              "canBeHandledOnRecover": true,
+              "target": "CurTeamAvatars",
               "doOffStage": true,
               "modifierName": "MultiAvatar_Potion_Phase_3_2_Avatar",
-              "target": "CurTeamAvatars",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "actorIceSubHurtDelta": -1
             }
           ],
-          "thinkInterval": 1
+          "NLBKJKDNFFP": -1
         }
-      }
-    }
-  },
-  {
-    "Default": {
-      "abilitySpecials": {
-        "DamageRatio": 0,
-        "DamageSystemValue": 0,
-        "ImpactCD": 0
       },
-      "DDNHHMIBNLF": {
-        "elementDurability": 100,
-        "isLimitedProperties": true,
-        "minus_one": -1
+      "abilitySpecials": {
+        "BuffDuration": 0,
+        "BurstDamageUpRatio": 0,
+        "Element_DamgeUpRatio": 0
       },
       "onAdded": [
         {
           "$type": "AttachModifier",
-          "doOffStage": false,
-          "modifierName": "MultiAvatar_Potion_Phase_3_3_Driver_Team",
+          "canBeHandledOnRecover": true,
           "target": "Team",
-          "actorIceSubHurtDelta": -1,
-          "canBeHandledOnRecover": true
+          "doOffStage": false,
+          "modifierName": "MultiAvatar_Potion_Phase_3_2_Driver_Team",
+          "actorIceSubHurtDelta": -1
         }
       ],
-      "abilityName": "Activity_MultiAvatar_Potion_Phase_3_3",
       "isDynamicAbility": true,
+      "abilityName": "Activity_MultiAvatar_Potion_Phase_3_2"
+    }
+  },
+  {
+    "Default": {
+      "CAKPDBGADEA": {
+        "minus_one": -1,
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "NLBKJKDNFFP": -1
+      },
       "modifiers": {
         "MultiAvatar_Potion_Phase_3_3_Avatar": {
-          "onAdded": [
-            {
-              "$type": "SetSystemValueToOverrideMap",
-              "doOffStage": true,
-              "key": "DamageSystemValue",
-              "actorIceSubHurtDelta": -1,
-              "value": -1,
-              "type": "ElementLevelCo",
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "elementDurability": 100,
-          "stacking": "Unique",
-          "isLimitedProperties": true,
           "onHittingOther": [
             {
               "$type": "Predicated",
-              "doOffStage": true,
+              "canBeHandledOnRecover": true,
               "target": "Other",
               "targetPredicates": [
                 {
                   "$type": "ByAttackTags",
+                  "target": "Target",
                   "attackTags": [
                     "Elemental_Burst"
-                  ],
-                  "target": "Target"
+                  ]
                 },
                 {
                   "$type": "ByEntityTypes",
-                  "target": "Target",
                   "value": -1,
+                  "target": "Target",
                   "entityTypes": [
                     "Monster"
                   ]
                 },
                 {
                   "$type": "ByTargetGlobalValue",
-                  "target": "Target",
                   "key": "_ANIMAL_ENTITY_TYPE",
-                  "compareType": "NoneOrEqual"
+                  "compareType": "NoneOrEqual",
+                  "target": "Target"
                 }
               ],
-              "actorIceSubHurtDelta": -1,
               "successActions": [
                 {
                   "$type": "SetGlobalPos",
-                  "doOffStage": true,
-                  "target": "Other",
                   "key": "_ABILITY_MultiAvatar_Potion_Phase_3_3_Pos",
                   "predicates": [
                     {
@@ -1422,25 +1417,26 @@
                       "compareType": "NoneOrEqual"
                     }
                   ],
-                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true,
+                  "target": "Other",
+                  "doOffStage": true,
                   "born": {
                     "$type": "ConfigBornByTarget",
                     "direction": {
                       "maxAngle": 180
                     },
-                    "useRotation": true,
-                    "FDGAEDDEEDG": {
-                      "ELAJJIANFFM": 180
+                    "EALBHHJEFGH": {
+                      "BKAPGJCLCIO": 180
                     },
-                    "alongGround": true,
+                    "useRotation": true,
+                    "value": 10,
                     "onGroundRaycastUpDist": 2,
-                    "value": 10
+                    "KFHHKFNAKFP": true
                   },
-                  "canBeHandledOnRecover": true
+                  "actorIceSubHurtDelta": -1
                 },
                 {
                   "$type": "SetGlobalPos",
-                  "doOffStage": true,
                   "setTarget": true,
                   "key": "_ABILITY_MultiAvatar_Potion_Phase_3_3_Pos_Avatar",
                   "predicates": [
@@ -1450,26 +1446,24 @@
                       "compareType": "NoneOrEqual"
                     }
                   ],
-                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true,
+                  "doOffStage": true,
                   "born": {
                     "$type": "ConfigBornBySelf",
                     "direction": {
                       "maxAngle": 180
                     },
-                    "useRotation": true,
-                    "FDGAEDDEEDG": {
-                      "ELAJJIANFFM": 180
+                    "EALBHHJEFGH": {
+                      "BKAPGJCLCIO": 180
                     },
-                    "onGroundRaycastUpDist": 2,
-                    "value": 10
+                    "useRotation": true,
+                    "value": 10,
+                    "onGroundRaycastUpDist": 2
                   },
-                  "canBeHandledOnRecover": true
+                  "actorIceSubHurtDelta": -1
                 },
                 {
                   "$type": "CopyGlobalValue",
-                  "doOffStage": true,
-                  "dstKey": "_ABILITY_MultiAvatar_Potion_Phase_3_3_Pos_Avatar_0",
-                  "srcTarget": "Team",
                   "predicates": [
                     {
                       "$type": "ByTargetGlobalValue",
@@ -1477,15 +1471,15 @@
                       "compareType": "NoneOrEqual"
                     }
                   ],
-                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true,
+                  "srcTarget": "Team",
                   "srcKey": "_ABILITY_MultiAvatar_Potion_Phase_3_3_Pos_0",
-                  "canBeHandledOnRecover": true
+                  "dstKey": "_ABILITY_MultiAvatar_Potion_Phase_3_3_Pos_Avatar_0",
+                  "doOffStage": true,
+                  "actorIceSubHurtDelta": -1
                 },
                 {
                   "$type": "CopyGlobalValue",
-                  "doOffStage": true,
-                  "dstKey": "_ABILITY_MultiAvatar_Potion_Phase_3_3_Pos_Avatar_1",
-                  "srcTarget": "Team",
                   "predicates": [
                     {
                       "$type": "ByTargetGlobalValue",
@@ -1493,15 +1487,15 @@
                       "compareType": "NoneOrEqual"
                     }
                   ],
-                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true,
+                  "srcTarget": "Team",
                   "srcKey": "_ABILITY_MultiAvatar_Potion_Phase_3_3_Pos_1",
-                  "canBeHandledOnRecover": true
+                  "dstKey": "_ABILITY_MultiAvatar_Potion_Phase_3_3_Pos_Avatar_1",
+                  "doOffStage": true,
+                  "actorIceSubHurtDelta": -1
                 },
                 {
                   "$type": "CopyGlobalValue",
-                  "doOffStage": true,
-                  "dstKey": "_ABILITY_MultiAvatar_Potion_Phase_3_3_Pos_Avatar_2",
-                  "srcTarget": "Team",
                   "predicates": [
                     {
                       "$type": "ByTargetGlobalValue",
@@ -1509,88 +1503,88 @@
                       "compareType": "NoneOrEqual"
                     }
                   ],
-                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true,
+                  "srcTarget": "Team",
                   "srcKey": "_ABILITY_MultiAvatar_Potion_Phase_3_3_Pos_2",
-                  "canBeHandledOnRecover": true
+                  "dstKey": "_ABILITY_MultiAvatar_Potion_Phase_3_3_Pos_Avatar_2",
+                  "doOffStage": true,
+                  "actorIceSubHurtDelta": -1
                 },
                 {
                   "$type": "TriggerAttackEvent",
-                  "doOffStage": true,
                   "attackEvent": {
                     "attackInfo": {
-                      "attenuationGroup": "default",
                       "hitPattern": {
-                        "retreatType": "ByHitDirectionInverse",
                         "hitImpulseType": "LV3",
+                        "retreatType": "ByHitDirectionInverse",
                         "onHitEffectName": "default",
-                        "hitHaltTimeScale": 0.05000000074505806,
-                        "JKLONEBKFKJ": {
-                          "JJGBOHIKHFM": true,
-                          "value": 1
-                        }
+                        "NPLKKCCDEDJ": {
+                          "value": 1,
+                          "NJICIOFCOPD": true
+                        },
+                        "hitHaltTimeScale": 0.05000000074505806
                       },
-                      "FJNMGDHFOEH": {
-                        "GCPNPCOFFBP": "Shake"
-                      },
-                      "IODAJAKBOLG": {
-                        "onHitEffectName": "default",
-                        "JKLONEBKFKJ": {
-                          "JJGBOHIKHFM": true,
-                          "value": 1
-                        }
+                      "cameraShake": {
+                        "extension": {
+                          "cycleDamping": 0.11999999731779099,
+                          "baseOnCamera": true,
+                          "rangeAttenuation": 0.5,
+                          "baseCycle": 0.11999999731779099
+                        },
+                        "shakeDistance": 20
                       },
                       "attackProperty": {
-                        "attackType": "Range",
                         "enBreak": 20,
-                        "elementRank": 1,
-                        "HPPLKCPAKHP": true,
                         "damageExtra": [
                           "DamageRatio",
                           "DamageSystemValue",
                           "MUL"
-                        ]
+                        ],
+                        "IOLHEGDMIBF": true,
+                        "attackType": "Range",
+                        "elementRank": 1
                       },
-                      "cameraShake": {
-                        "extension": {
-                          "baseCycle": 0.11999999731779099,
-                          "cycleDamping": 0.11999999731779099,
-                          "baseOnCamera": true,
-                          "rangeAttenuation": 0.5
-                        },
-                        "FAKMJBNLPPB": -1,
-                        "shakeDistance": 20
+                      "KMBBLIMOMBH": {
+                        "LMEIODIINNM": "Shake"
+                      },
+                      "attenuationGroup": "default",
+                      "OLHIHLILEKH": {
+                        "onHitEffectName": "default",
+                        "NPLKKCCDEDJ": {
+                          "value": 1,
+                          "NJICIOFCOPD": true
+                        }
                       }
                     },
                     "attackPattern": {
                       "$type": "ConfigAttackCircle",
+                      "BCIDGAKNEBH": {
+                        "BPIDFNFCNHP": {
+                          "value": 1,
+                          "NJICIOFCOPD": true
+                        }
+                      },
                       "radius": 10,
+                      "triggerType": "TriggerNoRepeat",
                       "massiveAttackRatio": 0.30000001192092896,
+                      "fanAngle": 360,
+                      "height": 6,
                       "born": {
                         "$type": "ConfigBornByGlobalValue",
                         "direction": {
                           "maxAngle": 180
                         },
-                        "useRotation": true,
-                        "positionKey": "_ABILITY_MultiAvatar_Potion_Phase_3_3_Pos_Avatar",
-                        "FDGAEDDEEDG": {
-                          "ELAJJIANFFM": 180
+                        "EALBHHJEFGH": {
+                          "BKAPGJCLCIO": 180
                         },
-                        "alongGround": true,
+                        "useRotation": true,
+                        "value": 10,
                         "onGroundRaycastUpDist": 2,
-                        "value": 10
-                      },
-                      "height": 6,
-                      "fanAngle": 360,
-                      "PBFNLCIFCBO": {
-                        "GOAEBMPCPJL": {
-                          "JJGBOHIKHFM": true,
-                          "value": 1
-                        }
-                      },
-                      "triggerType": "TriggerNoRepeat"
+                        "KFHHKFNAKFP": true,
+                        "positionKey": "_ABILITY_MultiAvatar_Potion_Phase_3_3_Pos_Avatar"
+                      }
                     }
                   },
-                  "targetType": "Enemy",
                   "predicates": [
                     {
                       "$type": "ByTargetGlobalValue",
@@ -1598,13 +1592,13 @@
                       "compareType": "NoneOrEqual"
                     }
                   ],
+                  "canBeHandledOnRecover": true,
+                  "doOffStage": true,
                   "actorIceSubHurtDelta": -1,
-                  "canBeHandledOnRecover": true
+                  "targetType": "Enemy"
                 },
                 {
                   "$type": "FireEffect",
-                  "doOffStage": true,
-                  "scale": 1,
                   "predicates": [
                     {
                       "$type": "ByTargetGlobalValue",
@@ -1612,189 +1606,223 @@
                       "compareType": "NoneOrEqual"
                     }
                   ],
-                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true,
+                  "effectTempleteID": -1,
                   "effectPattern": "Eff_Activity_AkaFesPotion_Blast_R8",
+                  "scale": 1,
+                  "doOffStage": true,
                   "born": {
                     "$type": "ConfigBornByGlobalValue",
                     "direction": {
                       "maxAngle": 180
                     },
-                    "useRotation": true,
-                    "positionKey": "_ABILITY_MultiAvatar_Potion_Phase_3_3_Pos_Avatar",
-                    "FDGAEDDEEDG": {
-                      "ELAJJIANFFM": 180
+                    "EALBHHJEFGH": {
+                      "BKAPGJCLCIO": 180
                     },
-                    "alongGround": true,
+                    "useRotation": true,
+                    "value": 10,
                     "onGroundRaycastUpDist": 2,
-                    "value": 10
+                    "KFHHKFNAKFP": true,
+                    "positionKey": "_ABILITY_MultiAvatar_Potion_Phase_3_3_Pos_Avatar"
                   },
-                  "effectTempleteID": -1,
-                  "canBeHandledOnRecover": true
+                  "actorIceSubHurtDelta": -1
                 },
                 {
                   "$type": "ApplyModifier",
+                  "canBeHandledOnRecover": true,
                   "doOffStage": true,
                   "modifierName": "MultiAvatar_Potion_Phase_3_3_Avatar_Impact",
-                  "actorIceSubHurtDelta": -1,
-                  "canBeHandledOnRecover": true
+                  "actorIceSubHurtDelta": -1
                 }
               ],
-              "canBeHandledOnRecover": true
+              "doOffStage": true,
+              "actorIceSubHurtDelta": -1
             }
           ],
-          "minus_one": -1
-        },
-        "MultiAvatar_Potion_Phase_3_3_Avatar_Impact": {
           "onAdded": [
             {
-              "$type": "SetGlobalValue",
+              "$type": "SetSystemValueToOverrideMap",
+              "type": "ElementLevelCo",
+              "key": "DamageSystemValue",
+              "canBeHandledOnRecover": true,
               "doOffStage": true,
-              "value": 1,
-              "key": "_ABILITY_MultiAvatar_Potion_Phase_3_3_ImpactCD",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "MMAFMANEAND": -1,
+              "actorIceSubHurtDelta": -1
             }
           ],
+          "minus_one": -1,
           "elementDurability": 100,
-          "stacking": "Unique",
           "isLimitedProperties": true,
+          "NLBKJKDNFFP": -1,
+          "stacking": "Unique"
+        },
+        "MultiAvatar_Potion_Phase_3_3_Avatar_Impact": {
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
-              "doOffStage": true,
               "key": "_ABILITY_MultiAvatar_Potion_Phase_3_3_ImpactCD",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "canBeHandledOnRecover": true,
+              "doOffStage": true,
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "duration": "ImpactCD",
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "key": "_ABILITY_MultiAvatar_Potion_Phase_3_3_ImpactCD",
+              "canBeHandledOnRecover": true,
+              "doOffStage": true,
+              "value": 1,
+              "actorIceSubHurtDelta": -1
             }
           ],
           "minus_one": -1,
-          "duration": "ImpactCD"
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "NLBKJKDNFFP": -1,
+          "stacking": "Unique"
         },
         "MultiAvatar_Potion_Phase_3_3_Driver_Team": {
+          "thinkInterval": 1,
           "onAdded": [
             {
               "$type": "AttachModifier",
+              "canBeHandledOnRecover": true,
+              "target": "CurTeamAvatars",
               "doOffStage": true,
               "modifierName": "MultiAvatar_Potion_Phase_3_3_Avatar",
-              "target": "CurTeamAvatars",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "actorIceSubHurtDelta": -1
             }
           ],
+          "minus_one": -1,
           "elementDurability": 100,
           "isLimitedProperties": true,
-          "minus_one": -1,
           "onThinkInterval": [
             {
               "$type": "AttachModifier",
+              "canBeHandledOnRecover": true,
+              "target": "CurTeamAvatars",
               "doOffStage": true,
               "modifierName": "MultiAvatar_Potion_Phase_3_3_Avatar",
-              "target": "CurTeamAvatars",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "actorIceSubHurtDelta": -1
             }
           ],
-          "thinkInterval": 1
+          "NLBKJKDNFFP": -1
         }
-      }
-    }
-  },
-  {
-    "Default": {
-      "abilitySpecials": {
-        "AttackUpRatio": 0
       },
-      "DDNHHMIBNLF": {
-        "elementDurability": 100,
-        "isLimitedProperties": true,
-        "minus_one": -1
+      "abilitySpecials": {
+        "DamageRatio": 0,
+        "DamageSystemValue": 0,
+        "ImpactCD": 0
       },
       "onAdded": [
         {
           "$type": "AttachModifier",
-          "doOffStage": false,
-          "modifierName": "MultiAvatar_Potion_Phase_4_1_Driver_Team",
+          "canBeHandledOnRecover": true,
           "target": "Team",
-          "actorIceSubHurtDelta": -1,
-          "canBeHandledOnRecover": true
+          "doOffStage": false,
+          "modifierName": "MultiAvatar_Potion_Phase_3_3_Driver_Team",
+          "actorIceSubHurtDelta": -1
         }
       ],
-      "abilityName": "Activity_MultiAvatar_Potion_Phase_4_1",
       "isDynamicAbility": true,
+      "abilityName": "Activity_MultiAvatar_Potion_Phase_3_3"
+    }
+  },
+  {
+    "Default": {
+      "CAKPDBGADEA": {
+        "minus_one": -1,
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "NLBKJKDNFFP": -1
+      },
       "modifiers": {
         "MultiAvatar_Potion_Phase_4_1_Avatar": {
-          "elementDurability": 100,
-          "stacking": "Unique",
-          "isLimitedProperties": true,
-          "KKBDDALAMKP": true,
-          "minus_one": -1,
           "properties": {
             "Actor_AttackRatio": "AttackUpRatio"
           },
-          "state": "AttackUp"
+          "HBLJELGPNMI": true,
+          "minus_one": -1,
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "state": "AttackUp",
+          "NLBKJKDNFFP": -1,
+          "stacking": "Unique"
         },
         "MultiAvatar_Potion_Phase_4_1_Driver_Team": {
+          "thinkInterval": 1,
           "onAdded": [
             {
               "$type": "AttachModifier",
+              "canBeHandledOnRecover": true,
+              "target": "CurTeamAvatars",
               "doOffStage": true,
               "modifierName": "MultiAvatar_Potion_Phase_4_1_Avatar",
-              "target": "CurTeamAvatars",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "actorIceSubHurtDelta": -1
             }
           ],
+          "minus_one": -1,
           "elementDurability": 100,
           "isLimitedProperties": true,
-          "minus_one": -1,
           "onThinkInterval": [
             {
               "$type": "AttachModifier",
+              "canBeHandledOnRecover": true,
+              "target": "CurTeamAvatars",
               "doOffStage": true,
               "modifierName": "MultiAvatar_Potion_Phase_4_1_Avatar",
-              "target": "CurTeamAvatars",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "actorIceSubHurtDelta": -1
             }
           ],
-          "thinkInterval": 1
+          "NLBKJKDNFFP": -1
         }
-      }
-    }
-  },
-  {
-    "Default": {
-      "abilitySpecials": {
-        "BuffDuration": 0,
-        "CritHurtUp": 0,
-        "CritUp": 0,
-        "DamageUpRatio": 0
       },
-      "DDNHHMIBNLF": {
-        "elementDurability": 100,
-        "isLimitedProperties": true,
-        "minus_one": -1
+      "abilitySpecials": {
+        "AttackUpRatio": 0
       },
       "onAdded": [
         {
           "$type": "AttachModifier",
-          "doOffStage": false,
-          "modifierName": "MultiAvatar_Potion_Phase_4_2_Driver_Team",
+          "canBeHandledOnRecover": true,
           "target": "Team",
-          "actorIceSubHurtDelta": -1,
-          "canBeHandledOnRecover": true
+          "doOffStage": false,
+          "modifierName": "MultiAvatar_Potion_Phase_4_1_Driver_Team",
+          "actorIceSubHurtDelta": -1
         }
       ],
-      "abilityName": "Activity_MultiAvatar_Potion_Phase_4_2",
       "isDynamicAbility": true,
+      "abilityName": "Activity_MultiAvatar_Potion_Phase_4_1"
+    }
+  },
+  {
+    "Default": {
+      "CAKPDBGADEA": {
+        "minus_one": -1,
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "NLBKJKDNFFP": -1
+      },
       "modifiers": {
         "MultiAvatar_Potion_Phase_4_2_Avatar": {
+          "minus_one": -1,
           "elementDurability": 100,
-          "stacking": "Unique",
           "isLimitedProperties": true,
           "modifierMixins": [
             {
               "$type": "ModifyDamageMixin",
+              "predicates": [
+                {
+                  "$type": "ByEntityTypes",
+                  "value": -1,
+                  "target": "Target",
+                  "entityTypes": [
+                    "Monster"
+                  ]
+                }
+              ],
+              "damagePercentageRatio": "DamageUpRatio",
               "attackTags": [
                 "NormalAttack_01",
                 "NormalAttack_02",
@@ -1805,48 +1833,41 @@
                 "ExtraAttack",
                 "FallingAttack"
               ],
-              "predicates": [
-                {
-                  "$type": "ByEntityTypes",
-                  "target": "Target",
-                  "value": -1,
-                  "entityTypes": [
-                    "Monster"
-                  ]
-                }
-              ],
-              "actorIceSubHurtDelta": -1,
-              "damagePercentageRatio": "DamageUpRatio"
+              "actorIceSubHurtDelta": -1
             },
             {
               "$type": "OnAvatarUseSkillMixin",
               "onTriggerSkill": [
                 {
                   "$type": "AttachModifier",
+                  "canBeHandledOnRecover": true,
                   "doOffStage": false,
                   "modifierName": "MultiAvatar_Potion_Phase_4_2_CritBuff_Avatar",
-                  "actorIceSubHurtDelta": -1,
-                  "canBeHandledOnRecover": true
+                  "actorIceSubHurtDelta": -1
                 }
               ],
-              "actorIceSubHurtDelta": -1,
               "onTriggerUltimateSkill": [
                 {
                   "$type": "AttachModifier",
+                  "canBeHandledOnRecover": true,
                   "doOffStage": false,
                   "modifierName": "MultiAvatar_Potion_Phase_4_2_CritBuff_Avatar",
-                  "actorIceSubHurtDelta": -1,
-                  "canBeHandledOnRecover": true
+                  "actorIceSubHurtDelta": -1
                 }
               ],
-              "clearSkillIdDelay": 0.20000000298023224
+              "clearSkillIdDelay": 0.20000000298023224,
+              "actorIceSubHurtDelta": -1
             }
           ],
-          "minus_one": -1
+          "NLBKJKDNFFP": -1,
+          "stacking": "Unique"
         },
         "MultiAvatar_Potion_Phase_4_2_CritBuff_Avatar": {
+          "duration": "BuffDuration",
+          "minus_one": -1,
           "elementDurability": 100,
           "isLimitedProperties": true,
+          "state": "AttackUp",
           "modifierMixins": [
             {
               "$type": "ModifyDamageMixin",
@@ -1860,93 +1881,79 @@
                 "ExtraAttack",
                 "FallingAttack"
               ],
-              "bonusCritical": "CritUp",
+              "actorIceSubHurtDelta": -1,
+              "bonusCritical": "CritUp"
+            }
+          ],
+          "NLBKJKDNFFP": -1
+        },
+        "MultiAvatar_Potion_Phase_4_2_Driver_Team": {
+          "thinkInterval": 1,
+          "onAdded": [
+            {
+              "$type": "AttachModifier",
+              "canBeHandledOnRecover": true,
+              "target": "CurTeamAvatars",
+              "doOffStage": true,
+              "modifierName": "MultiAvatar_Potion_Phase_4_2_Avatar",
               "actorIceSubHurtDelta": -1
             }
           ],
           "minus_one": -1,
-          "duration": "BuffDuration",
-          "state": "AttackUp"
-        },
-        "MultiAvatar_Potion_Phase_4_2_Driver_Team": {
-          "onAdded": [
-            {
-              "$type": "AttachModifier",
-              "doOffStage": true,
-              "modifierName": "MultiAvatar_Potion_Phase_4_2_Avatar",
-              "target": "CurTeamAvatars",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            }
-          ],
           "elementDurability": 100,
           "isLimitedProperties": true,
-          "minus_one": -1,
           "onThinkInterval": [
             {
               "$type": "AttachModifier",
+              "canBeHandledOnRecover": true,
+              "target": "CurTeamAvatars",
               "doOffStage": true,
               "modifierName": "MultiAvatar_Potion_Phase_4_2_Avatar",
-              "target": "CurTeamAvatars",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "actorIceSubHurtDelta": -1
             }
           ],
-          "thinkInterval": 1
+          "NLBKJKDNFFP": -1
         }
-      }
-    }
-  },
-  {
-    "Default": {
-      "abilitySpecials": {
-        "DamageRatio_Extra": 0,
-        "DamageRatio_Normal": 0,
-        "DamageSystemValue": 0,
-        "ExtraCD": 0,
-        "NormalCD": 0
       },
-      "DDNHHMIBNLF": {
-        "elementDurability": 100,
-        "isLimitedProperties": true,
-        "minus_one": -1
+      "abilitySpecials": {
+        "BuffDuration": 0,
+        "CritHurtUp": 0,
+        "CritUp": 0,
+        "DamageUpRatio": 0
       },
       "onAdded": [
         {
           "$type": "AttachModifier",
-          "doOffStage": false,
-          "modifierName": "MultiAvatar_Potion_Phase_4_3_Driver_Team",
+          "canBeHandledOnRecover": true,
           "target": "Team",
-          "actorIceSubHurtDelta": -1,
-          "canBeHandledOnRecover": true
+          "doOffStage": false,
+          "modifierName": "MultiAvatar_Potion_Phase_4_2_Driver_Team",
+          "actorIceSubHurtDelta": -1
         }
       ],
-      "abilityName": "Activity_MultiAvatar_Potion_Phase_4_3",
       "isDynamicAbility": true,
+      "abilityName": "Activity_MultiAvatar_Potion_Phase_4_2"
+    }
+  },
+  {
+    "Default": {
+      "CAKPDBGADEA": {
+        "minus_one": -1,
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "NLBKJKDNFFP": -1
+      },
       "modifiers": {
         "MultiAvatar_Potion_Phase_4_3_Avatar": {
-          "onAdded": [
-            {
-              "$type": "SetSystemValueToOverrideMap",
-              "doOffStage": true,
-              "key": "DamageSystemValue",
-              "actorIceSubHurtDelta": -1,
-              "value": -1,
-              "type": "ElementLevelCo",
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "elementDurability": 100,
-          "stacking": "Unique",
-          "isLimitedProperties": true,
           "onHittingOther": [
             {
               "$type": "Predicated",
-              "doOffStage": true,
+              "canBeHandledOnRecover": true,
               "target": "Other",
               "targetPredicates": [
                 {
                   "$type": "ByAttackTags",
+                  "target": "Target",
                   "attackTags": [
                     "NormalAttack_01",
                     "NormalAttack_02",
@@ -1954,587 +1961,582 @@
                     "NormalAttack_04",
                     "NormalAttack_05",
                     "NormalAttack_06"
-                  ],
-                  "target": "Target"
+                  ]
                 },
                 {
                   "$type": "ByEntityTypes",
-                  "target": "Target",
                   "value": -1,
+                  "target": "Target",
                   "entityTypes": [
                     "Monster"
                   ]
                 },
                 {
                   "$type": "ByTargetGlobalValue",
-                  "target": "Target",
                   "key": "_ANIMAL_ENTITY_TYPE",
-                  "compareType": "NoneOrEqual"
+                  "compareType": "NoneOrEqual",
+                  "target": "Target"
                 },
                 {
                   "$type": "ByTargetGlobalValue",
-                  "target": "Team",
                   "key": "_ABILITY_MultiAvatar_Potion_Phase_4_3_NormalCD",
-                  "compareType": "NoneOrEqual"
+                  "compareType": "NoneOrEqual",
+                  "target": "Team"
                 }
               ],
-              "actorIceSubHurtDelta": -1,
               "successActions": [
                 {
                   "$type": "ApplyModifier",
+                  "canBeHandledOnRecover": true,
+                  "target": "Other",
                   "doOffStage": true,
                   "modifierName": "MultiAvatar_Potion_Phase_4_3_Damage_Normal",
-                  "target": "Other",
-                  "actorIceSubHurtDelta": -1,
-                  "canBeHandledOnRecover": true
+                  "actorIceSubHurtDelta": -1
                 },
                 {
                   "$type": "ApplyModifier",
+                  "canBeHandledOnRecover": true,
+                  "target": "Team",
                   "doOffStage": true,
                   "modifierName": "MultiAvatar_Potion_Phase_4_3_Normal_CD",
-                  "target": "Team",
-                  "actorIceSubHurtDelta": -1,
-                  "canBeHandledOnRecover": true
+                  "actorIceSubHurtDelta": -1
                 }
               ],
-              "canBeHandledOnRecover": true
+              "doOffStage": true,
+              "actorIceSubHurtDelta": -1
             },
             {
               "$type": "Predicated",
-              "doOffStage": true,
+              "canBeHandledOnRecover": true,
               "target": "Other",
               "targetPredicates": [
                 {
                   "$type": "ByAttackTags",
+                  "target": "Target",
                   "attackTags": [
                     "ExtraAttack",
                     "FallingAttack"
-                  ],
-                  "target": "Target"
+                  ]
                 },
                 {
                   "$type": "ByEntityTypes",
-                  "target": "Target",
                   "value": -1,
+                  "target": "Target",
                   "entityTypes": [
                     "Monster"
                   ]
                 },
                 {
                   "$type": "ByTargetGlobalValue",
-                  "target": "Target",
                   "key": "_ANIMAL_ENTITY_TYPE",
-                  "compareType": "NoneOrEqual"
+                  "compareType": "NoneOrEqual",
+                  "target": "Target"
                 },
                 {
                   "$type": "ByTargetGlobalValue",
-                  "target": "Team",
                   "key": "_ABILITY_MultiAvatar_Potion_Phase_4_3_ExtraCD",
-                  "compareType": "NoneOrEqual"
+                  "compareType": "NoneOrEqual",
+                  "target": "Team"
                 }
               ],
-              "actorIceSubHurtDelta": -1,
               "successActions": [
                 {
                   "$type": "SetGlobalPos",
-                  "doOffStage": false,
-                  "target": "Other",
                   "key": "_ABILITY_MultiAvatar_Potion_Phase_4_3_Pos",
-                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true,
+                  "target": "Other",
+                  "doOffStage": false,
                   "born": {
                     "$type": "ConfigBornByTarget",
                     "direction": {
                       "maxAngle": 180
                     },
-                    "useRotation": true,
-                    "FDGAEDDEEDG": {
-                      "ELAJJIANFFM": 180
+                    "EALBHHJEFGH": {
+                      "BKAPGJCLCIO": 180
                     },
-                    "alongGround": true,
+                    "useRotation": true,
+                    "value": 10,
                     "onGroundRaycastUpDist": 2,
-                    "value": 10
+                    "KFHHKFNAKFP": true
                   },
-                  "canBeHandledOnRecover": true
+                  "actorIceSubHurtDelta": -1
                 },
                 {
                   "$type": "SetGlobalPos",
-                  "doOffStage": true,
                   "setTarget": true,
                   "key": "_ABILITY_MultiAvatar_Potion_Phase_4_3_Pos_Avatar",
-                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true,
+                  "doOffStage": true,
                   "born": {
                     "$type": "ConfigBornBySelf",
                     "direction": {
                       "maxAngle": 180
                     },
-                    "useRotation": true,
-                    "FDGAEDDEEDG": {
-                      "ELAJJIANFFM": 180
+                    "EALBHHJEFGH": {
+                      "BKAPGJCLCIO": 180
                     },
-                    "onGroundRaycastUpDist": 2,
-                    "value": 10
+                    "useRotation": true,
+                    "value": 10,
+                    "onGroundRaycastUpDist": 2
                   },
-                  "canBeHandledOnRecover": true
+                  "actorIceSubHurtDelta": -1
                 },
                 {
                   "$type": "CopyGlobalValue",
-                  "doOffStage": true,
-                  "dstKey": "_ABILITY_MultiAvatar_Potion_Phase_4_3_Pos_Avatar_0",
+                  "canBeHandledOnRecover": true,
                   "srcTarget": "Team",
-                  "actorIceSubHurtDelta": -1,
                   "srcKey": "_ABILITY_MultiAvatar_Potion_Phase_4_3_Pos_0",
-                  "canBeHandledOnRecover": true
+                  "dstKey": "_ABILITY_MultiAvatar_Potion_Phase_4_3_Pos_Avatar_0",
+                  "doOffStage": true,
+                  "actorIceSubHurtDelta": -1
                 },
                 {
                   "$type": "CopyGlobalValue",
-                  "doOffStage": true,
-                  "dstKey": "_ABILITY_MultiAvatar_Potion_Phase_4_3_Pos_Avatar_1",
+                  "canBeHandledOnRecover": true,
                   "srcTarget": "Team",
-                  "actorIceSubHurtDelta": -1,
                   "srcKey": "_ABILITY_MultiAvatar_Potion_Phase_4_3_Pos_1",
-                  "canBeHandledOnRecover": true
+                  "dstKey": "_ABILITY_MultiAvatar_Potion_Phase_4_3_Pos_Avatar_1",
+                  "doOffStage": true,
+                  "actorIceSubHurtDelta": -1
                 },
                 {
                   "$type": "CopyGlobalValue",
-                  "doOffStage": true,
-                  "dstKey": "_ABILITY_MultiAvatar_Potion_Phase_4_3_Pos_Avatar_2",
+                  "canBeHandledOnRecover": true,
                   "srcTarget": "Team",
-                  "actorIceSubHurtDelta": -1,
                   "srcKey": "_ABILITY_MultiAvatar_Potion_Phase_4_3_Pos_2",
-                  "canBeHandledOnRecover": true
+                  "dstKey": "_ABILITY_MultiAvatar_Potion_Phase_4_3_Pos_Avatar_2",
+                  "doOffStage": true,
+                  "actorIceSubHurtDelta": -1
                 },
                 {
                   "$type": "ApplyModifier",
+                  "canBeHandledOnRecover": true,
                   "doOffStage": true,
                   "modifierName": "MultiAvatar_Potion_Phase_4_3_Damage_Extra",
-                  "actorIceSubHurtDelta": -1,
-                  "canBeHandledOnRecover": true
+                  "actorIceSubHurtDelta": -1
                 },
                 {
                   "$type": "ApplyModifier",
+                  "canBeHandledOnRecover": true,
+                  "target": "Team",
                   "doOffStage": true,
                   "modifierName": "MultiAvatar_Potion_Phase_4_3_Extra_CD",
-                  "target": "Team",
-                  "actorIceSubHurtDelta": -1,
-                  "canBeHandledOnRecover": true
+                  "actorIceSubHurtDelta": -1
                 }
               ],
-              "canBeHandledOnRecover": true
+              "doOffStage": true,
+              "actorIceSubHurtDelta": -1
             }
           ],
-          "minus_one": -1
+          "onAdded": [
+            {
+              "$type": "SetSystemValueToOverrideMap",
+              "type": "ElementLevelCo",
+              "key": "DamageSystemValue",
+              "canBeHandledOnRecover": true,
+              "doOffStage": true,
+              "MMAFMANEAND": -1,
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "minus_one": -1,
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "NLBKJKDNFFP": -1,
+          "stacking": "Unique"
         },
         "MultiAvatar_Potion_Phase_4_3_Damage_Extra": {
+          "duration": 1,
           "onAdded": [
             {
               "$type": "TriggerAttackEvent",
-              "doOffStage": true,
               "attackEvent": {
                 "attackInfo": {
-                  "attenuationGroup": "default",
                   "hitPattern": {
-                    "retreatType": "ByHitDirectionInverse",
                     "hitImpulseType": "LV3",
+                    "retreatType": "ByHitDirectionInverse",
                     "onHitEffectName": "default",
-                    "hitHaltTimeScale": 0.05000000074505806,
-                    "JKLONEBKFKJ": {
-                      "JJGBOHIKHFM": true,
-                      "value": 1
-                    }
+                    "NPLKKCCDEDJ": {
+                      "value": 1,
+                      "NJICIOFCOPD": true
+                    },
+                    "hitHaltTimeScale": 0.05000000074505806
                   },
-                  "FJNMGDHFOEH": {
-                    "GCPNPCOFFBP": "Shake"
-                  },
-                  "IODAJAKBOLG": {
-                    "onHitEffectName": "default",
-                    "JKLONEBKFKJ": {
-                      "JJGBOHIKHFM": true,
-                      "value": 1
-                    }
+                  "cameraShake": {
+                    "extension": {
+                      "cycleDamping": 0.11999999731779099,
+                      "baseOnCamera": true,
+                      "rangeAttenuation": 0.5,
+                      "baseCycle": 0.11999999731779099
+                    },
+                    "shakeDistance": 20
                   },
                   "attackProperty": {
-                    "attackType": "Range",
                     "enBreak": 20,
-                    "elementRank": 1,
-                    "HPPLKCPAKHP": true,
                     "damageExtra": [
                       "DamageRatio_Extra",
                       "DamageSystemValue",
                       "MUL"
-                    ]
+                    ],
+                    "IOLHEGDMIBF": true,
+                    "attackType": "Range",
+                    "elementRank": 1
                   },
-                  "cameraShake": {
-                    "extension": {
-                      "baseCycle": 0.11999999731779099,
-                      "cycleDamping": 0.11999999731779099,
-                      "baseOnCamera": true,
-                      "rangeAttenuation": 0.5
-                    },
-                    "FAKMJBNLPPB": -1,
-                    "shakeDistance": 20
+                  "KMBBLIMOMBH": {
+                    "LMEIODIINNM": "Shake"
+                  },
+                  "attenuationGroup": "default",
+                  "OLHIHLILEKH": {
+                    "onHitEffectName": "default",
+                    "NPLKKCCDEDJ": {
+                      "value": 1,
+                      "NJICIOFCOPD": true
+                    }
                   }
                 },
                 "attackPattern": {
                   "$type": "ConfigAttackCircle",
+                  "BCIDGAKNEBH": {
+                    "BPIDFNFCNHP": {
+                      "value": 1,
+                      "NJICIOFCOPD": true
+                    }
+                  },
                   "radius": 10,
+                  "triggerType": "TriggerNoRepeat",
                   "massiveAttackRatio": 0.30000001192092896,
+                  "fanAngle": 360,
+                  "height": 6,
                   "born": {
                     "$type": "ConfigBornByGlobalValue",
                     "direction": {
                       "maxAngle": 180
                     },
-                    "useRotation": true,
-                    "positionKey": "_ABILITY_MultiAvatar_Potion_Phase_4_3_Pos_Avatar",
-                    "FDGAEDDEEDG": {
-                      "ELAJJIANFFM": 180
+                    "EALBHHJEFGH": {
+                      "BKAPGJCLCIO": 180
                     },
-                    "alongGround": true,
+                    "useRotation": true,
+                    "value": 10,
                     "onGroundRaycastUpDist": 2,
-                    "value": 10
-                  },
-                  "height": 6,
-                  "fanAngle": 360,
-                  "PBFNLCIFCBO": {
-                    "GOAEBMPCPJL": {
-                      "JJGBOHIKHFM": true,
-                      "value": 1
-                    }
-                  },
-                  "triggerType": "TriggerNoRepeat"
+                    "KFHHKFNAKFP": true,
+                    "positionKey": "_ABILITY_MultiAvatar_Potion_Phase_4_3_Pos_Avatar"
+                  }
                 }
               },
-              "targetType": "Enemy",
+              "canBeHandledOnRecover": true,
+              "doOffStage": true,
               "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "targetType": "Enemy"
             },
             {
               "$type": "FireEffect",
-              "doOffStage": true,
-              "scale": 1,
-              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true,
+              "effectTempleteID": -1,
               "effectPattern": "Eff_Activity_AkaFesPotion_Blast_R8",
+              "scale": 1,
+              "doOffStage": true,
               "born": {
                 "$type": "ConfigBornByGlobalValue",
                 "direction": {
                   "maxAngle": 180
                 },
-                "useRotation": true,
-                "positionKey": "_ABILITY_MultiAvatar_Potion_Phase_4_3_Pos_Avatar",
-                "FDGAEDDEEDG": {
-                  "ELAJJIANFFM": 180
+                "EALBHHJEFGH": {
+                  "BKAPGJCLCIO": 180
                 },
-                "alongGround": true,
+                "useRotation": true,
+                "value": 10,
                 "onGroundRaycastUpDist": 2,
-                "value": 10
+                "KFHHKFNAKFP": true,
+                "positionKey": "_ABILITY_MultiAvatar_Potion_Phase_4_3_Pos_Avatar"
               },
-              "effectTempleteID": -1,
-              "canBeHandledOnRecover": true
+              "actorIceSubHurtDelta": -1
             }
           ],
-          "elementDurability": 100,
-          "stacking": "Multiple",
-          "isLimitedProperties": true,
           "minus_one": -1,
-          "duration": 1
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "NLBKJKDNFFP": -1,
+          "stacking": "Multiple"
         },
         "MultiAvatar_Potion_Phase_4_3_Damage_Normal": {
+          "duration": 1,
           "onAdded": [
             {
               "$type": "DamageByAttackValue",
+              "canBeHandledOnRecover": true,
+              "target": "Target",
               "attackInfo": {
-                "attenuationGroup": "default",
                 "hitPattern": {
                   "hitImpulseType": "LV3",
-                  "hitHaltTimeScale": 0.009999999776482582,
-                  "JKLONEBKFKJ": {
-                    "JJGBOHIKHFM": true,
-                    "value": 1
-                  }
+                  "NPLKKCCDEDJ": {
+                    "value": 1,
+                    "NJICIOFCOPD": true
+                  },
+                  "hitHaltTimeScale": 0.009999999776482582
                 },
-                "FJNMGDHFOEH": {
-                  "GCPNPCOFFBP": "Shake"
-                },
-                "IODAJAKBOLG": {
-                  "onHitEffectName": "default",
-                  "JKLONEBKFKJ": {
-                    "JJGBOHIKHFM": true,
-                    "value": 1
-                  }
+                "cameraShake": {
+                  "extension": {
+                    "cycleDamping": 0.11999999731779099,
+                    "baseOnCamera": true,
+                    "rangeAttenuation": 0.5,
+                    "baseCycle": 0.11999999731779099
+                  },
+                  "shakeDistance": 20
                 },
                 "attackProperty": {
-                  "attackType": "Melee",
                   "enBreak": 100,
-                  "elementDurability": 25,
-                  "elementRank": 1,
-                  "HPPLKCPAKHP": true,
                   "damageExtra": [
                     "DamageRatio_Normal",
                     "DamageSystemValue",
                     "MUL"
-                  ]
+                  ],
+                  "IOLHEGDMIBF": true,
+                  "elementDurability": 25,
+                  "attackType": "Melee",
+                  "elementRank": 1
                 },
-                "cameraShake": {
-                  "extension": {
-                    "baseCycle": 0.11999999731779099,
-                    "cycleDamping": 0.11999999731779099,
-                    "baseOnCamera": true,
-                    "rangeAttenuation": 0.5
-                  },
-                  "FAKMJBNLPPB": -1,
-                  "shakeDistance": 20
+                "KMBBLIMOMBH": {
+                  "LMEIODIINNM": "Shake"
+                },
+                "attenuationGroup": "default",
+                "OLHIHLILEKH": {
+                  "onHitEffectName": "default",
+                  "NPLKKCCDEDJ": {
+                    "value": 1,
+                    "NJICIOFCOPD": true
+                  }
                 }
               },
               "doOffStage": false,
-              "target": "Target",
-              "actorIceSubHurtDelta": -1,
               "born": {
                 "$type": "ConfigBornByAttachPoint",
                 "direction": {
                   "maxAngle": 180
                 },
-                "useRotation": true,
-                "FDGAEDDEEDG": {
-                  "ELAJJIANFFM": 180
+                "EALBHHJEFGH": {
+                  "BKAPGJCLCIO": 180
                 },
                 "attachPointName": "Fx_ChestNode",
-                "onGroundRaycastUpDist": 2,
-                "value": 10
+                "useRotation": true,
+                "value": 10,
+                "onGroundRaycastUpDist": 2
               },
-              "canBeHandledOnRecover": true
+              "actorIceSubHurtDelta": -1
             },
             {
               "$type": "FireEffect",
-              "doOffStage": false,
-              "scale": 1,
-              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true,
+              "effectTempleteID": -1,
               "effectPattern": "Eff_Weapon_Blast_R30",
+              "scale": 1,
+              "doOffStage": false,
               "born": {
                 "direction": {
                   "maxAngle": 180
                 },
-                "FDGAEDDEEDG": {
-                  "ELAJJIANFFM": 180
+                "EALBHHJEFGH": {
+                  "BKAPGJCLCIO": 180
                 },
-                "onGroundRaycastUpDist": 2,
-                "value": 10
+                "value": 10,
+                "onGroundRaycastUpDist": 2
               },
-              "effectTempleteID": -1,
-              "canBeHandledOnRecover": true
+              "actorIceSubHurtDelta": -1
             }
           ],
-          "elementDurability": 100,
-          "stacking": "Multiple",
-          "isLimitedProperties": true,
           "minus_one": -1,
-          "duration": 1
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "NLBKJKDNFFP": -1,
+          "stacking": "Multiple"
         },
         "MultiAvatar_Potion_Phase_4_3_Driver_Team": {
+          "thinkInterval": 1,
           "onAdded": [
             {
               "$type": "AttachModifier",
+              "canBeHandledOnRecover": true,
+              "target": "CurTeamAvatars",
               "doOffStage": true,
               "modifierName": "MultiAvatar_Potion_Phase_4_3_Avatar",
-              "target": "CurTeamAvatars",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "actorIceSubHurtDelta": -1
             }
           ],
+          "minus_one": -1,
           "elementDurability": 100,
           "isLimitedProperties": true,
-          "minus_one": -1,
           "onThinkInterval": [
             {
               "$type": "AttachModifier",
+              "canBeHandledOnRecover": true,
+              "target": "CurTeamAvatars",
               "doOffStage": true,
               "modifierName": "MultiAvatar_Potion_Phase_4_3_Avatar",
-              "target": "CurTeamAvatars",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "actorIceSubHurtDelta": -1
             }
           ],
-          "thinkInterval": 1
+          "NLBKJKDNFFP": -1
         },
         "MultiAvatar_Potion_Phase_4_3_Extra_CD": {
-          "onAdded": [
-            {
-              "$type": "SetGlobalValue",
-              "doOffStage": true,
-              "value": 1,
-              "key": "_ABILITY_MultiAvatar_Potion_Phase_4_3_ExtraCD",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "elementDurability": 100,
-          "stacking": "Unique",
-          "isLimitedProperties": true,
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
-              "doOffStage": true,
               "key": "_ABILITY_MultiAvatar_Potion_Phase_4_3_ExtraCD",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "canBeHandledOnRecover": true,
+              "doOffStage": true,
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "duration": "ExtraCD",
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "key": "_ABILITY_MultiAvatar_Potion_Phase_4_3_ExtraCD",
+              "canBeHandledOnRecover": true,
+              "doOffStage": true,
+              "value": 1,
+              "actorIceSubHurtDelta": -1
             }
           ],
           "minus_one": -1,
-          "duration": "ExtraCD"
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "NLBKJKDNFFP": -1,
+          "stacking": "Unique"
         },
         "MultiAvatar_Potion_Phase_4_3_Normal_CD": {
-          "onAdded": [
-            {
-              "$type": "SetGlobalValue",
-              "doOffStage": true,
-              "value": 1,
-              "key": "_ABILITY_MultiAvatar_Potion_Phase_4_3_NormalCD",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "elementDurability": 100,
-          "stacking": "Unique",
-          "isLimitedProperties": true,
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
-              "doOffStage": true,
               "key": "_ABILITY_MultiAvatar_Potion_Phase_4_3_NormalCD",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "canBeHandledOnRecover": true,
+              "doOffStage": true,
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "duration": "NormalCD",
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "key": "_ABILITY_MultiAvatar_Potion_Phase_4_3_NormalCD",
+              "canBeHandledOnRecover": true,
+              "doOffStage": true,
+              "value": 1,
+              "actorIceSubHurtDelta": -1
             }
           ],
           "minus_one": -1,
-          "duration": "NormalCD"
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "NLBKJKDNFFP": -1,
+          "stacking": "Unique"
         }
-      }
-    }
-  },
-  {
-    "Default": {
-      "abilitySpecials": {
-        "AttackUpRatio": 0
       },
-      "DDNHHMIBNLF": {
-        "elementDurability": 100,
-        "isLimitedProperties": true,
-        "minus_one": -1
+      "abilitySpecials": {
+        "DamageRatio_Extra": 0,
+        "DamageRatio_Normal": 0,
+        "DamageSystemValue": 0,
+        "ExtraCD": 0,
+        "NormalCD": 0
       },
       "onAdded": [
         {
           "$type": "AttachModifier",
-          "doOffStage": false,
-          "modifierName": "MultiAvatar_Potion_Phase_5_1_Driver_Team",
+          "canBeHandledOnRecover": true,
           "target": "Team",
-          "actorIceSubHurtDelta": -1,
-          "canBeHandledOnRecover": true
+          "doOffStage": false,
+          "modifierName": "MultiAvatar_Potion_Phase_4_3_Driver_Team",
+          "actorIceSubHurtDelta": -1
         }
       ],
-      "abilityName": "Activity_MultiAvatar_Potion_Phase_5_1",
       "isDynamicAbility": true,
+      "abilityName": "Activity_MultiAvatar_Potion_Phase_4_3"
+    }
+  },
+  {
+    "Default": {
+      "CAKPDBGADEA": {
+        "minus_one": -1,
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "NLBKJKDNFFP": -1
+      },
       "modifiers": {
         "MultiAvatar_Potion_Phase_5_1_Avatar": {
-          "elementDurability": 100,
-          "stacking": "Unique",
-          "isLimitedProperties": true,
-          "KKBDDALAMKP": true,
-          "minus_one": -1,
           "properties": {
             "Actor_AttackRatio": "AttackUpRatio"
           },
-          "state": "AttackUp"
+          "HBLJELGPNMI": true,
+          "minus_one": -1,
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "state": "AttackUp",
+          "NLBKJKDNFFP": -1,
+          "stacking": "Unique"
         },
         "MultiAvatar_Potion_Phase_5_1_Driver_Team": {
+          "thinkInterval": 1,
           "onAdded": [
             {
               "$type": "AttachModifier",
+              "canBeHandledOnRecover": true,
+              "target": "CurTeamAvatars",
               "doOffStage": true,
               "modifierName": "MultiAvatar_Potion_Phase_5_1_Avatar",
-              "target": "CurTeamAvatars",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "actorIceSubHurtDelta": -1
             }
           ],
+          "minus_one": -1,
           "elementDurability": 100,
           "isLimitedProperties": true,
-          "minus_one": -1,
           "onThinkInterval": [
             {
               "$type": "AttachModifier",
+              "canBeHandledOnRecover": true,
+              "target": "CurTeamAvatars",
               "doOffStage": true,
               "modifierName": "MultiAvatar_Potion_Phase_5_1_Avatar",
-              "target": "CurTeamAvatars",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "actorIceSubHurtDelta": -1
             }
           ],
-          "thinkInterval": 1
+          "NLBKJKDNFFP": -1
         }
-      }
-    }
-  },
-  {
-    "Default": {
-      "abilitySpecials": {
-        "AttackUpRatio": 0,
-        "DebuffDuration": 0,
-        "DefenceRatio": 0
       },
-      "DDNHHMIBNLF": {
-        "elementDurability": 100,
-        "isLimitedProperties": true,
-        "minus_one": -1
+      "abilitySpecials": {
+        "AttackUpRatio": 0
       },
       "onAdded": [
         {
           "$type": "AttachModifier",
-          "doOffStage": false,
-          "modifierName": "MultiAvatar_Potion_Phase_5_2_Driver_Team",
+          "canBeHandledOnRecover": true,
           "target": "Team",
-          "actorIceSubHurtDelta": -1,
-          "canBeHandledOnRecover": true
+          "doOffStage": false,
+          "modifierName": "MultiAvatar_Potion_Phase_5_1_Driver_Team",
+          "actorIceSubHurtDelta": -1
         }
       ],
-      "abilityName": "Activity_MultiAvatar_Potion_Phase_5_2",
       "isDynamicAbility": true,
+      "abilityName": "Activity_MultiAvatar_Potion_Phase_5_1"
+    }
+  },
+  {
+    "Default": {
+      "CAKPDBGADEA": {
+        "minus_one": -1,
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "NLBKJKDNFFP": -1
+      },
       "modifiers": {
         "MultiAvatar_Potion_Phase_5_2_Avatar": {
-          "elementDurability": 100,
-          "stacking": "Unique",
-          "isLimitedProperties": true,
-          "modifierMixins": [
-            {
-              "$type": "DoActionByElementReactionMixin",
-              "actions": [
-                {
-                  "$type": "ApplyModifier",
-                  "doOffStage": true,
-                  "modifierName": "UNIQUE_MultiAvatar_Potion_Phase_5_2_DefenceRatio",
-                  "target": "Other",
-                  "actorIceSubHurtDelta": -1,
-                  "canBeHandledOnRecover": true
-                }
-              ],
-              "range": 20,
-              "reactionTypes": [
-                "SwirlFire",
-                "SwirlWater",
-                "SwirlElectric",
-                "SwirlIce"
-              ],
-              "actorIceSubHurtDelta": -1,
-              "entityTypes": [
-                "Monster"
-              ]
-            }
-          ],
           "onHittingOther": [
             {
               "$type": "Predicated",
-              "doOffStage": true,
+              "canBeHandledOnRecover": true,
               "target": "Other",
               "targetPredicates": [
                 {
                   "$type": "ByAttackTags",
+                  "target": "Target",
                   "attackTags": [
                     "Swirl_FireDamage",
                     "Swirl_WaterDamage",
@@ -2544,369 +2546,54 @@
                     "Self_Swirl_WaterDamage",
                     "Self_Swirl_ElectricDamage",
                     "Self_Swirl_IceDamage"
-                  ],
-                  "target": "Target"
+                  ]
                 },
                 {
                   "$type": "ByEntityTypes",
-                  "target": "Target",
                   "value": -1,
+                  "target": "Target",
                   "entityTypes": [
                     "Monster"
                   ]
                 },
                 {
                   "$type": "ByTargetGlobalValue",
-                  "target": "Target",
                   "key": "_ANIMAL_ENTITY_TYPE",
-                  "compareType": "NoneOrEqual"
+                  "compareType": "NoneOrEqual",
+                  "target": "Target"
                 }
               ],
-              "actorIceSubHurtDelta": -1,
               "successActions": [
                 {
                   "$type": "ApplyModifier",
+                  "canBeHandledOnRecover": true,
+                  "target": "Other",
                   "doOffStage": true,
                   "modifierName": "UNIQUE_MultiAvatar_Potion_Phase_5_2_DefenceRatio",
-                  "target": "Other",
-                  "actorIceSubHurtDelta": -1,
-                  "canBeHandledOnRecover": true
+                  "actorIceSubHurtDelta": -1
                 }
               ],
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "minus_one": -1
-        },
-        "MultiAvatar_Potion_Phase_5_2_Driver_Team": {
-          "onAdded": [
-            {
-              "$type": "AttachModifier",
               "doOffStage": true,
-              "modifierName": "MultiAvatar_Potion_Phase_5_2_Avatar",
-              "target": "CurTeamAvatars",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "actorIceSubHurtDelta": -1
             }
           ],
-          "elementDurability": 100,
-          "isLimitedProperties": true,
           "minus_one": -1,
-          "onThinkInterval": [
-            {
-              "$type": "AttachModifier",
-              "doOffStage": true,
-              "modifierName": "MultiAvatar_Potion_Phase_5_2_Avatar",
-              "target": "CurTeamAvatars",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "thinkInterval": 1
-        },
-        "UNIQUE_MultiAvatar_Potion_Phase_5_2_DefenceRatio": {
           "elementDurability": 100,
-          "stacking": "RefreshUniqueDurability",
-          "isLimitedProperties": true,
-          "KKBDDALAMKP": true,
-          "minus_one": -1,
-          "properties": {
-            "Actor_DefenceRatio": "DefenceRatio"
-          },
-          "isUnique": true,
-          "duration": "DebuffDuration",
-          "state": "DefenseDown"
-        }
-      }
-    }
-  },
-  {
-    "Default": {
-      "abilitySpecials": {
-        "DamageRatio": 0,
-        "DamageSystemValue": 0,
-        "ImpactCD": 0
-      },
-      "DDNHHMIBNLF": {
-        "elementDurability": 100,
-        "isLimitedProperties": true,
-        "minus_one": -1
-      },
-      "onAdded": [
-        {
-          "$type": "AttachModifier",
-          "doOffStage": false,
-          "modifierName": "MultiAvatar_Potion_Phase_5_3_Driver_Team",
-          "target": "Team",
-          "actorIceSubHurtDelta": -1,
-          "canBeHandledOnRecover": true
-        }
-      ],
-      "abilityName": "Activity_MultiAvatar_Potion_Phase_5_3",
-      "isDynamicAbility": true,
-      "modifiers": {
-        "MultiAvatar_Potion_Phase_5_3_Avatar": {
-          "onAdded": [
-            {
-              "$type": "SetSystemValueToOverrideMap",
-              "doOffStage": true,
-              "key": "DamageSystemValue",
-              "actorIceSubHurtDelta": -1,
-              "value": -1,
-              "type": "ElementLevelCo",
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "elementDurability": 100,
-          "stacking": "Unique",
           "isLimitedProperties": true,
           "modifierMixins": [
             {
               "$type": "DoActionByElementReactionMixin",
+              "entityTypes": [
+                "Monster"
+              ],
               "actions": [
                 {
-                  "$type": "SetGlobalPos",
-                  "doOffStage": true,
-                  "target": "Other",
-                  "key": "_ABILITY_MultiAvatar_Potion_Phase_5_3_Pos",
-                  "predicates": [
-                    {
-                      "$type": "ByTargetGlobalValue",
-                      "target": "Team",
-                      "key": "_ABILITY_MultiAvatar_Potion_Phase_5_3_CD",
-                      "compareType": "NoneOrEqual"
-                    }
-                  ],
-                  "actorIceSubHurtDelta": -1,
-                  "born": {
-                    "$type": "ConfigBornByTarget",
-                    "direction": {
-                      "maxAngle": 180
-                    },
-                    "useRotation": true,
-                    "FDGAEDDEEDG": {
-                      "ELAJJIANFFM": 180
-                    },
-                    "alongGround": true,
-                    "onGroundRaycastUpDist": 2,
-                    "value": 10
-                  },
-                  "canBeHandledOnRecover": true
-                },
-                {
-                  "$type": "SetGlobalPos",
-                  "doOffStage": true,
-                  "setTarget": true,
-                  "key": "_ABILITY_MultiAvatar_Potion_Phase_5_3_Pos_Avatar",
-                  "predicates": [
-                    {
-                      "$type": "ByTargetGlobalValue",
-                      "target": "Team",
-                      "key": "_ABILITY_MultiAvatar_Potion_Phase_5_3_CD",
-                      "compareType": "NoneOrEqual"
-                    }
-                  ],
-                  "actorIceSubHurtDelta": -1,
-                  "born": {
-                    "$type": "ConfigBornBySelf",
-                    "direction": {
-                      "maxAngle": 180
-                    },
-                    "useRotation": true,
-                    "FDGAEDDEEDG": {
-                      "ELAJJIANFFM": 180
-                    },
-                    "onGroundRaycastUpDist": 2,
-                    "value": 10
-                  },
-                  "canBeHandledOnRecover": true
-                },
-                {
-                  "$type": "CopyGlobalValue",
-                  "doOffStage": true,
-                  "dstKey": "_ABILITY_MultiAvatar_Potion_Phase_5_3_Pos_Avatar_0",
-                  "srcTarget": "Team",
-                  "predicates": [
-                    {
-                      "$type": "ByTargetGlobalValue",
-                      "target": "Team",
-                      "key": "_ABILITY_MultiAvatar_Potion_Phase_5_3_CD",
-                      "compareType": "NoneOrEqual"
-                    }
-                  ],
-                  "actorIceSubHurtDelta": -1,
-                  "srcKey": "_ABILITY_MultiAvatar_Potion_Phase_5_3_Pos_0",
-                  "canBeHandledOnRecover": true
-                },
-                {
-                  "$type": "CopyGlobalValue",
-                  "doOffStage": true,
-                  "dstKey": "_ABILITY_MultiAvatar_Potion_Phase_5_3_Pos_Avatar_1",
-                  "srcTarget": "Team",
-                  "predicates": [
-                    {
-                      "$type": "ByTargetGlobalValue",
-                      "target": "Team",
-                      "key": "_ABILITY_MultiAvatar_Potion_Phase_5_3_CD",
-                      "compareType": "NoneOrEqual"
-                    }
-                  ],
-                  "actorIceSubHurtDelta": -1,
-                  "srcKey": "_ABILITY_MultiAvatar_Potion_Phase_5_3_Pos_1",
-                  "canBeHandledOnRecover": true
-                },
-                {
-                  "$type": "CopyGlobalValue",
-                  "doOffStage": true,
-                  "dstKey": "_ABILITY_MultiAvatar_Potion_Phase_5_3_Pos_Avatar_2",
-                  "srcTarget": "Team",
-                  "predicates": [
-                    {
-                      "$type": "ByTargetGlobalValue",
-                      "target": "Team",
-                      "key": "_ABILITY_MultiAvatar_Potion_Phase_5_3_CD",
-                      "compareType": "NoneOrEqual"
-                    }
-                  ],
-                  "actorIceSubHurtDelta": -1,
-                  "srcKey": "_ABILITY_MultiAvatar_Potion_Phase_5_3_Pos_2",
-                  "canBeHandledOnRecover": true
-                },
-                {
-                  "$type": "TriggerAttackEvent",
-                  "doOffStage": true,
-                  "attackEvent": {
-                    "attackInfo": {
-                      "attenuationGroup": "default",
-                      "hitPattern": {
-                        "retreatType": "ByHitDirectionInverse",
-                        "hitImpulseType": "LV3",
-                        "onHitEffectName": "default",
-                        "hitHaltTimeScale": 0.05000000074505806,
-                        "JKLONEBKFKJ": {
-                          "JJGBOHIKHFM": true,
-                          "value": 1
-                        }
-                      },
-                      "FJNMGDHFOEH": {
-                        "GCPNPCOFFBP": "Shake"
-                      },
-                      "IODAJAKBOLG": {
-                        "onHitEffectName": "default",
-                        "JKLONEBKFKJ": {
-                          "JJGBOHIKHFM": true,
-                          "value": 1
-                        }
-                      },
-                      "attackProperty": {
-                        "attackType": "Range",
-                        "enBreak": 20,
-                        "elementRank": 1,
-                        "HPPLKCPAKHP": true,
-                        "damageExtra": [
-                          "DamageRatio",
-                          "DamageSystemValue",
-                          "MUL"
-                        ]
-                      },
-                      "cameraShake": {
-                        "extension": {
-                          "baseCycle": 0.11999999731779099,
-                          "cycleDamping": 0.11999999731779099,
-                          "baseOnCamera": true,
-                          "rangeAttenuation": 0.5
-                        },
-                        "FAKMJBNLPPB": -1,
-                        "shakeDistance": 20
-                      }
-                    },
-                    "attackPattern": {
-                      "$type": "ConfigAttackCircle",
-                      "radius": 10,
-                      "massiveAttackRatio": 0.30000001192092896,
-                      "born": {
-                        "$type": "ConfigBornByGlobalValue",
-                        "direction": {
-                          "maxAngle": 180
-                        },
-                        "useRotation": true,
-                        "positionKey": "_ABILITY_MultiAvatar_Potion_Phase_5_3_Pos_Avatar",
-                        "FDGAEDDEEDG": {
-                          "ELAJJIANFFM": 180
-                        },
-                        "alongGround": true,
-                        "onGroundRaycastUpDist": 2,
-                        "value": 10
-                      },
-                      "height": 6,
-                      "fanAngle": 360,
-                      "PBFNLCIFCBO": {
-                        "GOAEBMPCPJL": {
-                          "JJGBOHIKHFM": true,
-                          "value": 1
-                        }
-                      },
-                      "triggerType": "TriggerNoRepeat"
-                    }
-                  },
-                  "targetType": "Enemy",
-                  "predicates": [
-                    {
-                      "$type": "ByTargetGlobalValue",
-                      "target": "Team",
-                      "key": "_ABILITY_MultiAvatar_Potion_Phase_5_3_CD",
-                      "compareType": "NoneOrEqual"
-                    }
-                  ],
-                  "actorIceSubHurtDelta": -1,
-                  "canBeHandledOnRecover": true
-                },
-                {
-                  "$type": "FireEffect",
-                  "doOffStage": true,
-                  "scale": 1,
-                  "predicates": [
-                    {
-                      "$type": "ByTargetGlobalValue",
-                      "target": "Team",
-                      "key": "_ABILITY_MultiAvatar_Potion_Phase_5_3_CD",
-                      "compareType": "NoneOrEqual"
-                    }
-                  ],
-                  "actorIceSubHurtDelta": -1,
-                  "effectPattern": "Eff_Activity_AkaFesPotion_Blast_R8",
-                  "born": {
-                    "$type": "ConfigBornByGlobalValue",
-                    "direction": {
-                      "maxAngle": 180
-                    },
-                    "useRotation": true,
-                    "positionKey": "_ABILITY_MultiAvatar_Potion_Phase_5_3_Pos_Avatar",
-                    "FDGAEDDEEDG": {
-                      "ELAJJIANFFM": 180
-                    },
-                    "alongGround": true,
-                    "onGroundRaycastUpDist": 2,
-                    "value": 10
-                  },
-                  "effectTempleteID": -1,
-                  "canBeHandledOnRecover": true
-                },
-                {
                   "$type": "ApplyModifier",
+                  "canBeHandledOnRecover": true,
+                  "target": "Other",
                   "doOffStage": true,
-                  "modifierName": "UNIQUE_MultiAvatar_Potion_Phase_5_3_CD",
-                  "target": "Team",
-                  "predicates": [
-                    {
-                      "$type": "ByTargetGlobalValue",
-                      "target": "Team",
-                      "key": "_ABILITY_MultiAvatar_Potion_Phase_5_3_CD",
-                      "compareType": "NoneOrEqual"
-                    }
-                  ],
-                  "actorIceSubHurtDelta": -1,
-                  "canBeHandledOnRecover": true
+                  "modifierName": "UNIQUE_MultiAvatar_Potion_Phase_5_2_DefenceRatio",
+                  "actorIceSubHurtDelta": -1
                 }
               ],
               "range": 20,
@@ -2916,68 +2603,434 @@
                 "SwirlElectric",
                 "SwirlIce"
               ],
-              "actorIceSubHurtDelta": -1,
-              "entityTypes": [
-                "Monster"
-              ]
+              "actorIceSubHurtDelta": -1
             }
           ],
-          "minus_one": -1
+          "NLBKJKDNFFP": -1,
+          "stacking": "Unique"
         },
-        "MultiAvatar_Potion_Phase_5_3_Driver_Team": {
+        "MultiAvatar_Potion_Phase_5_2_Driver_Team": {
+          "thinkInterval": 1,
           "onAdded": [
             {
               "$type": "AttachModifier",
-              "doOffStage": true,
-              "modifierName": "MultiAvatar_Potion_Phase_5_3_Avatar",
+              "canBeHandledOnRecover": true,
               "target": "CurTeamAvatars",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "doOffStage": true,
+              "modifierName": "MultiAvatar_Potion_Phase_5_2_Avatar",
+              "actorIceSubHurtDelta": -1
             }
           ],
+          "minus_one": -1,
           "elementDurability": 100,
           "isLimitedProperties": true,
-          "minus_one": -1,
           "onThinkInterval": [
             {
               "$type": "AttachModifier",
-              "doOffStage": true,
-              "modifierName": "MultiAvatar_Potion_Phase_5_3_Avatar",
+              "canBeHandledOnRecover": true,
               "target": "CurTeamAvatars",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "doOffStage": true,
+              "modifierName": "MultiAvatar_Potion_Phase_5_2_Avatar",
+              "actorIceSubHurtDelta": -1
             }
           ],
-          "thinkInterval": 1
+          "NLBKJKDNFFP": -1
         },
-        "UNIQUE_MultiAvatar_Potion_Phase_5_3_CD": {
+        "UNIQUE_MultiAvatar_Potion_Phase_5_2_DefenceRatio": {
+          "isUnique": true,
+          "properties": {
+            "Actor_DefenceRatio": "DefenceRatio"
+          },
+          "duration": "DebuffDuration",
+          "HBLJELGPNMI": true,
+          "minus_one": -1,
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "state": "DefenseDown",
+          "NLBKJKDNFFP": -1,
+          "stacking": "RefreshUniqueDurability"
+        }
+      },
+      "abilitySpecials": {
+        "AttackUpRatio": 0,
+        "DebuffDuration": 0,
+        "DefenceRatio": 0
+      },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "canBeHandledOnRecover": true,
+          "target": "Team",
+          "doOffStage": false,
+          "modifierName": "MultiAvatar_Potion_Phase_5_2_Driver_Team",
+          "actorIceSubHurtDelta": -1
+        }
+      ],
+      "isDynamicAbility": true,
+      "abilityName": "Activity_MultiAvatar_Potion_Phase_5_2"
+    }
+  },
+  {
+    "Default": {
+      "CAKPDBGADEA": {
+        "minus_one": -1,
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "NLBKJKDNFFP": -1
+      },
+      "modifiers": {
+        "MultiAvatar_Potion_Phase_5_3_Avatar": {
           "onAdded": [
             {
-              "$type": "SetGlobalValue",
+              "$type": "SetSystemValueToOverrideMap",
+              "type": "ElementLevelCo",
+              "key": "DamageSystemValue",
+              "canBeHandledOnRecover": true,
               "doOffStage": true,
-              "value": 1,
-              "key": "_ABILITY_MultiAvatar_Potion_Phase_5_3_CD",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "elementDurability": 100,
-          "stacking": "Unique",
-          "isLimitedProperties": true,
-          "onRemoved": [
-            {
-              "$type": "SetGlobalValue",
-              "doOffStage": true,
-              "key": "_ABILITY_MultiAvatar_Potion_Phase_5_3_CD",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "MMAFMANEAND": -1,
+              "actorIceSubHurtDelta": -1
             }
           ],
           "minus_one": -1,
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "DoActionByElementReactionMixin",
+              "entityTypes": [
+                "Monster"
+              ],
+              "actions": [
+                {
+                  "$type": "SetGlobalPos",
+                  "key": "_ABILITY_MultiAvatar_Potion_Phase_5_3_Pos",
+                  "predicates": [
+                    {
+                      "$type": "ByTargetGlobalValue",
+                      "key": "_ABILITY_MultiAvatar_Potion_Phase_5_3_CD",
+                      "compareType": "NoneOrEqual",
+                      "target": "Team"
+                    }
+                  ],
+                  "canBeHandledOnRecover": true,
+                  "target": "Other",
+                  "doOffStage": true,
+                  "born": {
+                    "$type": "ConfigBornByTarget",
+                    "direction": {
+                      "maxAngle": 180
+                    },
+                    "EALBHHJEFGH": {
+                      "BKAPGJCLCIO": 180
+                    },
+                    "useRotation": true,
+                    "value": 10,
+                    "onGroundRaycastUpDist": 2,
+                    "KFHHKFNAKFP": true
+                  },
+                  "actorIceSubHurtDelta": -1
+                },
+                {
+                  "$type": "SetGlobalPos",
+                  "setTarget": true,
+                  "key": "_ABILITY_MultiAvatar_Potion_Phase_5_3_Pos_Avatar",
+                  "predicates": [
+                    {
+                      "$type": "ByTargetGlobalValue",
+                      "key": "_ABILITY_MultiAvatar_Potion_Phase_5_3_CD",
+                      "compareType": "NoneOrEqual",
+                      "target": "Team"
+                    }
+                  ],
+                  "canBeHandledOnRecover": true,
+                  "doOffStage": true,
+                  "born": {
+                    "$type": "ConfigBornBySelf",
+                    "direction": {
+                      "maxAngle": 180
+                    },
+                    "EALBHHJEFGH": {
+                      "BKAPGJCLCIO": 180
+                    },
+                    "useRotation": true,
+                    "value": 10,
+                    "onGroundRaycastUpDist": 2
+                  },
+                  "actorIceSubHurtDelta": -1
+                },
+                {
+                  "$type": "CopyGlobalValue",
+                  "predicates": [
+                    {
+                      "$type": "ByTargetGlobalValue",
+                      "key": "_ABILITY_MultiAvatar_Potion_Phase_5_3_CD",
+                      "compareType": "NoneOrEqual",
+                      "target": "Team"
+                    }
+                  ],
+                  "canBeHandledOnRecover": true,
+                  "srcTarget": "Team",
+                  "srcKey": "_ABILITY_MultiAvatar_Potion_Phase_5_3_Pos_0",
+                  "dstKey": "_ABILITY_MultiAvatar_Potion_Phase_5_3_Pos_Avatar_0",
+                  "doOffStage": true,
+                  "actorIceSubHurtDelta": -1
+                },
+                {
+                  "$type": "CopyGlobalValue",
+                  "predicates": [
+                    {
+                      "$type": "ByTargetGlobalValue",
+                      "key": "_ABILITY_MultiAvatar_Potion_Phase_5_3_CD",
+                      "compareType": "NoneOrEqual",
+                      "target": "Team"
+                    }
+                  ],
+                  "canBeHandledOnRecover": true,
+                  "srcTarget": "Team",
+                  "srcKey": "_ABILITY_MultiAvatar_Potion_Phase_5_3_Pos_1",
+                  "dstKey": "_ABILITY_MultiAvatar_Potion_Phase_5_3_Pos_Avatar_1",
+                  "doOffStage": true,
+                  "actorIceSubHurtDelta": -1
+                },
+                {
+                  "$type": "CopyGlobalValue",
+                  "predicates": [
+                    {
+                      "$type": "ByTargetGlobalValue",
+                      "key": "_ABILITY_MultiAvatar_Potion_Phase_5_3_CD",
+                      "compareType": "NoneOrEqual",
+                      "target": "Team"
+                    }
+                  ],
+                  "canBeHandledOnRecover": true,
+                  "srcTarget": "Team",
+                  "srcKey": "_ABILITY_MultiAvatar_Potion_Phase_5_3_Pos_2",
+                  "dstKey": "_ABILITY_MultiAvatar_Potion_Phase_5_3_Pos_Avatar_2",
+                  "doOffStage": true,
+                  "actorIceSubHurtDelta": -1
+                },
+                {
+                  "$type": "TriggerAttackEvent",
+                  "attackEvent": {
+                    "attackInfo": {
+                      "hitPattern": {
+                        "hitImpulseType": "LV3",
+                        "retreatType": "ByHitDirectionInverse",
+                        "onHitEffectName": "default",
+                        "NPLKKCCDEDJ": {
+                          "value": 1,
+                          "NJICIOFCOPD": true
+                        },
+                        "hitHaltTimeScale": 0.05000000074505806
+                      },
+                      "cameraShake": {
+                        "extension": {
+                          "cycleDamping": 0.11999999731779099,
+                          "baseOnCamera": true,
+                          "rangeAttenuation": 0.5,
+                          "baseCycle": 0.11999999731779099
+                        },
+                        "shakeDistance": 20
+                      },
+                      "attackProperty": {
+                        "enBreak": 20,
+                        "damageExtra": [
+                          "DamageRatio",
+                          "DamageSystemValue",
+                          "MUL"
+                        ],
+                        "IOLHEGDMIBF": true,
+                        "attackType": "Range",
+                        "elementRank": 1
+                      },
+                      "KMBBLIMOMBH": {
+                        "LMEIODIINNM": "Shake"
+                      },
+                      "attenuationGroup": "default",
+                      "OLHIHLILEKH": {
+                        "onHitEffectName": "default",
+                        "NPLKKCCDEDJ": {
+                          "value": 1,
+                          "NJICIOFCOPD": true
+                        }
+                      }
+                    },
+                    "attackPattern": {
+                      "$type": "ConfigAttackCircle",
+                      "BCIDGAKNEBH": {
+                        "BPIDFNFCNHP": {
+                          "value": 1,
+                          "NJICIOFCOPD": true
+                        }
+                      },
+                      "radius": 10,
+                      "triggerType": "TriggerNoRepeat",
+                      "massiveAttackRatio": 0.30000001192092896,
+                      "fanAngle": 360,
+                      "height": 6,
+                      "born": {
+                        "$type": "ConfigBornByGlobalValue",
+                        "direction": {
+                          "maxAngle": 180
+                        },
+                        "EALBHHJEFGH": {
+                          "BKAPGJCLCIO": 180
+                        },
+                        "useRotation": true,
+                        "value": 10,
+                        "onGroundRaycastUpDist": 2,
+                        "KFHHKFNAKFP": true,
+                        "positionKey": "_ABILITY_MultiAvatar_Potion_Phase_5_3_Pos_Avatar"
+                      }
+                    }
+                  },
+                  "predicates": [
+                    {
+                      "$type": "ByTargetGlobalValue",
+                      "key": "_ABILITY_MultiAvatar_Potion_Phase_5_3_CD",
+                      "compareType": "NoneOrEqual",
+                      "target": "Team"
+                    }
+                  ],
+                  "canBeHandledOnRecover": true,
+                  "doOffStage": true,
+                  "actorIceSubHurtDelta": -1,
+                  "targetType": "Enemy"
+                },
+                {
+                  "$type": "FireEffect",
+                  "predicates": [
+                    {
+                      "$type": "ByTargetGlobalValue",
+                      "key": "_ABILITY_MultiAvatar_Potion_Phase_5_3_CD",
+                      "compareType": "NoneOrEqual",
+                      "target": "Team"
+                    }
+                  ],
+                  "canBeHandledOnRecover": true,
+                  "effectTempleteID": -1,
+                  "effectPattern": "Eff_Activity_AkaFesPotion_Blast_R8",
+                  "scale": 1,
+                  "doOffStage": true,
+                  "born": {
+                    "$type": "ConfigBornByGlobalValue",
+                    "direction": {
+                      "maxAngle": 180
+                    },
+                    "EALBHHJEFGH": {
+                      "BKAPGJCLCIO": 180
+                    },
+                    "useRotation": true,
+                    "value": 10,
+                    "onGroundRaycastUpDist": 2,
+                    "KFHHKFNAKFP": true,
+                    "positionKey": "_ABILITY_MultiAvatar_Potion_Phase_5_3_Pos_Avatar"
+                  },
+                  "actorIceSubHurtDelta": -1
+                },
+                {
+                  "$type": "ApplyModifier",
+                  "predicates": [
+                    {
+                      "$type": "ByTargetGlobalValue",
+                      "key": "_ABILITY_MultiAvatar_Potion_Phase_5_3_CD",
+                      "compareType": "NoneOrEqual",
+                      "target": "Team"
+                    }
+                  ],
+                  "canBeHandledOnRecover": true,
+                  "target": "Team",
+                  "doOffStage": true,
+                  "modifierName": "UNIQUE_MultiAvatar_Potion_Phase_5_3_CD",
+                  "actorIceSubHurtDelta": -1
+                }
+              ],
+              "range": 20,
+              "reactionTypes": [
+                "SwirlFire",
+                "SwirlWater",
+                "SwirlElectric",
+                "SwirlIce"
+              ],
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "NLBKJKDNFFP": -1,
+          "stacking": "Unique"
+        },
+        "MultiAvatar_Potion_Phase_5_3_Driver_Team": {
+          "thinkInterval": 1,
+          "onAdded": [
+            {
+              "$type": "AttachModifier",
+              "canBeHandledOnRecover": true,
+              "target": "CurTeamAvatars",
+              "doOffStage": true,
+              "modifierName": "MultiAvatar_Potion_Phase_5_3_Avatar",
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "minus_one": -1,
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onThinkInterval": [
+            {
+              "$type": "AttachModifier",
+              "canBeHandledOnRecover": true,
+              "target": "CurTeamAvatars",
+              "doOffStage": true,
+              "modifierName": "MultiAvatar_Potion_Phase_5_3_Avatar",
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "NLBKJKDNFFP": -1
+        },
+        "UNIQUE_MultiAvatar_Potion_Phase_5_3_CD": {
           "isUnique": true,
-          "duration": "ImpactCD"
+          "onRemoved": [
+            {
+              "$type": "SetGlobalValue",
+              "key": "_ABILITY_MultiAvatar_Potion_Phase_5_3_CD",
+              "canBeHandledOnRecover": true,
+              "doOffStage": true,
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "duration": "ImpactCD",
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "key": "_ABILITY_MultiAvatar_Potion_Phase_5_3_CD",
+              "canBeHandledOnRecover": true,
+              "doOffStage": true,
+              "value": 1,
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "minus_one": -1,
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "NLBKJKDNFFP": -1,
+          "stacking": "Unique"
         }
-      }
+      },
+      "abilitySpecials": {
+        "DamageRatio": 0,
+        "DamageSystemValue": 0,
+        "ImpactCD": 0
+      },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "canBeHandledOnRecover": true,
+          "target": "Team",
+          "doOffStage": false,
+          "modifierName": "MultiAvatar_Potion_Phase_5_3_Driver_Team",
+          "actorIceSubHurtDelta": -1
+        }
+      ],
+      "isDynamicAbility": true,
+      "abilityName": "Activity_MultiAvatar_Potion_Phase_5_3"
     }
   }
 ]

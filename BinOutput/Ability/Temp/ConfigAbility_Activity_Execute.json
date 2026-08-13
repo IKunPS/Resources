@@ -1,15 +1,1465 @@
 [
   {
     "Default": {
-      "onKill": [
+      "CAKPDBGADEA": {
+        "minus_one": -1,
+        "elementDurability": 100,
+        "isLimitedProperties": true,
+        "NLBKJKDNFFP": -1
+      },
+      "abilityMixins": [
         {
-          "$type": "RemoveModifier",
-          "doOffStage": false,
-          "modifierName": "WeaknessBar_Handler",
-          "actorIceSubHurtDelta": -1,
-          "canBeHandledOnRecover": true
+          "$type": "AttachModifierToGlobalValueMixin",
+          "modifierNameSteps": [
+            "Monster_Execute_State",
+            "Monster_Normal_State",
+            "Monster_Recover_State"
+          ],
+          "enable": true,
+          "valueSteps": [
+            -0.5,
+            0.5,
+            1.5,
+            2.5
+          ],
+          "setEnable": true,
+          "removeAppliedModifier": true,
+          "globalValueKey": "MONSTER_BLOCKING_CAN_EXECUTE",
+          "PGNFKDOAEMM": true,
+          "actorIceSubHurtDelta": -1
+        },
+        {
+          "$type": "DoActionByAnimatorStateIDMixin",
+          "enterActions": [
+            {
+              "$type": "ApplyModifier",
+              "canBeHandledOnRecover": true,
+              "doOffStage": false,
+              "modifierName": "UNIQUE_Monster_Execute_WitchTime",
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "stateIDs": [
+            "Hit_H_SP"
+          ],
+          "value": -1,
+          "actorIceSubHurtDelta": -1
         }
       ],
+      "modifiers": {
+        "Monster_Execute_Handler": {
+          "onRemoved": [
+            {
+              "$type": "SetGlobalValueV2",
+              "key": "AVATAR_BLOCKING_CAN_EXECUTE",
+              "canBeHandledOnRecover": true,
+              "doOffStage": true,
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "duration": 0.5,
+          "onAdded": [
+            {
+              "$type": "SetGlobalValueV2",
+              "key": "AVATAR_BLOCKING_CAN_EXECUTE",
+              "canBeHandledOnRecover": true,
+              "doOffStage": true,
+              "value": 100,
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "minus_one": -1,
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "NLBKJKDNFFP": -1
+        },
+        "Monster_Execute_State": {
+          "onRemoved": [
+            {
+              "$type": "SetGlobalValueV2",
+              "key": "IN_EXECUTION",
+              "canBeHandledOnRecover": true,
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "SetGlobalValueV2",
+              "key": "EXECUTE_WEAKNESS_DAMAGE_LOCK",
+              "canBeHandledOnRecover": true,
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "RemoveModifier",
+              "canBeHandledOnRecover": true,
+              "target": "AllPlayerAvatars",
+              "doOffStage": false,
+              "modifierName": "Monster_Execute_Handler",
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "SetAnimatorBool",
+              "canBeHandledOnRecover": true,
+              "boolID": "HitLock",
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "SetAnimatorTrigger",
+              "canBeHandledOnRecover": true,
+              "triggerID": "EndWeak",
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "NotifyUI",
+              "uiContextName": "BladeheartInGame",
+              "message": "BrokenLoopOff",
+              "canBeHandledOnRecover": true,
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "SendEffectTrigger",
+              "canBeHandledOnRecover": true,
+              "effectPattern": "Eff_Monster_Activity_BladeHeart_Enable_Execution",
+              "doOffStage": false,
+              "parameter": "end",
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "onReconnect": [
+            {
+              "$type": "SetAnimatorTrigger",
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "WEAK_END_INDICATOR",
+                  "compareType": "NoneOrEqual",
+                  "target": "Target"
+                }
+              ],
+              "canBeHandledOnRecover": true,
+              "triggerID": "TriggerWeak",
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "Predicated",
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "IN_EXECUTION",
+                  "target": "Target",
+                  "value": 1
+                }
+              ],
+              "canBeHandledOnRecover": true,
+              "successActions": [
+                {
+                  "$type": "Predicated",
+                  "canBeHandledOnRecover": true,
+                  "targetPredicates": [
+                    {
+                      "$type": "ByNot",
+                      "predicates": [
+                        {
+                          "$type": "ByTargetGlobalValue",
+                          "key": "EXECUTE_WEAKNESS_DAMAGE_LOCK",
+                          "target": "Target",
+                          "value": 1
+                        }
+                      ],
+                      "target": "Target"
+                    }
+                  ],
+                  "successActions": [
+                    {
+                      "$type": "SetGlobalValueV2",
+                      "key": "EXECUTE_WEAKNESS_DAMAGE_LOCK",
+                      "canBeHandledOnRecover": true,
+                      "doOffStage": false,
+                      "value": 1,
+                      "actorIceSubHurtDelta": -1
+                    },
+                    {
+                      "$type": "AddGlobalValueV2",
+                      "key": "MONSTER_WEAKNESS_MAX",
+                      "canBeHandledOnRecover": true,
+                      "minValue": [
+                        "Monster_OriginWeaknessMax_Min",
+                        "_EXECUTE_WEAKNESS_MAX",
+                        "MUL"
+                      ],
+                      "useLimitRange": true,
+                      "maxValue": "_EXECUTE_WEAKNESS_MAX",
+                      "doOffStage": false,
+                      "value": [
+                        0,
+                        "_EXECUTE_WEAKNESS_MAX_DAMAGE",
+                        "SUB"
+                      ],
+                      "actorIceSubHurtDelta": -1
+                    },
+                    {
+                      "$type": "SetGlobalValueV2",
+                      "key": "MONSTER_WEAKNESS_RECOVER",
+                      "canBeHandledOnRecover": true,
+                      "doOffStage": false,
+                      "value": "MONSTER_WEAKNESS_MAX",
+                      "actorIceSubHurtDelta": -1
+                    }
+                  ],
+                  "doOffStage": false,
+                  "actorIceSubHurtDelta": -1
+                },
+                {
+                  "$type": "NotifyUI",
+                  "uiContextName": "BladeheartInGame",
+                  "message": "ExecuteOff",
+                  "canBeHandledOnRecover": true,
+                  "doOffStage": false,
+                  "actorIceSubHurtDelta": -1
+                },
+                {
+                  "$type": "RemoveUniqueModifier",
+                  "canBeHandledOnRecover": true,
+                  "doOffStage": false,
+                  "modifierName": "UNIQUE_Monster_Execute_WitchTime",
+                  "actorIceSubHurtDelta": -1
+                }
+              ],
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "SetGlobalValueV2",
+              "key": "IN_EXECUTION",
+              "canBeHandledOnRecover": true,
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "SetAnimatorBool",
+              "canBeHandledOnRecover": true,
+              "boolID": "HitLock",
+              "doOffStage": false,
+              "value": true,
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "AttachEffect",
+              "canBeHandledOnRecover": true,
+              "effectTempleteID": -1,
+              "effectPattern": "Eff_Monster_Activity_BladeHeart_Enable_Execution",
+              "scale": 1,
+              "doOffStage": false,
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "EALBHHJEFGH": {
+                  "BKAPGJCLCIO": 180
+                },
+                "value": 10,
+                "onGroundRaycastUpDist": 2
+              },
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "thinkInterval": 0.10000000149011612,
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "canBeHandledOnRecover": true,
+              "effectTempleteID": -1,
+              "effectPattern": "Eff_Monster_Activity_BladeHeart_Enable_Execution",
+              "scale": 1,
+              "doOffStage": false,
+              "born": {
+                "direction": {
+                  "maxAngle": 180
+                },
+                "EALBHHJEFGH": {
+                  "BKAPGJCLCIO": 180
+                },
+                "value": 10,
+                "onGroundRaycastUpDist": 2
+              },
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "ApplyModifier",
+              "canBeHandledOnRecover": true,
+              "doOffStage": false,
+              "modifierName": "Weak_Timer",
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "Predicated",
+              "failActions": [
+                {
+                  "$type": "SendEffectTrigger",
+                  "type": "Bool",
+                  "canBeHandledOnRecover": true,
+                  "effectPattern": "Eff_Monster_Activity_BladeHeart_Enable_Execution",
+                  "doOffStage": false,
+                  "parameter": "EnableExecution",
+                  "actorIceSubHurtDelta": -1
+                }
+              ],
+              "canBeHandledOnRecover": true,
+              "target": "AllPlayerAvatars",
+              "targetPredicates": [
+                {
+                  "$type": "ByTargetPositionToSelfPosition",
+                  "logic": "LesserOrEqual",
+                  "target": "Target",
+                  "value": "ExecuteZone"
+                }
+              ],
+              "successActions": [
+                {
+                  "$type": "ApplyModifier",
+                  "canBeHandledOnRecover": true,
+                  "target": "AllPlayerAvatars",
+                  "doOffStage": false,
+                  "modifierName": "Monster_Execute_Handler",
+                  "actorIceSubHurtDelta": -1
+                },
+                {
+                  "$type": "SendEffectTrigger",
+                  "type": "Bool",
+                  "canBeHandledOnRecover": true,
+                  "value": 1,
+                  "effectPattern": "Eff_Monster_Activity_BladeHeart_Enable_Execution",
+                  "doOffStage": false,
+                  "parameter": "EnableExecution",
+                  "actorIceSubHurtDelta": -1
+                }
+              ],
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "NotifyUI",
+              "uiContextName": "BladeheartInGame",
+              "message": "BrokenLoopOn",
+              "canBeHandledOnRecover": true,
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "NotifyUI",
+              "uiContextName": "BladeheartInGame",
+              "message": "Execute",
+              "canBeHandledOnRecover": true,
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "ServerLuaCall",
+              "funcName": "SLC_Show_Master_Break_Rmd",
+              "canBeHandledOnRecover": true,
+              "doOffStage": false,
+              "luaCallType": "FromGroup",
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "minus_one": -1,
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onThinkInterval": [
+            {
+              "$type": "Predicated",
+              "failActions": [
+                {
+                  "$type": "SendEffectTrigger",
+                  "type": "Bool",
+                  "canBeHandledOnRecover": true,
+                  "effectPattern": "Eff_Monster_Activity_BladeHeart_Enable_Execution",
+                  "doOffStage": false,
+                  "parameter": "EnableExecution",
+                  "actorIceSubHurtDelta": -1
+                }
+              ],
+              "canBeHandledOnRecover": true,
+              "target": "AllPlayerAvatars",
+              "targetPredicates": [
+                {
+                  "$type": "ByTargetPositionToSelfPosition",
+                  "logic": "LesserOrEqual",
+                  "target": "Target",
+                  "value": "ExecuteZone"
+                }
+              ],
+              "successActions": [
+                {
+                  "$type": "ApplyModifier",
+                  "canBeHandledOnRecover": true,
+                  "target": "AllPlayerAvatars",
+                  "doOffStage": false,
+                  "modifierName": "Monster_Execute_Handler",
+                  "actorIceSubHurtDelta": -1
+                },
+                {
+                  "$type": "SendEffectTrigger",
+                  "type": "Bool",
+                  "canBeHandledOnRecover": true,
+                  "value": 1,
+                  "effectPattern": "Eff_Monster_Activity_BladeHeart_Enable_Execution",
+                  "doOffStage": false,
+                  "parameter": "EnableExecution",
+                  "actorIceSubHurtDelta": -1
+                }
+              ],
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "NLBKJKDNFFP": -1,
+          "onBeingHit": [
+            {
+              "$type": "Predicated",
+              "canBeHandledOnRecover": true,
+              "target": "Target",
+              "targetPredicates": [
+                {
+                  "$type": "ByAttackTags",
+                  "target": "Target",
+                  "attackTags": [
+                    "Blocking_WitchTime"
+                  ]
+                }
+              ],
+              "successActions": [
+                {
+                  "$type": "RemoveUniqueModifier",
+                  "canBeHandledOnRecover": true,
+                  "doOffStage": false,
+                  "modifierName": "UNIQUE_Monster_PerfectCounter_WitchTime",
+                  "actorIceSubHurtDelta": -1
+                },
+                {
+                  "$type": "SetAnimatorTrigger",
+                  "canBeHandledOnRecover": true,
+                  "triggerID": "ExecuteStart",
+                  "doOffStage": false,
+                  "actorIceSubHurtDelta": -1
+                },
+                {
+                  "$type": "SetGlobalValueV2",
+                  "key": "IN_EXECUTION",
+                  "canBeHandledOnRecover": true,
+                  "doOffStage": false,
+                  "value": 1,
+                  "actorIceSubHurtDelta": -1
+                },
+                {
+                  "$type": "SetAnimatorBool",
+                  "canBeHandledOnRecover": true,
+                  "boolID": "HitLock",
+                  "doOffStage": false,
+                  "actorIceSubHurtDelta": -1
+                },
+                {
+                  "$type": "SetGlobalPos",
+                  "key": "AVATAR_POS",
+                  "canBeHandledOnRecover": true,
+                  "target": "SelfAttackTarget",
+                  "doOffStage": false,
+                  "born": {
+                    "$type": "ConfigBornByTarget",
+                    "direction": {
+                      "maxAngle": 180
+                    },
+                    "EALBHHJEFGH": {
+                      "BKAPGJCLCIO": 180
+                    },
+                    "useRotation": true,
+                    "value": 10,
+                    "onGroundRaycastUpDist": 2
+                  },
+                  "actorIceSubHurtDelta": -1
+                },
+                {
+                  "$type": "TurnDirectionToPos",
+                  "canBeHandledOnRecover": true,
+                  "toPos": {
+                    "$type": "ConfigBornByGlobalValue",
+                    "direction": {
+                      "maxAngle": 180
+                    },
+                    "EALBHHJEFGH": {
+                      "BKAPGJCLCIO": 180
+                    },
+                    "value": 10,
+                    "onGroundRaycastUpDist": 2,
+                    "positionKey": "AVATAR_POS"
+                  },
+                  "IGNFEIPKCPK": -1,
+                  "doOffStage": false,
+                  "actorIceSubHurtDelta": -1,
+                  "maxAngle": -1
+                },
+                {
+                  "$type": "SendEffectTrigger",
+                  "canBeHandledOnRecover": true,
+                  "effectPattern": "Eff_Monster_Activity_BladeHeart_Enable_Execution",
+                  "doOffStage": false,
+                  "parameter": "endEnable",
+                  "actorIceSubHurtDelta": -1
+                }
+              ],
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "Predicated",
+              "canBeHandledOnRecover": true,
+              "target": "Target",
+              "targetPredicates": [
+                {
+                  "$type": "ByAttackTags",
+                  "target": "Target",
+                  "attackTags": [
+                    "Blocking_Execute"
+                  ]
+                }
+              ],
+              "successActions": [
+                {
+                  "$type": "GetFightProperty",
+                  "canBeHandledOnRecover": true,
+                  "fightProp": "FIGHT_PROP_CUR_HP",
+                  "globalValueKey": "_EXECUTE_CUR_HP",
+                  "doOffStage": false,
+                  "actorIceSubHurtDelta": -1
+                },
+                {
+                  "$type": "Predicated",
+                  "canBeHandledOnRecover": true,
+                  "targetPredicates": [
+                    {
+                      "$type": "ByNot",
+                      "predicates": [
+                        {
+                          "$type": "ByTargetGlobalValue",
+                          "key": "EXECUTE_WEAKNESS_DAMAGE_LOCK",
+                          "target": "Target",
+                          "value": 1
+                        }
+                      ],
+                      "target": "Target"
+                    }
+                  ],
+                  "successActions": [
+                    {
+                      "$type": "SetGlobalValueV2",
+                      "key": "EXECUTE_WEAKNESS_DAMAGE_LOCK",
+                      "canBeHandledOnRecover": true,
+                      "doOffStage": false,
+                      "value": 1,
+                      "actorIceSubHurtDelta": -1
+                    },
+                    {
+                      "$type": "AddGlobalValueV2",
+                      "key": "MONSTER_WEAKNESS_MAX",
+                      "canBeHandledOnRecover": true,
+                      "minValue": [
+                        "Monster_OriginWeaknessMax_Min",
+                        "_EXECUTE_WEAKNESS_MAX",
+                        "MUL"
+                      ],
+                      "useLimitRange": true,
+                      "maxValue": "_EXECUTE_WEAKNESS_MAX",
+                      "doOffStage": false,
+                      "value": [
+                        0,
+                        "_EXECUTE_WEAKNESS_MAX_DAMAGE",
+                        "SUB"
+                      ],
+                      "actorIceSubHurtDelta": -1
+                    },
+                    {
+                      "$type": "SetGlobalValueV2",
+                      "key": "MONSTER_WEAKNESS_RECOVER",
+                      "canBeHandledOnRecover": true,
+                      "doOffStage": false,
+                      "value": "MONSTER_WEAKNESS_MAX",
+                      "actorIceSubHurtDelta": -1
+                    }
+                  ],
+                  "doOffStage": false,
+                  "actorIceSubHurtDelta": -1
+                },
+                {
+                  "$type": "NotifyUI",
+                  "uiContextName": "BladeheartInGame",
+                  "message": "ExecuteOff",
+                  "canBeHandledOnRecover": true,
+                  "doOffStage": false,
+                  "actorIceSubHurtDelta": -1
+                },
+                {
+                  "$type": "RemoveUniqueModifier",
+                  "canBeHandledOnRecover": true,
+                  "doOffStage": false,
+                  "modifierName": "UNIQUE_Monster_Execute_WitchTime",
+                  "actorIceSubHurtDelta": -1
+                },
+                {
+                  "$type": "Predicated",
+                  "canBeHandledOnRecover": true,
+                  "targetPredicates": [
+                    {
+                      "$type": "ByTargetGlobalValue",
+                      "key": "_EXECUTE_CUR_HP",
+                      "compareType": "MoreThan",
+                      "target": "Target",
+                      "value": "_EXECUTE_THRESHOLD_HP"
+                    }
+                  ],
+                  "successActions": [
+                    {
+                      "$type": "SetGlobalValueV2",
+                      "key": "MONSTER_BLOCKING_CAN_EXECUTE",
+                      "canBeHandledOnRecover": true,
+                      "doOffStage": false,
+                      "value": 2,
+                      "actorIceSubHurtDelta": -1
+                    }
+                  ],
+                  "doOffStage": false,
+                  "actorIceSubHurtDelta": -1
+                }
+              ],
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1
+            }
+          ]
+        },
+        "Monster_Normal_State": {
+          "onAdded": [
+            {
+              "$type": "ResetAnimatorTrigger",
+              "canBeHandledOnRecover": true,
+              "triggerID": "TriggerWeak",
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "ResetAnimatorTrigger",
+              "canBeHandledOnRecover": true,
+              "triggerID": "EndWeak",
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "minus_one": -1,
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "AttachModifierToGlobalValueMixin",
+              "modifierNameSteps": [
+                "Monster_WeaknessBar_Broken",
+                "Monster_WeaknessBar_Normal"
+              ],
+              "enable": true,
+              "valueSteps": [
+                -0.5,
+                0.5,
+                [
+                  "MONSTER_WEAKNESS_MAX",
+                  0.5,
+                  "ADD"
+                ]
+              ],
+              "setEnable": true,
+              "removeAppliedModifier": true,
+              "globalValueKey": "MONSTER_WEAKNESS_VALUE",
+              "PGNFKDOAEMM": true,
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "NLBKJKDNFFP": -1
+        },
+        "Monster_Recover_State": {
+          "thinkInterval": 0.009999999776482582,
+          "onAdded": [
+            {
+              "$type": "ResetAnimatorTrigger",
+              "canBeHandledOnRecover": true,
+              "triggerID": "TriggerWeak",
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "AttachModifier",
+              "canBeHandledOnRecover": true,
+              "doOffStage": false,
+              "modifierName": "Monster_WeaknessBar_Normal",
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "Predicated",
+              "failActions": [
+                {
+                  "$type": "SetGlobalValueV2",
+                  "key": "MONSTER_BLOCKING_CAN_EXECUTE",
+                  "canBeHandledOnRecover": true,
+                  "doOffStage": false,
+                  "value": 1,
+                  "actorIceSubHurtDelta": -1
+                }
+              ],
+              "canBeHandledOnRecover": true,
+              "targetPredicates": [
+                {
+                  "$type": "ByNot",
+                  "predicates": [
+                    {
+                      "$type": "ByTargetGlobalValue",
+                      "key": "MONSTER_WEAKNESS_VALUE",
+                      "target": "Target",
+                      "value": "MONSTER_WEAKNESS_RECOVER"
+                    }
+                  ],
+                  "target": "Target"
+                }
+              ],
+              "successActions": [
+                {
+                  "$type": "AddGlobalValueV2",
+                  "key": "MONSTER_WEAKNESS_VALUE",
+                  "canBeHandledOnRecover": true,
+                  "useLimitRange": true,
+                  "maxValue": "MONSTER_WEAKNESS_RECOVER",
+                  "doOffStage": false,
+                  "value": 150,
+                  "actorIceSubHurtDelta": -1
+                }
+              ],
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "minus_one": -1,
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "onThinkInterval": [
+            {
+              "$type": "Predicated",
+              "failActions": [
+                {
+                  "$type": "SetGlobalValueV2",
+                  "key": "MONSTER_BLOCKING_CAN_EXECUTE",
+                  "canBeHandledOnRecover": true,
+                  "doOffStage": false,
+                  "value": 1,
+                  "actorIceSubHurtDelta": -1
+                }
+              ],
+              "canBeHandledOnRecover": true,
+              "targetPredicates": [
+                {
+                  "$type": "ByNot",
+                  "predicates": [
+                    {
+                      "$type": "ByTargetGlobalValue",
+                      "key": "MONSTER_WEAKNESS_VALUE",
+                      "target": "Target",
+                      "value": "MONSTER_WEAKNESS_RECOVER"
+                    }
+                  ],
+                  "target": "Target"
+                }
+              ],
+              "successActions": [
+                {
+                  "$type": "AddGlobalValueV2",
+                  "key": "MONSTER_WEAKNESS_VALUE",
+                  "canBeHandledOnRecover": true,
+                  "useLimitRange": true,
+                  "maxValue": "MONSTER_WEAKNESS_RECOVER",
+                  "doOffStage": false,
+                  "value": 150,
+                  "actorIceSubHurtDelta": -1
+                }
+              ],
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "NLBKJKDNFFP": -1
+        },
+        "Monster_WeaknessBar_Broken": {
+          "onAdded": [
+            {
+              "$type": "SetAnimatorTrigger",
+              "canBeHandledOnRecover": true,
+              "triggerID": "TriggerWeak",
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "SetAnimatorBool",
+              "canBeHandledOnRecover": true,
+              "boolID": "HitLock",
+              "doOffStage": false,
+              "value": true,
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "SetGlobalValueV2",
+              "key": "MONSTER_BLOCKING_CAN_EXECUTE",
+              "canBeHandledOnRecover": true,
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "minus_one": -1,
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "NLBKJKDNFFP": -1
+        },
+        "Monster_WeaknessBar_Normal": {
+          "onRemoved": [
+            {
+              "$type": "SetGlobalValueV2",
+              "key": "WEAKNESS_NORMAL_INDICATOR",
+              "canBeHandledOnRecover": true,
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "onAdded": [
+            {
+              "$type": "SetGlobalValueV2",
+              "key": "WEAKNESS_NORMAL_INDICATOR",
+              "canBeHandledOnRecover": true,
+              "doOffStage": false,
+              "value": 1,
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "SetGlobalValueV2",
+              "key": "WEAK_END_INDICATOR",
+              "canBeHandledOnRecover": true,
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "minus_one": -1,
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "NLBKJKDNFFP": -1
+        },
+        "PerfectCounter": {
+          "onHittingOther": [
+            {
+              "$type": "Predicated",
+              "canBeHandledOnRecover": true,
+              "target": "Target",
+              "targetPredicates": [
+                {
+                  "$type": "ByAny",
+                  "predicates": [
+                    {
+                      "$type": "ByHasModifier",
+                      "target": "Target",
+                      "modifierName": "Blocking_NoDamage"
+                    },
+                    {
+                      "$type": "KBJIEFMEMIE",
+                      "FKALHKNGMLF": [
+                        "Blocking_Back"
+                      ],
+                      "target": "Target",
+                      "MOCOFLKNODH": true
+                    }
+                  ],
+                  "target": "Target"
+                },
+                {
+                  "$type": "ByAttackTags",
+                  "target": "Target",
+                  "attackTags": [
+                    "Monster_BladeMaster_BeBlockAttack"
+                  ]
+                },
+                {
+                  "$type": "ByEntityTypes",
+                  "value": -1,
+                  "target": "Target",
+                  "entityTypes": [
+                    "Avatar",
+                    "Partner",
+                    "Vehicle"
+                  ]
+                }
+              ],
+              "successActions": [
+                {
+                  "$type": "CHMALGHMDIJ",
+                  "canBeHandledOnRecover": true,
+                  "recommendedLevelMechanicTextMapHash": "Blocking_Special",
+                  "doOffStage": false,
+                  "actorIceSubHurtDelta": -1
+                },
+                {
+                  "$type": "ApplyModifier",
+                  "canBeHandledOnRecover": true,
+                  "doOffStage": false,
+                  "modifierName": "PerfectCounter_WitchTime",
+                  "actorIceSubHurtDelta": -1
+                }
+              ],
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "minus_one": -1,
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "NLBKJKDNFFP": -1
+        },
+        "PerfectCounter_WitchTime": {
+          "onRemoved": [
+            {
+              "$type": "RemoveUniqueModifier",
+              "canBeHandledOnRecover": true,
+              "doOffStage": false,
+              "modifierName": "UNIQUE_Monster_PerfectCounter_WitchTime",
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "SetGlobalValueV2",
+              "key": "_IN_PERFECT_COUNTER",
+              "canBeHandledOnRecover": true,
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "duration": 0.15000000596046448,
+          "onAdded": [
+            {
+              "$type": "ApplyModifier",
+              "canBeHandledOnRecover": true,
+              "doOffStage": false,
+              "modifierName": "UNIQUE_Monster_PerfectCounter_WitchTime",
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "SetGlobalValueV2",
+              "key": "_IN_PERFECT_COUNTER",
+              "canBeHandledOnRecover": true,
+              "doOffStage": false,
+              "value": 1,
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "minus_one": -1,
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "DoActionByAnimatorStateIDMixin",
+              "enterActions": [
+                {
+                  "$type": "RemoveUniqueModifier",
+                  "canBeHandledOnRecover": true,
+                  "doOffStage": false,
+                  "modifierName": "UNIQUE_Monster_PerfectCounter_WitchTime",
+                  "actorIceSubHurtDelta": -1
+                }
+              ],
+              "stateIDs": [
+                "HitThrow"
+              ],
+              "value": -1,
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "NLBKJKDNFFP": -1,
+          "stacking": "Unique"
+        },
+        "UNIQUE_Monster_Execute_WitchTime": {
+          "isUnique": true,
+          "properties": {
+            "Animator_OverallSpeedRatioMultiplied": 0
+          },
+          "minus_one": -1,
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "NLBKJKDNFFP": -1
+        },
+        "UNIQUE_Monster_PerfectCounter_WitchTime": {
+          "isUnique": true,
+          "properties": {
+            "Animator_OverallSpeedRatioMultiplied": 0
+          },
+          "minus_one": -1,
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "NLBKJKDNFFP": -1
+        },
+        "Weak_Timer": {
+          "onRemoved": [
+            {
+              "$type": "Predicated",
+              "canBeHandledOnRecover": true,
+              "targetPredicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "MONSTER_BLOCKING_CAN_EXECUTE",
+                  "target": "Target"
+                },
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "IN_EXECUTION",
+                  "compareType": "NoneOrEqual",
+                  "target": "Target"
+                },
+                {
+                  "$type": "ByNot",
+                  "predicates": [
+                    {
+                      "$type": "ByHasModifier",
+                      "target": "Target",
+                      "modifierName": "Blocking_Execute_Attack_OnMonster"
+                    }
+                  ],
+                  "target": "Target"
+                }
+              ],
+              "successActions": [
+                {
+                  "$type": "SetGlobalValueV2",
+                  "key": "MONSTER_WEAKNESS_RECOVER",
+                  "canBeHandledOnRecover": true,
+                  "doOffStage": false,
+                  "value": "MONSTER_WEAKNESS_MAX",
+                  "actorIceSubHurtDelta": -1
+                },
+                {
+                  "$type": "SetGlobalValueV2",
+                  "key": "MONSTER_BLOCKING_CAN_EXECUTE",
+                  "canBeHandledOnRecover": true,
+                  "doOffStage": false,
+                  "value": 2,
+                  "actorIceSubHurtDelta": -1
+                }
+              ],
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1
+            },
+            {
+              "$type": "SetGlobalValueV2",
+              "key": "WEAK_END_INDICATOR",
+              "canBeHandledOnRecover": true,
+              "doOffStage": false,
+              "value": 1,
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "duration": "Weak_Duration",
+          "minus_one": -1,
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "NLBKJKDNFFP": -1
+        },
+        "WeaknessBar_Handler": {
+          "onAdded": [
+            {
+              "$type": "Predicated",
+              "failActions": [
+                {
+                  "$type": "AttachModifier",
+                  "canBeHandledOnRecover": true,
+                  "doOffStage": false,
+                  "modifierName": "WeaknessBar_UI_Normal",
+                  "actorIceSubHurtDelta": -1
+                }
+              ],
+              "canBeHandledOnRecover": true,
+              "targetPredicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_IS_NINKEN",
+                  "target": "Target",
+                  "value": 1
+                }
+              ],
+              "successActions": [
+                {
+                  "$type": "AttachModifier",
+                  "canBeHandledOnRecover": true,
+                  "doOffStage": false,
+                  "modifierName": "WeaknessBar_UI_Ninken",
+                  "actorIceSubHurtDelta": -1
+                }
+              ],
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "minus_one": -1,
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "NLBKJKDNFFP": -1,
+          "onBeingHit": [
+            {
+              "$type": "Predicated",
+              "failActions": [
+                {
+                  "$type": "Predicated",
+                  "failActions": [
+                    {
+                      "$type": "Predicated",
+                      "failActions": [
+                        {
+                          "$type": "Predicated",
+                          "failActions": [
+                            {
+                              "$type": "Predicated",
+                              "failActions": [
+                                {
+                                  "$type": "Predicated",
+                                  "canBeHandledOnRecover": true,
+                                  "targetPredicates": [
+                                    {
+                                      "$type": "ByAttackTags",
+                                      "target": "Target",
+                                      "attackTags": [
+                                        "ExtraAttack"
+                                      ]
+                                    }
+                                  ],
+                                  "successActions": [
+                                    {
+                                      "$type": "AddGlobalValueV2",
+                                      "key": "MONSTER_WEAKNESS_VALUE",
+                                      "canBeHandledOnRecover": true,
+                                      "useLimitRange": true,
+                                      "maxValue": "MONSTER_WEAKNESS_MAX",
+                                      "doOffStage": false,
+                                      "value": [
+                                        0,
+                                        "ExtraAtk_WeaknessDamage",
+                                        "SUB"
+                                      ],
+                                      "actorIceSubHurtDelta": -1
+                                    },
+                                    {
+                                      "$type": "AddGlobalValueV2",
+                                      "key": "MONSTER_WEAKNESS_RECOVER",
+                                      "canBeHandledOnRecover": true,
+                                      "useLimitRange": true,
+                                      "maxValue": "MONSTER_WEAKNESS_RECOVER",
+                                      "doOffStage": false,
+                                      "value": [
+                                        0,
+                                        "ExtraAtk_WeaknessDamage",
+                                        "SUB"
+                                      ],
+                                      "actorIceSubHurtDelta": -1
+                                    }
+                                  ],
+                                  "doOffStage": false,
+                                  "actorIceSubHurtDelta": -1
+                                }
+                              ],
+                              "canBeHandledOnRecover": true,
+                              "targetPredicates": [
+                                {
+                                  "$type": "ByAttackTags",
+                                  "target": "Target",
+                                  "attackTags": [
+                                    "BladeMaster2_FullScreenAtk"
+                                  ]
+                                }
+                              ],
+                              "successActions": [
+                                {
+                                  "$type": "AddGlobalValueV2",
+                                  "key": "MONSTER_WEAKNESS_VALUE",
+                                  "canBeHandledOnRecover": true,
+                                  "useLimitRange": true,
+                                  "maxValue": "MONSTER_WEAKNESS_MAX",
+                                  "doOffStage": false,
+                                  "value": [
+                                    0,
+                                    "ElementBurst_WeaknessDamage",
+                                    "SUB"
+                                  ],
+                                  "actorIceSubHurtDelta": -1
+                                },
+                                {
+                                  "$type": "AddGlobalValueV2",
+                                  "key": "MONSTER_WEAKNESS_RECOVER",
+                                  "canBeHandledOnRecover": true,
+                                  "useLimitRange": true,
+                                  "maxValue": "MONSTER_WEAKNESS_RECOVER",
+                                  "doOffStage": false,
+                                  "value": [
+                                    0,
+                                    "ElementBurst_WeaknessDamage",
+                                    "SUB"
+                                  ],
+                                  "actorIceSubHurtDelta": -1
+                                }
+                              ],
+                              "doOffStage": false,
+                              "actorIceSubHurtDelta": -1
+                            }
+                          ],
+                          "canBeHandledOnRecover": true,
+                          "targetPredicates": [
+                            {
+                              "$type": "ByAttackTags",
+                              "target": "Target",
+                              "attackTags": [
+                                "Avatar_Blocking"
+                              ]
+                            }
+                          ],
+                          "successActions": [
+                            {
+                              "$type": "AddGlobalValueV2",
+                              "key": "MONSTER_WEAKNESS_VALUE",
+                              "canBeHandledOnRecover": true,
+                              "useLimitRange": true,
+                              "maxValue": "MONSTER_WEAKNESS_MAX",
+                              "doOffStage": false,
+                              "value": [
+                                0,
+                                "PerfectCounter_WeaknessDamage",
+                                "SUB",
+                                "PerfectBlocking_WeaknessDamage",
+                                "ADD"
+                              ],
+                              "actorIceSubHurtDelta": -1
+                            },
+                            {
+                              "$type": "AddGlobalValueV2",
+                              "key": "MONSTER_WEAKNESS_RECOVER",
+                              "canBeHandledOnRecover": true,
+                              "useLimitRange": true,
+                              "maxValue": "MONSTER_WEAKNESS_RECOVER",
+                              "doOffStage": false,
+                              "value": [
+                                0,
+                                "PerfectCounter_WeaknessDamage",
+                                "SUB",
+                                "PerfectBlocking_WeaknessDamage",
+                                "ADD"
+                              ],
+                              "actorIceSubHurtDelta": -1
+                            }
+                          ],
+                          "doOffStage": false,
+                          "actorIceSubHurtDelta": -1
+                        }
+                      ],
+                      "canBeHandledOnRecover": true,
+                      "targetPredicates": [
+                        {
+                          "$type": "ByAttackTags",
+                          "target": "Target",
+                          "attackTags": [
+                            "Blocking_Bounce"
+                          ]
+                        }
+                      ],
+                      "successActions": [
+                        {
+                          "$type": "AddGlobalValueV2",
+                          "key": "MONSTER_WEAKNESS_VALUE",
+                          "canBeHandledOnRecover": true,
+                          "useLimitRange": true,
+                          "maxValue": "MONSTER_WEAKNESS_MAX",
+                          "doOffStage": false,
+                          "value": [
+                            0,
+                            "ImperfectBlocking_WeaknessDamage",
+                            "SUB"
+                          ],
+                          "actorIceSubHurtDelta": -1
+                        },
+                        {
+                          "$type": "AddGlobalValueV2",
+                          "key": "MONSTER_WEAKNESS_RECOVER",
+                          "canBeHandledOnRecover": true,
+                          "useLimitRange": true,
+                          "maxValue": "MONSTER_WEAKNESS_RECOVER",
+                          "doOffStage": false,
+                          "value": [
+                            0,
+                            "ImperfectBlocking_WeaknessDamage",
+                            "SUB"
+                          ],
+                          "actorIceSubHurtDelta": -1
+                        }
+                      ],
+                      "doOffStage": false,
+                      "actorIceSubHurtDelta": -1
+                    }
+                  ],
+                  "canBeHandledOnRecover": true,
+                  "targetPredicates": [
+                    {
+                      "$type": "ByAttackTags",
+                      "target": "Target",
+                      "attackTags": [
+                        "Blocking_Perfect"
+                      ]
+                    }
+                  ],
+                  "successActions": [
+                    {
+                      "$type": "AddGlobalValueV2",
+                      "key": "MONSTER_WEAKNESS_VALUE",
+                      "canBeHandledOnRecover": true,
+                      "useLimitRange": true,
+                      "maxValue": "MONSTER_WEAKNESS_MAX",
+                      "doOffStage": false,
+                      "value": [
+                        0,
+                        "PerfectBlocking_WeaknessDamage",
+                        "SUB"
+                      ],
+                      "actorIceSubHurtDelta": -1
+                    },
+                    {
+                      "$type": "AddGlobalValueV2",
+                      "key": "MONSTER_WEAKNESS_RECOVER",
+                      "canBeHandledOnRecover": true,
+                      "useLimitRange": true,
+                      "maxValue": "MONSTER_WEAKNESS_RECOVER",
+                      "doOffStage": false,
+                      "value": [
+                        0,
+                        "PerfectBlocking_WeaknessDamage",
+                        "SUB"
+                      ],
+                      "actorIceSubHurtDelta": -1
+                    }
+                  ],
+                  "doOffStage": false,
+                  "actorIceSubHurtDelta": -1
+                }
+              ],
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "WEAKNESS_NORMAL_INDICATOR",
+                  "target": "Target",
+                  "value": 1
+                }
+              ],
+              "canBeHandledOnRecover": true,
+              "targetPredicates": [
+                {
+                  "$type": "ByAttackTags",
+                  "target": "Target",
+                  "attackTags": [
+                    "NormalAttack_01",
+                    "NormalAttack_02",
+                    "NormalAttack_03",
+                    "NormalAttack_04",
+                    "NormalAttack_05",
+                    "NormalAttack_06"
+                  ]
+                }
+              ],
+              "successActions": [
+                {
+                  "$type": "AddGlobalValueV2",
+                  "key": "MONSTER_WEAKNESS_VALUE",
+                  "canBeHandledOnRecover": true,
+                  "useLimitRange": true,
+                  "maxValue": "MONSTER_WEAKNESS_MAX",
+                  "doOffStage": false,
+                  "value": [
+                    0,
+                    "NormalAtk_WeaknessDamage",
+                    "SUB"
+                  ],
+                  "actorIceSubHurtDelta": -1
+                },
+                {
+                  "$type": "AddGlobalValueV2",
+                  "key": "MONSTER_WEAKNESS_RECOVER",
+                  "canBeHandledOnRecover": true,
+                  "useLimitRange": true,
+                  "maxValue": "MONSTER_WEAKNESS_RECOVER",
+                  "doOffStage": false,
+                  "value": [
+                    0,
+                    "NormalAtk_WeaknessDamage",
+                    "SUB"
+                  ],
+                  "actorIceSubHurtDelta": -1
+                }
+              ],
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1
+            }
+          ]
+        },
+        "WeaknessBar_UI_Ninken": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValueV2",
+              "key": "_EXECUTE_WEAKNESS_MAX",
+              "canBeHandledOnRecover": true,
+              "doOffStage": false,
+              "value": "Monster_OriginWeaknessMax_Ninken",
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "minus_one": -1,
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "MonsterWeaknessBarMixin",
+              "FFFPPBKPOBO": "MONSTER_WEAKNESS_MAX",
+              "LFFFLLJNNAL": "Monster_OriginWeaknessMax_Ninken",
+              "NLBAPFNHHGI": "MONSTER_WEAKNESS_VALUE",
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "NLBKJKDNFFP": -1
+        },
+        "WeaknessBar_UI_Normal": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValueV2",
+              "key": "_EXECUTE_WEAKNESS_MAX",
+              "canBeHandledOnRecover": true,
+              "doOffStage": false,
+              "value": "Monster_OriginWeaknessMax",
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "minus_one": -1,
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "modifierMixins": [
+            {
+              "$type": "MonsterWeaknessBarMixin",
+              "FFFPPBKPOBO": "MONSTER_WEAKNESS_MAX",
+              "LFFFLLJNNAL": "Monster_OriginWeaknessMax",
+              "NLBAPFNHHGI": "MONSTER_WEAKNESS_VALUE",
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "NLBKJKDNFFP": -1
+        }
+      },
       "abilitySpecials": {
         "ElementBurst_WeaknessDamage": 1200,
         "ExecuteZone": 5,
@@ -33,2015 +1483,591 @@
         "_EXECUTE_WEAKNESS_MAX",
         "_EXECUTE_THRESHOLD_HP"
       ],
-      "DDNHHMIBNLF": {
-        "elementDurability": 100,
-        "isLimitedProperties": true,
-        "minus_one": -1
-      },
+      "onKill": [
+        {
+          "$type": "RemoveModifier",
+          "canBeHandledOnRecover": true,
+          "doOffStage": false,
+          "modifierName": "WeaknessBar_Handler",
+          "actorIceSubHurtDelta": -1
+        }
+      ],
       "onAdded": [
         {
           "$type": "SetGlobalValueV2",
+          "key": "MONSTER_BLOCKING_CAN_EXECUTE",
+          "canBeHandledOnRecover": true,
           "doOffStage": false,
           "value": 1,
-          "key": "MONSTER_BLOCKING_CAN_EXECUTE",
-          "actorIceSubHurtDelta": -1,
-          "canBeHandledOnRecover": true
+          "actorIceSubHurtDelta": -1
         },
         {
           "$type": "AttachModifier",
+          "canBeHandledOnRecover": true,
           "doOffStage": false,
           "modifierName": "WeaknessBar_Handler",
-          "actorIceSubHurtDelta": -1,
-          "canBeHandledOnRecover": true
+          "actorIceSubHurtDelta": -1
         },
         {
           "$type": "AttachModifier",
+          "canBeHandledOnRecover": true,
           "doOffStage": false,
           "modifierName": "PerfectCounter",
-          "actorIceSubHurtDelta": -1,
-          "canBeHandledOnRecover": true
+          "actorIceSubHurtDelta": -1
         },
         {
           "$type": "Predicated",
-          "doOffStage": false,
           "failActions": [
             {
               "$type": "SetGlobalValueV2",
+              "key": "_EXECUTE_WEAKNESS_MAX_DAMAGE",
+              "canBeHandledOnRecover": true,
               "doOffStage": false,
               "value": "Execute_WeaknessMaxDamage",
-              "key": "_EXECUTE_WEAKNESS_MAX_DAMAGE",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "actorIceSubHurtDelta": -1
             }
           ],
+          "canBeHandledOnRecover": true,
           "targetPredicates": [
             {
               "$type": "ByTargetGlobalValue",
-              "value": 1,
+              "key": "_IS_NINKEN",
               "target": "Target",
-              "key": "_IS_NINKEN"
+              "value": 1
             }
           ],
-          "actorIceSubHurtDelta": -1,
           "successActions": [
             {
               "$type": "SetGlobalValueV2",
+              "key": "_EXECUTE_WEAKNESS_MAX_DAMAGE",
+              "canBeHandledOnRecover": true,
               "doOffStage": false,
               "value": "Execute_WeaknessMaxDamage_Ninken",
-              "key": "_EXECUTE_WEAKNESS_MAX_DAMAGE",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "actorIceSubHurtDelta": -1
             }
           ],
-          "canBeHandledOnRecover": true
+          "doOffStage": false,
+          "actorIceSubHurtDelta": -1
         },
         {
           "$type": "SetGlobalValueV2",
+          "key": "_EXECUTE_THRESHOLD_HP",
+          "canBeHandledOnRecover": true,
           "doOffStage": false,
           "value": [
             "FIGHT_PROP_MAX_HP",
             0.25,
             "MUL"
           ],
-          "key": "_EXECUTE_THRESHOLD_HP",
-          "actorIceSubHurtDelta": -1,
-          "canBeHandledOnRecover": true
-        }
-      ],
-      "abilityName": "ActivityAbility_Monster_Blocking_6_6_WeaknessBar",
-      "isDynamicAbility": true,
-      "abilityMixins": [
-        {
-          "$type": "AttachModifierToGlobalValueMixin",
-          "enable": true,
-          "globalValueKey": "MONSTER_BLOCKING_CAN_EXECUTE",
-          "modifierNameSteps": [
-            "Monster_Execute_State",
-            "Monster_Normal_State",
-            "Monster_Recover_State"
-          ],
-          "removeAppliedModifier": true,
-          "actorIceSubHurtDelta": -1,
-          "valueSteps": [
-            -0.5,
-            0.5,
-            1.5,
-            2.5
-          ],
-          "NEACJLMBFMN": true
-        },
-        {
-          "$type": "DoActionByAnimatorStateIDMixin",
-          "stateIDs": [
-            "Hit_H_SP"
-          ],
-          "value": -1,
-          "enterActions": [
-            {
-              "$type": "ApplyModifier",
-              "doOffStage": false,
-              "modifierName": "UNIQUE_Monster_Execute_WitchTime",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            }
-          ],
           "actorIceSubHurtDelta": -1
         }
       ],
-      "modifiers": {
-        "Monster_Execute_Handler": {
-          "onAdded": [
-            {
-              "$type": "SetGlobalValueV2",
-              "doOffStage": true,
-              "value": 100,
-              "key": "AVATAR_BLOCKING_CAN_EXECUTE",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "elementDurability": 100,
-          "isLimitedProperties": true,
-          "onRemoved": [
-            {
-              "$type": "SetGlobalValueV2",
-              "doOffStage": true,
-              "key": "AVATAR_BLOCKING_CAN_EXECUTE",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "minus_one": -1,
-          "duration": 0.5
-        },
-        "Monster_Execute_State": {
-          "onAdded": [
-            {
-              "$type": "AttachEffect",
-              "doOffStage": false,
-              "scale": 1,
-              "actorIceSubHurtDelta": -1,
-              "effectPattern": "Eff_Monster_Activity_BladeHeart_Enable_Execution",
-              "born": {
-                "direction": {
-                  "maxAngle": 180
-                },
-                "FDGAEDDEEDG": {
-                  "ELAJJIANFFM": 180
-                },
-                "onGroundRaycastUpDist": 2,
-                "value": 10
-              },
-              "effectTempleteID": -1,
-              "canBeHandledOnRecover": true
-            },
-            {
-              "$type": "ApplyModifier",
-              "doOffStage": false,
-              "modifierName": "Weak_Timer",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            },
-            {
-              "$type": "Predicated",
-              "doOffStage": false,
-              "failActions": [
-                {
-                  "$type": "SendEffectTrigger",
-                  "doOffStage": false,
-                  "parameter": "EnableExecution",
-                  "actorIceSubHurtDelta": -1,
-                  "effectPattern": "Eff_Monster_Activity_BladeHeart_Enable_Execution",
-                  "type": "Bool",
-                  "canBeHandledOnRecover": true
-                }
-              ],
-              "target": "AllPlayerAvatars",
-              "targetPredicates": [
-                {
-                  "$type": "ByTargetPositionToSelfPosition",
-                  "value": "ExecuteZone",
-                  "target": "Target",
-                  "logic": "LesserOrEqual"
-                }
-              ],
-              "actorIceSubHurtDelta": -1,
-              "successActions": [
-                {
-                  "$type": "ApplyModifier",
-                  "doOffStage": false,
-                  "modifierName": "Monster_Execute_Handler",
-                  "target": "AllPlayerAvatars",
-                  "actorIceSubHurtDelta": -1,
-                  "canBeHandledOnRecover": true
-                },
-                {
-                  "$type": "SendEffectTrigger",
-                  "doOffStage": false,
-                  "value": 1,
-                  "parameter": "EnableExecution",
-                  "actorIceSubHurtDelta": -1,
-                  "effectPattern": "Eff_Monster_Activity_BladeHeart_Enable_Execution",
-                  "type": "Bool",
-                  "canBeHandledOnRecover": true
-                }
-              ],
-              "canBeHandledOnRecover": true
-            },
-            {
-              "$type": "NotifyUI",
-              "doOffStage": false,
-              "actorIceSubHurtDelta": -1,
-              "NCMAHOEHJEC": "BladeheartInGame",
-              "NECKFFIOGBJ": "BrokenLoopOn",
-              "canBeHandledOnRecover": true
-            },
-            {
-              "$type": "NotifyUI",
-              "doOffStage": false,
-              "actorIceSubHurtDelta": -1,
-              "NCMAHOEHJEC": "BladeheartInGame",
-              "NECKFFIOGBJ": "Execute",
-              "canBeHandledOnRecover": true
-            },
-            {
-              "$type": "ServerLuaCall",
-              "doOffStage": false,
-              "luaCallType": "FromGroup",
-              "actorIceSubHurtDelta": -1,
-              "funcName": "SLC_Show_Master_Break_Rmd",
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "elementDurability": 100,
-          "onBeingHit": [
-            {
-              "$type": "Predicated",
-              "doOffStage": false,
-              "target": "Target",
-              "targetPredicates": [
-                {
-                  "$type": "ByAttackTags",
-                  "attackTags": [
-                    "Blocking_WitchTime"
-                  ],
-                  "target": "Target"
-                }
-              ],
-              "actorIceSubHurtDelta": -1,
-              "successActions": [
-                {
-                  "$type": "RemoveUniqueModifier",
-                  "doOffStage": false,
-                  "modifierName": "UNIQUE_Monster_PerfectCounter_WitchTime",
-                  "actorIceSubHurtDelta": -1,
-                  "canBeHandledOnRecover": true
-                },
-                {
-                  "$type": "SetAnimatorTrigger",
-                  "doOffStage": false,
-                  "triggerID": "ExecuteStart",
-                  "actorIceSubHurtDelta": -1,
-                  "canBeHandledOnRecover": true
-                },
-                {
-                  "$type": "SetGlobalValueV2",
-                  "doOffStage": false,
-                  "value": 1,
-                  "key": "IN_EXECUTION",
-                  "actorIceSubHurtDelta": -1,
-                  "canBeHandledOnRecover": true
-                },
-                {
-                  "$type": "SetAnimatorBool",
-                  "doOffStage": false,
-                  "boolID": "HitLock",
-                  "actorIceSubHurtDelta": -1,
-                  "canBeHandledOnRecover": true
-                },
-                {
-                  "$type": "SetGlobalPos",
-                  "doOffStage": false,
-                  "target": "SelfAttackTarget",
-                  "key": "AVATAR_POS",
-                  "actorIceSubHurtDelta": -1,
-                  "born": {
-                    "$type": "ConfigBornByTarget",
-                    "direction": {
-                      "maxAngle": 180
-                    },
-                    "useRotation": true,
-                    "FDGAEDDEEDG": {
-                      "ELAJJIANFFM": 180
-                    },
-                    "onGroundRaycastUpDist": 2,
-                    "value": 10
-                  },
-                  "canBeHandledOnRecover": true
-                },
-                {
-                  "$type": "TurnDirectionToPos",
-                  "doOffStage": false,
-                  "maxAngle": -1,
-                  "value": -1,
-                  "actorIceSubHurtDelta": -1,
-                  "toPos": {
-                    "$type": "ConfigBornByGlobalValue",
-                    "direction": {
-                      "maxAngle": 180
-                    },
-                    "positionKey": "AVATAR_POS",
-                    "FDGAEDDEEDG": {
-                      "ELAJJIANFFM": 180
-                    },
-                    "onGroundRaycastUpDist": 2,
-                    "value": 10
-                  },
-                  "canBeHandledOnRecover": true
-                },
-                {
-                  "$type": "SendEffectTrigger",
-                  "doOffStage": false,
-                  "parameter": "endEnable",
-                  "actorIceSubHurtDelta": -1,
-                  "effectPattern": "Eff_Monster_Activity_BladeHeart_Enable_Execution",
-                  "canBeHandledOnRecover": true
-                }
-              ],
-              "canBeHandledOnRecover": true
-            },
-            {
-              "$type": "Predicated",
-              "doOffStage": false,
-              "target": "Target",
-              "targetPredicates": [
-                {
-                  "$type": "ByAttackTags",
-                  "attackTags": [
-                    "Blocking_Execute"
-                  ],
-                  "target": "Target"
-                }
-              ],
-              "actorIceSubHurtDelta": -1,
-              "successActions": [
-                {
-                  "$type": "GetFightProperty",
-                  "doOffStage": false,
-                  "globalValueKey": "_EXECUTE_CUR_HP",
-                  "fightProp": "FIGHT_PROP_CUR_HP",
-                  "actorIceSubHurtDelta": -1,
-                  "canBeHandledOnRecover": true
-                },
-                {
-                  "$type": "Predicated",
-                  "doOffStage": false,
-                  "targetPredicates": [
-                    {
-                      "$type": "ByNot",
-                      "target": "Target",
-                      "predicates": [
-                        {
-                          "$type": "ByTargetGlobalValue",
-                          "value": 1,
-                          "target": "Target",
-                          "key": "EXECUTE_WEAKNESS_DAMAGE_LOCK"
-                        }
-                      ]
-                    }
-                  ],
-                  "actorIceSubHurtDelta": -1,
-                  "successActions": [
-                    {
-                      "$type": "SetGlobalValueV2",
-                      "doOffStage": false,
-                      "value": 1,
-                      "key": "EXECUTE_WEAKNESS_DAMAGE_LOCK",
-                      "actorIceSubHurtDelta": -1,
-                      "canBeHandledOnRecover": true
-                    },
-                    {
-                      "$type": "AddGlobalValueV2",
-                      "doOffStage": false,
-                      "value": [
-                        0,
-                        "_EXECUTE_WEAKNESS_MAX_DAMAGE",
-                        "SUB"
-                      ],
-                      "minValue": [
-                        "Monster_OriginWeaknessMax_Min",
-                        "_EXECUTE_WEAKNESS_MAX",
-                        "MUL"
-                      ],
-                      "key": "MONSTER_WEAKNESS_MAX",
-                      "maxValue": "_EXECUTE_WEAKNESS_MAX",
-                      "actorIceSubHurtDelta": -1,
-                      "useLimitRange": true,
-                      "canBeHandledOnRecover": true
-                    },
-                    {
-                      "$type": "SetGlobalValueV2",
-                      "doOffStage": false,
-                      "value": "MONSTER_WEAKNESS_MAX",
-                      "key": "MONSTER_WEAKNESS_RECOVER",
-                      "actorIceSubHurtDelta": -1,
-                      "canBeHandledOnRecover": true
-                    }
-                  ],
-                  "canBeHandledOnRecover": true
-                },
-                {
-                  "$type": "NotifyUI",
-                  "doOffStage": false,
-                  "actorIceSubHurtDelta": -1,
-                  "NCMAHOEHJEC": "BladeheartInGame",
-                  "NECKFFIOGBJ": "ExecuteOff",
-                  "canBeHandledOnRecover": true
-                },
-                {
-                  "$type": "RemoveUniqueModifier",
-                  "doOffStage": false,
-                  "modifierName": "UNIQUE_Monster_Execute_WitchTime",
-                  "actorIceSubHurtDelta": -1,
-                  "canBeHandledOnRecover": true
-                },
-                {
-                  "$type": "Predicated",
-                  "doOffStage": false,
-                  "targetPredicates": [
-                    {
-                      "$type": "ByTargetGlobalValue",
-                      "value": "_EXECUTE_THRESHOLD_HP",
-                      "target": "Target",
-                      "key": "_EXECUTE_CUR_HP",
-                      "compareType": "MoreThan"
-                    }
-                  ],
-                  "actorIceSubHurtDelta": -1,
-                  "successActions": [
-                    {
-                      "$type": "SetGlobalValueV2",
-                      "doOffStage": false,
-                      "value": 2,
-                      "key": "MONSTER_BLOCKING_CAN_EXECUTE",
-                      "actorIceSubHurtDelta": -1,
-                      "canBeHandledOnRecover": true
-                    }
-                  ],
-                  "canBeHandledOnRecover": true
-                }
-              ],
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "onReconnect": [
-            {
-              "$type": "SetAnimatorTrigger",
-              "doOffStage": false,
-              "triggerID": "TriggerWeak",
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "target": "Target",
-                  "key": "WEAK_END_INDICATOR",
-                  "compareType": "NoneOrEqual"
-                }
-              ],
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            },
-            {
-              "$type": "Predicated",
-              "doOffStage": false,
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "value": 1,
-                  "target": "Target",
-                  "key": "IN_EXECUTION"
-                }
-              ],
-              "actorIceSubHurtDelta": -1,
-              "successActions": [
-                {
-                  "$type": "Predicated",
-                  "doOffStage": false,
-                  "targetPredicates": [
-                    {
-                      "$type": "ByNot",
-                      "target": "Target",
-                      "predicates": [
-                        {
-                          "$type": "ByTargetGlobalValue",
-                          "value": 1,
-                          "target": "Target",
-                          "key": "EXECUTE_WEAKNESS_DAMAGE_LOCK"
-                        }
-                      ]
-                    }
-                  ],
-                  "actorIceSubHurtDelta": -1,
-                  "successActions": [
-                    {
-                      "$type": "SetGlobalValueV2",
-                      "doOffStage": false,
-                      "value": 1,
-                      "key": "EXECUTE_WEAKNESS_DAMAGE_LOCK",
-                      "actorIceSubHurtDelta": -1,
-                      "canBeHandledOnRecover": true
-                    },
-                    {
-                      "$type": "AddGlobalValueV2",
-                      "doOffStage": false,
-                      "value": [
-                        0,
-                        "_EXECUTE_WEAKNESS_MAX_DAMAGE",
-                        "SUB"
-                      ],
-                      "minValue": [
-                        "Monster_OriginWeaknessMax_Min",
-                        "_EXECUTE_WEAKNESS_MAX",
-                        "MUL"
-                      ],
-                      "key": "MONSTER_WEAKNESS_MAX",
-                      "maxValue": "_EXECUTE_WEAKNESS_MAX",
-                      "actorIceSubHurtDelta": -1,
-                      "useLimitRange": true,
-                      "canBeHandledOnRecover": true
-                    },
-                    {
-                      "$type": "SetGlobalValueV2",
-                      "doOffStage": false,
-                      "value": "MONSTER_WEAKNESS_MAX",
-                      "key": "MONSTER_WEAKNESS_RECOVER",
-                      "actorIceSubHurtDelta": -1,
-                      "canBeHandledOnRecover": true
-                    }
-                  ],
-                  "canBeHandledOnRecover": true
-                },
-                {
-                  "$type": "NotifyUI",
-                  "doOffStage": false,
-                  "actorIceSubHurtDelta": -1,
-                  "NCMAHOEHJEC": "BladeheartInGame",
-                  "NECKFFIOGBJ": "ExecuteOff",
-                  "canBeHandledOnRecover": true
-                },
-                {
-                  "$type": "RemoveUniqueModifier",
-                  "doOffStage": false,
-                  "modifierName": "UNIQUE_Monster_Execute_WitchTime",
-                  "actorIceSubHurtDelta": -1,
-                  "canBeHandledOnRecover": true
-                }
-              ],
-              "canBeHandledOnRecover": true
-            },
-            {
-              "$type": "SetGlobalValueV2",
-              "doOffStage": false,
-              "key": "IN_EXECUTION",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            },
-            {
-              "$type": "SetAnimatorBool",
-              "doOffStage": false,
-              "value": true,
-              "boolID": "HitLock",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            },
-            {
-              "$type": "AttachEffect",
-              "doOffStage": false,
-              "scale": 1,
-              "actorIceSubHurtDelta": -1,
-              "effectPattern": "Eff_Monster_Activity_BladeHeart_Enable_Execution",
-              "born": {
-                "direction": {
-                  "maxAngle": 180
-                },
-                "FDGAEDDEEDG": {
-                  "ELAJJIANFFM": 180
-                },
-                "onGroundRaycastUpDist": 2,
-                "value": 10
-              },
-              "effectTempleteID": -1,
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "isLimitedProperties": true,
-          "onRemoved": [
-            {
-              "$type": "SetGlobalValueV2",
-              "doOffStage": false,
-              "key": "IN_EXECUTION",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            },
-            {
-              "$type": "SetGlobalValueV2",
-              "doOffStage": false,
-              "key": "EXECUTE_WEAKNESS_DAMAGE_LOCK",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            },
-            {
-              "$type": "RemoveModifier",
-              "doOffStage": false,
-              "modifierName": "Monster_Execute_Handler",
-              "target": "AllPlayerAvatars",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            },
-            {
-              "$type": "SetAnimatorBool",
-              "doOffStage": false,
-              "boolID": "HitLock",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            },
-            {
-              "$type": "SetAnimatorTrigger",
-              "doOffStage": false,
-              "triggerID": "EndWeak",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            },
-            {
-              "$type": "NotifyUI",
-              "doOffStage": false,
-              "actorIceSubHurtDelta": -1,
-              "NCMAHOEHJEC": "BladeheartInGame",
-              "NECKFFIOGBJ": "BrokenLoopOff",
-              "canBeHandledOnRecover": true
-            },
-            {
-              "$type": "SendEffectTrigger",
-              "doOffStage": false,
-              "parameter": "end",
-              "actorIceSubHurtDelta": -1,
-              "effectPattern": "Eff_Monster_Activity_BladeHeart_Enable_Execution",
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "minus_one": -1,
-          "onThinkInterval": [
-            {
-              "$type": "Predicated",
-              "doOffStage": false,
-              "failActions": [
-                {
-                  "$type": "SendEffectTrigger",
-                  "doOffStage": false,
-                  "parameter": "EnableExecution",
-                  "actorIceSubHurtDelta": -1,
-                  "effectPattern": "Eff_Monster_Activity_BladeHeart_Enable_Execution",
-                  "type": "Bool",
-                  "canBeHandledOnRecover": true
-                }
-              ],
-              "target": "AllPlayerAvatars",
-              "targetPredicates": [
-                {
-                  "$type": "ByTargetPositionToSelfPosition",
-                  "value": "ExecuteZone",
-                  "target": "Target",
-                  "logic": "LesserOrEqual"
-                }
-              ],
-              "actorIceSubHurtDelta": -1,
-              "successActions": [
-                {
-                  "$type": "ApplyModifier",
-                  "doOffStage": false,
-                  "modifierName": "Monster_Execute_Handler",
-                  "target": "AllPlayerAvatars",
-                  "actorIceSubHurtDelta": -1,
-                  "canBeHandledOnRecover": true
-                },
-                {
-                  "$type": "SendEffectTrigger",
-                  "doOffStage": false,
-                  "value": 1,
-                  "parameter": "EnableExecution",
-                  "actorIceSubHurtDelta": -1,
-                  "effectPattern": "Eff_Monster_Activity_BladeHeart_Enable_Execution",
-                  "type": "Bool",
-                  "canBeHandledOnRecover": true
-                }
-              ],
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "thinkInterval": 0.10000000149011612
-        },
-        "Monster_Normal_State": {
-          "onAdded": [
-            {
-              "$type": "ResetAnimatorTrigger",
-              "doOffStage": false,
-              "triggerID": "TriggerWeak",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            },
-            {
-              "$type": "ResetAnimatorTrigger",
-              "doOffStage": false,
-              "triggerID": "EndWeak",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "elementDurability": 100,
-          "isLimitedProperties": true,
-          "modifierMixins": [
-            {
-              "$type": "AttachModifierToGlobalValueMixin",
-              "enable": true,
-              "globalValueKey": "MONSTER_WEAKNESS_VALUE",
-              "modifierNameSteps": [
-                "Monster_WeaknessBar_Broken",
-                "Monster_WeaknessBar_Normal"
-              ],
-              "removeAppliedModifier": true,
-              "actorIceSubHurtDelta": -1,
-              "valueSteps": [
-                -0.5,
-                0.5,
-                [
-                  "MONSTER_WEAKNESS_MAX",
-                  0.5,
-                  "ADD"
-                ]
-              ],
-              "NEACJLMBFMN": true
-            }
-          ],
-          "minus_one": -1
-        },
-        "Monster_Recover_State": {
-          "onAdded": [
-            {
-              "$type": "ResetAnimatorTrigger",
-              "doOffStage": false,
-              "triggerID": "TriggerWeak",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            },
-            {
-              "$type": "AttachModifier",
-              "doOffStage": false,
-              "modifierName": "Monster_WeaknessBar_Normal",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            },
-            {
-              "$type": "Predicated",
-              "doOffStage": false,
-              "failActions": [
-                {
-                  "$type": "SetGlobalValueV2",
-                  "doOffStage": false,
-                  "value": 1,
-                  "key": "MONSTER_BLOCKING_CAN_EXECUTE",
-                  "actorIceSubHurtDelta": -1,
-                  "canBeHandledOnRecover": true
-                }
-              ],
-              "targetPredicates": [
-                {
-                  "$type": "ByNot",
-                  "target": "Target",
-                  "predicates": [
-                    {
-                      "$type": "ByTargetGlobalValue",
-                      "value": "MONSTER_WEAKNESS_RECOVER",
-                      "target": "Target",
-                      "key": "MONSTER_WEAKNESS_VALUE"
-                    }
-                  ]
-                }
-              ],
-              "actorIceSubHurtDelta": -1,
-              "successActions": [
-                {
-                  "$type": "AddGlobalValueV2",
-                  "doOffStage": false,
-                  "value": 150,
-                  "key": "MONSTER_WEAKNESS_VALUE",
-                  "maxValue": "MONSTER_WEAKNESS_RECOVER",
-                  "actorIceSubHurtDelta": -1,
-                  "useLimitRange": true,
-                  "canBeHandledOnRecover": true
-                }
-              ],
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "elementDurability": 100,
-          "isLimitedProperties": true,
-          "minus_one": -1,
-          "onThinkInterval": [
-            {
-              "$type": "Predicated",
-              "doOffStage": false,
-              "failActions": [
-                {
-                  "$type": "SetGlobalValueV2",
-                  "doOffStage": false,
-                  "value": 1,
-                  "key": "MONSTER_BLOCKING_CAN_EXECUTE",
-                  "actorIceSubHurtDelta": -1,
-                  "canBeHandledOnRecover": true
-                }
-              ],
-              "targetPredicates": [
-                {
-                  "$type": "ByNot",
-                  "target": "Target",
-                  "predicates": [
-                    {
-                      "$type": "ByTargetGlobalValue",
-                      "value": "MONSTER_WEAKNESS_RECOVER",
-                      "target": "Target",
-                      "key": "MONSTER_WEAKNESS_VALUE"
-                    }
-                  ]
-                }
-              ],
-              "actorIceSubHurtDelta": -1,
-              "successActions": [
-                {
-                  "$type": "AddGlobalValueV2",
-                  "doOffStage": false,
-                  "value": 150,
-                  "key": "MONSTER_WEAKNESS_VALUE",
-                  "maxValue": "MONSTER_WEAKNESS_RECOVER",
-                  "actorIceSubHurtDelta": -1,
-                  "useLimitRange": true,
-                  "canBeHandledOnRecover": true
-                }
-              ],
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "thinkInterval": 0.009999999776482582
-        },
-        "Monster_WeaknessBar_Broken": {
-          "onAdded": [
-            {
-              "$type": "SetAnimatorTrigger",
-              "doOffStage": false,
-              "triggerID": "TriggerWeak",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            },
-            {
-              "$type": "SetAnimatorBool",
-              "doOffStage": false,
-              "value": true,
-              "boolID": "HitLock",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            },
-            {
-              "$type": "SetGlobalValueV2",
-              "doOffStage": false,
-              "key": "MONSTER_BLOCKING_CAN_EXECUTE",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "elementDurability": 100,
-          "isLimitedProperties": true,
-          "minus_one": -1
-        },
-        "Monster_WeaknessBar_Normal": {
-          "onAdded": [
-            {
-              "$type": "SetGlobalValueV2",
-              "doOffStage": false,
-              "value": 1,
-              "key": "WEAKNESS_NORMAL_INDICATOR",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            },
-            {
-              "$type": "SetGlobalValueV2",
-              "doOffStage": false,
-              "key": "WEAK_END_INDICATOR",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "elementDurability": 100,
-          "isLimitedProperties": true,
-          "onRemoved": [
-            {
-              "$type": "SetGlobalValueV2",
-              "doOffStage": false,
-              "key": "WEAKNESS_NORMAL_INDICATOR",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "minus_one": -1
-        },
-        "PerfectCounter": {
-          "elementDurability": 100,
-          "isLimitedProperties": true,
-          "onHittingOther": [
-            {
-              "$type": "Predicated",
-              "doOffStage": false,
-              "target": "Target",
-              "targetPredicates": [
-                {
-                  "$type": "ByAny",
-                  "target": "Target",
-                  "predicates": [
-                    {
-                      "$type": "ByHasModifier",
-                      "modifierName": "Blocking_NoDamage",
-                      "target": "Target"
-                    },
-                    {
-                      "$type": "PCFJFPGIOFJ",
-                      "BOHLGEEBJEK": true,
-                      "CLPCJGPMKKK": [
-                        "Blocking_Back"
-                      ],
-                      "target": "Target"
-                    }
-                  ]
-                },
-                {
-                  "$type": "ByAttackTags",
-                  "attackTags": [
-                    "Monster_BladeMaster_BeBlockAttack"
-                  ],
-                  "target": "Target"
-                },
-                {
-                  "$type": "ByEntityTypes",
-                  "target": "Target",
-                  "value": -1,
-                  "entityTypes": [
-                    "Avatar",
-                    "Partner",
-                    "Vehicle"
-                  ]
-                }
-              ],
-              "actorIceSubHurtDelta": -1,
-              "successActions": [
-                {
-                  "$type": "JAIPBKNFDFP",
-                  "doOffStage": false,
-                  "recommendedLevelMechanicTextMapHash": "Blocking_Special",
-                  "actorIceSubHurtDelta": -1,
-                  "canBeHandledOnRecover": true
-                },
-                {
-                  "$type": "ApplyModifier",
-                  "doOffStage": false,
-                  "modifierName": "PerfectCounter_WitchTime",
-                  "actorIceSubHurtDelta": -1,
-                  "canBeHandledOnRecover": true
-                }
-              ],
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "minus_one": -1
-        },
-        "PerfectCounter_WitchTime": {
-          "onAdded": [
-            {
-              "$type": "ApplyModifier",
-              "doOffStage": false,
-              "modifierName": "UNIQUE_Monster_PerfectCounter_WitchTime",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            },
-            {
-              "$type": "SetGlobalValueV2",
-              "doOffStage": false,
-              "value": 1,
-              "key": "_IN_PERFECT_COUNTER",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "elementDurability": 100,
-          "stacking": "Unique",
-          "isLimitedProperties": true,
-          "onRemoved": [
-            {
-              "$type": "RemoveUniqueModifier",
-              "doOffStage": false,
-              "modifierName": "UNIQUE_Monster_PerfectCounter_WitchTime",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            },
-            {
-              "$type": "SetGlobalValueV2",
-              "doOffStage": false,
-              "key": "_IN_PERFECT_COUNTER",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "modifierMixins": [
-            {
-              "$type": "DoActionByAnimatorStateIDMixin",
-              "stateIDs": [
-                "HitThrow"
-              ],
-              "value": -1,
-              "enterActions": [
-                {
-                  "$type": "RemoveUniqueModifier",
-                  "doOffStage": false,
-                  "modifierName": "UNIQUE_Monster_PerfectCounter_WitchTime",
-                  "actorIceSubHurtDelta": -1,
-                  "canBeHandledOnRecover": true
-                }
-              ],
-              "actorIceSubHurtDelta": -1
-            }
-          ],
-          "minus_one": -1,
-          "duration": 0.15000000596046448
-        },
-        "UNIQUE_Monster_Execute_WitchTime": {
-          "elementDurability": 100,
-          "isLimitedProperties": true,
-          "minus_one": -1,
-          "properties": {
-            "Animator_OverallSpeedRatioMultiplied": 0
-          },
-          "isUnique": true
-        },
-        "UNIQUE_Monster_PerfectCounter_WitchTime": {
-          "elementDurability": 100,
-          "isLimitedProperties": true,
-          "minus_one": -1,
-          "properties": {
-            "Animator_OverallSpeedRatioMultiplied": 0
-          },
-          "isUnique": true
-        },
-        "Weak_Timer": {
-          "elementDurability": 100,
-          "isLimitedProperties": true,
-          "onRemoved": [
-            {
-              "$type": "Predicated",
-              "doOffStage": false,
-              "targetPredicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "target": "Target",
-                  "key": "MONSTER_BLOCKING_CAN_EXECUTE"
-                },
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "target": "Target",
-                  "key": "IN_EXECUTION",
-                  "compareType": "NoneOrEqual"
-                },
-                {
-                  "$type": "ByNot",
-                  "target": "Target",
-                  "predicates": [
-                    {
-                      "$type": "ByHasModifier",
-                      "modifierName": "Blocking_Execute_Attack_OnMonster",
-                      "target": "Target"
-                    }
-                  ]
-                }
-              ],
-              "actorIceSubHurtDelta": -1,
-              "successActions": [
-                {
-                  "$type": "SetGlobalValueV2",
-                  "doOffStage": false,
-                  "value": "MONSTER_WEAKNESS_MAX",
-                  "key": "MONSTER_WEAKNESS_RECOVER",
-                  "actorIceSubHurtDelta": -1,
-                  "canBeHandledOnRecover": true
-                },
-                {
-                  "$type": "SetGlobalValueV2",
-                  "doOffStage": false,
-                  "value": 2,
-                  "key": "MONSTER_BLOCKING_CAN_EXECUTE",
-                  "actorIceSubHurtDelta": -1,
-                  "canBeHandledOnRecover": true
-                }
-              ],
-              "canBeHandledOnRecover": true
-            },
-            {
-              "$type": "SetGlobalValueV2",
-              "doOffStage": false,
-              "value": 1,
-              "key": "WEAK_END_INDICATOR",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "minus_one": -1,
-          "duration": "Weak_Duration"
-        },
-        "WeaknessBar_Handler": {
-          "onAdded": [
-            {
-              "$type": "Predicated",
-              "doOffStage": false,
-              "failActions": [
-                {
-                  "$type": "AttachModifier",
-                  "doOffStage": false,
-                  "modifierName": "WeaknessBar_UI_Normal",
-                  "actorIceSubHurtDelta": -1,
-                  "canBeHandledOnRecover": true
-                }
-              ],
-              "targetPredicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "value": 1,
-                  "target": "Target",
-                  "key": "_IS_NINKEN"
-                }
-              ],
-              "actorIceSubHurtDelta": -1,
-              "successActions": [
-                {
-                  "$type": "AttachModifier",
-                  "doOffStage": false,
-                  "modifierName": "WeaknessBar_UI_Ninken",
-                  "actorIceSubHurtDelta": -1,
-                  "canBeHandledOnRecover": true
-                }
-              ],
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "elementDurability": 100,
-          "onBeingHit": [
-            {
-              "$type": "Predicated",
-              "doOffStage": false,
-              "failActions": [
-                {
-                  "$type": "Predicated",
-                  "doOffStage": false,
-                  "failActions": [
-                    {
-                      "$type": "Predicated",
-                      "doOffStage": false,
-                      "failActions": [
-                        {
-                          "$type": "Predicated",
-                          "doOffStage": false,
-                          "failActions": [
-                            {
-                              "$type": "Predicated",
-                              "doOffStage": false,
-                              "failActions": [
-                                {
-                                  "$type": "Predicated",
-                                  "doOffStage": false,
-                                  "targetPredicates": [
-                                    {
-                                      "$type": "ByAttackTags",
-                                      "attackTags": [
-                                        "ExtraAttack"
-                                      ],
-                                      "target": "Target"
-                                    }
-                                  ],
-                                  "actorIceSubHurtDelta": -1,
-                                  "successActions": [
-                                    {
-                                      "$type": "AddGlobalValueV2",
-                                      "doOffStage": false,
-                                      "value": [
-                                        0,
-                                        "ExtraAtk_WeaknessDamage",
-                                        "SUB"
-                                      ],
-                                      "key": "MONSTER_WEAKNESS_VALUE",
-                                      "maxValue": "MONSTER_WEAKNESS_MAX",
-                                      "actorIceSubHurtDelta": -1,
-                                      "useLimitRange": true,
-                                      "canBeHandledOnRecover": true
-                                    },
-                                    {
-                                      "$type": "AddGlobalValueV2",
-                                      "doOffStage": false,
-                                      "value": [
-                                        0,
-                                        "ExtraAtk_WeaknessDamage",
-                                        "SUB"
-                                      ],
-                                      "key": "MONSTER_WEAKNESS_RECOVER",
-                                      "maxValue": "MONSTER_WEAKNESS_RECOVER",
-                                      "actorIceSubHurtDelta": -1,
-                                      "useLimitRange": true,
-                                      "canBeHandledOnRecover": true
-                                    }
-                                  ],
-                                  "canBeHandledOnRecover": true
-                                }
-                              ],
-                              "targetPredicates": [
-                                {
-                                  "$type": "ByAttackTags",
-                                  "attackTags": [
-                                    "BladeMaster2_FullScreenAtk"
-                                  ],
-                                  "target": "Target"
-                                }
-                              ],
-                              "actorIceSubHurtDelta": -1,
-                              "successActions": [
-                                {
-                                  "$type": "AddGlobalValueV2",
-                                  "doOffStage": false,
-                                  "value": [
-                                    0,
-                                    "ElementBurst_WeaknessDamage",
-                                    "SUB"
-                                  ],
-                                  "key": "MONSTER_WEAKNESS_VALUE",
-                                  "maxValue": "MONSTER_WEAKNESS_MAX",
-                                  "actorIceSubHurtDelta": -1,
-                                  "useLimitRange": true,
-                                  "canBeHandledOnRecover": true
-                                },
-                                {
-                                  "$type": "AddGlobalValueV2",
-                                  "doOffStage": false,
-                                  "value": [
-                                    0,
-                                    "ElementBurst_WeaknessDamage",
-                                    "SUB"
-                                  ],
-                                  "key": "MONSTER_WEAKNESS_RECOVER",
-                                  "maxValue": "MONSTER_WEAKNESS_RECOVER",
-                                  "actorIceSubHurtDelta": -1,
-                                  "useLimitRange": true,
-                                  "canBeHandledOnRecover": true
-                                }
-                              ],
-                              "canBeHandledOnRecover": true
-                            }
-                          ],
-                          "targetPredicates": [
-                            {
-                              "$type": "ByAttackTags",
-                              "attackTags": [
-                                "Avatar_Blocking"
-                              ],
-                              "target": "Target"
-                            }
-                          ],
-                          "actorIceSubHurtDelta": -1,
-                          "successActions": [
-                            {
-                              "$type": "AddGlobalValueV2",
-                              "doOffStage": false,
-                              "value": [
-                                0,
-                                "PerfectCounter_WeaknessDamage",
-                                "SUB",
-                                "PerfectBlocking_WeaknessDamage",
-                                "ADD"
-                              ],
-                              "key": "MONSTER_WEAKNESS_VALUE",
-                              "maxValue": "MONSTER_WEAKNESS_MAX",
-                              "actorIceSubHurtDelta": -1,
-                              "useLimitRange": true,
-                              "canBeHandledOnRecover": true
-                            },
-                            {
-                              "$type": "AddGlobalValueV2",
-                              "doOffStage": false,
-                              "value": [
-                                0,
-                                "PerfectCounter_WeaknessDamage",
-                                "SUB",
-                                "PerfectBlocking_WeaknessDamage",
-                                "ADD"
-                              ],
-                              "key": "MONSTER_WEAKNESS_RECOVER",
-                              "maxValue": "MONSTER_WEAKNESS_RECOVER",
-                              "actorIceSubHurtDelta": -1,
-                              "useLimitRange": true,
-                              "canBeHandledOnRecover": true
-                            }
-                          ],
-                          "canBeHandledOnRecover": true
-                        }
-                      ],
-                      "targetPredicates": [
-                        {
-                          "$type": "ByAttackTags",
-                          "attackTags": [
-                            "Blocking_Bounce"
-                          ],
-                          "target": "Target"
-                        }
-                      ],
-                      "actorIceSubHurtDelta": -1,
-                      "successActions": [
-                        {
-                          "$type": "AddGlobalValueV2",
-                          "doOffStage": false,
-                          "value": [
-                            0,
-                            "ImperfectBlocking_WeaknessDamage",
-                            "SUB"
-                          ],
-                          "key": "MONSTER_WEAKNESS_VALUE",
-                          "maxValue": "MONSTER_WEAKNESS_MAX",
-                          "actorIceSubHurtDelta": -1,
-                          "useLimitRange": true,
-                          "canBeHandledOnRecover": true
-                        },
-                        {
-                          "$type": "AddGlobalValueV2",
-                          "doOffStage": false,
-                          "value": [
-                            0,
-                            "ImperfectBlocking_WeaknessDamage",
-                            "SUB"
-                          ],
-                          "key": "MONSTER_WEAKNESS_RECOVER",
-                          "maxValue": "MONSTER_WEAKNESS_RECOVER",
-                          "actorIceSubHurtDelta": -1,
-                          "useLimitRange": true,
-                          "canBeHandledOnRecover": true
-                        }
-                      ],
-                      "canBeHandledOnRecover": true
-                    }
-                  ],
-                  "targetPredicates": [
-                    {
-                      "$type": "ByAttackTags",
-                      "attackTags": [
-                        "Blocking_Perfect"
-                      ],
-                      "target": "Target"
-                    }
-                  ],
-                  "actorIceSubHurtDelta": -1,
-                  "successActions": [
-                    {
-                      "$type": "AddGlobalValueV2",
-                      "doOffStage": false,
-                      "value": [
-                        0,
-                        "PerfectBlocking_WeaknessDamage",
-                        "SUB"
-                      ],
-                      "key": "MONSTER_WEAKNESS_VALUE",
-                      "maxValue": "MONSTER_WEAKNESS_MAX",
-                      "actorIceSubHurtDelta": -1,
-                      "useLimitRange": true,
-                      "canBeHandledOnRecover": true
-                    },
-                    {
-                      "$type": "AddGlobalValueV2",
-                      "doOffStage": false,
-                      "value": [
-                        0,
-                        "PerfectBlocking_WeaknessDamage",
-                        "SUB"
-                      ],
-                      "key": "MONSTER_WEAKNESS_RECOVER",
-                      "maxValue": "MONSTER_WEAKNESS_RECOVER",
-                      "actorIceSubHurtDelta": -1,
-                      "useLimitRange": true,
-                      "canBeHandledOnRecover": true
-                    }
-                  ],
-                  "canBeHandledOnRecover": true
-                }
-              ],
-              "targetPredicates": [
-                {
-                  "$type": "ByAttackTags",
-                  "attackTags": [
-                    "NormalAttack_01",
-                    "NormalAttack_02",
-                    "NormalAttack_03",
-                    "NormalAttack_04",
-                    "NormalAttack_05",
-                    "NormalAttack_06"
-                  ],
-                  "target": "Target"
-                }
-              ],
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "value": 1,
-                  "target": "Target",
-                  "key": "WEAKNESS_NORMAL_INDICATOR"
-                }
-              ],
-              "actorIceSubHurtDelta": -1,
-              "successActions": [
-                {
-                  "$type": "AddGlobalValueV2",
-                  "doOffStage": false,
-                  "value": [
-                    0,
-                    "NormalAtk_WeaknessDamage",
-                    "SUB"
-                  ],
-                  "key": "MONSTER_WEAKNESS_VALUE",
-                  "maxValue": "MONSTER_WEAKNESS_MAX",
-                  "actorIceSubHurtDelta": -1,
-                  "useLimitRange": true,
-                  "canBeHandledOnRecover": true
-                },
-                {
-                  "$type": "AddGlobalValueV2",
-                  "doOffStage": false,
-                  "value": [
-                    0,
-                    "NormalAtk_WeaknessDamage",
-                    "SUB"
-                  ],
-                  "key": "MONSTER_WEAKNESS_RECOVER",
-                  "maxValue": "MONSTER_WEAKNESS_RECOVER",
-                  "actorIceSubHurtDelta": -1,
-                  "useLimitRange": true,
-                  "canBeHandledOnRecover": true
-                }
-              ],
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "isLimitedProperties": true,
-          "minus_one": -1
-        },
-        "WeaknessBar_UI_Ninken": {
-          "onAdded": [
-            {
-              "$type": "SetGlobalValueV2",
-              "doOffStage": false,
-              "value": "Monster_OriginWeaknessMax_Ninken",
-              "key": "_EXECUTE_WEAKNESS_MAX",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "elementDurability": 100,
-          "isLimitedProperties": true,
-          "modifierMixins": [
-            {
-              "$type": "ILMLGKGALPM",
-              "EBMLLJLAJLI": "MONSTER_WEAKNESS_VALUE",
-              "IINFJLNPMCI": "MONSTER_WEAKNESS_MAX",
-              "actorIceSubHurtDelta": -1,
-              "LOAMIALIGMB": "Monster_OriginWeaknessMax_Ninken"
-            }
-          ],
-          "minus_one": -1
-        },
-        "WeaknessBar_UI_Normal": {
-          "onAdded": [
-            {
-              "$type": "SetGlobalValueV2",
-              "doOffStage": false,
-              "value": "Monster_OriginWeaknessMax",
-              "key": "_EXECUTE_WEAKNESS_MAX",
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "elementDurability": 100,
-          "isLimitedProperties": true,
-          "modifierMixins": [
-            {
-              "$type": "ILMLGKGALPM",
-              "EBMLLJLAJLI": "MONSTER_WEAKNESS_VALUE",
-              "IINFJLNPMCI": "MONSTER_WEAKNESS_MAX",
-              "actorIceSubHurtDelta": -1,
-              "LOAMIALIGMB": "Monster_OriginWeaknessMax"
-            }
-          ],
-          "minus_one": -1
-        }
-      }
+      "isDynamicAbility": true,
+      "abilityName": "ActivityAbility_Monster_Blocking_6_6_WeaknessBar"
     }
   },
   {
     "Default": {
-      "__unk_Q2982101340": [
-        "MONSTER_WEAKNESS_VALUE",
-        "MONSTER_WEAKNESS_MAX"
-      ],
-      "DDNHHMIBNLF": {
+      "CAKPDBGADEA": {
+        "minus_one": -1,
         "elementDurability": 100,
         "isLimitedProperties": true,
-        "minus_one": -1
+        "NLBKJKDNFFP": -1
       },
-      "onAdded": [
-        {
-          "$type": "AttachModifier",
-          "doOffStage": false,
-          "modifierName": "Monster_Blocking_PushBack_Handler",
-          "actorIceSubHurtDelta": -1,
-          "canBeHandledOnRecover": true
-        }
-      ],
-      "abilityName": "ActivityAbility_Monster_Blocking_6_6_BlockPushBack",
-      "isDynamicAbility": true,
       "modifiers": {
         "Monster_Blocking_PushBack_Force": {
+          "duration": 0.05000000074505806,
+          "minus_one": -1,
           "elementDurability": 100,
           "isLimitedProperties": true,
           "modifierMixins": [
             {
               "$type": "WindZoneMixin",
-              "shapeName": "CircleR5",
-              "targetType": "Enemy",
-              "FLPCKEHIAPD": 10,
-              "maxNum": 12,
-              "strength": -2.799999952316284,
-              "IGJGLKGPNFO": 100,
+              "value": 0.10000000149011612,
               "predicates": [
                 {
                   "$type": "ByEntityTypes",
-                  "target": "Target",
                   "value": -1,
+                  "target": "Target",
                   "entityTypes": [
                     "Avatar"
                   ]
                 }
               ],
-              "actorIceSubHurtDelta": -1,
+              "EMMNOPNLHOC": 100,
+              "maxNum": 12,
               "forceType": "WindZoneType",
+              "strength": -2.799999952316284,
               "born": {
                 "$type": "ConfigBornByGlobalValue",
                 "direction": {
                   "maxAngle": 180
                 },
-                "positionKey": "PUSH_BACK_INIT_POS",
-                "FDGAEDDEEDG": {
-                  "ELAJJIANFFM": 180
+                "EALBHHJEFGH": {
+                  "BKAPGJCLCIO": 180
                 },
+                "value": 10,
                 "onGroundRaycastUpDist": 2,
-                "value": 10
+                "positionKey": "PUSH_BACK_INIT_POS"
               },
-              "value": 0.10000000149011612
+              "shapeName": "CircleR5",
+              "PHBBIPIAELD": 10,
+              "actorIceSubHurtDelta": -1,
+              "targetType": "Enemy"
             }
           ],
-          "minus_one": -1,
-          "duration": 0.05000000074505806
+          "NLBKJKDNFFP": -1
         },
         "Monster_Blocking_PushBack_Handler": {
-          "elementDurability": 100,
-          "isLimitedProperties": true,
           "onHittingOther": [
             {
               "$type": "Predicated",
-              "doOffStage": false,
+              "canBeHandledOnRecover": true,
               "target": "Other",
               "targetPredicates": [
                 {
                   "$type": "ByEntityTypes",
-                  "target": "Target",
                   "value": -1,
+                  "target": "Target",
                   "entityTypes": [
                     "Avatar",
                     "Partner"
                   ]
                 },
                 {
-                  "$type": "PCFJFPGIOFJ",
-                  "BOHLGEEBJEK": true,
-                  "CLPCJGPMKKK": [
+                  "$type": "KBJIEFMEMIE",
+                  "FKALHKNGMLF": [
                     "Blocking_BS",
                     "Blocking_Loop",
                     "Blocking_Bounce",
                     "Blocking_Hit",
                     "Blocking_AS"
                   ],
-                  "target": "Target"
+                  "target": "Target",
+                  "MOCOFLKNODH": true
                 }
               ],
-              "actorIceSubHurtDelta": -1,
               "successActions": [
                 {
                   "$type": "SetGlobalPos",
-                  "doOffStage": false,
-                  "target": "SelfAttackActiveTarget",
                   "key": "PUSH_BACK_INIT_POS",
-                  "actorIceSubHurtDelta": -1,
+                  "canBeHandledOnRecover": true,
+                  "target": "SelfAttackActiveTarget",
+                  "doOffStage": false,
                   "born": {
                     "$type": "ConfigBornByTargetLinearPoint",
                     "direction": {
                       "maxAngle": 180
                     },
-                    "ENOAPEJAJHB": true,
-                    "FDGAEDDEEDG": {
-                      "ELAJJIANFFM": 180
+                    "EALBHHJEFGH": {
+                      "BKAPGJCLCIO": 180
                     },
-                    "FPHMANNFLHE": true,
-                    "alongGround": true,
-                    "MEFDEJIBIHI": true,
                     "value": 10,
+                    "FFELNAIDFOO": true,
                     "onGroundRaycastUpDist": 2,
-                    "linearOffset": -1
+                    "KFHHKFNAKFP": true,
+                    "LGOGOBEBJPO": true,
+                    "linearOffset": -1,
+                    "alongGround": true
                   },
-                  "canBeHandledOnRecover": true
+                  "actorIceSubHurtDelta": -1
                 },
                 {
                   "$type": "ApplyModifier",
+                  "canBeHandledOnRecover": true,
                   "doOffStage": false,
                   "modifierName": "Monster_Blocking_PushBack_Force",
-                  "actorIceSubHurtDelta": -1,
-                  "canBeHandledOnRecover": true
+                  "actorIceSubHurtDelta": -1
                 }
               ],
-              "canBeHandledOnRecover": true
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1
             }
           ],
-          "minus_one": -1
+          "minus_one": -1,
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "NLBKJKDNFFP": -1
         }
-      }
+      },
+      "__unk_Q2982101340": [
+        "MONSTER_WEAKNESS_VALUE",
+        "MONSTER_WEAKNESS_MAX"
+      ],
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "canBeHandledOnRecover": true,
+          "doOffStage": false,
+          "modifierName": "Monster_Blocking_PushBack_Handler",
+          "actorIceSubHurtDelta": -1
+        }
+      ],
+      "isDynamicAbility": true,
+      "abilityName": "ActivityAbility_Monster_Blocking_6_6_BlockPushBack"
     }
   },
   {
     "Default": {
-      "DDNHHMIBNLF": {
+      "CAKPDBGADEA": {
+        "minus_one": -1,
         "elementDurability": 100,
         "isLimitedProperties": true,
-        "minus_one": -1
+        "NLBKJKDNFFP": -1
+      },
+      "modifiers": {
+        "SkillSet_Reconnect_Handler": {
+          "onReconnect": [
+            {
+              "$type": "Predicated",
+              "failActions": [
+                {
+                  "$type": "UseSkillEliteSet",
+                  "canBeHandledOnRecover": true,
+                  "skillEliteSetID": 2,
+                  "doOffStage": false,
+                  "actorIceSubHurtDelta": -1
+                }
+              ],
+              "canBeHandledOnRecover": true,
+              "targetPredicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_IS_NINKEN",
+                  "target": "Target",
+                  "value": 1
+                }
+              ],
+              "successActions": [
+                {
+                  "$type": "UseSkillEliteSet",
+                  "canBeHandledOnRecover": true,
+                  "skillEliteSetID": 1,
+                  "doOffStage": false,
+                  "actorIceSubHurtDelta": -1
+                }
+              ],
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1
+            }
+          ],
+          "minus_one": -1,
+          "elementDurability": 100,
+          "isLimitedProperties": true,
+          "NLBKJKDNFFP": -1
+        }
       },
       "onAdded": [
         {
           "$type": "Predicated",
-          "doOffStage": false,
           "failActions": [
             {
               "$type": "UseSkillEliteSet",
-              "doOffStage": false,
-              "actorIceSubHurtDelta": -1,
               "canBeHandledOnRecover": true,
-              "skillEliteSetID": 2
+              "skillEliteSetID": 2,
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1
             }
           ],
+          "canBeHandledOnRecover": true,
           "targetPredicates": [
             {
               "$type": "ByTargetGlobalValue",
-              "value": 1,
+              "key": "_IS_NINKEN",
               "target": "Target",
-              "key": "_IS_NINKEN"
+              "value": 1
             }
           ],
-          "actorIceSubHurtDelta": -1,
           "successActions": [
             {
               "$type": "UseSkillEliteSet",
-              "doOffStage": false,
-              "actorIceSubHurtDelta": -1,
               "canBeHandledOnRecover": true,
-              "skillEliteSetID": 1
+              "skillEliteSetID": 1,
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1
             }
           ],
-          "canBeHandledOnRecover": true
+          "doOffStage": false,
+          "actorIceSubHurtDelta": -1
         },
         {
           "$type": "ApplyModifier",
+          "canBeHandledOnRecover": true,
           "doOffStage": false,
           "modifierName": "SkillSet_Reconnect_Handler",
-          "actorIceSubHurtDelta": -1,
-          "canBeHandledOnRecover": true
+          "actorIceSubHurtDelta": -1
         }
       ],
-      "abilityName": "ActivityAbility_Monster_Blocking_6_6_SkillEliteSet",
       "isDynamicAbility": true,
-      "modifiers": {
-        "SkillSet_Reconnect_Handler": {
-          "elementDurability": 100,
-          "onReconnect": [
-            {
-              "$type": "Predicated",
-              "doOffStage": false,
-              "failActions": [
-                {
-                  "$type": "UseSkillEliteSet",
-                  "doOffStage": false,
-                  "actorIceSubHurtDelta": -1,
-                  "canBeHandledOnRecover": true,
-                  "skillEliteSetID": 2
-                }
-              ],
-              "targetPredicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "value": 1,
-                  "target": "Target",
-                  "key": "_IS_NINKEN"
-                }
-              ],
-              "actorIceSubHurtDelta": -1,
-              "successActions": [
-                {
-                  "$type": "UseSkillEliteSet",
-                  "doOffStage": false,
-                  "actorIceSubHurtDelta": -1,
-                  "canBeHandledOnRecover": true,
-                  "skillEliteSetID": 1
-                }
-              ],
-              "canBeHandledOnRecover": true
-            }
-          ],
-          "isLimitedProperties": true,
-          "minus_one": -1
-        }
-      }
+      "abilityName": "ActivityAbility_Monster_Blocking_6_6_SkillEliteSet"
     }
   },
   {
     "Default": {
-      "DDNHHMIBNLF": {
+      "CAKPDBGADEA": {
+        "minus_one": -1,
         "elementDurability": 100,
         "isLimitedProperties": true,
-        "minus_one": -1
+        "NLBKJKDNFFP": -1
       },
       "onAdded": [
         {
           "$type": "SetGlobalValueV2",
+          "key": "_IS_NINKEN",
+          "canBeHandledOnRecover": true,
           "doOffStage": false,
           "value": 1,
-          "key": "_IS_NINKEN",
-          "actorIceSubHurtDelta": -1,
-          "canBeHandledOnRecover": true
+          "actorIceSubHurtDelta": -1
         }
       ],
-      "abilityName": "MonsterAffix_Ninken_Difficulty",
-      "isDynamicAbility": true
+      "isDynamicAbility": true,
+      "abilityName": "MonsterAffix_Ninken_Difficulty"
     }
   },
   {
     "Default": {
-      "DDNHHMIBNLF": {
+      "CAKPDBGADEA": {
+        "minus_one": -1,
         "elementDurability": 100,
         "isLimitedProperties": true,
-        "minus_one": -1
+        "NLBKJKDNFFP": -1
       },
-      "onAdded": [
-        {
-          "$type": "ApplyModifier",
-          "doOffStage": false,
-          "modifierName": "Monster_CounterRangeAttack_Handler",
-          "actorIceSubHurtDelta": -1,
-          "canBeHandledOnRecover": true
-        }
-      ],
-      "abilityName": "ActivityAbility_Monster_Blocking_6_6_CounterRangeAttack",
       "modifiers": {
         "Monster_CounterRangeAttack_Handler": {
+          "thinkInterval": 0.30000001192092896,
           "onAdded": [
             {
               "$type": "ApplyModifier",
-              "doOffStage": false,
-              "modifierName": "Monster_CounterRangeAttack_Handler_OnAvatar",
-              "target": "SelfAttackActiveTarget",
               "predicates": [
                 {
                   "$type": "ByTargetPositionToSelfPosition",
-                  "value": 50,
+                  "logic": "Lesser",
                   "target": "Target",
-                  "logic": "Lesser"
+                  "value": 50
                 }
               ],
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "canBeHandledOnRecover": true,
+              "target": "SelfAttackActiveTarget",
+              "doOffStage": false,
+              "modifierName": "Monster_CounterRangeAttack_Handler_OnAvatar",
+              "actorIceSubHurtDelta": -1
             }
           ],
+          "minus_one": -1,
           "elementDurability": 100,
           "isLimitedProperties": true,
-          "minus_one": -1,
           "onThinkInterval": [
             {
               "$type": "ApplyModifier",
-              "doOffStage": false,
-              "modifierName": "Monster_CounterRangeAttack_Handler_OnAvatar",
-              "target": "SelfAttackActiveTarget",
               "predicates": [
                 {
                   "$type": "ByTargetPositionToSelfPosition",
-                  "value": 50,
+                  "logic": "Lesser",
                   "target": "Target",
-                  "logic": "Lesser"
+                  "value": 50
                 }
               ],
-              "actorIceSubHurtDelta": -1,
-              "canBeHandledOnRecover": true
+              "canBeHandledOnRecover": true,
+              "target": "SelfAttackActiveTarget",
+              "doOffStage": false,
+              "modifierName": "Monster_CounterRangeAttack_Handler_OnAvatar",
+              "actorIceSubHurtDelta": -1
             }
           ],
-          "thinkInterval": 0.30000001192092896
+          "NLBKJKDNFFP": -1
         },
         "Monster_CounterRangeAttack_Handler_OnAvatar": {
+          "duration": 1,
+          "minus_one": -1,
           "elementDurability": 100,
+          "isLimitedProperties": true,
+          "NLBKJKDNFFP": -1,
           "onBeingHit": [
             {
               "$type": "Predicated",
-              "doOffStage": false,
+              "canBeHandledOnRecover": true,
               "targetPredicates": [
                 {
                   "$type": "ByAny",
-                  "target": "Target",
                   "predicates": [
                     {
                       "$type": "ByHasModifier",
                       "modifierName": "Blocking_NoDamage"
                     },
                     {
-                      "$type": "PCFJFPGIOFJ",
-                      "BOHLGEEBJEK": true,
-                      "CLPCJGPMKKK": [
+                      "$type": "KBJIEFMEMIE",
+                      "FKALHKNGMLF": [
                         "Blocking_Back"
                       ],
-                      "target": "Target"
+                      "target": "Target",
+                      "MOCOFLKNODH": true
                     }
-                  ]
+                  ],
+                  "target": "Target"
                 }
               ],
-              "actorIceSubHurtDelta": -1,
               "successActions": [
                 {
                   "$type": "Predicated",
-                  "doOffStage": false,
+                  "canBeHandledOnRecover": true,
                   "targetPredicates": [
                     {
                       "$type": "ByAttackTags",
+                      "target": "Target",
                       "attackTags": [
                         "Oprichnik_LanceArquebus_Bullet"
-                      ],
-                      "target": "Target"
+                      ]
                     }
                   ],
-                  "actorIceSubHurtDelta": -1,
                   "successActions": [
                     {
                       "$type": "TriggerBullet",
-                      "doOffStage": false,
-                      "trackTarget": "Applier",
+                      "canBeHandledOnRecover": true,
                       "target": "Applier",
                       "bulletID": 42307030,
-                      "value": true,
-                      "actorIceSubHurtDelta": -1,
+                      "onGround": true,
+                      "doOffStage": false,
+                      "trackTarget": "Applier",
+                      "NDHLNDAAFKI": true,
                       "born": {
                         "$type": "ConfigBornByTargetLinearPoint",
                         "direction": {
                           "$type": "ConfigDirectionByLookAtEntity",
-                          "maxAngle": 180,
-                          "FIDMAMPCMOI": true,
-                          "namedTransform": "Body"
+                          "namedTransform": "Body",
+                          "useCorrectDir": true,
+                          "maxAngle": 180
                         },
-                        "useRotation": true,
+                        "EALBHHJEFGH": {
+                          "BKAPGJCLCIO": 180
+                        },
+                        "value": 10,
+                        "FFELNAIDFOO": true,
                         "offset": {
                           "x": 1.2000000476837158
                         },
-                        "FDGAEDDEEDG": {
-                          "ELAJJIANFFM": 180
-                        },
-                        "MEFDEJIBIHI": true,
-                        "value": 10,
+                        "useRotation": true,
                         "onGroundRaycastUpDist": 2,
                         "linearOffset": 1
                       },
-                      "canBeHandledOnRecover": true,
-                      "POOEIFNLHDB": true
+                      "actorIceSubHurtDelta": -1
                     }
                   ],
-                  "canBeHandledOnRecover": true
+                  "doOffStage": false,
+                  "actorIceSubHurtDelta": -1
                 },
                 {
                   "$type": "Predicated",
-                  "doOffStage": false,
+                  "canBeHandledOnRecover": true,
                   "targetPredicates": [
                     {
                       "$type": "ByAttackTags",
+                      "target": "Target",
                       "attackTags": [
                         "Inu_Shihandai_RangeBlade"
-                      ],
-                      "target": "Target"
+                      ]
                     }
                   ],
-                  "actorIceSubHurtDelta": -1,
                   "successActions": [
                     {
                       "$type": "TriggerBullet",
-                      "doOffStage": false,
-                      "trackTarget": "Applier",
+                      "canBeHandledOnRecover": true,
                       "target": "Applier",
                       "bulletID": 42607017,
-                      "value": true,
-                      "actorIceSubHurtDelta": -1,
+                      "onGround": true,
+                      "doOffStage": false,
+                      "trackTarget": "Applier",
+                      "NDHLNDAAFKI": true,
                       "born": {
                         "$type": "ConfigBornByTargetLinearPoint",
                         "direction": {
                           "$type": "ConfigDirectionByLookAtEntity",
-                          "maxAngle": 180,
-                          "FIDMAMPCMOI": true,
-                          "namedTransform": "Body"
+                          "namedTransform": "Body",
+                          "useCorrectDir": true,
+                          "maxAngle": 180
                         },
-                        "useRotation": true,
+                        "EALBHHJEFGH": {
+                          "BKAPGJCLCIO": 180
+                        },
+                        "value": 10,
+                        "FFELNAIDFOO": true,
                         "offset": {
                           "x": 1.2000000476837158
                         },
-                        "FDGAEDDEEDG": {
-                          "ELAJJIANFFM": 180
-                        },
-                        "MEFDEJIBIHI": true,
-                        "value": 10,
+                        "useRotation": true,
                         "onGroundRaycastUpDist": 2,
                         "linearOffset": 1
                       },
-                      "canBeHandledOnRecover": true,
-                      "POOEIFNLHDB": true
+                      "actorIceSubHurtDelta": -1
                     }
                   ],
-                  "canBeHandledOnRecover": true
+                  "doOffStage": false,
+                  "actorIceSubHurtDelta": -1
                 },
                 {
                   "$type": "Predicated",
-                  "doOffStage": false,
+                  "canBeHandledOnRecover": true,
                   "targetPredicates": [
                     {
                       "$type": "ByAttackTags",
+                      "target": "Target",
                       "attackTags": [
                         "LLThunderHit1"
-                      ],
-                      "target": "Target"
+                      ]
                     }
                   ],
-                  "actorIceSubHurtDelta": -1,
                   "successActions": [
                     {
                       "$type": "TriggerBullet",
-                      "doOffStage": false,
-                      "trackTarget": "Applier",
+                      "canBeHandledOnRecover": true,
                       "target": "Applier",
                       "bulletID": 42607017,
-                      "value": true,
-                      "actorIceSubHurtDelta": -1,
+                      "onGround": true,
+                      "doOffStage": false,
+                      "trackTarget": "Applier",
+                      "NDHLNDAAFKI": true,
                       "born": {
                         "$type": "ConfigBornByTargetLinearPoint",
                         "direction": {
                           "$type": "ConfigDirectionByLookAtEntity",
-                          "maxAngle": 180,
-                          "FIDMAMPCMOI": true,
-                          "namedTransform": "Body"
+                          "namedTransform": "Body",
+                          "useCorrectDir": true,
+                          "maxAngle": 180
                         },
-                        "useRotation": true,
+                        "EALBHHJEFGH": {
+                          "BKAPGJCLCIO": 180
+                        },
+                        "value": 10,
+                        "FFELNAIDFOO": true,
                         "offset": {
                           "x": 1.2000000476837158
                         },
-                        "FDGAEDDEEDG": {
-                          "ELAJJIANFFM": 180
-                        },
-                        "MEFDEJIBIHI": true,
-                        "value": 10,
+                        "useRotation": true,
                         "onGroundRaycastUpDist": 2,
                         "linearOffset": 1
                       },
-                      "canBeHandledOnRecover": true,
-                      "POOEIFNLHDB": true
+                      "actorIceSubHurtDelta": -1
                     }
                   ],
-                  "canBeHandledOnRecover": true
+                  "doOffStage": false,
+                  "actorIceSubHurtDelta": -1
                 }
               ],
-              "canBeHandledOnRecover": true
+              "doOffStage": false,
+              "actorIceSubHurtDelta": -1
             }
-          ],
-          "isLimitedProperties": true,
-          "minus_one": -1,
-          "duration": 1
+          ]
         }
-      }
+      },
+      "onAdded": [
+        {
+          "$type": "ApplyModifier",
+          "canBeHandledOnRecover": true,
+          "doOffStage": false,
+          "modifierName": "Monster_CounterRangeAttack_Handler",
+          "actorIceSubHurtDelta": -1
+        }
+      ],
+      "abilityName": "ActivityAbility_Monster_Blocking_6_6_CounterRangeAttack"
     }
   }
 ]
