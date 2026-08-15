@@ -1,68 +1,26 @@
--- 基础信息
+-- Auto-generated spawn data
 local base_info = {
-	group_id = 133611419
+    group_id = 133611419
 }
 
---================================================================
---
--- 配置 抓取仅位置
---
---================================================================
-
--- 怪物
 monsters = {
-	{ config_id = 419002 , monster_id = 35550311 , pos = { x = 5591.979, y = 205.424, z = 9460.536 } , rot = { x = 0, y = 172.018, z = 0 } , level = 88 , title_id = 7359, special_name_id = 2900101 },
-	{ config_id = 419003 , monster_id = 35550506 , pos = { x = 5596.465, y = 205.393, z = 9459.741 } , rot = { x = 0, y = 177.75, z = 0 } , level = 88 , title_id = 7359, special_name_id = 2900101 }
+    { config_id = 419002, monster_id = 35550311, pos = { x = 5591.979004, y = 205.423996, z = 9460.536133 }, rot = { x = 0.000, y = 172.018, z = 0.000 }, level = 36, drop_id = 1000100, pose_id = 9007, title_id = 7359, special_name_id = 2900101 },
+    { config_id = 419003, monster_id = 35550506, pos = { x = 5596.464844, y = 205.393005, z = 9459.741211 }, rot = { x = 0.000, y = 177.750, z = 0.000 }, level = 36, drop_id = 1000100, pose_id = 9008, title_id = 7359, special_name_id = 2900101 }
 }
 
--- NPC
-npcs = {
-}
 
--- 装置
-gadgets = {
-
-}
-
--- 区域
-regions = {
-}
-
--- 触发器
-triggers = {
-}
-
--- 变量
-variables = {
-}
-
---================================================================
---
--- 初始化配置
---
---================================================================
-
--- 初始化时创建
 init_config = {
-	suite = 1,
-	end_suite = 0,
-	rand_suite = false
+    suite = 1,
+    end_suite = 0,
+    rand_suite = false
 }
-
---================================================================
---
--- 小组配置
---
---================================================================
 
 suites = {
-	{
-		-- suite_id = 1,
-		-- description = ,
-		monsters = { 419002,419003 },
-		gadgets = {  },
-		regions = { },
-		triggers = { },
-		rand_weight = 100
-	}
+    {
+        monsters = { 419002, 419003 },
+        gadgets = {  },
+        regions = { },
+        triggers = { },
+        rand_weight = 100
+    }
 }

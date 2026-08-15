@@ -1,69 +1,27 @@
--- 基础信息
+-- Auto-generated spawn data
 local base_info = {
-	group_id = 133607283
+    group_id = 133607283
 }
 
---================================================================
---
--- 配置 抓取仅位置
---
---================================================================
-
--- 怪物
 monsters = {
-	{ config_id = 283001 , monster_id = 28021402 , pos = { x = 1764.93, y = 262.81, z = 9449.44 } , rot = { x = 0, y = 0, z = 0 } , level = 89 },
-	{ config_id = 283002 , monster_id = 28021401 , pos = { x = 1756.496, y = 265.143, z = 9449.697 } , rot = { x = 0, y = 293.32, z = 0 } , level = 89 },
-	{ config_id = 283003 , monster_id = 28021401 , pos = { x = 1760.679, y = 261.186, z = 9438.485 } , rot = { x = 0, y = 245.365, z = 0 } , level = 89 }
+    { config_id = 283003, monster_id = 28021401, pos = { x = 1760.678955, y = 261.186005, z = 9438.485352 }, rot = { x = 0.000, y = 245.365, z = 0.000 }, level = 36, drop_id = 1000100, pose_id = 101, title_id = 0, special_name_id = 0 },
+    { config_id = 283001, monster_id = 28021402, pos = { x = 1764.930054, y = 262.809998, z = 9449.440430 }, rot = { x = 0.000, y = 0.000, z = 0.000 }, level = 36, drop_id = 1000100, pose_id = 101, title_id = 0, special_name_id = 0 },
+    { config_id = 283002, monster_id = 28021401, pos = { x = 1756.495972, y = 265.143005, z = 9449.697266 }, rot = { x = 0.000, y = 293.320, z = 0.000 }, level = 36, drop_id = 1000100, pose_id = 102, title_id = 0, special_name_id = 0 }
 }
 
--- NPC
-npcs = {
-}
 
--- 装置
-gadgets = {
-
-}
-
--- 区域
-regions = {
-}
-
--- 触发器
-triggers = {
-}
-
--- 变量
-variables = {
-}
-
---================================================================
---
--- 初始化配置
---
---================================================================
-
--- 初始化时创建
 init_config = {
-	suite = 1,
-	end_suite = 0,
-	rand_suite = false
+    suite = 1,
+    end_suite = 0,
+    rand_suite = false
 }
-
---================================================================
---
--- 小组配置
---
---================================================================
 
 suites = {
-	{
-		-- suite_id = 1,
-		-- description = ,
-		monsters = { 283001,283002,283003 },
-		gadgets = {  },
-		regions = { },
-		triggers = { },
-		rand_weight = 100
-	}
+    {
+        monsters = { 283003, 283001, 283002 },
+        gadgets = {  },
+        regions = { },
+        triggers = { },
+        rand_weight = 100
+    }
 }

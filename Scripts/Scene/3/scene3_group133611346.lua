@@ -1,70 +1,28 @@
--- 基础信息
+-- Auto-generated spawn data
 local base_info = {
-	group_id = 133611346
+    group_id = 133611346
 }
 
---================================================================
---
--- 配置 抓取仅位置
---
---================================================================
-
--- 怪物
 monsters = {
-	{ config_id = 346001 , monster_id = 28051001 , pos = { x = 6077.925, y = 226.918, z = 9747.168 } , rot = { x = 0, y = 0, z = 0 } , level = 93 },
-	{ config_id = 346002 , monster_id = 28051001 , pos = { x = 6075.038, y = 227.304, z = 9750.393 } , rot = { x = 0, y = 0, z = 0 } , level = 93 },
-	{ config_id = 346003 , monster_id = 28051001 , pos = { x = 6083.247, y = 224.016, z = 9748.017 } , rot = { x = 0, y = 0, z = 0 } , level = 93 },
-	{ config_id = 346004 , monster_id = 28051001 , pos = { x = 6088.04, y = 224.364, z = 9746.326 } , rot = { x = 0, y = 0, z = 0 } , level = 93 }
+    { config_id = 346004, monster_id = 28051001, pos = { x = 6088.040039, y = 224.363998, z = 9746.326172 }, rot = { x = 0.000, y = 0.000, z = 0.000 }, level = 36, drop_id = 1000100, pose_id = 0, title_id = 0, special_name_id = 0 },
+    { config_id = 346001, monster_id = 28051001, pos = { x = 6077.924805, y = 226.917999, z = 9747.167969 }, rot = { x = 0.000, y = 0.000, z = 0.000 }, level = 36, drop_id = 1000100, pose_id = 0, title_id = 0, special_name_id = 0 },
+    { config_id = 346002, monster_id = 28051001, pos = { x = 6075.038086, y = 227.304001, z = 9750.392578 }, rot = { x = 0.000, y = 0.000, z = 0.000 }, level = 36, drop_id = 1000100, pose_id = 0, title_id = 0, special_name_id = 0 },
+    { config_id = 346003, monster_id = 28051001, pos = { x = 6083.247070, y = 224.016006, z = 9748.016602 }, rot = { x = 0.000, y = 0.000, z = 0.000 }, level = 36, drop_id = 1000100, pose_id = 0, title_id = 0, special_name_id = 0 }
 }
 
--- NPC
-npcs = {
-}
 
--- 装置
-gadgets = {
-
-}
-
--- 区域
-regions = {
-}
-
--- 触发器
-triggers = {
-}
-
--- 变量
-variables = {
-}
-
---================================================================
---
--- 初始化配置
---
---================================================================
-
--- 初始化时创建
 init_config = {
-	suite = 1,
-	end_suite = 0,
-	rand_suite = false
+    suite = 1,
+    end_suite = 0,
+    rand_suite = false
 }
-
---================================================================
---
--- 小组配置
---
---================================================================
 
 suites = {
-	{
-		-- suite_id = 1,
-		-- description = ,
-		monsters = { 346001,346002,346003,346004 },
-		gadgets = {  },
-		regions = { },
-		triggers = { },
-		rand_weight = 100
-	}
+    {
+        monsters = { 346004, 346001, 346002, 346003 },
+        gadgets = {  },
+        regions = { },
+        triggers = { },
+        rand_weight = 100
+    }
 }

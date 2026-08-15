@@ -1,73 +1,34 @@
--- 基础信息
+-- Auto-generated spawn data
 local base_info = {
-	group_id = 133611095
+    group_id = 133611095
 }
 
---================================================================
---
--- 配置 抓取仅位置
---
---================================================================
-
--- 怪物
 monsters = {
-	{ config_id = 95012 , monster_id = 28030719 , pos = { x = 5450.982, y = 285.601, z = 9799.779 } , rot = { x = 0, y = 0, z = 0 } , level = 88 },
-	{ config_id = 95013 , monster_id = 28010210 , pos = { x = 5421.875, y = 256.229, z = 9768.857 } , rot = { x = 9.902, y = 171.959, z = 0.39 } , level = 88 },
-	{ config_id = 95014 , monster_id = 28010209 , pos = { x = 5478.563, y = 250.858, z = 9747.237 } , rot = { x = 0, y = 0.139, z = 0 } , level = 88 },
-	{ config_id = 95015 , monster_id = 28010209 , pos = { x = 5513.962, y = 252.104, z = 9716.964 } , rot = { x = 0, y = 359.875, z = 0 } , level = 88 },
-	{ config_id = 95016 , monster_id = 28010209 , pos = { x = 5434.458, y = 254.929, z = 9689.208 } , rot = { x = 0, y = 358.204, z = 0 } , level = 88 },
-	{ config_id = 95019 , monster_id = 28010209 , pos = { x = 5531.648, y = 250.757, z = 9692.478 } , rot = { x = 0, y = 359.916, z = 0 } , level = 88 }
+    { config_id = 95012, monster_id = 28030719, pos = { x = 5450.981934, y = 285.601013, z = 9799.779297 }, rot = { x = 0.000, y = 0.000, z = 0.000 }, level = 36, drop_id = 1000100, pose_id = 1120, title_id = 0, special_name_id = 0 },
+    { config_id = 95014, monster_id = 28010209, pos = { x = 5478.562988, y = 250.858002, z = 9747.237305 }, rot = { x = 0.000, y = 0.139, z = 0.000 }, level = 36, drop_id = 1000100, pose_id = 0, title_id = 0, special_name_id = 0 },
+    { config_id = 95015, monster_id = 28010209, pos = { x = 5513.961914, y = 252.104004, z = 9716.963867 }, rot = { x = 0.000, y = 359.875, z = 0.000 }, level = 36, drop_id = 1000100, pose_id = 0, title_id = 0, special_name_id = 0 },
+    { config_id = 95019, monster_id = 28010209, pos = { x = 5531.647949, y = 250.757004, z = 9692.477539 }, rot = { x = 0.000, y = 359.916, z = 0.000 }, level = 36, drop_id = 1000100, pose_id = 0, title_id = 0, special_name_id = 0 },
+    { config_id = 95016, monster_id = 28010209, pos = { x = 5434.458008, y = 254.929001, z = 9689.208008 }, rot = { x = 0.000, y = 358.204, z = 0.000 }, level = 36, drop_id = 1000100, pose_id = 0, title_id = 0, special_name_id = 0 },
+    { config_id = 95013, monster_id = 28010210, pos = { x = 5421.875000, y = 256.229004, z = 9768.857422 }, rot = { x = 9.902, y = 171.959, z = 0.390 }, level = 36, drop_id = 1000100, pose_id = 0, title_id = 0, special_name_id = 0 }
 }
 
--- NPC
-npcs = {
-}
-
--- 装置
 gadgets = {
-	{ config_id = 95017 , gadget_id = 70217014 , pos = { x = 5479.214, y = 252.597, z = 9767.486 } , rot = { x = 15.761, y = 6.782, z = 353.206 } , level = 88 },
-	{ config_id = 95018 , gadget_id = 70217014 , pos = { x = 5434.98, y = 254.751, z = 9686.968 } , rot = { x = 24.177, y = 227.774, z = 353.076 } , level = 88 }
+    { config_id = 95017, gadget_id = 70217014, pos = { x = 5479.213867, y = 252.597000, z = 9767.486328 }, rot = { x = 15.761, y = 6.782, z = 353.206 }, state = 0 },
+    { config_id = 95018, gadget_id = 70217014, pos = { x = 5434.979980, y = 254.751007, z = 9686.967773 }, rot = { x = 24.177, y = 227.774, z = 353.076 }, state = 0 }
 }
 
--- 区域
-regions = {
-}
-
--- 触发器
-triggers = {
-}
-
--- 变量
-variables = {
-}
-
---================================================================
---
--- 初始化配置
---
---================================================================
-
--- 初始化时创建
 init_config = {
-	suite = 1,
-	end_suite = 0,
-	rand_suite = false
+    suite = 1,
+    end_suite = 0,
+    rand_suite = false
 }
-
---================================================================
---
--- 小组配置
---
---================================================================
 
 suites = {
-	{
-		-- suite_id = 1,
-		-- description = ,
-		monsters = { 95012,95013,95014,95015,95016,95019 },
-		gadgets = { 95017,95018 },
-		regions = { },
-		triggers = { },
-		rand_weight = 100
-	}
+    {
+        monsters = { 95012, 95014, 95015, 95019, 95016, 95013 },
+        gadgets = { 95017, 95018 },
+        regions = { },
+        triggers = { },
+        rand_weight = 100
+    }
 }

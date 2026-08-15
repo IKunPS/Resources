@@ -1,71 +1,32 @@
--- 基础信息
+-- Auto-generated spawn data
 local base_info = {
-	group_id = 133611344
+    group_id = 133611344
 }
 
---================================================================
---
--- 配置 抓取仅位置
---
---================================================================
-
--- 怪物
 monsters = {
-	{ config_id = 344002 , monster_id = 22140101 , pos = { x = 5471.054, y = 200.625, z = 9413.792 } , rot = { x = 0, y = 0, z = 0 } , level = 88 , title_id = 4090, special_name_id = 2408901 },
-	{ config_id = 344003 , monster_id = 22140101 , pos = { x = 5476.147, y = 200.931, z = 9422.667 } , rot = { x = 0, y = 301.59, z = 0 } , level = 88 , title_id = 4090, special_name_id = 2408901 },
-	{ config_id = 344004 , monster_id = 22140101 , pos = { x = 5475.935, y = 200.297, z = 9411.981 } , rot = { x = 0, y = 0.084, z = 0 } , level = 88 , title_id = 4090, special_name_id = 2408901 },
-	{ config_id = 344005 , monster_id = 22140101 , pos = { x = 5470.598, y = 203.175, z = 9424.436 } , rot = { x = 0, y = 70.51, z = 0 } , level = 88 , title_id = 4090, special_name_id = 2408901 }
+    { config_id = 344005, monster_id = 22140101, pos = { x = 5470.598145, y = 203.175003, z = 9424.435547 }, rot = { x = 0.000, y = 70.510, z = 0.000 }, level = 36, drop_id = 1000100, pose_id = 101, title_id = 4090, special_name_id = 2408901 },
+    { config_id = 344004, monster_id = 22140101, pos = { x = 5475.935059, y = 200.296997, z = 9411.981445 }, rot = { x = 0.000, y = 0.084, z = 0.000 }, level = 36, drop_id = 1000100, pose_id = 101, title_id = 4090, special_name_id = 2408901 },
+    { config_id = 344002, monster_id = 22140101, pos = { x = 5471.054199, y = 200.625000, z = 9413.791992 }, rot = { x = 0.000, y = 0.000, z = 0.000 }, level = 36, drop_id = 1000100, pose_id = 101, title_id = 4090, special_name_id = 2408901 },
+    { config_id = 344003, monster_id = 22140101, pos = { x = 5476.146973, y = 200.931000, z = 9422.666992 }, rot = { x = 0.000, y = 301.590, z = 0.000 }, level = 36, drop_id = 1000100, pose_id = 101, title_id = 4090, special_name_id = 2408901 }
 }
 
--- NPC
-npcs = {
-}
-
--- 装置
 gadgets = {
-	{ config_id = 344001 , gadget_id = 42215010 , pos = { x = 5474.79, y = 200.388, z = 9414.143 } , rot = { x = 0, y = 0, z = 0 } , level = 93 },
-	{ config_id = 344006 , gadget_id = 70211012 , pos = { x = 5473.883, y = 201.056, z = 9420.482 } , rot = { x = 14.614, y = 118.709, z = 357.054 } , level = 88 }
+    { config_id = 344006, gadget_id = 70211012, pos = { x = 5473.882812, y = 201.056000, z = 9420.482422 }, rot = { x = 14.614, y = 118.709, z = 357.054 }, state = 101 },
+    { config_id = 344001, gadget_id = 42215010, pos = { x = 5474.790039, y = 200.388000, z = 9414.142578 }, rot = { x = 0.000, y = 0.000, z = 0.000 }, state = 0 }
 }
 
--- 区域
-regions = {
-}
-
--- 触发器
-triggers = {
-}
-
--- 变量
-variables = {
-}
-
---================================================================
---
--- 初始化配置
---
---================================================================
-
--- 初始化时创建
 init_config = {
-	suite = 1,
-	end_suite = 0,
-	rand_suite = false
+    suite = 1,
+    end_suite = 0,
+    rand_suite = false
 }
-
---================================================================
---
--- 小组配置
---
---================================================================
 
 suites = {
-	{
-		-- suite_id = 1,
-		-- description = ,
-		monsters = { 344002,344003,344004,344005 },
-		gadgets = { 344001,344006 },
-		regions = { },
-		triggers = { },
-		rand_weight = 100
-	}
+    {
+        monsters = { 344005, 344004, 344002, 344003 },
+        gadgets = { 344006, 344001 },
+        regions = { },
+        triggers = { },
+        rand_weight = 100
+    }
 }

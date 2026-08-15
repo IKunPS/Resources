@@ -1,11 +1,9 @@
--- 所有的group
 groups = {
-	{ id = 133608001 , pos = { x = 1970.909, y = 200.294, z = 9076.712 } , is_replaceable = { value = false, version = 0, new_bin_only = true } },
-	{ id = 133608002 , pos = { x = 3262.25, y = 406.701, z = 9899.077 } , is_replaceable = { value = false, version = 0, new_bin_only = true } },
-	{ id = 133608003 , pos = { x = 1902.614, y = 131.338, z = 10526.28 } , is_replaceable = { value = false, version = 0, new_bin_only = true } },
-	{ id = 133608004 , pos = { x = 1789.613, y = 200, z = 8984.549 } , is_replaceable = { value = false, version = 0, new_bin_only = true } },
-	{ id = 133608020 , pos = { x = 1945.619, y = 255.567, z = 9210.843 } , is_replaceable = { value = false, version = 0, new_bin_only = true } },
-	{ id = 133608022 , pos = { x = 1642.865, y = 205.406, z = 9952.987 } , is_replaceable = { value = false, version = 0, new_bin_only = true } },
-	{ id = 133608025 , pos = { x = 1981.107, y = 200.768, z = 9098.212 } , is_replaceable = { value = false, version = 0, new_bin_only = true } },
-	{ id = 133608026 , pos = { x = 1907.191, y = 257.345, z = 9203.164 } , is_replaceable = { value = false, version = 0, new_bin_only = true } }
+    { id = 133608026, area = 5, pos = { x = 1907.191040, y = 257.345001, z = 9203.164062 }, is_replaceable = { value = true, version = 0, new_bin_only = false } },
+    { id = 133608025, area = 5, pos = { x = 2001.630981, y = 200.981995, z = 9089.577148 }, is_replaceable = { value = true, version = 0, new_bin_only = false } },
+    { id = 133608001, area = 5, pos = { x = 1949.942993, y = 201.031006, z = 9080.574219 }, is_replaceable = { value = true, version = 0, new_bin_only = false } },
+    { id = 133608004, area = 5, pos = { x = 1789.613037, y = 200.000000, z = 8984.548828 }, is_replaceable = { value = true, version = 0, new_bin_only = false } },
+    { id = 133608020, area = 5, pos = { x = 1965.425049, y = 200.729996, z = 9047.918945 }, is_replaceable = { value = true, version = 0, new_bin_only = false } },
+    { id = 133608003, area = 5, pos = { x = 1904.668945, y = 131.281998, z = 10525.589844 }, is_replaceable = { value = true, version = 0, new_bin_only = false } },
+    { id = 133608022, area = 5, pos = { x = 1642.864990, y = 205.406006, z = 9952.987305 }, is_replaceable = { value = true, version = 0, new_bin_only = false } }
 }

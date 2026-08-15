@@ -449,5 +449,6 @@ groups = {
     { id = 133509028, area = 5, pos = { x = -1714.710, y = 312.147, z = 10620.430 }, is_replaceable = { value = true, version = 0, new_bin_only = false } },
     { id = 133509546, area = 5, pos = { x = -1928.288, y = 253.801, z = 9713.706 }, is_replaceable = { value = true, version = 0, new_bin_only = false } },
     { id = 133509425, area = 5, pos = { x = -1454.568, y = 114.870, z = 9594.838 }, is_replaceable = { value = true, version = 0, new_bin_only = false } },
-    { id = 133509522, area = 5, pos = { x = -990.534973, y = 204.046997, z = 9765.691406 }, is_replaceable = { value = true, version = 0, new_bin_only = false } }
+    { id = 133509522, area = 5, pos = { x = -990.534973, y = 204.046997, z = 9765.691406 }, is_replaceable = { value = true, version = 0, new_bin_only = false } },
+    { id = 133509038, area = 5, pos = { x = -1353.197998, y = 276.309998, z = 10402.059570 }, is_replaceable = { value = true, version = 0, new_bin_only = false } }
 }

@@ -1,68 +1,27 @@
--- 基础信息
+-- Auto-generated spawn data
 local base_info = {
-	group_id = 133605238
+    group_id = 133605238
 }
 
---================================================================
---
--- 配置 抓取仅位置
---
---================================================================
-
--- 怪物
 monsters = {
-	{ config_id = 238004 , monster_id = 28010203 , pos = { x = 2517.64, y = 333.899, z = 8967.143 } , rot = { x = 0, y = 255.36, z = 0 } , level = 88 },
-	{ config_id = 238005 , monster_id = 28010203 , pos = { x = 2546.395, y = 350.883, z = 9199.584 } , rot = { x = 0, y = 134.691, z = 0 } , level = 88 }
+    { config_id = 238002, monster_id = 28010202, pos = { x = 2342.625977, y = 276.000000, z = 9140.601562 }, rot = { x = 0.000, y = 70.156, z = 0.000 }, level = 36, drop_id = 1000100, pose_id = 0, title_id = 0, special_name_id = 0 },
+    { config_id = 238001, monster_id = 28010201, pos = { x = 2448.131104, y = 333.777008, z = 9172.294922 }, rot = { x = 0.000, y = 71.042, z = 0.000 }, level = 36, drop_id = 1000100, pose_id = 0, title_id = 0, special_name_id = 0 },
+    { config_id = 238004, monster_id = 28010203, pos = { x = 2517.639893, y = 333.898987, z = 8967.142578 }, rot = { x = 0.000, y = 255.360, z = 0.000 }, level = 36, drop_id = 1000100, pose_id = 0, title_id = 0, special_name_id = 0 }
 }
 
--- NPC
-npcs = {
-}
 
--- 装置
-gadgets = {
-
-}
-
--- 区域
-regions = {
-}
-
--- 触发器
-triggers = {
-}
-
--- 变量
-variables = {
-}
-
---================================================================
---
--- 初始化配置
---
---================================================================
-
--- 初始化时创建
 init_config = {
-	suite = 1,
-	end_suite = 0,
-	rand_suite = false
+    suite = 1,
+    end_suite = 0,
+    rand_suite = false
 }
-
---================================================================
---
--- 小组配置
---
---================================================================
 
 suites = {
-	{
-		-- suite_id = 1,
-		-- description = ,
-		monsters = { 238004,238005 },
-		gadgets = {  },
-		regions = { },
-		triggers = { },
-		rand_weight = 100
-	}
+    {
+        monsters = { 238002, 238001, 238004 },
+        gadgets = {  },
+        regions = { },
+        triggers = { },
+        rand_weight = 100
+    }
 }

@@ -1,82 +1,31 @@
--- 基础信息
+-- Auto-generated spawn data
 local base_info = {
-	group_id = 133606052
+    group_id = 133606052
 }
 
---================================================================
---
--- 配置 抓取仅位置
---
---================================================================
-
--- 怪物
 monsters = {
-	{ config_id = 52001 , monster_id = 28010602 , pos = { x = 1792.296, y = 200.491, z = 10313.89 } , rot = { x = 0, y = 253.028, z = 0 } , level = 90 },
-	{ config_id = 52012 , monster_id = 28010602 , pos = { x = 1765.67, y = 200.179, z = 10595.47 } , rot = { x = 0, y = 0, z = 0 } , level = 90 },
-	{ config_id = 52020 , monster_id = 28010502 , pos = { x = 1681.6, y = 200.064, z = 10758.14 } , rot = { x = 0, y = 70.248, z = 0 } , level = 90 },
-	{ config_id = 52021 , monster_id = 28010502 , pos = { x = 1670.767, y = 200, z = 10771.07 } , rot = { x = 0, y = 311.499, z = 0 } , level = 90 },
-	{ config_id = 52022 , monster_id = 28010602 , pos = { x = 1867.824, y = 201.849, z = 10890.66 } , rot = { x = 0, y = 28.222, z = 0 } , level = 90 },
-	{ config_id = 52025 , monster_id = 28010602 , pos = { x = 1866.628, y = 201.63, z = 10894.2 } , rot = { x = 0, y = 98.266, z = 0 } , level = 90 },
-	{ config_id = 52029 , monster_id = 28010602 , pos = { x = 2148.799, y = 200, z = 10865.56 } , rot = { x = 0, y = 77.864, z = 0 } , level = 90 },
-	{ config_id = 52030 , monster_id = 28010602 , pos = { x = 1841.6, y = 200.32, z = 10725.76 } , rot = { x = 0, y = 0, z = 0 } , level = 90 },
-	{ config_id = 52032 , monster_id = 28010602 , pos = { x = 1725.278, y = 200.088, z = 10773.54 } , rot = { x = 0, y = 0, z = 0 } , level = 90 },
-	{ config_id = 52033 , monster_id = 28010602 , pos = { x = 1736.422, y = 200.052, z = 10754.12 } , rot = { x = 0, y = 0, z = 0 } , level = 90 },
-	{ config_id = 52034 , monster_id = 28010602 , pos = { x = 1736.419, y = 200, z = 10748.62 } , rot = { x = 0, y = 0, z = 0 } , level = 90 },
-	{ config_id = 52035 , monster_id = 28010602 , pos = { x = 1702.296, y = 200.137, z = 10744.22 } , rot = { x = 0, y = 0, z = 0 } , level = 90 },
-	{ config_id = 52036 , monster_id = 28010602 , pos = { x = 1698.575, y = 200.122, z = 10743.5 } , rot = { x = 0, y = 0, z = 0 } , level = 90 },
-	{ config_id = 52037 , monster_id = 28010602 , pos = { x = 1688.555, y = 200.166, z = 10750.09 } , rot = { x = 0, y = 0, z = 0 } , level = 90 },
-	{ config_id = 52039 , monster_id = 28010502 , pos = { x = 1675.528, y = 200.174, z = 10817.7 } , rot = { x = 0, y = 0, z = 0 } , level = 90 },
-	{ config_id = 52041 , monster_id = 21010101 , pos = { x = 1674.249, y = 200.286, z = 10814.24 } , rot = { x = 0, y = 16.673, z = 0 } , level = 90 , title_id = 3001, special_name_id = 2300101 }
+    { config_id = 52004, monster_id = 28010502, pos = { x = 1641.000000, y = 200.037003, z = 10360.330078 }, rot = { x = 0.000, y = 280.232, z = 0.000 }, level = 36, drop_id = 1000100, pose_id = 0, title_id = 0, special_name_id = 0 },
+    { config_id = 52043, monster_id = 28010502, pos = { x = 1661.480957, y = 200.000000, z = 10359.440430 }, rot = { x = 0.000, y = 280.232, z = 0.000 }, level = 36, drop_id = 1000100, pose_id = 0, title_id = 0, special_name_id = 0 },
+    { config_id = 52044, monster_id = 28010502, pos = { x = 1652.692993, y = 200.171997, z = 10351.379883 }, rot = { x = 0.000, y = 280.232, z = 0.000 }, level = 36, drop_id = 1000100, pose_id = 0, title_id = 0, special_name_id = 0 },
+    { config_id = 52005, monster_id = 28010502, pos = { x = 1635.552002, y = 200.393997, z = 10430.200195 }, rot = { x = 0.000, y = 191.266, z = 0.000 }, level = 36, drop_id = 1000100, pose_id = 0, title_id = 0, special_name_id = 0 },
+    { config_id = 52016, monster_id = 28010602, pos = { x = 1913.708008, y = 200.175003, z = 10664.849609 }, rot = { x = 0.000, y = 182.594, z = 0.000 }, level = 36, drop_id = 1000100, pose_id = 1001, title_id = 0, special_name_id = 0 },
+    { config_id = 52017, monster_id = 28010602, pos = { x = 1982.543945, y = 200.000000, z = 10667.669922 }, rot = { x = 0.000, y = 76.785, z = 0.000 }, level = 36, drop_id = 1000100, pose_id = 1001, title_id = 0, special_name_id = 0 },
+    { config_id = 52029, monster_id = 28010602, pos = { x = 2148.799072, y = 200.000000, z = 10865.559570 }, rot = { x = 0.000, y = 77.864, z = 0.000 }, level = 36, drop_id = 1000100, pose_id = 1001, title_id = 0, special_name_id = 0 }
 }
 
--- NPC
-npcs = {
-}
 
--- 装置
-gadgets = {
-
-}
-
--- 区域
-regions = {
-}
-
--- 触发器
-triggers = {
-}
-
--- 变量
-variables = {
-}
-
---================================================================
---
--- 初始化配置
---
---================================================================
-
--- 初始化时创建
 init_config = {
-	suite = 1,
-	end_suite = 0,
-	rand_suite = false
+    suite = 1,
+    end_suite = 0,
+    rand_suite = false
 }
-
---================================================================
---
--- 小组配置
---
---================================================================
 
 suites = {
-	{
-		-- suite_id = 1,
-		-- description = ,
-		monsters = { 52001,52012,52020,52021,52022,52025,52029,52030,52032,52033,52034,52035,52036,52037,52039,52041 },
-		gadgets = {  },
-		regions = { },
-		triggers = { },
-		rand_weight = 100
-	}
+    {
+        monsters = { 52004, 52043, 52044, 52005, 52016, 52017, 52029 },
+        gadgets = {  },
+        regions = { },
+        triggers = { },
+        rand_weight = 100
+    }
 }
