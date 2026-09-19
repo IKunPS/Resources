@@ -1,42 +1,30 @@
--- 地图配置
+-- dumped by Mr.xks
 scene_config = {
-	begin_pos = { x = -512.0, z = -512.0 },
-	size = { x = 1024.0, z = 1024.0 },
-	born_pos = { x = 0.195, y = 0.000, z = 7.002 },
-	born_rot = { x = 0.000, y = 0.000, z = 0.000 },
-	born_point_list = {
-		{ pos = { x = -1.750, y = 0.000, z = 5.785 }, rot = { x = 0.000, y = 0.000, z = 0.000 } },
-		{ pos = { x = -1.592, y = 0.000, z = 8.734 }, rot = { x = 0.000, y = 0.000, z = 0.000 } },
-		{ pos = { x = 0.000, y = 0.000, z = 8.755 }, rot = { x = 0.000, y = 0.000, z = 0.000 } },
-		{ pos = { x = 0.000, y = 0.000, z = 6.228 }, rot = { x = 0.000, y = 0.000, z = 0.000 } }
-	},
-	die_y = -20,
-	room_safe_pos = {
-		scene_id = 3,
-		safe_pos = {
-			x = 2300.000,
-			y = 214.000,
-			z = -922.000
-		},
-		safe_rot = {
-			x = 0.000,
-			y = 0.000,
-			z = 0.000
-		}
-	},
-	vision_anchor = { x = -1000.0, z = -1000.0 }
+    begin_pos = { x = -1536.0, z = -1536.0 },
+    size = { x = 3072.0, z = 3072.0 },
+    born_pos = { x = 0.195, y = 0.0, z = 7.002 },
+    born_rot = { x = 0.0, y = 0.0, z = 0.0 },
+    born_point_list = {
+        { pos = { x = -1.75, y = 0.0, z = 5.785 }, rot = { x = 0.0, y = 0.0, z = 0.0 } },
+        { pos = { x = -1.592, y = 0.0, z = 8.734 }, rot = { x = 0.0, y = 0.0, z = 0.0 } },
+        { pos = { x = 0.0, y = 0.0, z = 8.755 }, rot = { x = 0.0, y = 0.0, z = 0.0 } },
+        { pos = { x = 0.0, y = 0.0, z = 6.228 }, rot = { x = 0.0, y = 0.0, z = 0.0 } }
+    },
+    die_y = -20,
+    room_safe_pos = { scene_id = 3, safe_pos = { x = 2228.462, y = 216.068, z = -899.128 }, safe_rot = { x = 0.0, y = 0.0, z = 0.0 }, second_area_id = 102 },
+    vision_anchor = { x = -2000.0, z = -2000.0 }
 }
 
--- 所有的区块
-blocks = { 1076 }
+blocks = {
+    1076
+}
 
--- 所有的区块范围坐标
 block_rects = {
-	{ min = { x = -512.0, z = -512.0 }, max = { x = 512.0, z = 512.0 } }
+    { min = { x = -1536.0, z = -1536.0 }, max = { x = 1536.0, z = 1536.0 } }
 }
 
--- Dummy Points
-dummy_points = { "dummy_points" }
+dummy_points = {
+    "dummy_points"
+}
 
--- Routes
-routes_config = { }
+routes_config = {}

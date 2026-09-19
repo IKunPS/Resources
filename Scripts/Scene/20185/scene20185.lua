@@ -1,24 +1,24 @@
--- 地图配置
+-- dumped by Mr.xks
 scene_config = {
-	begin_pos = { x = -512.0, z = -512.0 },
-	size = { x = 1024.0, z = 1024.0 },
-	born_pos = { x = 62, y = 10, z = 81 },
-	born_rot = { x = 0.000, y = 0.000, z = 0.000 },
-	die_y = -20,
-	city_id = 4,
-	vision_anchor = { x = -1000.0, z = -1000.0 }
+    begin_pos = { x = -512.0, z = -512.0 },
+    size = { x = 1024.0, z = 1024.0 },
+    born_pos = { x = 46.7, y = 10.446, z = 73.934 },
+    born_rot = { x = 0.0, y = 0.0, z = 0.0 },
+    die_y = -20,
+    city_id = 4,
+    vision_anchor = { x = -1000.0, z = -1000.0 }
 }
 
--- 所有的区块
-blocks = { 20185 }
+blocks = {
+    20185
+}
 
--- 所有的区块范围坐标
 block_rects = {
-	{ min = { x = -512.0, z = -512.0 }, max = { x = 512.0, z = 512.0 } }
+    { min = { x = -512.0, z = -512.0 }, max = { x = 512.0, z = 512.0 } }
 }
 
--- Dummy Points
-dummy_points = { }
+dummy_points = {
+    "dummy_points"
+}
 
--- Routes
-routes_config = { }
+routes_config = {}

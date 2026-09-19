@@ -1,2 +1,2 @@
-dummy_points = {
-}
+-- dumped by Mr.xks
+dummy_points = {}
